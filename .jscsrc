@@ -1,0 +1,8 @@
+{
+    "preset": "airbnb",
+    "requireTrailingComma": null,
+    "requireCamelCaseOrUpperCaseIdentifiers": null,
+    "disallowMultipleVarDecl": null,
+    "disallowQuotedKeysInObjects": null,
+    "excludeFiles": ["build", "dist"]
+}

@@ -1,0 +1,65 @@
+{
+  "name": "mailgun.js",
+  "version": "1.0.1",
+  "main": "index.js",
+  "author": "mailgun",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mailgun/mailgun.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mailgun/mailgun.js/issues"
+  },
+  "homepage": "https://github.com/mailgun/mailgun.js#readme",
+  "scripts": {
+    "build": "webpack --config ./webpack.config.js --progress --colors",
+    "start": "webpack --config ./webpack.config.js --progress --colors --watch",
+    "release": "webpack --config ./webpack.release.config.js --progress --colors",
+    "test": "multi='dot=- xunit=./results.xml' mocha --compilers js:babel/register -t 10000 -R mocha-multi",
+    "test-watch": "mocha --compilers js:babel/register -w -R dot",
+    "preversion": "npm test",
+    "version": "npm run release && git add -A dist",
+    "postversion": "git push && git push --tags && rm -rf build"
+  },
+  "dependencies": {
+    "btoa": "^1.1.2",
+    "es6-promise": "^3.0.2",
+    "lodash.defaults": "^3.1.2",
+    "lodash.indexby": "^3.1.1",
+    "lodash.last": "^3.0.0",
+    "lodash.map": "^3.1.4",
+    "lodash.merge": "^3.3.2",
+    "lodash.partialright": "^3.1.1",
+    "popsicle": "^1.1.1",
+    "popsicle-status": "^0.2.0",
+    "url-join": "0.0.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "exports-loader": "^0.6.2",
+    "expose-loader": "^0.7.0",
+    "imports-loader": "^0.6.4",
+    "jscs-loader": "^0.2.0",
+    "json-loader": "^0.5.2",
+    "mocha": "^2.2.3",
+    "mocha-multi": "^0.7.1",
+    "nock": "^0.48.1",
+    "raw-loader": "^0.5.1",
+    "should": "^4.1.0",
+    "webpack": "^1.12.1",
+    "webpack-dev-server": "^1.11.0",
+    "xmlbuilder": "^2.6.2"
+  },
+  "contributors": [
+    {
+      "name" : "Brad Gignac",
+      "url" : "https://github.com/bradgignac"
+    },
+    {
+      "name" : "Eddy Hernandez",
+      "url" : "https://github.com/eddywashere"
+    }
+  ]
+}
