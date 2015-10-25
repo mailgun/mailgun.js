@@ -10,6 +10,7 @@ __Table of Contents__
 	- [Install](#install)
 	- [Setup Client](#setup-client)
 	- [Methods](#methods)
+	- [Browser Demo](#browser-demo)
 	- [Examples](https://github.com/mailgun/mailgun-js/tree/c379f79ea2a2e0f825103751a3a102d8bdd3dd1b/example)
 - [Development](#development)
 	- [Requirements](#requirements)
@@ -867,6 +868,24 @@ Promise Returns:
 }
 ```
 
+## Browser Demo
+
+![image](https://cloud.githubusercontent.com/assets/399776/10718632/e8fe56e4-7b34-11e5-84c8-cfcfde978711.png)
+
+For this demo to work, you'll need to install and run `http-proxy` locally. Install it with:
+
+```sh
+npm install -g http-proxy
+```
+
+Then run the following command from the mailgun-js directory:
+
+```sh
+http-server -p 4001 --proxy="https://api.mailgun.net"
+```
+
+Demo should be up and running at http://0.0.0.0:4001/examples/
+
 # Development
 
 ## Requirements
@@ -925,3 +944,4 @@ npm version patch -m "chore(release): added %s"
 ## TODO
 
 - add missing services
+- add browser demo to heroku
