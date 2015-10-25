@@ -1,10 +1,13 @@
 {
   "name": "mailgun.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "author": "Mailgun",
   "license": "MIT",
-  "keywords": ["mailgun", "email"],
+  "keywords": [
+    "mailgun",
+    "email"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/mailgun/mailgun-js.git"
@@ -55,12 +58,12 @@
   },
   "contributors": [
     {
-      "name" : "Brad Gignac",
-      "url" : "https://github.com/bradgignac"
+      "name": "Brad Gignac",
+      "url": "https://github.com/bradgignac"
     },
     {
-      "name" : "Eddy Hernandez",
-      "url" : "https://github.com/eddywashere"
+      "name": "Eddy Hernandez",
+      "url": "https://github.com/eddywashere"
     }
   ]
 }

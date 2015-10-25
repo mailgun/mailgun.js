@@ -1,4 +1,4 @@
-/*! mailgun.js v1.0.0 */
+/*! mailgun.js v1.0.2 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -9056,8 +9056,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "mailgun.js",
-		"version": "1.0.0",
+		"version": "1.0.2",
 		"main": "index.js",
+		"author": "Mailgun",
+		"license": "MIT",
+		"keywords": [
+			"mailgun",
+			"email"
+		],
+		"repository": {
+			"type": "git",
+			"url": "git://github.com/mailgun/mailgun-js.git"
+		},
+		"bugs": {
+			"url": "https://github.com/mailgun/mailgun-js/issues"
+		},
+		"homepage": "https://github.com/mailgun/mailgun-js#readme",
 		"scripts": {
 			"build": "webpack --config ./webpack.config.js --progress --colors",
 			"start": "webpack --config ./webpack.config.js --progress --colors --watch",
