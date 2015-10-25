@@ -1,10 +1,8 @@
+// require('babel/register'); // uncomment this for node versions < 4
+
 var fs = require('fs');
 var mailgun = require('../index');
 var mg = mailgun.client({username: 'api', key:  process.env.MAILGUN_API_KEY || ''});
-
-// console.log("mg.domains", mg.domains.list);
-// mg.domains.list().then(d => console.log(d));
-//
 
 var domain = 'sandbox-123.mailgun.com';
 var fromEmail = 'Excited User <mailgun@sandbox-123.mailgun.com>';

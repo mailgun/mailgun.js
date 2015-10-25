@@ -21,6 +21,8 @@ __Table of Contents__
 
 ## Install
 
+- Requires node.js >= 4.x
+
 Install mailgun.js with:
 
 ```sh
@@ -869,7 +871,7 @@ Promise Returns:
 
 ## Requirements
 
-- Requires node.js >= 0.10.x.
+- Requires node.js >= 4.x
 
 Install node dependencies with:
 
