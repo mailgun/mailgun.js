@@ -1,4 +1,4 @@
-# Mailgun.js
+# Mailgun.js [![Build Status](https://travis-ci.org/mailgun/mailgun-js.svg)](https://travis-ci.org/mailgun/mailgun-js)
 
 A javascript sdk for Mailgun built with webpack, babel & es6. This can be used in node or in the browser*.
 
