@@ -1,4 +1,4 @@
-/*! mailgun.js v1.0.2 */
+/*! mailgun.js v1.0.3 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -9056,7 +9056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "mailgun.js",
-		"version": "1.0.2",
+		"version": "1.0.3",
 		"main": "index.js",
 		"author": "Mailgun",
 		"license": "MIT",
