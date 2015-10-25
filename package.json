@@ -2,16 +2,17 @@
   "name": "mailgun.js",
   "version": "1.0.1",
   "main": "index.js",
-  "author": "mailgun",
+  "author": "Mailgun",
   "license": "MIT",
+  "keywords": ["mailgun", "email"],
   "repository": {
     "type": "git",
-    "url": "git://github.com/mailgun/mailgun.js.git"
+    "url": "git://github.com/mailgun/mailgun-js.git"
   },
   "bugs": {
-    "url": "https://github.com/mailgun/mailgun.js/issues"
+    "url": "https://github.com/mailgun/mailgun-js/issues"
   },
-  "homepage": "https://github.com/mailgun/mailgun.js#readme",
+  "homepage": "https://github.com/mailgun/mailgun-js#readme",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --progress --colors",
     "start": "webpack --config ./webpack.config.js --progress --colors --watch",
