@@ -1,4 +1,4 @@
-/*! mailgun.js v1.0.3 */
+/*! mailgun.js v1.2.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -3172,8 +3172,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'postMulti',
-	    value: function postMulti(url, data, options) {
+	    value: function postMulti(url, data) {
 	      var formData = popsicle.form();
+	      var options = {
+	        headers: { 'Content-Type': null }
+	      };
 	
 	      Object.keys(data).forEach(function (key) {
 	        if (Array.isArray(data[key])) {
@@ -9056,7 +9059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "mailgun.js",
-		"version": "1.0.3",
+		"version": "1.2.0",
 		"main": "index.js",
 		"author": "Mailgun",
 		"license": "MIT",
