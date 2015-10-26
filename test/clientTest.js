@@ -5,6 +5,7 @@ var EventClient = require('../lib/events');
 var WebhookClient = require('../lib/webhooks');
 var SuppressionClient = require('../lib/suppressions');
 var MessagesClient = require('../lib/messages');
+var RoutesClient = require('../lib/routes');
 var ValidateClient = require('../lib/validate');
 var ParseClient = require('../lib/parse');
 
@@ -49,6 +50,10 @@ describe('Client', function() {
 
   it('creates messages client', function() {
     client.messages.should.be.instanceOf(MessagesClient);
+  });
+
+  it('creates routes client', function() {
+    client.routes.should.be.instanceOf(RoutesClient);
   });
 
   it('creates address validate client', function() {
