@@ -1,4 +1,4 @@
-/*! mailgun.js v1.2.0 */
+/*! mailgun.js v1.3.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(1).polyfill();
 	
 	var Client = __webpack_require__(6);
-	var version = __webpack_require__(107).version;
+	var version = __webpack_require__(109).version;
 	
 	module.exports = {
 	  VERSION: version,
@@ -1211,6 +1211,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var SuppressionClient = __webpack_require__(93);
 	var WebhookClient = __webpack_require__(105);
 	var MessagesClient = __webpack_require__(106);
+	var ValidateClient = __webpack_require__(107);
+	var ParseClient = __webpack_require__(108);
 	
 	var Client = function Client(options) {
 	  _classCallCheck(this, Client);
@@ -1234,6 +1236,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.stats = new StatsClient(this.request);
 	  this.suppressions = new SuppressionClient(this.request);
 	  this.messages = new MessagesClient(this.request);
+	
+	  if (config.public_key) {
+	    config.key = config.public_key;
+	
+	    this.public_request = new Request(config);
+	    this.validate = new ValidateClient(this.public_request);
+	    this.parse = new ParseClient(this.public_request);
+	  }
 	};
 	
 	module.exports = Client;
@@ -1584,7 +1594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 10 */
-[108, 11, 12, 13],
+[110, 11, 12, 13],
 /* 11 */
 /***/ function(module, exports) {
 
@@ -2621,7 +2631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 20 */
-[109, 21, 14, 15],
+[111, 21, 14, 15],
 /* 21 */
 /***/ function(module, exports) {
 
@@ -3039,7 +3049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 27 */
 23,
 /* 28 */
-[109, 29, 30, 31],
+[111, 29, 30, 31],
 /* 29 */
 21,
 /* 30 */
@@ -3047,7 +3057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 31 */
 15,
 /* 32 */
-[108, 33, 34, 35],
+[110, 33, 34, 35],
 /* 33 */
 11,
 /* 34 */
@@ -3799,7 +3809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 45 */
-[110, 46, 47],
+[112, 46, 47],
 /* 46 */
 /***/ function(module, exports) {
 
@@ -6453,15 +6463,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 67 */
-[111, 68, 74, 69, 75],
+[113, 68, 74, 69, 75],
 /* 68 */
-[112, 69, 70, 71],
+[114, 69, 70, 71],
 /* 69 */
 15,
 /* 70 */
 19,
 /* 71 */
-[109, 72, 73, 69],
+[111, 72, 73, 69],
 /* 72 */
 21,
 /* 73 */
@@ -6469,9 +6479,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 74 */
 11,
 /* 75 */
-[113, 71],
+[115, 71],
 /* 76 */
-[114, 71],
+[116, 71],
 /* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6718,15 +6728,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 81 */
-[111, 82, 89, 83, 90],
+[113, 82, 89, 83, 90],
 /* 82 */
-[112, 83, 84, 85],
+[114, 83, 84, 85],
 /* 83 */
 15,
 /* 84 */
 19,
 /* 85 */
-[109, 86, 87, 88],
+[111, 86, 87, 88],
 /* 86 */
 21,
 /* 87 */
@@ -6736,9 +6746,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 89 */
 11,
 /* 90 */
-[113, 85],
+[115, 85],
 /* 91 */
-[114, 85],
+[116, 85],
 /* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8775,7 +8785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 102 */
-[110, 103, 104],
+[112, 103, 104],
 /* 103 */
 /***/ function(module, exports) {
 
@@ -9057,9 +9067,83 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 107 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var ValidateClient = (function () {
+	  function ValidateClient(request) {
+	    _classCallCheck(this, ValidateClient);
+	
+	    this.request = request;
+	  }
+	
+	  _createClass(ValidateClient, [{
+	    key: 'get',
+	    value: function get(address) {
+	      return this.request.get('/v3/address/validate', { address: address }).then(function (response) {
+	        return response.body;
+	      });
+	    }
+	  }]);
+	
+	  return ValidateClient;
+	})();
+	
+	module.exports = ValidateClient;
+
+/***/ },
+/* 108 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var ParseClient = (function () {
+	  function ParseClient(request) {
+	    _classCallCheck(this, ParseClient);
+	
+	    this.request = request;
+	  }
+	
+	  _createClass(ParseClient, [{
+	    key: 'get',
+	    value: function get(addresses, enableDnsEspChecks) {
+	      var query = {};
+	
+	      if (Array.isArray(addresses)) {
+	        addresses = addresses.join(',');
+	      }
+	
+	      query.addresses = addresses;
+	
+	      if (enableDnsEspChecks) {
+	        query.syntax_only = false;
+	      }
+	
+	      return this.request.get('/v3/address/parse', query).then(function (response) {
+	        return response.body;
+	      });
+	    }
+	  }]);
+	
+	  return ParseClient;
+	})();
+	
+	module.exports = ParseClient;
+
+/***/ },
+/* 109 */
+/***/ function(module, exports) {
+
 	module.exports = {
 		"name": "mailgun.js",
-		"version": "1.2.0",
+		"version": "1.3.0",
 		"main": "index.js",
 		"author": "Mailgun",
 		"license": "MIT",
@@ -9128,7 +9212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 108 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -9186,7 +9270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 109 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -9428,7 +9512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 110 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	'use strict';
@@ -9438,7 +9522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__, __webpack_module_template_argument_3__) {
 
 	/**
@@ -9866,7 +9950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -10214,7 +10298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
@@ -10298,7 +10382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
