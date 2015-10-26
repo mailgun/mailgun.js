@@ -88,6 +88,12 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label for="subject" class="col-sm-3 form-control-label">Subject</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" ng-model="emailForm.subject" id="subject" placeholder="Mailgun Test" novalidate>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label for="html" class="col-sm-3 form-control-label">HTML</label>
                 <div class="col-sm-9">
                   <textarea ng-model="emailForm.html" class="form-control" id="html" rows="3"></textarea>
@@ -167,6 +173,9 @@
         key: ''
       };
 
+      $scope.emailForm = $scope.emailForm || {};
+      $scope.emailForm.subject = 'Hello from Mailgun!';
+
       $scope.setClient = function() {
         if($scope.form.key){
           $scope.mg = mailgun.client({url: 'http://0.0.0.0:4001', username: 'api', key:  $scope.form.key});
@@ -198,6 +207,7 @@
         var data = {
           to: $scope.emailForm.to,
           from: $scope.emailForm.from,
+          subject: $scope.emailForm.subject,
           html: $scope.emailForm.html,
           text: $scope.emailForm.text,
           inline: $scope.emailForm.inline,
