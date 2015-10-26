@@ -66,10 +66,16 @@ The following service methods are available to instantiated clients. The example
 	- [create](#create-3)
 	- [update](#update)
 	- [destroy](#destroy-1)
-- [validate](#validate)
+- [routes](#routes)
+	- [list](#list-3)
 	- [get](#get-4)
-- [parse](#parse)
+	- [create](#create-4)
+	- [update](#update-1)
+	- [destroy](#destroy-2)
+- [validate](#validate)
 	- [get](#get-5)
+- [parse](#parse)
+	- [get](#get-6)
 
 Method naming conventions:
 - `get` or `get{{Item}}` - expected response for client is a single object
@@ -869,6 +875,142 @@ Promise Returns:
 ```
 {
 	'open': { 'url': 'http://requestb.in' }
+}
+```
+
+### routes
+
+#### list
+
+`mg.routes.list(query)`
+
+Example:
+
+```js
+mg.routes.list()
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+[
+  {
+    actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+  	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+  	description: 'sample',
+  	expression: 'match_recipient(".*@example.com")',
+  	id: '562da483125730608a7d1719',
+  	priority: 0
+  }
+]
+```
+
+#### get
+
+`mg.routes.get(id)`
+
+Example:
+
+```js
+mg.routes.get('562da483125730608a7d1719')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+	description: 'sample',
+	expression: 'match_recipient(".*@example.com")',
+	id: '562da483125730608a7d1719',
+	priority: 0
+}
+```
+
+#### create
+
+`mg.routes.create(options)`
+
+Example:
+
+```js
+mg.routes.create({
+		priority: 0,
+		description: 'sample',
+		expression: 'match_recipient(".*@example.org")',
+		action: ['forward("http://myhost.com/messages/")', 'stop()']
+	})
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+	description: 'sample',
+	expression: 'match_recipient(".*@example.com")',
+	id: '562da483125730608a7d1719',
+	priority: 0
+}
+```
+
+#### update
+
+`mg.routes.update(id, options)`
+
+Example:
+
+```js
+mg.routes.update('562da483125730608a7d1719', {
+		priority: 0,
+		description: 'sample',
+		expression: 'match_recipient(".*@example.org")',
+		action: ['forward("http://myhost.com/messages/")', 'stop()']
+	})
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+	description: 'sample',
+	expression: 'match_recipient(".*@example.com")',
+	id: '562da483125730608a7d1719',
+	message: 'Route has been updated',
+	priority: 0
+}
+```
+
+#### destroy
+
+`mg.routes.destroy(id)`
+
+Example:
+
+```js
+mg.routes.destroy('562da483125730608a7d1719')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+	id: '562da483125730608a7d1719',
+	message: 'Route has been deleted'
 }
 ```
 
