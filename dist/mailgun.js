@@ -1,4 +1,4 @@
-/*! mailgun.js v1.3.0 */
+/*! mailgun.js v1.4.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(1).polyfill();
 	
 	var Client = __webpack_require__(6);
-	var version = __webpack_require__(109).version;
+	var version = __webpack_require__(110).version;
 	
 	module.exports = {
 	  VERSION: version,
@@ -1211,8 +1211,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var SuppressionClient = __webpack_require__(93);
 	var WebhookClient = __webpack_require__(105);
 	var MessagesClient = __webpack_require__(106);
-	var ValidateClient = __webpack_require__(107);
-	var ParseClient = __webpack_require__(108);
+	var RoutesClient = __webpack_require__(107);
+	var ValidateClient = __webpack_require__(108);
+	var ParseClient = __webpack_require__(109);
 	
 	var Client = function Client(options) {
 	  _classCallCheck(this, Client);
@@ -1236,6 +1237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.stats = new StatsClient(this.request);
 	  this.suppressions = new SuppressionClient(this.request);
 	  this.messages = new MessagesClient(this.request);
+	  this.routes = new RoutesClient(this.request);
 	
 	  if (config.public_key) {
 	    config.key = config.public_key;
@@ -1594,7 +1596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 10 */
-[110, 11, 12, 13],
+[111, 11, 12, 13],
 /* 11 */
 /***/ function(module, exports) {
 
@@ -2631,7 +2633,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 20 */
-[111, 21, 14, 15],
+[112, 21, 14, 15],
 /* 21 */
 /***/ function(module, exports) {
 
@@ -3049,7 +3051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 27 */
 23,
 /* 28 */
-[111, 29, 30, 31],
+[112, 29, 30, 31],
 /* 29 */
 21,
 /* 30 */
@@ -3057,7 +3059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 31 */
 15,
 /* 32 */
-[110, 33, 34, 35],
+[111, 33, 34, 35],
 /* 33 */
 11,
 /* 34 */
@@ -3809,7 +3811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 45 */
-[112, 46, 47],
+[113, 46, 47],
 /* 46 */
 /***/ function(module, exports) {
 
@@ -6463,15 +6465,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 67 */
-[113, 68, 74, 69, 75],
+[114, 68, 74, 69, 75],
 /* 68 */
-[114, 69, 70, 71],
+[115, 69, 70, 71],
 /* 69 */
 15,
 /* 70 */
 19,
 /* 71 */
-[111, 72, 73, 69],
+[112, 72, 73, 69],
 /* 72 */
 21,
 /* 73 */
@@ -6479,9 +6481,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 74 */
 11,
 /* 75 */
-[115, 71],
-/* 76 */
 [116, 71],
+/* 76 */
+[117, 71],
 /* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6728,15 +6730,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 81 */
-[113, 82, 89, 83, 90],
+[114, 82, 89, 83, 90],
 /* 82 */
-[114, 83, 84, 85],
+[115, 83, 84, 85],
 /* 83 */
 15,
 /* 84 */
 19,
 /* 85 */
-[111, 86, 87, 88],
+[112, 86, 87, 88],
 /* 86 */
 21,
 /* 87 */
@@ -6746,9 +6748,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 89 */
 11,
 /* 90 */
-[115, 85],
-/* 91 */
 [116, 85],
+/* 91 */
+[117, 85],
 /* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8785,7 +8787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 102 */
-[112, 103, 104],
+[113, 103, 104],
 /* 103 */
 /***/ function(module, exports) {
 
@@ -9073,6 +9075,65 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
+	var RoutesClient = (function () {
+	  function RoutesClient(request) {
+	    _classCallCheck(this, RoutesClient);
+	
+	    this.request = request;
+	  }
+	
+	  _createClass(RoutesClient, [{
+	    key: 'list',
+	    value: function list(query) {
+	      return this.request.get('/v3/routes', query).then(function (response) {
+	        return response.body.items;
+	      });
+	    }
+	  }, {
+	    key: 'get',
+	    value: function get(id) {
+	      return this.request.get('/v3/routes/' + id).then(function (response) {
+	        return response.body.route;
+	      });
+	    }
+	  }, {
+	    key: 'create',
+	    value: function create(data) {
+	      return this.request.post('/v3/routes', data).then(function (response) {
+	        return response.body.route;
+	      });
+	    }
+	  }, {
+	    key: 'update',
+	    value: function update(id, data) {
+	      return this.request.put('/v3/routes/' + id, data).then(function (response) {
+	        return response.body;
+	      });
+	    }
+	  }, {
+	    key: 'destroy',
+	    value: function destroy(id) {
+	      return this.request['delete']('/v3/routes/' + id).then(function (response) {
+	        return response.body;
+	      });
+	    }
+	  }]);
+	
+	  return RoutesClient;
+	})();
+	
+	module.exports = RoutesClient;
+
+/***/ },
+/* 108 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
 	var ValidateClient = (function () {
 	  function ValidateClient(request) {
 	    _classCallCheck(this, ValidateClient);
@@ -9095,7 +9156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ValidateClient;
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9138,12 +9199,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ParseClient;
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports) {
 
 	module.exports = {
 		"name": "mailgun.js",
-		"version": "1.3.0",
+		"version": "1.4.0",
 		"main": "index.js",
 		"author": "Mailgun",
 		"license": "MIT",
@@ -9212,7 +9273,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -9270,7 +9331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -9512,7 +9573,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	'use strict';
@@ -9522,7 +9583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__, __webpack_module_template_argument_3__) {
 
 	/**
@@ -9950,7 +10011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
 
 	/**
@@ -10298,7 +10359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
@@ -10382,7 +10443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
