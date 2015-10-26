@@ -4,13 +4,15 @@ var DomainClient = require('../lib/domains');
 var EventClient = require('../lib/events');
 var WebhookClient = require('../lib/webhooks');
 var SuppressionClient = require('../lib/suppressions');
-var MessagesClient = require('../lib/messages')
+var MessagesClient = require('../lib/messages');
+var ValidateClient = require('../lib/validate');
+var ParseClient = require('../lib/parse');
 
 describe('Client', function() {
   var client;
 
   beforeEach(function() {
-    client = new Client({ username: 'username', key: 'key' });
+    client = new Client({ username: 'username', key: 'key', public_key: 'key' });
   });
 
   it('raises error when username is not provided', function() {
@@ -47,5 +49,13 @@ describe('Client', function() {
 
   it('creates messages client', function() {
     client.messages.should.be.instanceOf(MessagesClient);
+  });
+
+  it('creates address validate client', function() {
+    client.validate.should.be.instanceOf(ValidateClient);
+  });
+
+  it('creates address parse client', function() {
+    client.parse.should.be.instanceOf(ParseClient);
   });
 });
