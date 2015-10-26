@@ -66,6 +66,10 @@ The following service methods are available to instantiated clients. The example
 	- [create](#create-3)
 	- [update](#update)
 	- [destroy](#destroy-1)
+- [validate](#validate)
+	- [get](#get-4)
+- [parse](#parse)
+	- [get](#get-5)
 
 Method naming conventions:
 - `get` or `get{{Item}}` - expected response for client is a single object
@@ -865,6 +869,57 @@ Promise Returns:
 ```
 {
 	'open': { 'url': 'http://requestb.in' }
+}
+```
+
+### validate
+
+#### get
+
+`mg.validate.get(address)`
+
+Example:
+
+```js
+mg.validate.get('alice@example.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  address: 'alice@example.com',
+  did_you_mean: null,
+  is_valid: false,
+  parts: { display_name: null, domain: null, local_part: null }
+}
+```
+
+### parse
+
+#### get
+
+`mg.parse.get(addresses, enableDnsEspChecks)`
+
+Example:
+
+```js
+mg.parse.get('Alice <alice@example.com>, example.com', true)
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+	parsed: [],
+  unparseable: [
+		'Alice <alice@example.com>',
+    'example.com'
+	]
 }
 ```
 
