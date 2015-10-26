@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mailgun.js Example</title>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <style media="screen">
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+      }
+      .jumbotron,.jumbotron p:last-child,.navbar{margin-bottom:0}body{min-height:75rem}.navbar-collapse .container-fluid{padding:2rem 2.5rem;border-bottom:1px solid #55595c}.navbar-collapse .text-muted,.navbar-collapse h4{color:#818a91}.about{float:left;max-width:30rem;margin-right:3rem}.social a{font-weight:500;color:#eceeef}.social a:hover{color:#fff}.jumbotron{padding-top:6rem;padding-bottom:6rem;background-color:#fff}.jumbotron-heading{font-weight:300}.jumbotron .container{max-width:40rem}footer{padding-top:3rem;padding-bottom:3rem}footer p{margin-bottom:.25rem}
+      .album {
+        min-height: 50rem; /* Can be removed; just added for demo purposes */
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        background-color: #f7f7f7;
+      }
+      .card, .card-header {
+        background: white;
+      }
+      pre {
+        background: #f1f1f1;
+        padding: .5rem;
+        border-radius: 3px;
+      }
+      .form-control-label {
+        text-align: right;
+      }
+      select.form-control {
+        height: 2.6rem;
+      }
+    </style>
+  </head>
+  <body ng-controller="MainCtrl" ng-cloak>
+    <section class="jumbotron text-center">
+      <div class="container">
+        <p class="lead">
+          <img src="https://mailgun.github.io/media/Mailgun_Icon.png" alt="" width="100px" />
+        </p>
+        <h1 class="jumbotron-heading display-2">Mailgun.js</h1>
+        <p class="lead">
+          A javascript sdk for Mailgun built with webpack, babel & es6.
+        </p>
+        <hr>
+        <p class="text-muted">
+          For this demo to work, you'll need to install and run `http-proxy` locally. Install it with:</p>
+          <pre>npm install -g http-proxy</pre>
+          <p class="text-muted">then run the following command:</p>
+          <pre>http-server -p 4001 --proxy="https://api.mailgun.net"</pre>
+          <p class="text-muted">then load up this page from <a href="http://0.0.0.0:4001/examples/">0.0.0.0:4001/examples/</a></p>
+          <p class="text-muted">Last but not least, enter your Mailgun private key below and click create client to fetch the domains for your account.</p>
+
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="key">Password</label>
+            <input ng-model="form.key" type="password" class="form-control" id="key" placeholder="key-xxxxxxxxxxxxxx">
+          </div>
+          <button type="submit" class="btn btn-danger" ng-click="setClient()">Create Client</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="album text-muted">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1 class="display-1 text-center">Email example</h1>
+            <hr>
+            <form name="emailForm" novalidate="">
+              <div class="form-group row">
+                <label for="domains" class="col-sm-3 form-control-label">Sending Domain</label>
+                <div class="col-sm-9">
+                  <select class="form-control" ng-change="updateDomain()" ng-model="emailForm.selectedDomain" id="domains" ng-options="item.name for item in domains"></select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="from" class="col-sm-3 form-control-label">From</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="from" ng-model="emailForm.from" placeholder="you@example.com" novalidate>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="to" class="col-sm-3 form-control-label">To</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" ng-model="emailForm.to" id="to" placeholder="test@example.com" novalidate>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="html" class="col-sm-3 form-control-label">HTML</label>
+                <div class="col-sm-9">
+                  <textarea ng-model="emailForm.html" class="form-control" id="html" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="text" class="col-sm-3 form-control-label">Text</label>
+                <div class="col-sm-9">
+                  <textarea ng-model="emailForm.text" class="form-control" id="text" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="attachment" class="col-sm-3 form-control-label">Attachment</label>
+                <div class="col-sm-9">
+                  <input type="file" class="form-control-file" id="attachment" file-model="emailForm.attachment" multiple>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inline" class="col-sm-3 form-control-label">Inline media</label>
+                <div class="col-sm-9">
+                  <input type="file" class="form-control-file" id="inline" file-model="emailForm.inline" multiple>
+                  <small>When used, add <code>&lt;img src=&quot;cid:filename-here.png&quot; width=&quot;200px&quot;&gt;</code> to html area.</small>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-push-3 col-sm-9">
+                  <button type="submit" class="btn btn-danger" ng-click="sendEmail()" ng-disabled="btnDisabled">Send Email</button>
+                </div>
+              </div>
+              <hr>
+              <p>
+                Response:
+              </p>
+              <pre><code>{{ response | json }}</code></pre>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-muted">
+      <div class="container text-center">
+        <p><a href="https://github.com/mailgun/mailgun-js">https://github.com/mailgun/mailgun-js</a></p>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="../dist/mailgun.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    var app = angular.module("app", []);
+
+    app.directive('fileModel', ['$parse', function ($parse) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          var model = $parse(attrs.fileModel);
+          var modelSetter = model.assign;
+
+          element.bind('change', function(){
+            var files = []
+
+            for (var i = 0; i < element[0].files.length; i++) {
+              files.push(element[0].files[i]);
+            }
+
+            scope.$apply(function(){
+                modelSetter(scope, files);
+            });
+          });
+        }
+      };
+    }]);
+
+    app.controller("MainCtrl", function($scope) {
+      $scope.mg = null;
+      $scope.domains = [];
+      $scope.form = {
+        key: ''
+      };
+
+      $scope.setClient = function() {
+        if($scope.form.key){
+          $scope.mg = mailgun.client({url: 'http://0.0.0.0:4001', username: 'api', key:  $scope.form.key});
+        }
+
+        $scope.mg.domains.list()
+          .then(domains => {
+            $scope.domains = domains;
+            $scope.emailForm.selectedDomain = $scope.domains[0];
+            $scope.updateDomain();
+            $scope.$apply();
+          })
+          .catch(err => console.log(err));
+      };
+
+      $scope.updateDomain = function(){
+        if($scope.emailForm.selectedDomain){
+          $scope.emailForm.from = 'Excited User <mailgun@' + $scope.emailForm.selectedDomain.name + '>';
+        }
+      }
+
+      $scope.sendEmail = function() {
+        if(!$scope.mg && !$scope.emailForm.selectedDomain){
+          return false;
+        }
+
+        $scope.btnDisabled = true;
+
+        var data = {
+          to: $scope.emailForm.to,
+          from: $scope.emailForm.from,
+          html: $scope.emailForm.html,
+          text: $scope.emailForm.text,
+          inline: $scope.emailForm.inline,
+          attachment: $scope.emailForm.attachment
+        };
+
+        var domain  = $scope.emailForm.selectedDomain.name;
+
+        $scope.mg.messages.create(domain, data)
+          .then(response => {
+            $scope.response = response;
+            $scope.btnDisabled = false;
+            $scope.$apply();
+          })
+          .catch(err => {
+            $scope.btnDisabled = false;
+            $scope.response = err;
+            $scope.$apply();
+          })
+      };
+    });
+    </script>
+  </body>
+</html>
