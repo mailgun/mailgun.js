@@ -31,6 +31,14 @@
       select.form-control {
         height: 2.6rem;
       }
+      .filedropper {
+        border: 1px dashed #ccc;
+        background: #fff;
+        text-align: center;
+        padding: 20px;
+        font-size: smaller;
+        width: 100%;
+      }
     </style>
   </head>
   <body ng-controller="MainCtrl" ng-cloak>
@@ -106,16 +114,24 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="attachment" class="col-sm-3 form-control-label">Attachment</label>
+                <label for="inline" class="col-sm-3 form-control-label">Inline Media</label>
                 <div class="col-sm-9">
-                  <input type="file" class="form-control-file" id="attachment" file-model="emailForm.attachment" multiple>
+                  <input type="file" class="form-control-file sr-only" id="inline" file-model="emailForm.inline" multiple>
+                  <label for="inline" class="filedropper" dropper-model="emailForm.inline">
+                    Drop Inline Images Here
+                  </label>
+                  <span ng-if="emailForm.inline.length > 0"><small>Use the following in the html section:</small></span>
+                  <span ng-repeat="f in emailForm.inline"><br><small><code>&lt;img src=&quot;cid:{{f.name}}&quot; width=&quot;200px&quot;&gt;</code></small></span>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="inline" class="col-sm-3 form-control-label">Inline media</label>
+                <label for="attachment" class="col-sm-3 form-control-label">Attachments</label>
                 <div class="col-sm-9">
-                  <input type="file" class="form-control-file" id="inline" file-model="emailForm.inline" multiple>
-                  <small>When used, add <code>&lt;img src=&quot;cid:filename-here.png&quot; width=&quot;200px&quot;&gt;</code> to html area.</small>
+                  <input type="file" class="form-control-file sr-only" id="attachment" file-model="emailForm.attachment" multiple>
+                  <label for="attachment" class="filedropper" dropper-model="emailForm.attachment">
+                    Drop Attachments Here
+                  </label>
+                  <span ng-repeat="f in emailForm.attachment"><br><small>{{f.name}}</small></span>
                 </div>
               </div>
               <div class="form-group row">
@@ -128,6 +144,7 @@
                 Response:
               </p>
               <pre><code>{{ response | json }}</code></pre>
+
             </form>
           </div>
         </div>
@@ -162,6 +179,40 @@
                 modelSetter(scope, files);
             });
           });
+        }
+      };
+    }]);
+
+    app.directive('dropperModel', ['$parse', function ($parse) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          var model = $parse(attrs.dropperModel);
+          var modelSetter = model.assign;
+
+          function drop(e){
+            e.stopPropagation();
+            e.preventDefault();
+
+            var files = []
+
+            for (var i = 0; i < e.dataTransfer.files.length; i++) {
+              files.push(e.dataTransfer.files[i]);
+            }
+
+            scope.$apply(function(){
+              modelSetter(scope, files);
+            });
+          }
+
+          function dragover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+          }
+
+          element[0].addEventListener('dragover', dragover, false);
+          element[0].addEventListener('drop', drop, false);
         }
       };
     }]);
