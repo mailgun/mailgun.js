@@ -7,16 +7,16 @@ NOTE: If used in the browser, a proxy is required to communicate with the Mailgu
 __Table of Contents__
 
 - [Documentation](#documentation)
-	- [Install](#install)
-	- [Setup Client](#setup-client)
-	- [Methods](#methods)
-	- [Browser Demo](#browser-demo)
-	- [Examples](https://github.com/mailgun/mailgun-js/tree/c379f79ea2a2e0f825103751a3a102d8bdd3dd1b/example)
+  - [Install](#install)
+  - [Setup Client](#setup-client)
+  - [Methods](#methods)
+  - [Browser Demo](#browser-demo)
+  - [Examples](https://github.com/mailgun/mailgun-js/tree/c379f79ea2a2e0f825103751a3a102d8bdd3dd1b/example)
 - [Development](#development)
-	- [Requirements](#requirements)
-	- [Build](#build)
-	- [Tests](#tests)
-	- [Release Process](#release-process)
+  - [Requirements](#requirements)
+  - [Build](#build)
+  - [Tests](#tests)
+  - [Release Process](#release-process)
 
 # Documentation
 
@@ -43,39 +43,39 @@ var mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'k
 
 The following service methods are available to instantiated clients. The examples assume you have already created a mailgun client as `mg` with valid credentials.
 - [messages](#messages)
-	- [create](#create)
+  - [create](#create)
 - [domains](#domains)
-	- [list](#list)
-	- [get](#get)
-	- [create](#create-1)
-	- [destroy](#destroy)
-	- [getTracking](#gettracking)
-	- [updateTracking](#updatetracking)
+  - [list](#list)
+  - [get](#get)
+  - [create](#create-1)
+  - [destroy](#destroy)
+  - [getTracking](#gettracking)
+  - [updateTracking](#updatetracking)
 - [events](#events)
-	- [get](#get-1)
+  - [get](#get-1)
 - [stats](#stats)
-	- [getDomain](#getdomain)
-	- [getAccount](#getaccount)
+  - [getDomain](#getdomain)
+  - [getAccount](#getaccount)
 - [suppressions](#suppressions)
-	- [list](#list-1)
-	- [get](#get-2)
-	- [create](#create-2)
+  - [list](#list-1)
+  - [get](#get-2)
+  - [create](#create-2)
 - [webhooks](#webhooks)
-	- [list](#list-2)
-	- [get](#get-3)
-	- [create](#create-3)
-	- [update](#update)
-	- [destroy](#destroy-1)
+  - [list](#list-2)
+  - [get](#get-3)
+  - [create](#create-3)
+  - [update](#update)
+  - [destroy](#destroy-1)
 - [routes](#routes)
-	- [list](#list-3)
-	- [get](#get-4)
-	- [create](#create-4)
-	- [update](#update-1)
-	- [destroy](#destroy-2)
+  - [list](#list-3)
+  - [get](#get-4)
+  - [create](#create-4)
+  - [update](#update-1)
+  - [destroy](#destroy-2)
 - [validate](#validate)
-	- [get](#get-5)
+  - [get](#get-5)
 - [parse](#parse)
-	- [get](#get-6)
+  - [get](#get-6)
 
 Method naming conventions:
 - `get` or `get{{Item}}` - expected response for client is a single object
@@ -347,17 +347,17 @@ Promise Returns:
 
 ```
 {
-	"click": {
-		"active": false
-	},
-	"open": {
-		"active": false
-	},
-	"unsubscribe": {
-		"active": false,
-		"html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-		"text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
-	}
+  "click": {
+    "active": false
+  },
+  "open": {
+    "active": false
+  },
+  "unsubscribe": {
+    "active": false,
+    "html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
+    "text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+  }
 }
 ```
 
@@ -383,10 +383,10 @@ Promise Returns:
 
 ```
 {
-	message: 'Tracking settings have been updated',
-	open: {
-		active: true
-	}
+  message: 'Tracking settings have been updated',
+  open: {
+    active: true
+  }
 }
 ```
 
@@ -408,10 +408,10 @@ Promise Returns:
 
 ```
 {
-	message: 'Tracking settings have been updated',
-	click: {
-		active: true
-	}
+  message: 'Tracking settings have been updated',
+  click: {
+    active: true
+  }
 }
 ```
 
@@ -419,10 +419,10 @@ Unsubscribe Tracking Example:
 
 ```js
 mg.domains.updateTracking('foobar.example.com', 'unsubscribe', {
-		active: true,
-		html_footer: "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-		text_footer: "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
-	})
+    active: true,
+    html_footer: "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
+    text_footer: "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+  })
   .then(msg => console.log(msg)) // logs response data
   .catch(err => console.log(err)); // logs any error
 ```
@@ -439,12 +439,12 @@ Promise Returns:
 
 ```
 {
-	message: 'Tracking settings have been updated',
-	"unsubscribe": {
-		"active": true,
-		"html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-		"text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
-	}
+  message: 'Tracking settings have been updated',
+  "unsubscribe": {
+    "active": true,
+    "html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
+    "text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+  }
 }
 ```
 
@@ -479,17 +479,17 @@ Promise Returns: items (array of event objects), pages (paging keys grouped by i
 ```
 {
  items: [{
-		type: 'accepted',
-	  summary: 'got it',
-	  content: { more: 'data' },
-	  timestamp: Wed Nov 19 2014 10:32:57 GMT-0800 (PST) },
-	}],
-	pages: {
-		first: { id: 'first', number: 'W3siYSI6IGZhbHNlLC', url: 'apiurl' },
+    type: 'accepted',
+    summary: 'got it',
+    content: { more: 'data' },
+    timestamp: Wed Nov 19 2014 10:32:57 GMT-0800 (PST) },
+  }],
+  pages: {
+    first: { id: 'first', number: 'W3siYSI6IGZhbHNlLC', url: 'apiurl' },
     last: { id: 'last', number: 'W3siYSI6IGZhbHNlLC', url: 'apiurl' },
     next: { id: 'next', number: W3siYSI6IGZhbHNlLC'', url: 'apiurl' },
     previous: { id: 'previous', number: 'W3siYSI6IGZhbHNlLC', url: 'apiurl' }
-	}
+  }
 }
 ```
 
@@ -550,9 +550,9 @@ Promise Returns:
   end: Sun Mar 22 2015 17:00:00 GMT-0700 (PDT),
   resolution: 'day',
   stats: [{
-		time: Sun Mar 15 2015 17:00:00 GMT-0700 (PDT),
-		delivered: { smtp: 2, http: 1, total: 3 }
-	}]
+    time: Sun Mar 15 2015 17:00:00 GMT-0700 (PDT),
+    delivered: { smtp: 2, http: 1, total: 3 }
+  }]
 }
 ```
 
@@ -576,9 +576,9 @@ Promise Returns:
   end: Sun Mar 22 2015 17:00:00 GMT-0700 (PDT),
   resolution: 'day',
   stats: [{
-		time: Sun Mar 15 2015 17:00:00 GMT-0700 (PDT),
-		delivered: { smtp: 2, http: 1, total: 3 }
-	}]
+    time: Sun Mar 15 2015 17:00:00 GMT-0700 (PDT),
+    delivered: { smtp: 2, http: 1, total: 3 }
+  }]
 }
 ```
 
@@ -616,21 +616,21 @@ Promise Returns:
 
 ```
 {
-	items: [
-		{
-			type: 'bounces',
-	    address: 'unknown@unknown.com',
-	    code: 550,
-	    error: 'No such mailbox',
-	    created_at: Fri Oct 21 2011 04:02:55 GMT-0700 (PDT)
-		}
-	],
-	pages: {
-		first: { id: 'first', page: '', address: '', url: 'apiurl' },
+  items: [
+    {
+      type: 'bounces',
+      address: 'unknown@unknown.com',
+      code: 550,
+      error: 'No such mailbox',
+      created_at: Fri Oct 21 2011 04:02:55 GMT-0700 (PDT)
+    }
+  ],
+  pages: {
+    first: { id: 'first', page: '', address: '', url: 'apiurl' },
     last: { id: 'last', page: '', address: '', url: 'apiurl' },
     next: { id: 'next', page: '', address: '', url: 'apiurl' },
     previous: { id: 'prev', page: '', address: '', url: 'apiurl' }
-	}
+  }
 }
 ```
 
@@ -668,7 +668,7 @@ Promise Returns:
 
 ```
 {
-	type: 'bounces',
+  type: 'bounces',
   address: 'address?@unknown.com',
   tags: [ '*' ],
   created_at: Fri Oct 21 2011 05:02:55 GMT-0700 (PDT)
@@ -769,15 +769,15 @@ Promise Returns:
 
 ```
 {
-	open: { 'url': 'http://requestb.in' },
-	click: { 'url': 'http://requestb.in' },
-	bounce: { 'url': 'http://requestb.in' },
-	deliver: { 'url': 'http://requestb.in' },
-	drop: { 'url': 'http://requestb.in' },
-	spam: { 'url': 'http://requestb.in' },
-	unsubscribe: { 'url': 'http://requestb.in' },
-	click: { 'url': 'http://requestb.in' },
-	open: { 'url': 'http://requestb.in' },
+  open: { 'url': 'http://requestb.in' },
+  click: { 'url': 'http://requestb.in' },
+  bounce: { 'url': 'http://requestb.in' },
+  deliver: { 'url': 'http://requestb.in' },
+  drop: { 'url': 'http://requestb.in' },
+  spam: { 'url': 'http://requestb.in' },
+  unsubscribe: { 'url': 'http://requestb.in' },
+  click: { 'url': 'http://requestb.in' },
+  open: { 'url': 'http://requestb.in' },
 }
 ```
 
@@ -797,7 +797,7 @@ Promise Returns:
 
 ```
 {
-	'open': { 'url': 'http://requestb.in' }
+  'open': { 'url': 'http://requestb.in' }
 }
 ```
 
@@ -817,7 +817,7 @@ Promise Returns:
 
 ```
 {
-	'open': { 'url': 'http://requestb.in' }
+  'open': { 'url': 'http://requestb.in' }
 }
 ```
 
@@ -833,8 +833,8 @@ Promise Returns:
 
 ```
 {
-	'code': '500',
-	'message': 'Hi!'
+  'code': '500',
+  'message': 'Hi!'
 }
 ```
 
@@ -854,7 +854,7 @@ Promise Returns:
 
 ```
 {
-	'open': { 'url': 'http://requestb.in' }
+  'open': { 'url': 'http://requestb.in' }
 }
 ```
 
@@ -874,7 +874,7 @@ Promise Returns:
 
 ```
 {
-	'open': { 'url': 'http://requestb.in' }
+  'open': { 'url': 'http://requestb.in' }
 }
 ```
 
@@ -898,11 +898,11 @@ Promise Returns: response body
 [
   {
     actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
-  	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
-  	description: 'sample',
-  	expression: 'match_recipient(".*@example.com")',
-  	id: '562da483125730608a7d1719',
-  	priority: 0
+    created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+    description: 'sample',
+    expression: 'match_recipient(".*@example.com")',
+    id: '562da483125730608a7d1719',
+    priority: 0
   }
 ]
 ```
@@ -923,12 +923,12 @@ Promise Returns: response body
 
 ```
 {
-	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
-	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
-	description: 'sample',
-	expression: 'match_recipient(".*@example.com")',
-	id: '562da483125730608a7d1719',
-	priority: 0
+  actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+  created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+  description: 'sample',
+  expression: 'match_recipient(".*@example.com")',
+  id: '562da483125730608a7d1719',
+  priority: 0
 }
 ```
 
@@ -940,11 +940,11 @@ Example:
 
 ```js
 mg.routes.create({
-		priority: 0,
-		description: 'sample',
-		expression: 'match_recipient(".*@example.org")',
-		action: ['forward("http://myhost.com/messages/")', 'stop()']
-	})
+    priority: 0,
+    description: 'sample',
+    expression: 'match_recipient(".*@example.org")',
+    action: ['forward("http://myhost.com/messages/")', 'stop()']
+  })
   .then(data => console.log(data)) // logs response body
   .catch(err => console.log(err)); // logs any error
 ```
@@ -953,12 +953,12 @@ Promise Returns: response body
 
 ```
 {
-	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
-	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
-	description: 'sample',
-	expression: 'match_recipient(".*@example.com")',
-	id: '562da483125730608a7d1719',
-	priority: 0
+  actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+  created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+  description: 'sample',
+  expression: 'match_recipient(".*@example.com")',
+  id: '562da483125730608a7d1719',
+  priority: 0
 }
 ```
 
@@ -970,11 +970,11 @@ Example:
 
 ```js
 mg.routes.update('562da483125730608a7d1719', {
-		priority: 0,
-		description: 'sample',
-		expression: 'match_recipient(".*@example.org")',
-		action: ['forward("http://myhost.com/messages/")', 'stop()']
-	})
+    priority: 0,
+    description: 'sample',
+    expression: 'match_recipient(".*@example.org")',
+    action: ['forward("http://myhost.com/messages/")', 'stop()']
+  })
   .then(data => console.log(data)) // logs response body
   .catch(err => console.log(err)); // logs any error
 ```
@@ -983,13 +983,13 @@ Promise Returns: response body
 
 ```
 {
-	actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
-	created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
-	description: 'sample',
-	expression: 'match_recipient(".*@example.com")',
-	id: '562da483125730608a7d1719',
-	message: 'Route has been updated',
-	priority: 0
+  actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+  created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+  description: 'sample',
+  expression: 'match_recipient(".*@example.com")',
+  id: '562da483125730608a7d1719',
+  message: 'Route has been updated',
+  priority: 0
 }
 ```
 
@@ -1009,8 +1009,8 @@ Promise Returns: response body
 
 ```
 {
-	id: '562da483125730608a7d1719',
-	message: 'Route has been deleted'
+  id: '562da483125730608a7d1719',
+  message: 'Route has been deleted'
 }
 ```
 
@@ -1057,11 +1057,11 @@ Promise Returns: response body
 
 ```
 {
-	parsed: [],
+  parsed: [],
   unparseable: [
-		'Alice <alice@example.com>',
+    'Alice <alice@example.com>',
     'example.com'
-	]
+  ]
 }
 ```
 
@@ -1141,4 +1141,16 @@ npm version patch -m "chore(release): added %s"
 ## TODO
 
 - add missing services
+  - Lists
+    - `lists.list(query)`
+    - `list.get(address)`
+    - `list.create(data)`
+    - `list.update(address, data)`
+    - `list.destroy(address)`
+    - `lists.listMembers(address, query)`
+    - `list.getMember(address, memberAddress)`
+    - `list.createMember(address, data)` (singe & json batch upload)
+    - `list.updateMember(address, memberAddress, data)`
+    - `list.updateMember(address, memberAddress, data)`
+    - `list.destroyMember(address, memberAddress)`
 - add browser demo to heroku
