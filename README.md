@@ -97,7 +97,7 @@ mg.messages.create('sandbox-123.mailgun.org', {
     from: "Excited User <mailgun@sandbox-123.mailgun.org>",
     to: ["test@example.com"],
     subject: "Hello",
-    text: "Testing some Mailgun awesomness!"
+    text: "Testing some Mailgun awesomness!",
     html: "<h1>Testing some Mailgun awesomness!</h1>"
   })
   .then(msg => console.log(msg)) // logs response data
