@@ -39,6 +39,16 @@ var mailgun = require('mailgun.js');
 var mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 
+To use `validate` and `parse` methods, you must additionally include `public_key`. If you're using only those methods, `key` can be an empty string.
+
+```js
+var mg = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY || '',
+  public_key: process.env.MAILGUN_PUBLIC_KEY || 'pubkey-yourkeyhere'
+});
+```
+
 ## Methods
 
 The following service methods are available to instantiated clients. The examples assume you have already created a mailgun client as `mg` with valid credentials.
