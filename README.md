@@ -49,6 +49,14 @@ var mg = mailgun.client({
 });
 ```
 
+In the case your mailgun account is eu hosted you would need to define eu's subdomain as `url` in mailgun's Client constructor:
+
+```js
+var mailgun = require('mailgun.js');
+var mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', url: 'https://api.eu.mailgun.net'});
+```
+
+
 ## Methods
 
 The following service methods are available to instantiated clients. The examples assume you have already created a mailgun client as `mg` with valid credentials.
