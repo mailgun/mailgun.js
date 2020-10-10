@@ -106,7 +106,7 @@ Method naming conventions:
 
 #### create
 
-`mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/api-sending.html#sending)
+`mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/en/latest/api-sending.html#sending)
 
 HTML/TEXT Example:
 
@@ -167,7 +167,7 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
 
 #### list
 
-`mg.messages.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
+`mg.messages.list(query)` - [api docs](https://documentation.mailgun.com/en/latest/api-domains.html)
 
 Example:
 
