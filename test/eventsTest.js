@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import EventClient from '../lib/events';
+const Request = require('../lib/request');
+const EventClient = require('../lib/events');
 
 describe('EventsClient', function() {
   var client, api;

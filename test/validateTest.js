@@ -1,6 +1,6 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
+const Request = require('../lib/request');
 var ValidateClient = require('../lib/validate');
 
 describe('ValidateClient', function() {

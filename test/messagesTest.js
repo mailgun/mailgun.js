@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import MessagesClient from '../lib/messages';
+const Request = require('../lib/request');
+const MessagesClient = require('../lib/messages');
 
 describe('MessagesClient', function() {
   var client, api;

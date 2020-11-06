@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import RoutesClient from '../lib/routes';
+const Request = require('../lib/request');
+const RoutesClient = require('../lib/routes');
 
 describe('RoutesClient', function() {
   var client, api;

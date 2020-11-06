@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import DomainClient from '../lib/domains';
+const Request = require('../lib/request');
+const DomainClient = require('../lib/domains');
 
 describe('DomainClient', function() {
   var client, api;

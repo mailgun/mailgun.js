@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import StatsClient from '../lib/stats';
+const Request = require('../lib/request');
+const StatsClient = require('../lib/stats');
 
 describe('StatsClient', function() {
   var client, api;

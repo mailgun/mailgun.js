@@ -2,7 +2,7 @@
 var btoa = require('btoa');
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
+const Request = require('../lib/request');
 
 describe('Request', function() {
   var headers;

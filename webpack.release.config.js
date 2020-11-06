@@ -1,1 +1,14 @@
-module.exports = require('./webpack.base.config.js')('release');
+const { merge } = require('webpack-merge');
+const path = require('path');
+const baseConfig = require('./webpack.config.js');
+
+module.exports = (env) => {
+  const outputDir = 'dist';
+
+  return merge(baseConfig(env), {
+    mode: 'production',
+    output: {
+      path: path.resolve('./', outputDir),
+    },
+  });
+};

@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import WebhookClient from '../lib/webhooks';
+const Request = require('../lib/request');
+const WebhookClient = require('../lib/webhooks');
 
 describe('WebhookClient', function() {
   var client, api;

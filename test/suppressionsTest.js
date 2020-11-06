@@ -1,7 +1,7 @@
 var nock = require('nock');
 var should = require('should');
-import Request from '../lib/request';
-import SuppressionClient from '../lib/suppressions';
+const Request = require('../lib/request');
+const SuppressionClient = require('../lib/suppressions');
 
 describe('SuppressionsClient', function() {
   var client, api;
