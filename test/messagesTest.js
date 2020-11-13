@@ -1,22 +1,22 @@
-var nock = require('nock');
-var should = require('should');
+const nock = require('nock');
 const Request = require('../lib/request');
 const MessagesClient = require('../lib/messages');
 
-describe('MessagesClient', function() {
-  var client, api;
+describe('MessagesClient', function () {
+  let client;
+  let api;
 
-  beforeEach(function() {
+  beforeEach(function () {
     client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' }));
     api = nock('https://api.mailgun.net');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     api.done();
   });
 
-  describe('create', function() {
-    it('sends an email', function() {
+  describe('create', function () {
+    it('sends an email', function () {
       api.post('/v3/sandbox.mailgun.org/messages').reply(200, {
         message: 'Queued. Thank you.',
         id: '<20111114174239.25659.5817@samples.mailgun.org>'
@@ -27,12 +27,12 @@ describe('MessagesClient', function() {
         from: 'bar@example.com',
         subject: 'howdy!',
         text: 'ello world!'
-      }).then(function(data) {
+      }).then(function (data) {
         data.message.should.eql('Queued. Thank you.');
       });
     });
 
-    it('returns error messages', function() {
+    it('returns error messages', function () {
       api.post('/v3/sandbox.mailgun.org/messages').reply(400, {
         message: 'Missing parameter \'to\'.'
       });
@@ -41,12 +41,12 @@ describe('MessagesClient', function() {
         from: 'bar@example.com',
         subject: 'howdy!',
         text: 'ello world!'
-      }).catch(function(data) {
+      }).catch(function (data) {
         data.message.should.eql('Missing parameter \'to\'.');
       });
     });
 
-    it('sends a mime email', function() {
+    it('sends a mime email', function () {
       api.post('/v3/sandbox.mailgun.org/messages.mime').reply(200, {
         message: 'Queued. Thank you.',
         id: '<20111114174239.25659.5817@samples.mailgun.org>'
@@ -57,7 +57,7 @@ describe('MessagesClient', function() {
         from: 'bar@example.com',
         subject: 'howdy!',
         mime: 'ello world!'
-      }).then(function(data) {
+      }).then(function (data) {
         data.message.should.eql('Queued. Thank you.');
       });
     });

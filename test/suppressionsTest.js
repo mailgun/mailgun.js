@@ -1,52 +1,53 @@
-var nock = require('nock');
-var should = require('should');
+const nock = require('nock');
+const should = require('should');
 const Request = require('../lib/request');
 const SuppressionClient = require('../lib/suppressions');
 
-describe('SuppressionsClient', function() {
-  var client, api;
+describe('SuppressionsClient', function () {
+  let client;
+  let api;
 
-  beforeEach(function() {
+  beforeEach(function () {
     client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' }));
     api = nock('https://api.mailgun.net');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     api.done();
   });
 
-  describe('list', function() {
-    var response;
+  describe('list', function () {
+    let response;
 
-    beforeEach(function() {
+    beforeEach(function () {
       response = {
-        'items': [],
-        'paging': {
-          'first': 'https://api.mailgun.net/v3/mailgun.com/bounces?page=first',
-          'last': 'https://api.mailgun.net/v3/mailgun.com/bounces?page=last',
-          'next': 'https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com',
-          'previous': 'https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com'
+        items: [],
+        paging: {
+          first: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=first',
+          last: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=last',
+          next: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com',
+          previous: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com'
         }
       };
     });
 
-    it('fetches bounces', function() {
+    it('fetches bounces', function () {
       response.items = [{
-        'address': 'unknown@unknown.com',
-        'code': 550,
-        'error': 'No such mailbox',
-        'created_at': 'Fri, 21 Oct 2011 11:02:55 GMT'
+        address: 'unknown@unknown.com',
+        code: 550,
+        error: 'No such mailbox',
+        created_at: 'Fri, 21 Oct 2011 11:02:55 GMT'
       }, {
-        'address': 'full@disk.com',
-        'code': 552,
-        'error': 'Mailbox full',
-        'created_at': 'Fri, 21 Oct 2011 12:02:55 GMT'
+        address: 'full@disk.com',
+        code: 552,
+        error: 'Mailbox full',
+        created_at: 'Fri, 21 Oct 2011 12:02:55 GMT'
       }];
 
       api.get('/v3/domain.com/bounces').reply(200, response);
 
-      return client.list('domain.com', 'bounces').then(function(bounces) {
-        var b;
+      return client.list('domain.com', 'bounces').then(function (bounces) {
+        let b;
         b = bounces.items[0];
         b.address.should.eql('unknown@unknown.com');
         b.code.should.eql(550);
@@ -61,21 +62,21 @@ describe('SuppressionsClient', function() {
       });
     });
 
-    it('fetches unsubscribes', function() {
+    it('fetches unsubscribes', function () {
       response.items = [{
-        'address': 'brad@example.com',
-        'tags': ['*'],
-        'created_at': 'Fri, 21 Oct 2011 11:02:55 GMT'
+        address: 'brad@example.com',
+        tags: ['*'],
+        created_at: 'Fri, 21 Oct 2011 11:02:55 GMT'
       }, {
-        'address': 'roman@example.com',
-        'tags': ['*'],
-        'created_at': 'Fri, 21 Oct 2011 12:02:55 GMT'
+        address: 'roman@example.com',
+        tags: ['*'],
+        created_at: 'Fri, 21 Oct 2011 12:02:55 GMT'
       }];
 
       api.get('/v3/domain.com/unsubscribes').reply(200, response);
 
-      return client.list('domain.com', 'unsubscribes').then(function(unsubscribes) {
-        var u;
+      return client.list('domain.com', 'unsubscribes').then(function (unsubscribes) {
+        let u;
 
         u = unsubscribes.items[0];
         u.address.should.eql('brad@example.com');
@@ -89,19 +90,19 @@ describe('SuppressionsClient', function() {
       });
     });
 
-    it('fetches complaints', function() {
+    it('fetches complaints', function () {
       response.items = [{
-        'address': 'brad@example.com',
-        'created_at': 'Fri, 21 Oct 2011 11:02:55 GMT'
+        address: 'brad@example.com',
+        created_at: 'Fri, 21 Oct 2011 11:02:55 GMT'
       }, {
-        'address': 'roman@example.com',
-        'created_at': 'Fri, 21 Oct 2011 12:02:55 GMT'
+        address: 'roman@example.com',
+        created_at: 'Fri, 21 Oct 2011 12:02:55 GMT'
       }];
 
       api.get('/v3/domain.com/complaints').reply(200, response);
 
-      return client.list('domain.com', 'complaints').then(function(complaints) {
-        var c;
+      return client.list('domain.com', 'complaints').then(function (complaints) {
+        let c;
 
         c = complaints.items[0];
         c.address.should.eql('brad@example.com');
@@ -113,11 +114,11 @@ describe('SuppressionsClient', function() {
       });
     });
 
-    it('parses page links', function() {
+    it('parses page links', function () {
       api.get('/v3/domain.com/bounces').reply(200, response);
 
-      return client.list('domain.com', 'bounces').then(function(bounces) {
-        var page;
+      return client.list('domain.com', 'bounces').then(function (bounces) {
+        let page;
 
         page = bounces.pages.first;
         page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
@@ -142,16 +143,16 @@ describe('SuppressionsClient', function() {
     });
   });
 
-  describe('get', function() {
-    it('fetches bounce for address', function() {
+  describe('get', function () {
+    it('fetches bounce for address', function () {
       api.get('/v3/domain.com/bounces/address%3F%40unknown.com').reply(200, {
-        'address': 'address?@unknown.com',
-        'code': 550,
-        'error': 'No such mailbox',
-        'created_at': 'Fri, 21 Oct 2011 11:02:55 GMT'
+        address: 'address?@unknown.com',
+        code: 550,
+        error: 'No such mailbox',
+        created_at: 'Fri, 21 Oct 2011 11:02:55 GMT'
       });
 
-      return client.get('domain.com', 'bounces', 'address?@unknown.com').then(function(bounce) {
+      return client.get('domain.com', 'bounces', 'address?@unknown.com').then(function (bounce) {
         bounce.address.should.eql('address?@unknown.com');
         bounce.code.should.eql(550);
         bounce.error.should.eql('No such mailbox');
@@ -159,14 +160,14 @@ describe('SuppressionsClient', function() {
       });
     });
 
-    it('fetches unsubscribe for address', function() {
+    it('fetches unsubscribe for address', function () {
       api.get('/v3/domain.com/unsubscribes/roman%3F%40example.com').reply(200, {
-        'address': 'address?@unknown.com',
-        'tags': ['*'],
-        'created_at': 'Fri, 21 Oct 2011 12:02:55 GMT'
+        address: 'address?@unknown.com',
+        tags: ['*'],
+        created_at: 'Fri, 21 Oct 2011 12:02:55 GMT'
       });
 
-      return client.get('domain.com', 'unsubscribes', 'roman?@example.com').then(function(unsubscribe) {
+      return client.get('domain.com', 'unsubscribes', 'roman?@example.com').then(function (unsubscribe) {
         unsubscribe.address.should.eql('address?@unknown.com');
         unsubscribe.tags.should.eql(['*']);
         unsubscribe.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 12:02:55 GMT');
@@ -174,30 +175,30 @@ describe('SuppressionsClient', function() {
     });
   });
 
-  describe('create', function() {
-    it('creates suppression', function() {
+  describe('create', function () {
+    it('creates suppression', function () {
       api.post('/v3/domain.com/bounces').reply(200, {
-        'message': 'Bounced address has been inserted',
-        'address': 'myaddress'
+        message: 'Bounced address has been inserted',
+        address: 'myaddress'
       });
 
       return client.create('domain.com', 'bounces', {
         address: 'myaddress',
         code: 550
-      }).then(function(data) {
+      }).then(function (data) {
         data.address.should.eql('myaddress');
       });
     });
   });
 
-  describe('destroy', function() {
-    it('deletes suppression', function() {
+  describe('destroy', function () {
+    it('deletes suppression', function () {
       api.delete('/v3/domain.com/bounces/my%3F%40address.com').reply(200, {
-        'message': 'Bounced address has been removed',
-        'address': 'my?@address.com'
+        message: 'Bounced address has been removed',
+        address: 'my?@address.com'
       });
 
-      return client.destroy('domain.com', 'bounces', 'my?@address.com').then(function(data) {
+      return client.destroy('domain.com', 'bounces', 'my?@address.com').then(function (data) {
         data.address.should.eql('my?@address.com');
       });
     });

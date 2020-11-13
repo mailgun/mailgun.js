@@ -24,6 +24,10 @@
     "rules": {
         "comma-dangle": 0,
         "prefer-arrow-callback": 0,
-        "func-names": 0
+        "func-names": 0,
+        "max-classes-per-file": 0,
+        "no-underscore-dangle": 0,
+        "class-methods-use-this": 0,
+        "prefer-destructuring": 0
     }
 }

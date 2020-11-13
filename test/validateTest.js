@@ -1,23 +1,23 @@
-var nock = require('nock');
-var should = require('should');
+const nock = require('nock');
 const Request = require('../lib/request');
-var ValidateClient = require('../lib/validate');
+const ValidateClient = require('../lib/validate');
 
-describe('ValidateClient', function() {
-  var client, api;
+describe('ValidateClient', function () {
+  let client;
+  let api;
 
-  beforeEach(function() {
+  beforeEach(function () {
     client = new ValidateClient(new Request({ url: 'https://api.mailgun.net' }));
     api = nock('https://api.mailgun.net');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     api.done();
   });
 
-  describe('get', function() {
-    it('validates a single email address', function() {
-      var data = {
+  describe('get', function () {
+    it('validates a single email address', function () {
+      const data = {
         address: 'Alice <alice@example.com>',
         did_you_mean: null,
         is_valid: false,
@@ -26,7 +26,7 @@ describe('ValidateClient', function() {
 
       api.get('/v3/address/validate?address=foo%40example.com').reply(200, data);
 
-      return client.get('foo@example.com').then(function(response) {
+      return client.get('foo@example.com').then(function (response) {
         response.should.eql(data);
       });
     });
