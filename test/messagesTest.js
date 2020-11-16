@@ -56,7 +56,7 @@ describe('MessagesClient', function () {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',
-        mime: 'ello world!'
+        message: 'ello world!'
       }).then(function (data) {
         data.message.should.eql('Queued. Thank you.');
       });
