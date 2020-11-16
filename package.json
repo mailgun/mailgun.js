@@ -27,6 +27,7 @@
     "postversion": "git push && git push --tags && rm -rf build"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "btoa": "^1.1.2",
     "es6-promise": "^3.0.2",
     "lodash.defaults": "^4.2.0",
