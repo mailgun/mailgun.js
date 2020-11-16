@@ -13,4 +13,4 @@
  * MIT Licensed
  */
 
-/*! mailgun.js v2.1.0 */
+/*! mailgun.js v2.1.1 */
