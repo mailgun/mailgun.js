@@ -164,6 +164,7 @@ to                | Email address of the recipient(s). Example: "Bob <bob@host.c
 html              | HTML version of the message.
 text              | Text version of the message.
 message           | MIME string of the message. Make sure to use multipart/form-data to send this as a file upload.
+attachment        | File attachment. You can post multiple attachment values. Important: You must use multipart/form-data encoding when sending attachments. Also you can use `{data: file, filename: filename}` to define custom filename.
 o:tag             | Tag string. See Tagging for more information.
 o:campaign        | Id of the campaign the message belongs to. See um-campaign-analytics for details.
 o:deliverytime    | Desired time of delivery. See Date Format. Note: Messages can be scheduled for a maximum of 3 days in the future.

@@ -1,6 +1,10 @@
 const nock = require('nock');
+const fs = require('fs');
+
 const Request = require('../lib/request');
 const MessagesClient = require('../lib/messages');
+
+const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
 describe('MessagesClient', function () {
   let client;
@@ -57,6 +61,23 @@ describe('MessagesClient', function () {
         from: 'bar@example.com',
         subject: 'howdy!',
         message: 'ello world!'
+      }).then(function (data) {
+        data.message.should.eql('Queued. Thank you.');
+      });
+    });
+
+    it('sends an attachment', function () {
+      api.post('/v3/sandbox.mailgun.org/messages').reply(200, {
+        message: 'Queued. Thank you.',
+        id: '<20111114174239.25659.5817@samples.mailgun.org>'
+      });
+
+      return client.create('sandbox.mailgun.org', {
+        to: 'foo@example.com',
+        from: 'bar@example.com',
+        subject: 'howdy!',
+        text: 'Testing some Mailgun awesomeness!',
+        attachment: [mailgunLogo]
       }).then(function (data) {
         data.message.should.eql('Queued. Thank you.');
       });
