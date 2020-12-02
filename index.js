@@ -1,13 +1,9 @@
-'use strict';
-
-require('es6-promise').polyfill();
-
-var Client = require('./lib/client');
-var version = require('./package.json').version;
+const Client = require('./lib/client');
+const version = require('./package.json').version;
 
 module.exports = {
   VERSION: version,
-  client: function(options) {
+  client(options) {
     return new Client(options);
   }
 };

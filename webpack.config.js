@@ -34,7 +34,7 @@ module.exports = () => {
       ]
     },
     plugins: [
-      new webpack.BannerPlugin({ banner: `${pkg.name} v${pkg.version}`, raw: false, entryOnly: true })
+      new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`)
     ],
     resolve: {
       extensions: ['.js', '.json'],
