@@ -27,14 +27,15 @@
     "postversion": "git push && git push --tags && rm -rf build"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "btoa": "^1.1.2",
     "lodash.defaults": "^4.2.0",
     "lodash.keyby": "^4.6.0",
     "lodash.map": "^4.6.0",
     "lodash.merge": "^4.6.2",
     "lodash.partialright": "^4.2.1",
-    "popsicle": "^12.1.0",
-    "popsicle-status": "^3.0.0",
+    "popsicle": "^1.1.1",
+    "popsicle-status": "^0.2.0",
     "url-join": "0.0.1"
   },
   "devDependencies": {
