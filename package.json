@@ -29,7 +29,6 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "btoa": "^1.1.2",
-    "es6-promise": "^3.0.2",
     "lodash.defaults": "^4.2.0",
     "lodash.keyby": "^4.6.0",
     "lodash.map": "^4.6.0",
@@ -37,8 +36,7 @@
     "lodash.partialright": "^4.2.1",
     "popsicle": "^1.1.1",
     "popsicle-status": "^0.2.0",
-    "url-join": "0.0.1",
-    "webpack-merge": "^5.3.0"
+    "url-join": "0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -51,10 +49,10 @@
     "mocha": "^2.2.3",
     "mocha-multi": "^0.7.1",
     "nock": "^13.0.4",
-    "raw-loader": "^4.0.2",
     "should": "^4.1.0",
     "webpack": "^5.3.2",
-    "webpack-cli": "^4.1.0"
+    "webpack-cli": "^4.1.0",
+    "webpack-merge": "^5.4.0"
   },
   "contributors": [
     {
