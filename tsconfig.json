@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "declaration": true,
+    "esModuleInterop": true
+  },
+  "typedocOptions": {
+    "mode": "modules",
+    "out": "docs",
+    "includes": "lib",
+    "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**"]
+  }
+}

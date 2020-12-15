@@ -1,35 +1,40 @@
 const webpack = require('webpack');
 const path = require('path');
+
 const pkg = require('./package.json');
 
 module.exports = () => {
-  const filename = '[name]';
-  const outputDir = 'build';
+  const outputDir = 'dist';
 
   return {
     mode: 'development',
+    target: 'node',
     context: __dirname,
     entry: {
-      mailgun: './index.js',
-      'mailgun.min': './index.js'
+      mailgun: path.resolve(__dirname, './index.ts'),
+      'mailgun.min': path.resolve(__dirname, './index.ts')
     },
     output: {
       path: path.resolve('./', outputDir),
-      filename: `${filename}.js`,
+      filename: 'mailgun.js',
       library: 'mailgun',
-      libraryTarget: 'umd'
+      libraryExport: 'default',
+      libraryTarget: 'umd',
+      globalObject: 'this',
     },
     module: {
       rules: [
         {
-          test: /\.m?js$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
+          test: /\.(ts|js)?/,
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+            {
+              loader: 'ts-loader',
             }
-          }
+          ],
+          exclude: /(node_modules|test)/
         }
       ]
     },
@@ -37,12 +42,8 @@ module.exports = () => {
       new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`)
     ],
     resolve: {
-      extensions: ['.js', '.json'],
-      fallback: {
-        url: false,
-        querystring: false
-      }
+      extensions: ['.ts', '.js', '.json']
     },
-    devtool: 'source-map'
+    devtool: 'inline-source-map'
   };
 };
