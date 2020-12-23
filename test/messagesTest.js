@@ -82,5 +82,22 @@ describe('MessagesClient', function () {
         data.message.should.eql('Queued. Thank you.');
       });
     });
+
+    it('sends with recipient-variables', function () {
+      api.post('/v3/sandbox.mailgun.org/messages').reply(200, {
+        message: 'Queued. Thank you.',
+        id: '<20111114174239.25659.5817@samples.mailgun.org>'
+      });
+
+      return client.create('sandbox.mailgun.org', {
+        to: ['foo@example.com', 'bar@example.com'],
+        from: 'bar@example.com',
+        subject: 'howdy!',
+        text: 'Testing some Mailgun awesomeness!',
+        'recipient-variables': { 'foo@example.com': { test: 'test' }, 'bar@example.com': { test: 'test' } },
+      }).then(function (data) {
+        data.message.should.eql('Queued. Thank you.');
+      });
+    });
   });
 });
