@@ -180,12 +180,12 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
 
 #### list
 
-`mg.messages.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
+`mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
 
 Example:
 
 ```js
-mg.messages.list()
+mg.domains.list()
   .then(domains => console.log(domains)) // logs array of domains
   .catch(err => console.log(err)); // logs any error
 ```
@@ -218,12 +218,12 @@ Options
 
 #### get
 
-`mg.messages.get()`
+`mg.domains.get()`
 
 Example:
 
 ```js
-mg.messages.get()
+mg.domains.get()
   .then(domains => console.log(domains)) // logs array of domains
   .catch(err => console.log(err)); // logs any error
 ```
