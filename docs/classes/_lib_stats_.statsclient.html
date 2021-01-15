@@ -88,6 +88,12 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_lib_stats_.statsclient.html#request" class="tsd-kind-icon">request</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_stats_.statsclient.html#_parsestats" class="tsd-kind-icon">_parse<wbr>Stats</a></li>
@@ -104,19 +110,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Stats<wbr>Client<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_stats_.statsclient.html" class="tsd-signature-type">StatsClient</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Stats<wbr>Client<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><a href="_lib_request_.request.html" class="tsd-signature-type">Request</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_stats_.statsclient.html" class="tsd-signature-type">StatsClient</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/8c5ff24/lib/stats.js#L16">lib/stats.js:16</a></li>
+									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/ad9f2c7/lib/stats.ts#L24">lib/stats.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>request: <span class="tsd-signature-type">any</span></h5>
+									<h5>request: <a href="_lib_request_.request.html" class="tsd-signature-type">Request</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_lib_stats_.statsclient.html" class="tsd-signature-type">StatsClient</a></h4>
@@ -125,24 +131,42 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="request" class="tsd-anchor"></a>
+					<h3>request</h3>
+					<div class="tsd-signature tsd-kind-icon">request<span class="tsd-signature-symbol">:</span> <a href="_lib_request_.request.html" class="tsd-signature-type">Request</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/ad9f2c7/lib/stats.ts#L24">lib/stats.ts:24</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="_parsestats" class="tsd-anchor"></a>
 					<h3>_parse<wbr>Stats</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_parse<wbr>Stats<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a></li>
+						<li class="tsd-signature tsd-kind-icon">_parse<wbr>Stats<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_statsoptions_.statsoptions.html" class="tsd-signature-type">StatsOptions</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/8c5ff24/lib/stats.js#L21">lib/stats.js:21</a></li>
+									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/ad9f2c7/lib/stats.ts#L30">lib/stats.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>response: <span class="tsd-signature-type">any</span></h5>
+									<h5>response: <span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_statsoptions_.statsoptions.html" class="tsd-signature-type">StatsOptions</a><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>body<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_interfaces_statsoptions_.statsoptions.html" class="tsd-signature-type">StatsOptions</a></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a></h4>
@@ -153,13 +177,13 @@
 					<a name="getaccount" class="tsd-anchor"></a>
 					<h3>get<wbr>Account</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Account<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Account<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/8c5ff24/lib/stats.js#L30">lib/stats.js:30</a></li>
+									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/ad9f2c7/lib/stats.ts#L39">lib/stats.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -168,7 +192,7 @@
 									<h5>query: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -176,25 +200,25 @@
 					<a name="getdomain" class="tsd-anchor"></a>
 					<h3>get<wbr>Domain</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Domain<span class="tsd-signature-symbol">(</span>domain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Domain<span class="tsd-signature-symbol">(</span>domain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/8c5ff24/lib/stats.js#L25">lib/stats.js:25</a></li>
+									<li>Defined in <a href="https://github.com/andrii-yelis/mailgun-js/blob/ad9f2c7/lib/stats.ts#L34">lib/stats.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>domain: <span class="tsd-signature-type">any</span></h5>
+									<h5>domain: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5>query: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_stats_.stats.html" class="tsd-signature-type">Stats</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -220,6 +244,21 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_lib_events_.html">&quot;lib/events&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_lib_interfaces_apierroroptions_.html">&quot;lib/interfaces/APIError<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_lib_interfaces_options_.html">&quot;lib/interfaces/<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_lib_interfaces_requestoptions_.html">&quot;lib/interfaces/<wbr>Request<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_lib_interfaces_statsoptions_.html">&quot;lib/interfaces/<wbr>Stats<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_lib_interfaces_supressions_.html">&quot;lib/interfaces/<wbr>Supressions&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_lib_messages_.html">&quot;lib/messages&quot;</a>
@@ -255,7 +294,7 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
+					<li class=" tsd-kind-class tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_lib_stats_.stats.html" class="tsd-kind-icon">Stats</a>
 					</li>
 				</ul>
@@ -265,6 +304,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_lib_stats_.statsclient.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_lib_stats_.statsclient.html#request" class="tsd-kind-icon">request</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_stats_.statsclient.html#_parsestats" class="tsd-kind-icon">_parse<wbr>Stats</a>
@@ -279,12 +321,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/_lib_stats_.html#map" class="tsd-kind-icon">map</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/_lib_stats_.html#urljoin" class="tsd-kind-icon">urljoin</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -298,10 +334,12 @@
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">

@@ -238,7 +238,7 @@
 					</thead>
 					<tbody><tr>
 							<td align="left">to</td>
-							<td align="left">Email address of the recipient(s). Example: &quot;Bob <a href="mailto:&#98;&#111;&#98;&#x40;&#x68;&#111;&#x73;&#116;&#46;&#99;&#111;&#x6d;">&#98;&#111;&#98;&#x40;&#x68;&#111;&#x73;&#116;&#46;&#99;&#111;&#x6d;</a>&quot;. You can use commas to separate multiple recipients (e.g.: &quot;<a href="mailto:&#x74;&#101;&#115;&#116;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#x74;&#101;&#115;&#116;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;</a>,test@example.com&quot; or [&quot;test@example.com&quot;, &quot;<a href="mailto:&#x74;&#101;&#115;&#116;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#x74;&#101;&#115;&#116;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;</a>&quot;]). Make sure to include all To, Cc and Bcc recipients of the message.</td>
+							<td align="left">Email address of the recipient(s). Example: &quot;Bob <a href="mailto:&#98;&#111;&#x62;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;">&#98;&#111;&#x62;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;</a>&quot;. You can use commas to separate multiple recipients (e.g.: &quot;<a href="mailto:&#116;&#x65;&#115;&#116;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;">&#116;&#x65;&#115;&#116;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;</a>,test@example.com&quot; or [&quot;test@example.com&quot;, &quot;<a href="mailto:&#116;&#x65;&#x73;&#116;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#116;&#x65;&#x73;&#116;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a>&quot;]). Make sure to include all To, Cc and Bcc recipients of the message.</td>
 						</tr>
 						<tr>
 							<td align="left">html</td>
@@ -584,11 +584,11 @@
 				</tbody></table>
 				<p>Promise Returns:</p>
 				<pre><code>{
-  <span class="hljs-attribute">message</span>: <span class="hljs-string">&#x27;Tracking settings have been updated&#x27;</span>,
+  message: &#x27;<span class="hljs-type">Tracking</span> settings have been updated&#x27;,
   <span class="hljs-string">&quot;unsubscribe&quot;</span>: {
-    <span class="hljs-string">&quot;active&quot;</span>: true,
-    <span class="hljs-string">&quot;html_footer&quot;</span>: <span class="hljs-string">&quot;\n&lt;br&gt;\n&lt;p&gt;&lt;a href=\&quot;%unsubscribe_url%\&quot;&gt;unsubscribe&lt;/a&gt;&lt;/p&gt;\n&quot;</span>,
-    <span class="hljs-string">&quot;text_footer&quot;</span>: <span class="hljs-string">&quot;\n\nTo unsubscribe click: &lt;%unsubscribe_url%&gt;\n\n&quot;</span>
+    <span class="hljs-string">&quot;active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;html_footer&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span>&lt;br&gt;<span class="hljs-subst">\n</span>&lt;p&gt;&lt;a href=<span class="hljs-subst">\&quot;</span>%unsubscribe_url%<span class="hljs-subst">\&quot;</span>&gt;unsubscribe&lt;/a&gt;&lt;/p&gt;<span class="hljs-subst">\n</span>&quot;</span>,
+    <span class="hljs-string">&quot;text_footer&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>To unsubscribe click: &lt;%unsubscribe_url%&gt;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&quot;</span>
   }
 }</code></pre>
 				<a href="#events" id="events" style="color: inherit; text-decoration: none;">
@@ -1227,6 +1227,21 @@ npm version patch -m <span class="hljs-string">&quot;chore(release): added %s&qu
 						<a href="modules/_lib_events_.html">&quot;lib/events&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_apierroroptions_.html">&quot;lib/interfaces/APIError<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_options_.html">&quot;lib/interfaces/<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_requestoptions_.html">&quot;lib/interfaces/<wbr>Request<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_statsoptions_.html">&quot;lib/interfaces/<wbr>Stats<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_supressions_.html">&quot;lib/interfaces/<wbr>Supressions&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/_lib_messages_.html">&quot;lib/messages&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -1273,6 +1288,7 @@ npm version patch -m <span class="hljs-string">&quot;chore(release): added %s&qu
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
