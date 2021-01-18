@@ -32,17 +32,21 @@ npm install mailgun.js
 
 ## Setup Client
 
-Next, require the module and instantiate a mailgun client by calling `mailgun.client` with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
+Next, require the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
+
+NOTE: startinf from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
 ```js
-var mailgun = require('mailgun.js');
-var mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 
 To use `validate` and `parse` methods, you must additionally include `public_key`. If you're using only those methods, `key` can be an empty string.
 
 ```js
-var mg = mailgun.client({
+const mg = mailgun.client({
   username: 'api',
   key: process.env.MAILGUN_API_KEY || '',
   public_key: process.env.MAILGUN_PUBLIC_KEY || 'pubkey-yourkeyhere'
@@ -52,8 +56,7 @@ var mg = mailgun.client({
 In the case your mailgun account is eu hosted you would need to define eu's subdomain as `url` in mailgun's Client constructor:
 
 ```js
-var mailgun = require('mailgun.js');
-var mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', url: 'https://api.eu.mailgun.net'});
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', url: 'https://api.eu.mailgun.net'});
 ```
 
 
@@ -180,12 +183,12 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
 
 #### list
 
-`mg.messages.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
+`mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
 
 Example:
 
 ```js
-mg.messages.list()
+mg.domains.list()
   .then(domains => console.log(domains)) // logs array of domains
   .catch(err => console.log(err)); // logs any error
 ```
@@ -218,12 +221,12 @@ Options
 
 #### get
 
-`mg.messages.get()`
+`mg.domains.get()`
 
 Example:
 
 ```js
-mg.messages.get()
+mg.domains.get()
   .then(domains => console.log(domains)) // logs array of domains
   .catch(err => console.log(err)); // logs any error
 ```

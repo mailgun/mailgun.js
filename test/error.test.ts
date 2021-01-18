@@ -17,7 +17,7 @@ describe('APIError', function () {
       }
     } as APIErrorOptions);
 
-    error.message.should.eql('oops. something went wrong');
+    error.details.should.eql('oops. something went wrong');
   });
 
   it('sets message from error field', function () {
@@ -28,15 +28,5 @@ describe('APIError', function () {
     } as APIErrorOptions);
 
     error.message.should.eql('oops. something went wrong');
-  });
-
-  it('sets request ID', function () {
-    error = new APIError({
-      headers: {
-        'x-mailgun-request-id': 'a-b-c-d'
-      }
-    } as any);
-
-    error.id.should.eql('a-b-c-d');
   });
 });

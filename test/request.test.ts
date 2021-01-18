@@ -6,6 +6,7 @@ import nock from 'nock';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { expect } from 'chai';
+import APIError from '../dist/lib/error.d';
 
 interface Response {
   status: number;
@@ -31,9 +32,9 @@ describe('Request', function () {
       headers['X-CSRF-Token'] = 'protectme';
 
       nock('https://api.mailgun.com', { reqheaders: headers })
-        .get('/v2/some/resource')
-        .query({ query: 'parameter' })
-        .reply(200);
+        .get('/v2/some/resource1')
+        .query({ some: 'parameter' })
+        .reply(200, {});
 
       const req = new Request({
         username: 'api',
@@ -42,12 +43,12 @@ describe('Request', function () {
         headers: { 'X-CSRF-Token': 'protectme' }
       }, formData);
 
-      const res = req.request('get', '/v2/some/resource', {
-        headers: { Test: 'Custom Header' },
-        query: { query: 'parameter' }
+      const res = req.request('get', '/v2/some/resource1', {
+        headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
+        query: { some: 'parameter' }
       });
 
-      return res;
+      return await res;
     });
 
     it('parses API response', function () {
@@ -71,9 +72,9 @@ describe('Request', function () {
         .reply(429, { message: 'Too many requests' });
 
       const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData);
-      const res = req.request('get', '/v2/some/resource').catch(function (error: Error) {
+      const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {
         expect(error.status).to.eql(429);
-        expect(error.message).to.eql('Too many requests');
+        expect(error.details).to.eql('Too many requests');
       });
 
       return res;
@@ -83,16 +84,16 @@ describe('Request', function () {
   describe('query', function () {
     const search = { query: 'data' };
 
-    it('sends data as query parameter', function () {
+    it('sends data as query parameter', async function () {
       nock('https://api.mailgun.com')
-        .get('/v2/some/resource')
+        .get('/v2/some/resource2')
         .query(search)
-        .reply(200);
+        .reply(200, {});
 
       const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData);
-      const res = req.query('get', '/v2/some/resource', { query: search });
+      const res = await req.query('get', '/v2/some/resource2', search);
 
-      return res;
+      return await res;
     });
   });
 

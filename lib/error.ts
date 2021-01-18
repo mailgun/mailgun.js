@@ -3,20 +3,21 @@ import APIErrorOptions from './interfaces/APIErrorOptions';
 
 export default  class APIError extends Error {
   status: number | string;
-  id: any;
+  stack: string;
+  details: string;
 
   constructor({
-    id,
-    headers,
     status,
+    statusText,
     message,
     body = {}
   }: APIErrorOptions) {
     const { message: bodyMessage, error } = body;
-    super(message || bodyMessage || error);
+    super();
 
+    this.stack = null;
     this.status = status;
-    this.message = message || bodyMessage || error;
-    this.id = id || (headers && headers['x-mailgun-request-id']);
+    this.message = message || error || statusText;
+    this.details = bodyMessage;
   }
 }

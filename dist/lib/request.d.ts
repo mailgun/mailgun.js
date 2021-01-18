@@ -6,16 +6,49 @@ declare class Request {
     private headers;
     private formData;
     constructor(options: RequestOptions, formData: FormData);
-    request(method: string, url: string, options: any): void;
-    query(method: string, url: string, params: any, options: any): void;
-    command(method: string, url: string, data: any, options: any): void;
-    get(url: string, params: any, options: any): void;
-    head(url: string, params: any, options: any): void;
-    options(url: string, params: any, options: any): void;
-    post(url: string, data: any, options: any): void;
-    postMulti(url: string, data: any): void;
-    put(url: string, data: any, options: any): void;
-    patch(url: string, data: any, options: any): void;
-    delete(url: string, data: any, options: any): void;
+    request(method: string, url: string, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    query(method: string, url: string, query: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    command(method: string, url: string, data: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    get(url: string, query?: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    head(url: string, query: any, options: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    options(url: string, query: any, options: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    post(url: string, data: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    postMulti(url: string, data: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    put(url: string, data: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    patch(url: string, data: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    delete(url: string, data?: any, options?: any): Promise<{
+        body: any;
+        status: number;
+    }>;
 }
 export default Request;

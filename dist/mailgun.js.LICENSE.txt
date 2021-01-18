@@ -1,0 +1,3 @@
+/*! MIT License © Sindre Sorhus */
+
+/*! mailgun.js v2.0.6 */

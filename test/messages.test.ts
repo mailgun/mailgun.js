@@ -42,17 +42,15 @@ describe('MessagesClient', function () {
 
     it('returns error messages', function () {
       api.post('/v3/sandbox.mailgun.org/messages').reply(400, {
-        body: {
-          message: 'Missing parameter \'to\'.'
-        }
+        message: 'Missing parameter \'to\'.'
       });
 
       return client.create('sandbox.mailgun.org', {
         from: 'bar@example.com',
         subject: 'howdy!',
         text: 'ello world!'
-      }).catch(function (data: { message: string }) {
-        expect(data.message).to.eql('Missing parameter \'to\'.');
+      }).catch(function (data: { details: string }) {
+        expect(data.details).to.eql('Missing parameter \'to\'.');
       });
     });
 

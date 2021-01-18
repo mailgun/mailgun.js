@@ -18,8 +18,9 @@ export default class MessagesClient {
   create(domain: string, data: any) {
     if (data.message) {
       return this.request.postMulti(`/v3/${domain}/messages.mime`, data)
-        .then(this._parseResponse);
+      .then(this._parseResponse);
     }
+
     return this.request.postMulti(`/v3/${domain}/messages`, data)
       .then(this._parseResponse);
   }

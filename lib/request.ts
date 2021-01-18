@@ -8,6 +8,7 @@ import ky from 'ky-universal';
 
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';
+import APIErrorOptions from './interfaces/APIErrorOptions';
 
 const isStream = (attachment: any) => typeof attachment === 'object' && typeof attachment.pipe === 'function';
 
@@ -46,7 +47,9 @@ class Request {
     const basic = Btoa(`${this.username}:${this.key}`);
     const headers = merge({
       Authorization: `Basic ${basic}`
-    }, this.headers);
+    }, this.headers, options?.headers);
+
+    delete options?.headers;
 
     const params = { ...options };
 
@@ -55,24 +58,28 @@ class Request {
       delete params.query
     }
 
-    try {
-      const response = await ky(
-        urljoin(this.url, url),
-        {
-          method: method.toLocaleUpperCase(),
-          headers,
-          throwHttpErrors: false,
-          ...params
-        }
-      );
+    const response = await ky(
+      urljoin(this.url, url),
+      {
+        method: method.toLocaleUpperCase(),
+        headers,
+        throwHttpErrors: false,
+        ...params
+      }
+    );
 
-      return {
-        body: await response?.json(),
-        status: response?.status
-      };
-    } catch (err) {
-      throw new APIError(err);
+    if (!response?.ok) {
+      throw new APIError({
+        status: response?.status,
+        statusText: response?.statusText,
+        body: await response?.json()
+      } as APIErrorOptions);
     }
+
+    return {
+      body: await response?.json(),
+      status: response?.status
+    };
   }
 
   query(method: string, url: string, query: any, options?: any) {
@@ -80,10 +87,10 @@ class Request {
   }
 
   command(method: string, url: string, data: any, options?: any) {
-
     return this.request(method, url, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      json: data,
+      // json: data,
+      body: data,
       ...options
     });
   }
@@ -119,14 +126,14 @@ class Request {
 
           if (Array.isArray(obj)) {
             obj.forEach(function (item) {
-              const data = isStream(item) ? item : item.data;
+              const data = item.data ? item.data : item;
               const options = getAttachmentOptions(item);
               (formData as any).append(key, data, options);
             });
           } else {
             const data = isStream(obj) ? obj : obj.data;
             const options = getAttachmentOptions(obj);
-            (formData as any).append(key, obj, options);
+            (formData as any).append(key, data, options);
           }
 
           return;

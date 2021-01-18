@@ -31,7 +31,7 @@ module.exports = () => {
               loader: 'babel-loader',
             },
             {
-              loader: 'ts-loader',
+              loader: 'ts-loader?configFile=tsconfig.webpack.json',
             }
           ],
           exclude: /(node_modules|test)/

@@ -1,16 +1,25 @@
 import Request from './request';
 import Options from './interfaces/Options';
+import DomainClient from './domains';
+import EventClient from './events';
+import StatsClient from './stats';
+import SuppressionClient from './suppressions';
+import WebhookClient from './webhooks';
+import MessagesClient from './messages';
+import RoutesClient from './routes';
+import ValidateClient from './validate';
+import ParseClient from './parse';
 export default class Client {
     private request;
-    domains: any;
-    webhooks: any;
-    events: any;
-    stats: any;
-    suppressions: any;
-    messages: any;
-    routes: any;
+    domains: DomainClient;
+    webhooks: WebhookClient;
+    events: EventClient;
+    stats: StatsClient;
+    suppressions: SuppressionClient;
+    messages: MessagesClient;
+    routes: RoutesClient;
     public_request: Request;
-    validate: any;
-    parse: any;
+    validate: ValidateClient;
+    parse: ParseClient;
     constructor(options: Options, formData: FormData);
 }
