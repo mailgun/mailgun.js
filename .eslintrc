@@ -1,33 +1,37 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true,
-        "node": true,
-        "mocha": true
-    },
-    "extends": [
-        "airbnb-base"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 12
-    },
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "paths": [
-                    "src"
-                ]
-            }
-        }
-    },
-    "rules": {
-        "comma-dangle": 0,
-        "prefer-arrow-callback": 0,
-        "func-names": 0,
-        "max-classes-per-file": 0,
-        "no-underscore-dangle": 0,
-        "class-methods-use-this": 0,
-        "prefer-destructuring": 0
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "plugins": [
+    "eslint-plugin-tsdoc"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+            "src"
+        ]
+      }
     }
+  },
+  "rules": {
+    "tsdoc/syntax": "warn",
+    "comma-dangle": 0,
+    "prefer-arrow-callback": 0,
+    "func-names": 0,
+    "max-classes-per-file": 0,
+    "no-underscore-dangle": 0,
+    "class-methods-use-this": 0,
+    "prefer-destructuring": 0
+  }
 }
