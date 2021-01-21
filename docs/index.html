@@ -1,0 +1,1308 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>mailgun.js</title>
+	<meta name="description" content="Documentation for mailgun.js">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">mailgun.js</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>mailgun.js</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#mailgunjs-" id="mailgunjs-" style="color: inherit; text-decoration: none;">
+					<h1>Mailgun.js <a href="https://travis-ci.org/mailgun/mailgun-js"><img src="https://travis-ci.org/mailgun/mailgun-js.svg" alt="Build Status"></a></h1>
+				</a>
+				<p>A javascript sdk for Mailgun built with webpack, babel &amp; es6. This can be used in node or in the browser*.</p>
+				<p>NOTE: If used in the browser, a proxy is required to communicate with the Mailgun api due to cors limitations. Also, do not publish your private api key in frontend code.</p>
+				<p><strong>Table of Contents</strong></p>
+				<ul>
+					<li><a href="#documentation">Documentation</a><ul>
+							<li><a href="#install">Install</a></li>
+							<li><a href="#setup-client">Setup Client</a></li>
+							<li><a href="#methods">Methods</a></li>
+							<li><a href="#browser-demo">Browser Demo</a></li>
+							<li><a href="https://github.com/mailgun/mailgun-js/tree/c379f79ea2a2e0f825103751a3a102d8bdd3dd1b/example">Examples</a></li>
+						</ul>
+					</li>
+					<li><a href="#development">Development</a><ul>
+							<li><a href="#requirements">Requirements</a></li>
+							<li><a href="#build">Build</a></li>
+							<li><a href="#tests">Tests</a></li>
+							<li><a href="#release-process">Release Process</a></li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h1>Documentation</h1>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<ul>
+					<li>Requires node.js &gt;= 12.x</li>
+				</ul>
+				<p>Install mailgun.js with:</p>
+				<pre><code class="language-sh">npm install mailgun.js</code></pre>
+				<a href="#setup-client" id="setup-client" style="color: inherit; text-decoration: none;">
+					<h2>Setup Client</h2>
+				</a>
+				<p>Next, require the module and instantiate a mailgun client by calling <code>mailgun.client</code> with basic auth credentials <code>(username: &#39;api&#39;, key: &#39;key-yourkeyhere&#39;)</code>.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">var</span> mailgun = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mailgun.js&#x27;</span>);
+<span class="hljs-keyword">var</span> mg = mailgun.client({<span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;api&#x27;</span>, <span class="hljs-attr">key</span>: process.env.MAILGUN_API_KEY || <span class="hljs-string">&#x27;key-yourkeyhere&#x27;</span>});</code></pre>
+				<p>To use <code>validate</code> and <code>parse</code> methods, you must additionally include <code>public_key</code>. If you&#39;re using only those methods, <code>key</code> can be an empty string.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">var</span> mg = mailgun.client({
+  <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;api&#x27;</span>,
+  <span class="hljs-attr">key</span>: process.env.MAILGUN_API_KEY || <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">public_key</span>: process.env.MAILGUN_PUBLIC_KEY || <span class="hljs-string">&#x27;pubkey-yourkeyhere&#x27;</span>
+});</code></pre>
+				<p>In the case your mailgun account is eu hosted you would need to define eu&#39;s subdomain as <code>url</code> in mailgun&#39;s Client constructor:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">var</span> mailgun = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mailgun.js&#x27;</span>);
+<span class="hljs-keyword">var</span> mg = mailgun.client({<span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;api&#x27;</span>, <span class="hljs-attr">key</span>: process.env.MAILGUN_API_KEY || <span class="hljs-string">&#x27;key-yourkeyhere&#x27;</span>, <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://api.eu.mailgun.net&#x27;</span>});</code></pre>
+				<a href="#methods" id="methods" style="color: inherit; text-decoration: none;">
+					<h2>Methods</h2>
+				</a>
+				<p>The following service methods are available to instantiated clients. The examples assume you have already created a mailgun client as <code>mg</code> with valid credentials.</p>
+				<ul>
+					<li><a href="#mailgunjs-img-srchttpstravis-ciorgmailgunmailgun-jssvg-altbuild-status">Mailgun.js <img src="https://travis-ci.org/mailgun/mailgun-js" alt="Build Status"></a></li>
+					<li><a href="#documentation">Documentation</a><ul>
+							<li><a href="#install">Install</a></li>
+							<li><a href="#setup-client">Setup Client</a></li>
+							<li><a href="#methods">Methods</a><ul>
+									<li><a href="#messages">messages</a><ul>
+											<li><a href="#create">create</a></li>
+										</ul>
+									</li>
+									<li><a href="#domains">domains</a><ul>
+											<li><a href="#list">list</a></li>
+											<li><a href="#get">get</a></li>
+											<li><a href="#create-1">create</a></li>
+											<li><a href="#destroy">destroy</a></li>
+											<li><a href="#gettracking">getTracking</a></li>
+											<li><a href="#updatetracking">updateTracking</a></li>
+										</ul>
+									</li>
+									<li><a href="#events">events</a><ul>
+											<li><a href="#get-1">get</a></li>
+										</ul>
+									</li>
+									<li><a href="#stats">stats</a><ul>
+											<li><a href="#getdomain">getDomain</a></li>
+											<li><a href="#getaccount">getAccount</a></li>
+										</ul>
+									</li>
+									<li><a href="#suppressions">suppressions</a><ul>
+											<li><a href="#list-1">list</a></li>
+											<li><a href="#get-2">get</a></li>
+											<li><a href="#create-2">create</a></li>
+										</ul>
+									</li>
+									<li><a href="#webhooks">webhooks</a><ul>
+											<li><a href="#list-2">list</a></li>
+											<li><a href="#get-3">get</a></li>
+											<li><a href="#create-3">create</a></li>
+											<li><a href="#update">update</a></li>
+											<li><a href="#destroy-1">destroy</a></li>
+										</ul>
+									</li>
+									<li><a href="#routes">routes</a><ul>
+											<li><a href="#list-3">list</a></li>
+											<li><a href="#get-4">get</a></li>
+											<li><a href="#create-4">create</a></li>
+											<li><a href="#update-1">update</a></li>
+											<li><a href="#destroy-2">destroy</a></li>
+										</ul>
+									</li>
+									<li><a href="#validate">validate</a><ul>
+											<li><a href="#get-5">get</a></li>
+										</ul>
+									</li>
+									<li><a href="#parse">parse</a><ul>
+											<li><a href="#get-6">get</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#browser-demo">Browser Demo</a></li>
+						</ul>
+					</li>
+					<li><a href="#development">Development</a><ul>
+							<li><a href="#requirements">Requirements</a></li>
+							<li><a href="#build">Build</a></li>
+							<li><a href="#tests">Tests</a></li>
+							<li><a href="#release-process">Release Process</a></li>
+							<li><a href="#todo">TODO</a></li>
+						</ul>
+					</li>
+				</ul>
+				<p>Method naming conventions:</p>
+				<ul>
+					<li><code>get</code> or <code>get{{Item}}</code> - expected response for client is a single object</li>
+					<li><code>list</code> or <code>list{{Items}}</code> - expected response for client is a list of objects</li>
+					<li><code>create</code> or <code>create{{Item}}</code> - expected response for client is a single object</li>
+					<li><code>update</code> or <code>update{{Item}}</code> - expected response is an object with a status message</li>
+					<li><code>destroy</code> or <code>destroy{{Item}}</code> - expected response is an object with a status message</li>
+				</ul>
+				<a href="#messages" id="messages" style="color: inherit; text-decoration: none;">
+					<h3>messages</h3>
+				</a>
+				<a href="#create" id="create" style="color: inherit; text-decoration: none;">
+					<h4>create</h4>
+				</a>
+				<p><code>mg.messages.create(domain, data)</code> - <a href="https://documentation.mailgun.com/api-sending.html#sending">api docs</a></p>
+				<p>HTML/TEXT Example:</p>
+				<pre><code class="language-js">mg.messages.create(<span class="hljs-string">&#x27;sandbox-123.mailgun.org&#x27;</span>, {
+    <span class="hljs-attr">from</span>: <span class="hljs-string">&quot;Excited User &lt;mailgun@sandbox-123.mailgun.org&gt;&quot;</span>,
+    <span class="hljs-attr">to</span>: [<span class="hljs-string">&quot;test@example.com&quot;</span>],
+    <span class="hljs-attr">subject</span>: <span class="hljs-string">&quot;Hello&quot;</span>,
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Testing some Mailgun awesomness!&quot;</span>,
+    <span class="hljs-attr">html</span>: <span class="hljs-string">&quot;&lt;h1&gt;Testing some Mailgun awesomness!&lt;/h1&gt;&quot;</span>
+  })
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>MIME Example:</p>
+				<pre><code class="language-js">mg.messages.create(<span class="hljs-string">&#x27;sandbox-123.mailgun.org&#x27;</span>, {
+    <span class="hljs-attr">from</span>: <span class="hljs-string">&quot;Excited User &lt;mailgun@sandbox-123.mailgun.org&gt;&quot;</span>,
+    <span class="hljs-attr">to</span>: [<span class="hljs-string">&quot;test@example.com&quot;</span>],
+    <span class="hljs-attr">subject</span>: <span class="hljs-string">&quot;Hello&quot;</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;&lt;mime encoded string here&gt;&quot;</span>
+  })
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;&lt;20151025002517.117282.79817@sandbox-123.mailgun.org&gt;&#x27;</span>,
+  message: <span class="hljs-string">&#x27;Queued. Thank you.&#x27;</span>
+}</code></pre>
+				<p>Options:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">to</td>
+							<td align="left">Email address of the recipient(s). Example: &quot;Bob <a href="mailto:&#98;&#111;&#x62;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;">&#98;&#111;&#x62;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;</a>&quot;. You can use commas to separate multiple recipients (e.g.: &quot;<a href="mailto:&#116;&#x65;&#115;&#116;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;">&#116;&#x65;&#115;&#116;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;</a>,test@example.com&quot; or [&quot;test@example.com&quot;, &quot;<a href="mailto:&#116;&#x65;&#x73;&#116;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#116;&#x65;&#x73;&#116;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a>&quot;]). Make sure to include all To, Cc and Bcc recipients of the message.</td>
+						</tr>
+						<tr>
+							<td align="left">html</td>
+							<td align="left">HTML version of the message.</td>
+						</tr>
+						<tr>
+							<td align="left">text</td>
+							<td align="left">Text version of the message.</td>
+						</tr>
+						<tr>
+							<td align="left">message</td>
+							<td align="left">MIME string of the message. Make sure to use multipart/form-data to send this as a file upload.</td>
+						</tr>
+						<tr>
+							<td align="left">attachment</td>
+							<td align="left">File attachment. You can post multiple attachment values. Important: You must use multipart/form-data encoding when sending attachments. Also you can use <code>{data: file, filename: filename}</code> to define custom filename.</td>
+						</tr>
+						<tr>
+							<td align="left">o:tag</td>
+							<td align="left">Tag string. See Tagging for more information.</td>
+						</tr>
+						<tr>
+							<td align="left">o:campaign</td>
+							<td align="left">Id of the campaign the message belongs to. See um-campaign-analytics for details.</td>
+						</tr>
+						<tr>
+							<td align="left">o:deliverytime</td>
+							<td align="left">Desired time of delivery. See Date Format. Note: Messages can be scheduled for a maximum of 3 days in the future.</td>
+						</tr>
+						<tr>
+							<td align="left">o:dkim</td>
+							<td align="left">Enables/disabled DKIM signatures on per-message basis. Pass yes or no</td>
+						</tr>
+						<tr>
+							<td align="left">o:testmode</td>
+							<td align="left">Enables sending in test mode. Pass yes if needed. See Sending in Test Mode</td>
+						</tr>
+						<tr>
+							<td align="left">o:tracking</td>
+							<td align="left">Toggles tracking on a per-message basis, see Tracking Messages for details. Pass yes or no.</td>
+						</tr>
+						<tr>
+							<td align="left">o:tracking-clicks</td>
+							<td align="left">Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes, no or htmlonly.</td>
+						</tr>
+						<tr>
+							<td align="left">o:tracking-opens</td>
+							<td align="left">Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes or no.</td>
+						</tr>
+						<tr>
+							<td align="left">h:X-My-Header</td>
+							<td align="left">h: prefix followed by an arbitrary value allows to append a custom MIME header to the message (X-My-Header in this case). For example, h:Reply-To to specify Reply-To address.</td>
+						</tr>
+						<tr>
+							<td align="left">v:my-var</td>
+							<td align="left">v: prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See Attaching Data to Messages for more information.</td>
+						</tr>
+				</tbody></table>
+				<a href="#domains" id="domains" style="color: inherit; text-decoration: none;">
+					<h3>domains</h3>
+				</a>
+				<a href="#list" id="list" style="color: inherit; text-decoration: none;">
+					<h4>list</h4>
+				</a>
+				<p><code>mg.messages.list(query)</code> - <a href="https://documentation.mailgun.com/api-domains.html">api docs</a></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.messages.list()
+  .then(<span class="hljs-function"><span class="hljs-params">domains</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(domains)) <span class="hljs-comment">// logs array of domains</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: array of Domain instances</p>
+				<pre><code>[{
+  <span class="hljs-attr">created_at:</span> <span class="hljs-string">&#x27;Sun, 19 Oct 2014 18:49:36 GMT&#x27;</span>,
+  <span class="hljs-attr">name:</span> <span class="hljs-string">&#x27;testing.example.com&#x27;</span>,
+  <span class="hljs-attr">receiving_dns_records:</span> <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">require_tls:</span> <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">sending_dns_records:</span> <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">skip_verification:</span> <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">smtp_login:</span> <span class="hljs-string">&#x27;postmaster@testing.example.com&#x27;</span>,
+  <span class="hljs-attr">smtp_password:</span> <span class="hljs-string">&#x27;password&#x27;</span>,
+  <span class="hljs-attr">spam_action:</span> <span class="hljs-string">&#x27;disabled&#x27;</span>,
+  <span class="hljs-attr">state:</span> <span class="hljs-string">&#x27;unverified&#x27;</span>,
+  <span class="hljs-attr">type:</span> <span class="hljs-string">&#x27;custom&#x27;</span>,
+  <span class="hljs-attr">wildcard:</span> <span class="hljs-literal">true</span>
+}]</code></pre>
+				<p>Options</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">limit</td>
+							<td align="left">Maximum number of records to return. (100 by default)</td>
+						</tr>
+						<tr>
+							<td align="left">skip</td>
+							<td align="left">Number of records to skip. (0 by default)</td>
+						</tr>
+				</tbody></table>
+				<a href="#get" id="get" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.messages.get()</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.messages.get()
+  .then(<span class="hljs-function"><span class="hljs-params">domains</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(domains)) <span class="hljs-comment">// logs array of domains</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: Domain instance</p>
+				<pre><code>{
+  created_at: <span class="hljs-symbol">&#x27;Sun</span>, <span class="hljs-number">19</span> <span class="hljs-type">Oct</span> <span class="hljs-number">2014</span> <span class="hljs-number">18</span>:<span class="hljs-number">49</span>:<span class="hljs-number">36</span> <span class="hljs-type">GMT</span>&#x27;,
+  name: <span class="hljs-symbol">&#x27;testing</span>.example.com&#x27;,
+  receiving_dns_records: [{
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;testing.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;TXT&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;v=spf1 include:mailgun.org ~all&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;k1._domainkey.testing.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;TXT&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;k=rsa; 123456&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;email.testing.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;CNAME&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mailgun.org&quot;</span>
+    }],
+  require_tls: <span class="hljs-literal">true</span>,
+  sending_dns_records: [{
+      <span class="hljs-string">&quot;priority&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;MX&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mxa.mailgun.org&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;priority&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;MX&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mxb.mailgun.org&quot;</span>
+    }],
+  skip_verification: <span class="hljs-literal">true</span>,
+  smtp_login: <span class="hljs-symbol">&#x27;postmaster</span><span class="hljs-meta">@testing</span>.example.com&#x27;,
+  smtp_password: <span class="hljs-symbol">&#x27;passwor</span>d&#x27;,
+  spam_action: <span class="hljs-symbol">&#x27;disable</span>d&#x27;,
+  state: <span class="hljs-symbol">&#x27;unverifie</span>d&#x27;,
+  <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">&#x27;custo</span>m&#x27;,
+  wildcard: <span class="hljs-literal">true</span>
+}</code></pre>
+				<a href="#create-1" id="create-1" style="color: inherit; text-decoration: none;">
+					<h4>create</h4>
+				</a>
+				<p><code>mg.domains.create(data)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.domains.create({<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;foobar.example.com&#x27;</span>})
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Options:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">name</td>
+							<td align="left">Name of the domain (ex. domain.com)</td>
+						</tr>
+						<tr>
+							<td align="left">smtp_password</td>
+							<td align="left">Password for SMTP authentication</td>
+						</tr>
+						<tr>
+							<td align="left">spam_action</td>
+							<td align="left">disabled or tag Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged wtih a spam header. See Spam Filter.</td>
+						</tr>
+						<tr>
+							<td align="left">wildcard</td>
+							<td align="left">true or false Determines whether the domain will accept email for sub-domains.</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns: Domain instance</p>
+				<pre><code>{
+  created_at: <span class="hljs-symbol">&#x27;Sun</span>, <span class="hljs-number">19</span> <span class="hljs-type">Oct</span> <span class="hljs-number">2014</span> <span class="hljs-number">18</span>:<span class="hljs-number">49</span>:<span class="hljs-number">36</span> <span class="hljs-type">GMT</span>&#x27;,
+  name: <span class="hljs-symbol">&#x27;foobar</span>.example.com&#x27;,
+  receiving_dns_records: [{
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;foobar.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;TXT&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;v=spf1 include:mailgun.org ~all&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;k1._domainkey.foobar.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;TXT&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;k=rsa; 123456&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;email.foobar.example.com&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;CNAME&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mailgun.org&quot;</span>
+    }],
+  require_tls: <span class="hljs-literal">true</span>,
+  sending_dns_records: [{
+      <span class="hljs-string">&quot;priority&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;MX&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mxa.mailgun.org&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;priority&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+      <span class="hljs-string">&quot;record_type&quot;</span>: <span class="hljs-string">&quot;MX&quot;</span>,
+      <span class="hljs-string">&quot;valid&quot;</span>: <span class="hljs-string">&quot;unknown&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;mxb.mailgun.org&quot;</span>
+    }],
+  skip_verification: <span class="hljs-literal">true</span>,
+  smtp_login: <span class="hljs-symbol">&#x27;postmaster</span><span class="hljs-meta">@foobar</span>.example.com&#x27;,
+  smtp_password: <span class="hljs-symbol">&#x27;passwor</span>d&#x27;,
+  spam_action: <span class="hljs-symbol">&#x27;disable</span>d&#x27;,
+  state: <span class="hljs-symbol">&#x27;unverifie</span>d&#x27;,
+  <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">&#x27;custo</span>m&#x27;,
+  wildcard: <span class="hljs-literal">false</span>
+}</code></pre>
+				<a href="#destroy" id="destroy" style="color: inherit; text-decoration: none;">
+					<h4>destroy</h4>
+				</a>
+				<p><code>mg.domains.destroy(domain)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.domains.destroy(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&quot;Domain has been deleted&quot;</span>
+}</code></pre>
+				<a href="#gettracking" id="gettracking" style="color: inherit; text-decoration: none;">
+					<h4>getTracking</h4>
+				</a>
+				<p><code>mg.domains.getTracking(domain)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.domains.getTracking(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attr">&quot;click&quot;</span>: {
+    <span class="hljs-attr">&quot;active&quot;</span>: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-attr">&quot;open&quot;</span>: {
+    <span class="hljs-attr">&quot;active&quot;</span>: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-attr">&quot;unsubscribe&quot;</span>: {
+    <span class="hljs-attr">&quot;active&quot;</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">&quot;html_footer&quot;</span>: <span class="hljs-string">&quot;\n&lt;br&gt;\n&lt;p&gt;&lt;a href=\&quot;%unsubscribe_url%\&quot;&gt;unsubscribe&lt;/a&gt;&lt;/p&gt;\n&quot;</span>,
+    <span class="hljs-attr">&quot;text_footer&quot;</span>: <span class="hljs-string">&quot;\n\nTo unsubscribe click: &lt;%unsubscribe_url%&gt;\n\n&quot;</span>
+  }
+}</code></pre>
+				<a href="#updatetracking" id="updatetracking" style="color: inherit; text-decoration: none;">
+					<h4>updateTracking</h4>
+				</a>
+				<p><code>mg.domains.updateTracking(domain, trackingType, data)</code></p>
+				<p>Open Tracking Example:</p>
+				<pre><code class="language-js">mg.domains.updateTracking(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>, {<span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>})
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Open Tracking Options</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">active</td>
+							<td align="left">Boolean, enables or disables open tracking</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&#x27;Tracking settings have been updated&#x27;</span>,
+  open: {
+    active: true
+  }
+}</code></pre>
+				<p>Click Tracking Example:</p>
+				<pre><code class="language-js">mg.domains.updateTracking(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;click&#x27;</span>, {<span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>})
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Click Tracking Options</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">active</td>
+							<td align="left">Boolean, enables or disables click tracking</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&#x27;Tracking settings have been updated&#x27;</span>,
+  click: {
+    active: true
+  }
+}</code></pre>
+				<p>Unsubscribe Tracking Example:</p>
+				<pre><code class="language-js">mg.domains.updateTracking(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;unsubscribe&#x27;</span>, {
+    <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">html_footer</span>: <span class="hljs-string">&quot;\n&lt;br&gt;\n&lt;p&gt;&lt;a href=\&quot;%unsubscribe_url%\&quot;&gt;unsubscribe&lt;/a&gt;&lt;/p&gt;\n&quot;</span>,
+    <span class="hljs-attr">text_footer</span>: <span class="hljs-string">&quot;\n\nTo unsubscribe click: &lt;%unsubscribe_url%&gt;\n\n&quot;</span>
+  })
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Unsubscribe Tracking Options</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">active</td>
+							<td align="left">Boolean, enables or disables unsubscribe tracking</td>
+						</tr>
+						<tr>
+							<td align="left">html_footer</td>
+							<td align="left">string appended to html emails for managing unsubscribe links</td>
+						</tr>
+						<tr>
+							<td align="left">text_footer</td>
+							<td align="left">string appended to html emails for managing unsubscribe links</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  message: &#x27;<span class="hljs-type">Tracking</span> settings have been updated&#x27;,
+  <span class="hljs-string">&quot;unsubscribe&quot;</span>: {
+    <span class="hljs-string">&quot;active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;html_footer&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span>&lt;br&gt;<span class="hljs-subst">\n</span>&lt;p&gt;&lt;a href=<span class="hljs-subst">\&quot;</span>%unsubscribe_url%<span class="hljs-subst">\&quot;</span>&gt;unsubscribe&lt;/a&gt;&lt;/p&gt;<span class="hljs-subst">\n</span>&quot;</span>,
+    <span class="hljs-string">&quot;text_footer&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>To unsubscribe click: &lt;%unsubscribe_url%&gt;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&quot;</span>
+  }
+}</code></pre>
+				<a href="#events" id="events" style="color: inherit; text-decoration: none;">
+					<h3>events</h3>
+				</a>
+				<a href="#get-1" id="get-1" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.events.get(domain, query)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.events.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, { <span class="hljs-attr">page</span>: <span class="hljs-string">&#x27;mypageid&#x27;</span> })
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data.items)) <span class="hljs-comment">// logs array of event objects</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Options:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">page</td>
+							<td align="left">Fetches the specified page of log records, assuming that the URL was returned by the previous request</td>
+						</tr>
+						<tr>
+							<td align="left">begin</td>
+							<td align="left">The beginning of the search time range. It can be specified as a string (see Date Format) or linux epoch seconds. Refer to Time Range for details.</td>
+						</tr>
+						<tr>
+							<td align="left">end</td>
+							<td align="left">The end of the search time range. It can be specified as a string (see Date Format) or linux epoch seconds. Refer to Time Range for details.</td>
+						</tr>
+						<tr>
+							<td align="left">ascending</td>
+							<td align="left">Defines the direction of the search time range if the range end time is not specified. Can be either yes or no. Refer to Time Range for details.</td>
+						</tr>
+						<tr>
+							<td align="left">limit</td>
+							<td align="left">Number of entries to return. (300 max)</td>
+						</tr>
+						<tr>
+							<td align="left"><field></td>
+							<td align="left"><field> is the name of the Filter Field. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator.</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns: items (array of event objects), pages (paging keys grouped by id)</p>
+				<pre><code>{
+ <span class="hljs-attribute">items</span>: [{
+    <span class="hljs-attribute">type</span>: <span class="hljs-string">&#x27;accepted&#x27;</span>,
+    <span class="hljs-attribute">summary</span>: <span class="hljs-string">&#x27;got it&#x27;</span>,
+    <span class="hljs-attribute">content</span>: { <span class="hljs-attribute">more</span>: <span class="hljs-string">&#x27;data&#x27;</span> },
+    <span class="hljs-attribute">timestamp</span>: Wed Nov <span class="hljs-number">19</span> <span class="hljs-number">2014</span> <span class="hljs-number">10</span>:<span class="hljs-number">32</span>:<span class="hljs-number">57</span> GMT-<span class="hljs-number">0800</span> (PST) },
+  }],
+  <span class="hljs-attribute">pages</span>: {
+    <span class="hljs-attribute">first</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;first&#x27;</span>, <span class="hljs-attribute">number</span>: <span class="hljs-string">&#x27;W3siYSI6IGZhbHNlLC&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">last</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;last&#x27;</span>, <span class="hljs-attribute">number</span>: <span class="hljs-string">&#x27;W3siYSI6IGZhbHNlLC&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">next</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;next&#x27;</span>, <span class="hljs-attribute">number</span>: W3siYSI6IGZhbHNlLC<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">previous</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;previous&#x27;</span>, <span class="hljs-attribute">number</span>: <span class="hljs-string">&#x27;W3siYSI6IGZhbHNlLC&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> }
+  }
+}</code></pre>
+				<a href="#stats" id="stats" style="color: inherit; text-decoration: none;">
+					<h3>stats</h3>
+				</a>
+				<p>Stats Options</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">event</td>
+							<td align="left">The type of the event. For a complete list of all events written to the log see the <code>Event Types</code> table below. (Required)</td>
+						</tr>
+						<tr>
+							<td align="left">start</td>
+							<td align="left">The starting time. Should be in :rfc:<code>2822#page-14</code> or unix epoch format. Default: 7 days from the current time.</td>
+						</tr>
+						<tr>
+							<td align="left">end</td>
+							<td align="left">The ending date. Should be in :rfc:<code>2822#page-14</code> or unix epoch format. Default: current time.</td>
+						</tr>
+						<tr>
+							<td align="left">resolution</td>
+							<td align="left">Can be either <code>hour</code>, <code>day</code> or <code>month</code>. Default: <code>day</code></td>
+						</tr>
+						<tr>
+							<td align="left">duration</td>
+							<td align="left">Period of time with resoluton encoded. If provided, overwrites the start date. See list below.</td>
+						</tr>
+				</tbody></table>
+				<p>Duration is a string that represents a period of time with some resolution. It has a format <code>[0-9]+[m,d,h]</code> where</p>
+				<ul>
+					<li><code>h</code> - an hour</li>
+					<li><code>d</code> - a day</li>
+					<li><code>m</code> - a month</li>
+				</ul>
+				<p>Examples:</p>
+				<ul>
+					<li><code>24h</code> - a period of 24 hours (a day) with hourly resolution</li>
+					<li><code>1d</code> - a period of 1 day with daily resolution</li>
+					<li><code>2m</code> - a period of 2 months with monthly resolution</li>
+				</ul>
+				<p>Event Types</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Event Type</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">accepted</td>
+							<td align="left">Mailgun accepted the request to send/forward the email and the message has been placed in queue.</td>
+						</tr>
+						<tr>
+							<td align="left">delivered</td>
+							<td align="left">Mailgun sent the email and it was accepted by the recipient email server.</td>
+						</tr>
+						<tr>
+							<td align="left">failed</td>
+							<td align="left">Mailgun could not deliver the email to the recipient email server.</td>
+						</tr>
+						<tr>
+							<td align="left">opened</td>
+							<td align="left">The email recipient opened the email and enabled image viewing. Open tracking must be enabled in the Mailgun control panel, and the CNAME record must be pointing to mailgun.org.</td>
+						</tr>
+						<tr>
+							<td align="left">clicked</td>
+							<td align="left">The email recipient clicked on a link in the email. Click tracking must be enabled in the Mailgun control panel, and the CNAME record must be pointing to mailgun.org.</td>
+						</tr>
+						<tr>
+							<td align="left">unsubscribed</td>
+							<td align="left">The email recipient clicked on the unsubscribe link. Unsubscribe tracking must be enabled in the Mailgun control panel.</td>
+						</tr>
+						<tr>
+							<td align="left">complained</td>
+							<td align="left">The email recipient clicked on the spam complaint button within their email client. Feedback loops enable the notification to be received by Mailgun.</td>
+						</tr>
+						<tr>
+							<td align="left">stored</td>
+							<td align="left">Mailgun has stored an incoming message</td>
+						</tr>
+				</tbody></table>
+				<a href="#getdomain" id="getdomain" style="color: inherit; text-decoration: none;">
+					<h4>getDomain</h4>
+				</a>
+				<p><code>mg.stats.getDomain(domain, query)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.stats.getDomain(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, {<span class="hljs-attr">event</span>: [<span class="hljs-string">&#x27;delivered&#x27;</span>, <span class="hljs-string">&#x27;accepted&#x27;</span>, <span class="hljs-string">&#x27;failed&#x27;</span>, <span class="hljs-string">&#x27;complained&#x27;</span>]})
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attr">start:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">15</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+  <span class="hljs-attr">end:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">22</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+  <span class="hljs-attr">resolution:</span> <span class="hljs-string">&#x27;day&#x27;</span>,
+  <span class="hljs-attr">stats:</span> [{
+    <span class="hljs-attr">time:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">15</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+    <span class="hljs-attr">delivered:</span> { <span class="hljs-attr">smtp:</span> <span class="hljs-number">2</span>, <span class="hljs-attr">http:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">total:</span> <span class="hljs-number">3</span> }
+  }]
+}</code></pre>
+				<a href="#getaccount" id="getaccount" style="color: inherit; text-decoration: none;">
+					<h4>getAccount</h4>
+				</a>
+				<p><code>mg.stats.getDomain(domain, query)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.stats.getDomain(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, {<span class="hljs-attr">event</span>: [<span class="hljs-string">&#x27;delivered&#x27;</span>, <span class="hljs-string">&#x27;accepted&#x27;</span>, <span class="hljs-string">&#x27;failed&#x27;</span>, <span class="hljs-string">&#x27;complained&#x27;</span>]})
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attr">start:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">15</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+  <span class="hljs-attr">end:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">22</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+  <span class="hljs-attr">resolution:</span> <span class="hljs-string">&#x27;day&#x27;</span>,
+  <span class="hljs-attr">stats:</span> [{
+    <span class="hljs-attr">time:</span> <span class="hljs-string">Sun</span> <span class="hljs-string">Mar</span> <span class="hljs-number">15</span> <span class="hljs-number">2015 17:00:00 </span><span class="hljs-string">GMT-0700</span> <span class="hljs-string">(PDT)</span>,
+    <span class="hljs-attr">delivered:</span> { <span class="hljs-attr">smtp:</span> <span class="hljs-number">2</span>, <span class="hljs-attr">http:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">total:</span> <span class="hljs-number">3</span> }
+  }]
+}</code></pre>
+				<a href="#suppressions" id="suppressions" style="color: inherit; text-decoration: none;">
+					<h3>suppressions</h3>
+				</a>
+				<a href="#list-1" id="list-1" style="color: inherit; text-decoration: none;">
+					<h4>list</h4>
+				</a>
+				<p><code>mg.suppressions.list(domain, suppressionType, query)</code></p>
+				<p>Bounces Example:</p>
+				<pre><code class="language-js">mg.suppressions.list(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;bounces&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Unsubscribes Example:</p>
+				<pre><code class="language-js">mg.suppressions.list(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;unsubscribes&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Complaints Example:</p>
+				<pre><code class="language-js">mg.suppressions.list(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;complaints&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">items</span>: [
+    {
+      <span class="hljs-attribute">type</span>: <span class="hljs-string">&#x27;bounces&#x27;</span>,
+      <span class="hljs-attribute">address</span>: <span class="hljs-string">&#x27;unknown@unknown.com&#x27;</span>,
+      <span class="hljs-attribute">code</span>: <span class="hljs-number">550</span>,
+      <span class="hljs-attribute">error</span>: <span class="hljs-string">&#x27;No such mailbox&#x27;</span>,
+      <span class="hljs-attribute">created_at</span>: Fri Oct <span class="hljs-number">21</span> <span class="hljs-number">2011</span> <span class="hljs-number">04</span>:<span class="hljs-number">02</span>:<span class="hljs-number">55</span> GMT-<span class="hljs-number">0700</span> (PDT)
+    }
+  ],
+  <span class="hljs-attribute">pages</span>: {
+    <span class="hljs-attribute">first</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;first&#x27;</span>, <span class="hljs-attribute">page</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">address</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">last</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;last&#x27;</span>, <span class="hljs-attribute">page</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">address</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">next</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;next&#x27;</span>, <span class="hljs-attribute">page</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">address</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> },
+    <span class="hljs-attribute">previous</span>: { <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;prev&#x27;</span>, <span class="hljs-attribute">page</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">address</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attribute">url</span>: <span class="hljs-string">&#x27;apiurl&#x27;</span> }
+  }
+}</code></pre>
+				<a href="#get-2" id="get-2" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.suppressions.get(domain, suppressionType, address)</code></p>
+				<p>Bounces Example:</p>
+				<pre><code class="language-js">mg.suppressions.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;bounces&#x27;</span>, <span class="hljs-string">&#x27;address@example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Unsubscribes Example:</p>
+				<pre><code class="language-js">mg.suppressions.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;unsubscribes&#x27;</span>, <span class="hljs-string">&#x27;address@example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Complaints Example:</p>
+				<pre><code class="language-js">mg.suppressions.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;complaints&#x27;</span>, <span class="hljs-string">&#x27;address@example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Options:</p>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-built_in">type</span>: <span class="hljs-string">&#x27;bounces&#x27;</span>,
+  addres<span class="hljs-variable">s:</span> <span class="hljs-string">&#x27;address?@unknown.com&#x27;</span>,
+  <span class="hljs-keyword">tag</span><span class="hljs-variable">s:</span> [ <span class="hljs-string">&#x27;*&#x27;</span> ],
+  created_a<span class="hljs-variable">t:</span> Fri Oct <span class="hljs-number">21</span> <span class="hljs-number">2011</span> <span class="hljs-number">05</span>:<span class="hljs-number">02</span>:<span class="hljs-number">55</span> GMT-<span class="hljs-number">0700</span> (PDT)
+}</code></pre>
+				<a href="#create-2" id="create-2" style="color: inherit; text-decoration: none;">
+					<h4>create</h4>
+				</a>
+				<p><code>mg.suppressions.create(domain, suppressionType, array)</code></p>
+				<p>Bounces Example:</p>
+				<pre><code class="language-js">mg.suppressions.create(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;bounces&#x27;</span>, [{<span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;bob@example.com&#x27;</span>}])
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Bounces Options: Contains an array with the following object properties</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">address</td>
+							<td align="left">Valid email address</td>
+						</tr>
+						<tr>
+							<td align="left">code</td>
+							<td align="left">Error code (optional, default: 550)</td>
+						</tr>
+						<tr>
+							<td align="left">error</td>
+							<td align="left">Error description (optional, default: empty string)</td>
+						</tr>
+						<tr>
+							<td align="left">created_at</td>
+							<td align="left">Timestamp of a bounce event in RFC2822 format (optional, default: current time)</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&quot;1 address has been added to the bounces table&quot;</span>
+}</code></pre>
+				<p>Unsubscribes Example:</p>
+				<pre><code class="language-js">mg.suppressions.create(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;unsubscribes&#x27;</span>, [{<span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;bob@example.com&#x27;</span>}])
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Unsubscribes Options: Contains an array with the following object properties</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">address</td>
+							<td align="left">Valid email address</td>
+						</tr>
+						<tr>
+							<td align="left">tag</td>
+							<td align="left">Tag to unsubscribe from, use * to unsubscribe an address from all domain’s correspondence (optional, default: *)</td>
+						</tr>
+						<tr>
+							<td align="left">created_at</td>
+							<td align="left">Timestamp of a bounce event in RFC2822 format (optional, default: current time)</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&quot;1 address has been added to the unsubscribes table&quot;</span>
+}</code></pre>
+				<p>Complaints Example:</p>
+				<pre><code class="language-js">mg.suppressions.create(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;complaints&#x27;</span>, [{<span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;bob@example.com&#x27;</span>}])
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Complaints Options: Contains an array with the following object properties</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Parameter</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">address</td>
+							<td align="left">Valid email address</td>
+						</tr>
+						<tr>
+							<td align="left">created_at</td>
+							<td align="left">Timestamp of a bounce event in RFC2822 format (optional, default: current time)</td>
+						</tr>
+				</tbody></table>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&quot;1 address has been added to the complaints table&quot;</span>
+}</code></pre>
+				<a href="#webhooks" id="webhooks" style="color: inherit; text-decoration: none;">
+					<h3>webhooks</h3>
+				</a>
+				<a href="#list-2" id="list-2" style="color: inherit; text-decoration: none;">
+					<h4>list</h4>
+				</a>
+				<p><code>mg.webhooks.list(domain, query)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.webhooks.list(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  open: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  click: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  bounce: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  deliver: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  <span class="hljs-built_in">drop</span>: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  spam: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  unsubscribe: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  click: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+  open: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; },</span>
+}</code></pre>
+				<a href="#get-3" id="get-3" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.webhooks.get(domain, id)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.webhooks.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>) <span class="hljs-comment">// bounce, deliver, drop, spam, unsubscribe, click, open</span>
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-symbol">&#x27;open</span>&#x27;: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; }</span>
+}</code></pre>
+				<a href="#create-3" id="create-3" style="color: inherit; text-decoration: none;">
+					<h4>create</h4>
+				</a>
+				<p><code>mg.webhooks.create(domain, id, data, test)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.webhooks.create(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-string">&#x27;http://requestb.in&#x27;</span>) <span class="hljs-comment">// bounce, deliver, drop, spam, unsubscribe, click, open</span>
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-symbol">&#x27;open</span>&#x27;: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; }</span>
+}</code></pre>
+				<p>Test Webhook Example:</p>
+				<pre><code class="language-js">mg.webhooks.get(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-string">&#x27;http://requestb.in&#x27;</span>, <span class="hljs-literal">true</span>) <span class="hljs-comment">// bounce, deliver, drop, spam, unsubscribe, click, open</span>
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  &#x27;code&#x27;: &#x27;500&#x27;,
+  &#x27;message&#x27;: &#x27;Hi!&#x27;
+}</code></pre>
+				<a href="#update" id="update" style="color: inherit; text-decoration: none;">
+					<h4>update</h4>
+				</a>
+				<p><code>mg.webhooks.update(domain, id, url, test)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.webhooks.update(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-string">&#x27;http://requestb.in&#x27;</span>) <span class="hljs-comment">// bounce, deliver, drop, spam, unsubscribe, click, open</span>
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-symbol">&#x27;open</span>&#x27;: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; }</span>
+}</code></pre>
+				<a href="#destroy-1" id="destroy-1" style="color: inherit; text-decoration: none;">
+					<h4>destroy</h4>
+				</a>
+				<p><code>mg.webhooks.destroy(domain, id)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.webhooks.update(<span class="hljs-string">&#x27;foobar.example.com&#x27;</span>, <span class="hljs-string">&#x27;open&#x27;</span>) <span class="hljs-comment">// bounce, deliver, drop, spam, unsubscribe, click, open</span>
+  .then(<span class="hljs-function"><span class="hljs-params">msg</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(msg)) <span class="hljs-comment">// logs response data</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns:</p>
+				<pre><code>{
+  <span class="hljs-symbol">&#x27;open</span>&#x27;: { <span class="hljs-symbol">&#x27;url</span>&#x27;: <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//requestb.in&#x27; }</span>
+}</code></pre>
+				<a href="#routes" id="routes" style="color: inherit; text-decoration: none;">
+					<h3>routes</h3>
+				</a>
+				<a href="#list-3" id="list-3" style="color: inherit; text-decoration: none;">
+					<h4>list</h4>
+				</a>
+				<p><code>mg.routes.list(query)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.routes.list()
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>[
+  {
+    actions: [ <span class="hljs-symbol">&#x27;forward</span>(<span class="hljs-string">&quot;http://myhost.com/messages/&quot;</span>)&#x27;, <span class="hljs-symbol">&#x27;stop</span>()&#x27; ],
+    created_at: <span class="hljs-symbol">&#x27;Mon</span>, <span class="hljs-number">26</span> Oct <span class="hljs-number">2015</span> <span class="hljs-number">03</span>:56:51 GMT&#x27;,
+    description: <span class="hljs-symbol">&#x27;sample</span>&#x27;,
+    expression: <span class="hljs-symbol">&#x27;match_recipient</span>(<span class="hljs-string">&quot;.*@example.com&quot;</span>)&#x27;,
+    id: <span class="hljs-symbol">&#x27;562da483125730608a7d1719</span>&#x27;,
+    priority: <span class="hljs-number">0</span>
+  }
+]</code></pre>
+				<a href="#get-4" id="get-4" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.routes.get(id)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.routes.get(<span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attribute">actions</span>: [ <span class="hljs-string">&#x27;forward(&quot;http://myhost.com/messages/&quot;)&#x27;</span>, <span class="hljs-string">&#x27;stop()&#x27;</span> ],
+  <span class="hljs-attribute">created_at</span>: <span class="hljs-string">&#x27;Mon, 26 Oct 2015 03:56:51 GMT&#x27;</span>,
+  <span class="hljs-attribute">description</span>: <span class="hljs-string">&#x27;sample&#x27;</span>,
+  <span class="hljs-attribute">expression</span>: <span class="hljs-string">&#x27;match_recipient(&quot;.*@example.com&quot;)&#x27;</span>,
+  <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>,
+  <span class="hljs-attribute">priority</span>: <span class="hljs-number">0</span>
+}</code></pre>
+				<a href="#create-4" id="create-4" style="color: inherit; text-decoration: none;">
+					<h4>create</h4>
+				</a>
+				<p><code>mg.routes.create(options)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.routes.create({
+    <span class="hljs-attr">priority</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;sample&#x27;</span>,
+    <span class="hljs-attr">expression</span>: <span class="hljs-string">&#x27;match_recipient(&quot;.*@example.org&quot;)&#x27;</span>,
+    <span class="hljs-attr">action</span>: [<span class="hljs-string">&#x27;forward(&quot;http://myhost.com/messages/&quot;)&#x27;</span>, <span class="hljs-string">&#x27;stop()&#x27;</span>]
+  })
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attribute">actions</span>: [ <span class="hljs-string">&#x27;forward(&quot;http://myhost.com/messages/&quot;)&#x27;</span>, <span class="hljs-string">&#x27;stop()&#x27;</span> ],
+  <span class="hljs-attribute">created_at</span>: <span class="hljs-string">&#x27;Mon, 26 Oct 2015 03:56:51 GMT&#x27;</span>,
+  <span class="hljs-attribute">description</span>: <span class="hljs-string">&#x27;sample&#x27;</span>,
+  <span class="hljs-attribute">expression</span>: <span class="hljs-string">&#x27;match_recipient(&quot;.*@example.com&quot;)&#x27;</span>,
+  <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>,
+  <span class="hljs-attribute">priority</span>: <span class="hljs-number">0</span>
+}</code></pre>
+				<a href="#update-1" id="update-1" style="color: inherit; text-decoration: none;">
+					<h4>update</h4>
+				</a>
+				<p><code>mg.routes.update(id, options)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.routes.update(<span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>, {
+    <span class="hljs-attr">priority</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;sample&#x27;</span>,
+    <span class="hljs-attr">expression</span>: <span class="hljs-string">&#x27;match_recipient(&quot;.*@example.org&quot;)&#x27;</span>,
+    <span class="hljs-attr">action</span>: [<span class="hljs-string">&#x27;forward(&quot;http://myhost.com/messages/&quot;)&#x27;</span>, <span class="hljs-string">&#x27;stop()&#x27;</span>]
+  })
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attribute">actions</span>: [ <span class="hljs-string">&#x27;forward(&quot;http://myhost.com/messages/&quot;)&#x27;</span>, <span class="hljs-string">&#x27;stop()&#x27;</span> ],
+  <span class="hljs-attribute">created_at</span>: <span class="hljs-string">&#x27;Mon, 26 Oct 2015 03:56:51 GMT&#x27;</span>,
+  <span class="hljs-attribute">description</span>: <span class="hljs-string">&#x27;sample&#x27;</span>,
+  <span class="hljs-attribute">expression</span>: <span class="hljs-string">&#x27;match_recipient(&quot;.*@example.com&quot;)&#x27;</span>,
+  <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>,
+  <span class="hljs-attribute">message</span>: <span class="hljs-string">&#x27;Route has been updated&#x27;</span>,
+  <span class="hljs-attribute">priority</span>: <span class="hljs-number">0</span>
+}</code></pre>
+				<a href="#destroy-2" id="destroy-2" style="color: inherit; text-decoration: none;">
+					<h4>destroy</h4>
+				</a>
+				<p><code>mg.routes.destroy(id)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.routes.destroy(<span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attribute">id</span>: <span class="hljs-string">&#x27;562da483125730608a7d1719&#x27;</span>,
+  message: <span class="hljs-string">&#x27;Route has been deleted&#x27;</span>
+}</code></pre>
+				<a href="#validate" id="validate" style="color: inherit; text-decoration: none;">
+					<h3>validate</h3>
+				</a>
+				<a href="#get-5" id="get-5" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.validate.get(address)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.validate.get(<span class="hljs-string">&#x27;alice@example.com&#x27;</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&#x27;alice@example.com&#x27;</span>,
+  <span class="hljs-attr">did_you_mean:</span> <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">is_valid:</span> <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">parts:</span> { <span class="hljs-attr">display_name:</span> <span class="hljs-literal">null</span>, <span class="hljs-attr">domain:</span> <span class="hljs-literal">null</span>, <span class="hljs-attr">local_part:</span> <span class="hljs-literal">null</span> }
+}</code></pre>
+				<a href="#parse" id="parse" style="color: inherit; text-decoration: none;">
+					<h3>parse</h3>
+				</a>
+				<a href="#get-6" id="get-6" style="color: inherit; text-decoration: none;">
+					<h4>get</h4>
+				</a>
+				<p><code>mg.parse.get(addresses, enableDnsEspChecks)</code></p>
+				<p>Example:</p>
+				<pre><code class="language-js">mg.parse.get(<span class="hljs-string">&#x27;Alice &lt;alice@example.com&gt;, example.com&#x27;</span>, <span class="hljs-literal">true</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)) <span class="hljs-comment">// logs response body</span>
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err)); <span class="hljs-comment">// logs any error</span></code></pre>
+				<p>Promise Returns: response body</p>
+				<pre><code>{
+  <span class="hljs-attribute">parsed</span>: [],
+  unparseable: [
+    <span class="hljs-string">&#x27;Alice &lt;alice@example.com&gt;&#x27;</span>,
+    <span class="hljs-string">&#x27;example.com&#x27;</span>
+  ]
+}</code></pre>
+				<a href="#browser-demo" id="browser-demo" style="color: inherit; text-decoration: none;">
+					<h2>Browser Demo</h2>
+				</a>
+				<p><img src="https://cloud.githubusercontent.com/assets/399776/10718632/e8fe56e4-7b34-11e5-84c8-cfcfde978711.png" alt="image"></p>
+				<p>For this demo to work, you&#39;ll need to install and run <code>http-proxy</code> locally. Install it with:</p>
+				<pre><code class="language-sh">npm install -g http-proxy</code></pre>
+				<p>Then run the following command from the mailgun-js directory:</p>
+				<pre><code class="language-sh">http-server -p 4001 --proxy=<span class="hljs-string">&quot;https://api.mailgun.net&quot;</span></code></pre>
+				<p>Demo should be up and running at <a href="http://0.0.0.0:4001/examples/">http://0.0.0.0:4001/examples/</a></p>
+				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+					<h1>Development</h1>
+				</a>
+				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+					<h2>Requirements</h2>
+				</a>
+				<ul>
+					<li>Requires node.js &gt;= 4.x</li>
+				</ul>
+				<p>Install node dependencies with:</p>
+				<pre><code class="language-sh">npm install</code></pre>
+				<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+					<h2>Build</h2>
+				</a>
+				<pre><code class="language-sh">npm run build</code></pre>
+				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
+					<h2>Tests</h2>
+				</a>
+				<pre><code class="language-sh">npm run tests</code></pre>
+				<p>Watch tests with</p>
+				<pre><code class="language-sh">npm run watch-tests</code></pre>
+				<a href="#release-process" id="release-process" style="color: inherit; text-decoration: none;">
+					<h2>Release Process</h2>
+				</a>
+				<p>Releases occur after feature branches have been tested and merged into master.</p>
+				<p>First, checkout master and pull the latest commits.</p>
+				<pre><code class="language-sh">git checkout master
+git pull</code></pre>
+				<p>Next, determine semantic version bump (major/minor/patch). Then run <code>npm version</code> with the appropriate keyword.</p>
+				<pre><code class="language-sh">npm version patch -m <span class="hljs-string">&quot;chore(release): added %s&quot;</span></code></pre>
+				<p>Other examples:</p>
+				<pre><code class="language-sh">npm version major -m <span class="hljs-string">&quot;chore(release): added %s&quot;</span>
+npm version minor -m <span class="hljs-string">&quot;chore(release): added %s&quot;</span>
+npm version patch -m <span class="hljs-string">&quot;chore(release): added %s&quot;</span></code></pre>
+				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
+					<h2>TODO</h2>
+				</a>
+				<ul>
+					<li>add missing services<ul>
+							<li>Lists<ul>
+									<li><code>lists.list(query)</code></li>
+									<li><code>list.get(address)</code></li>
+									<li><code>list.create(data)</code></li>
+									<li><code>list.update(address, data)</code></li>
+									<li><code>list.destroy(address)</code></li>
+									<li><code>lists.listMembers(address, query)</code></li>
+									<li><code>list.getMember(address, memberAddress)</code></li>
+									<li><code>list.createMember(address, data)</code> (singe &amp; json batch upload)</li>
+									<li><code>list.updateMember(address, memberAddress, data)</code></li>
+									<li><code>list.updateMember(address, memberAddress, data)</code></li>
+									<li><code>list.destroyMember(address, memberAddress)</code></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>add browser demo to heroku</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_client_.html">&quot;lib/client&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_domains_.html">&quot;lib/domains&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_error_.html">&quot;lib/error&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_events_.html">&quot;lib/events&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_apierroroptions_.html">&quot;lib/interfaces/APIError<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_options_.html">&quot;lib/interfaces/<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_requestoptions_.html">&quot;lib/interfaces/<wbr>Request<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_statsoptions_.html">&quot;lib/interfaces/<wbr>Stats<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_interfaces_supressions_.html">&quot;lib/interfaces/<wbr>Supressions&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_messages_.html">&quot;lib/messages&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_parse_.html">&quot;lib/parse&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_request_.html">&quot;lib/request&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_routes_.html">&quot;lib/routes&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_stats_.html">&quot;lib/stats&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_suppressions_.html">&quot;lib/suppressions&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_validate_.html">&quot;lib/validate&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_webhooks_.html">&quot;lib/webhooks&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_webpack_config_.html">&quot;webpack.config&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_webpack_release_config_.html">&quot;webpack.release.config&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
