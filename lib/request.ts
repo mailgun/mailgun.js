@@ -1,9 +1,6 @@
 
 import Btoa from 'btoa';
-
-import merge from 'lodash.merge';
 import urljoin from 'url-join';
-
 import ky from 'ky-universal';
 
 import APIError from './error';
@@ -45,11 +42,18 @@ class Request {
 
   async request(method: string, url: string, options?: any) {
     const basic = Btoa(`${this.username}:${this.key}`);
-    const headers = merge({
-      Authorization: `Basic ${basic}`
-    }, this.headers, options?.headers);
+    const headers = {
+      Authorization: `Basic ${basic}`,
+      ...this.headers,
+      ...options?.headers
+    };
 
     delete options?.headers;
+
+    if (!headers['Content-Type']) {
+      // for form-data it will be Null so we need to remove it
+      delete headers['Content-Type'];
+    }
 
     const params = { ...options };
 
@@ -89,7 +93,6 @@ class Request {
   command(method: string, url: string, data: any, options?: any) {
     return this.request(method, url, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      // json: data,
       body: data,
       ...options
     });
@@ -114,7 +117,7 @@ class Request {
   postMulti(url: string, data: any) {
 
     const formData: FormData = new (this.formData as any)();
-    const options: any = {
+    const params: any = {
       headers: { 'Content-Type': null }
     };
 
@@ -148,7 +151,7 @@ class Request {
         }
       });
 
-    return this.command('post', url, formData, options);
+    return this.command('post', url, formData, params);
   }
 
   put(url: string, data: any, options?: any) {
