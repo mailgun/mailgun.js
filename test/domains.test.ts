@@ -185,4 +185,15 @@ describe('DomainClient', function () {
       });
     });
   });
+
+  describe('getIps', () => {
+    it('should return list of dedicated ips', () => {
+      const items = ['192.161.0.1', '192.168.0.2']
+      api.get('/v2/domains/domain.com/ips').reply(200, { items });
+
+      return client.getIps('domain.com').then( (items: string[]) => {
+        items.should.eql(items);
+      });
+    });
+  });
 });

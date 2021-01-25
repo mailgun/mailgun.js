@@ -13,6 +13,7 @@ import MessagesClient from './messages';
 import RoutesClient from './routes';
 import ValidateClient from './validate';
 import ParseClient from './parse';
+import IpsClient from './ips';
 
 export default class Client {
   private request;
@@ -27,6 +28,7 @@ export default class Client {
   public public_request;
   public validate;
   public parse;
+  public ips;
 
   constructor(options: Options, formData: FormData) {
     let config: RequestOptions = { ...options } as RequestOptions;
@@ -51,6 +53,7 @@ export default class Client {
     this.suppressions = new SuppressionClient(this.request);
     this.messages = new MessagesClient(this.request);
     this.routes = new RoutesClient(this.request);
+    this.ips = new IpsClient(this.request);
 
     if (config.public_key) {
       config.key = config.public_key;

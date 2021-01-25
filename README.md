@@ -77,6 +77,8 @@ The following service methods are available to instantiated clients. The example
       - [destroy](#destroy)
       - [getTracking](#gettracking)
       - [updateTracking](#updatetracking)
+      - [getIps](#getips)
+      - [assignIp](#assignip)
     - [events](#events)
       - [get](#get-1)
     - [stats](#stats)
@@ -481,6 +483,62 @@ Promise Returns:
   }
 }
 ```
+
+#### getIps
+`mg.domains.getIps(domain)`
+
+Example:
+
+```js
+mg.domains.getIps('foobar.example.com')
+  .then(msg => console.log(msg)) // logs response data
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns:
+
+```
+["192.168.0.1", "192.168.0.2"]
+```
+
+#### assignIp
+
+`mg.domains.assignIp(domain, ip)`
+
+Example:
+
+```js
+mg.domains.assignIp('foobar.example.com', "192.168.0.3")
+  .then(msg => console.log(msg)) // logs response data
+  .catch(err => console.log(err)); // logs any error
+```
+
+
+```
+{
+  message: 'success'
+}
+```
+
+#### deleteIp
+
+`mg.domains.deleteIp(domain, ip)`
+
+Example:
+
+```js
+mg.domains.deleteIp('foobar.example.com', "192.168.0.3")
+  .then(msg => console.log(msg)) // logs response data
+  .catch(err => console.log(err)); // logs any error
+```
+
+
+```
+{
+  message: 'success'
+}
+```
+
 
 ### events
 
