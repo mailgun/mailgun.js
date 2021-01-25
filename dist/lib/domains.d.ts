@@ -58,5 +58,14 @@ export default class DomainClient {
     destroy(domain: string): Promise<any>;
     getTracking(domain: string): Promise<any>;
     updateTracking(domain: string, type: string, data: any): Promise<any>;
+    getIps(domain: string): Promise<string[]>;
+    assignIp(domain: string, ip: string): Promise<{
+        body: any;
+        status: number;
+    }>;
+    deleteIp(domain: string, ip: string): Promise<{
+        body: any;
+        status: number;
+    }>;
 }
 export {};

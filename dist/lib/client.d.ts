@@ -9,6 +9,7 @@ import MessagesClient from './messages';
 import RoutesClient from './routes';
 import ValidateClient from './validate';
 import ParseClient from './parse';
+import IpsClient from './ips';
 export default class Client {
     private request;
     domains: DomainClient;
@@ -21,5 +22,6 @@ export default class Client {
     public_request: Request;
     validate: ValidateClient;
     parse: ParseClient;
+    ips: IpsClient;
     constructor(options: Options, formData: FormData);
 }
