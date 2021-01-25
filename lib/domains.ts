@@ -64,7 +64,11 @@ export default class DomainClient {
   }
 
   _parseDomain(response: {
-    body: {domain: any, receiving_dns_records: any, sending_dns_records: any }
+    body: {
+      domain: any,
+      receiving_dns_records: any,
+      sending_dns_records: any
+    }
   }) {
     return new Domain(
       response.body.domain,
@@ -111,5 +115,20 @@ export default class DomainClient {
   updateTracking(domain: string, type: string, data: any) {
     return this.request.put(urljoin('/v2/domains', domain, 'tracking', type), data)
       .then(this._parseTrackingUpdate);
+  }
+
+  // IPs
+
+  getIps(domain: string) {
+    return this.request.get(urljoin('/v2/domains', domain, 'ips'))
+      .then((response: { body: { items: string[] } }) => response?.body?.items);
+  }
+
+  assignIp(domain: string, ip: string) {
+    return this.request.post(urljoin('/v2/domains', domain, 'ips'), { ip });
+  }
+
+  deleteIp(domain: string, ip: string) {
+    return this.request.delete(urljoin('/v2/domains', domain, 'ips', ip));
   }
 }
