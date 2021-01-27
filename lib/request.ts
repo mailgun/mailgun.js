@@ -25,6 +25,15 @@ const getAttachmentOptions = (item: any): { filename?: string, contentType?: str
   };
 }
 
+const streamToString = (stream: any) => {
+  const chunks: any = []
+  return new Promise((resolve, reject) => {
+    stream.on('data', (chunk: any) => chunks.push(chunk))
+    stream.on('error', reject)
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+  })
+}
+
 class Request {
   private username;
   private key;
@@ -73,10 +82,14 @@ class Request {
     );
 
     if (!response?.ok) {
+      const message = response?.body && isStream(response.body)
+        ? await streamToString(response.body)
+        : await response?.json();
+
       throw new APIError({
         status: response?.status,
         statusText: response?.statusText,
-        body: await response?.json()
+        body: { message }
       } as APIErrorOptions);
     }
 

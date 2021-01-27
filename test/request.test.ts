@@ -69,7 +69,7 @@ describe('Request', function () {
     it('handles API error', function () {
       nock('https://api.mailgun.com', { reqheaders: headers })
         .get('/v2/some/resource')
-        .reply(429, { message: 'Too many requests' });
+        .reply(429, 'Too many requests');
 
       const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData);
       const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {

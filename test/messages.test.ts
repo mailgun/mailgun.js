@@ -41,9 +41,7 @@ describe('MessagesClient', function () {
     });
 
     it('returns error messages', function () {
-      api.post('/v3/sandbox.mailgun.org/messages').reply(400, {
-        message: 'Missing parameter \'to\'.'
-      });
+      api.post('/v3/sandbox.mailgun.org/messages').reply(400, 'Missing parameter \'to\'.');
 
       return client.create('sandbox.mailgun.org', {
         from: 'bar@example.com',
