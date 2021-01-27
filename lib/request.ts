@@ -75,8 +75,7 @@ class Request {
     if (!response?.ok) {
       throw new APIError({
         status: response?.status,
-        statusText: response?.statusText,
-        body: await response?.json()
+        statusText: response?.statusText
       } as APIErrorOptions);
     }
 
