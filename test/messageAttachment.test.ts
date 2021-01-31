@@ -27,13 +27,13 @@ describe('MessagesClient', function () {
   });
 
   describe('create with attachments', function () {
-    it('sends a custom attachment', async function (done) {
+    it('sends a custom attachment', async function () {
       api.post('/v3/sandbox.mailgun.org/messages').reply(200, {
         message: 'Queued. Thank you.',
         id: '<20111114174239.25659.5817@samples.mailgun.org>'
       });
 
-      client.create('sandbox.mailgun.org', {
+      const res = await client.create('sandbox.mailgun.org', {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',
@@ -42,10 +42,9 @@ describe('MessagesClient', function () {
           filename: 'test-image',
           data: mailgunLogo
         }]
-      }).then(function (data: { message: string }) {
-        expect(data.message).to.eql('Queued. Thank you.');
-        done();
-      });
+      })
+
+      expect(res.message).to.eql('Queued. Thank you.');
     });
   });
 });
