@@ -131,4 +131,12 @@ export default class DomainClient {
   deleteIp(domain: string, ip: string) {
     return this.request.delete(urljoin('/v2/domains', domain, 'ips', ip));
   }
+
+  linkIpPool(domain: string, pool_id: string) {
+    return this.request.post(urljoin('/v2/domains', domain, 'ips'), { pool_id });
+  }
+
+  unlinkIpPoll(domain: string, pool_id: string, ip: string) {
+    return this.request.delete(urljoin('/v2/domains', domain, 'ips', 'ip_pool'), { pool_id, ip });
+  }
 }
