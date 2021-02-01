@@ -67,5 +67,13 @@ export default class DomainClient {
         body: any;
         status: number;
     }>;
+    linkIpPool(domain: string, pool_id: string): Promise<{
+        body: any;
+        status: number;
+    }>;
+    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<{
+        body: any;
+        status: number;
+    }>;
 }
 export {};

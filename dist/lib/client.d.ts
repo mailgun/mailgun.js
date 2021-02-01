@@ -10,6 +10,7 @@ import RoutesClient from './routes';
 import ValidateClient from './validate';
 import ParseClient from './parse';
 import IpsClient from './ips';
+import IpPoolsClient from './ip-pools';
 export default class Client {
     private request;
     domains: DomainClient;
@@ -23,5 +24,6 @@ export default class Client {
     validate: ValidateClient;
     parse: ParseClient;
     ips: IpsClient;
+    ip_pools: IpPoolsClient;
     constructor(options: Options, formData: FormData);
 }
