@@ -32,7 +32,7 @@ export default class Client {
   public ips;
   public ip_pools;
 
-  constructor(options: Options, formData: FormData) {
+  constructor(options: Options, formData: new () => FormData) {
     let config: RequestOptions = { ...options } as RequestOptions;
 
     config = defaults(config, { url: 'https://api.mailgun.net' });

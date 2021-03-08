@@ -39,9 +39,9 @@ class Request {
   private key;
   private url;
   private headers: any;
-  private formData: FormData;
+  private formData: new () => FormData;
 
-  constructor(options: RequestOptions, formData: FormData) {
+  constructor(options: RequestOptions, formData: new () => FormData) {
     this.username = options.username;
     this.key = options.key;
     this.url = options.url;
@@ -129,7 +129,7 @@ class Request {
 
   postMulti(url: string, data: any) {
 
-    const formData: FormData = new (this.formData as any)();
+    const formData: FormData = new this.formData();
     const params: any = {
       headers: { 'Content-Type': null }
     };
