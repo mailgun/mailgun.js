@@ -5,7 +5,7 @@ declare class Request {
     private url;
     private headers;
     private formData;
-    constructor(options: RequestOptions, formData: FormData);
+    constructor(options: RequestOptions, formData: new () => FormData);
     request(method: string, url: string, options?: any): Promise<{
         body: any;
         status: number;

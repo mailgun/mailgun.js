@@ -25,5 +25,5 @@ export default class Client {
     parse: ParseClient;
     ips: IpsClient;
     ip_pools: IpPoolsClient;
-    constructor(options: Options, formData: FormData);
+    constructor(options: Options, formData: new () => FormData);
 }
