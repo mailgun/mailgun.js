@@ -1,6 +1,3 @@
-import map from 'lodash.map';
-import indexBy from 'lodash.keyby';
-import partialRight from 'lodash.partialright';
 import url from 'url';
 import urljoin from 'url-join';
 
@@ -85,15 +82,18 @@ export default class SuppressionClient {
   }
 
   _parsePageLinks(response: { body: { paging: any } }) {
-    const pages = map(response.body.paging, (u, id) => this._parsePage(id, u));
-
-    return indexBy(pages, 'id');
+    const pages = Object.entries(response.body.paging);
+    return pages.reduce(
+      (acc: any, [id, url]: [url: string, id: string]) => {
+        acc[id] = this._parsePage(id, url)
+        return acc
+      }, {});
   }
 
   _parseList(response: { body: { items: any, paging: any } }, Model: TModel) {
     const data = {} as any;
 
-    data.items = map(response.body.items, (d) => new Model(d));
+    data.items = response.body.items.map((d: any) => new Model(d));
 
     data.pages = this._parsePageLinks(response);
 
@@ -114,11 +114,10 @@ export default class SuppressionClient {
 
   get(domain: string, type: string, address: string) {
     const model = (this.models as any)[type];
-    const parser = partialRight(this._parseItem, model);
 
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))
-      .then((response: { body: any }) => parser(response));
+      .then((response: { body: any }) => this._parseItem(response, model));
   }
 
   create(domain: string, type: string, data: any) {

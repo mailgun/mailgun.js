@@ -1,5 +1,3 @@
-const defaults = require('lodash.defaults');
-
 import Request from './request';
 import Options from './interfaces/Options';
 import RequestOptions from './interfaces/RequestOptions';
@@ -33,9 +31,11 @@ export default class Client {
   public ip_pools;
 
   constructor(options: Options, formData: new () => FormData) {
-    let config: RequestOptions = { ...options } as RequestOptions;
+    const config: RequestOptions = { ...options } as RequestOptions;
 
-    config = defaults(config, { url: 'https://api.mailgun.net' });
+    if (!config.url) {
+      config.url = 'https://api.mailgun.net'
+    }
 
     if (!config.username) {
       throw new Error('Parameter "username" is required');
