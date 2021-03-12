@@ -34,7 +34,7 @@ export default class DomainClient {
     }): any;
     _parseDomainList(response: {
         body: {
-            items: DomainData;
+            items: DomainData[];
         };
     }): Domain[];
     _parseDomain(response: {

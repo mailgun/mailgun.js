@@ -1,4 +1,3 @@
-/// <reference types="lodash" />
 import Request from './request';
 import { BounceData, ComplaintData, UnsubscribeData } from './interfaces/Supressions';
 declare type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
@@ -41,12 +40,7 @@ export default class SuppressionClient {
         body: {
             paging: any;
         };
-    }): import("lodash").Dictionary<{
-        id: string;
-        page: string | string[];
-        address: string | string[];
-        url: string;
-    }>;
+    }): any;
     _parseList(response: {
         body: {
             items: any;
