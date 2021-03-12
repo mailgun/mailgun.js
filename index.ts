@@ -1,3 +1,4 @@
+import FormData = require('form-data');
 import Client from './lib/client'
 import Options from './lib/interfaces/Options';
 

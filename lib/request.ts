@@ -2,6 +2,7 @@
 import Btoa from 'btoa';
 import urljoin from 'url-join';
 import ky from 'ky-universal';
+import FormData = require('form-data');
 
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';

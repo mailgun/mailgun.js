@@ -1,3 +1,4 @@
+import FormData = require('form-data');
 import Request from './request';
 import Options from './interfaces/Options';
 import RequestOptions from './interfaces/RequestOptions';
