@@ -17,7 +17,7 @@ describe('Client', function () {
   let client: any;
 
   beforeEach(function () {
-    client = new Client({ username: 'username', key: 'key', public_key: 'key' }, formData);
+    client = new Client({ username: 'username', key: 'key', public_key: 'key', timeout: 10000 }, formData);
   });
 
   it('raises error when username is not provided', function () {

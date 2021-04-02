@@ -38,6 +38,7 @@ class Request {
   private username;
   private key;
   private url;
+  private timeout;
   private headers: any;
   private formData: new () => FormData;
 
@@ -45,6 +46,7 @@ class Request {
     this.username = options.username;
     this.key = options.key;
     this.url = options.url;
+    this.timeout = options.timeout;
     this.headers = options.headers || {};
     this.formData = formData;
   }
@@ -77,6 +79,7 @@ class Request {
         method: method.toLocaleUpperCase(),
         headers,
         throwHttpErrors: false,
+        timeout: this.timeout,
         ...params
       }
     );
