@@ -145,7 +145,7 @@ class Request {
 
           if (Array.isArray(obj)) {
             obj.forEach(function (item) {
-              const data = item.data ? item.data : item;
+              const data = isStream(item) ? item : item.data;
               const options = getAttachmentOptions(item);
               (formData as any).append(key, data, options);
             });
