@@ -34,7 +34,7 @@ npm install mailgun.js
 
 Next, require the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
 
-NOTE: startinf from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
+NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
 ```js
 const formData = require('form-data');
