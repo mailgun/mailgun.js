@@ -4,7 +4,7 @@ import Options from './lib/interfaces/Options';
 export default class Mailgun {
   private formData: new () => FormData
 
-  constructor(FormData: new () => FormData) {
+  constructor(FormData: new (...args: any[]) => FormData) {
     this.formData = FormData;
   }
 
