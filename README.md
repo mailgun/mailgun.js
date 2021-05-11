@@ -34,7 +34,7 @@ npm install mailgun.js
 
 Next, require the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
 
-NOTE: startinf from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
+NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
 ```js
 const formData = require('form-data');
@@ -595,7 +595,7 @@ Stats Options
 | start      | The starting time. Should be in :rfc:`2822#page-14` or unix epoch format. Default: 7 days from the current time.           |
 | end        | The ending date. Should be in :rfc:`2822#page-14` or unix epoch format. Default: current time.                             |
 | resolution | Can be either ``hour``, ``day`` or ``month``. Default: ``day``                                                             |
-| duration   | Period of time with resoluton encoded. If provided, overwrites the start date. See list below.                                             |
+| duration   | Period of time with resolution encoded. If provided, overwrites the start date. See list below.                                             |
 
 Duration is a string that represents a period of time with some resolution. It has a format `[0-9]+[m,d,h]` where
 

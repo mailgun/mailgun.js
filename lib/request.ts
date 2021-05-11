@@ -162,7 +162,7 @@ class Request {
           data[key].forEach(function (item: any) {
             formData.append(key, item);
           });
-        } else {
+        } else if (data[key] != null) {
           formData.append(key, data[key]);
         }
       });

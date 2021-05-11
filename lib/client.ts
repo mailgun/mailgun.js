@@ -30,7 +30,7 @@ export default class Client {
   public ips;
   public ip_pools;
 
-  constructor(options: Options, formData: new () => FormData) {
+  constructor(options: Options, formData: new (...args: any[]) => FormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
 
     if (!config.url) {
