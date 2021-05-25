@@ -7,6 +7,7 @@ declare class Request {
     private headers;
     private formData;
     constructor(options: RequestOptions, formData: new () => FormData);
+    private objectToURLSearchParams;
     request(method: string, url: string, options?: any): Promise<{
         body: any;
         status: number;
