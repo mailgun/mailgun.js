@@ -35,16 +35,16 @@ const streamToString = (stream: any) => {
 }
 
 class Request {
-  private username;
-  private key;
-  private url;
+  private username: string;
+  private key: string;
+  private url: string;
   private headers: any;
   private formData: new () => FormData;
 
   constructor(options: RequestOptions, formData: new () => FormData) {
     this.username = options.username;
     this.key = options.key;
-    this.url = options.url;
+    this.url = options.url as string;
     this.headers = options.headers || {};
     this.formData = formData;
   }

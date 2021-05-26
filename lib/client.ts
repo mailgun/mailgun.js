@@ -15,6 +15,7 @@ import ValidateClient from './validate';
 import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
+import ListsClient from './lists';
 
 export default class Client {
   private request;
@@ -31,6 +32,7 @@ export default class Client {
   public parse;
   public ips;
   public ip_pools;
+  public lists;
 
   constructor(options: Options, formData: new () => FormData) {
     let config: RequestOptions = { ...options } as RequestOptions;
@@ -57,6 +59,7 @@ export default class Client {
     this.routes = new RoutesClient(this.request);
     this.ips = new IpsClient(this.request);
     this.ip_pools = new IpPoolsClient(this.request);
+    this.lists = new ListsClient(this.request);
 
     if (config.public_key) {
       config.key = config.public_key;
