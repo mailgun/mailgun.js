@@ -71,6 +71,7 @@ class Request {
       delete params.query
     }
 
+    console.log(method.toLocaleUpperCase(), urljoin(this.url, url));
     const response = await ky(
       urljoin(this.url, url),
       {
@@ -128,15 +129,25 @@ class Request {
   }
 
   postMulti(url: string, data: any) {
-
-    const formData: FormData = new this.formData();
     const params: any = {
       headers: { 'Content-Type': null }
     };
+    const formData = this.createFormData(data);
+    return this.command('post', url, formData, params);
+  }
 
-    Object.keys(data)
+  putMulti(url: string, data: any) {
+    const params: any = {
+      headers: { 'Content-Type': null }
+    };
+    const formData = this.createFormData(data);
+    return this.command('put', url, formData, params);
+  }
+
+  createFormData(data: any) {
+    const formData: FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
-      .forEach(function (key) {
+      .reduce((formDataAcc, key) => {
         if (key === 'attachment') {
           const obj = data.attachment;
 
@@ -144,12 +155,12 @@ class Request {
             obj.forEach(function (item) {
               const data = item.data ? item.data : item;
               const options = getAttachmentOptions(item);
-              (formData as any).append(key, data, options);
+              (formDataAcc as any).append(key, data, options);
             });
           } else {
             const data = isStream(obj) ? obj : obj.data;
             const options = getAttachmentOptions(obj);
-            (formData as any).append(key, data, options);
+            (formDataAcc as any).append(key, data, options);
           }
 
           return;
@@ -157,14 +168,14 @@ class Request {
 
         if (Array.isArray(data[key])) {
           data[key].forEach(function (item: any) {
-            formData.append(key, item);
+            formDataAcc.append(key, item);
           });
         } else {
-          formData.append(key, data[key]);
+          formDataAcc.append(key, data[key]);
         }
-      });
-
-    return this.command('post', url, formData, params);
+        return formDataAcc;
+      }, new this.formData())
+      return formData;
   }
 
   put(url: string, data: any, options?: any) {

@@ -1,48 +1,44 @@
 import Request from './request';
-
-interface ListsQuery {
-  address?: string;
-  limit?: number;
-  skip?: number;
-}
-
-interface CreateUpdateList {
-  address: string;
-  name?: string;
-  description?: string;
-  access_level?: string;
-}
+import {
+  ListsQuery,
+  CreateUpdateList,
+  DestroyedList,
+  MailingList
+} from './interfaces/lists';
 
 export default class ListsClient {
-  baseRoute: '/v3/lists';
+  baseRoute: string;
   request: Request;
 
   constructor(request: Request) {
     this.request = request;
+    this.baseRoute = '/v3/lists';
   }
 
   list(query?: ListsQuery) {
-    return this.request.get(this.baseRoute, query)
-      .then((response) => response.body.items);
+    return this.request.get(`${this.baseRoute}/pages`, query)
+      .then((response) =>  response.body.items as [MailingList]);
   }
 
-  get(address: string) {
-    return this.request.get(`${this.baseRoute}/${address}`)
-      .then((response) => response.body.list);
+  get(mailListAddress: string) {
+    return this.request.get(`${this.baseRoute}/${mailListAddress}`)
+      .then((response) => response.body.list as MailingList);
   }
 
   create(data: CreateUpdateList) {
-    return this.request.post(this.baseRoute, data)
-      .then((response) => response.body.lists);
+    return this.request.postMulti(this.baseRoute, data)
+      .then((response) => {
+        return response.body.list as MailingList
+      });
   }
 
-  update(address: string, data: CreateUpdateList) {
-    return this.request.put(`${this.baseRoute}/${address}`, data)
-      .then((response) => response.body);
+  update(mailListAddress: string, data: CreateUpdateList) {
+    return this.request.putMulti(`${this.baseRoute}/${mailListAddress}`, data)
+      .then((response) => response.body as MailingList);
   }
 
-  destroy(address: string) {
-    return this.request.delete(`${this.baseRoute}/${address}`)
-      .then((response) => response.body);
+  destroy(mailListAddress: string) {
+    return this.request.delete(`${this.baseRoute}/${mailListAddress}`)
+      .then((response) => response.body as DestroyedList);
   }
 }
