@@ -5,14 +5,17 @@ import {
   DestroyedList,
   MailingList
 } from './interfaces/lists';
+import {IMailListsMembers} from './interfaces/mailListMembers';
 
 export default class ListsClient {
   baseRoute: string;
   request: Request;
+  members: IMailListsMembers;
 
-  constructor(request: Request) {
+  constructor(request: Request, members:IMailListsMembers) {
     this.request = request;
     this.baseRoute = '/v3/lists';
+    this.members = members;
   }
 
   list(query?: ListsQuery) {

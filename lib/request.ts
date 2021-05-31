@@ -71,7 +71,6 @@ class Request {
       delete params.query
     }
 
-    console.log(method.toLocaleUpperCase(), urljoin(this.url, url));
     const response = await ky(
       urljoin(this.url, url),
       {

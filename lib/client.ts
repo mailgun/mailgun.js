@@ -16,6 +16,7 @@ import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
+import MailListsMembers from './mailListMembers';
 
 export default class Client {
   private request;
@@ -49,6 +50,7 @@ export default class Client {
 
     /** @internal */
     this.request = new Request(config, formData);
+    const mailListsMembers = new MailListsMembers(this.request);
 
     this.domains = new DomainClient(this.request);
     this.webhooks = new WebhookClient(this.request);
@@ -59,7 +61,7 @@ export default class Client {
     this.routes = new RoutesClient(this.request);
     this.ips = new IpsClient(this.request);
     this.ip_pools = new IpPoolsClient(this.request);
-    this.lists = new ListsClient(this.request);
+    this.lists = new ListsClient(this.request, mailListsMembers);
 
     if (config.public_key) {
       config.key = config.public_key;
