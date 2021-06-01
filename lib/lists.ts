@@ -37,7 +37,7 @@ export default class ListsClient {
 
   update(mailListAddress: string, data: CreateUpdateList) {
     return this.request.putMulti(`${this.baseRoute}/${mailListAddress}`, data)
-      .then((response) => response.body as MailingList);
+      .then((response) => response.body.list as MailingList);
   }
 
   destroy(mailListAddress: string) {
