@@ -5,10 +5,8 @@ import Request from '../lib/request';
 import ListsClient from '../lib/lists';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
-import { expect } from 'chai';
 import { MailingList } from '../lib/interfaces/lists';
 
-// TODO: fix types
 describe('ListsClient', function () {
   let client: any;
   let api: any;
@@ -96,7 +94,6 @@ describe('ListsClient', function () {
         list: defaultList
       });
       return client.update('test@example.com', { name: 'another name' }).then(function (data: any) {
-        console.log('data', data);
         data.should.eql(defaultList);
       });
     });

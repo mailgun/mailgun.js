@@ -19,7 +19,15 @@ export interface CreateUpdateMailListMembers {
     address: string;
     name?: string;
     vars?: string;
-    subscribed?: 'yes' | 'no';
+    subscribed?: 'yes' | 'no' | boolean;
+    upsert?: 'yes' | 'no';
+}
+
+export interface CreateUpdateMailListMembersReq {
+    address: string;
+    name?: string;
+    vars?: string;
+    subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
 }
 
@@ -27,7 +35,7 @@ export interface MailListMember {
     address: string;
     name: string;
     subscribed: boolean,
-    vars: string;
+    vars: string | any;
 }
 
 export interface DeletedMember {
