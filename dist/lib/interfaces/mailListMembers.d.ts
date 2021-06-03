@@ -38,12 +38,12 @@ export interface DeletedMember {
     message: string;
 }
 export interface NewMultipleMembersResponse {
-    list: [MailingList];
+    list: MailingList;
     message: string;
     'task-id': string;
 }
 export interface IMailListsMembers {
-    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<[MailListMember]>;
+    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]>;
     getMember(address: string, memberAddress: string): Promise<MailListMember>;
     createMember(mailListAddress: string, data: CreateUpdateMailListMembers): Promise<MailListMember>;
     createMembers(mailListAddress: string, data: MultipleMembersData): Promise<NewMultipleMembersResponse>;

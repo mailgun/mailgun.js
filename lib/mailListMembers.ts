@@ -36,7 +36,7 @@ export default class MailListsMembers implements IMailListsMembers{
 
   listMembers(mailListAddress: string, query?: MailListMembersQuery) {
     return this.request.get(`${this.baseRoute}/${mailListAddress}/members/pages`, query)
-      .then((response) =>  response.body.items as [MailListMember]);
+      .then((response) =>  response.body.items as MailListMember[]);
   }
 
   getMember(mailListAddress: string, mailListMemberAddress: string) {

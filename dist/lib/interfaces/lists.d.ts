@@ -7,8 +7,8 @@ export interface CreateUpdateList {
     address: string;
     name?: string;
     description?: string;
-    access_level?: ['read-only', 'members', 'everyone'];
-    reply_preference?: ['list', 'sender'];
+    access_level?: 'read-only' | 'members' | 'everyone';
+    reply_preference?: 'list' | 'sender';
 }
 export interface DestroyedList {
     address: string;

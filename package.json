@@ -26,7 +26,8 @@
     "preversion": "npm test",
     "version": "npm run release && git add -A dist",
     "postversion": "git push && git push --tags && rm -rf build",
-    "docs": "typedoc --tsconfig ./tsconfig.json"
+    "docs": "typedoc --tsconfig ./tsconfig.json",
+    "lint": "eslint ."
   },
   "dependencies": {
     "bluebird": "^3.7.2",

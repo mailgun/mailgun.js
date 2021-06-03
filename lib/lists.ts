@@ -20,7 +20,7 @@ export default class ListsClient {
 
   list(query?: ListsQuery) {
     return this.request.get(`${this.baseRoute}/pages`, query)
-      .then((response) =>  response.body.items as [MailingList]);
+      .then((response) =>  response.body.items as MailingList[]);
   }
 
   get(mailListAddress: string) {

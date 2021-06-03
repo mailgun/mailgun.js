@@ -5,7 +5,7 @@ export default class MailListsMembers implements IMailListsMembers {
     request: Request;
     constructor(request: Request);
     private checkAndUpdateData;
-    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<[MailListMember]>;
+    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]>;
     getMember(mailListAddress: string, mailListMemberAddress: string): Promise<MailListMember>;
     createMember(mailListAddress: string, data: CreateUpdateMailListMembers): Promise<MailListMember>;
     createMembers(mailListAddress: string, data: MultipleMembersData): Promise<NewMultipleMembersResponse>;

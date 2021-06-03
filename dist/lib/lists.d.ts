@@ -6,7 +6,7 @@ export default class ListsClient {
     request: Request;
     members: IMailListsMembers;
     constructor(request: Request, members: IMailListsMembers);
-    list(query?: ListsQuery): Promise<[MailingList]>;
+    list(query?: ListsQuery): Promise<MailingList[]>;
     get(mailListAddress: string): Promise<MailingList>;
     create(data: CreateUpdateList): Promise<MailingList>;
     update(mailListAddress: string, data: CreateUpdateList): Promise<MailingList>;

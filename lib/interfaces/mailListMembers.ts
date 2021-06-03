@@ -52,7 +52,7 @@ export interface NewMultipleMembersResponse {
 }
 
 export interface IMailListsMembers {
-    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<[MailListMember]>;
+    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]>;
     getMember(address: string, memberAddress: string): Promise<MailListMember>,
     createMember(mailListAddress: string, data: CreateUpdateMailListMembers): Promise<MailListMember>,
     createMembers(mailListAddress: string, data: MultipleMembersData): Promise<NewMultipleMembersResponse>,
