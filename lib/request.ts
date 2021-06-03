@@ -68,9 +68,9 @@ class Request {
 
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
       params.searchParams = options.query;
-      delete params.query
+      delete params.query;
     }
-    console.log(method.toLocaleUpperCase(), '=>', urljoin(this.url, url));
+
     const response = await ky(
       urljoin(this.url, url),
       {
