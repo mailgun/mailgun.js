@@ -18,29 +18,27 @@ export default class ListsClient {
     this.members = members;
   }
 
-  list(query?: ListsQuery) {
+  list(query?: ListsQuery): Promise<MailingList[]> {
     return this.request.get(`${this.baseRoute}/pages`, query)
-      .then((response) =>  response.body.items as MailingList[]);
+      .then((response) => response.body.items as MailingList[]);
   }
 
-  get(mailListAddress: string) {
+  get(mailListAddress: string): Promise<MailingList> {
     return this.request.get(`${this.baseRoute}/${mailListAddress}`)
       .then((response) => response.body.list as MailingList);
   }
 
-  create(data: CreateUpdateList) {
+  create(data: CreateUpdateList): Promise<MailingList> {
     return this.request.postMulti(this.baseRoute, data)
-      .then((response) => {
-        return response.body.list as MailingList
-      });
+      .then((response) => response.body.list as MailingList);
   }
 
-  update(mailListAddress: string, data: CreateUpdateList) {
+  update(mailListAddress: string, data: CreateUpdateList): Promise<MailingList> {
     return this.request.putMulti(`${this.baseRoute}/${mailListAddress}`, data)
       .then((response) => response.body.list as MailingList);
   }
 
-  destroy(mailListAddress: string) {
+  destroy(mailListAddress: string): Promise<DestroyedList> {
     return this.request.delete(`${this.baseRoute}/${mailListAddress}`)
       .then((response) => response.body as DestroyedList);
   }

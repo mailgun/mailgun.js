@@ -27,7 +27,7 @@
     "version": "npm run release && git add -A dist",
     "postversion": "git push && git push --tags && rm -rf build",
     "docs": "typedoc --tsconfig ./tsconfig.json",
-    "lint": "eslint ."
+    "lint": "eslint . && eslint . --ext .ts"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -54,10 +54,13 @@
     "@types/lodash.partialright": "^4.2.6",
     "@types/mocha": "^8.2.0",
     "@types/url-join": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-tsdoc": "^0.2.10",
     "form-data": "^3.0.1",
