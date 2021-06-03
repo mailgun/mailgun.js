@@ -1,4 +1,4 @@
-import {CreateUpdateList} from './lists';
+import {MailingList} from './lists';
 
 export interface MailListMembersQuery {
     subscribed?: 'yes' | 'no';
@@ -46,10 +46,11 @@ export interface DeletedMember {
   }
 
 export interface NewMultipleMembersResponse {
-    list: [CreateUpdateList];
+    list: MailingList;
     message: string;
     'task-id': string;
 }
+
 export interface IMailListsMembers {
     listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<[MailListMember]>;
     getMember(address: string, memberAddress: string): Promise<MailListMember>,

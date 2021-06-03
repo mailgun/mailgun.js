@@ -1,4 +1,4 @@
-import { CreateUpdateList } from './lists';
+import { MailingList } from './lists';
 export interface MailListMembersQuery {
     subscribed?: 'yes' | 'no';
     limit?: number;
@@ -38,7 +38,7 @@ export interface DeletedMember {
     message: string;
 }
 export interface NewMultipleMembersResponse {
-    list: [CreateUpdateList];
+    list: [MailingList];
     message: string;
     'task-id': string;
 }

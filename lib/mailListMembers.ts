@@ -7,9 +7,9 @@ import {
   MultipleMembersData,
   MultipleMembersReqData,
   DeletedMember,
-  CreateUpdateMailListMembersReq
+  CreateUpdateMailListMembersReq,
+  NewMultipleMembersResponse
 } from './interfaces/mailListMembers';
-import { CreateUpdateList } from './interfaces/lists';
 
 export default class MailListsMembers implements IMailListsMembers{
   baseRoute: string;
@@ -61,12 +61,13 @@ export default class MailListsMembers implements IMailListsMembers{
 
     return this.request.postMulti(`${this.baseRoute}/${mailListAddress}/members.json`, newData)
       .then((response) => {
-        return response.body;
+        return response.body as NewMultipleMembersResponse;
       });
   }
 
-  updateMember(mailListAddress: string, mailListMemberAddress: string, data: CreateUpdateList) {
-    return this.request.putMulti(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`, data)
+  updateMember(mailListAddress: string, mailListMemberAddress: string, data: CreateUpdateMailListMembers) {
+    const reqData = this.checkAndUpdateData(data);
+    return this.request.putMulti(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`, reqData)
       .then((response) => response.body.member as MailListMember);
   }
 

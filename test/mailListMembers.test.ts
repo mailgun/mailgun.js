@@ -4,7 +4,7 @@ import nock from 'nock';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
-import { DeletedMember, MailListMember } from '../lib/interfaces/mailListMembers';
+import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
 
 describe('mailListsMembersClient', function () {
   let client: any;
@@ -81,6 +81,94 @@ describe('mailListsMembersClient', function () {
       return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
         newListMember.should.eql(member);
       })
+    });
+  });
+
+  describe('createMembers', function () {
+    const mailingListAddress : string = 'testingMailingListAddress@example.com';
+    let  response : NewMultipleMembersResponse;
+
+    beforeEach(function () {
+      response = {
+        list: {
+          access_level: 'everyone',
+          address: mailingListAddress,
+          created_at: 'Wed, 26 May 2021 10:40:06 -0000',
+          description: 'test description',
+          members_count: 5,
+          name: 'test name',
+          reply_preference: 'list'
+        },
+        message: 'Mailing list has been updated',
+        'task-id': '00000000000000000000000000000000'
+      };
+    });
+
+    it('adds list of members to the mailing list', function () {
+      const newMembersListPlaceholder = new Array(5).fill(0);
+      const newMembersList = newMembersListPlaceholder.map((_, index)=>{
+          return {
+              address: `test${index}@example.com`,
+              name: `test name ${index}`,
+              vars: {gender:"female", age:index},
+              subscribed: true,
+              upsert: 'yes'
+          };
+      });
+
+      api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
+
+      return client.createMembers(mailingListAddress, {
+        members: newMembersList,
+        upsert: "yes"
+      }).then(function (result: NewMultipleMembersResponse) {
+        result.should.eql(response);
+      })
+    });
+
+    it('works with string value in members field', function () {
+      const newMembersListPlaceholder = new Array(5).fill(0);
+      const newMembersList = newMembersListPlaceholder.map((_, index)=>{
+        return {
+            address: `test${index}@example.com`,
+            name: `test name ${index}`,
+            vars: JSON.stringify({gender:"female", age:index}),
+            subscribed: true,
+            upsert: 'yes'
+        };
+      });
+      api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
+      return client.createMembers(mailingListAddress, {
+        members: newMembersList,
+        upsert: "yes"
+      }).then(function (result: NewMultipleMembersResponse) {
+        result.should.eql(response);
+      })
+    });
+
+  });
+
+  describe('updateMember', function () {
+    it('updates list member in the mailing list ', function () {
+      const mailingListAddress = 'testingMailingListAddress@example.com';
+      const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
+      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, {member: defaultListMember});
+
+      return client.updateMember(mailingListAddress, mailingListMemberAddress, defaultListMember).then(function (res: MailListMember) {
+        res.should.eql(defaultListMember);
+      });
+    });
+
+    it('works with string value in subscribed field', function () {
+      const mailingListAddress = 'testingMailingListAddress@example.com';
+      const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
+      const member:any = {...defaultListMember};
+      member.subscribed = "yes";
+      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, {member: defaultListMember});
+
+      return client.updateMember(mailingListAddress, mailingListMemberAddress, member).then(function (res: MailListMember) {
+        res.should.eql(defaultListMember);
+      });
     });
   });
 
