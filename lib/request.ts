@@ -38,13 +38,15 @@ class Request {
   private username: string;
   private key: string;
   private url: string;
+  private timeout: number;
   private headers: any;
   private formData: new () => FormData;
 
   constructor(options: RequestOptions, formData: new () => FormData) {
     this.username = options.username;
     this.key = options.key;
-    this.url = options.url as string;
+    this.url = options.url  as string;;
+    this.timeout = options.timeout;
     this.headers = options.headers || {};
     this.formData = formData;
   }
@@ -77,6 +79,7 @@ class Request {
         method: method.toLocaleUpperCase(),
         headers,
         throwHttpErrors: false,
+        timeout: this.timeout,
         ...params
       }
     );
@@ -147,12 +150,12 @@ class Request {
     const formData: FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc, key) => {
-        if (key === 'attachment') {
-          const obj = data.attachment;
+        if ('attachment' === key || 'inline' === key) {
+          const obj = data[key];
 
           if (Array.isArray(obj)) {
             obj.forEach(function (item) {
-              const data = item.data ? item.data : item;
+              const data = isStream(item) ? item : item.data;
               const options = getAttachmentOptions(item);
               (formDataAcc as any).append(key, data, options);
             });
@@ -169,8 +172,8 @@ class Request {
           data[key].forEach(function (item: any) {
             formDataAcc.append(key, item);
           });
-        } else {
-          formDataAcc.append(key, data[key]);
+        } else if (data[key] != null) {
+          formData.append(key, data[key]);
         }
         return formDataAcc;
       }, new this.formData())

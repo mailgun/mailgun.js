@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mailgun = require('../index');
 
-const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || '' });
+const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || '', timeout: 60000 });
 
 const domain = 'sandbox-123.mailgun.com';
 const fromEmail = 'Excited User <mailgun@sandbox-123.mailgun.com>';

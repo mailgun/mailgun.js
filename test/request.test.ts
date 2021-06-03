@@ -40,7 +40,8 @@ describe('Request', function () {
         username: 'api',
         key: 'key',
         url: 'https://api.mailgun.com',
-        headers: { 'X-CSRF-Token': 'protectme' }
+        headers: { 'X-CSRF-Token': 'protectme' },
+        timeout: 10000
       }, formData);
 
       const res = req.request('get', '/v2/some/resource1', {

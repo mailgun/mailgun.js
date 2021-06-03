@@ -1,5 +1,3 @@
-const map = require('lodash.map');
-const indexBy = require('lodash.keyby');
 const urljoin = require('url-join');
 
 const MgRequest = require('./request');
@@ -20,12 +18,12 @@ export default class EventClient {
   }
 
   _parsePageLinks(response: { body: { paging: any } }) {
-    let pages;
-
-    pages = {};
-    pages = map(response.body.paging, (url: string, id: string) => this._parsePage(id, url));
-
-    return indexBy(pages, 'id');
+    const pages = Object.entries(response.body.paging);
+    return pages.reduce(
+      (acc: any, [id, url]: [url: string, id: string]) => {
+        acc[id] = this._parsePage(id, url)
+        return acc
+      }, {});
   }
 
   _parseEventList(response: { body: { items: any, paging: any }  }) {

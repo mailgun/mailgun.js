@@ -1,4 +1,3 @@
-import map from 'lodash.map';
 import urljoin from 'url-join';
 import Request from './request';
 import StatsOptions from './interfaces/StatsOptions';
@@ -13,7 +12,7 @@ class Stats {
     this.start = new Date(data.start);
     this.end = new Date(data.end);
     this.resolution = data.resolution;
-    this.stats = map(data.stats, function (stat: { time: string | Date }) {
+    this.stats = data.stats.map(function (stat: { time: string | Date }) {
       stat.time = new Date(stat.time);
       return stat;
     });

@@ -19,7 +19,7 @@ describe('EventsClient', function () {
     api.done();
   });
 
-  describe('get', function () {
+  describe('GET', function () {
     let response: any;
 
     beforeEach(function () {

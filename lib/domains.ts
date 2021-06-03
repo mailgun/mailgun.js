@@ -1,4 +1,3 @@
-import map from 'lodash.map';
 import urljoin from 'url-join';
 import Request from './request';
 
@@ -57,8 +56,8 @@ export default class DomainClient {
     return response.body;
   }
 
-  _parseDomainList(response: { body: { items: DomainData } }) {
-    return map(response.body.items, function (item) {
+  _parseDomainList(response: { body: { items: DomainData[] } }) {
+    return response.body.items.map(function (item) {
       return new Domain(item);
     });
   }
