@@ -1231,18 +1231,4 @@ npm version patch -m "chore(release): added %s"
 ```
 
 ## TODO
-
-- add missing services
-  - Lists
-    - `lists.list(query)`
-    - `list.get(address)`
-    - `list.create(data)`
-    - `list.update(address, data)`
-    - `list.destroy(address)`
-    - `lists.listMembers(address, query)`
-    - `list.getMember(address, memberAddress)`
-    - `list.createMember(address, data)` (singe & json batch upload)
-    - `list.updateMember(address, memberAddress, data)`
-    - `list.updateMember(address, memberAddress, data)`
-    - `list.destroyMember(address, memberAddress)`
 - add browser demo to heroku

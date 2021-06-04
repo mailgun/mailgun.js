@@ -11,6 +11,7 @@ import ValidateClient from './validate';
 import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
+import ListsClient from './lists';
 export default class Client {
     private request;
     domains: DomainClient;
@@ -25,5 +26,6 @@ export default class Client {
     parse: ParseClient;
     ips: IpsClient;
     ip_pools: IpPoolsClient;
+    lists: ListsClient;
     constructor(options: Options, formData: new (...args: any[]) => FormData);
 }

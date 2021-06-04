@@ -14,7 +14,7 @@ export default class APIError extends Error {
     const { message: bodyMessage, error } = body;
     super();
 
-    this.stack = null;
+    this.stack = '';
     this.status = status;
     this.message = message || error || statusText;
     this.details = bodyMessage;

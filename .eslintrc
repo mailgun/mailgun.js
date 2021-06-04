@@ -7,22 +7,20 @@
     "mocha": true
   },
   "extends": [
-    "airbnb-base"
+    "airbnb-base",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
-    "eslint-plugin-tsdoc"
+    "eslint-plugin-tsdoc",
+    "@typescript-eslint"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12
   },
   "settings": {
-    "import/resolver": {
-      "node": {
-        "paths": [
-            "src"
-        ]
-      }
-    }
+    "import/resolver": "webpack"
   },
   "rules": {
     "tsdoc/syntax": "warn",
@@ -32,6 +30,8 @@
     "max-classes-per-file": 0,
     "no-underscore-dangle": 0,
     "class-methods-use-this": 0,
-    "prefer-destructuring": 0
+    "prefer-destructuring": 0,
+    "import/extensions": 0,
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }]
   }
 }

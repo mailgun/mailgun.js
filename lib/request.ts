@@ -1,15 +1,21 @@
-
 import Btoa from 'btoa';
 import urljoin from 'url-join';
 import ky from 'ky-universal';
-
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';
 import APIErrorOptions from './interfaces/APIErrorOptions';
 
+interface APIResponse {
+  status: number;
+  body: any;
+}
 const isStream = (attachment: any) => typeof attachment === 'object' && typeof attachment.pipe === 'function';
 
-const getAttachmentOptions = (item: any): { filename?: string, contentType?: string, knownLength?: number } => {
+const getAttachmentOptions = (item: any): {
+  filename?: string,
+  contentType?: string,
+  knownLength?: number
+} => {
   if (typeof item !== 'object' || isStream(item)) return {};
 
   const {
@@ -23,35 +29,36 @@ const getAttachmentOptions = (item: any): { filename?: string, contentType?: str
     ...(contentType && { contentType }),
     ...(knownLength && { knownLength })
   };
-}
+};
 
 const streamToString = (stream: any) => {
-  const chunks: any = []
+  const chunks: any = [];
   return new Promise((resolve, reject) => {
-    stream.on('data', (chunk: any) => chunks.push(chunk))
-    stream.on('error', reject)
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
-  })
-}
+    stream.on('data', (chunk: any) => chunks.push(chunk));
+    stream.on('error', reject);
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+  });
+};
 
 class Request {
-  private username;
-  private key;
-  private url;
-  private timeout;
+  private username: string;
+  private key: string;
+  private url: string;
+  private timeout: number;
   private headers: any;
   private formData: new () => FormData;
 
   constructor(options: RequestOptions, formData: new () => FormData) {
     this.username = options.username;
     this.key = options.key;
-    this.url = options.url;
+    this.url = options.url as string;
     this.timeout = options.timeout;
     this.headers = options.headers || {};
     this.formData = formData;
   }
 
-  async request(method: string, url: string, options?: any) {
+  async request(method: string, url: string, inputOptions?: any): Promise<APIResponse> {
+    const options = { ...inputOptions };
     const basic = Btoa(`${this.username}:${this.key}`);
     const headers = {
       Authorization: `Basic ${basic}`,
@@ -70,7 +77,7 @@ class Request {
 
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
       params.searchParams = options.query;
-      delete params.query
+      delete params.query;
     }
 
     const response = await ky(
@@ -102,11 +109,11 @@ class Request {
     };
   }
 
-  query(method: string, url: string, query: any, options?: any) {
+  query(method: string, url: string, query: any, options?: any) : Promise<APIResponse> {
     return this.request(method, url, { query, ...options });
   }
 
-  command(method: string, url: string, data: any, options?: any) {
+  command(method: string, url: string, data: any, options?: any) : Promise<APIResponse> {
     return this.request(method, url, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: data,
@@ -114,73 +121,84 @@ class Request {
     });
   }
 
-  get(url: string, query?: any, options?: any) {
+  get(url: string, query?: any, options?: any) : Promise<APIResponse> {
     return this.query('get', url, query, options);
   }
 
-  head(url: string, query: any, options: any) {
+  head(url: string, query: any, options: any) : Promise<APIResponse> {
     return this.query('head', url, query, options);
   }
 
-  options(url: string, query: any, options: any) {
+  options(url: string, query: any, options: any) : Promise<APIResponse> {
     return this.query('options', url, query, options);
   }
 
-  post(url: string, data: any, options?: any) {
+  post(url: string, data: any, options?: any) : Promise<APIResponse> {
     return this.command('post', url, data, options);
   }
 
-  postMulti(url: string, data: any) {
-
-    const formData: FormData = new this.formData();
+  postMulti(url: string, data: any): Promise<APIResponse> {
     const params: any = {
       headers: { 'Content-Type': null }
     };
+    const formData = this.createFormData(data);
+    return this.command('post', url, formData, params);
+  }
 
-    Object.keys(data)
+  putMulti(url: string, data: any): Promise<APIResponse> {
+    const params: any = {
+      headers: { 'Content-Type': null }
+    };
+    const formData = this.createFormData(data);
+    return this.command('put', url, formData, params);
+  }
+
+  createFormData(data: any): FormData {
+    const formData: FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
-      .forEach(function (key) {
-        if ('attachment' === key || 'inline' === key) {
+      .reduce((formDataAcc, key) => {
+        if (key === 'attachment' || key === 'inline') {
           const obj = data[key];
 
           if (Array.isArray(obj)) {
             obj.forEach(function (item) {
-              const data = isStream(item) ? item : item.data;
+              const itemData = isStream(item) ? item : item.data;
               const options = getAttachmentOptions(item);
-              (formData as any).append(key, data, options);
+              (formDataAcc as any).append(key, itemData, options);
             });
           } else {
-            const data = isStream(obj) ? obj : obj.data;
+            const objData = isStream(obj) ? obj : obj.data;
             const options = getAttachmentOptions(obj);
-            (formData as any).append(key, data, options);
+            (formDataAcc as any).append(key, objData, options);
           }
 
-          return;
+          return formDataAcc;
         }
 
         if (Array.isArray(data[key])) {
           data[key].forEach(function (item: any) {
-            formData.append(key, item);
+            formDataAcc.append(key, item);
           });
         } else if (data[key] != null) {
-          formData.append(key, data[key]);
+          formDataAcc.append(key, data[key]);
         }
-      });
-
-    return this.command('post', url, formData, params);
+        return formDataAcc;
+      // eslint-disable-next-line new-cap
+      }, new this.formData());
+    return formData;
   }
 
-  put(url: string, data: any, options?: any) {
+  put(url: string, data: any, options?: any): Promise<APIResponse> {
     return this.command('put', url, data, options);
   }
 
-  patch(url: string, data: any, options?: any) {
+  patch(url: string, data: any, options?: any): Promise<APIResponse> {
     return this.command('patch', url, data, options);
   }
 
-  delete(url: string, data?: any, options?: any) {
+  delete(url: string, data?: any, options?: any): Promise<APIResponse> {
     return this.command('delete', url, data, options);
   }
 }
 
-export default Request
+export default Request;

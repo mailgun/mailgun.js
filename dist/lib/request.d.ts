@@ -39,6 +39,11 @@ declare class Request {
         body: any;
         status: number;
     }>;
+    putMulti(url: string, data: any): Promise<{
+        body: any;
+        status: number;
+    }>;
+    createFormData(data: any): FormData;
     put(url: string, data: any, options?: any): Promise<{
         body: any;
         status: number;
