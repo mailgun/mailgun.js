@@ -1,4 +1,8 @@
 import RequestOptions from './interfaces/RequestOptions';
+interface APIResponse {
+    status: number;
+    body: any;
+}
 declare class Request {
     private username;
     private key;
@@ -7,50 +11,18 @@ declare class Request {
     private headers;
     private formData;
     constructor(options: RequestOptions, formData: new () => FormData);
-    private objectToURLSearchParams;
-    request(method: string, url: string, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    query(method: string, url: string, query: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    command(method: string, url: string, data: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    get(url: string, query?: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    head(url: string, query: any, options: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    options(url: string, query: any, options: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    post(url: string, data: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    postMulti(url: string, data: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    put(url: string, data: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    patch(url: string, data: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
-    delete(url: string, data?: any, options?: any): Promise<{
-        body: any;
-        status: number;
-    }>;
+    request(method: string, url: string, inputOptions?: any): Promise<APIResponse>;
+    query(method: string, url: string, query: any, options?: any): Promise<APIResponse>;
+    command(method: string, url: string, data: any, options?: any): Promise<APIResponse>;
+    get(url: string, query?: any, options?: any): Promise<APIResponse>;
+    head(url: string, query: any, options: any): Promise<APIResponse>;
+    options(url: string, query: any, options: any): Promise<APIResponse>;
+    post(url: string, data: any, options?: any): Promise<APIResponse>;
+    postMulti(url: string, data: any): Promise<APIResponse>;
+    putMulti(url: string, data: any): Promise<APIResponse>;
+    createFormData(data: any): FormData;
+    put(url: string, data: any, options?: any): Promise<APIResponse>;
+    patch(url: string, data: any, options?: any): Promise<APIResponse>;
+    delete(url: string, data?: any, options?: any): Promise<APIResponse>;
 }
 export default Request;
