@@ -1,6 +1,9 @@
 import Client from './lib/client'
 import Options from './lib/interfaces/Options';
 
+export type { Options };
+export type { Client };
+
 export default class Mailgun {
   private formData: new () => FormData
 
