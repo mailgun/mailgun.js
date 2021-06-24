@@ -1,4 +1,4 @@
-const formData = require('form-data');
+import formData from 'form-data';
 
 import { expect } from 'chai';
 

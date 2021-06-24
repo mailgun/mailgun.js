@@ -1,14 +1,15 @@
-import Client from './lib/client'
+import Client from './lib/client';
 import Options from './lib/interfaces/Options';
+import IFormData from './lib/interfaces/IFormData';
 
 export default class Mailgun {
-  private formData: new () => FormData
+  private formData: new () => IFormData
 
-  constructor(FormData: new (...args: any[]) => FormData) {
+  constructor(FormData: new (...args: any[]) => IFormData) {
     this.formData = FormData;
   }
 
-  client(options: Options) {
-    return new Client(options, this.formData)
+  client(options: Options) : any {
+    return new Client(options, this.formData);
   }
-};
+}

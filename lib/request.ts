@@ -4,6 +4,7 @@ import ky from 'ky-universal';
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';
 import APIErrorOptions from './interfaces/APIErrorOptions';
+import IFormData from './interfaces/IFormData';
 
 interface APIResponse {
   status: number;
@@ -46,9 +47,9 @@ class Request {
   private url: string;
   private timeout: number;
   private headers: any;
-  private formData: new () => FormData;
+  private formData: new () => IFormData;
 
-  constructor(options: RequestOptions, formData: new () => FormData) {
+  constructor(options: RequestOptions, formData: new () => IFormData) {
     this.username = options.username;
     this.key = options.key;
     this.url = options.url as string;
@@ -153,8 +154,8 @@ class Request {
     return this.command('put', url, formData, params);
   }
 
-  createFormData(data: any): FormData {
-    const formData: FormData = Object.keys(data)
+  createFormData(data: any): IFormData {
+    const formData: IFormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc, key) => {
         if (key === 'attachment' || key === 'inline') {

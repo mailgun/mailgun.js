@@ -15,6 +15,7 @@ import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
 import MailListsMembers from './mailListMembers';
+import IFormData from './interfaces/IFormData';
 
 export default class Client {
   private request;
@@ -33,7 +34,7 @@ export default class Client {
   public ip_pools;
   public lists;
 
-  constructor(options: Options, formData: new (...args: any[]) => FormData) {
+  constructor(options: Options, formData: new (...args: any[]) => IFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
 
     if (!config.url) {
