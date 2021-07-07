@@ -1,29 +1,20 @@
 // jscs:disable requireDotNotation
-const formData = require('form-data');
+import formData from 'form-data';
 
-import btoa from 'btoa';
+import base64 from 'base-64';
 import nock from 'nock';
+import { expect } from 'chai';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
-import { expect } from 'chai';
 import APIError from '../dist/lib/error.d';
-
-interface Response {
-  status: number;
-  body: { id: number, message: string };
-}
-
-interface Error {
-  status: number;
-  message: string;
-}
+import APIResponse from '../lib/interfaces/ApiResponse';
 
 describe('Request', function () {
   let headers: { [key: string]: string };
 
   beforeEach(function () {
     headers = {};
-    headers.Authorization = `Basic ${btoa('api:key')}`;
+    headers.Authorization = `Basic ${base64.encode('api:key')}`;
   });
 
   describe('request', function () {
@@ -44,12 +35,10 @@ describe('Request', function () {
         timeout: 10000
       }, formData);
 
-      const res = req.request('get', '/v2/some/resource1', {
+      await req.request('get', '/v2/some/resource1', {
         headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
         query: { some: 'parameter' }
       });
-
-      return await res;
     });
 
     it('parses API response', function () {
@@ -59,7 +48,7 @@ describe('Request', function () {
 
       const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData);
       const res = req.request('get', '/v2/some/resource')
-        .then(function (response: Response) {
+        .then(function (response: APIResponse) {
           expect(response.status).to.eql(200);
           expect(response.body).to.eql({ id: 1, message: 'hello' });
         });
@@ -92,9 +81,7 @@ describe('Request', function () {
         .reply(200, {});
 
       const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData);
-      const res = await req.query('get', '/v2/some/resource2', search);
-
-      return await res;
+      await req.query('get', '/v2/some/resource2', search);
     });
   });
 

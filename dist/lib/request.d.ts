@@ -1,9 +1,6 @@
 import RequestOptions from './interfaces/RequestOptions';
 import IFormData from './interfaces/IFormData';
-interface APIResponse {
-    status: number;
-    body: any;
-}
+import APIResponse from './interfaces/ApiResponse';
 declare class Request {
     private username;
     private key;

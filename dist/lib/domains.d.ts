@@ -59,21 +59,9 @@ export default class DomainClient {
     getTracking(domain: string): Promise<any>;
     updateTracking(domain: string, type: string, data: any): Promise<any>;
     getIps(domain: string): Promise<string[]>;
-    assignIp(domain: string, ip: string): Promise<{
-        body: any;
-        status: number;
-    }>;
-    deleteIp(domain: string, ip: string): Promise<{
-        body: any;
-        status: number;
-    }>;
-    linkIpPool(domain: string, pool_id: string): Promise<{
-        body: any;
-        status: number;
-    }>;
-    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<{
-        body: any;
-        status: number;
-    }>;
+    assignIp(domain: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
+    deleteIp(domain: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
+    linkIpPool(domain: string, pool_id: string): Promise<import("./interfaces/ApiResponse").default>;
+    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
 }
 export {};

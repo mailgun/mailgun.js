@@ -1,15 +1,12 @@
-import Btoa from 'btoa';
+import base64 from 'base-64';
 import urljoin from 'url-join';
 import ky from 'ky-universal';
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';
 import APIErrorOptions from './interfaces/APIErrorOptions';
 import IFormData from './interfaces/IFormData';
+import APIResponse from './interfaces/ApiResponse';
 
-interface APIResponse {
-  status: number;
-  body: any;
-}
 const isStream = (attachment: any) => typeof attachment === 'object' && typeof attachment.pipe === 'function';
 
 const getAttachmentOptions = (item: any): {
@@ -60,7 +57,7 @@ class Request {
 
   async request(method: string, url: string, inputOptions?: any): Promise<APIResponse> {
     const options = { ...inputOptions };
-    const basic = Btoa(`${this.username}:${this.key}`);
+    const basic = base64.encode(`${this.username}:${this.key}`);
     const headers = {
       Authorization: `Basic ${basic}`,
       ...this.headers,
