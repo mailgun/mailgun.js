@@ -6,7 +6,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
-import APIError from '../dist/lib/error.d';
+import APIError from '../lib/error';
 import APIResponse from '../lib/interfaces/ApiResponse';
 
 describe('Request', function () {
