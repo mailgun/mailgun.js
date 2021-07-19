@@ -83,10 +83,22 @@
   ],
   "standard-version":{
     "types": [
-      {"type": "Breaking", "section": "Breaking"},
-      {"type": "Feature", "section": "Features"},
-      {"type": "Fix", "section": "Bug Fixes"},
-      {"type": "Other", "section": "Other changes"}
+      {
+        "type": "breaking",
+        "section": "Breaking changes"
+      },
+      {
+        "type": "feature",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "other",
+        "section": "Other changes"
+      }
     ],
     "commitUrlFormat": "https://github.com/mailgun/mailgun-js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}",
