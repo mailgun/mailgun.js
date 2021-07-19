@@ -1216,19 +1216,9 @@ git checkout master
 git pull
 ```
 
-Next, determine semantic version bump (major/minor/patch). Then run `npm version` with the appropriate keyword.
+Next, run ```npm run release```.
 
-```sh
-npm version patch -m "chore(release): added %s"
-```
-
-Other examples:
-
-```sh
-npm version major -m "chore(release): added %s"
-npm version minor -m "chore(release): added %s"
-npm version patch -m "chore(release): added %s"
-```
+After that, ```run npm login``` and ```npm publish``` to publish changes on npm.
 
 ## TODO
 - add browser demo to heroku
