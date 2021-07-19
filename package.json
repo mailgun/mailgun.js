@@ -27,7 +27,8 @@
     "version": "npm run release && git add -A dist",
     "postversion": "git push && git push --tags && rm -rf build",
     "docs": "typedoc --tsconfig ./tsconfig.json",
-    "lint": "eslint . && eslint . --ext .ts"
+    "lint": "eslint . && eslint . --ext .ts",
+    "prepare": "husky install"
   },
   "dependencies": {
     "base-64": "^1.0.0",
@@ -42,6 +43,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/base-64": "^1.0.0",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
@@ -56,6 +59,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-tsdoc": "^0.2.10",
     "form-data": "^3.0.1",
+    "husky": "^7.0.1",
     "json-loader": "^0.5.7",
     "mocha": "^8.2.1",
     "mocha-multi": "^1.1.3",
