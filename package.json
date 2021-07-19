@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "main": "dist/mailgun.js",
   "types": "dist/index.d.ts",
   "author": "Mailgun",
@@ -81,7 +81,7 @@
       "url": "https://github.com/eddywashere"
     }
   ],
-  "standard-version":{
+  "standard-version": {
     "types": [
       {
         "type": "breaking",
@@ -103,7 +103,7 @@
     "commitUrlFormat": "https://github.com/mailgun/mailgun-js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
-      "prerelease":"npm test && webpack --config ./webpack.release.config.js --progress --color && git add -A dist",
+      "prerelease": "npm test && webpack --config ./webpack.release.config.js --progress --color && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
   }
