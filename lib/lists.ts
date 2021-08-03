@@ -29,12 +29,12 @@ export default class ListsClient {
   }
 
   create(data: CreateUpdateList): Promise<MailingList> {
-    return this.request.postMulti(this.baseRoute, data)
+    return this.request.postWithFD(this.baseRoute, data)
       .then((response) => response.body.list as MailingList);
   }
 
   update(mailListAddress: string, data: CreateUpdateList): Promise<MailingList> {
-    return this.request.putMulti(`${this.baseRoute}/${mailListAddress}`, data)
+    return this.request.putWithFD(`${this.baseRoute}/${mailListAddress}`, data)
       .then((response) => response.body.list as MailingList);
   }
 

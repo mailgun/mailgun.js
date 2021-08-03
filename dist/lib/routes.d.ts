@@ -1,10 +1,11 @@
+import { CreateUpdateRouteData, DestroyRouteResponse, Route, RoutesListQuery, UpdateRouteResponse } from './interfaces/routes';
 import Request from './request';
 export default class RoutesClient {
     request: Request;
     constructor(request: Request);
-    list(query: any): Promise<any>;
-    get(id: string): Promise<any>;
-    create(data: any): Promise<any>;
-    update(id: string, data: any): Promise<any>;
-    destroy(id: string): Promise<any>;
+    list(query: RoutesListQuery): Promise<Route[]>;
+    get(id: string): Promise<Route>;
+    create(data: CreateUpdateRouteData): Promise<Route>;
+    update(id: string, data: CreateUpdateRouteData): Promise<UpdateRouteResponse>;
+    destroy(id: string): Promise<DestroyRouteResponse>;
 }
