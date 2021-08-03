@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.3](https://github.com/mailgun/mailgun-js/compare/v3.5.2...v3.5.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* Issue with create and update route methods ([b7cf5ea](https://github.com/mailgun/mailgun-js/commits/b7cf5ea5951e58afce617f7b4b993aeab9f554e9))
+
 ### [3.5.2](https://github.com/mailgun/mailgun-js/compare/v3.5.1...v3.5.2) (2021-07-19)
 
 
