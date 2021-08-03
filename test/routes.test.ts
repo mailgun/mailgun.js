@@ -1,5 +1,4 @@
-const formData = require('form-data');
-
+import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import RoutesClient from '../lib/routes';

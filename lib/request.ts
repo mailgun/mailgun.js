@@ -135,7 +135,7 @@ class Request {
     return this.command('post', url, data, options);
   }
 
-  postMulti(url: string, data: any): Promise<APIResponse> {
+  postWithFD(url: string, data: any): Promise<APIResponse> {
     const params: any = {
       headers: { 'Content-Type': null }
     };
@@ -143,7 +143,7 @@ class Request {
     return this.command('post', url, formData, params);
   }
 
-  putMulti(url: string, data: any): Promise<APIResponse> {
+  putWithFD(url: string, data: any): Promise<APIResponse> {
     const params: any = {
       headers: { 'Content-Type': null }
     };

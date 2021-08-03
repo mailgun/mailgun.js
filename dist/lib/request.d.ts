@@ -16,8 +16,8 @@ declare class Request {
     head(url: string, query: any, options: any): Promise<APIResponse>;
     options(url: string, query: any, options: any): Promise<APIResponse>;
     post(url: string, data: any, options?: any): Promise<APIResponse>;
-    postMulti(url: string, data: any): Promise<APIResponse>;
-    putMulti(url: string, data: any): Promise<APIResponse>;
+    postWithFD(url: string, data: any): Promise<APIResponse>;
+    putWithFD(url: string, data: any): Promise<APIResponse>;
     createFormData(data: any): IFormData;
     put(url: string, data: any, options?: any): Promise<APIResponse>;
     patch(url: string, data: any, options?: any): Promise<APIResponse>;

@@ -49,7 +49,7 @@ export default class MailListsMembers implements IMailListsMembers {
     data: CreateUpdateMailListMembers
   ): Promise<MailListMember> {
     const reqData = this.checkAndUpdateData(data);
-    return this.request.postMulti(`${this.baseRoute}/${mailListAddress}/members`, reqData)
+    return this.request.postWithFD(`${this.baseRoute}/${mailListAddress}/members`, reqData)
       .then((response) => response.body.member as MailListMember);
   }
 
@@ -62,7 +62,7 @@ export default class MailListsMembers implements IMailListsMembers {
       upsert: data.upsert
     };
 
-    return this.request.postMulti(`${this.baseRoute}/${mailListAddress}/members.json`, newData)
+    return this.request.postWithFD(`${this.baseRoute}/${mailListAddress}/members.json`, newData)
       .then((response) => response.body as NewMultipleMembersResponse);
   }
 
@@ -72,7 +72,7 @@ export default class MailListsMembers implements IMailListsMembers {
     data: CreateUpdateMailListMembers
   ): Promise<MailListMember> {
     const reqData = this.checkAndUpdateData(data);
-    return this.request.putMulti(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`, reqData)
+    return this.request.putWithFD(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`, reqData)
       .then((response) => response.body.member as MailListMember);
   }
 
