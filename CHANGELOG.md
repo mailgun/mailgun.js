@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.4](https://github.com/mailgun/mailgun-js/compare/v3.5.3...v3.5.4) (2021-08-04)
+
+
+### Bug Fixes
+
+* Error 400 on creating a webhook ([ed1719d](https://github.com/mailgun/mailgun-js/commits/ed1719da3225981c5fe56ae2d48fc4733eb2d7ae))
+
 ### [3.5.3](https://github.com/mailgun/mailgun-js/compare/v3.5.2...v3.5.3) (2021-08-03)
 
 
