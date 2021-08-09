@@ -1,67 +1,40 @@
+import { DomainResponseData, DestroyedDomain, DestroyedDomainResponse, DomainsQuery, DomainInfo, DomainListResponseData, DomainShortData, DNSRecord } from './interfaces/Domains';
+import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
-interface DomainData {
+import { DomainTrackingResponse, DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdateDomainTrackingResponse, UpdatedOpenTracking } from './interfaces/DomainTracking';
+declare class Domain {
     name: string;
-    require_tls: any;
-    skip_verification: any;
-    state: any;
-    wildcard: any;
-    spam_action: any;
-    created_at: string | Date;
+    require_tls: boolean;
+    skip_verification: boolean;
+    state: string;
+    wildcard: boolean;
+    spam_action: string;
+    created_at: string;
     smtp_password: string;
     smtp_login: string;
     type: string;
-}
-declare class Domain {
-    name: any;
-    require_tls: any;
-    skip_verification: any;
-    state: any;
-    wildcard: any;
-    spam_action: any;
-    created_at: any;
-    smtp_password: any;
-    smtp_login: any;
-    type: any;
-    receiving_dns_records: any;
-    sending_dns_records: any;
-    constructor(data: DomainData, receiving?: any, sending?: any);
+    receiving_dns_records: DNSRecord[] | null;
+    sending_dns_records: DNSRecord[] | null;
+    constructor(data: DomainShortData, receiving?: DNSRecord[] | null, sending?: DNSRecord[] | null);
 }
 export default class DomainClient {
     request: Request;
     constructor(request: Request);
-    _parseMessage(response: {
-        body: any;
-    }): any;
-    _parseDomainList(response: {
-        body: {
-            items: DomainData[];
-        };
-    }): Domain[];
-    _parseDomain(response: {
-        body: {
-            domain: any;
-            receiving_dns_records: any;
-            sending_dns_records: any;
-        };
-    }): Domain;
-    _parseTrackingSettings(response: {
-        body: {
-            tracking: any;
-        };
-    }): any;
-    _parseTrackingUpdate(response: {
-        body: any;
-    }): any;
-    list(query: any): Promise<Domain[]>;
+    _parseMessage(response: DestroyedDomainResponse): DestroyedDomain;
+    _parseDomainList(response: DomainListResponseData): Domain[];
+    _parseDomain(response: DomainResponseData): Domain;
+    _parseTrackingSettings(response: DomainTrackingResponse): DomainTrackingData;
+    _parseTrackingUpdate(response: UpdateDomainTrackingResponse): UpdatedOpenTracking;
+    list(query: DomainsQuery): Promise<Domain[]>;
     get(domain: string): Promise<Domain>;
-    create(data: any): Promise<Domain>;
-    destroy(domain: string): Promise<any>;
-    getTracking(domain: string): Promise<any>;
-    updateTracking(domain: string, type: string, data: any): Promise<any>;
+    create(data: DomainInfo): Promise<Domain>;
+    destroy(domain: string): Promise<DestroyedDomain>;
+    getTracking(domain: string): Promise<DomainTrackingData>;
+    updateTracking(domain: string, type: string, data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo): Promise<UpdatedOpenTracking>;
     getIps(domain: string): Promise<string[]>;
-    assignIp(domain: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
-    deleteIp(domain: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
-    linkIpPool(domain: string, pool_id: string): Promise<import("./interfaces/ApiResponse").default>;
-    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<import("./interfaces/ApiResponse").default>;
+    assignIp(domain: string, ip: string): Promise<APIResponse>;
+    deleteIp(domain: string, ip: string): Promise<APIResponse>;
+    linkIpPool(domain: string, pool_id: string): Promise<APIResponse>;
+    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<APIResponse>;
 }
 export {};

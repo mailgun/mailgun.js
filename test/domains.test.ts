@@ -1,10 +1,10 @@
-const formData = require('form-data');
+import formData from 'form-data';
 
 import nock from 'nock';
+import { expect } from 'chai';
 import Request from '../lib/request';
 import DomainClient from '../lib/domains';
 import RequestOptions from '../lib/interfaces/RequestOptions';
-import { expect } from 'chai';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -172,11 +172,12 @@ describe('DomainClient', function () {
     it('updates tracking settings', async function () {
       const open = { active: true };
       api.put('/v2/domains/domain.com/tracking/open').reply(200, {
-          message: 'Tracking settings have been updated',
-          open
-        });
+        message: 'Tracking settings have been updated',
+        open
+      });
 
-      const res = await client.updateTracking('domain.com', 'open', { active: true })
+      const res = await client.updateTracking('domain.com', 'open', { active: 'yes' });
+
       expect(res).to.eql({
         message: 'Tracking settings have been updated',
         open: {
@@ -188,11 +189,11 @@ describe('DomainClient', function () {
 
   describe('getIps', () => {
     it('should return list of dedicated ips', () => {
-      const items = ['192.161.0.1', '192.168.0.2']
+      const items = ['192.161.0.1', '192.168.0.2'];
       api.get('/v2/domains/domain.com/ips').reply(200, { items });
 
-      return client.getIps('domain.com').then( (items: string[]) => {
-        items.should.eql(items);
+      return client.getIps('domain.com').then((response: string[]) => {
+        response.should.eql(items);
       });
     });
   });
