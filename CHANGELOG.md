@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.5](https://github.com/mailgun/mailgun-js/compare/v3.5.4...v3.5.5) (2021-08-09)
+
+
+### Bug Fixes
+
+* Domain.Creates method returns error ([2068c3d](https://github.com/mailgun/mailgun-js/commits/2068c3d37d54df013d6439c8e0b93f6f553173a7))
+
 ### [3.5.4](https://github.com/mailgun/mailgun-js/compare/v3.5.3...v3.5.4) (2021-08-04)
 
 
