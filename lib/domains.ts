@@ -1,34 +1,46 @@
+/* eslint-disable camelcase */
 import urljoin from 'url-join';
-import Request from './request';
+import {
+  DomainResponseData,
+  DestroyedDomain,
+  DestroyedDomainResponse,
+  DomainsQuery,
+  DomainInfo,
+  DomainListResponseData,
+  DomainShortData,
+  DNSRecord
+} from './interfaces/Domains';
 
-interface DomainData {
+import APIResponse from './interfaces/ApiResponse';
+import APIError from './error';
+import APIErrorOptions from './interfaces/APIErrorOptions';
+
+import Request from './request';
+import {
+  DomainTrackingResponse,
+  DomainTrackingData,
+  OpenTrackingInfo,
+  ClickTrackingInfo,
+  UnsubscribeTrackingInfo,
+  UpdateDomainTrackingResponse,
+  UpdatedOpenTracking
+} from './interfaces/DomainTracking';
+
+class Domain {
   name: string;
-  require_tls: any;
-  skip_verification: any;
-  state: any;
-  wildcard: any;
-  spam_action: any;
-  created_at: string | Date;
+  require_tls: boolean;
+  skip_verification: boolean;
+  state: string;
+  wildcard: boolean;
+  spam_action: string;
+  created_at: string;
   smtp_password: string;
   smtp_login: string;
   type: string;
-}
+  receiving_dns_records: DNSRecord[] | null;
+  sending_dns_records: DNSRecord[] | null;
 
-class Domain {
-  name: any;
-  require_tls: any;
-  skip_verification: any;
-  state: any;
-  wildcard: any;
-  spam_action: any;
-  created_at: any;
-  smtp_password: any;
-  smtp_login: any;
-  type: any;
-  receiving_dns_records: any;
-  sending_dns_records: any;
-
-  constructor(data: DomainData, receiving?: any, sending?: any) {
+  constructor(data: DomainShortData, receiving?: DNSRecord[] | null, sending?: DNSRecord[] | null) {
     this.name = data.name;
     this.require_tls = data.require_tls;
     this.skip_verification = data.skip_verification;
@@ -52,23 +64,17 @@ export default class DomainClient {
     this.request = request;
   }
 
-  _parseMessage(response: { body: any }) {
+  _parseMessage(response: DestroyedDomainResponse) : DestroyedDomain {
     return response.body;
   }
 
-  _parseDomainList(response: { body: { items: DomainData[] } }) {
+  _parseDomainList(response: DomainListResponseData): Domain[] {
     return response.body.items.map(function (item) {
       return new Domain(item);
     });
   }
 
-  _parseDomain(response: {
-    body: {
-      domain: any,
-      receiving_dns_records: any,
-      sending_dns_records: any
-    }
-  }) {
+  _parseDomain(response: DomainResponseData): Domain {
     return new Domain(
       response.body.domain,
       response.body.receiving_dns_records,
@@ -76,66 +82,73 @@ export default class DomainClient {
     );
   }
 
-  _parseTrackingSettings(response: { body: { tracking: any } }) {
+  _parseTrackingSettings(response: DomainTrackingResponse) : DomainTrackingData {
     return response.body.tracking;
   }
 
-  _parseTrackingUpdate(response: { body: any }) {
+  _parseTrackingUpdate(response: UpdateDomainTrackingResponse) :UpdatedOpenTracking {
     return response.body;
   }
 
-  list(query: any) {
+  list(query: DomainsQuery): Promise<Domain[]> {
     return this.request.get('/v2/domains', query)
-      .then(this._parseDomainList);
+      .then((res : APIResponse) => this._parseDomainList(res as DomainListResponseData));
   }
 
-  get(domain: string) {
+  get(domain: string) : Promise<Domain> {
     return this.request.get(`/v2/domains/${domain}`)
-      .then(this._parseDomain);
+      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  create(data: any) {
-    return this.request.post('/v2/domains', data)
-      .then(this._parseDomain);
+  create(data: DomainInfo) : Promise<Domain> {
+    return this.request.postWithFD('/v2/domains', data)
+      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  destroy(domain: string) {
+  destroy(domain: string): Promise<DestroyedDomain> {
     return this.request.delete(`/v2/domains/${domain}`)
-      .then(this._parseMessage);
+      .then((res : APIResponse) => this._parseMessage(res as DestroyedDomainResponse));
   }
 
   // Tracking
 
-  getTracking(domain: string) {
+  getTracking(domain: string) : Promise<DomainTrackingData> {
     return this.request.get(urljoin('/v2/domains', domain, 'tracking'))
       .then(this._parseTrackingSettings);
   }
 
-  updateTracking(domain: string, type: string, data: any) {
-    return this.request.put(urljoin('/v2/domains', domain, 'tracking', type), data)
+  updateTracking(
+    domain: string,
+    type: string,
+    data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo
+  ): Promise<UpdatedOpenTracking> {
+    if (!('html_footer' in data) && !('text_footer' in data) && typeof data?.active === 'boolean') {
+      throw new APIError({ status: 400, statusText: '', body: { message: 'Value "active" must contain string value.' } } as APIErrorOptions);
+    }
+    return this.request.putWithFD(urljoin('/v2/domains', domain, 'tracking', type), data)
       .then(this._parseTrackingUpdate);
   }
 
   // IPs
 
-  getIps(domain: string) {
+  getIps(domain: string): Promise<string[]> {
     return this.request.get(urljoin('/v2/domains', domain, 'ips'))
-      .then((response: { body: { items: string[] } }) => response?.body?.items);
+      .then((response: APIResponse) => response?.body?.items);
   }
 
-  assignIp(domain: string, ip: string) {
-    return this.request.post(urljoin('/v2/domains', domain, 'ips'), { ip });
+  assignIp(domain: string, ip: string): Promise<APIResponse> {
+    return this.request.postWithFD(urljoin('/v2/domains', domain, 'ips'), { ip });
   }
 
-  deleteIp(domain: string, ip: string) {
+  deleteIp(domain: string, ip: string): Promise<APIResponse> {
     return this.request.delete(urljoin('/v2/domains', domain, 'ips', ip));
   }
 
-  linkIpPool(domain: string, pool_id: string) {
-    return this.request.post(urljoin('/v2/domains', domain, 'ips'), { pool_id });
+  linkIpPool(domain: string, pool_id: string): Promise<APIResponse> {
+    return this.request.postWithFD(urljoin('/v2/domains', domain, 'ips'), { pool_id });
   }
 
-  unlinkIpPoll(domain: string, pool_id: string, ip: string) {
+  unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<APIResponse> {
     return this.request.delete(urljoin('/v2/domains', domain, 'ips', 'ip_pool'), { pool_id, ip });
   }
 }
