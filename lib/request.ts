@@ -152,6 +152,17 @@ class Request {
   }
 
   createFormData(data: any): IFormData {
+    const appendFileToFD = (key: string, obj : any, formDataInstance: IFormData): void => {
+      const isStreamData = isStream(obj);
+      const objData = isStreamData ? obj : obj.data;
+      const options = getAttachmentOptions(obj);
+      if (isStreamData) {
+        formDataInstance.append(key, objData, options);
+        return;
+      }
+      formDataInstance.append(key, objData, options.filename);
+    };
+
     const formData: IFormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc, key) => {
@@ -160,14 +171,10 @@ class Request {
 
           if (Array.isArray(obj)) {
             obj.forEach(function (item) {
-              const itemData = isStream(item) ? item : item.data;
-              const options = getAttachmentOptions(item);
-              (formDataAcc as any).append(key, itemData, options);
+              appendFileToFD(key, item, formDataAcc);
             });
           } else {
-            const objData = isStream(obj) ? obj : obj.data;
-            const options = getAttachmentOptions(obj);
-            (formDataAcc as any).append(key, objData, options);
+            appendFileToFD(key, obj, formDataAcc);
           }
 
           return formDataAcc;
