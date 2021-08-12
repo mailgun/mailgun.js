@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.6](https://github.com/mailgun/mailgun-js/compare/v3.5.5...v3.5.6) (2021-08-12)
+
+
+### Bug Fixes
+
+* Blob and buffer attachments not working ([ad69bda](https://github.com/mailgun/mailgun-js/commits/ad69bdaed5627d62571f58b1a79ac870c5086b14))
+
 ### [3.5.5](https://github.com/mailgun/mailgun-js/compare/v3.5.4...v3.5.5) (2021-08-09)
 
 
