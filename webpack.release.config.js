@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.js');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env) => {
   const outputDir = 'dist';
@@ -11,6 +12,17 @@ module.exports = (env) => {
     output: {
       path: path.resolve('./', outputDir),
     },
-    devtool: undefined
+    devtool: undefined,
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            keep_classnames: true,
+          }
+        }),
+      ],
+    },
   });
 };
