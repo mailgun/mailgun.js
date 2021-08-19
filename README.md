@@ -152,6 +152,124 @@ mg.messages.create('sandbox-123.mailgun.org', {
   .catch(err => console.log(err)); // logs any error
 ```
 
+Messages with attachments:
+
+- Node.js example of send file as an attachment
+
+  ```js
+    const fsPromises = require('fs').promises;
+    const path = require('path');
+    const filepath = path.resolve(__dirname, '../test.pdf');
+    let messageParams = {
+        from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+        to: ["test@example.com"],
+        subject: "Test subject",
+        message: "Hello here is a file in the attachment"
+    }
+
+    fsPromises.readFile(filepath)
+    .then(data => {
+      const file = {
+          filename: 'test-rename.pdf',
+          data
+      }
+      messageParams.attachment = file;
+      return mg.messages.create('sandbox-123.mailgun.org', messageParams);
+    })
+    .then(response => {
+        console.log(response);
+    })
+  ```
+- Node.js example of send multiple files as an attachment
+  ```js
+  const fsPromises = require('fs').promises;
+  const path = require('path');
+  const filepath = path.resolve(__dirname, '../test.pdf');
+  const filepath1 = path.resolve(__dirname, '../test.jpg');
+
+  let messageParams = {
+      from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+      to: ["test@example.com"],
+      subject: "Test subject",
+      message: "Test message"
+  }
+
+  (async () =>{
+      try {
+          const firstFile = {
+              filename: 'test.pdf',
+              data: await fsPromises.readFile(filepath)
+          }
+
+          const secondFile = {
+              filename: 'test.jpg',
+              data: await fsPromises.readFile(filepath1)
+          }
+
+          messageParams.attachment = [firstFile, secondFile];
+          const result =  await mg.messages.create('sandbox-123.mailgun.org', messageParams);
+          console.log(result);
+          } catch (error) {
+              console.error(error);
+          }
+  })()
+  ```
+- Node.js example of send file as inline image
+  ```js
+    const fsPromises = require('fs').promises;
+    const path = require('path');
+    const filepath = path.resolve(__dirname, '../test.jpg');
+    let messageParams = {
+        from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+        to: ["test@example.com"],
+        subject: "Test subject",
+        html: '<div><img alt="image" id="1" src="cid:test.jpg"/></div> Some extra text'
+    }
+
+    fsPromises.readFile(filepath)
+    .then(data => {
+      const file = {
+          filename: 'test.jpg',
+          data
+      }
+
+      messageParams.inline = file;
+      return mg.messages.create('sandbox-123.mailgun.org', messageParams);
+    })
+    .then(response => {
+        console.log(response);
+    })
+  ```
+
+- Browser example of send file
+
+  Before sending the file you need to somehow get the Blob of the file.
+  Usually can get it from the onChange event of input tag with type file.
+  ```js
+  const handleFileSelected = async (event) => {
+    const files = Array.from(event.target.files)
+    const fileBuffer = await files[0];
+  }
+  <input type="file" onChange={handleFileSelected} name="file-uploader"/>
+  ```
+
+  Then you can use the same approach as shown above for node.js apps.
+  ```js
+    const file = {
+      filename: 'test.pdf',
+      data: fileBuffer
+    };
+
+    let messageParams = {
+      from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+      to: ["test@example.com"],
+      subject: "Test subject",
+      text: "Hello here is a file in the attachment",
+      attachment: file
+    };
+
+    const res = await mg.messages.create(DOMAIN, messageParams);
+  ```
 Promise Returns:
 
 ```
