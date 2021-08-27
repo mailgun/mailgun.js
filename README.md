@@ -11,7 +11,7 @@ __Table of Contents__
   - [Setup Client](#setup-client)
   - [Methods](#methods)
   - [Browser Demo](#browser-demo)
-  - [Examples](https://github.com/mailgun/mailgun-js/tree/c379f79ea2a2e0f825103751a3a102d8bdd3dd1b/example)
+  - [Examples](https://github.com/mailgun/mailgun-js/tree/master/examples)
 - [Development](#development)
   - [Requirements](#requirements)
   - [Build](#build)
