@@ -20,13 +20,16 @@ export default class EventClient {
   _parsePageLinks(response: { body: { paging: any } }) {
     const pages = Object.entries(response.body.paging);
     return pages.reduce(
-      (acc: any, [id, url]: [url: string, id: string]) => {
-        acc[id] = this._parsePage(id, url)
-        return acc
-      }, {});
+      (acc: any, entrie: [url: string, id: string]) => {
+        const id = entrie[0];
+        const url = entrie[1];
+        acc[id] = this._parsePage(id, url);
+        return acc;
+      }, {}
+    );
   }
 
-  _parseEventList(response: { body: { items: any, paging: any }  }) {
+  _parseEventList(response: { body: { items: any, paging: any } }) {
     return {
       items: response.body.items,
       pages: this._parsePageLinks(response)

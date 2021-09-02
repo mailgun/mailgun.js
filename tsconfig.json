@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "incremental": true,
     "skipLibCheck": true
+    // "strict": true,
   },
   "typedocOptions": {
     "mode": "modules",

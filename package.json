@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mailgun/mailgun-js#readme",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --progress --color",
+    "build:release": "webpack --config ./webpack.release.config.js --progress --color",
     "start": "webpack --watch --config ./webpack.config.js --progress --color",
     "release": "standard-version -a",
     "test": "multi='dot=- xunit=./results.xml' mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
@@ -64,6 +65,7 @@
     "path-browserify": "^1.0.1",
     "should": "^4.1.0",
     "standard-version": "^9.3.1",
+    "terser-webpack-plugin": "^5.2.0",
     "ts-loader": "^8.0.12",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.36",
