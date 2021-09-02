@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.8](https://github.com/mailgun/mailgun-js/compare/v3.5.7...v3.5.8) (2021-09-02)
+
+
+### Features
+
+* Update index.ts export to fix commonJs imports ([246c046](https://github.com/mailgun/mailgun-js/commits/246c046619c593e5f13abe1ff0414fe9c9524cf9))
+
+
+### Other changes
+
+* Add examples of sending files to the readme ([a922b35](https://github.com/mailgun/mailgun-js/commits/a922b3590a6afd02e15650a2d6acf7b43933bb49))
+
 ### [3.5.7](https://github.com/mailgun/mailgun-js/compare/v3.5.6...v3.5.7) (2021-08-16)
 
 
