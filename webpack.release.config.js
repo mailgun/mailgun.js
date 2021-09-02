@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const { merge } = require('webpack-merge');
 
-const baseConfig = require('./webpack.config.js');
 const TerserPlugin = require('terser-webpack-plugin');
+const baseConfig = require('./webpack.config.js');
 
 module.exports = (env) => {
   const outputDir = 'dist';
