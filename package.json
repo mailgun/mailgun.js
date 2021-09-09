@@ -38,7 +38,6 @@
     "bluebird": "^3.7.2",
     "ky": "^0.25.1",
     "ky-universal": "^0.8.2",
-    "url": "^0.11.0",
     "url-join": "0.0.1",
     "web-streams-polyfill": "^3.0.1",
     "webpack-merge": "^5.4.0"

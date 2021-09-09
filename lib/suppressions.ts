@@ -17,11 +17,11 @@ import {
   SuppressionList,
   SuppressionModels,
   UnsubscribeData,
-  WhiteListData
+  WhiteListData,
 } from './interfaces/Supressions';
 
 const createOptions = {
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
 };
 
 class Bounce implements IBounce {
@@ -80,7 +80,11 @@ class WhiteList implements IWhiteList {
   }
 }
 
-type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe | typeof WhiteList;
+type TModel =
+  | typeof Bounce
+  | typeof Complaint
+  | typeof Unsubscribe
+  | typeof WhiteList;
 
 export default class SuppressionClient {
   request: any;
@@ -101,7 +105,7 @@ export default class SuppressionClient {
     };
   }
 
-  _parsePage(id: string, pageUrl: string) : ParsedPage {
+  _parsePage(id: string, pageUrl: string): ParsedPage {
     const parsedUrl = url.parse(pageUrl, true);
     const { query } = parsedUrl;
 
@@ -109,7 +113,7 @@ export default class SuppressionClient {
       id,
       page: query.page as string,
       address: query.address as string,
-      url: pageUrl
+      url: pageUrl,
     };
   }
 
@@ -121,12 +125,14 @@ export default class SuppressionClient {
         const pageUrl = pair[1];
         acc[id] = this._parsePage(id, pageUrl);
         return acc;
-      }, {}
+      },
+      {}
     ) as unknown as ParsedPagesList;
   }
 
   _parseList(
-    response: { body: { items: any, paging: any } }, Model: TModel
+    response: { body: { items: any; paging: any } },
+    Model: TModel
   ): SuppressionList {
     const data = {} as SuppressionList;
 
@@ -150,12 +156,16 @@ export default class SuppressionClient {
       .then((response: { body: any }) => response.body);
   }
 
-  list(domain: string, type: SuppressionModels, query: any) : Promise<SuppressionList> {
-    const model = (this.models)[type];
+  list(
+    domain: string,
+    type: SuppressionModels,
+    query: any
+  ): Promise<SuppressionList> {
+    const model = this.models[type];
 
     return this.request
       .get(urljoin('v3', domain, type), query)
-      .then((response: { body: { items: any, paging: any } }) => this._parseList(response, model));
+      .then((response: { body: { items: any; paging: any } }) => this._parseList(response, model));
   }
 
   get(
@@ -163,7 +173,7 @@ export default class SuppressionClient {
     type: SuppressionModels,
     address: string
   ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
-    const model = (this.models)[type];
+    const model = this.models[type];
 
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))
@@ -184,7 +194,11 @@ export default class SuppressionClient {
     }
 
     return this.request
-      .post(urljoin('v3', domain, type), JSON.stringify(postData), createOptions)
+      .post(
+        urljoin('v3', domain, type),
+        JSON.stringify(postData),
+        createOptions
+      )
       .then((response: { body: any }) => response.body);
   }
 

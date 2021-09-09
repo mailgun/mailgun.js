@@ -1820,7 +1820,7 @@ Demo should be up and running at http://0.0.0.0:4001/examples/
 
 ## Requirements
 
-- Requires node.js >= 4.x
+- Requires node.js >= 12.x
 
 Install node dependencies with:
 
@@ -1837,13 +1837,13 @@ npm run build
 ## Tests
 
 ```sh
-npm run tests
+npm run test
 ```
 
 Watch tests with
 
 ```sh
-npm run watch-tests
+npm run test-watch
 ```
 
 ## Release Process
