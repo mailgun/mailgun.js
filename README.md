@@ -146,7 +146,7 @@ mg.messages.create('sandbox-123.mailgun.org', {
     from: "Excited User <mailgun@sandbox-123.mailgun.org>",
     to: ["test@example.com"],
     subject: "Hello",
-    message: "<mime encoded string here>"
+    text: "<mime encoded string here>"
   })
   .then(msg => console.log(msg)) // logs response data
   .catch(err => console.log(err)); // logs any error
@@ -164,7 +164,7 @@ Messages with attachments:
         from: "Excited User <mailgun@sandbox-123.mailgun.org>",
         to: ["test@example.com"],
         subject: "Test subject",
-        message: "Hello here is a file in the attachment"
+        text: "Hello here is a file in the attachment"
     }
 
     fsPromises.readFile(filepath)
@@ -191,7 +191,7 @@ Messages with attachments:
       from: "Excited User <mailgun@sandbox-123.mailgun.org>",
       to: ["test@example.com"],
       subject: "Test subject",
-      message: "Test message"
+      text: "Test message"
   }
 
   (async () =>{
