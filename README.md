@@ -125,32 +125,53 @@ Method naming conventions:
 
 `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/api-sending.html#sending)
 
-HTML/TEXT Example:
+Options:
 
-```js
-mg.messages.create('sandbox-123.mailgun.org', {
-    from: "Excited User <mailgun@sandbox-123.mailgun.org>",
-    to: ["test@example.com"],
-    subject: "Hello",
-    text: "Testing some Mailgun awesomness!",
-    html: "<h1>Testing some Mailgun awesomness!</h1>"
-  })
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
-```
+Parameter         | Description
+:---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+to                | Email address of the recipient(s). Example: "Bob <bob@host.com>". You can use commas to separate multiple recipients (e.g.: "test@example.com,test@example.com" or ["test@example.com", "test@example.com"]). Make sure to include all To, Cc and Bcc recipients of the message.
+html              | HTML version of the message.
+text              | Text version of the message.
+message           | MIME string of the message. Make sure to use multipart/form-data to send this as a file upload.
+attachment        | File attachment. You can post multiple attachment values. Important: You must use multipart/form-data encoding when sending attachments. Also you can use `{data: file, filename: filename}` to define custom filename.
+o:tag             | Tag string. See Tagging for more information.
+o:campaign        | Id of the campaign the message belongs to. See um-campaign-analytics for details.
+o:deliverytime    | Desired time of delivery. See Date Format. Note: Messages can be scheduled for a maximum of 3 days in the future.
+o:dkim            | Enables/disabled DKIM signatures on per-message basis. Pass yes or no
+o:testmode        | Enables sending in test mode. Pass yes if needed. See Sending in Test Mode
+o:tracking        | Toggles tracking on a per-message basis, see Tracking Messages for details. Pass yes or no.
+o:tracking-clicks | Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes, no or htmlonly.
+o:tracking-opens  | Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes or no.
+h:X-My-Header     | h: prefix followed by an arbitrary value allows to append a custom MIME header to the message (X-My-Header in this case). For example, h:Reply-To to specify Reply-To address.
+v:my-var          | v: prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See Attaching Data to Messages for more information.
 
-MIME Example:
 
-```js
-mg.messages.create('sandbox-123.mailgun.org', {
-    from: "Excited User <mailgun@sandbox-123.mailgun.org>",
-    to: ["test@example.com"],
-    subject: "Hello",
-    text: "<mime encoded string here>"
-  })
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
-```
+- HTML/TEXT Example:
+
+  ```js
+  mg.messages.create('sandbox-123.mailgun.org', {
+      from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+      to: ["test@example.com"],
+      subject: "Hello",
+      text: "Testing some Mailgun awesomness!",
+      html: "<h1>Testing some Mailgun awesomness!</h1>"
+    })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.log(err)); // logs any error
+  ```
+
+- MIME Example:
+
+  ```js
+  mg.messages.create('sandbox-123.mailgun.org', {
+      from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+      to: ["test@example.com"],
+      subject: "Hello",
+      text: "<mime encoded string here>"
+    })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.log(err)); // logs any error
+  ```
 
 Messages with attachments:
 
@@ -270,34 +291,101 @@ Messages with attachments:
 
     const res = await mg.messages.create(DOMAIN, messageParams);
   ```
-Promise Returns:
+  Promise Returns:
 
+  ```js
+  {
+    id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
+    message: 'Queued. Thank you.'
+  }
+  ```
+#### Templates
+
+Mailgun’s templates uses a fork of the very popular template engine [handlebars](https://handlebarsjs.com/).
+
+To provide values for a substitution you need to use 'h:X-Mailgun-Variables' property in the message description.
+
+Make sure that this property is a JSON string like {"title":"A title", "body":"The body"}.
+
+You can find few examples of how to use templates below.
+- Providing values for **title** and **slug** variables to render in template
+```js
+...
+  const {
+    title,
+    slug,
+  } = someDataSource;
+
+  const mailgunData = {
+    from: 'mailer@example.com>',
+    to: 'recipient@example.com',
+    subject: `Email ${title}`,
+    template: 'name-of-the-template-you-made-in-mailgun-web-portal',
+    'h:X-Mailgun-Variables': JSON.stringify({ // be sure to stringify your payload
+      title,
+      slug,
+    }),
+    'h:Reply-To': 'reply-to@example.com',
+  };
+
+  try {
+    const response = await mailgun.messages.create(DOMAIN_NAME, mailgunData);
+...
 ```
-{
-  id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
-  message: 'Queued. Thank you.'
-}
+
+- Providing an array of objects to render them in the template
+```JS
+  ...
+  const mailgunData = {
+    from: 'mailer@example.com>',
+    to: 'recipient@example.com',
+    subject: `Email ${title}`,
+    template: 'name-of-the-another-template-you-made-in-mailgun-web-portal',
+    'h:X-Mailgun-Variables': JSON.stringify({
+    "arrayItems": [
+        {
+            "question": "test_question",
+            "answer": "test_answer"
+        },
+        {
+            "question": "test_question",
+            "answer": "test_answer"
+        }
+    ]})
+  };
+  try {
+    const response = await mailgun.messages.create(DOMAIN_NAME, mailgunData);
+  ...
 ```
 
-Options:
+#### Recipient Variables
+[Docs](https://documentation.mailgun.com/en/latest/user_manual.html#batch-sending)
 
-Parameter         | Description
-:---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-to                | Email address of the recipient(s). Example: "Bob <bob@host.com>". You can use commas to separate multiple recipients (e.g.: "test@example.com,test@example.com" or ["test@example.com", "test@example.com"]). Make sure to include all To, Cc and Bcc recipients of the message.
-html              | HTML version of the message.
-text              | Text version of the message.
-message           | MIME string of the message. Make sure to use multipart/form-data to send this as a file upload.
-attachment        | File attachment. You can post multiple attachment values. Important: You must use multipart/form-data encoding when sending attachments. Also you can use `{data: file, filename: filename}` to define custom filename.
-o:tag             | Tag string. See Tagging for more information.
-o:campaign        | Id of the campaign the message belongs to. See um-campaign-analytics for details.
-o:deliverytime    | Desired time of delivery. See Date Format. Note: Messages can be scheduled for a maximum of 3 days in the future.
-o:dkim            | Enables/disabled DKIM signatures on per-message basis. Pass yes or no
-o:testmode        | Enables sending in test mode. Pass yes if needed. See Sending in Test Mode
-o:tracking        | Toggles tracking on a per-message basis, see Tracking Messages for details. Pass yes or no.
-o:tracking-clicks | Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes, no or htmlonly.
-o:tracking-opens  | Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes or no.
-h:X-My-Header     | h: prefix followed by an arbitrary value allows to append a custom MIME header to the message (X-My-Header in this case). For example, h:Reply-To to specify Reply-To address.
-v:my-var          | v: prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See Attaching Data to Messages for more information.
+Recipient Variables are custom variables that you define, which you can then reference in the message body. They give you the ability to send a custom message to each recipient while still using a single API Call.
+
+```Js
+...
+ const mailgunData = {
+    from: 'Example.com Mailer <mailer@mailer.example.com>',
+    to: ['me@example.com', 'you@example.com'],
+    subject: 'Recipient - %recipient.title%',
+    html: 'Here\'s %recipient.title% and <a href="%recipient.link%">link</a>',
+    'recipient-variables': JSON.stringify({
+      'me@example.com': {
+        title: 'Me',
+        link: 'href-var',
+      },
+      'you@example.com': {
+        title: 'You',
+        link: 'slug-recipient-var-c',
+      },
+    }),
+  };
+
+  try {
+    const response = await mailgun.messages.create(DOMAIN_NAME, mailgunData);
+...
+```
 
 ### domains
 
