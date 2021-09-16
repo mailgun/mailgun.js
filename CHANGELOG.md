@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.9](https://github.com/mailgun/mailgun-js/compare/v3.5.8...v3.5.9) (2021-09-16)
+
+
+### Bug Fixes
+
+* Update @commitlint/cli and standard-version dependencies ([fe0233e](https://github.com/mailgun/mailgun-js/commits/fe0233e9afbd546f33b0f1c73930ca9329b5fa38))
+
+
+### Other changes
+
+* Add templates examples to readme ([f0bf0b8](https://github.com/mailgun/mailgun-js/commits/f0bf0b8cc66b3e7e5899fa913f2f79582f547a37))
+
 ### [3.5.8](https://github.com/mailgun/mailgun-js/compare/v3.5.7...v3.5.8) (2021-09-02)
 
 
