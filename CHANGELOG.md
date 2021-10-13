@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/mailgun/mailgun-js/compare/v3.5.9...v3.6.0) (2021-10-13)
+
+
+### Features
+
+* Split the distro for different targets ([1a55085](https://github.com/mailgun/mailgun-js/commits/1a550854765c7cdbb68b13b32c1f1392003abf30))
+* Update commitlint rules ([262ce0c](https://github.com/mailgun/mailgun-js/commits/262ce0ccd594bbcd97c9aa9ba5f11ad6ce6fc8c5))
+
 ### [3.5.9](https://github.com/mailgun/mailgun-js/compare/v3.5.8...v3.5.9) (2021-09-16)
 
 

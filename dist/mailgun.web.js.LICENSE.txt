@@ -1,0 +1,7 @@
+/*! MIT License © Sindre Sorhus */
+
+/*! https://mths.be/base64 v1.0.0 by @mathias | MIT license */
+
+/*! https://mths.be/punycode v1.3.2 by @mathias */
+
+/*! mailgun.js v3.5.9 */
