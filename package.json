@@ -1,7 +1,8 @@
 {
   "name": "mailgun.js",
   "version": "3.5.9",
-  "main": "dist/mailgun.js",
+  "main": "dist/mailgun.node.js",
+  "browser": "dist/mailgun.web.js",
   "types": "dist/index.d.ts",
   "author": "Mailgun",
   "license": "MIT",
@@ -18,9 +19,9 @@
   },
   "homepage": "https://github.com/mailgun/mailgun-js#readme",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --progress --color",
-    "build:release": "webpack --config ./webpack.release.config.js --progress --color",
-    "start": "webpack --watch --config ./webpack.config.js --progress --color",
+    "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color",
+    "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color",
+    "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "release": "standard-version -a",
     "test": "multi='dot=- xunit=./results.xml' mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test-watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
@@ -105,7 +106,7 @@
     "commitUrlFormat": "https://github.com/mailgun/mailgun-js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
-      "prerelease": "npm test && webpack --config ./webpack.release.config.js --progress --color && git add -A dist",
+      "prerelease": "npm test && webpack --config ./webpack/webpack.release.config.js --progress --color && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
   }

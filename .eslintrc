@@ -33,6 +33,9 @@
     "class-methods-use-this": 0,
     "prefer-destructuring": 0,
     "import/extensions": 0,
-    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }]
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/no-var-requires": {
+      "ignorePatterns": ["**/webpack/*.js"]
+    }
   }
 }
