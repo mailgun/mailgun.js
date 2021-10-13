@@ -91,7 +91,7 @@
         "section": "Breaking changes"
       },
       {
-        "type": "feature",
+        "type": "Feat",
         "section": "Features"
       },
       {
@@ -104,10 +104,6 @@
       }
     ],
     "commitUrlFormat": "https://github.com/mailgun/mailgun-js/commits/{{hash}}",
-    "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}",
-    "scripts": {
-      "prerelease": "npm test && webpack --config ./webpack/webpack.release.config.js --progress --color && git add -A dist",
-      "posttag": "git push && git push --tags && rm -rf build"
-    }
+    "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}"
   }
 }
