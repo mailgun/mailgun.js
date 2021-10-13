@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.10](https://github.com/mailgun/mailgun-js/compare/v3.5.9...v3.5.10) (2021-10-13)
+
 ### [3.5.9](https://github.com/mailgun/mailgun-js/compare/v3.5.8...v3.5.9) (2021-09-16)
 
 
