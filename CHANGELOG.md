@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.6.1](https://github.com/mailgun/mailgun-js/compare/v3.6.0...v3.6.1) (2021-10-18)
+
+
+### Other changes
+
+* Update eslint dependency. Regenerate package-lock file ([0e1fef6](https://github.com/mailgun/mailgun-js/commits/0e1fef683b86e05852a04c6e2f6199db0e39ff22))
+* Update mocha to v9 ([768ed1f](https://github.com/mailgun/mailgun-js/commits/768ed1f5896c2bbb7fff59f4fbb68d425ea5a594))
+
 ## [3.6.0](https://github.com/mailgun/mailgun-js/compare/v3.5.9...v3.6.0) (2021-10-13)
 
 
