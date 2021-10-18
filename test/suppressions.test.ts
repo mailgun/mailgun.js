@@ -1,5 +1,6 @@
-const should = require('should');
-const formData = require('form-data');
+import chai, { expect } from 'chai';
+chai.should();
+import formData from 'form-data';
 
 import nock from 'nock';
 import Request from '../lib/request';
@@ -129,22 +130,22 @@ describe('SuppressionsClient', function () {
 
           page = bounces.pages.first;
           page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
-          should(page.page).eql('first');
-          should(page.address).eql(undefined);
+          expect(page.page).to.eql('first');
+          expect(page.address).to.be.eql(undefined);
 
           page = bounces.pages.last;
           page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=last');
-          should(page.page).eql('last');
-          should(page.address).eql(undefined);
+          expect(page.page).to.be.eql('last');
+          expect(page.address).to.be.eql(undefined);
 
           page = bounces.pages.next;
           page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com');
-          should(page.page).eql('next');
+          expect(page.page).to.be.eql('next');
           page.address.should.eql('next@mailgun.com');
 
           page = bounces.pages.previous;
           page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com');
-          should(page.page).eql('previous');
+          expect(page.page).to.be.eql('previous');
           page.address.should.eql('previous@mailgun.com');
         });
     });

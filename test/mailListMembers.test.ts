@@ -1,10 +1,9 @@
-const formData = require('form-data');
-
 import nock from 'nock';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
+import formData from 'form-data';
 
 describe('mailListsMembersClient', function () {
   let client: any;

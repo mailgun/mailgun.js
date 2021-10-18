@@ -1,8 +1,7 @@
-const formData = require('form-data'); // importing this way to not have type error in line 13
-
 import nock from 'nock';
 
 import EventClient from '../lib/events';
+import formData from 'form-data';
 import MgRequest from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 

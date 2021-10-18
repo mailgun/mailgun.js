@@ -1,5 +1,3 @@
-const formData = require('form-data'); // importing this way to not have type error in line 13
-
 import fs from 'fs';
 import nock from 'nock';
 
@@ -7,6 +5,7 @@ import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { expect } from 'chai';
+import formData from 'form-data';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
