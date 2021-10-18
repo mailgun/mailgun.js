@@ -1,6 +1,5 @@
-const commonConfig = require('./webpack.common.config');
-
 const { merge } = require('webpack-merge');
+const commonConfig = require('./webpack.common.config');
 
 const nodeConf = merge(commonConfig, {
   target: 'node',

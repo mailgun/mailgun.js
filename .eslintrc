@@ -7,20 +7,21 @@
     "mocha": true
   },
   "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "airbnb-base"
   ],
   "plugins": [
     "eslint-plugin-tsdoc",
     "@typescript-eslint"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12
   },
   "settings": {
-    "import/resolver": "webpack"
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
   },
   "ignorePatterns": ["docs/assets/js/*", "dist/**"],
   "rules": {
@@ -33,9 +34,19 @@
     "class-methods-use-this": 0,
     "prefer-destructuring": 0,
     "import/extensions": 0,
-    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "@typescript-eslint/no-var-requires": {
-      "ignorePatterns": ["**/webpack/*.js"]
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "import/extensions": 0
+      }
     }
-  }
+  ]
 }

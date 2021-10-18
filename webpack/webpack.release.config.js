@@ -2,15 +2,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const TerserPlugin = require('terser-webpack-plugin');
-const baseConfig = require('./webpack.common.config');
-
 const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.common.config');
 
 const productionConfig = merge(baseConfig, {
   mode: 'production',
   devtool: undefined,
   optimization: {
-      minimize: true,
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,
