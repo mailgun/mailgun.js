@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const pkg = require('../package.json');
 
-
 const SRC_DIR = path.join(__dirname, '../');
 
 const outputDir = 'dist';
@@ -29,7 +28,7 @@ const commonConfig = {
             loader: 'babel-loader',
           },
           {
-            loader: 'ts-loader?configFile='+path.join(SRC_DIR,'tsconfig.webpack.json')
+            loader: `ts-loader?configFile=${path.join(SRC_DIR, 'tsconfig.webpack.json')}`
           }
         ],
         exclude: /(node_modules|test)/
