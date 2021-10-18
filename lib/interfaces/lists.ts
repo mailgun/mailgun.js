@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface ListsQuery {
     address?: string;
     limit?: number;

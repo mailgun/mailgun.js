@@ -1,11 +1,11 @@
 import fs from 'fs';
 import nock from 'nock';
+import { expect } from 'chai';
+import formData from 'form-data';
 
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
 import RequestOptions from '../lib/interfaces/RequestOptions';
-import { expect } from 'chai';
-import formData from 'form-data';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
@@ -41,7 +41,7 @@ describe('MessagesClient', function () {
           filename: 'test-image',
           data: mailgunLogo
         }]
-      })
+      });
 
       expect(res.message).to.eql('Queued. Thank you.');
     });

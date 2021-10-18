@@ -17,13 +17,18 @@ describe('Client', function () {
   let client: any;
 
   beforeEach(function () {
-    client = new Client({ username: 'username', key: 'key', public_key: 'key', timeout: 10000 }, formData);
+    client = new Client({
+      username: 'username',
+      key: 'key',
+      public_key: 'key',
+      timeout: 10000
+    }, formData);
   });
 
   it('raises error when username is not provided', function () {
     expect(
       function () {
-        return new Client({ key: 'key' } as any, formData)
+        return new Client({ key: 'key' } as any, formData);
       }
     ).to.throw('Parameter "username" is required');
   });

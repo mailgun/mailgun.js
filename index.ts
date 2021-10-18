@@ -5,7 +5,7 @@ import IFormData from './lib/interfaces/IFormData';
 class Mailgun {
   private formData: new () => IFormData
 
-  constructor(FormData: new (...args: any[]) => IFormData) {
+  constructor(FormData: new (...args: unknown[]) => IFormData) {
     this.formData = FormData;
   }
 

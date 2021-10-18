@@ -1,4 +1,4 @@
-import Request from "./request";
+import Request from './request';
 export default class MessagesClient {
     request: Request;
     constructor(request: Request);

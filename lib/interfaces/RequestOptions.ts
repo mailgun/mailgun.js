@@ -1,6 +1,8 @@
 import Options from './Options';
 
-export default interface RequestOptions extends Options {
+interface RequestOptions extends Options {
   headers: any;
   timeout: number;
 }
+
+export default RequestOptions;

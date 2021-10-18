@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mailgun = require('../index');
 
 const mg = mailgun.client({

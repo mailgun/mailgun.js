@@ -1,9 +1,9 @@
 import nock from 'nock';
+import formData from 'form-data';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
-import formData from 'form-data';
 
 describe('mailListsMembersClient', function () {
   let client: any;
@@ -19,7 +19,7 @@ describe('mailListsMembersClient', function () {
       name: 'test name',
       subscribed: true,
       vars: { gender: 'female', age: 0 }
-    } as MailListMember
+    } as MailListMember;
   });
 
   afterEach(function () {
@@ -57,7 +57,7 @@ describe('mailListsMembersClient', function () {
 
   describe('createMember', function () {
     it('adds list member to the mailing list ', function () {
-      const member:any = {...defaultListMember};
+      const member:any = { ...defaultListMember };
       member.subscribed = true;
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
@@ -66,12 +66,12 @@ describe('mailListsMembersClient', function () {
 
       return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
         newListMember.should.eql(member);
-      })
+      });
     });
 
     it('works with string value in subscribed field', function () {
-      const member:any = {...defaultListMember};
-      member.subscribed = "yes";
+      const member:any = { ...defaultListMember };
+      member.subscribed = 'yes';
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
         member
@@ -79,13 +79,13 @@ describe('mailListsMembersClient', function () {
 
       return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
         newListMember.should.eql(member);
-      })
+      });
     });
   });
 
   describe('createMembers', function () {
-    const mailingListAddress : string = 'testingMailingListAddress@example.com';
-    let  response : NewMultipleMembersResponse;
+    const mailingListAddress = 'testingMailingListAddress@example.com';
+    let response : NewMultipleMembersResponse;
 
     beforeEach(function () {
       response = {
@@ -105,55 +105,55 @@ describe('mailListsMembersClient', function () {
 
     it('adds list of members to the mailing list', function () {
       const newMembersListPlaceholder = new Array(5).fill(0);
-      const newMembersList = newMembersListPlaceholder.map((_, index)=>{
-          return {
-              address: `test${index}@example.com`,
-              name: `test name ${index}`,
-              vars: {gender:"female", age:index},
-              subscribed: true,
-              upsert: 'yes'
-          };
-      });
+      const newMembersList = newMembersListPlaceholder.map((_, index) => ({
+        address: `test${index}@example.com`,
+        name: `test name ${index}`,
+        vars: { gender: 'female', age: index },
+        subscribed: true,
+        upsert: 'yes'
+      }));
 
       api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
 
       return client.createMembers(mailingListAddress, {
         members: newMembersList,
-        upsert: "yes"
+        upsert: 'yes'
       }).then(function (result: NewMultipleMembersResponse) {
         result.should.eql(response);
-      })
+      });
     });
 
     it('works with string value in members field', function () {
       const newMembersListPlaceholder = new Array(5).fill(0);
-      const newMembersList = newMembersListPlaceholder.map((_, index)=>{
-        return {
-            address: `test${index}@example.com`,
-            name: `test name ${index}`,
-            vars: JSON.stringify({gender:"female", age:index}),
-            subscribed: true,
-            upsert: 'yes'
-        };
-      });
+      const newMembersList = newMembersListPlaceholder.map((_, index) => ({
+        address: `test${index}@example.com`,
+        name: `test name ${index}`,
+        vars: JSON.stringify({ gender: 'female', age: index }),
+        subscribed: true,
+        upsert: 'yes'
+
+      }));
       api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
       return client.createMembers(mailingListAddress, {
         members: newMembersList,
-        upsert: "yes"
+        upsert: 'yes'
       }).then(function (result: NewMultipleMembersResponse) {
         result.should.eql(response);
-      })
+      });
     });
-
   });
 
   describe('updateMember', function () {
     it('updates list member in the mailing list ', function () {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
-      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, {member: defaultListMember});
+      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, { member: defaultListMember });
 
-      return client.updateMember(mailingListAddress, mailingListMemberAddress, defaultListMember).then(function (res: MailListMember) {
+      return client.updateMember(
+        mailingListAddress,
+        mailingListMemberAddress,
+        defaultListMember
+      ).then(function (res: MailListMember) {
         res.should.eql(defaultListMember);
       });
     });
@@ -161,32 +161,37 @@ describe('mailListsMembersClient', function () {
     it('works with string value in subscribed field', function () {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
-      const member:any = {...defaultListMember};
-      member.subscribed = "yes";
-      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, {member: defaultListMember});
+      const member: any = { ...defaultListMember };
+      member.subscribed = 'yes';
+      api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, { member: defaultListMember });
 
-      return client.updateMember(mailingListAddress, mailingListMemberAddress, member).then(function (res: MailListMember) {
+      return client.updateMember(
+        mailingListAddress,
+        mailingListMemberAddress,
+        member
+      ).then(function (res: MailListMember) {
         res.should.eql(defaultListMember);
       });
     });
   });
 
   describe('destroyMember', function () {
-
     it('deletes member from the list ', function () {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
       const res = {
         member: defaultListMember,
-        message: "deleted"
+        message: 'deleted'
       } as DeletedMember;
 
       api.delete(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, res);
 
-      return client.destroyMember(mailingListAddress, mailingListMemberAddress).then(function (deletedMemberRes: DeletedMember) {
+      return client.destroyMember(
+        mailingListAddress,
+        mailingListMemberAddress
+      ).then(function (deletedMemberRes: DeletedMember) {
         deletedMemberRes.should.eql(res);
       });
     });
   });
-
 });

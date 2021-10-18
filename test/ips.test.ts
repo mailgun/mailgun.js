@@ -1,10 +1,10 @@
 // const formData = require('form-data');
 
 import nock from 'nock';
+import formData from 'form-data';
 import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import IpsClient from '../lib/ips';
-import formData from 'form-data';
 
 import { IpData, IpsListResponseBody } from '../lib/interfaces/Ips';
 

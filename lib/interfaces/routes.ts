@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface Route {
     actions: string[];
     created_at: string;

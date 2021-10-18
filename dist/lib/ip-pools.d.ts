@@ -1,24 +1,21 @@
-declare const MgRequest: any;
-import { IpPool } from "./interfaces/IpPools";
+import Request from './request';
+import { IpPool, IpPoolUpdateData } from './interfaces/IpPools';
 export default class IpPoolsClient {
-    request: typeof MgRequest;
-    constructor(request: typeof MgRequest);
-    list(query: any): IpPool[];
+    request: Request;
+    constructor(request: Request);
+    list(query: any): Promise<IpPool[]>;
     create(data: {
         name: string;
         description?: string;
         ips?: string[];
-    }): any;
-    update(poolId: string, data: {
-        name: string;
-        description: string;
-        add_ip: string;
-        remove_ip: string;
-    }): any;
+    }): Promise<{
+        message: string;
+        pool_id: string;
+    }>;
+    update(poolId: string, data: IpPoolUpdateData): Promise<any>;
     delete(poolId: string, data: {
         id: string;
         pool_id: string;
-    }): any;
+    }): Promise<any>;
     private parseIpPoolsResponse;
 }
-export {};

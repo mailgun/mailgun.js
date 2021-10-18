@@ -1,5 +1,11 @@
-import {MailingList} from './lists';
+import { MailingList } from './lists';
 
+export interface MailListMember {
+    address: string;
+    name: string;
+    subscribed: boolean,
+    vars: string | any;
+}
 export interface MailListMembersQuery {
     subscribed?: 'yes' | 'no';
     limit?: number;
@@ -31,13 +37,6 @@ export interface CreateUpdateMailListMembersReq {
     upsert?: 'yes' | 'no';
 }
 
-export interface MailListMember {
-    address: string;
-    name: string;
-    subscribed: boolean,
-    vars: string | any;
-}
-
 export interface DeletedMember {
     member: {
         address: string;
@@ -54,8 +53,15 @@ export interface NewMultipleMembersResponse {
 export interface IMailListsMembers {
     listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]>;
     getMember(address: string, memberAddress: string): Promise<MailListMember>,
-    createMember(mailListAddress: string, data: CreateUpdateMailListMembers): Promise<MailListMember>,
-    createMembers(mailListAddress: string, data: MultipleMembersData): Promise<NewMultipleMembersResponse>,
-    updateMember(address : string, memberAddress: string, data:CreateUpdateMailListMembers): Promise<MailListMember> ,
+    createMember(
+        mailListAddress: string,
+        data: CreateUpdateMailListMembers): Promise<MailListMember>,
+    createMembers(
+        mailListAddress: string,
+        data: MultipleMembersData): Promise<NewMultipleMembersResponse>,
+    updateMember(
+        address: string,
+        memberAddress: string,
+        data: CreateUpdateMailListMembers): Promise<MailListMember>,
     destroyMember(address : string, memberAddress: string): Promise<DeletedMember>
 }

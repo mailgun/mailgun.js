@@ -1,9 +1,9 @@
-declare const MgRequest: any;
+import MgRequest from './request';
+import { IpData, IpsListResponseBody } from './interfaces/Ips';
 export default class IpsClient {
-    request: typeof MgRequest;
-    constructor(request: typeof MgRequest);
-    list(query: any): any;
-    get(ip: string): any;
+    request: MgRequest;
+    constructor(request: MgRequest);
+    list(query: any): Promise<IpsListResponseBody | IpData>;
+    get(ip: string): Promise<IpsListResponseBody | IpData>;
     private parseIpsResponse;
 }
-export {};

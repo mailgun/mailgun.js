@@ -1,17 +1,18 @@
-const MgRequest = require('./request');
+/* eslint-disable camelcase */
+import Request from './request';
 
-import { IpPool } from "./interfaces/IpPools";
+import { IpPool, IpPoolListResponse, IpPoolUpdateData } from './interfaces/IpPools';
 
 export default class IpPoolsClient {
-  request: typeof MgRequest;
+  request: Request;
 
-  constructor(request: typeof MgRequest) {
+  constructor(request: Request) {
     this.request = request;
   }
 
-  list(query: any): IpPool[] {
+  list(query: any): Promise<IpPool[]> {
     return this.request.get('/v1/ip_pools', query)
-      .then((response: { body: { ip_pools: IpPool, message: string } }) => this.parseIpPoolsResponse(response));
+      .then((response: IpPoolListResponse) => this.parseIpPoolsResponse(response));
   }
 
   create(data: { name: string, description?: string, ips?: string[] }) {
@@ -19,7 +20,7 @@ export default class IpPoolsClient {
       .then((response: { body: { message: string, pool_id: string } }) => response?.body);
   }
 
-  update(poolId: string, data: { name: string, description: string, add_ip: string, remove_ip: string }) {
+  update(poolId: string, data: IpPoolUpdateData) : Promise<any> {
     return this.request.patch(`/v1/ip_pools/${poolId}`, data)
       .then((response: { body: any }) => response?.body);
   }

@@ -1,4 +1,4 @@
-export default interface APIErrorOptions {
+interface APIErrorOptions {
   headers: { [key: string]: any };
   status: number | string;
   message: string;
@@ -6,3 +6,5 @@ export default interface APIErrorOptions {
   url: string;
   statusText: string;
 }
+
+export default APIErrorOptions;

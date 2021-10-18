@@ -1,10 +1,9 @@
+/* eslint-disable camelcase */
 import url from 'url';
 import urljoin from 'url-join';
 
 import Request from './request';
 import { BounceData, ComplaintData, UnsubscribeData } from './interfaces/Supressions';
-
-type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
@@ -52,6 +51,8 @@ class Unsubscribe {
   }
 }
 
+type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
+
 export default class SuppressionClient {
   request: any;
   models: {
@@ -84,10 +85,11 @@ export default class SuppressionClient {
   _parsePageLinks(response: { body: { paging: any } }) {
     const pages = Object.entries(response.body.paging);
     return pages.reduce(
-      (acc: any, [id, url]: [url: string, id: string]) => {
-        acc[id] = this._parsePage(id, url)
-        return acc
-      }, {});
+      (acc: any, [id, pageUrl]: [pageUrl: string, id: string]) => {
+        acc[id] = this._parsePage(id, pageUrl);
+        return acc;
+      }, {}
+    );
   }
 
   _parseList(response: { body: { items: any, paging: any } }, Model: TModel) {
@@ -122,19 +124,22 @@ export default class SuppressionClient {
 
   create(domain: string, type: string, data: any) {
     // supports adding multiple suppressions by default
+    let postData;
     if (!Array.isArray(data)) {
-      data = [data];
+      postData = [data];
+    } else {
+      postData = { ...data };
     }
 
     return this.request
-    .post(urljoin('v3', domain, type), data, createOptions)
-    .then((response: { body: any }) => response.body);
+      .post(urljoin('v3', domain, type), postData, createOptions)
+      .then((response: { body: any }) => response.body);
   }
 
   destroy(domain: string, type: string, address: string) {
     return this.request
-    .delete(urljoin('v3', domain, type, encodeURIComponent(address)))
-    .then((response: { body: any }) => response.body);
+      .delete(urljoin('v3', domain, type, encodeURIComponent(address)))
+      .then((response: { body: any }) => response.body);
   }
 }
 

@@ -13,8 +13,9 @@ class Stats {
     this.end = new Date(data.end);
     this.resolution = data.resolution;
     this.stats = data.stats.map(function (stat: { time: string | Date }) {
-      stat.time = new Date(stat.time);
-      return stat;
+      const res = { ...stat };
+      res.time = new Date(stat.time);
+      return res;
     });
   }
 }

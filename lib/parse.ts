@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Request from './request';
 
 export default class ParseClient {
@@ -11,10 +12,10 @@ export default class ParseClient {
     const query = {} as { addresses: string, syntax_only: boolean };
 
     if (Array.isArray(addresses)) {
-      addresses = addresses.join(',');
+      query.addresses = addresses.join(',');
+    } else {
+      query.addresses = addresses;
     }
-
-    query.addresses = addresses;
 
     if (enableDnsEspChecks) {
       query.syntax_only = false;

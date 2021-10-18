@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface BounceData {
   address: string;
   code: number;
@@ -15,4 +16,3 @@ export interface UnsubscribeData {
   tags: any;
   created_at: string | Date;
 }
-
