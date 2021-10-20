@@ -1,4 +1,4 @@
-const formData = require('form-data'); // importing this way to not have type error in line 13
+import formData from 'form-data'; // importing this way to not have type error in line 13
 
 import fs from 'fs';
 import nock from 'nock';

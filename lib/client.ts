@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Request from './request';
 import Options from './interfaces/Options';
 import RequestOptions from './interfaces/RequestOptions';
@@ -34,11 +35,11 @@ export default class Client {
   public ip_pools;
   public lists;
 
-  constructor(options: Options, formData: new (...args: any[]) => IFormData) {
+  constructor(options: Options, formData: new (...args: unknown[]) => IFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
 
     if (!config.url) {
-      config.url = 'https://api.mailgun.net'
+      config.url = 'https://api.mailgun.net';
     }
 
     if (!config.username) {

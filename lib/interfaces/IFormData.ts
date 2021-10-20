@@ -11,8 +11,9 @@ interface AppendOptions {
 }
 
 export default abstract class IFormData {
-    constructor(){ //description of type. Should not be used for creating objects
-    }
+  // eslint-disable-next-line no-useless-constructor
+  constructor() { // description of type. Should not be used for creating objects
+  }
 
-    abstract append(key: string, value: any, options?: AppendOptions | string): void
+  abstract append(key: string, value: any, options?: AppendOptions | string): void
 }

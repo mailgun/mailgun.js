@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';

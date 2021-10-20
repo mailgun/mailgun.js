@@ -1,52 +1,54 @@
-const urljoin = require('url-join');
+import urljoin from 'url-join';
+import {
+  EventsList, EventsPage, EventsResponse, PagesList, PagesListAccumulator
+} from './interfaces/Events';
 
-const MgRequest = require('./request');
+import Request from './request';
 
 export default class EventClient {
-  request: typeof MgRequest;
+  request: Request;
 
-  constructor(request: typeof MgRequest) {
+  constructor(request: Request) {
     this.request = request;
   }
 
-  _parsePageNumber(url: string) {
+  _parsePageNumber(url: string) : string {
     return url.split('/').pop();
   }
 
-  _parsePage(id: string, url: string) {
+  _parsePage(id: string, url: string) : EventsPage {
     return { id, number: this._parsePageNumber(url), url };
   }
 
-  _parsePageLinks(response: { body: { paging: any } }) {
-    const pages = Object.entries(response.body.paging);
+  _parsePageLinks(response: EventsResponse) : PagesList {
+    const pages = Object.entries(response.body.paging as PagesList);
     return pages.reduce(
-      (acc: any, entrie: [url: string, id: string]) => {
+      (acc: PagesListAccumulator, entrie: [url: string, id: string]) => {
         const id = entrie[0];
         const url = entrie[1];
         acc[id] = this._parsePage(id, url);
         return acc;
       }, {}
-    );
+    ) as unknown as PagesList;
   }
 
-  _parseEventList(response: { body: { items: any, paging: any } }) {
+  _parseEventList(response: EventsResponse) : EventsList {
     return {
       items: response.body.items,
       pages: this._parsePageLinks(response)
     };
   }
 
-  get(domain: string, query: { page: any }) {
+  get(domain: string, query: { page: string }) : Promise<EventsList> {
     let url;
-
-    if (query && query.page) {
-      url = urljoin('/v2', domain, 'events', query.page);
-      delete query.page;
+    const queryCopy = { ...query };
+    if (queryCopy && queryCopy.page) {
+      url = urljoin('/v2', domain, 'events', queryCopy.page);
+      delete queryCopy.page;
     } else {
       url = urljoin('/v2', domain, 'events');
     }
-
-    return this.request.get(url, query)
-      .then((response: { body: { items: any, paging: any } }) => this._parseEventList(response));
+    return this.request.get(url, queryCopy)
+      .then((response: EventsResponse) => this._parseEventList(response));
   }
 }

@@ -28,5 +28,5 @@ export default class Client {
     ips: IpsClient;
     ip_pools: IpPoolsClient;
     lists: ListsClient;
-    constructor(options: Options, formData: new (...args: any[]) => IFormData);
+    constructor(options: Options, formData: new (...args: unknown[]) => IFormData);
 }

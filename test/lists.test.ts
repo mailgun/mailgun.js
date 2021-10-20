@@ -1,10 +1,11 @@
 import nock from 'nock';
+import formData from 'form-data';
+
 import Request from '../lib/request';
 import ListsClient from '../lib/lists';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { MailingList } from '../lib/interfaces/lists';
-import formData from 'form-data';
 
 describe('ListsClient', function () {
   let client: any;
@@ -24,7 +25,7 @@ describe('ListsClient', function () {
       members_count: 1,
       name: '123',
       reply_preference: null
-    } as MailingList
+    } as MailingList;
   });
 
   afterEach(function () {
@@ -39,15 +40,14 @@ describe('ListsClient', function () {
         items: lists
       });
 
-      return client.list().then(function (lists: MailingList[]) {
-        lists[0].should.eql(defaultList);
+      return client.list().then(function (listsRes: MailingList[]) {
+        listsRes[0].should.eql(defaultList);
       });
     });
   });
 
   describe('get', function () {
     it('gets a specific mailing list', function () {
-
       api.get('/v3/lists/testing.example.com').reply(200, {
         list: defaultList
       });
@@ -60,7 +60,6 @@ describe('ListsClient', function () {
 
   describe('create', function () {
     it('creates the list', function () {
-
       api.post('/v3/lists').reply(200, {
         list: defaultList
       });

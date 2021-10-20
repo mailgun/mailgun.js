@@ -1,10 +1,10 @@
-const MgRequest = require('./request');
+import MgRequest from './request';
 import { IpData, IpsListResponseBody } from './interfaces/Ips';
 
 export default class IpsClient {
-  request: typeof MgRequest;
+  request: MgRequest;
 
-  constructor(request: typeof MgRequest) {
+  constructor(request: MgRequest) {
     this.request = request;
   }
 

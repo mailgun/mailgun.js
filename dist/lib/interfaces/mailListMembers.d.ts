@@ -1,4 +1,10 @@
 import { MailingList } from './lists';
+export interface MailListMember {
+    address: string;
+    name: string;
+    subscribed: boolean;
+    vars: string | any;
+}
 export interface MailListMembersQuery {
     subscribed?: 'yes' | 'no';
     limit?: number;
@@ -24,12 +30,6 @@ export interface CreateUpdateMailListMembersReq {
     vars?: string;
     subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
-}
-export interface MailListMember {
-    address: string;
-    name: string;
-    subscribed: boolean;
-    vars: string | any;
 }
 export interface DeletedMember {
     member: {

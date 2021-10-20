@@ -10,7 +10,7 @@ import RequestOptions from '../lib/interfaces/RequestOptions';
 interface Data {
   parsed: string[],
   unparseable: string[]
-};
+}
 
 describe('ParseClient', function () {
   let client: any;

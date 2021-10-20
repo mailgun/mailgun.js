@@ -1,11 +1,12 @@
 import chai, { expect } from 'chai';
-chai.should();
 import formData from 'form-data';
-
 import nock from 'nock';
+
 import Request from '../lib/request';
 import SuppressionClient from '../lib/suppressions';
 import RequestOptions from '../lib/interfaces/RequestOptions';
+
+chai.should();
 
 describe('SuppressionsClient', function () {
   let client: any;
@@ -81,7 +82,7 @@ describe('SuppressionsClient', function () {
       api.get('/v3/domain.com/unsubscribes').reply(200, response);
 
       return client.list('domain.com', 'unsubscribes')
-          .then(function (unsubscribes: { items: any }) {
+        .then(function (unsubscribes: { items: any }) {
           let u;
 
           u = unsubscribes.items[0];

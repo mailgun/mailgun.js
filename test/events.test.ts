@@ -1,7 +1,7 @@
 import nock from 'nock';
 
-import EventClient from '../lib/events';
 import formData from 'form-data';
+import EventClient from '../lib/events';
 import MgRequest from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 

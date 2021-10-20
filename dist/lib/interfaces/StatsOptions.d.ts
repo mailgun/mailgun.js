@@ -1,4 +1,4 @@
-export default interface StatsOptions {
+interface StatsOptions {
     start: string | Date;
     end: string | Date;
     resolution: string;
@@ -11,3 +11,4 @@ export default interface StatsOptions {
         };
     }[];
 }
+export default StatsOptions;

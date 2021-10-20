@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mailgun = require('../index');
 
 const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || '' });

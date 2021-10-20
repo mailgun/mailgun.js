@@ -5,7 +5,7 @@ import {
   DestroyedList,
   MailingList
 } from './interfaces/lists';
-import {IMailListsMembers} from './interfaces/mailListMembers';
+import { IMailListsMembers } from './interfaces/mailListMembers';
 
 export default class ListsClient {
   baseRoute: string;

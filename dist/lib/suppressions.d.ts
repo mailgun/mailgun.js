@@ -1,6 +1,5 @@
 import Request from './request';
 import { BounceData, ComplaintData, UnsubscribeData } from './interfaces/Supressions';
-declare type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
 declare class Bounce {
     type: string;
     address: string;
@@ -22,6 +21,7 @@ declare class Unsubscribe {
     created_at: Date;
     constructor(data: UnsubscribeData);
 }
+declare type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
 export default class SuppressionClient {
     request: any;
     models: {

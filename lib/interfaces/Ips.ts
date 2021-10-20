@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface IpsListResponseBody {
   assignable_to_pools: boolean;
   items: string[];
