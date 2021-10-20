@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/mailgun/mailgun-js/compare/v3.6.1...v3.7.0) (2021-10-20)
+
+
+### Features
+
+* Fix linter errors ([126ba03](https://github.com/mailgun/mailgun-js/commits/126ba039bccfbdb257ddde7d17a58790e4cd30a3))
+
 ### [3.6.1](https://github.com/mailgun/mailgun-js/compare/v3.6.0...v3.6.1) (2021-10-18)
 
 
