@@ -4,13 +4,14 @@ import formData from 'form-data';
 import EventClient from '../lib/events';
 import MgRequest from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('EventsClient', function () {
   let client: any;
   let api: any;
 
   beforeEach(function () {
-    client = new EventClient(new MgRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new EventClient(new MgRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

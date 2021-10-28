@@ -12,6 +12,7 @@ import MessagesClient from '../lib/messages';
 import RoutesClient from '../lib/routes';
 import ValidateClient from '../lib/validate';
 import ParseClient from '../lib/parse';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('Client', function () {
   let client: any;
@@ -22,13 +23,13 @@ describe('Client', function () {
       key: 'key',
       public_key: 'key',
       timeout: 10000
-    }, formData);
+    }, formData as InputFormData);
   });
 
   it('raises error when username is not provided', function () {
     expect(
       function () {
-        return new Client({ key: 'key' } as any, formData);
+        return new Client({ key: 'key' } as any, formData as InputFormData);
       }
     ).to.throw('Parameter "username" is required');
   });
@@ -36,7 +37,7 @@ describe('Client', function () {
   it('raises error when key is not provided', function () {
     expect(
       function () {
-        return new Client({ username: 'username' } as any, formData);
+        return new Client({ username: 'username' } as any, formData as InputFormData);
       }
     ).to.throw('Parameter "key" is required');
   });

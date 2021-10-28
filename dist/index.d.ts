@@ -1,9 +1,9 @@
 import Client from './lib/client';
+import { InputFormData } from './lib/interfaces/IFormData';
 import Options from './lib/interfaces/Options';
-import IFormData from './lib/interfaces/IFormData';
 declare class Mailgun {
     private formData;
-    constructor(FormData: new (...args: unknown[]) => IFormData);
+    constructor(FormData: InputFormData);
     client(options: Options): Client;
 }
 export = Mailgun;

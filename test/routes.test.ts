@@ -4,6 +4,7 @@ import nock from 'nock';
 import Request from '../lib/request';
 import RoutesClient from '../lib/routes';
 import RequestOptions from '../lib/interfaces/RequestOptions';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 interface Data {
   actions: string[],
@@ -19,7 +20,7 @@ describe('RoutesClient', function () {
   let api: any;
 
   beforeEach(function () {
-    client = new RoutesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new RoutesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

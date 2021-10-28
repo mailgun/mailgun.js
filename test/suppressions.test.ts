@@ -5,6 +5,7 @@ import nock from 'nock';
 import Request from '../lib/request';
 import SuppressionClient from '../lib/suppressions';
 import RequestOptions from '../lib/interfaces/RequestOptions';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 chai.should();
 
@@ -13,7 +14,7 @@ describe('SuppressionsClient', function () {
   let api: any;
 
   beforeEach(function () {
-    client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

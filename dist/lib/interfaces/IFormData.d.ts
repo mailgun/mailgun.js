@@ -1,15 +1,7 @@
-interface Headers {
+import NodeFormData from 'form-data';
+export interface IFormDataOptions {
     [key: string]: any;
 }
-interface AppendOptions {
-    header?: string | Headers;
-    knownLength?: number;
-    filename?: string;
-    filepath?: string;
-    contentType?: string;
+export interface InputFormData {
+    new (options?: HTMLFormElement | IFormDataOptions): NodeFormData | FormData;
 }
-export default abstract class IFormData {
-    constructor();
-    abstract append(key: string, value: any, options?: AppendOptions | string): void;
-}
-export {};

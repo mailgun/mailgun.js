@@ -12,7 +12,7 @@ import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
-import IFormData from './interfaces/IFormData';
+import { InputFormData } from './interfaces/IFormData';
 export default class Client {
     private request;
     domains: DomainClient;
@@ -28,5 +28,5 @@ export default class Client {
     ips: IpsClient;
     ip_pools: IpPoolsClient;
     lists: ListsClient;
-    constructor(options: Options, formData: new (...args: unknown[]) => IFormData);
+    constructor(options: Options, formData: InputFormData);
 }

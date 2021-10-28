@@ -5,13 +5,14 @@ import Request from '../lib/request';
 import StatsClient from '../lib/stats';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import StatsOptions from '../lib/interfaces/StatsOptions';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('StatsClient', function () {
   let client: any;
   let api: any;
 
   beforeEach(function () {
-    client = new StatsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new StatsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

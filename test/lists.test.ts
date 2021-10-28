@@ -6,6 +6,7 @@ import ListsClient from '../lib/lists';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { MailingList } from '../lib/interfaces/lists';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('ListsClient', function () {
   let client: any;
@@ -13,7 +14,7 @@ describe('ListsClient', function () {
   let defaultList : MailingList;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     const mailListMembers = new MailListMembers(reqObject);
     client = new ListsClient(reqObject, mailListMembers);
     api = nock('https://api.mailgun.net');

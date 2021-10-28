@@ -1,11 +1,11 @@
 import Client from './lib/client';
+import { InputFormData } from './lib/interfaces/IFormData';
 import Options from './lib/interfaces/Options';
-import IFormData from './lib/interfaces/IFormData';
 
 class Mailgun {
-  private formData: new () => IFormData
+  private formData: InputFormData
 
-  constructor(FormData: new (...args: unknown[]) => IFormData) {
+  constructor(FormData: InputFormData) {
     this.formData = FormData;
   }
 

@@ -1,5 +1,6 @@
+import NodeFormData from 'form-data';
 import RequestOptions from './interfaces/RequestOptions';
-import IFormData from './interfaces/IFormData';
+import { InputFormData } from './interfaces/IFormData';
 import APIResponse from './interfaces/ApiResponse';
 declare class Request {
     private username;
@@ -8,7 +9,7 @@ declare class Request {
     private timeout;
     private headers;
     private formData;
-    constructor(options: RequestOptions, formData: new () => IFormData);
+    constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, inputOptions?: any): Promise<APIResponse>;
     query(method: string, url: string, query: any, options?: any): Promise<APIResponse>;
     command(method: string, url: string, data: any, options?: any): Promise<APIResponse>;
@@ -18,7 +19,7 @@ declare class Request {
     post(url: string, data: any, options?: any): Promise<APIResponse>;
     postWithFD(url: string, data: any): Promise<APIResponse>;
     putWithFD(url: string, data: any): Promise<APIResponse>;
-    createFormData(data: any): IFormData;
+    createFormData(data: any): NodeFormData | FormData;
     put(url: string, data: any, options?: any): Promise<APIResponse>;
     patch(url: string, data: any, options?: any): Promise<APIResponse>;
     delete(url: string, data?: any, options?: any): Promise<APIResponse>;
