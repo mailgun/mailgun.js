@@ -9,7 +9,7 @@ export interface CreateUpdateList {
     address: string;
     name?: string;
     description?: string;
-    access_level?: 'read-only' | 'members'| 'everyone';
+    access_level?: 'readonly' | 'members'| 'everyone';
     reply_preference?: 'list' | 'sender';
 }
 
