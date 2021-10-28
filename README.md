@@ -106,7 +106,7 @@ The following service methods are available to instantiated clients. The example
       - [get](#get-6)
     - [lists](#lists)
       - [list](#list-4)
-      - [get](#get-5)
+      - [get](#get-7)
       - [create](#create-5)
       - [update](#update-2)
       - [destroy](#destroy-3)
