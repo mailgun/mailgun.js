@@ -4,6 +4,7 @@ import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('mailListsMembersClient', function () {
   let client: any;
@@ -11,7 +12,7 @@ describe('mailListsMembersClient', function () {
   let defaultListMember : MailListMember;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     client = new MailListMembers(reqObject);
     api = nock('https://api.mailgun.net');
     defaultListMember = {

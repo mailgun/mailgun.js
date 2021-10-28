@@ -6,6 +6,7 @@ import formData from 'form-data';
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
 import RequestOptions from '../lib/interfaces/RequestOptions';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
@@ -14,7 +15,7 @@ describe('MessagesClient', function () {
   let api: any;
 
   beforeEach(function () {
-    client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

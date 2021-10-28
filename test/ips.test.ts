@@ -7,6 +7,7 @@ import RequestOptions from '../lib/interfaces/RequestOptions';
 import IpsClient from '../lib/ips';
 
 import { IpData, IpsListResponseBody } from '../lib/interfaces/Ips';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -14,7 +15,7 @@ describe('DomainClient', function () {
   let api: any;
 
   beforeEach(function () {
-    client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData));
+    client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

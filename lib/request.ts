@@ -1,13 +1,19 @@
+import NodeFormData from 'form-data';
 import base64 from 'base-64';
 import urljoin from 'url-join';
 import ky from 'ky-universal';
 import APIError from './error';
 import RequestOptions from './interfaces/RequestOptions';
 import APIErrorOptions from './interfaces/APIErrorOptions';
-import IFormData from './interfaces/IFormData';
+import { InputFormData } from './interfaces/IFormData';
 import APIResponse from './interfaces/ApiResponse';
 
 const isStream = (attachment: any) => typeof attachment === 'object' && typeof attachment.pipe === 'function';
+
+function isNodeFormData(formDataInstance: NodeFormData | FormData)
+  : formDataInstance is NodeFormData {
+  return (<NodeFormData>formDataInstance).getHeaders !== undefined;
+}
 
 const getAttachmentOptions = (item: any): {
   filename?: string,
@@ -44,9 +50,9 @@ class Request {
   private url: string;
   private timeout: number;
   private headers: any;
-  private formData: new () => IFormData;
+  private formData: InputFormData;
 
-  constructor(options: RequestOptions, formData: new () => IFormData) {
+  constructor(options: RequestOptions, formData: InputFormData) {
     this.username = options.username;
     this.key = options.key;
     this.url = options.url as string;
@@ -151,21 +157,25 @@ class Request {
     return this.command('put', url, formData, params);
   }
 
-  createFormData(data: any): IFormData {
-    const appendFileToFD = (key: string, obj : any, formDataInstance: IFormData): void => {
+  createFormData(data: any): NodeFormData | FormData {
+    const appendFileToFD = (
+      key: string,
+      obj: any,
+      formDataInstance: NodeFormData | FormData
+    ): void => {
       const isStreamData = isStream(obj);
       const objData = isStreamData ? obj : obj.data;
       const options = getAttachmentOptions(obj);
-      if (isStreamData) {
+      if (isNodeFormData(formDataInstance)) {
         formDataInstance.append(key, objData, options);
         return;
       }
       formDataInstance.append(key, objData, options.filename);
     };
 
-    const formData: IFormData = Object.keys(data)
+    const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
-      .reduce((formDataAcc, key) => {
+      .reduce((formDataAcc: NodeFormData | FormData, key) => {
         if (key === 'attachment' || key === 'inline') {
           const obj = data[key];
 

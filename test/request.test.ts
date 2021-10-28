@@ -8,6 +8,7 @@ import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import APIError from '../lib/error';
 import APIResponse from '../lib/interfaces/ApiResponse';
+import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('Request', function () {
   let headers: { [key: string]: string };
@@ -33,7 +34,7 @@ describe('Request', function () {
         url: 'https://api.mailgun.com',
         headers: { 'X-CSRF-Token': 'protectme' },
         timeout: 10000
-      }, formData);
+      }, formData as InputFormData);
 
       await req.request('get', '/v2/some/resource1', {
         headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
@@ -46,7 +47,7 @@ describe('Request', function () {
         .get('/v2/some/resource')
         .reply(200, { id: 1, message: 'hello' });
 
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData);
+      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
       const res = req.request('get', '/v2/some/resource')
         .then(function (response: APIResponse) {
           expect(response.status).to.eql(200);
@@ -61,7 +62,7 @@ describe('Request', function () {
         .get('/v2/some/resource')
         .reply(429, 'Too many requests');
 
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData);
+      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
       const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {
         expect(error.status).to.eql(429);
         expect(error.details).to.eql('Too many requests');
@@ -80,7 +81,7 @@ describe('Request', function () {
         .query(search)
         .reply(200, {});
 
-      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData);
+      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
       await req.query('get', '/v2/some/resource2', search);
     });
   });
@@ -93,7 +94,7 @@ describe('Request', function () {
         .post('/v2/some/resource')
         .reply(200, {});
 
-      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData);
+      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
       const res = req.command('post', '/v2/some/resource', body);
 
       return res;
