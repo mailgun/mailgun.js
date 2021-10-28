@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.1](https://github.com/mailgun/mailgun-js/compare/v3.7.0...v3.7.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* Fix TS2345 error ([e20b8d7](https://github.com/mailgun/mailgun-js/commits/e20b8d7fd03cc94fd49a1c82b4936d5b115024a3))
+
 ## [3.7.0](https://github.com/mailgun/mailgun-js/compare/v3.6.1...v3.7.0) (2021-10-20)
 
 
