@@ -104,6 +104,19 @@ The following service methods are available to instantiated clients. The example
       - [get](#get-5)
     - [parse](#parse)
       - [get](#get-6)
+    - [lists](#lists)
+      - [list](#list-4)
+      - [get](#get-7)
+      - [create](#create-5)
+      - [update](#update-2)
+      - [destroy](#destroy-3)
+    - [mailListMembers](#maillistmembers)
+      - [listMembers](#listmember)
+      - [getMember](#getmember)
+      - [createMember](#createmember)
+      - [createMembers](#createmembers)
+      - [updateMember](#updatemember)
+      - [destroyMember](#destroymember)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -1362,6 +1375,327 @@ Promise Returns: response body
   ]
 }
 ```
+
+### lists
+
+A client to manage mailing lists.
+
+#### list
+
+`mg.lists.list()`
+
+Example:
+
+```js
+mg.lists.list()
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+[
+  {
+    access_level: 'readonly',
+    address: 'noreply@sample.com',
+    created_at: 'Wed, 27 Oct 2021 21:59:21 -0000',
+    description: '',
+    members_count: 0,
+    name: '',
+    reply_preference: 'list'
+  }
+]
+```
+
+#### get
+
+`mg.lists.get(mailListAddress)`
+
+Example:
+
+```js
+mg.lists.get('noreply@sample.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  access_level: 'readonly',
+  address: 'noreply@sample.com',
+  created_at: 'Thu, 28 Oct 2021 00:16:56 -0000',
+  description: '',
+  members_count: 0,
+  name: '',
+  reply_preference: 'list'
+}
+```
+
+#### create
+
+`mg.lists.create(data)`
+
+Example:
+
+```js
+mg.lists.create({
+    address: 'reply@sample.com',
+    name: 'Reply Address', // optional, modifiable on website
+    description: 'Mailing lists for repliable address', // optional, modifiable on website
+    access_level: 'readonly', // optional, modifiable on website
+    reply_preference: 'list', // optional, modifiable on website
+  })
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  access_level: 'readonly',
+  address: 'reply@sample.com',
+  created_at: 'Thu, 28 Oct 2021 03:12:17 -0000',
+  description: 'Mailing lists for repliable address',
+  members_count: 0,
+  name: 'Reply Address',
+  reply_preference: 'list'
+}
+```
+
+#### update
+
+`mg.lists.update(mailListAddress)`
+
+Example:
+
+```js
+mg.lists.update('reply@sample.com', {
+    address: 'foo@sample.com',
+    name: 'Foo', // optional, modifiable on website
+    description: 'Foo bar bat', // optional, modifiable on website
+    access_level: 'members', // optional, modifiable on website
+    reply_preference: 'sender', // optional, modifiable on website
+  })
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  access_level: 'members',
+  address: 'foo@sample.com',
+  created_at: 'Thu, 28 Oct 2021 03:21:15 -0000',
+  description: 'Foo bar bat',
+  members_count: 0,
+  name: 'Foo',
+  reply_preference: 'sender'
+}
+```
+
+#### destroy
+
+`mg.lists.destroy(mailListAddress)`
+
+Example:
+
+```js
+mg.lists.destroy('foo@sample.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  address: 'foo@sample.com',
+  message: 'Mailing list has been removed'
+}
+```
+
+### mailListMembers
+
+A client to manage members within a specific mailing list.
+
+#### listMembers
+
+`mg.lists.members.listMembers(mailListAddress)`
+
+Example:
+
+```js
+mg.lists.members.listMembers('reply@sample.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+[
+  {
+    address: 'foo@bar.com',
+    name: 'Jane Doe',
+    subscribed: true,
+    vars: { age: 50 }
+  }
+]
+```
+
+#### getMember
+
+`mg.lists.members.getMember(mailListAddress, mailListMemberAddress)`
+
+Example:
+
+```js
+mg.lists.members.getMember('reply@sample.com', 'foo@bar.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  address: 'foo@bar.com',
+  name: 'Jane Doe',
+  subscribed: true,
+  vars: { age: 50 }
+}
+```
+
+#### createMember
+
+`mg.lists.members.createMember(mailListAddress, data)`
+
+Example:
+
+```js
+mg.lists.members.createMember('reply@sample.com', {
+    address: 'bat@bar.com',
+    name: 'John Smith', // optional, modifiable on website
+    vars: {hobby: "chess"}, // optional, modifiable on website 
+    subscribed: 'no', // optional, modifiable on website
+    upsert: 'yes', // optional, choose yes to insert if not exist, or update it exist
+  })
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  address: 'bat@bar.com',
+  name: 'John Smith',
+  subscribed: false,
+  vars: { hobby: 'chess' }
+}
+```
+
+#### createMembers
+
+`mg.lists.members.createMembers(mailListAddress, data)`
+
+Example:
+
+```js
+mg.lists.members.createMembers('reply@sample.com', {
+    members: [
+      {
+        address: "bot1@foobar.com",
+        name: "Bot1 Superbot",
+        vars: {location: "loc1"},
+        subscribed: true,
+      },
+      {
+        address: "bot2@foobar.com",
+        name: "Bot2 Superbot",
+        vars: {location: "loc2"},
+        subscribed: false,
+      },
+    ],
+    upsert: "yes",
+  })
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  list: {
+    access_level: 'readonly',
+    address: 'reply@sample.com',
+    created_at: 'Thu, 28 Oct 2021 03:21:15 -0000',
+    description: 'For reply purpose',
+    members_count: 2,
+    name: 'Reply',
+    reply_preference: 'list'
+  },
+  message: 'Mailing list has been updated',
+  'task-id': '575b943c37a211ec8a520242ac11000a'
+}
+```
+
+#### updateMember
+
+`mg.lists.members.updateMember(mailListAddress, mailListMemberAddress, data)`
+
+Example:
+
+```js
+mg.lists.members.updateMember('reply@sample.com', 'bot1@foobar.com', {
+    address: 'bot0@barfoo.com',
+    name: 'Bot0 Normalbot', // optional, modifiable on website
+    vars: {location: "space"},
+    subscribed: false,
+  })
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  address: 'bot0@barfoo.com',
+  name: 'Bot0 Normalbot',
+  subscribed: false,
+  vars: { location: 'space' }
+}
+```
+
+#### destroyMember
+
+`mg.lists.members.destroyMember(mailListAddress, mailListMemberAddress)`
+
+Example:
+
+```js
+mg.lists.members.destroyMember('reply@sample.com', 'bot2@foobar.com')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Promise Returns: response body
+
+```
+{
+  member: { address: 'bot2@foobar.com' },
+  message: 'Mailing list member has been deleted'
+}
+```
+
+
 
 ## Browser Demo
 
