@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/mailgun/mailgun-js.git"
+    "url": "git://github.com/mailgun/mailgun.js.git"
   },
   "bugs": {
-    "url": "https://github.com/mailgun/mailgun-js/issues"
+    "url": "https://github.com/mailgun/mailgun.js/issues"
   },
-  "homepage": "https://github.com/mailgun/mailgun-js#readme",
+  "homepage": "https://github.com/mailgun/mailgun.js#readme",
   "scripts": {
     "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color",
     "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color",
@@ -102,8 +102,8 @@
         "section": "Other changes"
       }
     ],
-    "commitUrlFormat": "https://github.com/mailgun/mailgun-js/commits/{{hash}}",
-    "compareUrlFormat": "https://github.com/mailgun/mailgun-js/compare/{{previousTag}}...{{currentTag}}",
+    "commitUrlFormat": "https://github.com/mailgun/mailgun.js/commits/{{hash}}",
+    "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
       "prerelease": "npm test && webpack --config ./webpack/webpack.release.config.js --progress --color && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
