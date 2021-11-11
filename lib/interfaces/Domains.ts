@@ -11,7 +11,7 @@ export interface DomainInfo {
     smtp_password: string;
     spam_action?: 'disabled' | 'block' | 'tag';
     wildcard?: boolean;
-    force_dkim_authority?: true;
+    force_dkim_authority?: boolean | 'true' | 'false';
     dkim_key_size?: 1024 | 2048;
     ips?: '';
     pool_id?: '';
@@ -69,13 +69,74 @@ export interface DomainListResponseData {
     }
 }
 
-export interface DestroyedDomain {
-    message: string;
+export interface MessageResponse {
+    message : string
 }
 
 export interface DestroyedDomainResponse {
     status: number;
+    body: MessageResponse
+}
+
+export interface ConnectionSettings {
+    require_tls: boolean;
+    skip_verification: boolean;
+}
+export interface ConnectionSettingsResponse {
     body: {
-        message: string;
+        connection: ConnectionSettings
     }
+    status: number
+}
+
+export interface UpdatedConnectionSettings {
+    message: string,
+    require_tls: boolean,
+    skip_verification: boolean
+}
+
+export interface UpdatedConnectionSettingsRes {
+    body: UpdatedConnectionSettings,
+    status: number
+}
+
+export interface DKIMAuthorityInfo {
+    self: boolean | 'yes' | 'no' | 'true' |'false'
+}
+
+export interface UpdatedDKIMAuthority {
+    changed: boolean,
+    message: string,
+    sending_dns_records: DNSRecord[]
+}
+
+export interface UpdatedDKIMAuthorityResponse {
+    body: UpdatedDKIMAuthority,
+    status: 200
+}
+
+export interface DKIMSelectorInfo {
+    dkimSelector: string
+}
+
+export interface UpdatedDKIMSelectorResponse {
+    body:MessageResponse,
+    status: number
+}
+
+export interface WebPrefixInfo {
+    webPrefix: string
+}
+
+export interface UpdatedWebPrefix {
+    message : string
+}
+export interface UpdatedWebPrefixResponse {
+    body:MessageResponse,
+    status: number
+}
+
+export interface ReplacementForPool {
+    pool_id?: string;
+    ip?: string;
 }

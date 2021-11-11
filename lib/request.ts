@@ -142,6 +142,9 @@ class Request {
   }
 
   postWithFD(url: string, data: any): Promise<APIResponse> {
+    if (!data) {
+      throw new Error('Please provide data object');
+    }
     const params: any = {
       headers: { 'Content-Type': null }
     };
@@ -150,6 +153,9 @@ class Request {
   }
 
   putWithFD(url: string, data: any): Promise<APIResponse> {
+    if (!data) {
+      throw new Error('Please provide data object');
+    }
     const params: any = {
       headers: { 'Content-Type': null }
     };

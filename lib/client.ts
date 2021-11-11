@@ -17,6 +17,7 @@ import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
 import MailListsMembers from './mailListMembers';
 import { InputFormData } from './interfaces/IFormData';
+import DomainCredentialsClient from './domainsCredentials';
 
 export default class Client {
   private request;
@@ -53,8 +54,9 @@ export default class Client {
     /** @internal */
     this.request = new Request(config, formData);
     const mailListsMembers = new MailListsMembers(this.request);
+    const domainCredentialsClient = new DomainCredentialsClient(this.request);
 
-    this.domains = new DomainClient(this.request);
+    this.domains = new DomainClient(this.request, domainCredentialsClient);
     this.webhooks = new WebhookClient(this.request);
     this.events = new EventClient(this.request);
     this.stats = new StatsClient(this.request);

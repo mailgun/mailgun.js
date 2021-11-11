@@ -1,7 +1,8 @@
-import { DomainResponseData, DestroyedDomain, DestroyedDomainResponse, DomainsQuery, DomainInfo, DomainListResponseData, DomainShortData, DNSRecord } from './interfaces/Domains';
+import { DomainsQuery, DomainInfo, DomainShortData, DNSRecord, ConnectionSettings, UpdatedConnectionSettings, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse, ReplacementForPool, MessageResponse } from './interfaces/Domains';
 import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
-import { DomainTrackingResponse, DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdateDomainTrackingResponse, UpdatedOpenTracking } from './interfaces/DomainTracking';
+import { DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdatedOpenTracking } from './interfaces/DomainTracking';
+import DomainCredentialsClient from './domainsCredentials';
 declare class Domain {
     name: string;
     require_tls: boolean;
@@ -19,22 +20,28 @@ declare class Domain {
 }
 export default class DomainClient {
     request: Request;
-    constructor(request: Request);
-    _parseMessage(response: DestroyedDomainResponse): DestroyedDomain;
-    _parseDomainList(response: DomainListResponseData): Domain[];
-    _parseDomain(response: DomainResponseData): Domain;
-    _parseTrackingSettings(response: DomainTrackingResponse): DomainTrackingData;
-    _parseTrackingUpdate(response: UpdateDomainTrackingResponse): UpdatedOpenTracking;
+    domainCredentials: DomainCredentialsClient;
+    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient);
+    private _parseMessage;
+    private _parseDomainList;
+    private _parseDomain;
+    private _parseTrackingSettings;
+    private _parseTrackingUpdate;
     list(query: DomainsQuery): Promise<Domain[]>;
     get(domain: string): Promise<Domain>;
     create(data: DomainInfo): Promise<Domain>;
-    destroy(domain: string): Promise<DestroyedDomain>;
+    destroy(domain: string): Promise<MessageResponse>;
+    getConnection(domain: string): Promise<ConnectionSettings>;
+    updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings>;
     getTracking(domain: string): Promise<DomainTrackingData>;
     updateTracking(domain: string, type: string, data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo): Promise<UpdatedOpenTracking>;
     getIps(domain: string): Promise<string[]>;
     assignIp(domain: string, ip: string): Promise<APIResponse>;
     deleteIp(domain: string, ip: string): Promise<APIResponse>;
     linkIpPool(domain: string, pool_id: string): Promise<APIResponse>;
-    unlinkIpPoll(domain: string, pool_id: string, ip: string): Promise<APIResponse>;
+    unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse>;
+    updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority>;
+    updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResponse>;
+    updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse>;
 }
 export {};
