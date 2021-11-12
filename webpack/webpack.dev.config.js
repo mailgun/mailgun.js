@@ -7,9 +7,9 @@ const nodeConf = merge(commonConfig, {
     filename: 'mailgun.node.js'
   },
   watchOptions: {
-    aggregateTimeout: 500,
+    aggregateTimeout: 300,
     poll: 5000,
-    ignored: ['../**/dist/', '**/node_modules']
+    ignored: ['../**/dist/*', '**/node_modules']
   }
 });
 
@@ -19,9 +19,9 @@ const webConf = merge(commonConfig, {
     filename: 'mailgun.web.js'
   },
   watchOptions: {
-    aggregateTimeout: 500,
+    aggregateTimeout: 300,
     poll: 5000,
-    ignored: ['../**/dist/', '**/node_modules']
+    ignored: ['../**/dist/*', '**/node_modules']
   }
 });
 

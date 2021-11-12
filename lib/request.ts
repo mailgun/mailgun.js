@@ -182,7 +182,7 @@ class Request {
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
-        if (key === 'attachment' || key === 'inline') {
+        if (key === 'attachment' || key === 'inline' || key === 'file') {
           const obj = data[key];
 
           if (Array.isArray(obj)) {
