@@ -43,10 +43,10 @@ export default class EventClient {
     let url;
     const queryCopy = { ...query };
     if (queryCopy && queryCopy.page) {
-      url = urljoin('/v2', domain, 'events', queryCopy.page);
+      url = urljoin('/v3', domain, 'events', queryCopy.page);
       delete queryCopy.page;
     } else {
-      url = urljoin('/v2', domain, 'events');
+      url = urljoin('/v3', domain, 'events');
     }
     return this.request.get(url, queryCopy)
       .then((response: EventsResponse) => this._parseEventList(response));
