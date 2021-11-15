@@ -9,26 +9,38 @@ export interface DomainCredentials {
     password: string;
 }
 
+export interface DomainCredentialsItem {
+    created_at: string,
+    login: string,
+    mailbox: string,
+    size_bytes: number | null
+}
 export interface DomainCredentialsResponseData {
     status: number;
     body: {
-        items: DomainCredentials[];
+        items: DomainCredentialsItem[];
         total_count: number;
     }
 }
 
 export interface DomainCredentialsList {
-    items: DomainCredentials[];
+    items: DomainCredentialsItem[];
     totalCount: number;
 }
 
 export interface CreatedUpdatedDomainCredentialsResponse {
-    message: string;
+    status: number,
+    body: {
+        message: string;
+    }
 }
 
 export interface DeletedDomainCredentialsResponse {
-    message: string;
-    spec: string;
+    status: number,
+    body: {
+        message: string;
+        spec: string;
+    }
 }
 
 export interface UpdateDomainCredentialsData {

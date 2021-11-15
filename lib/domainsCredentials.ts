@@ -1,3 +1,4 @@
+import urljoin from 'url-join';
 import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
 
@@ -28,8 +29,8 @@ export default class DomainCredentialsClient implements IDomainCredentials {
     };
   }
 
-  list(domain: string, query: DomainCredentialsQuery): Promise<DomainCredentialsList> {
-    return this.request.get(`${this.baseRoute}${domain}/credentials`, query)
+  list(domain: string, query?: DomainCredentialsQuery): Promise<DomainCredentialsList> {
+    return this.request.get(urljoin(this.baseRoute, domain, '/credentials'), query)
       .then(
         (res: APIResponse) => this._parseDomainCredentialsList(res as DomainCredentialsResponseData)
       );
@@ -40,7 +41,7 @@ export default class DomainCredentialsClient implements IDomainCredentials {
     data: DomainCredentials
   ): Promise<CreatedUpdatedDomainCredentialsResponse> {
     return this.request.postWithFD(`${this.baseRoute}${domain}/credentials`, data)
-      .then((res: APIResponse) => res.body as CreatedUpdatedDomainCredentialsResponse);
+      .then((res: APIResponse) => res as CreatedUpdatedDomainCredentialsResponse);
   }
 
   update(
@@ -49,7 +50,7 @@ export default class DomainCredentialsClient implements IDomainCredentials {
     data: UpdateDomainCredentialsData
   ): Promise<CreatedUpdatedDomainCredentialsResponse> {
     return this.request.putWithFD(`${this.baseRoute}${domain}/credentials/${credentialsLogin}`, data)
-      .then((res: APIResponse) => res.body as CreatedUpdatedDomainCredentialsResponse);
+      .then((res: APIResponse) => res as CreatedUpdatedDomainCredentialsResponse);
   }
 
   destroy(
@@ -57,6 +58,6 @@ export default class DomainCredentialsClient implements IDomainCredentials {
     credentialsLogin: string
   ): Promise<DeletedDomainCredentialsResponse> {
     return this.request.delete(`${this.baseRoute}${domain}/credentials/${credentialsLogin}`)
-      .then((res: APIResponse) => res.body as DeletedDomainCredentialsResponse);
+      .then((res: APIResponse) => res as DeletedDomainCredentialsResponse);
   }
 }
