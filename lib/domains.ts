@@ -39,7 +39,7 @@ import {
 } from './interfaces/DomainTracking';
 import DomainCredentialsClient from './domainsCredentials';
 
-class Domain {
+export class Domain {
   name: string;
   require_tls: boolean;
   skip_verification: boolean;
@@ -105,7 +105,7 @@ export default class DomainClient {
     return response.body;
   }
 
-  list(query: DomainsQuery): Promise<Domain[]> {
+  list(query?: DomainsQuery): Promise<Domain[]> {
     return this.request.get('/v3/domains', query)
       .then((res : APIResponse) => this._parseDomainList(res as DomainListResponseData));
   }

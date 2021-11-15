@@ -107,10 +107,12 @@ class Request {
       } as APIErrorOptions);
     }
 
-    return {
+    const res = {
       body: await response?.json(),
       status: response?.status
     };
+
+    return res;
   }
 
   query(method: string, url: string, query: any, options?: any) : Promise<APIResponse> {

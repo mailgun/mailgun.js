@@ -3,7 +3,7 @@ import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
 import { DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdatedOpenTracking } from './interfaces/DomainTracking';
 import DomainCredentialsClient from './domainsCredentials';
-declare class Domain {
+export declare class Domain {
     name: string;
     require_tls: boolean;
     skip_verification: boolean;
@@ -27,7 +27,7 @@ export default class DomainClient {
     private _parseDomain;
     private _parseTrackingSettings;
     private _parseTrackingUpdate;
-    list(query: DomainsQuery): Promise<Domain[]>;
+    list(query?: DomainsQuery): Promise<Domain[]>;
     get(domain: string): Promise<Domain>;
     create(data: DomainInfo): Promise<Domain>;
     destroy(domain: string): Promise<MessageResponse>;
@@ -44,4 +44,3 @@ export default class DomainClient {
     updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResponse>;
     updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse>;
 }
-export {};

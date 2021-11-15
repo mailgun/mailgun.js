@@ -5,10 +5,11 @@ import EventClient from '../lib/events';
 import MgRequest from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
+import { EventsList, EventsResponse } from '../lib/interfaces/Events';
 
 describe('EventsClient', function () {
-  let client: any;
-  let api: any;
+  let client: EventClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new EventClient(new MgRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
@@ -26,14 +27,12 @@ describe('EventsClient', function () {
       response = {
         items: [
           {
-            type: 'accepted',
+            event: 'accepted',
             timestamp: 'Wed, 19 Nov 2014 18:32:57 GMT',
-            gist: 'got it',
             content: { more: 'data' }
           }, {
-            type: 'opened',
+            event: 'opened',
             timestamp: 'Tue, 18 Nov 2014 12:32:57 GMT',
-            gist: 'sent',
             content: { more: 'data' }
           }
         ],
@@ -47,49 +46,41 @@ describe('EventsClient', function () {
     });
 
     it('fetches all events', function () {
-      api.get('/v2/domain.com/events').reply(200, response);
+      api.get('/v3/domain.com/events').reply(200, response);
 
-      return client.get('domain.com').then(function (data: any) {
+      return client.get('domain.com').then(function (data: EventsList) {
         let e;
 
         e = data.items[0];
-        e.type.should.eql('accepted');
-        e.gist.should.eql('got it');
+        e.event.should.eql('accepted');
         e.timestamp.should.eql('Wed, 19 Nov 2014 18:32:57 GMT');
-        e.content.should.eql({ more: 'data' });
 
         e = data.items[1];
-        e.type.should.eql('opened');
-        e.gist.should.eql('sent');
+        e.event.should.eql('opened');
         e.timestamp.should.eql('Tue, 18 Nov 2014 12:32:57 GMT');
-        e.content.should.eql({ more: 'data' });
       });
     });
 
     it('fetches single page', function () {
-      api.get('/v2/domain.com/events/pageId').reply(200, response);
+      api.get('/v3/domain.com/events/pageId').reply(200, response);
 
-      return client.get('domain.com', { page: 'pageId' }).then(function (data: any) {
+      return client.get('domain.com', { page: 'pageId' }).then(function (data: EventsList) {
         let e;
 
         e = data.items[0];
-        e.type.should.eql('accepted');
-        e.gist.should.eql('got it');
+        e.event.should.eql('accepted');
         e.timestamp.should.eql('Wed, 19 Nov 2014 18:32:57 GMT');
-        e.content.should.eql({ more: 'data' });
 
         e = data.items[1];
-        e.type.should.eql('opened');
-        e.gist.should.eql('sent');
+        e.event.should.eql('opened');
         e.timestamp.should.eql('Tue, 18 Nov 2014 12:32:57 GMT');
-        e.content.should.eql({ more: 'data' });
       });
     });
 
     it('parses page links', function () {
-      api.get('/v2/domain.com/events').reply(200, response);
+      api.get('/v3/domain.com/events').reply(200, response);
 
-      return client.get('domain.com').then(function (data: any) {
+      return client.get('domain.com').then(function (data: EventsList) {
         let page;
 
         page = data.pages.first;

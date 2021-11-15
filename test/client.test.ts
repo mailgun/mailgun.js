@@ -11,8 +11,12 @@ import SuppressionsClient from '../lib/suppressions';
 import MessagesClient from '../lib/messages';
 import RoutesClient from '../lib/routes';
 import ValidateClient from '../lib/validate';
-import ParseClient from '../lib/parse';
+
 import { InputFormData } from '../lib/interfaces/IFormData';
+import StatsClient from '../lib/stats';
+import ListsClient from '../lib/lists';
+import IpPoolsClient from '../lib/ip-pools';
+import IpsClient from '../lib/ips';
 
 describe('Client', function () {
   let client: any;
@@ -62,6 +66,10 @@ describe('Client', function () {
     client.suppressions.should.be.instanceOf(SuppressionsClient);
   });
 
+  it('creates stats client', function () {
+    client.stats.should.be.instanceOf(StatsClient);
+  });
+
   it('creates messages client', function () {
     client.messages.should.be.instanceOf(MessagesClient);
   });
@@ -70,11 +78,19 @@ describe('Client', function () {
     client.routes.should.be.instanceOf(RoutesClient);
   });
 
-  it('creates address validate client', function () {
-    client.validate.should.be.instanceOf(ValidateClient);
+  it('creates ips client', function () {
+    client.ips.should.be.instanceOf(IpsClient);
   });
 
-  it('creates address parse client', function () {
-    client.parse.should.be.instanceOf(ParseClient);
+  it('creates ip_pools client', function () {
+    client.ip_pools.should.be.instanceOf(IpPoolsClient);
+  });
+
+  it('creates lists client', function () {
+    client.lists.should.be.instanceOf(ListsClient);
+  });
+
+  it('creates address validate client', function () {
+    client.validate.should.be.instanceOf(ValidateClient);
   });
 });
