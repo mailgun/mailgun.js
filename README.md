@@ -1581,7 +1581,7 @@ Example:
 mg.lists.members.createMember('reply@sample.com', {
     address: 'bat@bar.com',
     name: 'John Smith', // optional, modifiable on website
-    vars: {hobby: "chess"}, // optional, modifiable on website 
+    vars: {hobby: "chess"}, // optional, modifiable on website
     subscribed: 'no', // optional, modifiable on website
     upsert: 'yes', // optional, choose yes to insert if not exist, or update it exist
   })
@@ -1758,7 +1758,7 @@ git pull
 
 Next, run ```npm run release```.
 
-After that, ```run npm login``` and ```npm publish``` to publish changes on npm.
+After that, run ```npm login``` and ```npm publish``` to publish changes on npm.
 
 ## TODO
 - add browser demo to heroku

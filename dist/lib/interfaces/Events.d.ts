@@ -68,15 +68,16 @@ export interface DomainEvent {
     recipient: string;
     event: string;
 }
+export interface ParsedPage {
+    id: string;
+    number: string;
+    url: string;
+}
 export interface ParsedPagesList {
-    previous: {
-        id: string;
-        number: string;
-        url: string;
-    };
-    first: string;
-    last: string;
-    next: string;
+    previous: ParsedPage;
+    first: ParsedPage;
+    last: ParsedPage;
+    next: ParsedPage;
 }
 export interface EventsList {
     items: DomainEvent[];
