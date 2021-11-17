@@ -5,7 +5,7 @@ import Request from '../lib/request';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import DomainCredentialsClient from '../lib/domainsCredentials';
-import { CreatedUpdatedDomainCredentialsResponse, DeletedDomainCredentialsResponse, DomainCredentialsList } from '../lib/interfaces/DomainCredentials';
+import { DomainCredentialsList, DomainCredentialsResult } from '../lib/interfaces/DomainCredentials';
 
 // TODO: fix types
 describe('DomainsCredentialsClient', function () {
@@ -58,8 +58,8 @@ describe('DomainsCredentialsClient', function () {
         message: 'Created 1 credentials pair(s)'
       });
 
-      return client.create('testDomain', domainCredentialsData).then(function (res: CreatedUpdatedDomainCredentialsResponse) {
-        res.should.eql({ body: { message: 'Created 1 credentials pair(s)' }, status: 200 });
+      return client.create('testDomain', domainCredentialsData).then(function (res: DomainCredentialsResult) {
+        res.should.eql({ message: 'Created 1 credentials pair(s)', status: 200 });
       });
     });
   });
@@ -72,8 +72,8 @@ describe('DomainsCredentialsClient', function () {
 
       return client.update('testDomain', 'testLogin', {
         password: 'testPassword1'
-      }).then(function (res: CreatedUpdatedDomainCredentialsResponse) {
-        res.should.eql({ body: { message: 'Password changed' }, status: 200 });
+      }).then(function (res: DomainCredentialsResult) {
+        res.should.eql({ message: 'Password changed', status: 200 });
       });
     });
   });
@@ -85,12 +85,10 @@ describe('DomainsCredentialsClient', function () {
         spec: 'testDomain'
       });
 
-      return client.destroy('testDomain', 'testLogin').then(function (data: DeletedDomainCredentialsResponse) {
+      return client.destroy('testDomain', 'testLogin').then(function (data: DomainCredentialsResult) {
         data.should.eql({
-          body: {
-            message: 'domain deleted',
-            spec: 'testDomain'
-          },
+          message: 'domain deleted',
+          spec: 'testDomain',
           status: 200
         });
       });

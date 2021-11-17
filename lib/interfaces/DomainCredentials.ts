@@ -27,6 +27,11 @@ export interface DomainCredentialsList {
     items: DomainCredentialsItem[];
     totalCount: number;
 }
+export interface DomainCredentialsResult {
+    status: number,
+    message: string;
+    spec?: string;
+}
 
 export interface CreatedUpdatedDomainCredentialsResponse {
     status: number,
@@ -50,14 +55,14 @@ export interface UpdateDomainCredentialsData {
 export interface IDomainCredentials {
     list(domain: string, query: DomainCredentialsQuery): Promise<DomainCredentialsList>
     create(domain: string, data: DomainCredentials
-    ): Promise<CreatedUpdatedDomainCredentialsResponse>
+    ): Promise<DomainCredentialsResult>
     update(
         domain: string,
         credentialsLogin: string,
         data: UpdateDomainCredentialsData
-    ): Promise<CreatedUpdatedDomainCredentialsResponse>
+    ): Promise<DomainCredentialsResult>
     destroy(
         domain: string,
         credentialsLogin: string
-    ): Promise<DeletedDomainCredentialsResponse>
+    ): Promise<DomainCredentialsResult>
 }
