@@ -7,7 +7,7 @@ export interface WebhookResponseBody {
     webhook: APIWebhook;
 }
 export interface WebhookResponse {
-    status: string;
+    status: number;
     body: WebhookResponseBody;
 }
 export interface WebhookList {
@@ -18,4 +18,8 @@ export interface WebhookList {
 export interface WebhooksQuery {
     limit?: number;
     skip?: number;
+}
+export interface ValidationResponse {
+    code: number;
+    message: string;
 }

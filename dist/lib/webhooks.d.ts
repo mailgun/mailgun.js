@@ -1,4 +1,4 @@
-import { WebhookList, WebhookResponse, WebhooksQuery } from './interfaces/Webhooks';
+import { ValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from './interfaces/Webhooks';
 import Request from './request';
 declare class Webhook {
     id: string;
@@ -6,7 +6,7 @@ declare class Webhook {
     constructor(id: string, url: string);
 }
 export default class WebhookClient {
-    request: any;
+    request: Request;
     constructor(request: Request);
     _parseWebhookList(response: {
         body: {
@@ -25,7 +25,7 @@ export default class WebhookClient {
     };
     list(domain: string, query: WebhooksQuery): Promise<WebhookList>;
     get(domain: string, id: string): Promise<Webhook>;
-    create(domain: string, id: string, url: string, test?: boolean): Promise<Webhook>;
+    create(domain: string, id: string, url: string, test?: boolean): Promise<Webhook | ValidationResponse>;
     update(domain: string, id: string, url: string): Promise<Webhook>;
     destroy(domain: string, id: string): Promise<Webhook>;
 }

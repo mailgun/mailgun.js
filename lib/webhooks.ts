@@ -1,5 +1,11 @@
 import urljoin from 'url-join';
-import { WebhookList, WebhookResponse, WebhooksQuery } from './interfaces/Webhooks';
+
+import {
+  ValidationResponse,
+  WebhookList,
+  WebhookResponse,
+  WebhooksQuery
+} from './interfaces/Webhooks';
 import Request from './request';
 
 class Webhook {
@@ -13,7 +19,7 @@ class Webhook {
 }
 
 export default class WebhookClient {
-  request: any;
+  request: Request;
 
   constructor(request: Request) {
     this.request = request;
@@ -36,36 +42,39 @@ export default class WebhookClient {
 
   _parseWebhookTest(response: { body: { code: number, message: string } })
   : {code: number, message:string} {
-    return { code: response.body.code, message: response.body.message };
+    return { code: response.body.code, message: response.body.message } as ValidationResponse;
   }
 
   list(domain: string, query: WebhooksQuery): Promise<WebhookList> {
-    return this.request.get(urljoin('/v2/domains', domain, 'webhooks'), query)
+    return this.request.get(urljoin('/v3/domains', domain, 'webhooks'), query)
       .then(this._parseWebhookList);
   }
 
   get(domain: string, id: string): Promise<Webhook> {
-    return this.request.get(urljoin('/v2/domains', domain, 'webhooks', id))
+    return this.request.get(urljoin('/v3/domains', domain, 'webhooks', id))
       .then(this._parseWebhookWithID(id));
   }
 
-  create(domain: string, id: string, url: string, test = false): Promise<Webhook> {
+  create(domain: string,
+    id: string,
+    url: string,
+    test = false): Promise<Webhook | ValidationResponse> {
     if (test) {
-      return this.request.putWithFD(urljoin('/v2/domains', domain, 'webhooks', id, 'test'), { url })
+      return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id, 'test'), { url })
         .then(this._parseWebhookTest);
     }
 
-    return this.request.postWithFD(urljoin('/v2/domains', domain, 'webhooks'), { id, url })
+    return this.request.postWithFD(urljoin('/v3/domains', domain, 'webhooks'), { id, url })
       .then(this._parseWebhookWithID(id));
   }
 
   update(domain: string, id: string, url: string): Promise<Webhook> {
-    return this.request.putWithFD(urljoin('/v2/domains', domain, 'webhooks', id), { url })
+    return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id), { url })
       .then(this._parseWebhookWithID(id));
   }
 
   destroy(domain: string, id: string) : Promise<Webhook> {
-    return this.request.delete(urljoin('/v2/domains', domain, 'webhooks', id))
+    return this.request.delete(urljoin('/v3/domains', domain, 'webhooks', id))
       .then(this._parseWebhookWithID(id));
   }
 }

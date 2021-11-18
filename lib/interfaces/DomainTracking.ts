@@ -18,7 +18,7 @@ export interface DomainTrackingResponse {
 }
 
 export interface UpdatedOpenTracking {
-    message: 'Domain tracking settings have been updated';
+    message: string;
     open?: { active: boolean };
     click?: { active: boolean | 'htmlonly'};
     unsubscribe?: {
@@ -34,14 +34,14 @@ export interface UpdateDomainTrackingResponse {
 }
 
 export interface OpenTrackingInfo {
-    active: 'yes' | 'no';
+    active: 'yes'| 'no' | 'true' | 'false';
 }
 export interface ClickTrackingInfo {
-    active: 'yes' | 'no' | 'htmlonly';
+    active: 'yes'| 'no' | 'true' | 'false' | 'htmlonly';
 }
 
 export interface UnsubscribeTrackingInfo {
-    active: boolean;
+    active: 'yes'| 'no' | 'true' | 'false';
     html_footer: string;
     text_footer: string;
 }

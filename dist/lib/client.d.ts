@@ -1,4 +1,3 @@
-import Request from './request';
 import Options from './interfaces/Options';
 import DomainClient from './domains';
 import EventClient from './events';
@@ -8,7 +7,6 @@ import WebhookClient from './webhooks';
 import MessagesClient from './messages';
 import RoutesClient from './routes';
 import ValidateClient from './validate';
-import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
@@ -22,9 +20,7 @@ export default class Client {
     suppressions: SuppressionClient;
     messages: MessagesClient;
     routes: RoutesClient;
-    public_request: Request;
     validate: ValidateClient;
-    parse: ParseClient;
     ips: IpsClient;
     ip_pools: IpPoolsClient;
     lists: ListsClient;

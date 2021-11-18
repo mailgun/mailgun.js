@@ -107,10 +107,12 @@ class Request {
       } as APIErrorOptions);
     }
 
-    return {
+    const res = {
       body: await response?.json(),
       status: response?.status
     };
+
+    return res;
   }
 
   query(method: string, url: string, query: any, options?: any) : Promise<APIResponse> {
@@ -142,6 +144,9 @@ class Request {
   }
 
   postWithFD(url: string, data: any): Promise<APIResponse> {
+    if (!data) {
+      throw new Error('Please provide data object');
+    }
     const params: any = {
       headers: { 'Content-Type': null }
     };
@@ -150,6 +155,9 @@ class Request {
   }
 
   putWithFD(url: string, data: any): Promise<APIResponse> {
+    if (!data) {
+      throw new Error('Please provide data object');
+    }
     const params: any = {
       headers: { 'Content-Type': null }
     };
@@ -176,7 +184,7 @@ class Request {
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
-        if (key === 'attachment' || key === 'inline') {
+        if (key === 'attachment' || key === 'inline' || key === 'file') {
           const obj = data[key];
 
           if (Array.isArray(obj)) {

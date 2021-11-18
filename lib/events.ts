@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
 import {
-  EventsList, EventsPage, EventsResponse, PagesList, PagesListAccumulator
+  EventsList, EventsPage, EventsResponse, PagesList, PagesListAccumulator, ParsedPagesList
 } from './interfaces/Events';
 
 import Request from './request';
@@ -20,7 +20,7 @@ export default class EventClient {
     return { id, number: this._parsePageNumber(url), url };
   }
 
-  _parsePageLinks(response: EventsResponse) : PagesList {
+  _parsePageLinks(response: EventsResponse) : ParsedPagesList {
     const pages = Object.entries(response.body.paging as PagesList);
     return pages.reduce(
       (acc: PagesListAccumulator, entrie: [url: string, id: string]) => {
@@ -29,7 +29,7 @@ export default class EventClient {
         acc[id] = this._parsePage(id, url);
         return acc;
       }, {}
-    ) as unknown as PagesList;
+    ) as unknown as ParsedPagesList;
   }
 
   _parseEventList(response: EventsResponse) : EventsList {
@@ -39,14 +39,14 @@ export default class EventClient {
     };
   }
 
-  get(domain: string, query: { page: string }) : Promise<EventsList> {
+  get(domain: string, query?: { page: string }) : Promise<EventsList> {
     let url;
     const queryCopy = { ...query };
     if (queryCopy && queryCopy.page) {
-      url = urljoin('/v2', domain, 'events', queryCopy.page);
+      url = urljoin('/v3', domain, 'events', queryCopy.page);
       delete queryCopy.page;
     } else {
-      url = urljoin('/v2', domain, 'events');
+      url = urljoin('/v3', domain, 'events');
     }
     return this.request.get(url, queryCopy)
       .then((response: EventsResponse) => this._parseEventList(response));

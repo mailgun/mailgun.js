@@ -11,12 +11,13 @@ import WebhookClient from './webhooks';
 import MessagesClient from './messages';
 import RoutesClient from './routes';
 import ValidateClient from './validate';
-import ParseClient from './parse';
 import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
 import MailListsMembers from './mailListMembers';
 import { InputFormData } from './interfaces/IFormData';
+import DomainCredentialsClient from './domainsCredentials';
+import MultipleValidationClient from './multipleValidation';
 
 export default class Client {
   private request;
@@ -28,9 +29,7 @@ export default class Client {
   public suppressions;
   public messages;
   public routes;
-  public public_request;
   public validate;
-  public parse;
   public ips;
   public ip_pools;
   public lists;
@@ -53,8 +52,10 @@ export default class Client {
     /** @internal */
     this.request = new Request(config, formData);
     const mailListsMembers = new MailListsMembers(this.request);
+    const domainCredentialsClient = new DomainCredentialsClient(this.request);
+    const multipleValidationClient = new MultipleValidationClient(this.request);
 
-    this.domains = new DomainClient(this.request);
+    this.domains = new DomainClient(this.request, domainCredentialsClient);
     this.webhooks = new WebhookClient(this.request);
     this.events = new EventClient(this.request);
     this.stats = new StatsClient(this.request);
@@ -64,13 +65,6 @@ export default class Client {
     this.ips = new IpsClient(this.request);
     this.ip_pools = new IpPoolsClient(this.request);
     this.lists = new ListsClient(this.request, mailListsMembers);
-
-    if (config.public_key) {
-      config.key = config.public_key;
-
-      this.public_request = new Request(config, formData);
-      this.validate = new ValidateClient(this.public_request);
-      this.parse = new ParseClient(this.public_request);
-    }
+    this.validate = new ValidateClient(this.request, multipleValidationClient);
   }
 }
