@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/mailgun/mailgun.js/compare/v3.7.3...v4.0.0) (2021-11-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated signature of unlinkIpPoll method
+
+* feature: Update events client to use v3 of API
+
+* feature: Update webhooks to use v3 of API
+
+* breaking: Update validation to use v4 of API
+* removed parse client functionality.
+Changed mg.validate.get response
+Added multiple email addresses validation
+
+* other: Update domain credentials responses to add status code
+
+* Update endpoints for service methods (#209) ([59f812d](https://github.com/mailgun/mailgun.js/commits/59f812dcf771a5d7ed812424bb5dfaef0f52ff62)), closes [#209](https://github.com/mailgun/mailgun.js/issues/209)
+
 ### [3.7.3](https://github.com/mailgun/mailgun.js/compare/v3.7.2...v3.7.3) (2021-11-10)
 
 ### [3.7.2](https://github.com/mailgun/mailgun-js/compare/v3.7.1...v3.7.2) (2021-10-28)
