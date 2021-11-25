@@ -50,7 +50,7 @@ class Request {
   private url: string;
   private timeout: number;
   private headers: any;
-  private formData: InputFormData;
+  private FormDataConstructor: InputFormData;
 
   constructor(options: RequestOptions, formData: InputFormData) {
     this.username = options.username;
@@ -58,7 +58,7 @@ class Request {
     this.url = options.url as string;
     this.timeout = options.timeout;
     this.headers = options.headers || {};
-    this.formData = formData;
+    this.FormDataConstructor = formData;
   }
 
   async request(method: string, url: string, inputOptions?: any): Promise<APIResponse> {
@@ -166,49 +166,82 @@ class Request {
   }
 
   createFormData(data: any): NodeFormData | FormData {
-    const appendFileToFD = (
-      key: string,
-      obj: any,
-      formDataInstance: NodeFormData | FormData
-    ): void => {
-      const isStreamData = isStream(obj);
-      const objData = isStreamData ? obj : obj.data;
-      const options = getAttachmentOptions(obj);
-      if (isNodeFormData(formDataInstance)) {
-        formDataInstance.append(key, objData, options);
-        return;
-      }
-      formDataInstance.append(key, objData, options.filename);
-    };
-
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
-        if (key === 'attachment' || key === 'inline' || key === 'file') {
-          const obj = data[key];
-
-          if (Array.isArray(obj)) {
-            obj.forEach(function (item) {
-              appendFileToFD(key, item, formDataAcc);
-            });
-          } else {
-            appendFileToFD(key, obj, formDataAcc);
-          }
-
+        const fileKeys = ['attachment', 'inline', 'file'];
+        if (fileKeys.includes(key)) {
+          this.addFilesToFD(key, data[key], formDataAcc);
           return formDataAcc;
         }
 
-        if (Array.isArray(data[key])) {
-          data[key].forEach(function (item: any) {
-            formDataAcc.append(key, item);
-          });
-        } else if (data[key] != null) {
-          formDataAcc.append(key, data[key]);
+        if (key === 'message') { // mime message
+          this.addMimeDataToFD(key, data[key], formDataAcc);
+          return formDataAcc;
         }
+
+        this.addCommonPropertyToFD(key, data[key], formDataAcc);
         return formDataAcc;
-      // eslint-disable-next-line new-cap
-      }, new this.formData());
+      }, new this.FormDataConstructor());
     return formData;
+  }
+
+  private addMimeDataToFD(
+    key: string,
+    data: Buffer | Blob,
+    formDataInstance: NodeFormData | FormData
+  ): void {
+    if (isNodeFormData(formDataInstance)) {
+      if (Buffer.isBuffer(data)) {
+        formDataInstance.append(key, data, { filename: 'MimeMessage' });
+      }
+    } else {
+      formDataInstance.append(key, data as Blob, 'MimeMessage');
+    }
+  }
+
+  private addFilesToFD(
+    propertyName: string,
+    value: any,
+    formDataInstance: NodeFormData | FormData
+  ): void {
+    const appendFileToFD = (
+      key: string,
+      obj: any,
+      formData: NodeFormData | FormData
+    ): void => {
+      const isStreamData = isStream(obj);
+      const objData = isStreamData ? obj : obj.data;
+      // getAttachmentOptions should be called with obj parameter to prevent loosing filename
+      const options = getAttachmentOptions(obj);
+      if (isNodeFormData(formData)) {
+        formData.append(key, objData, options);
+        return;
+      }
+      formData.append(key, objData, options.filename);
+    };
+
+    if (Array.isArray(value)) {
+      value.forEach(function (item) {
+        appendFileToFD(propertyName, item, formDataInstance);
+      });
+    } else {
+      appendFileToFD(propertyName, value, formDataInstance);
+    }
+  }
+
+  private addCommonPropertyToFD(
+    key: string,
+    value: any,
+    formDataAcc: NodeFormData | FormData
+  ): void {
+    if (Array.isArray(value)) {
+      value.forEach(function (item: any) {
+        formDataAcc.append(key, item);
+      });
+    } else if (value != null) {
+      formDataAcc.append(key, value);
+    }
   }
 
   put(url: string, data: any, options?: any): Promise<APIResponse> {
