@@ -8,7 +8,7 @@ declare class Request {
     private url;
     private timeout;
     private headers;
-    private formData;
+    private FormDataConstructor;
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, inputOptions?: any): Promise<APIResponse>;
     query(method: string, url: string, query: any, options?: any): Promise<APIResponse>;
@@ -20,6 +20,9 @@ declare class Request {
     postWithFD(url: string, data: any): Promise<APIResponse>;
     putWithFD(url: string, data: any): Promise<APIResponse>;
     createFormData(data: any): NodeFormData | FormData;
+    private addMimeDataToFD;
+    private addFilesToFD;
+    private addCommonPropertyToFD;
     put(url: string, data: any, options?: any): Promise<APIResponse>;
     patch(url: string, data: any, options?: any): Promise<APIResponse>;
     delete(url: string, data?: any, options?: any): Promise<APIResponse>;
