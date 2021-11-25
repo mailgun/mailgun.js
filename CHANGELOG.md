@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/mailgun/mailgun.js/compare/v4.0.0...v4.0.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* Fixes handling of mime messages ([#213](https://github.com/mailgun/mailgun.js/issues/213)) ([ad43490](https://github.com/mailgun/mailgun.js/commits/ad43490a562b95cb77e38cb66f71ef13a4da8331))
+
 ## [4.0.0](https://github.com/mailgun/mailgun.js/compare/v3.7.3...v4.0.0) (2021-11-18)
 
 

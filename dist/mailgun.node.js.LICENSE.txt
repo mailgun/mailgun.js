@@ -2,4 +2,4 @@
 
 /*! https://mths.be/base64 v1.0.0 by @mathias | MIT license */
 
-/*! mailgun.js v3.7.3 */
+/*! mailgun.js v4.0.0 */
