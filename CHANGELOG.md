@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/mailgun/mailgun.js/compare/v4.0.1...v4.1.0) (2021-11-30)
+
+
+### Features
+
+* Add support of whitelists into suppressions client ([#214](https://github.com/mailgun/mailgun.js/issues/214)) ([1e4fb84](https://github.com/mailgun/mailgun.js/commits/1e4fb84d2528751a9c2dddd1599d2bc0e12b1fdd))
+
 ### [4.0.1](https://github.com/mailgun/mailgun.js/compare/v4.0.0...v4.0.1) (2021-11-25)
 
 
