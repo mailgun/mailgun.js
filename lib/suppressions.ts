@@ -3,7 +3,12 @@ import url from 'url';
 import urljoin from 'url-join';
 
 import Request from './request';
-import { BounceData, ComplaintData, UnsubscribeData } from './interfaces/Supressions';
+import {
+  BounceData,
+  ComplaintData,
+  UnsubscribeData,
+  WhiteListData
+} from './interfaces/Supressions';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
@@ -51,7 +56,21 @@ class Unsubscribe {
   }
 }
 
-type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
+class WhiteList {
+  type: string;
+  value: string;
+  reason: string;
+  createdAt: Date;
+
+  constructor(data: WhiteListData) {
+    this.type = 'whitelists';
+    this.value = data.value;
+    this.reason = data.reason;
+    this.createdAt = new Date(data.createdAt);
+  }
+}
+
+type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe | typeof WhiteList;
 
 export default class SuppressionClient {
   request: any;
@@ -59,6 +78,7 @@ export default class SuppressionClient {
     bounces: typeof Bounce;
     complaints: typeof Complaint;
     unsubscribes: typeof Unsubscribe;
+    whitelists: typeof WhiteList;
   };
 
   constructor(request: Request) {
@@ -66,7 +86,8 @@ export default class SuppressionClient {
     this.models = {
       bounces: Bounce,
       complaints: Complaint,
-      unsubscribes: Unsubscribe
+      unsubscribes: Unsubscribe,
+      whitelists: WhiteList,
     };
   }
 
@@ -106,6 +127,12 @@ export default class SuppressionClient {
     return new Model(response.body);
   }
 
+  private createWhiteList(domain: string, data: any) {
+    return this.request
+      .postWithFD(urljoin('v3', domain, 'whitelists'), data, createOptions)
+      .then((response: { body: any }) => response.body);
+  }
+
   list(domain: string, type: string, query: any) {
     const model = (this.models as any)[type];
 
@@ -125,14 +152,18 @@ export default class SuppressionClient {
   create(domain: string, type: string, data: any) {
     // supports adding multiple suppressions by default
     let postData;
+    if (type === 'whitelists') {
+      return this.createWhiteList(domain, data);
+    }
+
     if (!Array.isArray(data)) {
       postData = [data];
     } else {
-      postData = { ...data };
+      postData = [...data];
     }
 
     return this.request
-      .post(urljoin('v3', domain, type), postData, createOptions)
+      .post(urljoin('v3', domain, type), JSON.stringify(postData), createOptions)
       .then((response: { body: any }) => response.body);
   }
 
