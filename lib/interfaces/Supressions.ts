@@ -16,3 +16,10 @@ export interface UnsubscribeData {
   tags: any;
   created_at: string | Date;
 }
+
+export interface WhiteListData {
+  type: string;
+  value: string;
+  reason: string;
+  createdAt: string | Date;
+}

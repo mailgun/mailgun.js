@@ -1,5 +1,5 @@
 import Request from './request';
-import { BounceData, ComplaintData, UnsubscribeData } from './interfaces/Supressions';
+import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from './interfaces/Supressions';
 declare class Bounce {
     type: string;
     address: string;
@@ -21,13 +21,21 @@ declare class Unsubscribe {
     created_at: Date;
     constructor(data: UnsubscribeData);
 }
-declare type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe;
+declare class WhiteList {
+    type: string;
+    value: string;
+    reason: string;
+    createdAt: Date;
+    constructor(data: WhiteListData);
+}
+declare type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe | typeof WhiteList;
 export default class SuppressionClient {
     request: any;
     models: {
         bounces: typeof Bounce;
         complaints: typeof Complaint;
         unsubscribes: typeof Unsubscribe;
+        whitelists: typeof WhiteList;
     };
     constructor(request: Request);
     _parsePage(id: string, pageUrl: string): {
@@ -49,7 +57,8 @@ export default class SuppressionClient {
     }, Model: TModel): any;
     _parseItem(response: {
         body: any;
-    }, Model: TModel): Bounce | Complaint | Unsubscribe;
+    }, Model: TModel): Bounce | Complaint | Unsubscribe | WhiteList;
+    private createWhiteList;
     list(domain: string, type: string, query: any): any;
     get(domain: string, type: string, address: string): any;
     create(domain: string, type: string, data: any): any;
