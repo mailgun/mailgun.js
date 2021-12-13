@@ -165,6 +165,17 @@ class Request {
     return this.command('put', url, formData, params);
   }
 
+  patchWithFD(url: string, data: any): Promise<APIResponse> {
+    if (!data) {
+      throw new Error('Please provide data object');
+    }
+    const params: any = {
+      headers: { 'Content-Type': null }
+    };
+    const formData = this.createFormData(data);
+    return this.command('patch', url, formData, params);
+  }
+
   createFormData(data: any): NodeFormData | FormData {
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })

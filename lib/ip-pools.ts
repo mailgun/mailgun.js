@@ -16,12 +16,12 @@ export default class IpPoolsClient {
   }
 
   create(data: { name: string, description?: string, ips?: string[] }) {
-    return this.request.post('/v1/ip_pools', data)
+    return this.request.postWithFD('/v1/ip_pools', data)
       .then((response: { body: { message: string, pool_id: string } }) => response?.body);
   }
 
   update(poolId: string, data: IpPoolUpdateData) : Promise<any> {
-    return this.request.patch(`/v1/ip_pools/${poolId}`, data)
+    return this.request.patchWithFD(`/v1/ip_pools/${poolId}`, data)
       .then((response: { body: any }) => response?.body);
   }
 

@@ -19,6 +19,7 @@ declare class Request {
     post(url: string, data: any, options?: any): Promise<APIResponse>;
     postWithFD(url: string, data: any): Promise<APIResponse>;
     putWithFD(url: string, data: any): Promise<APIResponse>;
+    patchWithFD(url: string, data: any): Promise<APIResponse>;
     createFormData(data: any): NodeFormData | FormData;
     private addMimeDataToFD;
     private addFilesToFD;
