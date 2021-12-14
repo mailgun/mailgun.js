@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.2](https://github.com/mailgun/mailgun.js/compare/v4.1.1...v4.1.2) (2021-12-14)
+
+
+### Bug Fixes
+
+* Update stats methods to allow an array of events ([#216](https://github.com/mailgun/mailgun.js/issues/216)) ([3b0fc41](https://github.com/mailgun/mailgun.js/commits/3b0fc411a4fa34a27cfd255a914adb17499f3af6))
+
 ### [4.1.1](https://github.com/mailgun/mailgun.js/compare/v4.1.0...v4.1.1) (2021-12-13)
 
 
