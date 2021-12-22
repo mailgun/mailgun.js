@@ -37,7 +37,10 @@ import {
   UpdateDomainTrackingResponse,
   UpdatedOpenTracking
 } from './interfaces/DomainTracking';
+import { IDomainCredentials } from './interfaces/DomainCredentials';
+import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
 import DomainCredentialsClient from './domainsCredentials';
+import DomainTemplatesClient from './domainsTemplates';
 
 export class Domain {
   name: string;
@@ -72,11 +75,17 @@ export class Domain {
 
 export default class DomainClient {
   request: Request;
-  public domainCredentials: DomainCredentialsClient;
+  public domainCredentials: IDomainCredentials;
+  public domainTemplates: IDomainTemplatesClient
 
-  constructor(request: Request, domainCredentialsClient: DomainCredentialsClient) {
+  constructor(
+    request: Request,
+    domainCredentialsClient: DomainCredentialsClient,
+    domainTemplatesClient: DomainTemplatesClient
+  ) {
     this.request = request;
     this.domainCredentials = domainCredentialsClient;
+    this.domainTemplates = domainTemplatesClient;
   }
 
   private _parseMessage(response: DestroyedDomainResponse) : MessageResponse {
