@@ -22,6 +22,7 @@ import {
   NotificationAPIResponse,
   NotificationResult,
   ShortTemplateVersion,
+  TemplateQuery,
   TemplateVersion,
   UpdateOrDeleteDomainTemplateAPIResponse,
   UpdateOrDeleteDomainTemplateResult
@@ -146,8 +147,8 @@ export default class DomainTemplatesClient implements IDomainTemplatesClient {
       );
   }
 
-  get(domain: string, templateName: string): Promise<DomainTemplateItem> {
-    return this.request.get(urljoin(this.baseRoute, domain, '/templates/', templateName))
+  get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem> {
+    return this.request.get(urljoin(this.baseRoute, domain, '/templates/', templateName), query)
       .then(
         (res: GetDomainTemplateAPIResponse) => new DomainTemplateItem(res.body.template)
       );

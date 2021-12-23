@@ -1,5 +1,5 @@
 import Request from './request';
-import { CreateDomainTemplateVersionResult, DomainTemplate, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, IDomainTemplatesClient, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from './interfaces/DomainTemplates';
+import { CreateDomainTemplateVersionResult, DomainTemplate, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, IDomainTemplatesClient, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from './interfaces/DomainTemplates';
 export declare class DomainTemplateItem implements DomainTemplate {
     name: string;
     description: string;
@@ -22,7 +22,7 @@ export default class DomainTemplatesClient implements IDomainTemplatesClient {
     private parseList;
     private parseListTemplateVersions;
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>;
-    get(domain: string, templateName: string): Promise<DomainTemplateItem>;
+    get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem>;
     create(domain: string, data: DomainTemplateData): Promise<DomainTemplateItem>;
     update(domain: string, templateName: string, data: DomainTemplateUpdateData): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroy(domain: string, templateName: string): Promise<UpdateOrDeleteDomainTemplateResult>;
