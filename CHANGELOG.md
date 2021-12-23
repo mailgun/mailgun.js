@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.4](https://github.com/mailgun/mailgun.js/compare/v4.1.3...v4.1.4) (2021-12-23)
+
+
+### Bug Fixes
+
+* Add query parameter for the get method in domain templates client ([5aa5cb1](https://github.com/mailgun/mailgun.js/commits/5aa5cb1d5cbc3e23f9e65f8fbf41350dfd7cd435))
+
 ### [4.1.3](https://github.com/mailgun/mailgun.js/compare/v4.1.2...v4.1.3) (2021-12-23)
 
 ### [4.1.2](https://github.com/mailgun/mailgun.js/compare/v4.1.1...v4.1.2) (2021-12-14)

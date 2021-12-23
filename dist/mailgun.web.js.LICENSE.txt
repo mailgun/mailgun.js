@@ -4,4 +4,4 @@
 
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 
-/*! mailgun.js v4.1.2 */
+/*! mailgun.js v4.1.3 */
