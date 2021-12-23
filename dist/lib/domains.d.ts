@@ -2,7 +2,10 @@ import { DomainsQuery, DomainInfo, DomainShortData, DNSRecord, ConnectionSetting
 import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
 import { DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdatedOpenTracking } from './interfaces/DomainTracking';
+import { IDomainCredentials } from './interfaces/DomainCredentials';
+import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
 import DomainCredentialsClient from './domainsCredentials';
+import DomainTemplatesClient from './domainsTemplates';
 export declare class Domain {
     name: string;
     require_tls: boolean;
@@ -20,8 +23,9 @@ export declare class Domain {
 }
 export default class DomainClient {
     request: Request;
-    domainCredentials: DomainCredentialsClient;
-    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient);
+    domainCredentials: IDomainCredentials;
+    domainTemplates: IDomainTemplatesClient;
+    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient);
     private _parseMessage;
     private _parseDomainList;
     private _parseDomain;
