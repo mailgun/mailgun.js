@@ -37,6 +37,9 @@ export interface DomainTemplatesQuery {
     limit: number;
     p: string;
 }
+export interface TemplateQuery {
+    active: YesNo;
+}
 export interface ShortTemplateVersion {
     tag: string;
     engine: string;
@@ -178,7 +181,7 @@ export interface ListDomainTemplateVersionsResult {
 }
 export interface IDomainTemplatesClient {
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>;
-    get(domain: string, templateName: string): Promise<DomainTemplateItem>;
+    get(domain: string, templateName: string, query: TemplateQuery): Promise<DomainTemplateItem>;
     create(domain: string, data: DomainTemplateData): Promise<DomainTemplateItem>;
     update(domain: string, templateName: string, data: DomainTemplateUpdateData): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroy(domain: string, templateName: string): Promise<UpdateOrDeleteDomainTemplateResult>;
