@@ -136,7 +136,7 @@ Method naming conventions:
 
 #### create
 
-`mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/api-sending.html#sending)
+`mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/en/latest/api-sending.html)
 
 Options:
 
