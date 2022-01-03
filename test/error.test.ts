@@ -29,4 +29,14 @@ describe('APIError', function () {
 
     error.message.should.eql('oops. something went wrong');
   });
+
+  it('is an api error', function () {
+    error = new APIError({
+      body: {
+        error: 'oops. something went wrong'
+      }
+    } as APIErrorOptions);
+
+    error.name.should.eql('APIError');
+  });
 });
