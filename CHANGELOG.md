@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.6](https://github.com/mailgun/mailgun.js/compare/v4.1.5...v4.1.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* Update "mocha" to fix "nanoid" dependency ([4e122cf](https://github.com/mailgun/mailgun.js/commits/4e122cffc6d35967bf70380a9003938949a6f442))
+* Update "typedoc" version to fix "marked" version ([a84a252](https://github.com/mailgun/mailgun.js/commits/a84a25231e877313c2756cefd89da64d98065196))
+
+
+### Other changes
+
+* Recompile documentation ([f068746](https://github.com/mailgun/mailgun.js/commits/f0687462e35c237909fbf133a0c563da4a87f6bd))
+
 ### [4.1.5](https://github.com/mailgun/mailgun.js/compare/v4.1.4...v4.1.5) (2022-01-24)
 
 ### [4.1.4](https://github.com/mailgun/mailgun.js/compare/v4.1.3...v4.1.4) (2021-12-23)
