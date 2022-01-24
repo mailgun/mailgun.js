@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.5](https://github.com/mailgun/mailgun.js/compare/v4.1.4...v4.1.5) (2022-01-24)
+
 ### [4.1.4](https://github.com/mailgun/mailgun.js/compare/v4.1.3...v4.1.4) (2021-12-23)
 
 
