@@ -14,9 +14,9 @@
     // "strict": true,
   },
   "typedocOptions": {
-    "mode": "modules",
     "out": "docs",
-    "includes": "lib",
+    "entryPointStrategy": "expand",
+    "entryPoints": ["./lib"],
     "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**"]
   }
 }
