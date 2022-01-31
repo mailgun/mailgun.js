@@ -83,7 +83,9 @@ class Request {
       params.searchParams = options.query;
       delete params.query;
     }
-
+    console.log('url --------->', urljoin(this.url, url));
+    console.log('method --------->', method);
+    console.log('params --------->', params);
     const response = await ky(
       urljoin(this.url, url),
       {
@@ -111,7 +113,7 @@ class Request {
       body: await response?.json(),
       status: response?.status
     };
-
+    console.log('res ------------->', res);
     return res;
   }
 

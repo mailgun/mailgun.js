@@ -19,6 +19,7 @@ import { InputFormData } from './interfaces/IFormData';
 import DomainCredentialsClient from './domainsCredentials';
 import MultipleValidationClient from './multipleValidation';
 import DomainTemplatesClient from './domainsTemplates';
+import DomainTagsClient from './domainsTags';
 
 export default class Client {
   private request;
@@ -55,9 +56,15 @@ export default class Client {
     const mailListsMembers = new MailListsMembers(this.request);
     const domainCredentialsClient = new DomainCredentialsClient(this.request);
     const domainTemplatesClient = new DomainTemplatesClient(this.request);
+    const domainTagsClient = new DomainTagsClient(this.request);
     const multipleValidationClient = new MultipleValidationClient(this.request);
 
-    this.domains = new DomainClient(this.request, domainCredentialsClient, domainTemplatesClient);
+    this.domains = new DomainClient(
+      this.request,
+      domainCredentialsClient,
+      domainTemplatesClient,
+      domainTagsClient
+    );
     this.webhooks = new WebhookClient(this.request);
     this.events = new EventClient(this.request);
     this.stats = new StatsClient(this.request);
