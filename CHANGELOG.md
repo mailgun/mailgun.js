@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/mailgun/mailgun.js/compare/v4.1.6...v4.2.0) (2022-02-02)
+
+
+### Features
+
+* Add domains tags functionality ([6cc41e3](https://github.com/mailgun/mailgun.js/commits/6cc41e30f20f70d9dc4a4ec247a600e553d706f4))
+
+
+### Other changes
+
+* Add tests for new functionality ([e741689](https://github.com/mailgun/mailgun.js/commits/e741689123de9648c35eee4e31f95bb38b86aa78))
+
 ### [4.1.6](https://github.com/mailgun/mailgun.js/compare/v4.1.5...v4.1.6) (2022-01-24)
 
 
