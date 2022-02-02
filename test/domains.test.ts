@@ -15,6 +15,7 @@ import {
   UpdatedDKIMSelectorResponse, UpdatedWebPrefixResponse
 } from '../lib/interfaces/Domains';
 import DomainTemplatesClient from '../lib/domainsTemplates';
+import DomainTagsClient from '../lib/domainsTags';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -25,7 +26,13 @@ describe('DomainClient', function () {
     const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     const domainCredentialsClient = new DomainCredentialsClient(reqObject);
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
-    client = new DomainClient(reqObject, domainCredentialsClient, domainTemplatesClient);
+    const domainTagsClient = new DomainTagsClient(reqObject);
+    client = new DomainClient(
+      reqObject,
+      domainCredentialsClient,
+      domainTemplatesClient,
+      domainTagsClient
+    );
     api = nock('https://api.mailgun.net');
   });
 

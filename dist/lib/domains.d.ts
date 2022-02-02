@@ -6,6 +6,8 @@ import { IDomainCredentials } from './interfaces/DomainCredentials';
 import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
+import { IDomainTagsClient } from './interfaces/DomainTags';
+import DomainTagsClient from './domainsTags';
 export declare class Domain {
     name: string;
     require_tls: boolean;
@@ -25,7 +27,8 @@ export default class DomainClient {
     request: Request;
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;
-    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient);
+    domainTags: IDomainTagsClient;
+    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient, domainTagsClient: DomainTagsClient);
     private _parseMessage;
     private _parseDomainList;
     private _parseDomain;

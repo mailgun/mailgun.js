@@ -41,6 +41,8 @@ import { IDomainCredentials } from './interfaces/DomainCredentials';
 import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
+import { IDomainTagsClient } from './interfaces/DomainTags';
+import DomainTagsClient from './domainsTags';
 
 export class Domain {
   name: string;
@@ -76,16 +78,19 @@ export class Domain {
 export default class DomainClient {
   request: Request;
   public domainCredentials: IDomainCredentials;
-  public domainTemplates: IDomainTemplatesClient
+  public domainTemplates: IDomainTemplatesClient;
+  public domainTags: IDomainTagsClient;
 
   constructor(
     request: Request,
     domainCredentialsClient: DomainCredentialsClient,
-    domainTemplatesClient: DomainTemplatesClient
+    domainTemplatesClient: DomainTemplatesClient,
+    domainTagsClient: DomainTagsClient
   ) {
     this.request = request;
     this.domainCredentials = domainCredentialsClient;
     this.domainTemplates = domainTemplatesClient;
+    this.domainTags = domainTagsClient;
   }
 
   private _parseMessage(response: DestroyedDomainResponse) : MessageResponse {
