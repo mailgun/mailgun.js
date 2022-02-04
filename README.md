@@ -43,16 +43,6 @@ const mailgun = new Mailgun(formData);
 const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 
-To use `validate` and `parse` methods, you must additionally include `public_key`. If you're using only those methods, `key` can be an empty string.
-
-```js
-const mg = mailgun.client({
-  username: 'api',
-  key: process.env.MAILGUN_API_KEY || '',
-  public_key: process.env.MAILGUN_PUBLIC_KEY || 'pubkey-yourkeyhere'
-});
-```
-
 In the case your mailgun account is eu hosted you would need to define eu's subdomain as `url` in mailgun's Client constructor:
 
 ```js
@@ -102,12 +92,15 @@ The following service methods are available to instantiated clients. The example
       - [destroy](#destroy-2)
     - [validate](#validate)
       - [get](#get-5)
-    - [parse](#parse)
-      - [get](#get-6)
-    - [lists](#lists)
-      - [list](#list-4)
-      - [get](#get-7)
+    - [Multiple Validation](#multiple-validation)
       - [create](#create-5)
+      - [list](#list-4)
+      - [get](#get-5)
+      - [destroy](#destroy-3)
+    - [lists](#lists)
+      - [list](#list-5)
+      - [get](#get-6)
+      - [create](#create-6)
       - [update](#update-2)
       - [destroy](#destroy-3)
     - [mailListMembers](#maillistmembers)
@@ -1334,7 +1327,7 @@ Promise Returns: response body
 Example:
 
 ```js
-mg.validate.get('alice@example.com')
+mg.validate.get('foo@mailgun.net')
   .then(data => console.log(data)) // logs response body
   .catch(err => console.log(err)); // logs any error
 ```
@@ -1350,29 +1343,137 @@ Promise Returns: response body
 }
 ```
 
-### parse
-
-#### get
-
-`mg.parse.get(addresses, enableDnsEspChecks)`
-
-Example:
+### Multiple Validation
+https://documentation.mailgun.com/en/latest/api-email-validation.html#email-validation
+#### create
+`mg.validate.multipleValidation.create('name_of_the_list', { file })`
 
 ```js
-mg.parse.get('Alice <alice@example.com>, example.com', true)
+const fsPromises = require('fs').promises;
+const filepath = path.resolve(__dirname, '../path_to_your_file_with_emails_list.csv');
+
+...
+
+(async () => {
+  try {
+    const file = {
+      filename: 'test.csv',
+      data: await fsPromises.readFile(filepath)
+    };
+
+    const validateBulkResult = await mg.validate.multipleValidation.create('name_of_the_list', { file });
+    console.log('validateBulkResult', validateBulkResult);
+  } catch (error) {
+    console.error(error);
+  }
+})();
+```
+
+Response shape:
+```JSON
+ {
+  "id": "name_of_the_list",
+  "message": "The validation job was submitted."
+}
+```
+
+#### list
+
+`mg.validate.multipleValidation.list()`
+
+```js
+mg.validate.multipleValidation.list()
   .then(data => console.log(data)) // logs response body
   .catch(err => console.log(err)); // logs any error
 ```
 
-Promise Returns: response body
-
-```
+Response shape:
+```JSON
 {
-  parsed: [],
-  unparseable: [
-    'Alice <alice@example.com>',
-    'example.com'
-  ]
+  "jobs": [
+    {
+      "created_at": 1643965937,
+      "download_url": {
+        "csv": "csv-url",
+        "json": "json-url"
+      },
+      "id": "name_of_the_list",
+      "quantity": 40,
+      "records_processed": 40,
+      "status": "uploaded",
+      "summary": {
+        "result": {
+          "catch_all": 0,
+          "deliverable": 0,
+          "do_not_send": 0,
+          "undeliverable": 0,
+          "unknown": 40
+        },
+        "risk": { "high": 0, "low": 0, "medium": 0, "unknown": 40 }
+      }
+    }
+  ],
+  "paging": {
+    "first": "https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=first&pivot=",
+    "last": "https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=last&pivot=",
+    "next": "https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=next&pivot=b4808b5b-1111-2222-3333-6cd0b63f41ea",
+    "prev": "https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=prev&pivot="
+  },
+  "total": 1
+}
+```
+
+#### get
+
+`mg.validate.multipleValidation.get('name_of_the_list')`
+
+```js
+mg.validate.multipleValidation.get('name_of_the_list')
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Response shape:
+```JSON
+{
+  "created_at": 1643965937,
+  "download_url": {
+    "csv": "csv-url",
+    "json": "json-url"
+  },
+  "id": "name_of_the_list",
+  "quantity": 40,
+  "records_processed": 40,
+  "status": "uploaded",
+  "summary": {
+    "result": {
+      "catch_all": 0,
+      "deliverable": 0,
+      "do_not_send": 0,
+      "undeliverable": 0,
+      "unknown": 40
+    },
+    "risk": { "high": 0, "low": 0, "medium": 0, "unknown": 40 }
+  }
+}
+```
+
+#### destroy
+
+`mg.validate.multipleValidation.destroy('name_of_the_list');`
+
+cancels bulk validation job
+```js
+mg.validate.multipleValidation.destroy('name_of_the_list');
+  .then(data => console.log(data)) // logs response body
+  .catch(err => console.log(err)); // logs any error
+```
+
+Response shape:
+```JSON
+{
+  "body": "Validation job canceled.",
+  "status": 200
 }
 ```
 
