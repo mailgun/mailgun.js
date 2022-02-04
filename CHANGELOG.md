@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.1](https://github.com/mailgun/mailgun.js/compare/v4.2.0...v4.2.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* Remove redundant logs ([27142a0](https://github.com/mailgun/mailgun.js/commits/27142a0f0af6bbb18463a46c50f36dce66f85ad5))
+
+
+### Other changes
+
+* Update readme ([ea795e6](https://github.com/mailgun/mailgun.js/commits/ea795e62eea82d575907691a570f867b863c0fb9))
+
 ## [4.2.0](https://github.com/mailgun/mailgun.js/compare/v4.1.6...v4.2.0) (2022-02-02)
 
 
