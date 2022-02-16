@@ -111,7 +111,7 @@ class Request {
       body: await response?.json(),
       status: response?.status
     };
-    console.log('res ------------->', res);
+
     return res;
   }
 
