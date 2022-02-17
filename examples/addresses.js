@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const mailgun = require('../index');
+const mailgun = require('../lib/index');
 
 const mg = mailgun.client({
   username: 'api',

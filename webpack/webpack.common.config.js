@@ -9,8 +9,8 @@ const commonConfig = {
   mode: 'development',
   context: SRC_DIR,
   entry: {
-    mailgun: path.join(SRC_DIR, 'index.ts'),
-    'mailgun.min': path.join(SRC_DIR, 'index.ts')
+    mailgun: path.join(SRC_DIR, 'lib/index.ts'),
+    'mailgun.min': path.join(SRC_DIR, 'lib/index.ts')
   },
   output: {
     path: path.join(SRC_DIR, outputDir),

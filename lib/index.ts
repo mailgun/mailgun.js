@@ -1,6 +1,6 @@
-import Client from './lib/client';
-import { InputFormData } from './lib/interfaces/IFormData';
-import Options from './lib/interfaces/Options';
+import Client from './client';
+import { InputFormData } from './interfaces/IFormData';
+import Options from './interfaces/Options';
 
 class Mailgun {
   private formData: InputFormData
