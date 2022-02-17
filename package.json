@@ -3,7 +3,7 @@
   "version": "4.2.3",
   "main": "dist/mailgun.node.js",
   "browser": "dist/mailgun.web.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/mailgun.js.d.ts",
   "author": "Mailgun",
   "license": "MIT",
   "keywords": [
@@ -19,15 +19,19 @@
   },
   "homepage": "https://github.com/mailgun/mailgun.js#readme",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color",
-    "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color",
+    "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build-dts",
+    "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build-dts",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "release": "standard-version -a",
     "test": "multi='dot=- xunit=./results.xml' nyc mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test-watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "lint": "eslint . && eslint . --ext .ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build-dts": "node dts-bundle && rm -rf dist/lib"
+  },
+  "typescript": {
+    "definition": "dist/mailgun.js.d.ts"
   },
   "dependencies": {
     "base-64": "^1.0.0",
@@ -52,6 +56,7 @@
     "@typescript-eslint/parser": "^4.26.0",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
+    "dts-bundle": "^0.7.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-webpack": "^0.13.1",
@@ -106,7 +111,7 @@
     "commitUrlFormat": "https://github.com/mailgun/mailgun.js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
-      "prerelease": "npm test && webpack --config ./webpack/webpack.release.config.js --progress --color && git add -A dist",
+      "prerelease": "npm test && npm build:release && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
   }
