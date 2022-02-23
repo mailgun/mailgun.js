@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "4.2.3",
+  "version": "5.0.0",
   "main": "dist/mailgun.node.js",
   "browser": "dist/mailgun.web.js",
   "types": "dist/mailgun.js.d.ts",
@@ -111,7 +111,7 @@
     "commitUrlFormat": "https://github.com/mailgun/mailgun.js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
-      "prerelease": "npm test && npm build:release && git add -A dist",
+      "prerelease": "npm test && npm run build:release && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
   }

@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/mailgun/mailgun.js/compare/v4.2.2...v5.0.0) (2022-02-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Concatenation of d.ts files into one. Change import path for types
+
+### Bug Fixes
+
+* Remove redundant log ([49e9e40](https://github.com/mailgun/mailgun.js/commits/49e9e409078a9e520745fb054bcbd89c74b272c5))
+* Remove redundant log ([b088f8e](https://github.com/mailgun/mailgun.js/commits/b088f8e7db2f0e4fa086cfbb6143c795abfb6d05))
+
+
+### Other changes
+
+* Move index.ts file to lib folder ([2592c68](https://github.com/mailgun/mailgun.js/commits/2592c68e8368505b56c29dcf0ff13b338205a045))
+
+
+### Breaking changes
+
+* Concatenation of d.ts files into one. Change import path for types ([d27db87](https://github.com/mailgun/mailgun.js/commits/d27db87e4f1c08caa68b9719eb17329d94a2a717))
+
 ### [4.2.3](https://github.com/mailgun/mailgun.js/compare/v4.2.2...v4.2.3) (2022-02-23)
 
 
