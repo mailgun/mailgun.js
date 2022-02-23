@@ -27,8 +27,8 @@ export default class StatsClient {
     this.request = request;
   }
 
-  private prepareSearchParams(query: StatsQuery): Array<Array<string>> {
-    let searchParams = [];
+  private prepareSearchParams(query: StatsQuery | undefined): Array<Array<string>> {
+    let searchParams = [] as Array<Array<string>>;
     if (typeof query === 'object' && Object.keys(query).length) {
       searchParams = Object.entries(query).reduce((arrayWithPairs, currentPair) => {
         const [key, value] = currentPair;
@@ -38,7 +38,7 @@ export default class StatsClient {
         }
         arrayWithPairs.push([key, value]);
         return arrayWithPairs;
-      }, []);
+      }, [] as Array<Array<string>>);
     }
 
     return searchParams;

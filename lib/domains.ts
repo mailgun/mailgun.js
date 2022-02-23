@@ -208,7 +208,7 @@ export default class DomainClient {
 
   updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority> {
     return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, { query: `self=${data.self}` })
-      .then((res : APIResponse) => res)
+      .then((res : APIResponse) => res as UpdatedDKIMAuthorityResponse)
       .then((res : UpdatedDKIMAuthorityResponse) => res.body as UpdatedDKIMAuthority);
   }
 
