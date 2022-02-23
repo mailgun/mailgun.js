@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/mailgun/mailgun.js/compare/v5.0.0...v5.0.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* Resolve ts strict mode issues ([473f6a2](https://github.com/mailgun/mailgun.js/commits/473f6a2909bfa72e9d779d1233485767eac6f323))
+
 ## [5.0.0](https://github.com/mailgun/mailgun.js/compare/v4.2.2...v5.0.0) (2022-02-23)
 
 
