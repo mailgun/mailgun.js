@@ -13,7 +13,7 @@ export default class EventClient {
   }
 
   _parsePageNumber(url: string) : string {
-    return url.split('/').pop();
+    return url.split('/').pop() || '';
   }
 
   _parsePage(id: string, url: string) : EventsPage {
@@ -23,9 +23,9 @@ export default class EventClient {
   _parsePageLinks(response: EventsResponse) : ParsedPagesList {
     const pages = Object.entries(response.body.paging as PagesList);
     return pages.reduce(
-      (acc: PagesListAccumulator, entrie: [url: string, id: string]) => {
-        const id = entrie[0];
-        const url = entrie[1];
+      (acc: PagesListAccumulator, pair: [url: string, id: string]) => {
+        const id = pair[0];
+        const url = pair[1];
         acc[id] = this._parsePage(id, url);
         return acc;
       }, {}

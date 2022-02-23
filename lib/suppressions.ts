@@ -6,6 +6,16 @@ import Request from './request';
 import {
   BounceData,
   ComplaintData,
+  IBounce,
+  IComplaint,
+  IUnsubscribe,
+  IWhiteList,
+  PagesList,
+  PagesListAccumulator,
+  ParsedPage,
+  ParsedPagesList,
+  SuppressionList,
+  SuppressionModels,
   UnsubscribeData,
   WhiteListData
 } from './interfaces/Supressions';
@@ -14,7 +24,7 @@ const createOptions = {
   headers: { 'Content-Type': 'application/json' }
 };
 
-class Bounce {
+class Bounce implements IBounce {
   type: string;
   address: string;
   code: number;
@@ -30,7 +40,7 @@ class Bounce {
   }
 }
 
-class Complaint {
+class Complaint implements IComplaint {
   type: string;
   address: any;
   created_at: Date;
@@ -42,7 +52,7 @@ class Complaint {
   }
 }
 
-class Unsubscribe {
+class Unsubscribe implements IUnsubscribe {
   type: string;
   address: string;
   tags: any;
@@ -56,7 +66,7 @@ class Unsubscribe {
   }
 }
 
-class WhiteList {
+class WhiteList implements IWhiteList {
   type: string;
   value: string;
   reason: string;
@@ -91,30 +101,34 @@ export default class SuppressionClient {
     };
   }
 
-  _parsePage(id: string, pageUrl: string) {
+  _parsePage(id: string, pageUrl: string) : ParsedPage {
     const parsedUrl = url.parse(pageUrl, true);
     const { query } = parsedUrl;
 
     return {
       id,
-      page: query.page,
-      address: query.address,
+      page: query.page as string,
+      address: query.address as string,
       url: pageUrl
     };
   }
 
-  _parsePageLinks(response: { body: { paging: any } }) {
-    const pages = Object.entries(response.body.paging);
+  _parsePageLinks(response: { body: { paging: any } }): ParsedPagesList {
+    const pages = Object.entries(response.body.paging as PagesList);
     return pages.reduce(
-      (acc: any, [id, pageUrl]: [pageUrl: string, id: string]) => {
+      (acc: PagesListAccumulator, pair: [pageUrl: string, id: string]) => {
+        const id = pair[0];
+        const pageUrl = pair[1];
         acc[id] = this._parsePage(id, pageUrl);
         return acc;
       }, {}
-    );
+    ) as unknown as ParsedPagesList;
   }
 
-  _parseList(response: { body: { items: any, paging: any } }, Model: TModel) {
-    const data = {} as any;
+  _parseList(
+    response: { body: { items: any, paging: any } }, Model: TModel
+  ): SuppressionList {
+    const data = {} as SuppressionList;
 
     data.items = response.body.items.map((d: any) => new Model(d));
 
@@ -123,7 +137,10 @@ export default class SuppressionClient {
     return data;
   }
 
-  _parseItem(response: { body: any }, Model: TModel) {
+  _parseItem(
+    response: { body: any },
+    Model: TModel
+  ): IBounce | IComplaint | IUnsubscribe | IWhiteList {
     return new Model(response.body);
   }
 
@@ -133,16 +150,20 @@ export default class SuppressionClient {
       .then((response: { body: any }) => response.body);
   }
 
-  list(domain: string, type: string, query: any) {
-    const model = (this.models as any)[type];
+  list(domain: string, type: SuppressionModels, query: any) : Promise<SuppressionList> {
+    const model = (this.models)[type];
 
     return this.request
       .get(urljoin('v3', domain, type), query)
       .then((response: { body: { items: any, paging: any } }) => this._parseList(response, model));
   }
 
-  get(domain: string, type: string, address: string) {
-    const model = (this.models as any)[type];
+  get(
+    domain: string,
+    type: SuppressionModels,
+    address: string
+  ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
+    const model = (this.models)[type];
 
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))

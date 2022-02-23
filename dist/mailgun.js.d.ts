@@ -155,8 +155,8 @@ declare module 'mailgun.js/stats' {
 
 declare module 'mailgun.js/suppressions' {
     import Request from 'mailgun.js/request';
-    import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from 'mailgun.js/interfaces/Supressions';
-    class Bounce {
+    import { BounceData, ComplaintData, IBounce, IComplaint, IUnsubscribe, IWhiteList, ParsedPage, ParsedPagesList, SuppressionList, SuppressionModels, UnsubscribeData, WhiteListData } from 'mailgun.js/interfaces/Supressions';
+    class Bounce implements IBounce {
         type: string;
         address: string;
         code: number;
@@ -164,20 +164,20 @@ declare module 'mailgun.js/suppressions' {
         created_at: Date;
         constructor(data: BounceData);
     }
-    class Complaint {
+    class Complaint implements IComplaint {
         type: string;
         address: any;
         created_at: Date;
         constructor(data: ComplaintData);
     }
-    class Unsubscribe {
+    class Unsubscribe implements IUnsubscribe {
         type: string;
         address: string;
         tags: any;
         created_at: Date;
         constructor(data: UnsubscribeData);
     }
-    class WhiteList {
+    class WhiteList implements IWhiteList {
         type: string;
         value: string;
         reason: string;
@@ -194,28 +194,23 @@ declare module 'mailgun.js/suppressions' {
             whitelists: typeof WhiteList;
         };
         constructor(request: Request);
-        _parsePage(id: string, pageUrl: string): {
-            id: string;
-            page: string | string[];
-            address: string | string[];
-            url: string;
-        };
+        _parsePage(id: string, pageUrl: string): ParsedPage;
         _parsePageLinks(response: {
             body: {
                 paging: any;
             };
-        }): any;
+        }): ParsedPagesList;
         _parseList(response: {
             body: {
                 items: any;
                 paging: any;
             };
-        }, Model: TModel): any;
+        }, Model: TModel): SuppressionList;
         _parseItem(response: {
             body: any;
-        }, Model: TModel): Bounce | Complaint | Unsubscribe | WhiteList;
-        list(domain: string, type: string, query: any): any;
-        get(domain: string, type: string, address: string): any;
+        }, Model: TModel): IBounce | IComplaint | IUnsubscribe | IWhiteList;
+        list(domain: string, type: SuppressionModels, query: any): Promise<SuppressionList>;
+        get(domain: string, type: SuppressionModels, address: string): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList>;
         create(domain: string, type: string, data: any): any;
         destroy(domain: string, type: string, address: string): any;
     }
@@ -223,12 +218,12 @@ declare module 'mailgun.js/suppressions' {
 }
 
 declare module 'mailgun.js/webhooks' {
-    import { ValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from 'mailgun.js/interfaces/Webhooks';
+    import { ValidationResponse, WebhookList, WebhookResponse, WebhooksIds, WebhooksQuery } from 'mailgun.js/interfaces/Webhooks';
     import Request from 'mailgun.js/request';
     class Webhook {
         id: string;
-        url: string;
-        constructor(id: string, url: string);
+        url: string | undefined;
+        constructor(id: string, url: string | undefined);
     }
     export default class WebhookClient {
         request: Request;
@@ -249,7 +244,7 @@ declare module 'mailgun.js/webhooks' {
             message: string;
         };
         list(domain: string, query: WebhooksQuery): Promise<WebhookList>;
-        get(domain: string, id: string): Promise<Webhook>;
+        get(domain: string, id: WebhooksIds): Promise<Webhook>;
         create(domain: string, id: string, url: string, test?: boolean): Promise<Webhook | ValidationResponse>;
         update(domain: string, id: string, url: string): Promise<Webhook>;
         destroy(domain: string, id: string): Promise<Webhook>;
@@ -1253,6 +1248,61 @@ declare module 'mailgun.js/interfaces/Supressions' {
         reason: string;
         createdAt: string | Date;
     }
+    export interface IBounce {
+        type: string;
+        address: string;
+        code: number;
+        error: string;
+        created_at: Date;
+    }
+    export interface IComplaint {
+        type: string;
+        address: any;
+        created_at: Date;
+    }
+    export interface IUnsubscribe {
+        type: string;
+        address: string;
+        tags: any;
+        created_at: Date;
+    }
+    export interface IWhiteList {
+        type: string;
+        value: string;
+        reason: string;
+        createdAt: Date;
+    }
+    export interface ParsedPage {
+        id: string;
+        page: string | undefined;
+        address: string | undefined;
+        url: string;
+    }
+    export interface ParsedPagesList {
+        previous: ParsedPage;
+        first: ParsedPage;
+        last: ParsedPage;
+        next: ParsedPage;
+    }
+    export interface SuppressionList {
+        items: IBounce[] | IComplaint[] | IUnsubscribe[] | IWhiteList[];
+        pages: ParsedPagesList;
+    }
+    export interface PagesList {
+        previous: string;
+        first: string;
+        last: string;
+        next: string;
+    }
+    export enum SuppressionModels {
+        BOUNCES = "bounces",
+        COMPLAINTS = "complaints",
+        UNSUBSCRIBES = "unsubscribes",
+        WHITELISTS = "whitelists"
+    }
+    export interface PagesListAccumulator {
+        [index: string]: ParsedPage;
+    }
 }
 
 declare module 'mailgun.js/interfaces/Webhooks' {
@@ -1280,6 +1330,15 @@ declare module 'mailgun.js/interfaces/Webhooks' {
     export interface ValidationResponse {
         code: number;
         message: string;
+    }
+    export enum WebhooksIds {
+        CLICKED = "clicked",
+        COMPLAINED = "complained",
+        DELIVERED = "delivered",
+        OPENED = "opened",
+        PERMANENT_FAIL = "permanent_fail",
+        TEMPORARY_FAIL = "temporary_fail",
+        UNSUBSCRIBED = "unsubscribe"
     }
 }
 
