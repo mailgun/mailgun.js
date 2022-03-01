@@ -1217,12 +1217,13 @@ declare module 'mailgun.js/interfaces/StatsOptions' {
         resolution: string;
         stats: Stat[];
     }
+    export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'rejected' | 'complained' | 'failed-temporary' | 'failed-permanent';
     export interface StatsQuery {
-        event: string | string[];
-        start: string | Date;
-        end: string | Date;
-        resolution: 'hour' | 'day' | 'month';
-        duration: string;
+        event: StatsEvent | StatsEvent[];
+        start?: string | Date;
+        end?: string | Date;
+        resolution?: 'hour' | 'day' | 'month';
+        duration?: string;
     }
 }
 
