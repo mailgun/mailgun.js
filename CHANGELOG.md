@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.2](https://github.com/mailgun/mailgun.js/compare/v5.0.1...v5.0.2) (2022-03-14)
+
+
+### Bug Fixes
+
+* Make `StatsQuery` interface properties optional, add `StatsEvent` type ([91a2d6a](https://github.com/mailgun/mailgun.js/commits/91a2d6ae22f2c9cb86ee64ccab636d23926bb6d1))
+
 ### [5.0.1](https://github.com/mailgun/mailgun.js/compare/v5.0.0...v5.0.1) (2022-02-23)
 
 
