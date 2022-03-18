@@ -19,7 +19,7 @@
         }
       }
   },
-  "ignorePatterns": ["docs/assets/js/*", "dist/**"],
+  "ignorePatterns": ["docs/assets/js/*", "dist/**", "docs/**"],
   "rules": {
     "tsdoc/syntax": "warn",
     "comma-dangle": 0,

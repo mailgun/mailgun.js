@@ -6,6 +6,7 @@ import Request from '../lib/request';
 import SuppressionClient from '../lib/suppressions';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
+import { WhiteListData } from '../lib/interfaces/Supressions';
 
 chai.should();
 
@@ -123,6 +124,38 @@ describe('SuppressionsClient', function () {
         });
     });
 
+    it('fetches WhiteLists', function () {
+      response.items = [{
+        type: 'whitelists',
+        value: 'brad@example.com',
+        reason: 'first reason',
+        createdAt: '2021-11-30T10:38:56.000Z'
+      }, {
+        type: 'whitelists',
+        value: 'roman@example.com',
+        reason: 'second reason',
+        createdAt: '2021-11-30T10:38:56.000Z'
+      }];
+
+      api.get('/v3/domain.com/whitelists').reply(200, response);
+
+      return client.list('domain.com', 'whitelists')
+        .then(function (complaints: { items: WhiteListData[] }) {
+          let c;
+          c = complaints.items[0];
+          c.type.should.eql('whitelists');
+          c.value.should.eql('brad@example.com');
+          c.reason.should.eql('first reason');
+          c.createdAt.should.eql(new Date('2021-11-30T10:38:56.000Z'));
+
+          c = complaints.items[1];
+          c.type.should.eql('whitelists');
+          c.value.should.eql('roman@example.com');
+          c.reason.should.eql('second reason');
+          c.createdAt.should.eql(new Date('2021-11-30T10:38:56.000Z'));
+        });
+    });
+
     it('parses page links', function () {
       api.get('/v3/domain.com/bounces').reply(200, response);
 
@@ -186,20 +219,71 @@ describe('SuppressionsClient', function () {
         });
     });
   });
-
   describe('create', function () {
-    it('creates suppression', function () {
-      api.post('/v3/domain.com/bounces').reply(200, {
-        message: 'Bounced address has been inserted',
-        address: 'myaddress'
-      });
+    describe('create bounce', function () {
+      it('creates suppression', function () {
+        api.post('/v3/domain.com/bounces').reply(200, {
+          message: '1 addresses have been added to the bounces table'
+        });
 
-      return client.create('domain.com', 'bounces', {
-        address: 'myaddress',
-        code: 550
-      }).then(function (data: { address: string }) {
-        data.address.should.eql('myaddress');
+        return client.create('domain.com', 'bounces', {
+          address: 'myaddress',
+          code: 550
+        }).then(function (data: { message: string }) {
+          data.message.should.eql('1 addresses have been added to the bounces table');
+        });
       });
+    });
+
+    describe('create multiple bounces', function () {
+      it('creates bounces', async function () {
+        const message = '2 addresses have been added to the bounces table';
+        api.post('/v3/domain.com/bounces').reply(200, {
+          message
+        });
+        return client.create('domain.com', 'bounces',
+          [{ address: 'myaddress' }, { address: 'myaddress1' }])
+          .then(function (data: { message: string }) {
+            data.message.should.eql(message);
+          });
+      });
+    });
+    describe('create whitelists', function () {
+      it('creates whitelist', async function () {
+        const message = '1 addresses have been added to the whitelists table';
+        api.post('/v3/domain.com/whitelists').reply(200, {
+          message
+        });
+        return client.create('domain.com', 'whitelists',
+          { address: 'myaddress' })
+          .then(function (data: { message: string }) {
+            data.message.should.eql(message);
+          });
+      });
+    });
+
+    describe('create multiple whitelists', function () {
+      it('throws in case multiple whitelists provided', async function () {
+        try {
+          await client.create('domain.com', 'whitelists',
+            [{ address: 'myaddress' }, { address: 'myaddress1' }]);
+        } catch (error: any) {
+          error.message.should.eql('Data property should be an object');
+          error.details.should.eql("Whitelist's creation process does not support multiple creations. Data property should be an object");
+          error.status.should.eql(400);
+        }
+      });
+    });
+
+    it('throws in case type is unknown', async function () {
+      try {
+        await client.create('domain.com', 'wrong type',
+          { address: 'myaddress' });
+      } catch (error: any) {
+        error.message.should.eql('Unknown type value');
+        error.details.should.eql('Type may be only one of [bounces, complaints, unsubscribes, whitelists]');
+        error.status.should.eql(400);
+      }
     });
   });
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const fs = require('fs');
-const mailgun = require('../index');
+const mailgun = require('../lib/index');
 
 const mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || '', timeout: 60000 });
 
