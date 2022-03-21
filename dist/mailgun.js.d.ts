@@ -6,11 +6,11 @@ declare module 'mailgun.js' {
     import Client from 'mailgun.js/client';
     import { InputFormData } from 'mailgun.js/interfaces/IFormData';
     import Options from 'mailgun.js/interfaces/Options';
-    class Mailgun {
+    export default class Mailgun {
+        static get default(): typeof Mailgun;
         constructor(FormData: InputFormData);
         client(options: Options): Client;
     }
-    export = Mailgun;
 }
 
 declare module 'mailgun.js/client' {
@@ -44,7 +44,7 @@ declare module 'mailgun.js/client' {
 }
 
 declare module 'mailgun.js/interfaces/IFormData' {
-    import NodeFormData from 'form-data';
+    import * as NodeFormData from 'form-data';
     export interface IFormDataOptions {
         [key: string]: any;
     }
@@ -196,10 +196,10 @@ declare module 'mailgun.js/suppressions' {
         _parseItem<T extends Suppression>(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData, Model: {
             new (data: BounceData | ComplaintData | UnsubscribeData | WhiteListData): T;
         }): T;
-        list(domain: string, type: SuppressionModels, query: SuppressionListQuery): Promise<SuppressionList>;
-        get(domain: string, type: SuppressionModels, address: string): Promise<Bounce | Complaint | Unsubscribe | WhiteList>;
-        create(domain: string, type: SuppressionModels, data: SuppressionCreationData | SuppressionCreationData[]): Promise<SuppressionCreationResult>;
-        destroy(domain: string, type: SuppressionModels, address: string): Promise<SuppressionDestroyResult>;
+        list(domain: string, type: string, query?: SuppressionListQuery): Promise<SuppressionList>;
+        get(domain: string, type: string, address: string): Promise<Bounce | Complaint | Unsubscribe | WhiteList>;
+        create(domain: string, type: string, data: SuppressionCreationData | SuppressionCreationData[]): Promise<SuppressionCreationResult>;
+        destroy(domain: string, type: string, address: string): Promise<SuppressionDestroyResult>;
     }
 }
 
@@ -460,7 +460,7 @@ declare module 'mailgun.js/interfaces/ApiResponse' {
 }
 
 declare module 'mailgun.js/request' {
-    import NodeFormData from 'form-data';
+    import * as NodeFormData from 'form-data';
     import RequestOptions from 'mailgun.js/interfaces/RequestOptions';
     import { InputFormData } from 'mailgun.js/interfaces/IFormData';
     import APIResponse from 'mailgun.js/interfaces/ApiResponse';

@@ -2,7 +2,8 @@ import Client from './client';
 import { InputFormData } from './interfaces/IFormData';
 import Options from './interfaces/Options';
 
-class Mailgun {
+export default class Mailgun {
+  static get default(): typeof Mailgun { return this; }
   private formData: InputFormData
 
   constructor(FormData: InputFormData) {
@@ -13,5 +14,3 @@ class Mailgun {
     return new Client(options, this.formData);
   }
 }
-
-export = Mailgun;

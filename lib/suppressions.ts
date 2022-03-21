@@ -165,7 +165,7 @@ export default class SuppressionClient {
       .then(this.prepareResponse);
   }
 
-  private checkType(type: SuppressionModels) {
+  private checkType(type: string) {
     if (!this.models.has(type)) {
       throw new APIError({
         status: 400,
@@ -186,8 +186,8 @@ export default class SuppressionClient {
 
   list(
     domain: string,
-    type: SuppressionModels,
-    query: SuppressionListQuery
+    type: string,
+    query?: SuppressionListQuery
   ): Promise<SuppressionList> {
     this.checkType(type);
 
@@ -199,7 +199,7 @@ export default class SuppressionClient {
 
   get(
     domain: string,
-    type: SuppressionModels,
+    type: string,
     address: string
   ): Promise<Bounce | Complaint | Unsubscribe | WhiteList> {
     this.checkType(type);
@@ -212,7 +212,7 @@ export default class SuppressionClient {
 
   create(
     domain: string,
-    type: SuppressionModels,
+    type: string,
     data: SuppressionCreationData | SuppressionCreationData[]
   ): Promise<SuppressionCreationResult> {
     this.checkType(type);
@@ -235,7 +235,7 @@ export default class SuppressionClient {
 
   destroy(
     domain: string,
-    type: SuppressionModels,
+    type: string,
     address: string
   ): Promise<SuppressionDestroyResult> {
     this.checkType(type);

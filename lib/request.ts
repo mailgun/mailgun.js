@@ -1,5 +1,5 @@
-import NodeFormData from 'form-data';
-import base64 from 'base-64';
+import * as NodeFormData from 'form-data';
+import * as base64 from 'base-64';
 import urljoin from 'url-join';
 import ky from 'ky-universal';
 import APIError from './error';

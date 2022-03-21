@@ -16,7 +16,6 @@ const commonConfig = {
     path: path.join(SRC_DIR, outputDir),
     filename: 'mailgun.js',
     library: 'mailgun',
-    libraryTarget: 'umd',
     globalObject: 'this',
   },
   module: {
