@@ -1,4 +1,4 @@
-import NodeFormData from 'form-data';
+import * as NodeFormData from 'form-data';
 
 export interface IFormDataOptions {
   [key: string]: any;

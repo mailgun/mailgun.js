@@ -1,38 +1,47 @@
 /* eslint-disable camelcase */
-import url from 'url';
 import urljoin from 'url-join';
 
 import Request from './request';
 import {
   BounceData,
   ComplaintData,
-  IBounce,
-  IComplaint,
-  IUnsubscribe,
-  IWhiteList,
   PagesList,
   PagesListAccumulator,
   ParsedPage,
   ParsedPagesList,
+  SuppressionCreationData,
+  SuppressionCreationResponse,
+  SuppressionCreationResult,
+  SuppressionDestroyResponse,
+  SuppressionDestroyResult,
   SuppressionList,
+  SuppressionListQuery,
+  SuppressionListResponse,
   SuppressionModels,
+  SuppressionResponse,
   UnsubscribeData,
-  WhiteListData
+  WhiteListData,
 } from './interfaces/Supressions';
+import APIError from './error';
+import APIErrorOptions from './interfaces/APIErrorOptions';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
 };
-
-class Bounce implements IBounce {
+export class Suppression {
   type: string;
+  constructor(type: SuppressionModels) {
+    this.type = type;
+  }
+}
+export class Bounce extends Suppression {
   address: string;
   code: number;
   error: string;
   created_at: Date;
 
   constructor(data: BounceData) {
-    this.type = 'bounces';
+    super(SuppressionModels.BOUNCES);
     this.address = data.address;
     this.code = +data.code;
     this.error = data.error;
@@ -40,80 +49,68 @@ class Bounce implements IBounce {
   }
 }
 
-class Complaint implements IComplaint {
-  type: string;
-  address: any;
+export class Complaint extends Suppression {
+  address: string | undefined;
   created_at: Date;
 
   constructor(data: ComplaintData) {
-    this.type = 'complaints';
+    super(SuppressionModels.COMPLAINTS);
     this.address = data.address;
     this.created_at = new Date(data.created_at);
   }
 }
 
-class Unsubscribe implements IUnsubscribe {
-  type: string;
+export class Unsubscribe extends Suppression {
   address: string;
-  tags: any;
+  tags: string[];
   created_at: Date;
 
   constructor(data: UnsubscribeData) {
-    this.type = 'unsubscribes';
+    super(SuppressionModels.UNSUBSCRIBES);
     this.address = data.address;
     this.tags = data.tags;
     this.created_at = new Date(data.created_at);
   }
 }
 
-class WhiteList implements IWhiteList {
-  type: string;
+export class WhiteList extends Suppression {
   value: string;
   reason: string;
   createdAt: Date;
 
   constructor(data: WhiteListData) {
-    this.type = 'whitelists';
+    super(SuppressionModels.WHITELISTS);
     this.value = data.value;
     this.reason = data.reason;
     this.createdAt = new Date(data.createdAt);
   }
 }
 
-type TModel = typeof Bounce | typeof Complaint | typeof Unsubscribe | typeof WhiteList;
-
 export default class SuppressionClient {
-  request: any;
-  models: {
-    bounces: typeof Bounce;
-    complaints: typeof Complaint;
-    unsubscribes: typeof Unsubscribe;
-    whitelists: typeof WhiteList;
-  };
+  request: Request;
+  models: Map<string, any>;
 
   constructor(request: Request) {
     this.request = request;
-    this.models = {
-      bounces: Bounce,
-      complaints: Complaint,
-      unsubscribes: Unsubscribe,
-      whitelists: WhiteList,
-    };
+    this.models = new Map();
+    this.models.set('bounces', Bounce);
+    this.models.set('complaints', Complaint);
+    this.models.set('unsubscribes', Unsubscribe);
+    this.models.set('whitelists', WhiteList);
   }
 
   _parsePage(id: string, pageUrl: string) : ParsedPage {
-    const parsedUrl = url.parse(pageUrl, true);
-    const { query } = parsedUrl;
-
+    const parsedUrl = new URL(pageUrl);
+    const { searchParams } = parsedUrl;
     return {
       id,
-      page: query.page as string,
-      address: query.address as string,
+      page: searchParams.has('page') ? searchParams.get('page') : undefined,
+      address: searchParams.has('address') ? searchParams.get('address') : undefined,
       url: pageUrl
     };
   }
 
-  _parsePageLinks(response: { body: { paging: any } }): ParsedPagesList {
+  _parsePageLinks(response: SuppressionListResponse): ParsedPagesList {
     const pages = Object.entries(response.body.paging as PagesList);
     return pages.reduce(
       (acc: PagesListAccumulator, pair: [pageUrl: string, id: string]) => {
@@ -126,51 +123,99 @@ export default class SuppressionClient {
   }
 
   _parseList(
-    response: { body: { items: any, paging: any } }, Model: TModel
+    response: SuppressionListResponse,
+    Model: {
+      new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+      Bounce | Complaint | Unsubscribe | WhiteList
+    }
   ): SuppressionList {
     const data = {} as SuppressionList;
-
-    data.items = response.body.items.map((d: any) => new Model(d));
+    data.items = response.body.items.map((item) => new Model(item));
 
     data.pages = this._parsePageLinks(response);
 
     return data;
   }
 
-  _parseItem(
-    response: { body: any },
-    Model: TModel
-  ): IBounce | IComplaint | IUnsubscribe | IWhiteList {
-    return new Model(response.body);
+  _parseItem<T extends Suppression>(
+    data : BounceData | ComplaintData | UnsubscribeData | WhiteListData,
+    Model: {
+      new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+      T
+    }
+  ): T {
+    return new Model(data);
   }
 
-  private createWhiteList(domain: string, data: any) {
+  private createWhiteList(
+    domain: string,
+    data: SuppressionCreationData | SuppressionCreationData[]
+  ): Promise<SuppressionCreationResult> {
+    if (Array.isArray(data)) {
+      throw new APIError({
+        status: 400,
+        statusText: 'Data property should be an object',
+        body: {
+          message: 'Whitelist\'s creation process does not support multiple creations. Data property should be an object'
+        }
+      } as APIErrorOptions);
+    }
     return this.request
-      .postWithFD(urljoin('v3', domain, 'whitelists'), data, createOptions)
-      .then((response: { body: any }) => response.body);
+      .postWithFD(urljoin('v3', domain, 'whitelists'), data)
+      .then(this.prepareResponse);
   }
 
-  list(domain: string, type: SuppressionModels, query: any) : Promise<SuppressionList> {
-    const model = (this.models)[type];
+  private checkType(type: string) {
+    if (!this.models.has(type)) {
+      throw new APIError({
+        status: 400,
+        statusText: 'Unknown type value',
+        body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
+      } as APIErrorOptions);
+    }
+  }
 
+  private prepareResponse(response: SuppressionCreationResponse): SuppressionCreationResult {
+    return {
+      message: response.body.message,
+      type: response.body.type || '',
+      value: response.body.value || '',
+      status: response.status
+    };
+  }
+
+  list(
+    domain: string,
+    type: string,
+    query?: SuppressionListQuery
+  ): Promise<SuppressionList> {
+    this.checkType(type);
+
+    const model = this.models.get(type);
     return this.request
       .get(urljoin('v3', domain, type), query)
-      .then((response: { body: { items: any, paging: any } }) => this._parseList(response, model));
+      .then((response: SuppressionListResponse) => this._parseList(response, model));
   }
 
   get(
     domain: string,
-    type: SuppressionModels,
+    type: string,
     address: string
-  ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
-    const model = (this.models)[type];
+  ): Promise<Bounce | Complaint | Unsubscribe | WhiteList> {
+    this.checkType(type);
 
+    const model = this.models.get(type);
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))
-      .then((response: { body: any }) => this._parseItem(response, model));
+      .then((response: SuppressionResponse) => this._parseItem<typeof model>(response.body, model));
   }
 
-  create(domain: string, type: string, data: any) {
+  create(
+    domain: string,
+    type: string,
+    data: SuppressionCreationData | SuppressionCreationData[]
+  ): Promise<SuppressionCreationResult> {
+    this.checkType(type);
     // supports adding multiple suppressions by default
     let postData;
     if (type === 'whitelists') {
@@ -185,13 +230,23 @@ export default class SuppressionClient {
 
     return this.request
       .post(urljoin('v3', domain, type), JSON.stringify(postData), createOptions)
-      .then((response: { body: any }) => response.body);
+      .then(this.prepareResponse);
   }
 
-  destroy(domain: string, type: string, address: string) {
+  destroy(
+    domain: string,
+    type: string,
+    address: string
+  ): Promise<SuppressionDestroyResult> {
+    this.checkType(type);
     return this.request
       .delete(urljoin('v3', domain, type, encodeURIComponent(address)))
-      .then((response: { body: any }) => response.body);
+      .then((response: SuppressionDestroyResponse) => ({
+        message: response.body.message,
+        value: response.body.value || '',
+        address: response.body.address || '',
+        status: response.status
+      }));
   }
 }
 

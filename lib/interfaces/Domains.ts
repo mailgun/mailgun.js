@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 export interface DomainsQuery {
-    authority : string;
-    state: 'active' | 'unverified' | 'disabled';
-    limit: number;
-    skip: number;
+    authority? : string;
+    state?: 'active' | 'unverified' | 'disabled';
+    limit?: number;
+    skip?: number;
 }
 
 export interface DomainInfo {

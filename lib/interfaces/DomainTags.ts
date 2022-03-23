@@ -238,7 +238,6 @@ export interface DomainTagDevicesAggregation {
     device: DevicesTypes;
 }
 
-
 export interface IDomainTagsClient {
     list(domain: string): Promise<DomainTagsList>
     get(domain: string, tag: string): Promise<DomainTagsItem>

@@ -1,3 +1,7 @@
+import {
+  Bounce, Complaint, Unsubscribe, WhiteList
+} from '../suppressions';
+
 /* eslint-disable camelcase */
 export interface BounceData {
   address: string;
@@ -24,35 +28,10 @@ export interface WhiteListData {
   createdAt: string | Date;
 }
 
-export interface IBounce {
-  type: string;
-  address: string;
-  code: number;
-  error: string;
-  created_at: Date;
-}
-export interface IComplaint {
-  type: string;
-  address: any;
-  created_at: Date;
-}
-export interface IUnsubscribe {
-  type: string;
-  address: string;
-  tags: any;
-  created_at: Date;
-}
-export interface IWhiteList {
-  type: string;
-  value: string;
-  reason: string;
-  createdAt: Date;
-}
-
 export interface ParsedPage {
   id: string;
-  page: string | undefined;
-  address: string | undefined;
+  page: string | null | undefined;
+  address: string | null | undefined;
   url: string
 }
 export interface ParsedPagesList {
@@ -63,7 +42,7 @@ export interface ParsedPagesList {
 }
 
 export interface SuppressionList {
-  items: IBounce[] | IComplaint[] | IUnsubscribe[] | IWhiteList[];
+  items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
   pages: ParsedPagesList;
 }
 
@@ -83,4 +62,62 @@ export enum SuppressionModels {
 
 export interface PagesListAccumulator {
   [index: string]: ParsedPage;
+}
+
+export interface SuppressionListQuery {
+  limit?: number;
+}
+
+export interface SuppressionListResponse {
+  body: {
+    items: BounceData[] | ComplaintData[] | UnsubscribeData[] | WhiteListData[];
+    paging: PagesList;
+  }
+  status: number;
+}
+
+export interface SuppressionResponse {
+  body: BounceData | ComplaintData | UnsubscribeData | WhiteListData;
+  status: number;
+}
+
+export interface SuppressionDestroyResponse {
+  body: {
+    message: string;
+    value?: string;
+    address?: string;
+  }
+  status: number;
+}
+
+export interface SuppressionDestroyResult {
+  message: string;
+  value: string;
+  address: string;
+  status: number;
+}
+
+export interface SuppressionCreationData {
+  address: string;
+  code?: number;
+  error?: string;
+  domain?: string;
+  tag?: string;
+  created_at?: string ;
+}
+
+export interface SuppressionCreationResponse {
+  body:{
+    message:string;
+    type?: string;
+    value?: string;
+  }
+  status: number;
+}
+
+export interface SuppressionCreationResult {
+  message:string;
+  type: string;
+  value: string;
+  status: number;
 }
