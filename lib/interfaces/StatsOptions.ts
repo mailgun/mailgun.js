@@ -14,7 +14,7 @@ export interface StatsOptions {
   stats: Stat[];
 }
 
-export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'rejected' | 'complained' | 'failed-temporary' | 'failed-permanent';
+export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
 
 export interface StatsQuery {
   event: StatsEvent | StatsEvent[];
