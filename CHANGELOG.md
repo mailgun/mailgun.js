@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.3](https://github.com/mailgun/mailgun.js/compare/v5.0.2...v5.0.3) (2022-03-23)
+
+
+### Bug Fixes
+
+* Remove deprecated url package ([406eb56](https://github.com/mailgun/mailgun.js/commits/406eb56916bd52ca8e3d9b1ffacf419d42db5a86))
+* TypeError -> mailgun_js_1.default is not a constructor ([ff91333](https://github.com/mailgun/mailgun.js/commits/ff91333c3f34434c54e993da62a61dc38d6196f4))
+* Update DomainsQuery interface for mg.domains.list ([b55eb52](https://github.com/mailgun/mailgun.js/commits/b55eb52c18eb6d81dd3e6fcb991a8b7b5a75a4ab))
+* Update get method in Domain templates client interface to have an optional parameter ([12868a8](https://github.com/mailgun/mailgun.js/commits/12868a88e5465d4f3dcb3e3797522c7b4fc552a0))
+
+
+### Other changes
+
+* Update webpack release config ([240038a](https://github.com/mailgun/mailgun.js/commits/240038a180eb0ad6a704bf24ed01e3c241bef5d5))
+
 ### [5.0.2](https://github.com/mailgun/mailgun.js/compare/v5.0.1...v5.0.2) (2022-03-14)
 
 
