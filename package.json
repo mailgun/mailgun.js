@@ -112,7 +112,7 @@
     "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
       "prerelease": "npm test && npm run build:release",
-      "postchangelog": "build:prepublish && git add -A dist",
+      "postchangelog": "npm run build:prepublish && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
   }
