@@ -20,8 +20,9 @@ import DomainCredentialsClient from './domainsCredentials';
 import MultipleValidationClient from './multipleValidation';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
+import { IMailgunClient } from './interfaces/IMailgunClient';
 
-export default class Client {
+export default class Client implements IMailgunClient {
   private request;
 
   public domains;
