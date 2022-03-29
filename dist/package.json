@@ -1,0 +1,44 @@
+{
+  "name": "mailgun.js",
+  "version": "5.0.3",
+  "main": "./mailgun.node.js",
+  "browser": "./mailgun.web.js",
+  "types": "./index.d.ts",
+  "author": "Mailgun",
+  "license": "MIT",
+  "keywords": [
+    "mailgun",
+    "email"
+  ],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mailgun/mailgun.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mailgun/mailgun.js/issues"
+  },
+  "homepage": "https://github.com/mailgun/mailgun.js#readme",
+  "typescript": {
+    "definition": "./index.d.ts"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "bluebird": "^3.7.2",
+    "ky": "^0.25.1",
+    "ky-universal": "^0.8.2",
+    "url-join": "^4.0.1",
+    "web-streams-polyfill": "^3.0.1",
+    "webpack-merge": "^5.4.0"
+  },
+  "contributors": [
+    {
+      "name": "Brad Gignac",
+      "url": "https://github.com/bradgignac"
+    },
+    {
+      "name": "Eddy Hernandez",
+      "url": "https://github.com/eddywashere"
+    }
+  ]
+}
