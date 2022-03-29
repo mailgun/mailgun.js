@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.4](https://github.com/mailgun/mailgun.js/compare/v5.0.3...v5.0.4) (2022-03-29)
+
+
+### Bug Fixes
+
+* Remove dts-bundle dependency. Add package.json to dist ([94cfd56](https://github.com/mailgun/mailgun.js/commits/94cfd561908317c897d6764e2bbb9fed8b8bd854))
+* Update postchangelog command ([08439c8](https://github.com/mailgun/mailgun.js/commits/08439c835ca4f5757cff8d52ec588288892817f7))
+
 ### [5.0.3](https://github.com/mailgun/mailgun.js/compare/v5.0.2...v5.0.3) (2022-03-23)
 
 
