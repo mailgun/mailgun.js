@@ -1,3 +1,8 @@
+import {
+  MailgunMessageData,
+  MessagesSendAPIResponse,
+  MessagesSendResult
+} from './interfaces/Messages';
 import Request from './request';
 
 export default class MessagesClient {
@@ -7,15 +12,14 @@ export default class MessagesClient {
     this.request = request;
   }
 
-  _parseResponse(response: { body: any }) {
-    if (response.body) {
-      return response.body;
-    }
-
-    return response;
+  _parseResponse(response: MessagesSendAPIResponse): MessagesSendResult {
+    return {
+      status: response.status,
+      ...response.body
+    };
   }
 
-  create(domain: string, data: any) {
+  create(domain: string, data: MailgunMessageData): Promise<MessagesSendResult> {
     if (data.message) {
       return this.request.postWithFD(`/v3/${domain}/messages.mime`, data)
         .then(this._parseResponse);

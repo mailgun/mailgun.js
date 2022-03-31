@@ -8,12 +8,13 @@ import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
 import RequestOptions from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
+import { MessagesSendResult } from '../lib/interfaces/Messages';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
 describe('MessagesClient', function () {
-  let client: any;
-  let api: any;
+  let client: MessagesClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
@@ -36,8 +37,10 @@ describe('MessagesClient', function () {
         from: 'bar@example.com',
         subject: 'howdy!',
         text: 'ello world!'
-      }).then(function (data: { message: string }) {
+      }).then(function (data: MessagesSendResult) {
         expect(data.message).to.eql('Queued. Thank you.');
+        expect(data.id).to.eql('<20111114174239.25659.5817@samples.mailgun.org>');
+        expect(data.status).to.eql(200);
       });
     });
 
@@ -48,8 +51,9 @@ describe('MessagesClient', function () {
         from: 'bar@example.com',
         subject: 'howdy!',
         text: 'ello world!'
-      }).catch(function (data: { details: string }) {
+      }).catch(function (data: MessagesSendResult) {
         expect(data.details).to.eql('Missing parameter \'to\'.');
+        expect(data.status).to.eql(400);
       });
     });
 
@@ -64,8 +68,9 @@ describe('MessagesClient', function () {
         from: 'bar@example.com',
         subject: 'howdy!',
         message: 'ello world!'
-      }).then(function (data: { message: string }) {
+      }).then(function (data: MessagesSendResult) {
         expect(data.message).to.eql('Queued. Thank you.');
+        expect(data.status).to.eql(200);
       });
     });
 
@@ -81,8 +86,9 @@ describe('MessagesClient', function () {
         subject: 'howdy!',
         text: 'Testing some Mailgun awesomeness!',
         attachment: [mailgunLogo]
-      }).then(function (data: { message: string }) {
+      }).then(function (data: MessagesSendResult) {
         expect(data.message).to.eql('Queued. Thank you.');
+        expect(data.status).to.eql(200);
       });
     });
   });
