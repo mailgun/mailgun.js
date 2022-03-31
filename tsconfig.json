@@ -1,5 +1,5 @@
 {
-  "include": ["lib"],
+  "include": ["lib", "test"],
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,

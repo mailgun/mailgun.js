@@ -22,15 +22,15 @@
   "scripts": {
     "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build:prepublish",
     "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build:prepublish",
+    "build:prepublish": "node ./SetupPackage.js",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
-    "release": "standard-version -a",
     "test": "multi='dot=- xunit=./results.xml' nyc mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test-watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "lint": "eslint . && eslint . --ext .ts",
-    "prepare": "husky install",
-    "build:prepublish": "node ./SetupPackage.js",
-    "link": "cd dist && npm link"
+    "release": "standard-version -a",
+    "link": "cd dist && npm link",
+    "prepare": "husky install"
   },
   "typescript": {
     "definition": "./index.d.ts"
