@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.5](https://github.com/mailgun/mailgun.js/compare/v5.0.4...v5.0.5) (2022-03-31)
+
+
+### Bug Fixes
+
+* Add types to message create method ([5c31628](https://github.com/mailgun/mailgun.js/commits/5c31628f7adbafbfb8fb7283076b64448d10226d))
+
 ### [5.0.4](https://github.com/mailgun/mailgun.js/compare/v5.0.3...v5.0.4) (2022-03-29)
 
 
