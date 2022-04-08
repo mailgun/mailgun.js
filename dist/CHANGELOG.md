@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/mailgun/mailgun.js/compare/v5.0.5...v5.1.0) (2022-04-08)
+
+
+### Features
+
+* Add verify method to domains ([dd65f7b](https://github.com/mailgun/mailgun.js/commits/dd65f7b50930d4c34f1503ed4b87e0f4b8829b37))
+
 ### [5.0.5](https://github.com/mailgun/mailgun.js/compare/v5.0.4...v5.0.5) (2022-03-31)
 
 
