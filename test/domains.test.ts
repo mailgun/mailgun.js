@@ -16,6 +16,7 @@ import {
 } from '../lib/interfaces/Domains';
 import DomainTemplatesClient from '../lib/domainsTemplates';
 import DomainTagsClient from '../lib/domainsTags';
+import APIResponse from '../lib/interfaces/ApiResponse';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -162,6 +163,78 @@ describe('DomainClient', function () {
     });
   });
 
+  describe('verify', function () {
+    it('verifies a domain', function () {
+      const domainData = {
+        created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+        name: 'test.example.com',
+        smtp_login: 'postmaster@test.example.com',
+        smtp_password: 'password',
+        spam_action: 'disabled',
+        state: 'active',
+        type: 'custom',
+        wildcard: true,
+        skip_verification: true,
+        require_tls: true
+      };
+
+      api.put('/v3/domains/test.example.com/verify').reply(200, {
+        domain: domainData,
+        receiving_dns_records: [
+          {
+            cached: ['test-value1', 'test-value2'],
+            priority: '10',
+            record_type: 'MX',
+            valid: 'valid',
+            value: 'test-value'
+          },
+        ],
+        sending_dns_records: [
+          {
+            cached: ['test-value'],
+            name: 'test name',
+            record_type: 'TXT',
+            valid: 'valid',
+            value: 'test-value'
+          },
+        ]
+      });
+
+      return client.verify('test.example.com').then(function (domain: Domain) {
+        domain.should.eql({
+          created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+          name: 'test.example.com',
+          receiving_dns_records: [
+            {
+              cached: ['test-value1', 'test-value2'],
+              priority: '10',
+              record_type: 'MX',
+              valid: 'valid',
+              value: 'test-value'
+            }
+          ],
+          require_tls: true,
+          sending_dns_records: [
+            {
+              cached: ['test-value'],
+              name: 'test name',
+              record_type: 'TXT',
+              valid: 'valid',
+              value: 'test-value'
+            }
+          ],
+          skip_verification: true,
+          smtp_login: 'postmaster@test.example.com',
+          smtp_password: 'password',
+          spam_action: 'disabled',
+          state: 'active',
+          type: 'custom',
+          wildcard: true
+        });
+      });
+    });
+  });
+
   describe('destroy', function () {
     it('deletes a domain', function () {
       api.delete('/v3/domains/test.example.com').reply(200, {
@@ -246,6 +319,20 @@ describe('DomainClient', function () {
         }
       });
     });
+
+    it('checks input parameter', async function () {
+      try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        await client.updateTracking('domain.com', 'open', { active: true });
+      } catch (error) {
+        expect(error).to.include({
+          status: 400,
+          details: 'Property "active" must contain string value.',
+          message: 'Received boolean value for active property'
+        });
+      }
+    });
   });
 
   describe('getIps', () => {
@@ -259,6 +346,70 @@ describe('DomainClient', function () {
     });
   });
 
+  describe('assignIp', () => {
+    it('should assign Ip', () => {
+      const ip = '127.0.0.1';
+      api.post('/v3/domains/domain.com/ips').reply(200, { message: 'success' });
+
+      return client.assignIp('domain.com', ip).then((response: APIResponse) => {
+        response.should.eql({ status: 200, body: { message: 'success' } });
+      });
+    });
+  });
+
+  describe('deleteIp', () => {
+    it('should delete assigned Ip', () => {
+      const ip = '127.0.0.1';
+      api.delete('/v3/domains/domain.com/ips/127.0.0.1').reply(200, { message: 'success' });
+
+      return client.deleteIp('domain.com', ip).then((response: APIResponse) => {
+        response.should.eql({ status: 200, body: { message: 'success' } });
+      });
+    });
+  });
+
+  describe('linkIpPool', () => {
+    it('should link ip pool', () => {
+      const ipPool = '121212121212121212121212';
+      api.post('/v3/domains/domain.com/ips').reply(200, { message: 'success' });
+
+      return client.linkIpPool('domain.com', ipPool).then((response: APIResponse) => {
+        response.should.eql({ status: 200, body: { message: 'success' } });
+      });
+    });
+  });
+
+  describe('unlinkIpPoll', () => {
+    it('should unlink ip pool with new ip pool', () => {
+      const ipPool = '121212121212121212121212';
+      api.delete(`/v3/domains/domain.com/ips/ip_pool?pool_id=${ipPool}`).reply(200, { message: 'success' });
+
+      return client.unlinkIpPoll('domain.com', { pool_id: ipPool }).then((response: APIResponse) => {
+        response.should.eql({ status: 200, body: { message: 'success' } });
+      });
+    });
+
+    it('should unlink ip pool with ip', () => {
+      const ip = '127.0.0.1';
+      api.delete(`/v3/domains/domain.com/ips/ip_pool?ip=${ip}`).reply(200, { message: 'success' });
+
+      return client.unlinkIpPoll('domain.com', { ip }).then((response: APIResponse) => {
+        response.should.eql({ status: 200, body: { message: 'success' } });
+      });
+    });
+
+    it('should check replacement data', async () => {
+      try {
+        await client.unlinkIpPoll('domain.com', { ip: 'test', pool_id: 'test' });
+      } catch (error) {
+        expect(error).to.include({
+          status: 400,
+          details: 'Please specify either pool_id or ip (not both)',
+          message: 'Too much data for replacement'
+        });
+      }
+    });
+  });
   describe('updateDKIMAuthority', () => {
     it('changes the DKIM authority for a domain.', () => {
       const expectedRes = {

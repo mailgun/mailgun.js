@@ -139,6 +139,11 @@ export default class DomainClient {
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
+  verify(domain: string): Promise<Domain> {
+    return this.request.put(`/v3/domains/${domain}/verify`, {})
+      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+  }
+
   destroy(domain: string): Promise<MessageResponse> {
     return this.request.delete(`/v3/domains/${domain}`)
       .then((res : APIResponse) => this._parseMessage(res as DestroyedDomainResponse));
@@ -169,7 +174,7 @@ export default class DomainClient {
     data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo
   ): Promise<UpdatedOpenTracking> {
     if (typeof data?.active === 'boolean') {
-      throw new APIError({ status: 400, statusText: '', body: { message: 'Property "active" must contain string value.' } } as APIErrorOptions);
+      throw new APIError({ status: 400, statusText: 'Received boolean value for active property', body: { message: 'Property "active" must contain string value.' } } as APIErrorOptions);
     }
     return this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), data)
       .then((res : APIResponse) => this._parseTrackingUpdate(res as UpdateDomainTrackingResponse));
@@ -197,7 +202,13 @@ export default class DomainClient {
   unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse> {
     let searchParams = '';
     if (replacement.pool_id && replacement.ip) {
-      throw new APIError({ status: 400, statusText: '', body: { message: 'Please specify either pool_id or ip (not both)' } } as APIErrorOptions);
+      throw new APIError(
+        {
+          status: 400,
+          statusText: 'Too much data for replacement',
+          body: { message: 'Please specify either pool_id or ip (not both)' }
+        } as APIErrorOptions
+      );
     } else if (replacement.pool_id) {
       searchParams = `?pool_id=${replacement.pool_id}`;
     } else if (replacement.ip) {

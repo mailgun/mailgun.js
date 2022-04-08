@@ -4,3 +4,4 @@ results.xml
 build
 
 ./test.js
+.coverage/

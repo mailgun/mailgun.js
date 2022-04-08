@@ -37,6 +37,7 @@ export default class DomainClient {
     list(query?: DomainsQuery): Promise<Domain[]>;
     get(domain: string): Promise<Domain>;
     create(data: DomainInfo): Promise<Domain>;
+    verify(domain: string): Promise<Domain>;
     destroy(domain: string): Promise<MessageResponse>;
     getConnection(domain: string): Promise<ConnectionSettings>;
     updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings>;
