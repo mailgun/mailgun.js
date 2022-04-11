@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/mailgun/mailgun.js/compare/v5.1.0...v5.2.0) (2022-04-11)
+
+
+### Features
+
+* Add validation methods to mailing list client ([224790c](https://github.com/mailgun/mailgun.js/commits/224790c4c20466a2203856d703b51e7d4a03a195))
+
 ## [5.1.0](https://github.com/mailgun/mailgun.js/compare/v5.0.5...v5.1.0) (2022-04-08)
 
 
