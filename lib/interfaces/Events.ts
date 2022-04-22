@@ -3,6 +3,29 @@ export interface EventsPage {
     number: string;
     url: string;
 }
+
+export interface FilterField {
+    event?: string;
+    list?: string;
+    attachment?: string;
+    from?: string;
+    'message-id'?: string;
+    subject?: string;
+    to?: string;
+    size?: string;
+    recipient?: string;
+    recipients?: string;
+    tags?: string;
+    severity?: string;
+}
+
+export interface EventsQuery extends FilterField{
+    page?: string;
+    begin?: string;
+    end?: string;
+    ascending?: 'yes'| 'no';
+    limit?: number;
+}
 export interface PagesList {
     previous: string;
     first: string;
