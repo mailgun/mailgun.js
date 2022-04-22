@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.2](https://github.com/mailgun/mailgun.js/compare/v5.2.1...v5.2.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* Fix parsing of a response body with json data ([d57671f](https://github.com/mailgun/mailgun.js/commits/d57671f0b0af0c24e64684697e3f5d9001fa43cd))
+* Update message type. Update readme file ([dd22ec0](https://github.com/mailgun/mailgun.js/commits/dd22ec0588b7ddcf04f2f96f6b109502446f766c))
+* Update query parameter type for events get method ([1705a1f](https://github.com/mailgun/mailgun.js/commits/1705a1f34f855d53471548646dda44dbdd0d6338))
+* Update response handler to support string response ([6e0f305](https://github.com/mailgun/mailgun.js/commits/6e0f3053e2ffe9dec25dd6fa8cfe19140be626ad))
+
 ### [5.2.1](https://github.com/mailgun/mailgun.js/compare/v5.2.0...v5.2.1) (2022-04-14)
 
 
