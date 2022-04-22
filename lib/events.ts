@@ -1,6 +1,12 @@
 import urljoin from 'url-join';
 import {
-  EventsList, EventsPage, EventsResponse, PagesList, PagesListAccumulator, ParsedPagesList
+  EventsList,
+  EventsPage,
+  EventsQuery,
+  EventsResponse,
+  PagesList,
+  PagesListAccumulator,
+  ParsedPagesList
 } from './interfaces/Events';
 
 import Request from './request';
@@ -39,7 +45,7 @@ export default class EventClient {
     };
   }
 
-  get(domain: string, query?: { page: string }) : Promise<EventsList> {
+  get(domain: string, query?: EventsQuery) : Promise<EventsList> {
     let url;
     const queryCopy = { ...query };
     if (queryCopy && queryCopy.page) {
