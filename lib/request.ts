@@ -8,7 +8,7 @@ import APIErrorOptions from './interfaces/APIErrorOptions';
 import { InputFormData } from './interfaces/IFormData';
 import APIResponse from './interfaces/ApiResponse';
 
-const isStream = (attachment: any) => typeof attachment === 'object' && typeof attachment.pipe === 'function';
+const isStream = (data: any) => typeof data === 'object' && typeof data.pipe === 'function';
 
 function isNodeFormData(formDataInstance: NodeFormData | FormData)
   : formDataInstance is NodeFormData {
@@ -108,11 +108,20 @@ class Request {
     }
 
     const res = {
-      body: await response?.json(),
+      body: await this.getResponseBody(response),
       status: response?.status
     };
 
     return res;
+  }
+
+  private async getResponseBody(response: any) {
+    if (isStream(await response.body)) {
+      return {
+        message: await streamToString(response.body)
+      };
+    }
+    return response?.json();
   }
 
   query(method: string, url: string, query: any, options?: any) : Promise<APIResponse> {

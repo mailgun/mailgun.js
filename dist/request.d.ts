@@ -11,6 +11,7 @@ declare class Request {
     private FormDataConstructor;
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, inputOptions?: any): Promise<APIResponse>;
+    private getResponseBody;
     query(method: string, url: string, query: any, options?: any): Promise<APIResponse>;
     command(method: string, url: string, data: any, options?: any): Promise<APIResponse>;
     get(url: string, query?: any, options?: any): Promise<APIResponse>;
