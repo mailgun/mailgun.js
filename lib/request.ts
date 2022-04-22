@@ -107,21 +107,28 @@ class Request {
       } as APIErrorOptions);
     }
 
-    const res = {
-      body: await this.getResponseBody(response),
-      status: response?.status
-    };
-
-    return res;
+    const res = await this.getResponseBody(response);
+    return res as APIResponse;
   }
 
-  private async getResponseBody(response: any) {
-    if (isStream(await response.body)) {
-      return {
-        message: await streamToString(response.body)
+  private async getResponseBody(response: any): Promise<APIResponse> {
+    const res = {
+      body: {},
+      status: response?.status
+    } as APIResponse;
+    let responseString = '';
+    try {
+      responseString = await response.text();
+      const jsonBody = JSON.parse(responseString);
+      res.body = jsonBody;
+      return res;
+    } catch (error: unknown) {
+      res.status = 400;
+      res.body = {
+        message: responseString,
       };
+      return res;
     }
-    return response?.json();
   }
 
   query(method: string, url: string, query: any, options?: any) : Promise<APIResponse> {
