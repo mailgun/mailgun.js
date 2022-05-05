@@ -2,7 +2,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import WebhookClient from '../lib/webhooks';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('WebhookClient', function () {

@@ -1,15 +1,15 @@
-export interface ListsQuery {
+export declare type ListsQuery = {
     address?: string;
     limit?: number;
     skip?: number;
-}
-export interface CreateUpdateList {
+};
+export declare type CreateUpdateList = {
     address: string;
     name?: string;
     description?: string;
     access_level?: 'readonly' | 'members' | 'everyone';
     reply_preference?: 'list' | 'sender';
-}
+};
 export interface DestroyedList {
     address: string;
     message: string;

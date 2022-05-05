@@ -51,9 +51,9 @@ export declare enum SuppressionModels {
 export interface PagesListAccumulator {
     [index: string]: ParsedPage;
 }
-export interface SuppressionListQuery {
+export declare type SuppressionListQuery = {
     limit?: number;
-}
+};
 export interface SuppressionListResponse {
     body: {
         items: BounceData[] | ComplaintData[] | UnsubscribeData[] | WhiteListData[];
@@ -79,14 +79,14 @@ export interface SuppressionDestroyResult {
     address: string;
     status: number;
 }
-export interface SuppressionCreationData {
+export declare type SuppressionCreationData = {
     address: string;
     code?: number;
     error?: string;
     domain?: string;
     tag?: string;
     created_at?: string;
-}
+};
 export interface SuppressionCreationResponse {
     body: {
         message: string;

@@ -1,8 +1,15 @@
 import Options from './Options';
 
-interface RequestOptions extends Options {
+export interface OnCallEmptyHeaders {
+  [key: string]: undefined;
+}
+export interface RequestOptions extends Options {
   headers: any;
   timeout: number;
 }
 
-export default RequestOptions;
+export interface OnCallRequestOptions {
+  timeout?: number;
+  headers?: HeadersInit| OnCallEmptyHeaders;
+  [key: string]: unknown | undefined;
+}

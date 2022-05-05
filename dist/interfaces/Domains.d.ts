@@ -1,9 +1,9 @@
-export interface DomainsQuery {
+export declare type DomainsQuery = {
     authority?: string;
     state?: 'active' | 'unverified' | 'disabled';
     limit?: number;
     skip?: number;
-}
+};
 export interface DomainInfo {
     name: string;
     smtp_password: string;
@@ -44,7 +44,7 @@ export interface DNSRecord {
     valid: string;
     value: string;
 }
-export interface DomainResponseData {
+export declare type DomainResponseData = {
     status: number;
     body: {
         domain: DomainData;
@@ -52,7 +52,7 @@ export interface DomainResponseData {
         receiving_dns_records: DNSRecord[];
         sending_dns_records: DNSRecord[];
     };
-}
+};
 export interface DomainListResponseData {
     status: number;
     body: {
@@ -67,10 +67,10 @@ export interface DestroyedDomainResponse {
     status: number;
     body: MessageResponse;
 }
-export interface ConnectionSettings {
+export declare type ConnectionSettings = {
     require_tls: boolean;
     skip_verification: boolean;
-}
+};
 export interface ConnectionSettingsResponse {
     body: {
         connection: ConnectionSettings;

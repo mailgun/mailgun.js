@@ -5,7 +5,7 @@ import formData from 'form-data';
 
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);

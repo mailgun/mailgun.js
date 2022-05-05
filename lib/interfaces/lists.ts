@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-export interface ListsQuery {
+export type ListsQuery = {
     address?: string;
     limit?: number;
     skip?: number;
 }
 
-export interface CreateUpdateList {
+export type CreateUpdateList = {
     address: string;
     name?: string;
     description?: string;

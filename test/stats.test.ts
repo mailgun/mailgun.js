@@ -3,7 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import StatsClient from '../lib/stats';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { StatsOptions } from '../lib/interfaces/StatsOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 

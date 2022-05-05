@@ -12,7 +12,7 @@ export enum Pages {
     PREV = 'prev'
 }
 /* eslint-disable camelcase */
-export interface DomainTemplateData {
+export type DomainTemplateData = {
     name: string;
     description: string;
     template: string;
@@ -21,7 +21,7 @@ export interface DomainTemplateData {
     comment?: string;
 }
 
-export interface DomainTemplateVersionData {
+export type DomainTemplateVersionData = {
     template: string;
     tag: string;
     engine?: string;
@@ -29,23 +29,23 @@ export interface DomainTemplateVersionData {
     active?: YesNo;
 }
 
-export interface DomainTemplateUpdateData {
+export type DomainTemplateUpdateData = {
     description: string;
 }
 
-export interface DomainTemplateUpdateVersionData {
+export type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
 }
 
-export interface DomainTemplatesQuery {
+export type DomainTemplatesQuery = {
     page: Pages;
     limit: number;
     p: string;
 }
 
-export interface TemplateQuery {
+export type TemplateQuery = {
     active: YesNo;
 }
 

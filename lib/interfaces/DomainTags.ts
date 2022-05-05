@@ -6,11 +6,11 @@ export enum Resolution {
     DAY = 'day',
     MONTH = 'month'
 }
-export interface DomainTagsQuery {
+export type DomainTagsQuery = {
     limit: number;
 }
 
-export interface DomainTagsStatisticQuery {
+export type DomainTagsStatisticQuery = {
     event: string;
     start?: number;
     end?: number;

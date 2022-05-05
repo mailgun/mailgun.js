@@ -19,7 +19,7 @@ export interface WebhookList {
     }
 }
 
-export interface WebhooksQuery {
+export type WebhooksQuery = {
     limit?: number;
     skip?: number;
 }

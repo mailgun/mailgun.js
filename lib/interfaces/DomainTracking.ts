@@ -33,14 +33,14 @@ export interface UpdateDomainTrackingResponse {
     body: UpdatedOpenTracking;
 }
 
-export interface OpenTrackingInfo {
+export type OpenTrackingInfo = {
     active: 'yes'| 'no' | 'true' | 'false';
 }
-export interface ClickTrackingInfo {
+export type ClickTrackingInfo = {
     active: 'yes'| 'no' | 'true' | 'false' | 'htmlonly';
 }
 
-export interface UnsubscribeTrackingInfo {
+export type UnsubscribeTrackingInfo = {
     active: 'yes'| 'no' | 'true' | 'false';
     html_footer: string;
     text_footer: string;

@@ -4,16 +4,16 @@ export declare enum Resolution {
     DAY = "day",
     MONTH = "month"
 }
-export interface DomainTagsQuery {
+export declare type DomainTagsQuery = {
     limit: number;
-}
-export interface DomainTagsStatisticQuery {
+};
+export declare type DomainTagsStatisticQuery = {
     event: string;
     start?: number;
     end?: number;
     resolution?: Resolution;
     duration?: string;
-}
+};
 export interface DomainTagsItemInfo {
     tag: string;
     description: string;

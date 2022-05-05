@@ -17,14 +17,14 @@ export interface DestroyRouteResponse {
     message: string;
 }
 
-export interface CreateUpdateRouteData {
+export type CreateUpdateRouteData = {
     priority?: number;
     description?: string;
     expression: string;
     action: string[];
 }
 
-export interface RoutesListQuery {
+export type RoutesListQuery = {
     limit?: number;
     skip?: number;
 }

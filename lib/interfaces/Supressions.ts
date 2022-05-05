@@ -64,7 +64,7 @@ export interface PagesListAccumulator {
   [index: string]: ParsedPage;
 }
 
-export interface SuppressionListQuery {
+export type SuppressionListQuery = {
   limit?: number;
 }
 
@@ -97,7 +97,7 @@ export interface SuppressionDestroyResult {
   status: number;
 }
 
-export interface SuppressionCreationData {
+export type SuppressionCreationData = {
   address: string;
   code?: number;
   error?: string;

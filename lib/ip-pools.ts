@@ -1,7 +1,17 @@
 /* eslint-disable camelcase */
 import Request from './request';
 
-import { IpPool, IpPoolListResponse, IpPoolUpdateData } from './interfaces/IpPools';
+import {
+  IpPoolCreateData,
+  IpPoolCreateResponse,
+  IpPoolCreateResult,
+  IpPoolDeleteData,
+  IpPoolListResponse,
+  IpPoolListResult,
+  IpPoolMessageResponse,
+  IpPoolMessageResult,
+  IpPoolUpdateData,
+} from './interfaces/IpPools';
 
 export default class IpPoolsClient {
   request: Request;
@@ -10,27 +20,39 @@ export default class IpPoolsClient {
     this.request = request;
   }
 
-  list(query: any): Promise<IpPool[]> {
-    return this.request.get('/v1/ip_pools', query)
+  list(): Promise<IpPoolListResult> {
+    return this.request.get('/v1/ip_pools')
       .then((response: IpPoolListResponse) => this.parseIpPoolsResponse(response));
   }
 
-  create(data: { name: string, description?: string, ips?: string[] }) {
-    return this.request.postWithFD('/v1/ip_pools', data)
-      .then((response: { body: { message: string, pool_id: string } }) => response?.body);
+  async create(data: IpPoolCreateData): Promise<IpPoolCreateResult> {
+    const response: IpPoolCreateResponse = await this.request.postWithFD('/v1/ip_pools', data);
+    return {
+      status: response.status,
+      ...response.body
+    };
   }
 
-  update(poolId: string, data: IpPoolUpdateData) : Promise<any> {
-    return this.request.patchWithFD(`/v1/ip_pools/${poolId}`, data)
-      .then((response: { body: any }) => response?.body);
+  async update(poolId: string, data: IpPoolUpdateData): Promise<IpPoolMessageResult> {
+    const response: IpPoolMessageResponse = await this.request.patchWithFD(`/v1/ip_pools/${poolId}`, data);
+    return {
+      status: response.status,
+      ...response.body
+    };
   }
 
-  delete(poolId: string, data: { id: string, pool_id: string }) {
-    return this.request.delete(`/v1/ip_pools/${poolId}`, data)
-      .then((response: { body: any }) => response?.body);
+  async delete(poolId: string, data: IpPoolDeleteData): Promise<IpPoolMessageResult> {
+    const response:IpPoolMessageResponse = await this.request.delete(`/v1/ip_pools/${poolId}`, data);
+    return {
+      status: response.status,
+      ...response.body
+    };
   }
 
-  private parseIpPoolsResponse(response: { body: any | any }) {
-    return response.body.ip_pools;
+  private parseIpPoolsResponse(response: IpPoolListResponse): IpPoolListResult {
+    return {
+      status: response.status,
+      ...response.body
+    };
   }
 }

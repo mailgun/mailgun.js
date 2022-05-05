@@ -25,7 +25,7 @@ export default class MultipleValidationClient implements IMultipleValidationClie
       .then((response) => response.body);
   }
 
-  create(listId: string, file: any): Promise<CreatedMultipleValidationJob> {
+  create(listId: string, file: Record<string, unknown>): Promise<CreatedMultipleValidationJob> {
     return this.request.postWithFD(`/v4/address/validate/bulk/${listId}`, file)
       .then((response) => response.body);
   }

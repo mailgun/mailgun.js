@@ -5,7 +5,7 @@ import base64 from 'base-64';
 import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/request';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import APIError from '../lib/error';
 import APIResponse from '../lib/interfaces/ApiResponse';
 import { InputFormData } from '../lib/interfaces/IFormData';

@@ -10,10 +10,47 @@ export interface IpPoolListResponse {
         ip_pools: IpPool;
         message: string;
     };
+    status: number;
 }
-export interface IpPoolUpdateData {
+export interface IpPoolListResult {
+    ip_pools: IpPool;
+    message: string;
+    status: number;
+}
+export declare type IpPoolUpdateData = {
     name: string;
     description: string;
     add_ip: string;
     remove_ip: string;
-}
+};
+export declare type IpPoolMessageResponse = {
+    body: {
+        message: string;
+    };
+    status: number;
+};
+export declare type IpPoolMessageResult = {
+    message: string;
+    status: number;
+};
+export declare type IpPoolDeleteData = {
+    id: string;
+    pool_id: string;
+};
+export declare type IpPoolCreateData = {
+    name: string;
+    description?: string;
+    ips?: string[];
+};
+export declare type IpPoolCreateResponse = {
+    body: {
+        message: string;
+        pool_id: string;
+    };
+    status: number;
+};
+export declare type IpPoolCreateResult = {
+    status: number;
+    message: string;
+    pool_id: string;
+};

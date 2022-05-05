@@ -1,7 +1,7 @@
 import nock from 'nock';
 import formData from 'form-data';
 import Request from '../lib/request';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
 import { InputFormData } from '../lib/interfaces/IFormData';

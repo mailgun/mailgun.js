@@ -1,3 +1,6 @@
+export declare type ValidationQuery = {
+    address: string;
+};
 export interface ValidationResult {
     address: string;
     is_disposable_address: boolean;
