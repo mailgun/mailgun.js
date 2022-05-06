@@ -2,7 +2,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import WebhookClient from '../lib/webhooks';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('WebhookClient', function () {
@@ -45,6 +45,30 @@ describe('WebhookClient', function () {
 
       return client.get('domain.com', 'click').then(function (webhook: any) {
         webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      });
+    });
+
+    it('fetches single webhook with multiple urls', function () {
+      api.get('/v3/domains/domain.com/webhooks/click').reply(200, {
+        webhook: {
+          urls: ['trackclick.com', 'trackclick1.com']
+        }
+      });
+
+      return client.get('domain.com', 'click').then(function (webhook: any) {
+        webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      });
+    });
+
+    it('sets url to undefined if no urls', function () {
+      api.get('/v3/domains/domain.com/webhooks/click').reply(200, {
+        webhook: {
+          urls: []
+        }
+      });
+
+      return client.get('domain.com', 'click').then(function (webhook: any) {
+        webhook.should.eql({ id: 'click', url: undefined });
       });
     });
   });

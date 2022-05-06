@@ -1,6 +1,5 @@
-import APIResponse from './interfaces/ApiResponse';
 import { IMultipleValidationClient } from './interfaces/MultipleValidation';
-import { ValidationResult, ValidationResponse } from './interfaces/Validate';
+import { ValidationResult, ValidationResponse, ValidationQuery } from './interfaces/Validate';
 import Request from './request';
 
 export default class ValidateClient {
@@ -12,9 +11,9 @@ export default class ValidateClient {
     this.multipleValidation = multipleValidationClient;
   }
 
-  get(address: string): Promise<ValidationResult> {
-    return this.request.get('/v4/address/validate', { address })
-      .then((response : APIResponse) => response)
-      .then((res : ValidationResponse) => res.body as ValidationResult);
+  async get(address: string): Promise<ValidationResult> {
+    const query: ValidationQuery = { address };
+    const result: ValidationResponse = await this.request.get('/v4/address/validate', query);
+    return result.body as ValidationResult;
   }
 }

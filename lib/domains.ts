@@ -140,7 +140,7 @@ export default class DomainClient {
   }
 
   verify(domain: string): Promise<Domain> {
-    return this.request.put(`/v3/domains/${domain}/verify`, {})
+    return this.request.put(`/v3/domains/${domain}/verify`)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 

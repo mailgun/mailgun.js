@@ -9,37 +9,37 @@ export declare enum Pages {
     NEXT = "next",
     PREV = "prev"
 }
-export interface DomainTemplateData {
+export declare type DomainTemplateData = {
     name: string;
     description: string;
     template: string;
     tag?: string;
     engine?: string;
     comment?: string;
-}
-export interface DomainTemplateVersionData {
+};
+export declare type DomainTemplateVersionData = {
     template: string;
     tag: string;
     engine?: string;
     comment?: string;
     active?: YesNo;
-}
-export interface DomainTemplateUpdateData {
+};
+export declare type DomainTemplateUpdateData = {
     description: string;
-}
-export interface DomainTemplateUpdateVersionData {
+};
+export declare type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
-}
-export interface DomainTemplatesQuery {
+};
+export declare type DomainTemplatesQuery = {
     page: Pages;
     limit: number;
     p: string;
-}
-export interface TemplateQuery {
+};
+export declare type TemplateQuery = {
     active: YesNo;
-}
+};
 export interface ShortTemplateVersion {
     tag: string;
     engine: string;

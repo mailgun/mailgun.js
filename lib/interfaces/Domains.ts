@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export interface DomainsQuery {
+export type DomainsQuery = {
     authority? : string;
     state?: 'active' | 'unverified' | 'disabled';
     limit?: number;
@@ -51,7 +51,7 @@ export interface DNSRecord {
     value: string;
 }
 
-export interface DomainResponseData {
+export type DomainResponseData = {
     status: number;
     body: {
         domain: DomainData;
@@ -78,7 +78,7 @@ export interface DestroyedDomainResponse {
     body: MessageResponse
 }
 
-export interface ConnectionSettings {
+export type ConnectionSettings = {
     require_tls: boolean;
     skip_verification: boolean;
 }

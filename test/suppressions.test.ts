@@ -4,7 +4,7 @@ import nock from 'nock';
 
 import Request from '../lib/request';
 import SuppressionClient from '../lib/suppressions';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import { WhiteListData } from '../lib/interfaces/Supressions';
 

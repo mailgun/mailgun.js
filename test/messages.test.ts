@@ -6,7 +6,7 @@ import { expect } from 'chai';
 
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import { MessagesSendResult } from '../lib/interfaces/Messages';
 

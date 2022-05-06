@@ -4,7 +4,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/request';
 import DomainClient, { Domain } from '../lib/domains';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import DomainCredentialsClient from '../lib/domainsCredentials';
 import {

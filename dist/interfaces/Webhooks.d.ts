@@ -15,10 +15,10 @@ export interface WebhookList {
         urls: string[];
     };
 }
-export interface WebhooksQuery {
+export declare type WebhooksQuery = {
     limit?: number;
     skip?: number;
-}
+};
 export interface ValidationResponse {
     code: number;
     message: string;

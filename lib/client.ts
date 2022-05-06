@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import Request from './request';
 import Options from './interfaces/Options';
-import RequestOptions from './interfaces/RequestOptions';
+import { RequestOptions } from './interfaces/RequestOptions';
 
 import DomainClient from './domains';
 import EventClient from './events';

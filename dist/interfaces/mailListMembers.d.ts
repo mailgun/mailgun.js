@@ -5,18 +5,18 @@ export interface MailListMember {
     subscribed: boolean;
     vars: string | any;
 }
-export interface MailListMembersQuery {
+export declare type MailListMembersQuery = {
     subscribed?: 'yes' | 'no';
     limit?: number;
-}
-export interface MultipleMembersData {
+};
+export declare type MultipleMembersData = {
     members: Array<MailListMember>;
     upsert: 'yes' | 'no';
-}
-export interface MultipleMembersReqData {
+};
+export declare type MultipleMembersReqData = {
     members: string;
     upsert: 'yes' | 'no';
-}
+};
 export interface CreateUpdateMailListMembers {
     address: string;
     name?: string;
@@ -24,13 +24,13 @@ export interface CreateUpdateMailListMembers {
     subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
 }
-export interface CreateUpdateMailListMembersReq {
+export declare type CreateUpdateMailListMembersReq = {
     address: string;
     name?: string;
     vars?: string;
     subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
-}
+};
 export interface DeletedMember {
     member: {
         address: string;

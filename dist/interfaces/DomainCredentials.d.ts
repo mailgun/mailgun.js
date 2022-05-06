@@ -1,11 +1,11 @@
-export interface DomainCredentialsQuery {
+export declare type DomainCredentialsQuery = {
     limit: number;
     skip: number;
-}
-export interface DomainCredentials {
+};
+export declare type DomainCredentials = {
     login: string;
     password: string;
-}
+};
 export interface DomainCredentialsItem {
     created_at: string;
     login: string;
@@ -41,9 +41,9 @@ export interface DeletedDomainCredentialsResponse {
         spec: string;
     };
 }
-export interface UpdateDomainCredentialsData {
+export declare type UpdateDomainCredentialsData = {
     password: string;
-}
+};
 export interface IDomainCredentials {
     list(domain: string, query: DomainCredentialsQuery): Promise<DomainCredentialsList>;
     create(domain: string, data: DomainCredentials): Promise<DomainCredentialsResult>;

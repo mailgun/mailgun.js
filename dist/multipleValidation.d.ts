@@ -5,6 +5,6 @@ export default class MultipleValidationClient implements IMultipleValidationClie
     constructor(request: Request);
     list(): Promise<MultipleValidationJobsListResult>;
     get(listId: string): Promise<MultipleValidationJob>;
-    create(listId: string, file: any): Promise<CreatedMultipleValidationJob>;
+    create(listId: string, file: Record<string, unknown>): Promise<CreatedMultipleValidationJob>;
     destroy(listId: string): Promise<CanceledMultipleValidationJob>;
 }

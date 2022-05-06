@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
-export interface DomainCredentialsQuery {
+export type DomainCredentialsQuery = {
     limit: number;
     skip: number;
 }
 
-export interface DomainCredentials {
+export type DomainCredentials = {
     login: string;
     password: string;
 }
@@ -48,7 +48,7 @@ export interface DeletedDomainCredentialsResponse {
     }
 }
 
-export interface UpdateDomainCredentialsData {
+export type UpdateDomainCredentialsData = {
     password: string;
 }
 

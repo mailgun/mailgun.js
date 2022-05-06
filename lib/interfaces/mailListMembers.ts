@@ -6,17 +6,17 @@ export interface MailListMember {
     subscribed: boolean,
     vars: string | any;
 }
-export interface MailListMembersQuery {
+export type MailListMembersQuery = {
     subscribed?: 'yes' | 'no';
     limit?: number;
 }
 
-export interface MultipleMembersData {
+export type MultipleMembersData = {
     members: Array<MailListMember>;
     upsert: 'yes' | 'no';
 }
 
-export interface MultipleMembersReqData {
+export type MultipleMembersReqData = {
     members: string;
     upsert: 'yes' | 'no';
 }
@@ -29,7 +29,7 @@ export interface CreateUpdateMailListMembers {
     upsert?: 'yes' | 'no';
 }
 
-export interface CreateUpdateMailListMembersReq {
+export type CreateUpdateMailListMembersReq = {
     address: string;
     name?: string;
     vars?: string;

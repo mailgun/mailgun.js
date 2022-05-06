@@ -1,7 +1,7 @@
 import nock from 'nock';
 import formData from 'form-data';
 import Request from '../lib/request';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
 import { InputFormData } from '../lib/interfaces/IFormData';
@@ -73,6 +73,19 @@ describe('mailListsMembersClient', function () {
     it('works with string value in subscribed field', function () {
       const member:any = { ...defaultListMember };
       member.subscribed = 'yes';
+      const mailingListAddress = 'testingMailingListAddress@example.com';
+      api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
+        member
+      });
+
+      return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
+        newListMember.should.eql(member);
+      });
+    });
+
+    it('works with false value in subscribed field', function () {
+      const member:any = { ...defaultListMember };
+      member.subscribed = false;
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
         member

@@ -3,7 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import ValidateClient from '../lib/validate';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import MultipleValidationClient from '../lib/multipleValidation';
 

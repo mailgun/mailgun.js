@@ -8,17 +8,17 @@ export default class IpsClient {
     this.request = request;
   }
 
-  list(query: any) {
-    return this.request.get('/v3/ips', query)
-      .then((response: { body: IpsListResponseBody }) => this.parseIpsResponse(response));
+  async list(query: any): Promise<IpsListResponseBody> {
+    const response = await this.request.get('/v3/ips', query);
+    return this.parseIpsResponse<IpsListResponseBody>(response);
   }
 
-  get(ip: string) {
-    return this.request.get(`/v3/ips/${ip}`)
-      .then((response: { body: IpData }) => this.parseIpsResponse(response));
+  async get(ip: string): Promise<IpData> {
+    const response = await this.request.get(`/v3/ips/${ip}`);
+    return this.parseIpsResponse<IpData>(response);
   }
 
-  private parseIpsResponse(response: { body: IpsListResponseBody | IpData }) {
+  private parseIpsResponse<T>(response: { body: T }): T {
     return response.body;
   }
 }

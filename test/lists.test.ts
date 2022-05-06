@@ -3,7 +3,7 @@ import formData from 'form-data';
 
 import Request from '../lib/request';
 import ListsClient from '../lib/lists';
-import RequestOptions from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import {
   CancelValidationResult,
