@@ -82,6 +82,19 @@ describe('mailListsMembersClient', function () {
         newListMember.should.eql(member);
       });
     });
+
+    it('works with false value in subscribed field', function () {
+      const member:any = { ...defaultListMember };
+      member.subscribed = false;
+      const mailingListAddress = 'testingMailingListAddress@example.com';
+      api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
+        member
+      });
+
+      return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
+        newListMember.should.eql(member);
+      });
+    });
   });
 
   describe('createMembers', function () {

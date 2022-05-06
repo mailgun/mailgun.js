@@ -24,8 +24,7 @@ export interface IpPoolListResult {
 export type IpPoolUpdateData = {
   name: string,
   description: string,
-  add_ip: string,
-  remove_ip: string
+  ips: string[]
 }
 
 export type IpPoolMessageResponse = {
@@ -41,8 +40,8 @@ export type IpPoolMessageResult = {
 }
 
 export type IpPoolDeleteData = {
-  id: string,
-   pool_id: string
+  ip?: string,
+  pool_id?: string
 }
 
 export type IpPoolCreateData = {

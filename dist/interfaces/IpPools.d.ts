@@ -20,8 +20,7 @@ export interface IpPoolListResult {
 export declare type IpPoolUpdateData = {
     name: string;
     description: string;
-    add_ip: string;
-    remove_ip: string;
+    ips: string[];
 };
 export declare type IpPoolMessageResponse = {
     body: {
@@ -34,8 +33,8 @@ export declare type IpPoolMessageResult = {
     status: number;
 };
 export declare type IpPoolDeleteData = {
-    id: string;
-    pool_id: string;
+    ip?: string;
+    pool_id?: string;
 };
 export declare type IpPoolCreateData = {
     name: string;

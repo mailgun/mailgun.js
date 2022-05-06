@@ -47,6 +47,30 @@ describe('WebhookClient', function () {
         webhook.should.eql({ id: 'click', url: 'trackclick.com' });
       });
     });
+
+    it('fetches single webhook with multiple urls', function () {
+      api.get('/v3/domains/domain.com/webhooks/click').reply(200, {
+        webhook: {
+          urls: ['trackclick.com', 'trackclick1.com']
+        }
+      });
+
+      return client.get('domain.com', 'click').then(function (webhook: any) {
+        webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      });
+    });
+
+    it('sets url to undefined if no urls', function () {
+      api.get('/v3/domains/domain.com/webhooks/click').reply(200, {
+        webhook: {
+          urls: []
+        }
+      });
+
+      return client.get('domain.com', 'click').then(function (webhook: any) {
+        webhook.should.eql({ id: 'click', url: undefined });
+      });
+    });
   });
 
   describe('create', function () {
