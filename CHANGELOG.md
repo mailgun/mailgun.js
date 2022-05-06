@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/mailgun/mailgun.js/compare/v5.2.2...v6.0.0) (2022-05-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update ip-pools client responses body shapes. Refactor of request.ts file
+
+### Breaking changes
+
+* Update ip-pools client responses body shapes. Refactor of request.ts file ([0595d62](https://github.com/mailgun/mailgun.js/commits/0595d62eeba66caa98b19b048425385db982d2f0))
+
+
+### Other changes
+
+* Add tests ([8590989](https://github.com/mailgun/mailgun.js/commits/859098970b21b84a1085cb8cf967db769f28ed0f))
+
 ### [5.2.2](https://github.com/mailgun/mailgun.js/compare/v5.2.1...v5.2.2) (2022-04-22)
 
 
