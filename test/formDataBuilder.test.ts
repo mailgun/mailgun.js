@@ -27,9 +27,9 @@ describe('FormDataBuilder', function () {
     });
 
     it('adds default name for file if needed', async () => {
-      const result = builder.createFormData({ file: { data: Buffer.from('test message') } }) as NodeFormData;
+      const result = builder.createFormData({ attachment: { data: Buffer.from('test message') } }) as NodeFormData;
       const data = result.getBuffer().toString();
-      expect(data).include('Content-Disposition: form-data; name="file"; filename="file"');
+      expect(data).include('Content-Disposition: form-data; name="attachment"; filename="file"');
       expect(data).include('Content-Type: application/octet-stream');
     });
   });
