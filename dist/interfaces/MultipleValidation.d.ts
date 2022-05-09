@@ -8,6 +8,7 @@ export interface MultipleValidationJob {
     quantity: number;
     records_processed: number;
     status: string;
+    responseStatusCode: number;
     summary: {
         result: {
             catch_all: number;
@@ -28,6 +29,14 @@ export interface CreatedMultipleValidationJob {
     id: string;
     message: string;
 }
+export interface MultipleValidationCreationData {
+    file: Record<string, unknown>;
+    [key: string]: unknown | undefined;
+}
+export interface MultipleValidationCreationDataUpdated {
+    multipleValidationFile: Record<string, unknown>;
+    [key: string]: unknown | undefined;
+}
 export interface PagesList {
     prev: string;
     first: string;
@@ -38,13 +47,14 @@ export interface MultipleValidationJobsListResult {
     jobs: MultipleValidationJob[];
     paging: PagesList;
     total: number;
+    status: number;
 }
 export interface MultipleValidationJobsListResponse {
     status: 200;
     body: MultipleValidationJobsListResult;
 }
 export interface CanceledMultipleValidationJob {
-    body: string;
+    message: string;
     status: number;
 }
 export interface IMultipleValidationClient {

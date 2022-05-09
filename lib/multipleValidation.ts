@@ -1,7 +1,10 @@
+import APIResponse from './interfaces/ApiResponse';
 import {
   CanceledMultipleValidationJob,
   CreatedMultipleValidationJob,
   IMultipleValidationClient,
+  MultipleValidationCreationDataUpdated,
+  MultipleValidationCreationData,
   MultipleValidationJob,
   MultipleValidationJobsListResult
 }
@@ -15,23 +18,43 @@ export default class MultipleValidationClient implements IMultipleValidationClie
     this.request = request;
   }
 
-  list(): Promise<MultipleValidationJobsListResult> {
-    return this.request.get('/v4/address/validate/bulk')
-      .then((response) => response.body as MultipleValidationJobsListResult);
+  private handleResponse<T>(response: APIResponse): T {
+    return {
+      status: response.status,
+      ...response?.body
+    } as T;
   }
 
-  get(listId: string): Promise<MultipleValidationJob> {
-    return this.request.get(`/v4/address/validate/bulk/${listId}`)
-      .then((response) => response.body);
+  async list(): Promise<MultipleValidationJobsListResult> {
+    const response = await this.request.get('/v4/address/validate/bulk');
+    return this.handleResponse<MultipleValidationJobsListResult>(response);
   }
 
-  create(listId: string, file: Record<string, unknown>): Promise<CreatedMultipleValidationJob> {
-    return this.request.postWithFD(`/v4/address/validate/bulk/${listId}`, file)
-      .then((response) => response.body);
+  async get(listId: string): Promise<MultipleValidationJob> {
+    const response = await this.request.get(`/v4/address/validate/bulk/${listId}`);
+    return {
+      responseStatusCode: response.status,
+      ...response?.body
+    };
   }
 
-  destroy(listId: string): Promise<CanceledMultipleValidationJob> {
-    return this.request.delete(`/v4/address/validate/bulk/${listId}`)
-      .then((response) => response);
+  async create(
+    listId: string,
+    data: MultipleValidationCreationData
+  ): Promise<CreatedMultipleValidationJob> {
+    const multipleValidationData: MultipleValidationCreationDataUpdated = {
+      multipleValidationFile: {
+        ...data?.file
+      },
+      ...data
+    };
+    delete multipleValidationData.file;
+    const response = await this.request.postWithFD(`/v4/address/validate/bulk/${listId}`, multipleValidationData);
+    return this.handleResponse<CreatedMultipleValidationJob>(response);
+  }
+
+  async destroy(listId: string): Promise<CanceledMultipleValidationJob> {
+    const response = await this.request.delete(`/v4/address/validate/bulk/${listId}`);
+    return this.handleResponse<CanceledMultipleValidationJob>(response);
   }
 }

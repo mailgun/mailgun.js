@@ -14,7 +14,7 @@ class FormDataBuilder {
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
-        const fileKeys = ['attachment', 'inline', 'file'];
+        const fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
         if (fileKeys.includes(key)) {
           this.addFilesToFD(key, data[key], formDataAcc);
           return formDataAcc;
@@ -78,10 +78,11 @@ class FormDataBuilder {
     formDataInstance: NodeFormData | FormData
   ): void {
     const appendFileToFD = (
-      key: string,
+      originalKey: string,
       obj: any,
       formData: NodeFormData | FormData
     ): void => {
+      const key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
       const isStreamData = this.isStream(obj);
       const objData = isStreamData ? obj : obj.data;
       // getAttachmentOptions should be called with obj parameter to prevent loosing filename
