@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.1](https://github.com/mailgun/mailgun.js/compare/v6.0.0...v6.0.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* Remove file property handling as a file ([d1a8a14](https://github.com/mailgun/mailgun.js/commits/d1a8a14eb5b12ca38772f9414e068fd49a011bad))
+
+
+### Other changes
+
+* Update tests ([52e443c](https://github.com/mailgun/mailgun.js/commits/52e443c20bd57c36e1b50aa1b8d930e160370ab6))
+
 ## [6.0.0](https://github.com/mailgun/mailgun.js/compare/v5.2.2...v6.0.0) (2022-05-06)
 
 
