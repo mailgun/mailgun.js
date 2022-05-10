@@ -75,7 +75,7 @@ describe('ValidateClient', function () {
         .reply(200, data);
 
       return client.list().then(function (response: MultipleValidationJobsListResult) {
-        response.should.eql(data);
+        response.should.eql({ status: 200, ...data });
       });
     });
   });
@@ -114,7 +114,7 @@ describe('ValidateClient', function () {
         .reply(200, data);
 
       return client.get(listId).then(function (response: MultipleValidationJob) {
-        response.should.eql(data);
+        response.should.eql({ responseStatusCode: 200, ...data });
       });
     });
   });
@@ -135,7 +135,7 @@ describe('ValidateClient', function () {
 
       return client.create(listId, { file })
         .then(function (response: CreatedMultipleValidationJob) {
-          response.should.eql(data);
+          response.should.eql({ status: 200, ...data });
         });
     });
   });
@@ -144,7 +144,7 @@ describe('ValidateClient', function () {
     it('should cancel current running bulk validation job.', async function () {
       const listId = 'testValidationList';
       const data = {
-        body: { message: 'Validation job canceled.' },
+        message: 'Validation job canceled.',
         status: 200
       };
       api.delete(`/v4/address/validate/bulk/${listId}`)
