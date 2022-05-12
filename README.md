@@ -175,7 +175,7 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
       from: "Excited User <mailgun@sandbox-123.mailgun.org>",
       to: ["test@example.com"],
       subject: "Hello",
-      text: "<mime encoded string here>"
+      message: "<mime encoded string here>"
     })
     .then(msg => console.log(msg)) // logs response data
     .catch(err => console.log(err)); // logs any error
@@ -1446,6 +1446,7 @@ Response shape:
   "id": "name_of_the_list",
   "quantity": 40,
   "records_processed": 40,
+  "responseStatusCode": 200,
   "status": "uploaded",
   "summary": {
     "result": {
@@ -1875,5 +1876,5 @@ git pull
 
 Next, run ```npm run release```.
 
-After that, run ```npm login``` and ```npm publish``` to publish changes on npm.
+After that, `cd ./dist` and then run ```npm login``` and ```npm publish``` to publish changes on npm.
 
