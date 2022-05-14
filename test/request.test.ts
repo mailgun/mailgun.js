@@ -64,11 +64,8 @@ describe('Request', function () {
 
       const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
       const response: APIResponse = await req.request('get', '/v3/some/resource');
-      expect(response).to.eql({
-        status: 400,
-        body: {
-          message: 'Mailgun is awesome API'
-        }
+      expect(response.body).to.eql({
+        message: 'Mailgun is awesome API'
       });
     });
 
