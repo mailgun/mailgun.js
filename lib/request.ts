@@ -72,7 +72,6 @@ class Request {
     }
 
     const res = await this.getResponseBody(response);
-    console.log('res : ', res)
     return res as APIResponse;
   }
 
