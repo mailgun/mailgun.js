@@ -36,6 +36,7 @@
     "definition": "./index.d.ts"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "base-64": "^1.0.0",
     "bluebird": "^3.7.2",
     "ky": "^0.25.1",
