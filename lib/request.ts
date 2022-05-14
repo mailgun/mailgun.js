@@ -1,6 +1,6 @@
 import * as base64 from 'base-64';
 import urljoin from 'url-join';
-import ky from 'ky-universal';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './error';
 import { OnCallEmptyHeaders, OnCallRequestOptions, RequestOptions } from './interfaces/RequestOptions';
@@ -35,6 +35,7 @@ class Request {
     const options: OnCallRequestOptions = { ...onCallOptions };
     const basic = base64.encode(`${this.username}:${this.key}`);
     const onCallHeaders = options.headers ? options.headers : {};
+
     const headers: HeadersInit| OnCallEmptyHeaders = {
       Authorization: `Basic ${basic}`,
       ...this.headers,
@@ -50,49 +51,45 @@ class Request {
       delete params.query;
     }
 
-    const response: Response = await ky(
-      urljoin(this.url, url),
-      {
-        method: method.toLocaleUpperCase(),
-        headers,
-        throwHttpErrors: false,
-        timeout: this.timeout,
-        ...params
-      }
-    );
+    let response: AxiosResponse;
 
-    if (!response?.ok) {
-      const res = await this.getResponseBody(response);
+    try {
+      response = await axios.request({
+        method: method.toLocaleUpperCase(),
+        timeout: this.timeout,
+        url: urljoin(this.url, url),
+        headers,
+        ...params
+      });
+    } catch (err: unknown) {
+      const errorResponse = err as AxiosError;
 
       throw new APIError({
-        status: response?.status,
-        statusText: response?.statusText,
-        body: res.body
+        status: errorResponse?.response?.status,
+        statusText: errorResponse?.response?.statusText,
+        body: errorResponse?.response?.data
       } as APIErrorOptions);
     }
 
     const res = await this.getResponseBody(response);
+    console.log('res : ', res)
     return res as APIResponse;
   }
 
-  private async getResponseBody(response: Response): Promise<APIResponse> {
+  private async getResponseBody(response: AxiosResponse): Promise<APIResponse> {
     const res = {
       body: {},
       status: response?.status
     } as APIResponse;
-    let responseString = '';
-    try {
-      responseString = await response.text();
-      const jsonBody = JSON.parse(responseString);
-      res.body = jsonBody;
-      return res;
-    } catch (error: unknown) {
-      res.status = 400;
+
+    if (typeof response.data === 'string') {
       res.body = {
-        message: responseString,
+        message: response.data
       };
-      return res;
+    } else {
+      res.body = response.data;
     }
+    return res;
   }
 
   query(
