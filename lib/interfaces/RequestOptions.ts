@@ -12,5 +12,6 @@ export interface RequestOptions extends Options {
 export interface OnCallRequestOptions {
   timeout?: number;
   headers?: AxiosRequestHeaders;
+  query?: any;
   [key: string]: unknown | undefined;
 }

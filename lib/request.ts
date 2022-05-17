@@ -47,7 +47,7 @@ class Request {
     const params = { ...options };
 
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
-      params.searchParams = options.query;
+      params.params = new URLSearchParams(options.query);
       delete params.query;
     }
 
@@ -82,6 +82,13 @@ class Request {
     } as APIResponse;
 
     if (typeof response.data === 'string') {
+      if (response.data === 'Mailgun Magnificent API') {
+        throw new APIError({
+          status: 400,
+          statusText: 'Incorrect url',
+          body: response.data
+        } as APIErrorOptions);
+      }
       res.body = {
         message: response.data
       };

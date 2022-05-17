@@ -11,7 +11,14 @@ export default class APIError extends Error {
     message,
     body = {}
   }: APIErrorOptions) {
-    const { message: bodyMessage, error } = body;
+    let bodyMessage = '';
+    let error = '';
+    if (typeof body === 'string') {
+      bodyMessage = body;
+    } else {
+      bodyMessage = body?.message;
+      error = body?.error;
+    }
     super();
 
     this.stack = '';

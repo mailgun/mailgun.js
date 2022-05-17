@@ -38,11 +38,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "base-64": "^1.0.0",
-    "bluebird": "^3.7.2",
-    "ky": "^0.25.1",
-    "ky-universal": "^0.8.2",
     "url-join": "^4.0.1",
-    "web-streams-polyfill": "^3.0.1",
     "webpack-merge": "^5.4.0"
   },
   "devDependencies": {
