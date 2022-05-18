@@ -51,6 +51,11 @@ class Request {
       delete params.query;
     }
 
+    if (options?.body) {
+      const body = options?.body;
+      params.data = body;
+      delete params.body;
+    }
     let response: AxiosResponse;
 
     try {
@@ -110,7 +115,7 @@ class Request {
   command(
     method: string,
     url: string,
-    data?: Record<string, unknown> | string | NodeFormData | FormData,
+    data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData,
     options?: Record<string, unknown>,
     addDefaultHeaders = true
   ): Promise<APIResponse> {
@@ -151,17 +156,23 @@ class Request {
     data: Record<string, unknown> | Record<string, unknown>[]
   ): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('post', url, formData, {}, false);
+    return this.command('post', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   putWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('put', url, formData, {}, false);
+    return this.command('put', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   patchWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('patch', url, formData, {}, false);
+    return this.command('patch', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   put(url: string, data?: Record<string, unknown> | string, options?: Record<string, unknown>)
