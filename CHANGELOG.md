@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/mailgun/mailgun.js/compare/v6.0.1...v7.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Replaced ky with axios
+
+### Features
+
+* Fix tests. Improve error handling ([063e3ee](https://github.com/mailgun/mailgun.js/commits/063e3eedcd7d55b59bd32e521aa053be0a8d3101))
+
+
+### Bug Fixes
+
+* Correct handling of options body. Add header for form-data ([e2e210d](https://github.com/mailgun/mailgun.js/commits/e2e210d919ca1a68d76ed4c4aa93cc1178f6ebba))
+* Corrected test to check body and not improper status code ([d11cd39](https://github.com/mailgun/mailgun.js/commits/d11cd39a1316c34bac0bc437bb43d4f8797cd3bd))
+* Refactored ky usage with axios ([df4da91](https://github.com/mailgun/mailgun.js/commits/df4da916f10a0653d1a7e3ed8243f02bd3b824e1))
+* Removed console.log ([b4e21c7](https://github.com/mailgun/mailgun.js/commits/b4e21c74b218f92a8292237aa8fe8b2af91b4b81))
+
+
+### Other changes
+
+* Update docs and readme ([1ccaeac](https://github.com/mailgun/mailgun.js/commits/1ccaeaca4ed954985b2ee9a0c0e7666c2f8f6b0f))
+
+
+### Breaking changes
+
+* Replaced ky with axios ([142bb7a](https://github.com/mailgun/mailgun.js/commits/142bb7ada1671c31a636d89efd7ffc62afaf3671))
+
 ### [6.0.1](https://github.com/mailgun/mailgun.js/compare/v6.0.0...v6.0.1) (2022-05-10)
 
 
