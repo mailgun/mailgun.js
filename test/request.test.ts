@@ -60,16 +60,18 @@ describe('Request', function () {
     it('parses API response with string', async function () {
       nock('https://api.mailgun.com', { reqheaders: headers })
         .get('/v3/some/resource')
-        .reply(200, 'Mailgun is awesome API');
+        .reply(200, 'Mailgun Magnificent API');
 
       const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
-      const response: APIResponse = await req.request('get', '/v3/some/resource');
-      expect(response).to.eql({
-        status: 400,
-        body: {
-          message: 'Mailgun is awesome API'
-        }
-      });
+      try {
+        await req.request('get', '/v3/some/resource');
+      } catch (error) {
+        expect(error).to.include({
+          status: 400,
+          details: 'Mailgun Magnificent API',
+          message: 'Incorrect url'
+        });
+      }
     });
 
     it('handles API error', function () {

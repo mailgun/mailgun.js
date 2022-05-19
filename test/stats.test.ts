@@ -4,11 +4,11 @@ import nock from 'nock';
 import Request from '../lib/request';
 import StatsClient from '../lib/stats';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { StatsOptions } from '../lib/interfaces/StatsOptions';
+import { StatsOptions, StatsQuery } from '../lib/interfaces/StatsOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('StatsClient', function () {
-  let client: any;
+  let client: StatsClient;
   let api: any;
 
   beforeEach(function () {
@@ -21,7 +21,7 @@ describe('StatsClient', function () {
   });
 
   describe('getDomain', function () {
-    const query = { event: 'delivered' };
+    const query = { event: 'delivered' } as StatsQuery;
 
     it('fetches stats for a given domain', function () {
       api.get('/v3/domain.com/stats/total')

@@ -1,6 +1,6 @@
 import * as base64 from 'base-64';
 import urljoin from 'url-join';
-import ky from 'ky-universal';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './error';
 import { OnCallEmptyHeaders, OnCallRequestOptions, RequestOptions } from './interfaces/RequestOptions';
@@ -35,6 +35,7 @@ class Request {
     const options: OnCallRequestOptions = { ...onCallOptions };
     const basic = base64.encode(`${this.username}:${this.key}`);
     const onCallHeaders = options.headers ? options.headers : {};
+
     const headers: HeadersInit| OnCallEmptyHeaders = {
       Authorization: `Basic ${basic}`,
       ...this.headers,
@@ -46,28 +47,32 @@ class Request {
     const params = { ...options };
 
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
-      params.searchParams = options.query;
+      params.params = new URLSearchParams(options.query);
       delete params.query;
     }
 
-    const response: Response = await ky(
-      urljoin(this.url, url),
-      {
-        method: method.toLocaleUpperCase(),
-        headers,
-        throwHttpErrors: false,
-        timeout: this.timeout,
-        ...params
-      }
-    );
+    if (options?.body) {
+      const body = options?.body;
+      params.data = body;
+      delete params.body;
+    }
+    let response: AxiosResponse;
 
-    if (!response?.ok) {
-      const res = await this.getResponseBody(response);
+    try {
+      response = await axios.request({
+        method: method.toLocaleUpperCase(),
+        timeout: this.timeout,
+        url: urljoin(this.url, url),
+        headers,
+        ...params
+      });
+    } catch (err: unknown) {
+      const errorResponse = err as AxiosError;
 
       throw new APIError({
-        status: response?.status,
-        statusText: response?.statusText,
-        body: res.body
+        status: errorResponse?.response?.status,
+        statusText: errorResponse?.response?.statusText,
+        body: errorResponse?.response?.data
       } as APIErrorOptions);
     }
 
@@ -75,24 +80,27 @@ class Request {
     return res as APIResponse;
   }
 
-  private async getResponseBody(response: Response): Promise<APIResponse> {
+  private async getResponseBody(response: AxiosResponse): Promise<APIResponse> {
     const res = {
       body: {},
       status: response?.status
     } as APIResponse;
-    let responseString = '';
-    try {
-      responseString = await response.text();
-      const jsonBody = JSON.parse(responseString);
-      res.body = jsonBody;
-      return res;
-    } catch (error: unknown) {
-      res.status = 400;
+
+    if (typeof response.data === 'string') {
+      if (response.data === 'Mailgun Magnificent API') {
+        throw new APIError({
+          status: 400,
+          statusText: 'Incorrect url',
+          body: response.data
+        } as APIErrorOptions);
+      }
       res.body = {
-        message: responseString,
+        message: response.data
       };
-      return res;
+    } else {
+      res.body = response.data;
     }
+    return res;
   }
 
   query(
@@ -107,7 +115,7 @@ class Request {
   command(
     method: string,
     url: string,
-    data?: Record<string, unknown> | string | NodeFormData | FormData,
+    data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData,
     options?: Record<string, unknown>,
     addDefaultHeaders = true
   ): Promise<APIResponse> {
@@ -148,17 +156,23 @@ class Request {
     data: Record<string, unknown> | Record<string, unknown>[]
   ): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('post', url, formData, {}, false);
+    return this.command('post', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   putWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('put', url, formData, {}, false);
+    return this.command('put', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   patchWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('patch', url, formData, {}, false);
+    return this.command('patch', url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, false);
   }
 
   put(url: string, data?: Record<string, unknown> | string, options?: Record<string, unknown>)

@@ -1,15 +1,17 @@
+import { AxiosRequestHeaders } from 'axios'
 import Options from './Options';
 
 export interface OnCallEmptyHeaders {
   [key: string]: undefined;
 }
 export interface RequestOptions extends Options {
-  headers: any;
+  headers: AxiosRequestHeaders;
   timeout: number;
 }
 
 export interface OnCallRequestOptions {
   timeout?: number;
-  headers?: HeadersInit| OnCallEmptyHeaders;
+  headers?: AxiosRequestHeaders;
+  query?: any;
   [key: string]: unknown | undefined;
 }
