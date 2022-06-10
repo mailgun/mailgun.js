@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://github.com/mailgun/mailgun.js/compare/v7.0.0...v7.0.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* Update max body length configuration. Fix Axios error handling ([cbc4182](https://github.com/mailgun/mailgun.js/commits/cbc4182db59ec6e41aada0eaad5fbf39a344d4b6))
+
 ## [7.0.0](https://github.com/mailgun/mailgun.js/compare/v6.0.1...v7.0.0) (2022-05-19)
 
 
