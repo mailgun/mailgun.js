@@ -10,6 +10,7 @@ declare class Request {
     private timeout;
     private headers;
     private formDataBuilder;
+    private maxBodyLength;
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, onCallOptions?: Record<string, unknown | Record<string, unknown>>): Promise<APIResponse>;
     private getResponseBody;

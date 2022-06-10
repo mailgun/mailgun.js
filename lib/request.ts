@@ -17,6 +17,7 @@ class Request {
   private timeout: number;
   private headers: Record<string, unknown>;
   private formDataBuilder: FormDataBuilder;
+  private maxBodyLength: number;
 
   constructor(options: RequestOptions, formData: InputFormData) {
     this.username = options.username;
@@ -25,6 +26,7 @@ class Request {
     this.timeout = options.timeout;
     this.headers = options.headers || {};
     this.formDataBuilder = new FormDataBuilder(formData);
+    this.maxBodyLength = 25000000; // 25MB
   }
 
   async request(
@@ -64,15 +66,16 @@ class Request {
         timeout: this.timeout,
         url: urljoin(this.url, url),
         headers,
-        ...params
+        ...params,
+        maxBodyLength: this.maxBodyLength
       });
     } catch (err: unknown) {
       const errorResponse = err as AxiosError;
 
       throw new APIError({
-        status: errorResponse?.response?.status,
-        statusText: errorResponse?.response?.statusText,
-        body: errorResponse?.response?.data
+        status: errorResponse?.response?.status || 400,
+        statusText: errorResponse?.response?.statusText || errorResponse.code,
+        body: errorResponse?.response?.data || errorResponse.message
       } as APIErrorOptions);
     }
 

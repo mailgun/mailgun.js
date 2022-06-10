@@ -87,6 +87,22 @@ describe('Request', function () {
 
       return res;
     });
+
+    it('handles axios error', function () {
+      nock('https://api.mailgun.com', { reqheaders: headers })
+        .post('/v2/some/resource')
+        .reply(400, 'Too big body');
+
+      const twentyFiveMegabytesInBytes = 25000000;
+      const test25MbBuffer = Buffer.alloc(twentyFiveMegabytesInBytes);
+      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const res = req.postWithFD('/v2/some/resource', { attachment: [{ filename: 'test.pdf', data: test25MbBuffer }] }).catch(function (error: APIError) {
+        expect(error.status).to.eql(400);
+        expect(error.details).to.eql('Request body larger than maxBodyLength limit');
+      });
+
+      return res;
+    });
   });
 
   describe('query', function () {
