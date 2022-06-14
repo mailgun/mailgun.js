@@ -12,6 +12,33 @@ export default class MessagesClient {
     this.request = request;
   }
 
+  private prepareBooleanValues(data: MailgunMessageData): MailgunMessageData {
+    const yesNoProperties = new Set([
+      'o:testmode',
+      't:text',
+      'o:dkim',
+      'o:tracking',
+      'o:tracking-clicks',
+      'o:tracking-opens',
+      'o:require-tls',
+      'o:skip-verification'
+    ]);
+
+    if (!data || Object.keys(data).length === 0) {
+      return {};
+    }
+    const updatedData = Object.keys(data).reduce((acc, key) => {
+      if (yesNoProperties.has(key) && typeof data[key] === 'boolean') {
+        acc[key] = data[key] ? 'yes' : 'no';
+      } else {
+        acc[key] = data[key];
+      }
+      return acc;
+    }, {} as MailgunMessageData);
+
+    return updatedData;
+  }
+
   _parseResponse(response: MessagesSendAPIResponse): MessagesSendResult {
     return {
       status: response.status,
@@ -25,7 +52,8 @@ export default class MessagesClient {
         .then(this._parseResponse);
     }
 
-    return this.request.postWithFD(`/v3/${domain}/messages`, data)
+    const modifiedData = this.prepareBooleanValues(data);
+    return this.request.postWithFD(`/v3/${domain}/messages`, modifiedData)
       .then(this._parseResponse);
   }
 }
