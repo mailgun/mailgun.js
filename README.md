@@ -138,6 +138,7 @@ Parameter         | Description
 to                | Email address of the recipient(s). Example: "Bob <bob@host.com>". You can use commas to separate multiple recipients (e.g.: "test@example.com,test@example.com" or ["test@example.com", "test@example.com"]).
 cc                | Same as `To` but for `carbon copy`
 bcc               | Same as `To` but for `blind carbon copy`
+subject           | Subject of the message.
 html              | HTML version of the message.
 text              | Text version of the message.
 message           | MIME string of the message. Make sure to use multipart/form-data to send this as a file upload.
