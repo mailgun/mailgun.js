@@ -400,7 +400,7 @@ Recipient Variables are custom variables that you define, which you can then ref
 
 #### list
 
-`mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/api-domains.html)
+`mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/en/latest/api-domains.html)
 
 Example:
 
