@@ -165,7 +165,7 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
       html: "<h1>Testing some Mailgun awesomness!</h1>"
     })
     .then(msg => console.log(msg)) // logs response data
-    .catch(err => console.log(err)); // logs any error
+    .catch(err => console.error(err)); // logs any error
   ```
 
 - MIME Example:
@@ -178,7 +178,7 @@ v:my-var          | v: prefix followed by an arbitrary name allows to attach a c
       message: "<mime encoded string here>"
     })
     .then(msg => console.log(msg)) // logs response data
-    .catch(err => console.log(err)); // logs any error
+    .catch(err => console.error(err)); // logs any error
   ```
 
 Messages with attachments:
@@ -406,7 +406,7 @@ Example:
 ```js
 mg.domains.list()
   .then(domains => console.log(domains)) // logs array of domains
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: array of Domain instances
@@ -444,7 +444,7 @@ Example:
 ```js
 mg.domains.get()
   .then(domains => console.log(domains)) // logs array of domains
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: Domain instance
@@ -503,7 +503,7 @@ Example:
 ```js
 mg.domains.create({name: 'foobar.example.com'})
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Options:
@@ -570,7 +570,7 @@ Example:
 ```js
 mg.domains.destroy('foobar.example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -590,7 +590,7 @@ Example:
 ```js
 mg.domains.getTracking('foobar.example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -620,7 +620,7 @@ Open Tracking Example:
 ```js
 mg.domains.updateTracking('foobar.example.com', 'open', {active: true})
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Open Tracking Options
@@ -645,7 +645,7 @@ Click Tracking Example:
 ```js
 mg.domains.updateTracking('foobar.example.com', 'click', {active: true})
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Click Tracking Options
@@ -674,7 +674,7 @@ mg.domains.updateTracking('foobar.example.com', 'unsubscribe', {
     text_footer: "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
   })
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Unsubscribe Tracking Options
@@ -706,7 +706,7 @@ Example:
 ```js
 mg.domains.getIps('foobar.example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -724,7 +724,7 @@ Example:
 ```js
 mg.domains.assignIp('foobar.example.com', "192.168.0.3")
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 
@@ -743,7 +743,7 @@ Example:
 ```js
 mg.domains.deleteIp('foobar.example.com', "192.168.0.3")
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 
@@ -765,7 +765,7 @@ Example:
 ```js
 mg.events.get('foobar.example.com', { page: 'mypageid' })
   .then(data => console.log(data.items)) // logs array of event objects
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Options:
@@ -845,7 +845,7 @@ Example:
 ```js
 mg.stats.getDomain('foobar.example.com', {event: ['delivered', 'accepted', 'failed', 'complained']})
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -871,7 +871,7 @@ Example:
 ```js
 mg.stats.getDomain('foobar.example.com', {event: ['delivered', 'accepted', 'failed', 'complained']})
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -899,7 +899,7 @@ Bounces Example:
 ```js
 mg.suppressions.list('foobar.example.com', 'bounces')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Unsubscribes Example:
@@ -907,7 +907,7 @@ Unsubscribes Example:
 ```js
 mg.suppressions.list('foobar.example.com', 'unsubscribes')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Complaints Example:
@@ -915,7 +915,7 @@ Complaints Example:
 ```js
 mg.suppressions.list('foobar.example.com', 'complaints')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -949,7 +949,7 @@ Bounces Example:
 ```js
 mg.suppressions.get('foobar.example.com', 'bounces', 'address@example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Unsubscribes Example:
@@ -957,7 +957,7 @@ Unsubscribes Example:
 ```js
 mg.suppressions.get('foobar.example.com', 'unsubscribes', 'address@example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Complaints Example:
@@ -965,7 +965,7 @@ Complaints Example:
 ```js
 mg.suppressions.get('foobar.example.com', 'complaints', 'address@example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Options:
@@ -990,7 +990,7 @@ Bounces Example:
 ```js
 mg.suppressions.create('foobar.example.com', 'bounces', [{address: 'bob@example.com'}])
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Bounces Options: Contains an array with the following object properties
@@ -1015,7 +1015,7 @@ Unsubscribes Example:
 ```js
 mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com'}])
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Unsubscribes Options: Contains an array with the following object properties
@@ -1039,7 +1039,7 @@ Complaints Example:
 ```js
 mg.suppressions.create('foobar.example.com', 'complaints', [{address: 'bob@example.com'}])
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Complaints Options: Contains an array with the following object properties
@@ -1068,7 +1068,7 @@ Example:
 ```js
 mg.webhooks.list('foobar.example.com')
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1096,7 +1096,7 @@ Example:
 ```js
 mg.webhooks.get('foobar.example.com', 'open') // bounce, deliver, drop, spam, unsubscribe, click, open
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1116,7 +1116,7 @@ Example:
 ```js
 mg.webhooks.create('foobar.example.com', 'open', 'http://requestb.in') // bounce, deliver, drop, spam, unsubscribe, click, open
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1132,7 +1132,7 @@ Test Webhook Example:
 ```js
 mg.webhooks.get('foobar.example.com', 'open', 'http://requestb.in', true) // bounce, deliver, drop, spam, unsubscribe, click, open
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1153,7 +1153,7 @@ Example:
 ```js
 mg.webhooks.update('foobar.example.com', 'open', 'http://requestb.in') // bounce, deliver, drop, spam, unsubscribe, click, open
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1173,7 +1173,7 @@ Example:
 ```js
 mg.webhooks.update('foobar.example.com', 'open') // bounce, deliver, drop, spam, unsubscribe, click, open
   .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns:
@@ -1195,7 +1195,7 @@ Example:
 ```js
 mg.routes.list()
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1222,7 +1222,7 @@ Example:
 ```js
 mg.routes.get('562da483125730608a7d1719')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1252,7 +1252,7 @@ mg.routes.create({
     action: ['forward("http://myhost.com/messages/")', 'stop()']
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1282,7 +1282,7 @@ mg.routes.update('562da483125730608a7d1719', {
     action: ['forward("http://myhost.com/messages/")', 'stop()']
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1308,7 +1308,7 @@ Example:
 ```js
 mg.routes.destroy('562da483125730608a7d1719')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1331,7 +1331,7 @@ Example:
 ```js
 mg.validate.get('foo@mailgun.net')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1386,7 +1386,7 @@ Response shape:
 ```js
 mg.validate.multipleValidation.list()
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Response shape:
@@ -1432,7 +1432,7 @@ Response shape:
 ```js
 mg.validate.multipleValidation.get('name_of_the_list')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Response shape:
@@ -1469,7 +1469,7 @@ cancels bulk validation job
 ```js
 mg.validate.multipleValidation.destroy('name_of_the_list');
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Response shape:
@@ -1493,7 +1493,7 @@ Example:
 ```js
 mg.lists.list()
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1521,7 +1521,7 @@ Example:
 ```js
 mg.lists.get('noreply@sample.com')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1553,7 +1553,7 @@ mg.lists.create({
     reply_preference: 'list', // optional, modifiable on website
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1585,7 +1585,7 @@ mg.lists.update('reply@sample.com', {
     reply_preference: 'sender', // optional, modifiable on website
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1611,7 +1611,7 @@ Example:
 ```js
 mg.lists.destroy('foo@sample.com')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1636,7 +1636,7 @@ Example:
 ```js
 mg.lists.members.listMembers('reply@sample.com')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1661,7 +1661,7 @@ Example:
 ```js
 mg.lists.members.getMember('reply@sample.com', 'foo@bar.com')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1690,7 +1690,7 @@ mg.lists.members.createMember('reply@sample.com', {
     upsert: 'yes', // optional, choose yes to insert if not exist, or update it exist
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1729,7 +1729,7 @@ mg.lists.members.createMembers('reply@sample.com', {
     upsert: "yes",
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1764,7 +1764,7 @@ mg.lists.members.updateMember('reply@sample.com', 'bot1@foobar.com', {
     subscribed: false,
   })
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
@@ -1787,7 +1787,7 @@ Example:
 ```js
 mg.lists.members.destroyMember('reply@sample.com', 'bot2@foobar.com')
   .then(data => console.log(data)) // logs response body
-  .catch(err => console.log(err)); // logs any error
+  .catch(err => console.error(err)); // logs any error
 ```
 
 Promise Returns: response body
