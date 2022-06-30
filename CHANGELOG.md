@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.3](https://github.com/mailgun/mailgun.js/compare/v7.0.2...v7.0.3) (2022-06-30)
+
+
+### Bug Fixes
+
+* Update handler of mime messages to support strings ([8d88163](https://github.com/mailgun/mailgun.js/commits/8d881636e7de54275d2cccb9652198c9af8cf0a1))
+
+
+### Other changes
+
+* Add missed subject property in readme ([7f4d128](https://github.com/mailgun/mailgun.js/commits/7f4d1286642d4009b25224514d75a0fb51af9bef))
+* Fix link to doc for domains ([944a189](https://github.com/mailgun/mailgun.js/commits/944a1898b03ea020534a7e1be64b1b993ba86439))
+* Regenerate docs ([7f6d318](https://github.com/mailgun/mailgun.js/commits/7f6d3184523c2f9a851093f2b733c5c8fc6806a4))
+* Replace console.log by console.error for logging errors in the readme ([fd9a31f](https://github.com/mailgun/mailgun.js/commits/fd9a31fe90908c9e2e40b2df34cf94a39a716687))
+
 ### [7.0.2](https://github.com/mailgun/mailgun.js/compare/v7.0.1...v7.0.2) (2022-06-14)
 
 
