@@ -60,15 +60,16 @@ class FormDataBuilder {
 
   private addMimeDataToFD(
     key: string,
-    data: Buffer | Blob,
+    data: Buffer | Blob | string,
     formDataInstance: NodeFormData | FormData
   ): void {
-    if (this.isNodeFormData(formDataInstance)) {
-      if (Buffer.isBuffer(data)) {
-        formDataInstance.append(key, data, { filename: 'MimeMessage' });
-      }
+    if (Buffer.isBuffer(data) || typeof data === 'string') {
+      const nodeFormData = formDataInstance as NodeFormData;
+      const preparedData = typeof data === 'string' ? Buffer.from(data) : data;
+      nodeFormData.append(key, preparedData, { filename: 'MimeMessage' });
     } else {
-      formDataInstance.append(key, data as Blob, 'MimeMessage');
+      const browserFormData = formDataInstance as FormData;
+      browserFormData.append(key, data, 'MimeMessage');
     }
   }
 
