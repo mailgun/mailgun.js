@@ -168,14 +168,12 @@ export type MailgunMessageData = {
      * to the message ('X-My-Header' in this case).
      * For example, `h:Reply-To` to specify Reply-To address.
      */
-    'h:X-My-Header'?: string;
+    [key: `h:${string}`]: string;
 
     /**
      * `v:` prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See [Attaching Data to Messages](https://documentation.mailgun.com/en/latest/user_manual.html#manual-customdata) for more information.
      */
-    'v:my-var'?: string;
-
-    [key: string]: any;
+    [key: `v:${string}`]: string;
 }
 
 export interface MessagesSendAPIResponse {
