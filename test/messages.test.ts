@@ -65,7 +65,8 @@ describe('MessagesClient', function () {
         'o:tracking-clicks': true,
         'o:tracking-opens': true,
         'o:require-tls': true,
-        'o:skip-verification': true
+        'o:skip-verification': true,
+        text: 'test'
       }).then(function (data: MessagesSendResult) {
         expect(request.postWithFD).to.have.been.called.with({
           'o:testmode': 'yes',
@@ -75,7 +76,8 @@ describe('MessagesClient', function () {
           'o:tracking-clicks': 'yes',
           'o:tracking-opens': 'yes',
           'o:require-tls': 'yes',
-          'o:skip-verification': 'yes'
+          'o:skip-verification': 'yes',
+          text: 'test'
         });
         expect(data.message).to.eql('Queued. Thank you.');
         expect(data.id).to.eql('<20111114174239.25659.5817@samples.mailgun.org>');
@@ -106,7 +108,7 @@ describe('MessagesClient', function () {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',
-        message: 'ello world!'
+        message: 'hello world!'
       }).then(function (data: MessagesSendResult) {
         expect(data.message).to.eql('Queued. Thank you.');
         expect(data.status).to.eql(200);
