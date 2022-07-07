@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.4](https://github.com/mailgun/mailgun.js/compare/v7.0.3...v7.0.4) (2022-07-07)
+
+
+### Bug Fixes
+
+* Message Data (one of text, html, template required) ([abd2862](https://github.com/mailgun/mailgun.js/commits/abd2862fcf36ca54d68dea14cb2b2658d33092ec))
+
+
+### Other changes
+
+* Add content to message data ([a878cc1](https://github.com/mailgun/mailgun.js/commits/a878cc1acb0b4ca441b100278ca0fd2b47d137e3))
+* Add propetry for mime messages ([f701cfb](https://github.com/mailgun/mailgun.js/commits/f701cfb591f08dbb882953bb2b77131fae089bad))
+* Fix build error ([c7fcb5e](https://github.com/mailgun/mailgun.js/commits/c7fcb5e05bd84fc6ef04589bde37846a11f9466d))
+* Fix tests ([b4791c4](https://github.com/mailgun/mailgun.js/commits/b4791c4e746a97aec359635272c2b29cb956ab6f))
+
 ### [7.0.3](https://github.com/mailgun/mailgun.js/compare/v7.0.2...v7.0.3) (2022-06-30)
 
 
