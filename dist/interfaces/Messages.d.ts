@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /**
  * Ensures the object has least one key present and not undefined
  *
@@ -16,8 +17,12 @@ export declare type MailgunMessageContent = AtLeastOneKeyPresent<{
      */
     html?: string;
     /**
-     * Name of a template stored via [template API](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates). See [Templates](https://documentation.mailgun.com/en/latest/user_manual.html#templating) for more information
+     * Body of the message. (MIME version)
      */
+    message?: string | Buffer | Blob;
+    /**
+    * Name of a template stored via [template API](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates). See [Templates](https://documentation.mailgun.com/en/latest/user_manual.html#templating) for more information
+    */
     template?: string;
 }>;
 export declare type MailgunMessageData = MailgunMessageContent & {
