@@ -29,7 +29,7 @@ export type MailgunMessageContent = AtLeastOneKeyPresent<{
     template?: string;
 }>;
 
-export type MailgunMessageData = {
+export type MailgunMessageData = MailgunMessageContent & {
     /**
      * Email address for `From` header
      */
