@@ -131,9 +131,9 @@ export type MailgunMessageData = MailgunMessageContent & {
     'o:time-zone-localize'?: string;
 
     /**
-     * Enables sending in test mode. Pass `yes` if needed. See [Sending in Test Mode](https://documentation.mailgun.com/en/latest/user_manual.html#manual-testmode)
+     * Enables sending in test mode. Pass `true` if needed. See [Sending in Test Mode](https://documentation.mailgun.com/en/latest/user_manual.html#manual-testmode)
      */
-    'o:testmode'?: boolean | 'yes' | 'no';
+    'o:testmode'?: 'true' | 'false';
 
     /**
      * Toggles tracking on a per-message basis, see [Tracking Messages](https://documentation.mailgun.com/en/latest/user_manual.html#tracking-messages for details. Pass 'yes', 'no', 'true' or 'false'
