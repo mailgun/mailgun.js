@@ -59,12 +59,12 @@ class Request {
       delete params.body;
     }
     let response: AxiosResponse;
-
+    const urlValue = urljoin(this.url, url);
     try {
       response = await axios.request({
         method: method.toLocaleUpperCase(),
         timeout: this.timeout,
-        url: urljoin(this.url, url),
+        url: urlValue,
         headers,
         ...params,
         maxBodyLength: this.maxBodyLength

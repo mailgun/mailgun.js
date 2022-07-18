@@ -1,3 +1,4 @@
+import urljoin from 'url-join';
 import Request from './request';
 import {
   MailListMembersQuery,
@@ -8,14 +9,20 @@ import {
   MultipleMembersReqData,
   DeletedMember,
   CreateUpdateMailListMembersReq,
-  NewMultipleMembersResponse
+  NewMultipleMembersResponse,
+  MailListMembersResult,
+  MailListMembersResponse
 } from './interfaces/mailListMembers';
+import NavigationThruPages from './common/NavigationThruPages';
 
-export default class MailListsMembers implements IMailListsMembers {
+export default class MailListsMembers
+  extends NavigationThruPages<MailListMembersResult>
+  implements IMailListsMembers {
   baseRoute: string;
   request: Request;
 
   constructor(request: Request) {
+    super();
     this.request = request;
     this.baseRoute = '/v3/lists';
   }
@@ -34,9 +41,30 @@ export default class MailListsMembers implements IMailListsMembers {
     return newData as CreateUpdateMailListMembersReq;
   }
 
-  listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]> {
-    return this.request.get(`${this.baseRoute}/${mailListAddress}/members/pages`, query)
-      .then((response) => response.body.items as MailListMember[]);
+  protected parseList(
+    response: MailListMembersResponse,
+  ): MailListMembersResult {
+    const data = {} as MailListMembersResult;
+    data.items = response.body.items;
+
+    data.pages = this.parsePageLinks(response);
+    return data;
+  }
+
+  async listMembers(
+    mailListAddress: string,
+    query?: MailListMembersQuery
+  ): Promise<MailListMembersResult> {
+    let url;
+    const queryCopy = { ...query };
+    if (queryCopy && queryCopy.page) {
+      url = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`, queryCopy.page);
+      delete queryCopy.page;
+    } else {
+      url = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`);
+    }
+    const apiResponse: MailListMembersResponse = await this.request.get(url, queryCopy);
+    return this.parseList(apiResponse);
   }
 
   getMember(mailListAddress: string, mailListMemberAddress: string): Promise<MailListMember> {

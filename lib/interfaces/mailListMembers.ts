@@ -1,14 +1,19 @@
 import { MailingList } from './lists';
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 
 export interface MailListMember {
     address: string;
     name: string;
     subscribed: boolean,
-    vars: string | any;
+    vars: {
+        [key: string]: any
+    };
 }
+
 export type MailListMembersQuery = {
     subscribed?: 'yes' | 'no';
     limit?: number;
+    page?: string;
 }
 
 export type MultipleMembersData = {
@@ -50,8 +55,25 @@ export interface NewMultipleMembersResponse {
     'task-id': string;
 }
 
+export interface MailListMembersResponse {
+    body: {
+        items: MailListMember[]
+        paging: PagesList
+    },
+    status: number
+}
+export interface MailListMembersResult{
+    items: MailListMember[]
+    pages: ParsedPagesList
+    status: number
+}
+
 export interface IMailListsMembers {
-    listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMember[]>;
+    listMembers(
+        mailListAddress: string,
+        query?: MailListMembersQuery
+    ): Promise<MailListMembersResult>;
+
     getMember(address: string, memberAddress: string): Promise<MailListMember>,
     createMember(
         mailListAddress: string,
