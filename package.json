@@ -29,6 +29,7 @@
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "lint": "eslint . && eslint . --ext .ts",
     "release": "standard-version -a",
+    "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
     "prepare": "husky install"
   },
