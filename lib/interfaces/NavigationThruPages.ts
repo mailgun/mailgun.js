@@ -7,7 +7,7 @@ export interface PagesList {
 
 export interface ParsedPage {
     id: string;
-    page: string | null | undefined;
+    page: string;
     iteratorPosition: string | null | undefined;
     url: string
 }

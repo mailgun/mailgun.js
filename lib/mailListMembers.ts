@@ -47,7 +47,7 @@ export default class MailListsMembers
     const data = {} as MailListMembersResult;
     data.items = response.body.items;
 
-    data.pages = this.parsePageLinks(response);
+    data.pages = this.parsePageLinks(response, '?', 'address');
     return data;
   }
 

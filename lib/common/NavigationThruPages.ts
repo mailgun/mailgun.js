@@ -7,14 +7,21 @@ import {
 } from '../interfaces/NavigationThruPages';
 
 export default abstract class NavigationThruPages <T> {
-  protected parsePage(id: string, pageUrl: string, urlSeparator = '?', iteratorName = 'address'): ParsedPage {
+  protected parsePage(id: string, pageUrl: string, urlSeparator = '?', iteratorName: string|undefined): ParsedPage {
     const parsedUrl = new URL(pageUrl);
     const { searchParams } = parsedUrl;
+
     const pageValue = pageUrl && typeof pageUrl === 'string' ? pageUrl.split(urlSeparator).pop() || '' : '';
+    let iteratorPosition = null;
+    if (iteratorName) {
+      iteratorPosition = searchParams.has(iteratorName)
+        ? searchParams.get(iteratorName)
+        : undefined;
+    }
     return {
       id,
       page: urlSeparator === '?' ? `?${pageValue}` : pageValue,
-      iteratorPosition: searchParams.has(iteratorName) ? searchParams.get(iteratorName) : undefined,
+      iteratorPosition,
       url: pageUrl
     } as ParsedPage;
   }
