@@ -8,7 +8,7 @@ export interface PagesList {
 export interface ParsedPage {
     id: string;
     page: string | null | undefined;
-    address: string | null | undefined;
+    iteratorPosition: string | null | undefined;
     url: string
 }
 

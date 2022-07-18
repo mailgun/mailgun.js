@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { DomainTagStatistic } from '../domainsTags';
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 
 export enum Resolution {
     HOUR = 'hour',
@@ -8,6 +9,7 @@ export enum Resolution {
 }
 export type DomainTagsQuery = {
     limit: number;
+    page: string;
 }
 
 export type DomainTagsStatisticQuery = {
@@ -32,32 +34,6 @@ export interface DomainTagsItem {
     'last-seen': Date
 }
 
-export interface PagesList {
-    previous: string;
-    first: string;
-    last: string;
-    next: string;
-}
-
-export interface ParsedPage{
-    id: string;
-    url: string
-}
-export interface ParsedPagesList {
-    previous: ParsedPage;
-    first: ParsedPage;
-    last: ParsedPage;
-    next: ParsedPage;
-}
-
-export interface TagsPage {
-    id: string;
-    url: string;
-}
-
-export interface PagesListAccumulator {
-    [index: string]: TagsPage
-}
 export interface DomainTagsResponseData {
     status: number;
     body: {
@@ -67,6 +43,7 @@ export interface DomainTagsResponseData {
 }
 
 export interface DomainTagsList {
+    status: number;
     items: DomainTagsItem[];
     pages: ParsedPagesList;
 }
