@@ -1,16 +1,11 @@
 import { DomainTemplateItem } from '../domainsTemplates';
+import { ParsedPagesList } from './NavigationThruPages';
 
 export enum YesNo {
     YES = 'yes',
     NO = 'no'
 }
 
-export enum Pages {
-    FIRST = 'first',
-    LAST = 'last',
-    NEXT = 'next',
-    PREV = 'prev'
-}
 /* eslint-disable camelcase */
 export type DomainTemplateData = {
     name: string;
@@ -40,9 +35,8 @@ export type DomainTemplateUpdateVersionData = {
 }
 
 export type DomainTemplatesQuery = {
-    page: Pages;
+    page: 'string';
     limit: number;
-    p: string;
 }
 
 export type TemplateQuery = {
@@ -95,12 +89,8 @@ export interface ListDomainTemplatesAPIResponse {
 
 export interface ListDomainTemplatesResult {
         items: DomainTemplate[];
-        pages: {
-            first: string;
-            last: string;
-            next: string;
-            previous: string;
-        };
+        pages: ParsedPagesList;
+        status: number;
 }
 
 export interface GetDomainTemplateAPIResponse {
@@ -196,12 +186,7 @@ export interface ListDomainTemplateVersionsAPIResponse {
 
 export interface ListDomainTemplateVersionsResult {
     template: DomainTemplateItem;
-    pages: {
-        first: string;
-        last: string;
-        next: string;
-        previous: string;
-    };
+    pages: ParsedPagesList;
 }
 
 export interface IDomainTemplatesClient {
