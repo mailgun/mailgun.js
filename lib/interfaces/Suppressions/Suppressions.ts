@@ -1,58 +1,13 @@
 import {
   Bounce, Complaint, Unsubscribe, WhiteList
-} from '../suppressions';
+} from '../../suppressions';
+import { PagesList, ParsedPagesList } from '../NavigationThruPages';
+import { BounceData } from './Bounce';
+import { ComplaintData } from './Complaint';
+import { UnsubscribeData } from './Unsubscribe';
+import { WhiteListData } from './WhiteList';
 
 /* eslint-disable camelcase */
-export interface BounceData {
-  address: string;
-  code: number;
-  error: string;
-  created_at: string | Date;
-}
-
-export interface ComplaintData {
-  address: string;
-  created_at: string | Date;
-}
-
-export interface UnsubscribeData {
-  address: string;
-  tags: any;
-  created_at: string | Date;
-}
-
-export interface WhiteListData {
-  type: string;
-  value: string;
-  reason: string;
-  createdAt: string | Date;
-}
-
-export interface ParsedPage {
-  id: string;
-  page: string | null | undefined;
-  address: string | null | undefined;
-  url: string
-}
-export interface ParsedPagesList {
-  previous: ParsedPage;
-  first: ParsedPage;
-  last: ParsedPage;
-  next: ParsedPage;
-}
-
-export interface SuppressionList {
-  items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
-  pages: ParsedPagesList;
-}
-
-export interface PagesList {
-  previous: string;
-  first: string;
-  last: string;
-  next: string;
-}
-
 export enum SuppressionModels {
   BOUNCES = 'bounces',
   COMPLAINTS = 'complaints',
@@ -60,13 +15,18 @@ export enum SuppressionModels {
   WHITELISTS = 'whitelists'
 }
 
-export interface PagesListAccumulator {
-  [index: string]: ParsedPage;
+export interface SuppressionList {
+  items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
+  pages: ParsedPagesList;
+  status: number;
 }
 
 export type SuppressionListQuery = {
   limit?: number;
+  page?: string;
 }
+
+export type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
 
 export interface SuppressionListResponse {
   body: {

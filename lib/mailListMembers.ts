@@ -55,15 +55,10 @@ export default class MailListsMembers
     mailListAddress: string,
     query?: MailListMembersQuery
   ): Promise<MailListMembersResult> {
-    let url;
-    const queryCopy = { ...query };
-    if (queryCopy && queryCopy.page) {
-      url = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`, queryCopy.page);
-      delete queryCopy.page;
-    } else {
-      url = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`);
-    }
-    const apiResponse: MailListMembersResponse = await this.request.get(url, queryCopy);
+    const baseUrl = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`);
+    const { updatedQuery, url } = this.updateUrlAndQuery(baseUrl, query);
+
+    const apiResponse: MailListMembersResponse = await this.request.get(url, updatedQuery);
     return this.parseList(apiResponse);
   }
 

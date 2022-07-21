@@ -9,7 +9,7 @@ export enum Resolution {
 }
 export type DomainTagsQuery = {
     limit: number;
-    page: string;
+    page?: string;
 }
 
 export type DomainTagsStatisticQuery = {

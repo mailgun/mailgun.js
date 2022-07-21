@@ -7,7 +7,7 @@ export declare enum Resolution {
 }
 export declare type DomainTagsQuery = {
     limit: number;
-    page: string;
+    page?: string;
 };
 export declare type DomainTagsStatisticQuery = {
     event: string;

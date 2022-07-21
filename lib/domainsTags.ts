@@ -89,19 +89,11 @@ export default class DomainTagsClient
     return new DomainTagStatistic(response);
   }
 
-  list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList> {
-    let url;
-    const queryCopy = { ...query };
-    if (queryCopy && queryCopy.page) {
-      url = urljoin(this.baseRoute, domain, '/tags', queryCopy.page);
-      delete queryCopy.page;
-    } else {
-      url = urljoin(this.baseRoute, domain, '/tags');
-    }
-    return this.request.get(url, query)
-      .then(
-        (res: APIResponse) => this.parseList(res as DomainTagsResponseData)
-      );
+  async list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList> {
+    const { updatedQuery, url } = this.updateUrlAndQuery(urljoin(this.baseRoute, domain, '/tags'), query);
+
+    const apiResponse: DomainTagsResponseData = await this.request.get(url, updatedQuery);
+    return this.parseList(apiResponse);
   }
 
   get(domain: string, tag: string): Promise<DomainTagsItem> {

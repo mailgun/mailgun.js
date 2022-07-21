@@ -6,8 +6,8 @@ export interface PagesList {
 }
 export interface ParsedPage {
     id: string;
-    page: string | null | undefined;
-    iteratorPosition: string | null | undefined;
+    page: string;
+    iteratorPosition: string | undefined;
     url: string;
 }
 export interface ParsedPagesList {
@@ -23,4 +23,11 @@ export interface ResponseWithPaging {
     body: {
         paging: PagesList;
     };
+}
+export interface QueryWithPage {
+    page?: string;
+}
+export interface UpdatedUrlAndQuery {
+    url: string;
+    updatedQuery: Record<string, unknown>;
 }

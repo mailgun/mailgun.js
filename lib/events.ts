@@ -17,34 +17,6 @@ export default class EventClient
     this.request = request;
   }
 
-  // _parsePageNumber(url: string) : string {
-  //   return url.split('/').pop() || '';
-  // }
-
-  // _parsePage(id: string, url: string) : EventsPage {
-  //   return { id, number: this._parsePageNumber(url), url };
-  // }
-
-  // _parsePageLinks(response: EventsResponse) : ParsedPagesList {
-  //   const pages = Object.entries(response.body.paging as PagesList);
-  //   return pages.reduce(
-  //     (acc: PagesListAccumulator, pair: [url: string, id: string]) => {
-  //       const id = pair[0];
-  //       const url = pair[1];
-  //       acc[id] = this._parsePage(id, url);
-  //       return acc;
-  //     }, {}
-  //   ) as unknown as ParsedPagesList;
-  // }
-
-  // _parseEventList(response: EventsResponse) : EventsList {
-  //   return {
-  //     items: response.body.items,
-  //     pages: this._parsePageLinks(response),
-  //     status: 200
-  //   };
-  // }
-
   protected parseList(
     response: EventsResponse,
   ): EventsList {
@@ -56,16 +28,10 @@ export default class EventClient
     return data;
   }
 
-  get(domain: string, query?: EventsQuery) : Promise<EventsList> {
-    let url;
-    const queryCopy = { ...query };
-    if (queryCopy && queryCopy.page) {
-      url = urljoin('/v3', domain, 'events', queryCopy.page);
-      delete queryCopy.page;
-    } else {
-      url = urljoin('/v3', domain, 'events');
-    }
-    return this.request.get(url, queryCopy)
-      .then((response: EventsResponse) => this.parseList(response));
+  async get(domain: string, query?: EventsQuery) : Promise<EventsList> {
+    const { updatedQuery, url } = this.updateUrlAndQuery(urljoin('/v3', domain, 'events'), query);
+
+    const apiResponse: EventsResponse = await this.request.get(url, updatedQuery);
+    return this.parseList(apiResponse);
   }
 }

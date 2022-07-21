@@ -1,13 +1,24 @@
+import urljoin from 'url-join';
 import {
-  PagesList,
   PagesListAccumulator,
   ParsedPage,
   ParsedPagesList,
-  ResponseWithPaging
+  QueryWithPage,
+  ResponseWithPaging,
+  UpdatedUrlAndQuery
 } from '../interfaces/NavigationThruPages';
+import { BounceData, IBounce } from '../interfaces/Suppressions/Bounce';
+import { ComplaintData, IComplaint } from '../interfaces/Suppressions/Complaint';
+import { IUnsubscribe, UnsubscribeData } from '../interfaces/Suppressions/Unsubscribe';
+import { IWhiteList, WhiteListData } from '../interfaces/Suppressions/WhiteList';
 
 export default abstract class NavigationThruPages <T> {
-  protected parsePage(id: string, pageUrl: string, urlSeparator = '?', iteratorName: string|undefined): ParsedPage {
+  protected parsePage(
+    id: string,
+    pageUrl: string,
+    urlSeparator: string,
+    iteratorName: string | undefined
+  ) : ParsedPage {
     const parsedUrl = new URL(pageUrl);
     const { searchParams } = parsedUrl;
 
@@ -28,10 +39,10 @@ export default abstract class NavigationThruPages <T> {
 
   protected parsePageLinks(
     response: ResponseWithPaging,
-    urlSeparator?: string,
+    urlSeparator: string,
     iteratorName?: string
   ): ParsedPagesList {
-    const pages = Object.entries(response.body.paging as PagesList);
+    const pages = Object.entries(response.body.paging);
     return pages.reduce(
       (acc: PagesListAccumulator, pair: [pageUrl: string, id: string]) => {
         const id = pair[0];
@@ -42,5 +53,21 @@ export default abstract class NavigationThruPages <T> {
     ) as unknown as ParsedPagesList;
   }
 
-  protected abstract parseList(response: ResponseWithPaging): T;
+  protected updateUrlAndQuery(clientUrl: string, query?: QueryWithPage): UpdatedUrlAndQuery {
+    let url = clientUrl;
+    const queryCopy = { ...query };
+    if (queryCopy && queryCopy.page) {
+      url = urljoin(clientUrl, queryCopy.page);
+      delete queryCopy.page;
+    }
+    return {
+      url,
+      updatedQuery: queryCopy
+    };
+  }
+
+  protected abstract parseList(response: ResponseWithPaging, Model?: {
+    new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+    IBounce | IComplaint | IUnsubscribe | IWhiteList
+  }): T;
 }
