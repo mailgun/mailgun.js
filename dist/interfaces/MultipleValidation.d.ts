@@ -1,19 +1,46 @@
-export interface MultipleValidationJob {
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
+export interface MultipleValidationJobData {
     created_at: number;
-    download_url: {
+    id: string;
+    quantity: number;
+    records_processed: number | null;
+    status: string;
+    download_url?: {
         csv: string;
         json: string;
     };
-    id: string;
-    quantity: number;
-    records_processed: number;
-    status: string;
-    responseStatusCode: number;
-    summary: {
+    summary?: {
         result: {
             catch_all: number;
             deliverable: number;
             do_not_send: number;
+            undeliverable: number;
+            unknown: number;
+        };
+        risk: {
+            high: number;
+            low: number;
+            medium: number;
+            unknown: number;
+        };
+    };
+}
+export interface MultipleValidationJobResult {
+    createdAt: Date;
+    id: string;
+    quantity: number;
+    recordsProcessed: number | null;
+    status: string;
+    responseStatusCode: number;
+    downloadUrl?: {
+        csv: string;
+        json: string;
+    };
+    summary?: {
+        result: {
+            catchAll: number;
+            deliverable: number;
+            doNotSend: number;
             undeliverable: number;
             unknown: number;
         };
@@ -37,21 +64,19 @@ export interface MultipleValidationCreationDataUpdated {
     multipleValidationFile: Record<string, unknown>;
     [key: string]: unknown | undefined;
 }
-export interface PagesList {
-    prev: string;
-    first: string;
-    last: string;
-    next: string;
-}
 export interface MultipleValidationJobsListResult {
-    jobs: MultipleValidationJob[];
-    paging: PagesList;
+    jobs: MultipleValidationJobResult[];
+    pages: ParsedPagesList;
     total: number;
     status: number;
 }
 export interface MultipleValidationJobsListResponse {
-    status: 200;
-    body: MultipleValidationJobsListResult;
+    status: number;
+    body: {
+        paging: PagesList;
+        jobs: MultipleValidationJobData[];
+        total: number;
+    };
 }
 export interface CanceledMultipleValidationJob {
     message: string;
@@ -59,7 +84,7 @@ export interface CanceledMultipleValidationJob {
 }
 export interface IMultipleValidationClient {
     list(): Promise<MultipleValidationJobsListResult>;
-    get(listId: string): Promise<MultipleValidationJob>;
+    get(listId: string): Promise<MultipleValidationJobResult>;
     create(listId: string, file: any): Promise<CreatedMultipleValidationJob>;
     destroy(listId: string): Promise<CanceledMultipleValidationJob>;
 }

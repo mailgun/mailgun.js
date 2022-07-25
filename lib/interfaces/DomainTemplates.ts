@@ -1,5 +1,5 @@
 import { DomainTemplateItem } from '../domainsTemplates';
-import { ParsedPagesList } from './NavigationThruPages';
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 
 export enum YesNo {
     YES = 'yes',
@@ -175,12 +175,7 @@ export interface ListDomainTemplateVersionsAPIResponse {
             id: string;
             versions: ShortTemplateVersion[]
         }
-        paging: {
-            first: string;
-            last: string;
-            next: string;
-            previous: string;
-        };
+        paging: PagesList;
     };
 }
 

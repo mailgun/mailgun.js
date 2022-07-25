@@ -1,5 +1,4 @@
 import urljoin from 'url-join';
-import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
 
 import {
