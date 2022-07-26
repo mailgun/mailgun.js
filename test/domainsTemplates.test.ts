@@ -91,6 +91,44 @@ describe('DomainsTemplatesClient', function () {
         id: 'someId'
       });
     });
+
+    it('returns if no created date in version for template', async () => {
+      api.get('/v3/testDomain/templates/testTemplateName').reply(200, {
+        template: {
+          name: 'test_template',
+          description: 'test_template description',
+          createdAt: null,
+          createdBy: '',
+          id: 'someId',
+          version: {
+            tag: 'initial',
+            engine: 'handlebars',
+            mjml: '',
+            comment: '',
+            active: true,
+            id: '908c523e-7bad-472f-bb10-153059adc148'
+          }
+        }
+      });
+
+      const template = await client.get('testDomain', 'testTemplateName');
+      template.should.be.an('object');
+      template.should.eql({
+        name: 'test_template',
+        description: 'test_template description',
+        createdAt: '',
+        createdBy: '',
+        id: 'someId',
+        version: {
+          tag: 'initial',
+          engine: 'handlebars',
+          mjml: '',
+          comment: '',
+          active: true,
+          id: '908c523e-7bad-472f-bb10-153059adc148'
+        }
+      });
+    });
   });
 
   describe('create', function () {
@@ -161,6 +199,21 @@ describe('DomainsTemplatesClient', function () {
         status: 200,
         message: 'template has been updated',
         templateName: 'test_template1'
+      });
+    });
+
+    it('returns result if no template in API response', async () => {
+      api.put('/v3/testDomain/templates/testTemplateName').reply(200, {
+        message: 'template has been updated',
+      });
+
+      const updatedTemplate = await client.update('testDomain', 'testTemplateName', {
+        description: 'updated test_template description'
+      });
+      updatedTemplate.should.be.an('object');
+      updatedTemplate.should.eql({
+        status: 200,
+        message: 'template has been updated',
       });
     });
   });
@@ -244,6 +297,26 @@ describe('DomainsTemplatesClient', function () {
         }
       });
     });
+
+    it('return result if no template in API response', async () => {
+      const templateVersionData = {
+        template: '%recipient.title%',
+        tag: 'v3',
+        comment: 'comment',
+        active: 'yes'
+      } as DomainTemplateVersionData;
+
+      api.post('/v3/testDomain/templates/testTemplateName/versions').reply(200, {
+        message: 'new version of the template has been stored'
+      });
+
+      const templateVersion = await client.createVersion('testDomain', 'testTemplateName', templateVersionData);
+      templateVersion.should.be.an('object');
+      templateVersion.should.eql({
+        status: 200,
+        message: 'new version of the template has been stored',
+      });
+    });
   });
 
   describe('getVersion', function () {
@@ -308,6 +381,23 @@ describe('DomainsTemplatesClient', function () {
         message: 'version has been updated',
         templateName: 'test_template',
         templateVersion: { tag: 'v2' }
+      });
+    });
+
+    it('return result if no template in API response', async () => {
+      api.put('/v3/testDomain/templates/testTemplateName/versions/v2').reply(200, {
+        message: 'version has been updated'
+      });
+
+      const updatedTemplate = await client.updateVersion('testDomain', 'testTemplateName', 'v2', {
+        template: '%recipient.title%',
+        comment: 'updated comment 2',
+        active: 'yes'
+      } as DomainTemplateUpdateVersionData);
+      updatedTemplate.should.be.an('object');
+      updatedTemplate.should.eql({
+        status: 200,
+        message: 'version has been updated'
       });
     });
   });

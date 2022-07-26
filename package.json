@@ -25,7 +25,7 @@
     "build:prepublish": "node ./SetupPackage.js",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "test": "multi='dot=- xunit=./results.xml' nyc --reporter=text-summary --reporter=lcov --report-dir=.coverage mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
-    "test-watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
+    "test:watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "lint": "eslint . && eslint . --ext .ts",
     "release": "standard-version -a",

@@ -58,7 +58,7 @@ describe('ValidateClient', function () {
   });
 
   describe('List', function () {
-    it('should provide list of all bulk validation jobs', function () {
+    it('should provide list of all bulk validation jobs', async () => {
       const data = {
         jobs: [
           responseData
@@ -133,9 +133,161 @@ describe('ValidateClient', function () {
         },
         total: 1
       };
-      return client.list().then(function (response: MultipleValidationJobsListResult) {
-        response.should.eql(expectedResult);
-      });
+
+      const result: MultipleValidationJobsListResult = await client.list();
+      result.should.eql(expectedResult);
+    });
+    it('returns result if no downloads and summary objects', async function () {
+      const data = {
+        jobs: [
+          {
+            ...responseData,
+            ...{
+              download_url: undefined
+            },
+            ...{
+              summary: undefined
+            }
+          }
+        ],
+        paging: {
+          first: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=first&pivot=',
+          last: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=last&pivot=',
+          next: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=next&pivot=',
+          prev: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=prev&pivot='
+        },
+        total: 1
+      };
+
+      api.get('/v4/address/validate/bulk')
+        .reply(200, data);
+      const expectedResult = {
+        status: 200,
+        jobs: [
+          {
+            createdAt: new Date(1636716764),
+            id: 'testValidationList',
+            quantity: 40,
+            recordsProcessed: 40,
+            status: 'uploaded',
+            responseStatusCode: 200
+          }
+        ],
+        pages: {
+          first: {
+            id: 'first',
+            iteratorPosition: '',
+            page: '?limit=100&page=first&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=first&pivot='
+          },
+          last: {
+            id: 'last',
+            iteratorPosition: '',
+            page: '?limit=100&page=last&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=last&pivot='
+          },
+          next: {
+            id: 'next',
+            iteratorPosition: '',
+            page: '?limit=100&page=next&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=next&pivot='
+          },
+          prev: {
+            id: 'prev',
+            iteratorPosition: '',
+            page: '?limit=100&page=prev&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=prev&pivot='
+          }
+        },
+        total: 1
+      };
+
+      const result: MultipleValidationJobsListResult = await client.list();
+      result.should.eql(expectedResult);
+    });
+
+    it('returns result if no url in downloads objects', async function () {
+      const data = {
+        jobs: [
+          {
+            ...responseData,
+            ...{
+              download_url: {}
+            }
+          }
+        ],
+        paging: {
+          first: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=first&pivot=',
+          last: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=last&pivot=',
+          next: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=next&pivot=',
+          prev: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=prev&pivot='
+        },
+        total: 1
+      };
+
+      api.get('/v4/address/validate/bulk')
+        .reply(200, data);
+      const expectedResult = {
+        status: 200,
+        jobs: [
+          {
+            createdAt: new Date(1636716764),
+            downloadUrl: {
+              csv: undefined,
+              json: undefined
+            },
+            id: 'testValidationList',
+            quantity: 40,
+            recordsProcessed: 40,
+            status: 'uploaded',
+            responseStatusCode: 200,
+            summary: {
+              result: {
+                catchAll: 0,
+                deliverable: 2,
+                doNotSend: 0,
+                undeliverable: 16,
+                unknown: 22
+              },
+              risk: {
+                high: 16,
+                low: 2,
+                medium: 0,
+                unknown: 22
+              }
+            }
+          }
+        ],
+        pages: {
+          first: {
+            id: 'first',
+            iteratorPosition: '',
+            page: '?limit=100&page=first&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=first&pivot='
+          },
+          last: {
+            id: 'last',
+            iteratorPosition: '',
+            page: '?limit=100&page=last&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=last&pivot='
+          },
+          next: {
+            id: 'next',
+            iteratorPosition: '',
+            page: '?limit=100&page=next&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=next&pivot='
+          },
+          prev: {
+            id: 'prev',
+            iteratorPosition: '',
+            page: '?limit=100&page=prev&pivot=',
+            url: 'https://api.mailgun.net/v4/address/validate/bulk?limit=100&page=prev&pivot='
+          }
+        },
+        total: 1
+      };
+      const result: MultipleValidationJobsListResult = await client.list();
+      result.should.eql(expectedResult);
     });
   });
 
