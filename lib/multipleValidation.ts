@@ -9,7 +9,8 @@ import {
   MultipleValidationJobsListResult,
   MultipleValidationJobsListResponse,
   MultipleValidationJobData,
-  MultipleValidationJobResult
+  MultipleValidationJobResult,
+  MultipleValidationJobsListQuery
 }
   from './interfaces/MultipleValidation';
 import Request from './request';
@@ -105,9 +106,8 @@ export default class MultipleValidationClient
     return data;
   }
 
-  async list(): Promise<MultipleValidationJobsListResult> {
-    const response: MultipleValidationJobsListResponse = await this.request.get('/v4/address/validate/bulk');
-    return this.parseList(response);
+  async list(query?: MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult> {
+    return this.requestListWithPages('/v4/address/validate/bulk', query);
   }
 
   async get(listId: string): Promise<MultipleValidationJob> {
