@@ -13,7 +13,7 @@ export default class EventClient
   request: Request;
 
   constructor(request: Request) {
-    super();
+    super(request);
     this.request = request;
   }
 
@@ -29,9 +29,6 @@ export default class EventClient
   }
 
   async get(domain: string, query?: EventsQuery) : Promise<EventsList> {
-    const { updatedQuery, url } = this.updateUrlAndQuery(urljoin('/v3', domain, 'events'), query);
-
-    const apiResponse: EventsResponse = await this.request.get(url, updatedQuery);
-    return this.parseList(apiResponse);
+    return this.requestListWithPages(urljoin('/v3', domain, 'events'), query);
   }
 }

@@ -1,5 +1,5 @@
 import NavigationThruPages from './common/NavigationThruPages';
-import { CanceledMultipleValidationJob, CreatedMultipleValidationJob, IMultipleValidationClient, MultipleValidationCreationData, MultipleValidationJobsListResult, MultipleValidationJobsListResponse, MultipleValidationJobData, MultipleValidationJobResult } from './interfaces/MultipleValidation';
+import { CanceledMultipleValidationJob, CreatedMultipleValidationJob, IMultipleValidationClient, MultipleValidationCreationData, MultipleValidationJobsListResult, MultipleValidationJobsListResponse, MultipleValidationJobData, MultipleValidationJobResult, MultipleValidationJobsListQuery } from './interfaces/MultipleValidation';
 import Request from './request';
 export declare class MultipleValidationJob implements MultipleValidationJobResult {
     createdAt: Date;
@@ -34,7 +34,7 @@ export default class MultipleValidationClient extends NavigationThruPages<Multip
     constructor(request: Request);
     private handleResponse;
     protected parseList(response: MultipleValidationJobsListResponse): MultipleValidationJobsListResult;
-    list(): Promise<MultipleValidationJobsListResult>;
+    list(query?: MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult>;
     get(listId: string): Promise<MultipleValidationJob>;
     create(listId: string, data: MultipleValidationCreationData): Promise<CreatedMultipleValidationJob>;
     destroy(listId: string): Promise<CanceledMultipleValidationJob>;

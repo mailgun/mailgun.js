@@ -89,7 +89,7 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
   models: Map<string, any>;
 
   constructor(request: Request) {
-    super();
+    super(request);
     this.request = request;
     this.models = new Map();
     this.models.set('bounces', Bounce);
@@ -167,10 +167,7 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
   ): Promise<SuppressionList> {
     this.checkType(type);
     const model = this.models.get(type);
-    const { updatedQuery, url } = this.updateUrlAndQuery(urljoin('v3', domain, type), query);
-
-    const apiResponse: SuppressionListResponse = await this.request.get(url, updatedQuery);
-    return this.parseList(apiResponse, model);
+    return this.requestListWithPages(urljoin('v3', domain, type), query, model);
   }
 
   get(

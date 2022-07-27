@@ -68,7 +68,7 @@ export default class DomainTemplatesClient
   request: Request;
 
   constructor(request: Request) {
-    super();
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/';
   }
@@ -145,10 +145,7 @@ export default class DomainTemplatesClient
   }
 
   async list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult> {
-    const { url, updatedQuery } = this.updateUrlAndQuery(urljoin(this.baseRoute, domain, '/templates'), query);
-
-    const response: ListDomainTemplatesAPIResponse = await this.request.get(url, updatedQuery);
-    return this.parseList(response);
+    return this.requestListWithPages(urljoin(this.baseRoute, domain, '/templates'), query);
   }
 
   get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem> {

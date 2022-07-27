@@ -1,4 +1,6 @@
 import urljoin from 'url-join';
+import APIError from '../error';
+import APIErrorOptions from '../interfaces/APIErrorOptions';
 import {
   PagesListAccumulator,
   ParsedPage,
@@ -11,8 +13,16 @@ import { BounceData, IBounce } from '../interfaces/Suppressions/Bounce';
 import { ComplaintData, IComplaint } from '../interfaces/Suppressions/Complaint';
 import { IUnsubscribe, UnsubscribeData } from '../interfaces/Suppressions/Unsubscribe';
 import { IWhiteList, WhiteListData } from '../interfaces/Suppressions/WhiteList';
+import Request from '../request';
 
 export default abstract class NavigationThruPages <T> {
+  request?: Request;
+  constructor(request?: Request) {
+    if (request) {
+      this.request = request;
+    }
+  }
+
   protected parsePage(
     id: string,
     pageUrl: string,
@@ -44,19 +54,17 @@ export default abstract class NavigationThruPages <T> {
   ): ParsedPagesList {
     const pages = Object.entries(response.body.paging);
     return pages.reduce(
-      (acc: PagesListAccumulator, pair: [pageUrl: string, id: string]) => {
-        const id = pair[0];
-        const pageUrl = pair[1];
+      (acc: PagesListAccumulator, [id, pageUrl]: [ id: string, pageUrl: string]) => {
         acc[id] = this.parsePage(id, pageUrl, urlSeparator, iteratorName);
         return acc;
       }, {}
     ) as unknown as ParsedPagesList;
   }
 
-  protected updateUrlAndQuery(clientUrl: string, query?: QueryWithPage): UpdatedUrlAndQuery {
+  private updateUrlAndQuery(clientUrl: string, query?: QueryWithPage): UpdatedUrlAndQuery {
     let url = clientUrl;
     const queryCopy = { ...query };
-    if (queryCopy && queryCopy.page) {
+    if (queryCopy.page) {
       url = urljoin(clientUrl, queryCopy.page);
       delete queryCopy.page;
     }
@@ -64,6 +72,23 @@ export default abstract class NavigationThruPages <T> {
       url,
       updatedQuery: queryCopy
     };
+  }
+
+  protected async requestListWithPages(clientUrl:string, query?: QueryWithPage, Model?: {
+    new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+    IBounce | IComplaint | IUnsubscribe | IWhiteList
+  }): Promise<T> {
+    const { url, updatedQuery } = this.updateUrlAndQuery(clientUrl, query);
+    if (this.request) {
+      const response: ResponseWithPaging = await this.request.get(url, updatedQuery);
+      // Model here is usually undefined except for Suppression Client
+      return this.parseList(response, Model);
+    }
+    throw new APIError({
+      status: 500,
+      statusText: 'Request property is empty',
+      body: { message: '' }
+    } as APIErrorOptions);
   }
 
   protected abstract parseList(response: ResponseWithPaging, Model?: {

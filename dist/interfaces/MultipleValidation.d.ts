@@ -70,6 +70,10 @@ export interface MultipleValidationJobsListResult {
     total: number;
     status: number;
 }
+export interface MultipleValidationJobsListQuery {
+    limit: number;
+    page: string;
+}
 export interface MultipleValidationJobsListResponse {
     status: number;
     body: {

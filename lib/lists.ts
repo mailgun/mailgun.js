@@ -21,7 +21,7 @@ export default class ListsClient
   members: IMailListsMembers;
 
   constructor(request: Request, members:IMailListsMembers) {
-    super();
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/lists';
     this.members = members;
@@ -49,9 +49,7 @@ export default class ListsClient
   }
 
   async list(query?: ListsQuery): Promise<MailingListResult> {
-    const { updatedQuery, url } = this.updateUrlAndQuery(`${this.baseRoute}/pages`, query);
-    const response: MailingListApiResponse = await this.request.get(url, updatedQuery);
-    return this.parseList(response);
+    return this.requestListWithPages(`${this.baseRoute}/pages`, query);
   }
 
   get(mailListAddress: string): Promise<MailingList> {

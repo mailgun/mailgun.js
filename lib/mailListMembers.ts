@@ -22,7 +22,7 @@ export default class MailListsMembers
   request: Request;
 
   constructor(request: Request) {
-    super();
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/lists';
   }
@@ -55,11 +55,7 @@ export default class MailListsMembers
     mailListAddress: string,
     query?: MailListMembersQuery
   ): Promise<MailListMembersResult> {
-    const baseUrl = urljoin(`${this.baseRoute}/${mailListAddress}/members/pages`);
-    const { updatedQuery, url } = this.updateUrlAndQuery(baseUrl, query);
-
-    const apiResponse: MailListMembersResponse = await this.request.get(url, updatedQuery);
-    return this.parseList(apiResponse);
+    return this.requestListWithPages(`${this.baseRoute}/${mailListAddress}/members/pages`, query);
   }
 
   getMember(mailListAddress: string, mailListMemberAddress: string): Promise<MailListMember> {

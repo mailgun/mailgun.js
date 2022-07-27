@@ -67,7 +67,7 @@ export default class DomainTagsClient
   request: Request;
 
   constructor(request: Request) {
-    super();
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/';
   }
@@ -90,10 +90,7 @@ export default class DomainTagsClient
   }
 
   async list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList> {
-    const { updatedQuery, url } = this.updateUrlAndQuery(urljoin(this.baseRoute, domain, '/tags'), query);
-
-    const apiResponse: DomainTagsResponseData = await this.request.get(url, updatedQuery);
-    return this.parseList(apiResponse);
+    return this.requestListWithPages(urljoin(this.baseRoute, domain, '/tags'), query);
   }
 
   get(domain: string, tag: string): Promise<DomainTagsItem> {
