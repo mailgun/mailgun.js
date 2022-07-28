@@ -1,5 +1,4 @@
 import urljoin from 'url-join';
-import APIResponse from './interfaces/ApiResponse';
 import Request from './request';
 
 import {
@@ -27,6 +26,7 @@ import {
   UpdateOrDeleteDomainTemplateAPIResponse,
   UpdateOrDeleteDomainTemplateResult
 } from './interfaces/DomainTemplates';
+import NavigationThruPages from './common/NavigationThruPages';
 
 export class DomainTemplateItem implements DomainTemplate {
   name : string;
@@ -61,11 +61,14 @@ export class DomainTemplateItem implements DomainTemplate {
   }
 }
 
-export default class DomainTemplatesClient implements IDomainTemplatesClient {
+export default class DomainTemplatesClient
+  extends NavigationThruPages<ListDomainTemplatesResult>
+  implements IDomainTemplatesClient {
   baseRoute: string;
   request: Request;
 
   constructor(request: Request) {
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/';
   }
@@ -118,12 +121,13 @@ export default class DomainTemplatesClient implements IDomainTemplatesClient {
     return result;
   }
 
-  private parseList(response: ListDomainTemplatesAPIResponse): ListDomainTemplatesResult {
+  protected parseList(response: ListDomainTemplatesAPIResponse): ListDomainTemplatesResult {
     const data = {} as ListDomainTemplatesResult;
 
     data.items = response.body.items.map((d: DomainTemplate) => new DomainTemplateItem(d));
 
-    data.pages = response.body.paging;
+    data.pages = this.parsePageLinks(response, '?', 'p');
+    data.status = response.status;
 
     return data;
   }
@@ -135,16 +139,13 @@ export default class DomainTemplatesClient implements IDomainTemplatesClient {
 
     data.template = new DomainTemplateItem(response.body.template);
 
-    data.pages = response.body.paging;
+    data.pages = this.parsePageLinks(response, '?', 'p');
 
     return data;
   }
 
-  list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult> {
-    return this.request.get(urljoin(this.baseRoute, domain, '/templates'), query)
-      .then(
-        (res: APIResponse) => this.parseList(res)
-      );
+  async list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult> {
+    return this.requestListWithPages(urljoin(this.baseRoute, domain, '/templates'), query);
   }
 
   get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem> {

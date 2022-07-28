@@ -132,7 +132,7 @@ export default class DomainClient {
   create(data: DomainInfo) : Promise<Domain> {
     const postObj = { ...data };
     if ('force_dkim_authority' in postObj && typeof postObj.force_dkim_authority === 'boolean') {
-      postObj.force_dkim_authority = postObj.toString() === 'true' ? 'true' : 'false';
+      postObj.force_dkim_authority = postObj.force_dkim_authority.toString() === 'true' ? 'true' : 'false';
     }
 
     return this.request.postWithFD('/v3/domains', postObj)

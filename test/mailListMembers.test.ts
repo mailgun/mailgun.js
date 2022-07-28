@@ -28,16 +28,26 @@ describe('mailListsMembersClient', function () {
   });
 
   describe('listMembers', function () {
-    it('fetches all mail list members', function () {
+    it('fetches all mail list members', async function () {
       const lists = [defaultListMember];
 
       api.get('/v3/lists/list-name/members/pages').reply(200, {
-        items: lists
+        items: lists,
+        paging: {
+          first: 'http://test.com/pages?page=1'
+        }
       });
 
-      return client.listMembers('list-name').then(function (membersList: MailListMember[]) {
-        membersList[0].should.eql(defaultListMember);
-      });
+      const result = await client.listMembers('list-name');
+
+      result.should.have.property('items');
+      result.items.length.should.be.equal(1);
+      result.items[0].should.eql(defaultListMember);
+
+      result.should.have.property('pages');
+      result.pages.first.page.should.be.eql('?page=1');
+      result.pages.first.url.should.be.eql('http://test.com/pages?page=1');
+      result.pages.first.id.should.be.eql('first');
     });
   });
 

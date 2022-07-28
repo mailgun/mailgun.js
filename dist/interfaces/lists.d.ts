@@ -1,7 +1,8 @@
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 export declare type ListsQuery = {
     address?: string;
     limit?: number;
-    skip?: number;
+    page?: string;
 };
 export declare type CreateUpdateList = {
     address: string;
@@ -66,4 +67,16 @@ export interface MailingList {
     members_count: number;
     name: string;
     reply_preference: null | string;
+}
+export interface MailingListResult {
+    items: MailingList[];
+    status: number;
+    pages: ParsedPagesList;
+}
+export interface MailingListApiResponse {
+    body: {
+        items: MailingList[];
+        paging: PagesList;
+    };
+    status: number;
 }

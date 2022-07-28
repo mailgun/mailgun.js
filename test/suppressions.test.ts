@@ -6,7 +6,7 @@ import Request from '../lib/request';
 import SuppressionClient from '../lib/suppressions';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
-import { WhiteListData } from '../lib/interfaces/Supressions';
+import { WhiteListData } from '../lib/interfaces/Suppressions/WhiteList';
 
 chai.should();
 
@@ -156,33 +156,30 @@ describe('SuppressionsClient', function () {
         });
     });
 
-    it('parses page links', function () {
+    it('parses page links', async () => {
       api.get('/v3/domain.com/bounces').reply(200, response);
+      const bounces = await client.list('domain.com', 'bounces');
+      let page;
 
-      return client.list('domain.com', 'bounces')
-        .then(function (bounces: { pages: any }) {
-          let page;
+      page = bounces.pages.first;
+      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
+      expect(page.page).to.eql('?page=first');
+      expect(page.iteratorPosition).to.be.eql(undefined);
 
-          page = bounces.pages.first;
-          page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
-          expect(page.page).to.eql('first');
-          expect(page.address).to.be.eql(undefined);
+      page = bounces.pages.last;
+      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=last');
+      expect(page.page).to.be.eql('?page=last');
+      expect(page.iteratorPosition).to.be.eql(undefined);
 
-          page = bounces.pages.last;
-          page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=last');
-          expect(page.page).to.be.eql('last');
-          expect(page.address).to.be.eql(undefined);
+      page = bounces.pages.next;
+      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com');
+      expect(page.page).to.be.eql('?page=next&address=next@mailgun.com');
+      page.iteratorPosition.should.eql('next@mailgun.com');
 
-          page = bounces.pages.next;
-          page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com');
-          expect(page.page).to.be.eql('next');
-          page.address.should.eql('next@mailgun.com');
-
-          page = bounces.pages.previous;
-          page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com');
-          expect(page.page).to.be.eql('previous');
-          page.address.should.eql('previous@mailgun.com');
-        });
+      page = bounces.pages.previous;
+      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com');
+      expect(page.page).to.be.eql('?page=previous&address=previous@mailgun.com');
+      page.iteratorPosition.should.eql('previous@mailgun.com');
     });
   });
 

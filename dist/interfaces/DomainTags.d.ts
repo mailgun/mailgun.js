@@ -1,4 +1,5 @@
 import { DomainTagStatistic } from '../domainsTags';
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 export declare enum Resolution {
     HOUR = "hour",
     DAY = "day",
@@ -6,6 +7,7 @@ export declare enum Resolution {
 }
 export declare type DomainTagsQuery = {
     limit: number;
+    page?: string;
 };
 export declare type DomainTagsStatisticQuery = {
     event: string;
@@ -26,29 +28,6 @@ export interface DomainTagsItem {
     'first-seen': Date;
     'last-seen': Date;
 }
-export interface PagesList {
-    previous: string;
-    first: string;
-    last: string;
-    next: string;
-}
-export interface ParsedPage {
-    id: string;
-    url: string;
-}
-export interface ParsedPagesList {
-    previous: ParsedPage;
-    first: ParsedPage;
-    last: ParsedPage;
-    next: ParsedPage;
-}
-export interface TagsPage {
-    id: string;
-    url: string;
-}
-export interface PagesListAccumulator {
-    [index: string]: TagsPage;
-}
 export interface DomainTagsResponseData {
     status: number;
     body: {
@@ -57,6 +36,7 @@ export interface DomainTagsResponseData {
     };
 }
 export interface DomainTagsList {
+    status: number;
     items: DomainTagsItem[];
     pages: ParsedPagesList;
 }

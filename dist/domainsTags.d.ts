@@ -1,5 +1,6 @@
 import Request from './request';
-import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsItemInfo, DomainTagsList, DomainTagsMessageRes, DomainTagsQuery, DomainTagsStatisticQuery, DomainTagStatAPIResponse, DomainTagStatisticItem, DomainTagStatisticResult, IDomainTagsClient, Resolution } from './interfaces/DomainTags';
+import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsItemInfo, DomainTagsList, DomainTagsMessageRes, DomainTagsQuery, DomainTagsResponseData, DomainTagsStatisticQuery, DomainTagStatAPIResponse, DomainTagStatisticItem, DomainTagStatisticResult, IDomainTagsClient, Resolution } from './interfaces/DomainTags';
+import NavigationThruPages from './common/NavigationThruPages';
 export declare class DomainTag implements DomainTagsItem {
     tag: string;
     description: string;
@@ -16,12 +17,11 @@ export declare class DomainTagStatistic implements DomainTagStatisticResult {
     stats: DomainTagStatisticItem[];
     constructor(tagStatisticInfo: DomainTagStatAPIResponse);
 }
-export default class DomainTagsClient implements IDomainTagsClient {
+export default class DomainTagsClient extends NavigationThruPages<DomainTagsList> implements IDomainTagsClient {
     baseRoute: string;
     request: Request;
     constructor(request: Request);
-    private _parsePageLinks;
-    private _parseDomainTagsList;
+    protected parseList(response: DomainTagsResponseData): DomainTagsList;
     private _parseTagStatistic;
     list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList>;
     get(domain: string, tag: string): Promise<DomainTagsItem>;

@@ -3,15 +3,10 @@ import urljoin from 'url-join';
 
 import Request from './request';
 import {
-  BounceData,
-  ComplaintData,
-  PagesList,
-  PagesListAccumulator,
-  ParsedPage,
-  ParsedPagesList,
   SuppressionCreationData,
   SuppressionCreationResponse,
   SuppressionCreationResult,
+  SuppressionDataType,
   SuppressionDestroyResponse,
   SuppressionDestroyResult,
   SuppressionList,
@@ -19,11 +14,14 @@ import {
   SuppressionListResponse,
   SuppressionModels,
   SuppressionResponse,
-  UnsubscribeData,
-  WhiteListData,
-} from './interfaces/Supressions';
+} from './interfaces/Suppressions/Suppressions';
 import APIError from './error';
 import APIErrorOptions from './interfaces/APIErrorOptions';
+import { IBounce, BounceData } from './interfaces/Suppressions/Bounce';
+import { IComplaint, ComplaintData } from './interfaces/Suppressions/Complaint';
+import { IUnsubscribe, UnsubscribeData } from './interfaces/Suppressions/Unsubscribe';
+import { IWhiteList, WhiteListData } from './interfaces/Suppressions/WhiteList';
+import NavigationThruPages from './common/NavigationThruPages';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
@@ -34,7 +32,7 @@ export class Suppression {
     this.type = type;
   }
 }
-export class Bounce extends Suppression {
+export class Bounce extends Suppression implements IBounce {
   address: string;
   code: number;
   error: string;
@@ -49,8 +47,8 @@ export class Bounce extends Suppression {
   }
 }
 
-export class Complaint extends Suppression {
-  address: string | undefined;
+export class Complaint extends Suppression implements IComplaint {
+  address: string;
   created_at: Date;
 
   constructor(data: ComplaintData) {
@@ -60,7 +58,7 @@ export class Complaint extends Suppression {
   }
 }
 
-export class Unsubscribe extends Suppression {
+export class Unsubscribe extends Suppression implements IUnsubscribe {
   address: string;
   tags: string[];
   created_at: Date;
@@ -73,7 +71,7 @@ export class Unsubscribe extends Suppression {
   }
 }
 
-export class WhiteList extends Suppression {
+export class WhiteList extends Suppression implements IWhiteList {
   value: string;
   reason: string;
   createdAt: Date;
@@ -86,11 +84,12 @@ export class WhiteList extends Suppression {
   }
 }
 
-export default class SuppressionClient {
+export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
   request: Request;
   models: Map<string, any>;
 
   constructor(request: Request) {
+    super(request);
     this.request = request;
     this.models = new Map();
     this.models.set('bounces', Bounce);
@@ -99,41 +98,18 @@ export default class SuppressionClient {
     this.models.set('whitelists', WhiteList);
   }
 
-  _parsePage(id: string, pageUrl: string) : ParsedPage {
-    const parsedUrl = new URL(pageUrl);
-    const { searchParams } = parsedUrl;
-    return {
-      id,
-      page: searchParams.has('page') ? searchParams.get('page') : undefined,
-      address: searchParams.has('address') ? searchParams.get('address') : undefined,
-      url: pageUrl
-    };
-  }
-
-  _parsePageLinks(response: SuppressionListResponse): ParsedPagesList {
-    const pages = Object.entries(response.body.paging as PagesList);
-    return pages.reduce(
-      (acc: PagesListAccumulator, pair: [pageUrl: string, id: string]) => {
-        const id = pair[0];
-        const pageUrl = pair[1];
-        acc[id] = this._parsePage(id, pageUrl);
-        return acc;
-      }, {}
-    ) as unknown as ParsedPagesList;
-  }
-
-  _parseList(
+  protected parseList(
     response: SuppressionListResponse,
     Model: {
-      new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
-      Bounce | Complaint | Unsubscribe | WhiteList
+      new(data: SuppressionDataType):
+      IBounce | IComplaint | IUnsubscribe | IWhiteList
     }
   ): SuppressionList {
     const data = {} as SuppressionList;
     data.items = response.body.items.map((item) => new Model(item));
 
-    data.pages = this._parsePageLinks(response);
-
+    data.pages = this.parsePageLinks(response, '?', 'address');
+    data.status = response.status;
     return data;
   }
 
@@ -184,17 +160,14 @@ export default class SuppressionClient {
     };
   }
 
-  list(
+  async list(
     domain: string,
     type: string,
     query?: SuppressionListQuery
   ): Promise<SuppressionList> {
     this.checkType(type);
-
     const model = this.models.get(type);
-    return this.request
-      .get(urljoin('v3', domain, type), query)
-      .then((response: SuppressionListResponse) => this._parseList(response, model));
+    return this.requestListWithPages(urljoin('v3', domain, type), query, model);
   }
 
   get(

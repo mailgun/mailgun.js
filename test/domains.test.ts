@@ -161,6 +161,48 @@ describe('DomainClient', function () {
         });
       });
     });
+
+    it('converts boolean true force_dkim_authority to string', async () => {
+      let requestObject;
+      api.post('/v3/domains').reply(200, function (_uri, requestBody) {
+        requestObject = requestBody as formData;
+        return {
+          domain: {
+            name: 'another.example.com',
+            smtp_password: 'smtp_password',
+            web_scheme: 'https',
+          }
+        };
+      });
+      await client.create({
+        name: 'another.example.com',
+        smtp_password: 'smtp_password',
+        web_scheme: 'https',
+        force_dkim_authority: true,
+      });
+      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------');
+    });
+
+    it('converts boolean false force_dkim_authority to string', async () => {
+      let requestObject;
+      api.post('/v3/domains').reply(200, function (_uri, requestBody) {
+        requestObject = requestBody as formData;
+        return {
+          domain: {
+            name: 'another.example.com',
+            smtp_password: 'smtp_password',
+            web_scheme: 'https',
+          }
+        };
+      });
+      await client.create({
+        name: 'another.example.com',
+        smtp_password: 'smtp_password',
+        web_scheme: 'https',
+        force_dkim_authority: false,
+      });
+      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------');
+    });
   });
 
   describe('verify', function () {

@@ -21,11 +21,9 @@ import {
   DomainTagStatisticItem,
   DomainTagStatisticResult,
   IDomainTagsClient,
-  PagesList,
-  PagesListAccumulator,
-  ParsedPagesList,
   Resolution
 } from './interfaces/DomainTags';
+import NavigationThruPages from './common/NavigationThruPages';
 
 export class DomainTag implements DomainTagsItem {
   tag: string;
@@ -62,37 +60,27 @@ export class DomainTagStatistic implements DomainTagStatisticResult {
   }
 }
 
-export default class DomainTagsClient implements IDomainTagsClient {
+export default class DomainTagsClient
+  extends NavigationThruPages<DomainTagsList>
+  implements IDomainTagsClient {
   baseRoute: string;
   request: Request;
 
   constructor(request: Request) {
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/';
   }
 
-  private _parsePageLinks(response: DomainTagsResponseData): ParsedPagesList {
-    const pages = Object.entries(response.body.paging as PagesList);
-    return pages.reduce(
-      (acc: PagesListAccumulator, entrie: [url: string, id: string]) => {
-        const id = entrie[0];
-        const url = entrie[1];
-        acc[id] = {
-          id,
-          url
-        };
-        return acc;
-      }, {}
-    ) as unknown as ParsedPagesList;
-  }
-
-  private _parseDomainTagsList(
-    response: DomainTagsResponseData
+  protected parseList(
+    response: DomainTagsResponseData,
   ): DomainTagsList {
-    return {
-      items: response.body.items.map((tagInfo) => new DomainTag(tagInfo)),
-      pages: this._parsePageLinks(response)
-    };
+    const data = {} as DomainTagsList;
+    data.items = response.body.items.map((tagInfo: DomainTagsItemInfo) => new DomainTag(tagInfo));
+
+    data.pages = this.parsePageLinks(response, '?', 'tag');
+    data.status = response.status;
+    return data;
   }
 
   private _parseTagStatistic(
@@ -101,11 +89,8 @@ export default class DomainTagsClient implements IDomainTagsClient {
     return new DomainTagStatistic(response);
   }
 
-  list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList> {
-    return this.request.get(urljoin(this.baseRoute, domain, '/tags'), query)
-      .then(
-        (res: APIResponse) => this._parseDomainTagsList(res as DomainTagsResponseData)
-      );
+  async list(domain: string, query?: DomainTagsQuery): Promise<DomainTagsList> {
+    return this.requestListWithPages(urljoin(this.baseRoute, domain, '/tags'), query);
   }
 
   get(domain: string, tag: string): Promise<DomainTagsItem> {

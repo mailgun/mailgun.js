@@ -7,16 +7,21 @@ import {
   ValidationApiResponse,
   StartValidationResult,
   ValidationResult,
-  CancelValidationResult
+  CancelValidationResult,
+  MailingListResult,
+  MailingListApiResponse
 } from './interfaces/lists';
 import { IMailListsMembers } from './interfaces/mailListMembers';
+import NavigationThruPages from './common/NavigationThruPages';
 
-export default class ListsClient {
+export default class ListsClient
+  extends NavigationThruPages<MailingListResult> {
   baseRoute: string;
   request: Request;
   members: IMailListsMembers;
 
   constructor(request: Request, members:IMailListsMembers) {
+    super(request);
     this.request = request;
     this.baseRoute = '/v3/lists';
     this.members = members;
@@ -32,9 +37,19 @@ export default class ListsClient {
     } as ValidationResult;
   }
 
-  list(query?: ListsQuery): Promise<MailingList[]> {
-    return this.request.get(`${this.baseRoute}/pages`, query)
-      .then((response) => response.body.items as MailingList[]);
+  protected parseList(response: MailingListApiResponse): MailingListResult {
+    const data = {} as MailingListResult;
+
+    data.items = response.body.items;
+
+    data.pages = this.parsePageLinks(response, '?', 'address');
+    data.status = response.status;
+
+    return data;
+  }
+
+  async list(query?: ListsQuery): Promise<MailingListResult> {
+    return this.requestListWithPages(`${this.baseRoute}/pages`, query);
   }
 
   get(mailListAddress: string): Promise<MailingList> {
