@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/mailgun/mailgun.js/compare/v7.0.4...v8.0.0) (2022-07-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* (MultipleValidationClient) Changed result interface for Multiple Validation.
+* (ListsClient) property with the name 'skip' was replaced by 'page' in the ListsQuery interface.
+* (ListsClient.list)'list' method changed the response interface to MailingListResult
+* Unify iterating thru pages in Domain Templates
+* (SuppressionClient) Some interfaces moved from Suppressions.d.ts to separate files
+(SuppressionClient.list) Property with name 'address' was replaced by iteratorPosition in the response in 'pages'
+* (EventClient.get) Number propery was replaced by iteratorPosition in pages property of response
+* (DomainTagsClient) Page property was added to DomainTagsQuery.
+* (DomainTagsClient) Status property was added to DomainTagsList.
+* (DomainTagsClient) Address property replaced by iteratorPosition in ParsedPage for list method.
+* (MailListsMembers) Updated listMembers response to be object with MailListMembersResult interface
+
+### Features
+
+* Add query to MultipleValidationClient ([2a7fd64](https://github.com/mailgun/mailgun.js/commits/2a7fd646af22675c75c81d144821f1d05ce87815))
+* Unify iterating thru pages in domain tags ([2ee7bd2](https://github.com/mailgun/mailgun.js/commits/2ee7bd2afee6d397ae41357c9cf66e4c88e7feff))
+* Unify iterating thru pages in Domain Templates ([2dcf453](https://github.com/mailgun/mailgun.js/commits/2dcf453ad9c53d2359620f890edd709f373e9aee))
+* Unify iterating thru pages in events ([41de3bb](https://github.com/mailgun/mailgun.js/commits/41de3bb084dc3c5b90abb81cdcfe7c365b6df097))
+* Unify iterating thru pages in Mailing lists ([40a6859](https://github.com/mailgun/mailgun.js/commits/40a685944057c308e7cb09c7f8d02b2b7177b87e))
+* Unify iterating thru pages in Multiple Validations ([db0d1f8](https://github.com/mailgun/mailgun.js/commits/db0d1f8629dda5849ff54a95607b7b388dde57d9))
+* Unify iterating thru pages in suppressions ([11962dc](https://github.com/mailgun/mailgun.js/commits/11962dcb7f8fe716af4f559ab97984154f3a30c6))
+
+
+### Bug Fixes
+
+* Fix assignment for force_dkim_authority ([ab442fe](https://github.com/mailgun/mailgun.js/commits/ab442fea88631e0e09c9399f14e1498782cc8373))
+
+
+### Breaking changes
+
+* Add pages navigation for mail list members ([a62ebbf](https://github.com/mailgun/mailgun.js/commits/a62ebbfc26768d56d78d1514836e97f8fdf1351f))
+
+
+### Other changes
+
+* Add release:test command ([6fd1e48](https://github.com/mailgun/mailgun.js/commits/6fd1e48f17bfb001f3fa337a85bbca9714025532))
+* Increase test coverage ([93014da](https://github.com/mailgun/mailgun.js/commits/93014dafc2ff91cc9b8ef52830472e9d354cb605))
+* Move duplicate logic to common class ([4603fd2](https://github.com/mailgun/mailgun.js/commits/4603fd2d35c0e94499aa0914b3c42168ece6d203))
+* Regenerate docs ([665068d](https://github.com/mailgun/mailgun.js/commits/665068d210b1b36b17cb4678dab178686db0c232))
+* Update commitlint rules ([a5a8897](https://github.com/mailgun/mailgun.js/commits/a5a8897932cb2499f62aabaf31f6f5c8650236a5))
+* Update readme ([3c32f1b](https://github.com/mailgun/mailgun.js/commits/3c32f1b726c0f19bcd5e009bd36b12c98e23cc8d))
+
 ### [7.0.4](https://github.com/mailgun/mailgun.js/compare/v7.0.3...v7.0.4) (2022-07-07)
 
 

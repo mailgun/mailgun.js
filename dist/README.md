@@ -110,6 +110,7 @@ The following service methods are available to instantiated clients. The example
       - [createMembers](#createmembers)
       - [updateMember](#updatemember)
       - [destroyMember](#destroymember)
+  - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -1793,13 +1794,178 @@ mg.lists.members.destroyMember('reply@sample.com', 'bot2@foobar.com')
 
 Promise Returns: response body
 
-```
+```js
 {
   member: { address: 'bot2@foobar.com' },
   message: 'Mailing list member has been deleted'
 }
 ```
 
+## Navigation thru lists
+  Most of the methods that return items in a list support pagination.
+  There are two ways to receive part of the list:
+  1. Provide properties 'limit' and 'page' in the query.
+  This way uses more frequently in the SDK and works for the next methods:
+  - mg.domains.domainTags.list()
+  - mg.domains.domainTemplates.list()
+  - mg.domains.domainTemplates.listVersions()
+  - mg.events.get()
+  - mg.lists.list()
+  - mg.lists.members.listMembers()
+  - mg.validate.list()
+  - mg.suppressions.list()
+
+    The general idea is that after you made the first call with a limit property in the query you will receive a response with a property called pages in it. This property implements the next interface:
+
+    ```TS
+    {
+        previous: {
+            id: string;
+            page: string;
+            iteratorPosition: string | undefined;
+            url: string
+        };
+        first: {
+            id: string;
+            page: string;
+            iteratorPosition: string | undefined;
+            url: string
+        };
+        last: {
+            id: string;
+            page: string;
+            iteratorPosition: string | undefined;
+            url: string
+        };
+        next: {
+            id: string;
+            page: string;
+            iteratorPosition: string | undefined;
+            url: string
+        };
+    }
+    ```
+    To receive the next page you need to add the page property to the query argument. This property should contain a string value from 'page' property in response.pages.(previous/first/last/next).
+
+    Example:
+    ```Js
+    // first call
+    const listMembers = await mg.lists.members.listMembers('your_mailing_list', { limit: 2 });
+
+    /* response
+    {
+      items: [
+        {
+          address: 'test-0@example.com',
+          name: 'test name 0',
+          subscribed: true,
+          vars: [Object]
+        },
+        {
+          address: 'test-1@example.com',
+          name: 'test name 1',
+          subscribed: true,
+          vars: [Object]
+        }
+      ],
+      pages: {
+        first: {
+          id: 'first',
+          page: '?page=first&limit=2',
+          iteratorPosition: undefined,
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=first&limit=2'
+        },
+        last: {
+          id: 'last',
+          page: '?page=last&limit=2',
+          iteratorPosition: undefined,
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=last&limit=2'
+        },
+        next: {
+          id: 'next',
+          page: '?page=next&address=test-1%40example.com&limit=2',
+          iteratorPosition: 'test-1@example.com',
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=next&address=test-1%40example.com&limit=2'
+        },
+        previous: {
+          id: 'previous',
+          page: '?page=prev&address=test-0%40example.com&limit=2',
+          iteratorPosition: 'test-0@example.com',
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=prev&address=test-0%40example.com&limit=2'
+        }
+      }
+    }
+    */
+    // second call
+    const listMembers = await mg.lists.members.listMembers(
+        'your_mailing_list',
+        {
+          limit: 2,
+          page: '?page=next&address=test-1%40example.com&limit=2'
+        }
+      );
+
+    /* response
+    {
+      items: [
+        {
+          address: 'test-2@example.com',
+          name: 'test name 2',
+          subscribed: true,
+          vars: [Object]
+        },
+        {
+          address: 'test-3@example.com',
+          name: 'test name 3',
+          subscribed: true,
+          vars: [Object]
+        }
+      ],
+      pages: {
+        first: {
+          id: 'first',
+          page: '?page=first&limit=2',
+          iteratorPosition: undefined,
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=first&limit=2'
+        },
+        last: {
+          id: 'last',
+          page: '?page=last&limit=2',
+          iteratorPosition: undefined,
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=last&limit=2'
+        },
+        next: {
+          id: 'next',
+          page: '?page=next&address=test-3%40example.com&limit=2',
+          iteratorPosition: 'test-3@example.com',
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=next&address=test-3%40example.com&limit=2'
+        },
+        previous: {
+          id: 'previous',
+          page: '?page=prev&address=test-2%40example.com&limit=2',
+          iteratorPosition: 'test-2@example.com',
+          url: 'https://your_domain/v3/lists/your_mailing_list/members/pages?page=prev&address=test-2%40example.com&limit=2'
+        }
+      }
+    }
+    */
+    ```
+    2. The second option of navigation is to provide properties 'limit' and 'skip' in the query. This way uses only in a few places for now:
+      - mg.domains.list()
+      - mg.domains.domainCredentials.list()
+      - mg.routes.list()
+      - mg.webhooks.list()
+    The main idea here is quite simple you just need to provide how many records from the start of a list you want to skip and how many to receive. You can do it using the query parameter in each method.
+    Example:
+    ```js
+    const listDomainCredentials = await client.domains.domainCredentials.list(
+    'your_domain_name',
+    {
+      skip: 10,
+      limit: 1
+    }
+    );
+    ```
 
 
 ## Browser Demo
