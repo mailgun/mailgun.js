@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import Request from './request';
-import Options from './interfaces/Options';
-import { RequestOptions } from './interfaces/RequestOptions';
+import Options from './types/Options';
+import { RequestOptions } from './types/RequestOptions';
 
 import DomainClient from './domains';
 import EventClient from './events';
@@ -15,12 +15,12 @@ import IpsClient from './ips';
 import IpPoolsClient from './ip-pools';
 import ListsClient from './lists';
 import MailListsMembers from './mailListMembers';
-import { InputFormData } from './interfaces/IFormData';
+import { InputFormData } from './types/IFormData';
 import DomainCredentialsClient from './domainsCredentials';
 import MultipleValidationClient from './multipleValidation';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
-import { IMailgunClient } from './interfaces/IMailgunClient';
+import { IMailgunClient } from './types/IMailgunClient';
 
 export default class Client implements IMailgunClient {
   private request;

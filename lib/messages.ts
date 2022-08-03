@@ -1,10 +1,10 @@
 import APIError from './error';
-import APIErrorOptions from './interfaces/APIErrorOptions';
+import APIErrorOptions from './types/APIErrorOptions';
 import {
   MailgunMessageData,
   MessagesSendAPIResponse,
   MessagesSendResult
-} from './interfaces/Messages';
+} from './types/Messages';
 import Request from './request';
 
 export default class MessagesClient {

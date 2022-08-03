@@ -4,8 +4,8 @@ import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/request';
 import DomainClient, { Domain } from '../lib/domains';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { RequestOptions } from '../lib/types/RequestOptions';
+import { InputFormData } from '../lib/types/IFormData';
 import DomainCredentialsClient from '../lib/domainsCredentials';
 import {
   ConnectionSettings,
@@ -13,10 +13,10 @@ import {
   UpdatedConnectionSettings,
   UpdatedDKIMAuthority,
   UpdatedDKIMSelectorResponse, UpdatedWebPrefixResponse
-} from '../lib/interfaces/Domains';
+} from '../lib/types/Domains';
 import DomainTemplatesClient from '../lib/domainsTemplates';
 import DomainTagsClient from '../lib/domainsTags';
-import APIResponse from '../lib/interfaces/ApiResponse';
+import APIResponse from '../lib/types/ApiResponse';
 
 // TODO: fix types
 describe('DomainClient', function () {

@@ -3,9 +3,9 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/request';
 import StatsClient from '../lib/stats';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { StatsOptions, StatsQuery } from '../lib/interfaces/StatsOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { RequestOptions } from '../lib/types/RequestOptions';
+import { StatsOptions, StatsQuery } from '../lib/types/StatsOptions';
+import { InputFormData } from '../lib/types/IFormData';
 
 describe('StatsClient', function () {
   let client: StatsClient;

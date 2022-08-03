@@ -1,4 +1,4 @@
-import APIErrorOptions from './interfaces/APIErrorOptions';
+import APIErrorOptions from './types/APIErrorOptions';
 
 export default class APIError extends Error {
   status: number | string;

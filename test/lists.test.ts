@@ -3,15 +3,15 @@ import formData from 'form-data';
 
 import Request from '../lib/request';
 import ListsClient from '../lib/lists';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/types/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import {
   CancelValidationResult,
   MailingList,
   StartValidationResult,
   ValidationResult
-} from '../lib/interfaces/lists';
-import { InputFormData } from '../lib/interfaces/IFormData';
+} from '../lib/types/lists';
+import { InputFormData } from '../lib/types/IFormData';
 
 describe('ListsClient', function () {
   let client: any;

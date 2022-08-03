@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
 import APIError from '../error';
-import APIErrorOptions from '../interfaces/APIErrorOptions';
+import APIErrorOptions from '../types/APIErrorOptions';
 import {
   PagesListAccumulator,
   ParsedPage,
@@ -8,11 +8,11 @@ import {
   QueryWithPage,
   ResponseWithPaging,
   UpdatedUrlAndQuery
-} from '../interfaces/NavigationThruPages';
-import { BounceData, IBounce } from '../interfaces/Suppressions/Bounce';
-import { ComplaintData, IComplaint } from '../interfaces/Suppressions/Complaint';
-import { IUnsubscribe, UnsubscribeData } from '../interfaces/Suppressions/Unsubscribe';
-import { IWhiteList, WhiteListData } from '../interfaces/Suppressions/WhiteList';
+} from '../types/NavigationThruPages';
+import { BounceData, IBounce } from '../types/Suppressions/Bounce';
+import { ComplaintData, IComplaint } from '../types/Suppressions/Complaint';
+import { IUnsubscribe, UnsubscribeData } from '../types/Suppressions/Unsubscribe';
+import { IWhiteList, WhiteListData } from '../types/Suppressions/WhiteList';
 import Request from '../request';
 
 export default abstract class NavigationThruPages <T> {

@@ -1,5 +1,5 @@
 import urljoin from 'url-join';
-import APIResponse from './interfaces/ApiResponse';
+import APIResponse from './types/ApiResponse';
 import Request from './request';
 
 import {
@@ -22,7 +22,7 @@ import {
   DomainTagStatisticResult,
   IDomainTagsClient,
   Resolution
-} from './interfaces/DomainTags';
+} from './types/DomainTags';
 import NavigationThruPages from './common/NavigationThruPages';
 
 export class DomainTag implements DomainTagsItem {

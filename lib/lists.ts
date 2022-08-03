@@ -10,8 +10,8 @@ import {
   CancelValidationResult,
   MailingListResult,
   MailingListApiResponse
-} from './interfaces/lists';
-import { IMailListsMembers } from './interfaces/mailListMembers';
+} from './types/lists';
+import { IMailListsMembers } from './types/mailListMembers';
 import NavigationThruPages from './common/NavigationThruPages';
 
 export default class ListsClient

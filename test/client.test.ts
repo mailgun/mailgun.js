@@ -12,7 +12,7 @@ import MessagesClient from '../lib/messages';
 import RoutesClient from '../lib/routes';
 import ValidateClient from '../lib/validate';
 
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData } from '../lib/types/IFormData';
 import StatsClient from '../lib/stats';
 import ListsClient from '../lib/lists';
 import IpPoolsClient from '../lib/ip-pools';
