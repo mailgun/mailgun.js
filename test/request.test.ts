@@ -7,7 +7,7 @@ import { expect } from 'chai';
 import Request from '../lib/request';
 import { RequestOptions } from '../lib/types/RequestOptions';
 import APIError from '../lib/error';
-import APIResponse from '../lib/types/ApiResponse';
+import { APIResponse } from '../lib/types/ApiResponse';
 import { InputFormData } from '../lib/types/IFormData';
 
 describe('Request', function () {

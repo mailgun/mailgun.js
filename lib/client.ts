@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import Request from './request';
-import Options from './types/Options';
+import { Options } from './types/Options';
 import { RequestOptions } from './types/RequestOptions';
 
 import DomainClient from './domains';

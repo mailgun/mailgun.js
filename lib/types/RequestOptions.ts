@@ -1,5 +1,5 @@
-import { AxiosRequestHeaders } from 'axios'
-import Options from './Options';
+import { AxiosRequestHeaders } from 'axios';
+import { Options } from './Options';
 
 export interface OnCallEmptyHeaders {
   [key: string]: undefined;

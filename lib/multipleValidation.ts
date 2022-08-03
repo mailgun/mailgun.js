@@ -1,5 +1,5 @@
 import NavigationThruPages from './common/NavigationThruPages';
-import APIResponse from './types/ApiResponse';
+import { APIResponse } from './types/ApiResponse';
 import {
   CanceledMultipleValidationJob,
   CreatedMultipleValidationJob,

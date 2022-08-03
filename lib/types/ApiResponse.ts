@@ -1,6 +1,4 @@
- interface APIResponse {
-    status: number;
-    body: any;
+export interface APIResponse {
+  status: number;
+  body: any;
 }
-
-export default APIResponse;

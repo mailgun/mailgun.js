@@ -4,9 +4,9 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './error';
 import { OnCallEmptyHeaders, OnCallRequestOptions, RequestOptions } from './types/RequestOptions';
-import APIErrorOptions from './types/APIErrorOptions';
+import { APIErrorOptions } from './types/APIErrorOptions';
 import { InputFormData } from './types/IFormData';
-import APIResponse from './types/ApiResponse';
+import { APIResponse } from './types/ApiResponse';
 import FormDataBuilder from './formDataBuilder';
 import { IpPoolDeleteData } from './types/IpPools';
 

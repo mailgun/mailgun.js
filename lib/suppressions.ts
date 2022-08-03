@@ -16,7 +16,7 @@ import {
   SuppressionResponse,
 } from './types/Suppressions/Suppressions';
 import APIError from './error';
-import APIErrorOptions from './types/APIErrorOptions';
+import { APIErrorOptions } from './types/APIErrorOptions';
 import { IBounce, BounceData } from './types/Suppressions/Bounce';
 import { IComplaint, ComplaintData } from './types/Suppressions/Complaint';
 import { IUnsubscribe, UnsubscribeData } from './types/Suppressions/Unsubscribe';

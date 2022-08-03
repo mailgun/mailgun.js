@@ -16,7 +16,7 @@ import {
 } from '../lib/types/Domains';
 import DomainTemplatesClient from '../lib/domainsTemplates';
 import DomainTagsClient from '../lib/domainsTags';
-import APIResponse from '../lib/types/ApiResponse';
+import { APIResponse } from '../lib/types/ApiResponse';
 
 // TODO: fix types
 describe('DomainClient', function () {

@@ -23,9 +23,9 @@ import {
   MessageResponse,
 } from './types/Domains';
 
-import APIResponse from './types/ApiResponse';
+import { APIResponse } from './types/ApiResponse';
 import APIError from './error';
-import APIErrorOptions from './types/APIErrorOptions';
+import { APIErrorOptions } from './types/APIErrorOptions';
 
 import Request from './request';
 import {
