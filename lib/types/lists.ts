@@ -26,7 +26,7 @@ export interface StartValidationResult {
     message: string;
 }
 
-export interface ValidationResponse {
+export interface ListValidationResponse {
     status: string;
     download_url: {
       csv: string;
@@ -51,13 +51,13 @@ export interface ValidationResponse {
       }
     }
 }
-export interface ValidationApiResponse extends ValidationResponse{
+export interface ValidationApiResponse extends ListValidationResponse{
     created_at: number;
 }
-export interface ValidationResultData extends ValidationResponse{
+export interface ValidationResultData extends ListValidationResponse{
     created_at: Date;
 }
-export interface ValidationResult {
+export interface ListValidationResult {
     status: number;
     validationResult: ValidationResultData;
 }

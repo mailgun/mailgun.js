@@ -1,6 +1,7 @@
 import Client from './client';
-import { InputFormData } from './types/IFormData';
-import Options from './types/Options';
+import { InputFormData, Options } from './types';
+
+export * from './types';
 
 export default class Mailgun {
   static get default(): typeof Mailgun { return this; }

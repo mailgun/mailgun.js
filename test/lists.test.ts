@@ -9,7 +9,7 @@ import {
   CancelValidationResult,
   MailingList,
   StartValidationResult,
-  ValidationResult
+  ListValidationResult
 } from '../lib/types/lists';
 import { InputFormData } from '../lib/types/IFormData';
 
@@ -179,7 +179,7 @@ describe('ListsClient', function () {
         }
       });
 
-      return client.validationResult('test@example.com').then(function (data: ValidationResult) {
+      return client.validationResult('test@example.com').then(function (data: ListValidationResult) {
         data.should.eql({
           status: 200,
           validationResult: {
