@@ -45,7 +45,10 @@ export default class WebhookClient {
 
   _parseWebhookTest(response: { body: { code: number, message: string } })
   : {code: number, message:string} {
-    return { code: response.body.code, message: response.body.message } as WebhooksValidationResponse;
+    return {
+      code: response.body.code,
+      message: response.body.message
+    } as WebhooksValidationResponse;
   }
 
   list(domain: string, query: WebhooksQuery): Promise<WebhookList> {
