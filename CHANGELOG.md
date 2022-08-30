@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.1](https://github.com/mailgun/mailgun.js/compare/v8.0.0...v8.0.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* Move webpack-merge to the dev dependencies ([68304c2](https://github.com/mailgun/mailgun.js/commits/68304c20f28ad38b8202ddf008c4a5f0786f1f54))
+
+
+### Other changes
+
+* Update build ([633e539](https://github.com/mailgun/mailgun.js/commits/633e5392b5bc2843fa08e3541a63f5b67179dcf6))
+* Update send-email example ([a5a7c5a](https://github.com/mailgun/mailgun.js/commits/a5a7c5aeaa560cf8e6d6d9936b9c0137e84ba7e9))
+
 ## [8.0.0](https://github.com/mailgun/mailgun.js/compare/v7.0.4...v8.0.0) (2022-07-28)
 
 
