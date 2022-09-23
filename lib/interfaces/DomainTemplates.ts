@@ -35,8 +35,12 @@ export type DomainTemplateUpdateVersionData = {
 }
 
 export type DomainTemplatesQuery = {
-    page: 'string';
-    limit: number;
+    /** 'page' (optionally 'p') params from previous response's 'paging' object.
+     * Value must be stringified as query params. Ex: '?page=first','?page=next&p=name-of-last-item'
+     .... */
+    page?: `?${string}`;
+    /** Number of records to retrieve. Default value is 10. */
+    limit?: number;
 }
 
 export type TemplateQuery = {

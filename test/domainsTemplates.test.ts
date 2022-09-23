@@ -67,6 +67,43 @@ describe('DomainsTemplatesClient', function () {
       templatesList.pages.previous.page.should.be.equal('?page=previous&p=temporary-test-template&limit=10');
       expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
     });
+
+    it('fetches pages of templates with the "page" and "limit" options', async () => {
+      api.get('/v3/testDomain/templates?page=next&p=temporary-test-template&limit=1').reply(200, {
+        items: [
+          {
+            name: 'test_template',
+            description: 'test_template description',
+            createdAt: 'Mon, 20 Dec 2021 14:47:51 UTC',
+            createdBy: '',
+            id: 'someId',
+          },
+        ],
+        paging: {
+          first: 'https://api.mailgun.net/v3/testDomain/templates?limit=1',
+          last: 'https://api.mailgun.net/v3/testDomain/templates?page=last&limit=1',
+          next: 'https://api.mailgun.net/v3/testDomain/templates?page=next&p=temporary-test-template&limit=1',
+          previous: 'https://api.mailgun.net/v3/testDomain/templates?page=previous&p=temporary-test-template&limit=1',
+        },
+      });
+
+      const templatesList = await client.list('testDomain', {
+        page: '?page=next&p=temporary-test-template',
+        limit: 1,
+      });
+      templatesList.should.be.an('object').to.have.property('items');
+      templatesList.pages.first.page.should.be.equal('?limit=1');
+      expect(templatesList.pages.first.iteratorPosition).to.be.equal(undefined);
+
+      templatesList.pages.last.page.should.be.equal('?page=last&limit=1');
+      expect(templatesList.pages.last.iteratorPosition).to.be.equal(undefined);
+
+      templatesList.pages.next.page.should.be.equal('?page=next&p=temporary-test-template&limit=1');
+      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
+
+      templatesList.pages.previous.page.should.be.equal('?page=previous&p=temporary-test-template&limit=1');
+      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
+    });
   });
 
   describe('get', function () {
