@@ -26,7 +26,7 @@ class Request {
     this.timeout = options.timeout;
     this.headers = options.headers || {};
     this.formDataBuilder = new FormDataBuilder(formData);
-    this.maxBodyLength = 52428800; // 25MB
+    this.maxBodyLength = 52428800; // 50 MB
   }
 
   async request(
