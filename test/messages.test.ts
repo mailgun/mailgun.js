@@ -7,9 +7,9 @@ import spies from 'chai-spies';
 
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
-import { MessagesSendResult } from '../lib/interfaces/Messages';
+import { RequestOptions } from '../lib/types/RequestOptions';
+import { InputFormData } from '../lib/types/IFormData';
+import { MessagesSendResult } from '../lib/types/Messages';
 
 chai.use(spies);
 const expect = chai.expect;

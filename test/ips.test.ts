@@ -3,11 +3,11 @@
 import nock from 'nock';
 import formData from 'form-data';
 import Request from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/types/RequestOptions';
 import IpsClient from '../lib/ips';
 
-import { IpData, IpsListResponseBody } from '../lib/interfaces/Ips';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { IpData, IpsListResponseBody } from '../lib/types/Ips';
+import { InputFormData } from '../lib/types/IFormData';
 
 // TODO: fix types
 describe('DomainClient', function () {

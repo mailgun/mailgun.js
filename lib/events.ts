@@ -4,7 +4,7 @@ import {
   EventsList,
   EventsQuery,
   EventsResponse,
-} from './interfaces/Events';
+} from './types/Events';
 
 import Request from './request';
 

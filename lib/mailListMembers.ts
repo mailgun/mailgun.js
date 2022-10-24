@@ -12,7 +12,7 @@ import {
   NewMultipleMembersResponse,
   MailListMembersResult,
   MailListMembersResponse
-} from './interfaces/mailListMembers';
+} from './types/mailListMembers';
 import NavigationThruPages from './common/NavigationThruPages';
 
 export default class MailListsMembers

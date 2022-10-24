@@ -3,12 +3,12 @@ import urljoin from 'url-join';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './error';
-import { OnCallEmptyHeaders, OnCallRequestOptions, RequestOptions } from './interfaces/RequestOptions';
-import APIErrorOptions from './interfaces/APIErrorOptions';
-import { InputFormData } from './interfaces/IFormData';
-import APIResponse from './interfaces/ApiResponse';
+import { OnCallEmptyHeaders, OnCallRequestOptions, RequestOptions } from './types/RequestOptions';
+import { APIErrorOptions } from './types/APIErrorOptions';
+import { InputFormData } from './types/IFormData';
+import { APIResponse } from './types/ApiResponse';
 import FormDataBuilder from './formDataBuilder';
-import { IpPoolDeleteData } from './interfaces/IpPools';
+import { IpPoolDeleteData } from './types/IpPools';
 
 class Request {
   private username: string;

@@ -3,15 +3,15 @@ import formData from 'form-data';
 
 import Request from '../lib/request';
 import ListsClient from '../lib/lists';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
+import { RequestOptions } from '../lib/types/RequestOptions';
 import MailListMembers from '../lib/mailListMembers';
 import {
   CancelValidationResult,
   MailingList,
   StartValidationResult,
-  ValidationResult
-} from '../lib/interfaces/lists';
-import { InputFormData } from '../lib/interfaces/IFormData';
+  ListValidationResult
+} from '../lib/types/lists';
+import { InputFormData } from '../lib/types/IFormData';
 
 describe('ListsClient', function () {
   let client: any;
@@ -179,7 +179,7 @@ describe('ListsClient', function () {
         }
       });
 
-      return client.validationResult('test@example.com').then(function (data: ValidationResult) {
+      return client.validationResult('test@example.com').then(function (data: ListValidationResult) {
         data.should.eql({
           status: 200,
           validationResult: {

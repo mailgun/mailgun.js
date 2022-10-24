@@ -21,11 +21,11 @@ import {
   UpdatedWebPrefixResponse,
   ReplacementForPool,
   MessageResponse,
-} from './interfaces/Domains';
+} from './types/Domains';
 
-import APIResponse from './interfaces/ApiResponse';
+import { APIResponse } from './types/ApiResponse';
 import APIError from './error';
-import APIErrorOptions from './interfaces/APIErrorOptions';
+import { APIErrorOptions } from './types/APIErrorOptions';
 
 import Request from './request';
 import {
@@ -36,12 +36,12 @@ import {
   UnsubscribeTrackingInfo,
   UpdateDomainTrackingResponse,
   UpdatedOpenTracking
-} from './interfaces/DomainTracking';
-import { IDomainCredentials } from './interfaces/DomainCredentials';
-import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
+} from './types/DomainTracking';
+import { IDomainCredentials } from './types/DomainCredentials';
+import { IDomainTemplatesClient } from './types/DomainTemplates';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
-import { IDomainTagsClient } from './interfaces/DomainTags';
+import { IDomainTagsClient } from './types/DomainTags';
 import DomainTagsClient from './domainsTags';
 
 export class Domain {

@@ -14,13 +14,13 @@ import {
   SuppressionListResponse,
   SuppressionModels,
   SuppressionResponse,
-} from './interfaces/Suppressions/Suppressions';
+} from './types/Suppressions/Suppressions';
 import APIError from './error';
-import APIErrorOptions from './interfaces/APIErrorOptions';
-import { IBounce, BounceData } from './interfaces/Suppressions/Bounce';
-import { IComplaint, ComplaintData } from './interfaces/Suppressions/Complaint';
-import { IUnsubscribe, UnsubscribeData } from './interfaces/Suppressions/Unsubscribe';
-import { IWhiteList, WhiteListData } from './interfaces/Suppressions/WhiteList';
+import { APIErrorOptions } from './types/APIErrorOptions';
+import { IBounce, BounceData } from './types/Suppressions/Bounce';
+import { IComplaint, ComplaintData } from './types/Suppressions/Complaint';
+import { IUnsubscribe, UnsubscribeData } from './types/Suppressions/Unsubscribe';
+import { IWhiteList, WhiteListData } from './types/Suppressions/WhiteList';
 import NavigationThruPages from './common/NavigationThruPages';
 
 const createOptions = {

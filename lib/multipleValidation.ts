@@ -1,5 +1,5 @@
 import NavigationThruPages from './common/NavigationThruPages';
-import APIResponse from './interfaces/ApiResponse';
+import { APIResponse } from './types/ApiResponse';
 import {
   CanceledMultipleValidationJob,
   CreatedMultipleValidationJob,
@@ -12,7 +12,7 @@ import {
   MultipleValidationJobResult,
   MultipleValidationJobsListQuery
 }
-  from './interfaces/MultipleValidation';
+  from './types/MultipleValidation';
 import Request from './request';
 
 export class MultipleValidationJob implements MultipleValidationJobResult {

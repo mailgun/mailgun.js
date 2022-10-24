@@ -4,9 +4,9 @@ import nock from 'nock';
 import formData from 'form-data';
 import EventClient from '../lib/events';
 import MgRequest from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
-import { EventsList, EventsResponse } from '../lib/interfaces/Events';
+import { RequestOptions } from '../lib/types/RequestOptions';
+import { InputFormData } from '../lib/types/IFormData';
+import { EventsList, EventsResponse } from '../lib/types/Events';
 
 describe('EventsClient', function () {
   let client: EventClient;

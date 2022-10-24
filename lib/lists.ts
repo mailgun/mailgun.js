@@ -6,12 +6,12 @@ import {
   MailingList,
   ValidationApiResponse,
   StartValidationResult,
-  ValidationResult,
+  ListValidationResult,
   CancelValidationResult,
   MailingListResult,
   MailingListApiResponse
-} from './interfaces/lists';
-import { IMailListsMembers } from './interfaces/mailListMembers';
+} from './types/lists';
+import { IMailListsMembers } from './types/mailListMembers';
 import NavigationThruPages from './common/NavigationThruPages';
 
 export default class ListsClient
@@ -27,14 +27,14 @@ export default class ListsClient
     this.members = members;
   }
 
-  private parseValidationResult(status: number, data: ValidationApiResponse): ValidationResult {
+  private parseValidationResult(status: number, data: ValidationApiResponse): ListValidationResult {
     return {
       status,
       validationResult: {
         ...data,
         created_at: new Date(data.created_at * 1000) // add millisecond to Unix timestamp
       }
-    } as ValidationResult;
+    } as ListValidationResult;
   }
 
   protected parseList(response: MailingListApiResponse): MailingListResult {
@@ -80,7 +80,7 @@ export default class ListsClient
       }) as StartValidationResult);
   }
 
-  validationResult(mailListAddress: string): Promise<ValidationResult> {
+  validationResult(mailListAddress: string): Promise<ListValidationResult> {
     return this.request.get(`${this.baseRoute}/${mailListAddress}/validate`)
       .then(
         (response) => this.parseValidationResult(

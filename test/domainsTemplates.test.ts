@@ -3,10 +3,10 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import Request from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { RequestOptions } from '../lib/types/RequestOptions';
+import { InputFormData } from '../lib/types/IFormData';
 import DomainTemplatesClient from '../lib/domainsTemplates';
-import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/interfaces/DomainTemplates';
+import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/types/DomainTemplates';
 
 // TODO: fix types
 describe('DomainsTemplatesClient', function () {

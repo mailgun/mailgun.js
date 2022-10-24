@@ -11,7 +11,7 @@ import {
   IpPoolMessageResponse,
   IpPoolMessageResult,
   IpPoolUpdateData,
-} from './interfaces/IpPools';
+} from './types/IpPools';
 
 export default class IpPoolsClient {
   request: Request;

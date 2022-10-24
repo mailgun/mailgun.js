@@ -25,7 +25,7 @@ import {
   TemplateVersion,
   UpdateOrDeleteDomainTemplateAPIResponse,
   UpdateOrDeleteDomainTemplateResult
-} from './interfaces/DomainTemplates';
+} from './types/DomainTemplates';
 import NavigationThruPages from './common/NavigationThruPages';
 
 export class DomainTemplateItem implements DomainTemplate {
