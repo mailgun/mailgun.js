@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.2](https://github.com/mailgun/mailgun.js/compare/v8.0.1...v8.0.2) (2022-10-24)
+
+
+### Bug Fixes
+
+* Increase limit on body size ([8cd6fad](https://github.com/mailgun/mailgun.js/commits/8cd6fad1c497839a22a08a682690287a44954428))
+
+
+### Other changes
+
+* Update comment ([d2dbff5](https://github.com/mailgun/mailgun.js/commits/d2dbff516acfe70a0a8b6addff755a3fb9bc55c7))
+
 ### [8.0.1](https://github.com/mailgun/mailgun.js/compare/v8.0.0...v8.0.1) (2022-08-30)
 
 
