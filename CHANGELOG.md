@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [8.0.3](https://github.com/mailgun/mailgun.js/compare/v8.0.2...v8.0.3) (2022-11-16)
 
+### Bug Fixes
+* Bumps [loader-utils](https://github.com/webpack/loader-utils) from 2.0.2 to 2.0.3.
+
+
 ### [8.0.2](https://github.com/mailgun/mailgun.js/compare/v8.0.1...v8.0.2) (2022-10-24)
 
 
