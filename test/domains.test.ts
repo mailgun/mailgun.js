@@ -77,6 +77,15 @@ describe('DomainClient', function () {
         });
       });
     });
+
+    it('returns empty array if items property is empty', async () => {
+      api.get('/v3/domains').reply(200, {
+        items: null
+      });
+      const res :Domain[] = await client.list();
+      res.should.be.an('array');
+      res.length.should.equal(0);
+    });
   });
 
   describe('get', function () {
