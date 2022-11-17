@@ -104,6 +104,10 @@
         "section": "Bug Fixes"
       },
       {
+        "type": "chore",
+        "section": "Bug Fixes"
+      },
+      {
         "type": "other",
         "section": "Other changes"
       }
