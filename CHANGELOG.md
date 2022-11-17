@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.5](https://github.com/mailgun/mailgun.js/compare/v8.0.4...v8.0.5) (2022-11-17)
+
+
+### Bug Fixes
+
+* **deps:** bump loader-utils from 2.0.3 to 2.0.4 ([59f140c](https://github.com/mailgun/mailgun.js/commits/59f140cdbaaa9276c1b9cba6e97aea8a2863d223))
+
+
+### Other changes
+
+* Update standard-version types array to include pull-requests from dependabot ([ba165a8](https://github.com/mailgun/mailgun.js/commits/ba165a81391f8bd68d8f62109d715757b7708a97))
+
 ### [8.0.4](https://github.com/mailgun/mailgun.js/compare/v8.0.3...v8.0.4) (2022-11-16)
 
 
