@@ -43,10 +43,10 @@ const mailgun = new Mailgun(formData);
 const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 
-In the case your mailgun account is eu hosted you would need to define eu's subdomain as `url` in mailgun's Client constructor:
+In the case your mailgun account is eu hosted you would need to define eu's subdomain as `host` in mailgun's Client constructor:
 
 ```js
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', url: 'https://api.eu.mailgun.net'});
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', host: 'https://api.eu.mailgun.net'});
 ```
 
 
