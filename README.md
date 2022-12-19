@@ -78,31 +78,32 @@ The following service methods are available to instantiated clients. The example
       - [list](#list-1)
       - [get](#get-2)
       - [create](#create-2)
+      - [destroy](#destroy-1)
     - [webhooks](#webhooks)
       - [list](#list-2)
       - [get](#get-3)
       - [create](#create-3)
       - [update](#update)
-      - [destroy](#destroy-1)
+      - [destroy](#destroy-2)
     - [routes](#routes)
       - [list](#list-3)
       - [get](#get-4)
       - [create](#create-4)
       - [update](#update-1)
-      - [destroy](#destroy-2)
+      - [destroy](#destroy-3)
     - [validate](#validate)
       - [get](#get-5)
     - [Multiple Validation](#multiple-validation)
       - [create](#create-5)
       - [list](#list-4)
       - [get](#get-5)
-      - [destroy](#destroy-3)
+      - [destroy](#destroy-4)
     - [lists](#lists)
       - [list](#list-5)
       - [get](#get-6)
       - [create](#create-6)
       - [update](#update-2)
-      - [destroy](#destroy-3)
+      - [destroy](#destroy-5)
     - [mailListMembers](#maillistmembers)
       - [listMembers](#listmember)
       - [getMember](#getmember)
@@ -301,7 +302,7 @@ Messages with attachments:
 
     const res = await mg.messages.create(DOMAIN, messageParams);
   ```
-  Promise Returns:
+  Promise returns:
 
   ```js
   {
@@ -411,7 +412,7 @@ mg.domains.list()
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: array of Domain instances
+Promise returns: array of Domain instances
 
 ```
 [{
@@ -449,7 +450,7 @@ mg.domains.get()
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: Domain instance
+Promise returns: Domain instance
 
 ```
 {
@@ -517,7 +518,7 @@ Options:
 | spam_action   | disabled or tag Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged wtih a spam header. See Spam Filter. |
 | wildcard      | true or false Determines whether the domain will accept email for sub-domains.                                                                |
 
-Promise Returns: Domain instance
+Promise returns: Domain instance
 
 ```
 {
@@ -575,7 +576,7 @@ mg.domains.destroy('foobar.example.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -595,7 +596,7 @@ mg.domains.getTracking('foobar.example.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -631,7 +632,7 @@ Open Tracking Options
 |:----------|:-------------------------------------------|
 | active    | Boolean, enables or disables open tracking |
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -656,7 +657,7 @@ Click Tracking Options
 |:----------|:--------------------------------------------|
 | active    | Boolean, enables or disables click tracking |
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -687,7 +688,7 @@ Unsubscribe Tracking Options
 | html_footer | string appended to html emails for managing unsubscribe links |
 | text_footer | string appended to html emails for managing unsubscribe links |
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -711,7 +712,7 @@ mg.domains.getIps('foobar.example.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 ["192.168.0.1", "192.168.0.2"]
@@ -782,7 +783,7 @@ Options:
 | limit     | Number of entries to return. (300 max)                                                                                                                                                                                                                                          |
 | <field>   | <field> is the name of the Filter Field. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator. |
 
-Promise Returns: items (array of event objects), pages (paging keys grouped by id)
+Promise returns: items (array of event objects), pages (paging keys grouped by id)
 
 ```
 {
@@ -850,7 +851,7 @@ mg.stats.getDomain('foobar.example.com', {event: ['delivered', 'accepted', 'fail
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -876,7 +877,7 @@ mg.stats.getDomain('foobar.example.com', {event: ['delivered', 'accepted', 'fail
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -892,172 +893,226 @@ Promise Returns:
 
 ### suppressions
 
-#### list
+- #### list
 
-`mg.suppressions.list(domain, suppressionType, query)`
+  `mg.suppressions.list(domain, suppressionType, query?)`
 
-Bounces Example:
+  - Bounces Example:
 
-```js
-mg.suppressions.list('foobar.example.com', 'bounces')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+    ```js
+    mg.suppressions.list('foobar.example.com', 'bounces')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
 
-Unsubscribes Example:
+  - Unsubscribes Example:
 
-```js
-mg.suppressions.list('foobar.example.com', 'unsubscribes')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+    ```js
+    mg.suppressions.list('foobar.example.com', 'unsubscribes')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
 
-Complaints Example:
+  - Complaints Example:
 
-```js
-mg.suppressions.list('foobar.example.com', 'complaints')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+    ```js
+    mg.suppressions.list('foobar.example.com', 'complaints')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
 
-Promise Returns:
+    Promise returns:
 
-```
-{
-  items: [
+    ```JS
     {
-      type: 'bounces',
-      address: 'unknown@unknown.com',
-      code: 550,
-      error: 'No such mailbox',
-      created_at: Fri Oct 21 2011 04:02:55 GMT-0700 (PDT)
+    items: [
+      {
+        type: "bounces",
+        address: "unknown@unknown.com",
+        code: 550,
+        error: "No such mailbox",
+        created_at: Fri Oct 21 2011 04:02:55 GMT-0700 (PDT)
+      }],
+    pages: {
+      first: { id: "first", page: "", address: "", url: "apiurl" },
+      last: { id: "last", page: "", address: "", url: "apiurl" },
+      next: { id: "next", page: "", address: "", url: "apiurl" },
+      previous: { id: "prev", page: "", address: "", url: "apiurl" }
     }
-  ],
-  pages: {
-    first: { id: 'first', page: '', address: '', url: 'apiurl' },
-    last: { id: 'last', page: '', address: '', url: 'apiurl' },
-    next: { id: 'next', page: '', address: '', url: 'apiurl' },
-    previous: { id: 'prev', page: '', address: '', url: 'apiurl' }
+    }
+    ```
+
+- #### get
+
+  `mg.suppressions.get(domain, suppressionType, address)`
+
+  - Bounces Example:
+
+    ```js
+    mg.suppressions.get('foobar.example.com', 'bounces', 'address@example.com')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+  - Unsubscribes Example:
+
+    ```js
+    mg.suppressions.get('foobar.example.com', 'unsubscribes', 'address@example.com')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+  - Complaints Example:
+
+    ```js
+    mg.suppressions.get('foobar.example.com', 'complaints', 'address@example.com')
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+  Response example:
+
+  ```JS
+  {
+    type: "bounces",
+    address: "address?@unknown.com",
+    tags: [ "*" ],
+    created_at: Fri Oct 21 2011 05:02:55 GMT-0700 (PDT)
   }
-}
-```
+  ```
 
-#### get
+-   #### create
+    `mg.suppressions.create(domain, suppressionType, data || data[])`
 
-`mg.suppressions.get(domain, suppressionType, address)`
+    - Bounces Example:
+      ```JS
+      mg.suppressions.create('foobar.example.com', 'bounces', [{address: 'bob@example.com'}])
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-Bounces Example:
+      Bounces Options: Contains an array with the following object properties
 
-```js
-mg.suppressions.get('foobar.example.com', 'bounces', 'address@example.com')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      | Parameter  | Description                                                                     |
+      |:-----------|:--------------------------------------------------------------------------------|
+      | address    | Valid email address                                                             |
+      | code       | Error code (optional, default: 550)                                             |
+      | error      | Error description (optional, default: empty string)                             |
+      | created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time) |
 
-Unsubscribes Example:
+      Promise returns:
 
-```js
-mg.suppressions.get('foobar.example.com', 'unsubscribes', 'address@example.com')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      ```JSON
+      {
+        message: "1 address has been added to the bounces table"
+      }
+      ```
 
-Complaints Example:
+    - Unsubscribes Example:
 
-```js
-mg.suppressions.get('foobar.example.com', 'complaints', 'address@example.com')
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      ```js
+      mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com'}])
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-Options:
+      Unsubscribes Options: Contains an array with the following object properties
 
-Promise Returns:
+      | Parameter  | Description                                                                                                      |
+      |:-----------|:-----------------------------------------------------------------------------------------------------------------|
+      | address    | Valid email address                                                                                              |
+      | tag        | Tag to unsubscribe from, use * to unsubscribe an address from all domain’s correspondence (optional, default: *) |
+      | created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time)                                  |
 
-```
-{
-  type: 'bounces',
-  address: 'address?@unknown.com',
-  tags: [ '*' ],
-  created_at: Fri Oct 21 2011 05:02:55 GMT-0700 (PDT)
-}
-```
+      Promise returns:
 
-#### create
+      ```JS
+      {
+        message: "1 address has been added to the unsubscribes table"
+      }
+      ```
 
-`mg.suppressions.create(domain, suppressionType, array)`
+    - Complaints Example:
 
-Bounces Example:
+      ```js
+      mg.suppressions.create('foobar.example.com', 'complaints', [{address: 'bob@example.com'}])
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-```js
-mg.suppressions.create('foobar.example.com', 'bounces', [{address: 'bob@example.com'}])
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      Complaints Options: Contains an array with the following object properties
 
-Bounces Options: Contains an array with the following object properties
+      | Parameter  | Description                                                                                                      |
+      |:-----------|:-----------------------------------------------------------------------------------------------------------------|
+      | address    | Valid email address                                                                                              |
+      | created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time)                                  |
 
-| Parameter  | Description                                                                     |
-|:-----------|:--------------------------------------------------------------------------------|
-| address    | Valid email address                                                             |
-| code       | Error code (optional, default: 550)                                             |
-| error      | Error description (optional, default: empty string)                             |
-| created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time) |
+      Promise returns:
 
-Promise Returns:
+      ```JS
+      {
+        message: "1 address has been added to the complaints table"
+      }
+      ```
 
-```
-{
-  message: "1 address has been added to the bounces table"
-}
-```
+-   #### destroy
+    `mg.suppressions.destroy(domain, suppressionType, address)`
 
-Unsubscribes Example:
+    - Bounces Example:
 
-```js
-mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com'}])
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      ```JS
+      mg.suppressions.destroy('foobar.example.com', 'bounces', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-Unsubscribes Options: Contains an array with the following object properties
+      Promise returns:
 
-| Parameter  | Description                                                                                                      |
-|:-----------|:-----------------------------------------------------------------------------------------------------------------|
-| address    | Valid email address                                                                                              |
-| tag        | Tag to unsubscribe from, use * to unsubscribe an address from all domain’s correspondence (optional, default: *) |
-| created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time)                                  |
+      ```JS
+      {
+        message: "Bounced address has been removed",
+        value: "",
+        address: "bob@example.com",
+        status: 200
+      }
+      ```
 
-Promise Returns:
+    - Unsubscribes Example:
 
-```
-{
-  message: "1 address has been added to the unsubscribes table"
-}
-```
+      ```js
+      mg.suppressions.destroy('foobar.example.com', 'unsubscribes', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-Complaints Example:
+      Promise returns:
 
-```js
-mg.suppressions.create('foobar.example.com', 'complaints', [{address: 'bob@example.com'}])
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.error(err)); // logs any error
-```
+      ```JS
+      {
+        message: 'Unsubscribe event has been removed',
+        value: '',
+        address: 'bob@example.com',
+        status: 200
+      }
+      ```
 
-Complaints Options: Contains an array with the following object properties
+    - Complaints Example:
 
-| Parameter  | Description                                                                                                      |
-|:-----------|:-----------------------------------------------------------------------------------------------------------------|
-| address    | Valid email address                                                                                              |
-| created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time)                                  |
+      ```js
+      mg.suppressions.destroy('foobar.example.com', 'complaints', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
 
-Promise Returns:
+      Promise returns:
 
-```
-{
-  message: "1 address has been added to the complaints table"
-}
-```
+      ```JS
+        message: 'Spam complaint has been removed',
+        value: '',
+        address: 'bob@example.com',
+        status: 200
+      ```
+
 
 ### webhooks
 
@@ -1073,7 +1128,7 @@ mg.webhooks.list('foobar.example.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1101,7 +1156,7 @@ mg.webhooks.get('foobar.example.com', 'open') // bounce, deliver, drop, spam, un
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1121,7 +1176,7 @@ mg.webhooks.create('foobar.example.com', 'open', 'http://requestb.in') // bounce
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1137,7 +1192,7 @@ mg.webhooks.get('foobar.example.com', 'open', 'http://requestb.in', true) // bou
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1158,7 +1213,7 @@ mg.webhooks.update('foobar.example.com', 'open', 'http://requestb.in') // bounce
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1178,7 +1233,7 @@ mg.webhooks.update('foobar.example.com', 'open') // bounce, deliver, drop, spam,
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns:
+Promise returns:
 
 ```
 {
@@ -1200,7 +1255,7 @@ mg.routes.list()
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 [
@@ -1227,7 +1282,7 @@ mg.routes.get('562da483125730608a7d1719')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1257,7 +1312,7 @@ mg.routes.create({
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1287,7 +1342,7 @@ mg.routes.update('562da483125730608a7d1719', {
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1313,7 +1368,7 @@ mg.routes.destroy('562da483125730608a7d1719')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1336,7 +1391,7 @@ mg.validate.get('foo@mailgun.net')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1498,7 +1553,7 @@ mg.lists.list()
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 [
@@ -1526,7 +1581,7 @@ mg.lists.get('noreply@sample.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1558,7 +1613,7 @@ mg.lists.create({
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1590,7 +1645,7 @@ mg.lists.update('reply@sample.com', {
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1616,7 +1671,7 @@ mg.lists.destroy('foo@sample.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1641,7 +1696,7 @@ mg.lists.members.listMembers('reply@sample.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 [
@@ -1666,7 +1721,7 @@ mg.lists.members.getMember('reply@sample.com', 'foo@bar.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1695,7 +1750,7 @@ mg.lists.members.createMember('reply@sample.com', {
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1734,7 +1789,7 @@ mg.lists.members.createMembers('reply@sample.com', {
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1769,7 +1824,7 @@ mg.lists.members.updateMember('reply@sample.com', 'bot1@foobar.com', {
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```
 {
@@ -1792,7 +1847,7 @@ mg.lists.members.destroyMember('reply@sample.com', 'bot2@foobar.com')
   .catch(err => console.error(err)); // logs any error
 ```
 
-Promise Returns: response body
+Promise returns: response body
 
 ```js
 {
