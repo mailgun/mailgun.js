@@ -104,7 +104,8 @@ describe('Request', function () {
               filename: 'test.pdf',
               data: moreThanExpectedLimitBuffer
             }]
-          });
+          }
+        );
       } catch (error: unknown) {
         expect(error).to.have.property('status');
         expect(error).to.have.property('details');
