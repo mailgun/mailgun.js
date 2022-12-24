@@ -1,6 +1,6 @@
 import {
   Bounce, Complaint, Unsubscribe, WhiteList
-} from '../../suppressions';
+} from '../../Classes/Suppressions';
 import { PagesList, ParsedPagesList } from '../NavigationThruPages';
 import { BounceData } from './Bounce';
 import { ComplaintData } from './Complaint';

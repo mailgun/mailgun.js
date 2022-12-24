@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import formData from 'form-data';
 import nock from 'nock';
 
-import Request from '../lib/request';
-import SuppressionClient from '../lib/suppressions';
+import Request from '../lib/Classes/common/Request';
+import SuppressionClient from '../lib/Classes/Suppressions';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import { WhiteListData } from '../lib/interfaces/Suppressions/WhiteList';

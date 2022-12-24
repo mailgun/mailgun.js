@@ -1,9 +1,9 @@
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/request';
+import Request from '../lib/Classes/common/Request';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import MailListMembers from '../lib/mailListMembers';
-import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/mailListMembers';
+import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
+import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/interfaces/MailingLists';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('mailListsMembersClient', function () {

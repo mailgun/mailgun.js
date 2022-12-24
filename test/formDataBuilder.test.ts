@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import NodeFormData from 'form-data';
-import FormDataBuilder from '../lib/formDataBuilder';
+import FormDataBuilder from '../lib/Classes/common/FormDataBuilder';
 
 describe('FormDataBuilder', function () {
   let builder: FormDataBuilder;

@@ -1,6 +1,6 @@
-import Client from './client';
+import MailgunClient from './Classes/MailgunClient';
 import { InputFormData } from './interfaces/IFormData';
-import Options from './interfaces/Options';
+import MailgunClientOptions from './interfaces/MailgunClientOptions';
 
 export default class Mailgun {
   static get default(): typeof Mailgun { return this; }
@@ -10,7 +10,7 @@ export default class Mailgun {
     this.formData = FormData;
   }
 
-  client(options: Options) : Client {
-    return new Client(options, this.formData);
+  client(options: MailgunClientOptions) : MailgunClient {
+    return new MailgunClient(options, this.formData);
   }
 }

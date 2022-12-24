@@ -1,4 +1,4 @@
-import APIError from '../lib/error';
+import APIError from '../lib/Classes/common/Error';
 import APIErrorOptions from '../lib/interfaces/APIErrorOptions';
 
 describe('APIError', function () {

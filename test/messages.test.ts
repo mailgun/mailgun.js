@@ -5,8 +5,8 @@ import nock from 'nock';
 import chai from 'chai';
 import spies from 'chai-spies';
 
-import Request from '../lib/request';
-import MessagesClient from '../lib/messages';
+import Request from '../lib/Classes/common/Request';
+import MessagesClient from '../lib/Classes/Messages';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import { MessagesSendResult } from '../lib/interfaces/Messages';

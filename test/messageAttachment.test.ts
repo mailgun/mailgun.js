@@ -3,8 +3,8 @@ import nock from 'nock';
 import { expect } from 'chai';
 import formData from 'form-data';
 
-import Request from '../lib/request';
-import MessagesClient from '../lib/messages';
+import Request from '../lib/Classes/common/Request';
+import MessagesClient from '../lib/Classes/Messages';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 

@@ -1,8 +1,8 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/request';
-import StatsClient from '../lib/stats';
+import Request from '../lib/Classes/common/Request';
+import StatsClient from '../lib/Classes/Stats';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { StatsOptions, StatsQuery } from '../lib/interfaces/StatsOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';

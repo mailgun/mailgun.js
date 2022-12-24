@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
-import Request from '../lib/request';
-import RoutesClient from '../lib/routes';
+import Request from '../lib/Classes/common/Request';
+import RoutesClient from '../lib/Classes/Routes';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 

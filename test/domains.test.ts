@@ -2,11 +2,11 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/request';
-import DomainClient, { Domain } from '../lib/domains';
+import Request from '../lib/Classes/common/Request';
+import DomainClient, { Domain } from '../lib/Classes/Domains/domains';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
-import DomainCredentialsClient from '../lib/domainsCredentials';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import {
   ConnectionSettings,
   MessageResponse,
@@ -14,8 +14,8 @@ import {
   UpdatedDKIMAuthority,
   UpdatedDKIMSelectorResponse, UpdatedWebPrefixResponse
 } from '../lib/interfaces/Domains';
-import DomainTemplatesClient from '../lib/domainsTemplates';
-import DomainTagsClient from '../lib/domainsTags';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
+import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
 import APIResponse from '../lib/interfaces/ApiResponse';
 
 // TODO: fix types
