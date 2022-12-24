@@ -24,12 +24,21 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: lts/hydrogen
-          
-      - name: Print node verstion
+
+      - name: Print node version
         run: node -v
-        
+
       - name: Install dependencies
         run: npm ci
-        
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run build
+        run: npm run build
+
       - name: Run tests
         run: npm test
+
+      - name: Show expected changes in the changelog file
+        run: npm run release:test
