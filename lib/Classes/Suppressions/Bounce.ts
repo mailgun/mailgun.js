@@ -1,5 +1,5 @@
-
-import { BounceData, IBounce, SuppressionModels } from '../../interfaces/Suppressions';
+import { SuppressionModels } from '../../Enums';
+import { BounceData, IBounce } from '../../interfaces/Suppressions';
 import Suppression from './Suppression';
 
 export default class Bounce extends Suppression implements IBounce {

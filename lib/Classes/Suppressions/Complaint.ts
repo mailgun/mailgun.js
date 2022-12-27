@@ -1,4 +1,5 @@
-import { ComplaintData, IComplaint, SuppressionModels } from '../../interfaces/Suppressions';
+import { SuppressionModels } from '../../Enums';
+import { ComplaintData, IComplaint } from '../../interfaces/Suppressions';
 import Suppression from './Suppression';
 
 export default class Complaint extends Suppression implements IComplaint {

@@ -1,12 +1,8 @@
 /* eslint-disable camelcase */
 import { DomainTagStatistic } from '../../Classes/Domains/domainsTags';
+import { Resolution } from '../../Enums';
 import { PagesList, ParsedPagesList } from '../NavigationThruPages';
 
-export enum Resolution {
-    HOUR = 'hour',
-    DAY = 'day',
-    MONTH = 'month'
-}
 export type DomainTagsQuery = {
     limit: number;
     page?: string;

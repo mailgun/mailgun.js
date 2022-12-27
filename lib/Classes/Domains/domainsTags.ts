@@ -20,10 +20,10 @@ import {
   DomainTagStatAPIResponse,
   DomainTagStatisticItem,
   DomainTagStatisticResult,
-  IDomainTagsClient,
-  Resolution
+  IDomainTagsClient
 } from '../../interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
+import { Resolution } from '../../Enums';
 
 export class DomainTag implements DomainTagsItem {
   tag: string;

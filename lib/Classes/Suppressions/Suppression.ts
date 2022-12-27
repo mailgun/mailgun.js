@@ -1,4 +1,4 @@
-import { SuppressionModels } from '../../interfaces/Suppressions';
+import { SuppressionModels } from '../../Enums';
 
 export default class Suppression {
     type: string;

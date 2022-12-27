@@ -1,10 +1,10 @@
 import urljoin from 'url-join';
+import { WebhooksIds } from '../Enums';
 
 import {
   ValidationResponse,
   WebhookList,
   WebhookResponse,
-  WebhooksIds,
   WebhooksQuery
 } from '../interfaces/Webhooks';
 import Request from './common/Request';

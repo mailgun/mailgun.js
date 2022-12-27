@@ -1,9 +1,6 @@
 import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
+import { YesNo } from '../../Enums';
 import { PagesList, ParsedPagesList } from '../NavigationThruPages';
-export declare enum YesNo {
-    YES = "yes",
-    NO = "no"
-}
 export type DomainTemplateData = {
     name: string;
     description: string;

@@ -1,6 +1,7 @@
 import Request from '../common/Request';
-import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsItemInfo, DomainTagsList, DomainTagsMessageRes, DomainTagsQuery, DomainTagsResponseData, DomainTagsStatisticQuery, DomainTagStatAPIResponse, DomainTagStatisticItem, DomainTagStatisticResult, IDomainTagsClient, Resolution } from '../../interfaces/Domains';
+import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsItemInfo, DomainTagsList, DomainTagsMessageRes, DomainTagsQuery, DomainTagsResponseData, DomainTagsStatisticQuery, DomainTagStatAPIResponse, DomainTagStatisticItem, DomainTagStatisticResult, IDomainTagsClient } from '../../interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
+import { Resolution } from '../../Enums';
 export declare class DomainTag implements DomainTagsItem {
     tag: string;
     description: string;

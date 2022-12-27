@@ -23,12 +23,3 @@ export interface ValidationResponse {
     code: number;
     message: string;
 }
-export declare enum WebhooksIds {
-    CLICKED = "clicked",
-    COMPLAINED = "complained",
-    DELIVERED = "delivered",
-    OPENED = "opened",
-    PERMANENT_FAIL = "permanent_fail",
-    TEMPORARY_FAIL = "temporary_fail",
-    UNSUBSCRIBED = "unsubscribe"
-}

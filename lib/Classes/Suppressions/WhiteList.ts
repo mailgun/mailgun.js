@@ -1,4 +1,5 @@
-import { IWhiteList, SuppressionModels, WhiteListData } from '../../interfaces/Suppressions';
+import { SuppressionModels } from '../../Enums';
+import { IWhiteList, WhiteListData } from '../../interfaces/Suppressions';
 import Suppression from './Suppression';
 
 export default class WhiteList extends Suppression implements IWhiteList {

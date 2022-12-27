@@ -10,12 +10,6 @@ import { UnsubscribeData } from './Unsubscribe';
 import { WhiteListData } from './WhiteList';
 
 /* eslint-disable camelcase */
-export enum SuppressionModels {
-  BOUNCES = 'bounces',
-  COMPLAINTS = 'complaints',
-  UNSUBSCRIBES = 'unsubscribes',
-  WHITELISTS = 'whitelists'
-}
 
 export interface SuppressionList {
   items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
