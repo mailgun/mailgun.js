@@ -2,7 +2,6 @@ import urljoin from 'url-join';
 import Request from '../common/Request';
 import {
   MailListMembersQuery,
-  IMailListsMembers,
   CreateUpdateMailListMembers,
   MailListMember,
   MultipleMembersData,
@@ -12,8 +11,9 @@ import {
   NewMultipleMembersResponse,
   MailListMembersResult,
   MailListMembersResponse
-} from '../../interfaces/MailingLists';
+} from '../../Types/MailingLists';
 import NavigationThruPages from '../common/NavigationThruPages';
+import { IMailListsMembers } from '../../interfaces/MailingLists';
 
 export default class MailListsMembers
   extends NavigationThruPages<MailListMembersResult>

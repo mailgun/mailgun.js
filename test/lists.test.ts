@@ -10,7 +10,7 @@ import {
   MailingList,
   StartValidationResult,
   ValidationResult
-} from '../lib/interfaces/MailingLists';
+} from '../lib/Types/MailingLists';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
 describe('ListsClient', function () {

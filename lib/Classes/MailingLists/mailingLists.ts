@@ -10,7 +10,7 @@ import {
   CancelValidationResult,
   MailingListResult,
   MailingListApiResponse
-} from '../../interfaces/MailingLists';
+} from '../../Types/MailingLists';
 import { IMailListsMembers } from '../../interfaces/MailingLists/MailingListMembers';
 import NavigationThruPages from '../common/NavigationThruPages';
 

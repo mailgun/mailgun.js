@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
 
 /* eslint-disable camelcase */
 export type ListsQuery = {
@@ -15,18 +15,18 @@ export type CreateUpdateList = {
     reply_preference?: 'list' | 'sender';
 }
 
-export interface DestroyedList {
+export type DestroyedList = {
     address: string;
     message: string;
 }
 
-export interface StartValidationResult {
+export type StartValidationResult = {
     status: number;
     id: string;
     message: string;
 }
 
-export interface ValidationResponse {
+export type ValidationResponse = {
     status: string;
     download_url: {
       csv: string;
@@ -51,22 +51,22 @@ export interface ValidationResponse {
       }
     }
 }
-export interface ValidationApiResponse extends ValidationResponse{
+export type ValidationApiResponse = ValidationResponse & {
     created_at: number;
 }
-export interface ValidationResultData extends ValidationResponse{
+export type ValidationResultData = ValidationResponse & {
     created_at: Date;
 }
-export interface ValidationResult {
+export type ValidationResult = {
     status: number;
     validationResult: ValidationResultData;
 }
 
-export interface CancelValidationResult {
+export type CancelValidationResult = {
     status: number;
     message: string;
 }
-export interface MailingList {
+export type MailingList = {
     access_level: string;
     address: string;
     created_at: string;
@@ -76,13 +76,13 @@ export interface MailingList {
     reply_preference: null | string;
 }
 
-export interface MailingListResult {
+export type MailingListResult = {
     items: MailingList[];
     status: number;
     pages: ParsedPagesList
 }
 
-export interface MailingListApiResponse {
+export type MailingListApiResponse = {
     body: {
         items: MailingList[];
         paging: PagesList;
