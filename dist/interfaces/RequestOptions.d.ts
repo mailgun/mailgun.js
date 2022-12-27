@@ -1,9 +1,9 @@
 import { AxiosRequestHeaders } from 'axios';
-import Options from './Options';
+import MailgunClientOptions from './MailgunClientOptions';
 export interface OnCallEmptyHeaders {
     [key: string]: undefined;
 }
-export interface RequestOptions extends Options {
+export interface RequestOptions extends MailgunClientOptions {
     headers: AxiosRequestHeaders;
     timeout: number;
 }

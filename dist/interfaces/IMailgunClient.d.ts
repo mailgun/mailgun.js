@@ -1,14 +1,14 @@
-import DomainClient from '../domains';
-import EventClient from '../events';
-import IpPoolsClient from '../ip-pools';
-import IpsClient from '../ips';
-import ListsClient from '../lists';
-import MessagesClient from '../messages';
-import RoutesClient from '../routes';
-import StatsClient from '../stats';
-import SuppressionClient from '../suppressions';
-import ValidateClient from '../validate';
-import WebhookClient from '../webhooks';
+import DomainClient from '../Classes/Domains/domains';
+import EventClient from '../Classes/Events';
+import IpPoolsClient from '../Classes/IPPools';
+import IpsClient from '../Classes/IPs';
+import ListsClient from '../Classes/MailingLists/mailingLists';
+import MessagesClient from '../Classes/Messages';
+import RoutesClient from '../Classes/Routes';
+import StatsClient from '../Classes/Stats';
+import SuppressionClient from '../Classes/SuppressionsClient';
+import ValidateClient from '../Classes/Validations/validate';
+import WebhookClient from '../Classes/Webhooks';
 export interface IMailgunClient {
     domains: DomainClient;
     webhooks: WebhookClient;

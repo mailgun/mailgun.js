@@ -1,9 +1,9 @@
-import Client from './client';
+import MailgunClient from './Classes/MailgunClient';
 import { InputFormData } from './interfaces/IFormData';
-import Options from './interfaces/Options';
+import MailgunClientOptions from './interfaces/MailgunClientOptions';
 export default class Mailgun {
     static get default(): typeof Mailgun;
     private formData;
     constructor(FormData: InputFormData);
-    client(options: Options): Client;
+    client(options: MailgunClientOptions): MailgunClient;
 }
