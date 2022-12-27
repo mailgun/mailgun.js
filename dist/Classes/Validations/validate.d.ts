@@ -1,6 +1,7 @@
-import { IMultipleValidationClient, ValidationResult } from '../../interfaces/Validations/index';
+import { IValidateClient, IMultipleValidationClient } from '../../interfaces/Validations';
+import { ValidationResult } from '../../Types/Validations';
 import Request from '../common/Request';
-export default class ValidateClient {
+export default class ValidateClient implements IValidateClient {
     multipleValidation: IMultipleValidationClient;
     request: Request;
     constructor(request: Request, multipleValidationClient: IMultipleValidationClient);

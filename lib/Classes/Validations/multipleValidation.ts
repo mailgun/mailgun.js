@@ -1,19 +1,19 @@
 import NavigationThruPages from '../common/NavigationThruPages';
 import APIResponse from '../../interfaces/ApiResponse';
+
+import Request from '../common/Request';
+import { IMultipleValidationClient } from '../../interfaces/Validations';
 import {
-  CanceledMultipleValidationJob,
-  CreatedMultipleValidationJob,
-  IMultipleValidationClient,
-  MultipleValidationCreationDataUpdated,
-  MultipleValidationCreationData,
+  MultipleValidationJobResult,
+  MultipleValidationJobData,
   MultipleValidationJobsListResult,
   MultipleValidationJobsListResponse,
-  MultipleValidationJobData,
-  MultipleValidationJobResult,
-  MultipleValidationJobsListQuery
-}
-  from '../../interfaces/Validations/index';
-import Request from '../common/Request';
+  MultipleValidationJobsListQuery,
+  MultipleValidationCreationData,
+  CreatedMultipleValidationJob,
+  MultipleValidationCreationDataUpdated,
+  CanceledMultipleValidationJob
+} from '../../Types/Validations/MultipleValidation';
 
 export class MultipleValidationJob implements MultipleValidationJobResult {
   createdAt: Date;
