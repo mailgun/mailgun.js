@@ -2,16 +2,18 @@ import Bounce from '../../Classes/Suppressions/Bounce';
 import Complaint from '../../Classes/Suppressions/Complaint';
 import Unsubscribe from '../../Classes/Suppressions/Unsubscribe';
 import WhiteList from '../../Classes/Suppressions/WhiteList';
+import {
+  BounceData,
+  ComplaintData,
+  UnsubscribeData,
+  WhiteListData
+} from '.';
 
-import { PagesList, ParsedPagesList } from '../NavigationThruPages';
-import { BounceData } from './Bounce';
-import { ComplaintData } from './Complaint';
-import { UnsubscribeData } from './Unsubscribe';
-import { WhiteListData } from './WhiteList';
+import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
 
 /* eslint-disable camelcase */
 
-export interface SuppressionList {
+export type SuppressionList = {
   items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
   pages: ParsedPagesList;
   status: number;
@@ -24,7 +26,7 @@ export type SuppressionListQuery = {
 
 export type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
 
-export interface SuppressionListResponse {
+export type SuppressionListResponse = {
   body: {
     items: BounceData[] | ComplaintData[] | UnsubscribeData[] | WhiteListData[];
     paging: PagesList;
@@ -32,12 +34,12 @@ export interface SuppressionListResponse {
   status: number;
 }
 
-export interface SuppressionResponse {
-  body: BounceData | ComplaintData | UnsubscribeData | WhiteListData;
+export type SuppressionResponse = {
+  body: SuppressionDataType;
   status: number;
 }
 
-export interface SuppressionDestroyResponse {
+export type SuppressionDestroyResponse = {
   body: {
     message: string;
     value?: string;
@@ -46,7 +48,7 @@ export interface SuppressionDestroyResponse {
   status: number;
 }
 
-export interface SuppressionDestroyResult {
+export type SuppressionDestroyResult = {
   message: string;
   value: string;
   address: string;
@@ -62,7 +64,7 @@ export type SuppressionCreationData = {
   created_at?: string ;
 }
 
-export interface SuppressionCreationResponse {
+export type SuppressionCreationResponse = {
   body:{
     message:string;
     type?: string;
@@ -71,7 +73,7 @@ export interface SuppressionCreationResponse {
   status: number;
 }
 
-export interface SuppressionCreationResult {
+export type SuppressionCreationResult = {
   message:string;
   type: string;
   value: string;

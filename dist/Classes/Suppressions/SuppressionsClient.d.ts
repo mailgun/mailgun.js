@@ -1,11 +1,12 @@
 import Request from '../common/Request';
-import { SuppressionCreationData, SuppressionCreationResult, SuppressionDataType, SuppressionDestroyResult, SuppressionList, SuppressionListQuery, SuppressionListResponse, IBounce, BounceData, IComplaint, ComplaintData, IUnsubscribe, UnsubscribeData, IWhiteList, WhiteListData } from '../../interfaces/Suppressions/index';
 import NavigationThruPages from '../common/NavigationThruPages';
 import Bounce from './Bounce';
 import Complaint from './Complaint';
 import Unsubscribe from './Unsubscribe';
 import WhiteList from './WhiteList';
 import Suppression from './Suppression';
+import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../interfaces/Suppressions';
+import { SuppressionList, SuppressionListResponse, SuppressionDataType, BounceData, ComplaintData, UnsubscribeData, WhiteListData, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
     request: Request;
     models: Map<string, any>;

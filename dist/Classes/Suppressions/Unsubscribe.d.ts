@@ -1,4 +1,5 @@
-import { IUnsubscribe, UnsubscribeData } from '../../interfaces/Suppressions';
+import { IUnsubscribe } from '../../interfaces/Suppressions';
+import { UnsubscribeData } from '../../Types/Suppressions';
 import Suppression from './Suppression';
 export default class Unsubscribe extends Suppression implements IUnsubscribe {
     address: string;

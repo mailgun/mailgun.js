@@ -3,26 +3,7 @@ import urljoin from 'url-join';
 /* eslint-disable camelcase */
 
 import Request from '../common/Request';
-import {
-  SuppressionCreationData,
-  SuppressionCreationResponse,
-  SuppressionCreationResult,
-  SuppressionDataType,
-  SuppressionDestroyResponse,
-  SuppressionDestroyResult,
-  SuppressionList,
-  SuppressionListQuery,
-  SuppressionListResponse,
-  SuppressionResponse,
-  IBounce,
-  BounceData,
-  IComplaint,
-  ComplaintData,
-  IUnsubscribe,
-  UnsubscribeData,
-  IWhiteList,
-  WhiteListData,
-} from '../../interfaces/Suppressions/index';
+
 import APIError from '../common/Error';
 import APIErrorOptions from '../../interfaces/APIErrorOptions';
 import NavigationThruPages from '../common/NavigationThruPages';
@@ -31,6 +12,28 @@ import Complaint from './Complaint';
 import Unsubscribe from './Unsubscribe';
 import WhiteList from './WhiteList';
 import Suppression from './Suppression';
+import {
+  IBounce,
+  IComplaint,
+  IUnsubscribe,
+  IWhiteList
+} from '../../interfaces/Suppressions';
+import {
+  SuppressionList,
+  SuppressionListResponse,
+  SuppressionDataType,
+  BounceData,
+  ComplaintData,
+  UnsubscribeData,
+  WhiteListData,
+  SuppressionCreationData,
+  SuppressionCreationResult,
+  SuppressionCreationResponse,
+  SuppressionListQuery,
+  SuppressionResponse,
+  SuppressionDestroyResult,
+  SuppressionDestroyResponse
+} from '../../Types/Suppressions';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }

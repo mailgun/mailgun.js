@@ -9,11 +9,14 @@ import {
   ResponseWithPaging,
   UpdatedUrlAndQuery
 } from '../../interfaces/NavigationThruPages';
-import { BounceData, IBounce } from '../../interfaces/Suppressions/Bounce';
-import { ComplaintData, IComplaint } from '../../interfaces/Suppressions/Complaint';
-import { IUnsubscribe, UnsubscribeData } from '../../interfaces/Suppressions/Unsubscribe';
-import { IWhiteList, WhiteListData } from '../../interfaces/Suppressions/WhiteList';
+import { IBounce } from '../../interfaces/Suppressions/Bounce';
+import { IComplaint } from '../../interfaces/Suppressions/Complaint';
+import { IUnsubscribe } from '../../interfaces/Suppressions/Unsubscribe';
+import { IWhiteList } from '../../interfaces/Suppressions/WhiteList';
 import Request from './Request';
+import {
+  SuppressionDataType
+} from '../../Types/Suppressions';
 
 export default abstract class NavigationThruPages <T> {
   request?: Request;
@@ -75,7 +78,7 @@ export default abstract class NavigationThruPages <T> {
   }
 
   protected async requestListWithPages(clientUrl:string, query?: QueryWithPage, Model?: {
-    new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+    new(data: SuppressionDataType):
     IBounce | IComplaint | IUnsubscribe | IWhiteList
   }): Promise<T> {
     const { url, updatedQuery } = this.updateUrlAndQuery(clientUrl, query);
@@ -92,7 +95,7 @@ export default abstract class NavigationThruPages <T> {
   }
 
   protected abstract parseList(response: ResponseWithPaging, Model?: {
-    new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
+    new(data: SuppressionDataType):
     IBounce | IComplaint | IUnsubscribe | IWhiteList
   }): T;
 }

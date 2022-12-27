@@ -1,4 +1,5 @@
-import { IWhiteList, WhiteListData } from '../../interfaces/Suppressions';
+import { IWhiteList } from '../../interfaces/Suppressions';
+import { WhiteListData } from '../../Types/Suppressions';
 import Suppression from './Suppression';
 export default class WhiteList extends Suppression implements IWhiteList {
     value: string;
