@@ -1,7 +1,8 @@
 import Request from '../common/Request';
-import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsItemInfo, DomainTagsList, DomainTagsMessageRes, DomainTagsQuery, DomainTagsResponseData, DomainTagsStatisticQuery, DomainTagStatAPIResponse, DomainTagStatisticItem, DomainTagStatisticResult, IDomainTagsClient } from '../../interfaces/Domains';
+import { IDomainTagStatisticResult, IDomainTagsClient } from '../../interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
 import { Resolution } from '../../Enums';
+import { DomainTagsItem, DomainTagsItemInfo, DomainTagStatisticItem, DomainTagStatAPIResponse, DomainTagsList, DomainTagsResponseData, DomainTagsQuery, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagCountriesAggregation, DomainTagProvidersAggregation, DomainTagDevicesAggregation } from '../../Types/Domains';
 export declare class DomainTag implements DomainTagsItem {
     tag: string;
     description: string;
@@ -9,7 +10,7 @@ export declare class DomainTag implements DomainTagsItem {
     'last-seen': Date;
     constructor(tagInfo: DomainTagsItemInfo);
 }
-export declare class DomainTagStatistic implements DomainTagStatisticResult {
+export declare class DomainTagStatistic implements IDomainTagStatisticResult {
     tag: string;
     description: string;
     start: Date;

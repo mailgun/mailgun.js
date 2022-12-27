@@ -7,16 +7,17 @@ import DomainClient, { Domain } from '../lib/Classes/Domains/domains';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
-import {
-  ConnectionSettings,
-  MessageResponse,
-  UpdatedConnectionSettings,
-  UpdatedDKIMAuthority,
-  UpdatedDKIMSelectorResponse, UpdatedWebPrefixResponse
-} from '../lib/interfaces/Domains';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
 import APIResponse from '../lib/interfaces/ApiResponse';
+import {
+  MessageResponse,
+  ConnectionSettings,
+  UpdatedConnectionSettings,
+  UpdatedDKIMAuthority,
+  UpdatedDKIMSelectorResponse,
+  UpdatedWebPrefixResponse
+} from '../lib/Types/Domains';
 
 // TODO: fix types
 describe('DomainClient', function () {

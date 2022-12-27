@@ -6,7 +6,7 @@ export type DomainsQuery = {
     skip?: number;
 }
 
-export interface DomainInfo {
+export type DomainInfo = {
     name: string;
     smtp_password: string;
     spam_action?: 'disabled' | 'block' | 'tag';
@@ -18,7 +18,7 @@ export interface DomainInfo {
     web_scheme: 'http' | 'https'
 }
 
-export interface DomainShortData {
+export type DomainShortData = {
     name: string;
     require_tls: boolean;
     skip_verification: boolean;
@@ -31,7 +31,7 @@ export interface DomainShortData {
     type: string;
 
 }
-export interface DomainData extends DomainShortData{
+export type DomainData = DomainShortData & {
     id: string;
     is_disabled: boolean;
     web_prefix: string;
@@ -61,7 +61,7 @@ export type DomainResponseData = {
     }
 }
 
-export interface DomainListResponseData {
+export type DomainListResponseData = {
     status: number;
     body: {
         items: DomainsListItem[] | null;
@@ -69,11 +69,11 @@ export interface DomainListResponseData {
     }
 }
 
-export interface MessageResponse {
+export type MessageResponse = {
     message : string
 }
 
-export interface DestroyedDomainResponse {
+export type DestroyedDomainResponse = {
     status: number;
     body: MessageResponse
 }
@@ -82,61 +82,61 @@ export type ConnectionSettings = {
     require_tls: boolean;
     skip_verification: boolean;
 }
-export interface ConnectionSettingsResponse {
+export type ConnectionSettingsResponse = {
     body: {
         connection: ConnectionSettings
     }
     status: number
 }
 
-export interface UpdatedConnectionSettings {
+export type UpdatedConnectionSettings = {
     message: string,
     require_tls: boolean,
     skip_verification: boolean
 }
 
-export interface UpdatedConnectionSettingsRes {
+export type UpdatedConnectionSettingsRes = {
     body: UpdatedConnectionSettings,
     status: number
 }
 
-export interface DKIMAuthorityInfo {
+export type DKIMAuthorityInfo = {
     self: boolean | 'yes' | 'no' | 'true' |'false'
 }
 
-export interface UpdatedDKIMAuthority {
+export type UpdatedDKIMAuthority = {
     changed: boolean,
     message: string,
     sending_dns_records: DNSRecord[]
 }
 
-export interface UpdatedDKIMAuthorityResponse {
+export type UpdatedDKIMAuthorityResponse = {
     body: UpdatedDKIMAuthority,
     status: 200
 }
 
-export interface DKIMSelectorInfo {
+export type DKIMSelectorInfo = {
     dkimSelector: string
 }
 
-export interface UpdatedDKIMSelectorResponse {
+export type UpdatedDKIMSelectorResponse = {
     body:MessageResponse,
     status: number
 }
 
-export interface WebPrefixInfo {
+export type WebPrefixInfo = {
     webPrefix: string
 }
 
-export interface UpdatedWebPrefix {
+export type UpdatedWebPrefix = {
     message : string
 }
-export interface UpdatedWebPrefixResponse {
+export type UpdatedWebPrefixResponse = {
     body:MessageResponse,
     status: number
 }
 
-export interface ReplacementForPool {
+export type ReplacementForPool = {
     pool_id?: string;
     ip?: string;
 }

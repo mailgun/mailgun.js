@@ -3,27 +3,29 @@ import APIResponse from '../../interfaces/ApiResponse';
 import Request from '../common/Request';
 
 import {
-  DomainTagAPIResponseStatsItem,
-  DomainTagCountriesAggregation,
-  DomainTagCountriesAPIResponse,
-  DomainTagDevicesAggregation,
-  DomainTagDevicesAPIResponse,
-  DomainTagProvidersAggregation,
-  DomainTagProvidersAPIResponse,
-  DomainTagsItem,
-  DomainTagsItemInfo,
-  DomainTagsList,
-  DomainTagsMessageRes,
-  DomainTagsQuery,
-  DomainTagsResponseData,
-  DomainTagsStatisticQuery,
-  DomainTagStatAPIResponse,
-  DomainTagStatisticItem,
-  DomainTagStatisticResult,
+  IDomainTagStatisticResult,
   IDomainTagsClient
 } from '../../interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
 import { Resolution } from '../../Enums';
+import {
+  DomainTagsItem,
+  DomainTagsItemInfo,
+  DomainTagStatisticItem,
+  DomainTagStatAPIResponse,
+  DomainTagAPIResponseStatsItem,
+  DomainTagsList,
+  DomainTagsResponseData,
+  DomainTagsQuery,
+  DomainTagsMessageRes,
+  DomainTagsStatisticQuery,
+  DomainTagCountriesAggregation,
+  DomainTagCountriesAPIResponse,
+  DomainTagProvidersAggregation,
+  DomainTagProvidersAPIResponse,
+  DomainTagDevicesAggregation,
+  DomainTagDevicesAPIResponse
+} from '../../Types/Domains';
 
 export class DomainTag implements DomainTagsItem {
   tag: string;
@@ -39,7 +41,7 @@ export class DomainTag implements DomainTagsItem {
   }
 }
 
-export class DomainTagStatistic implements DomainTagStatisticResult {
+export class DomainTagStatistic implements IDomainTagStatisticResult {
   tag: string;
   description: string;
   start: Date;

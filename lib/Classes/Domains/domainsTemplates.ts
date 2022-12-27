@@ -5,13 +5,12 @@ import {
   CreateDomainTemplateAPIResponse,
   CreateDomainTemplateVersionAPIResponse,
   CreateDomainTemplateVersionResult,
-  DomainTemplate, DomainTemplateData,
+  DomainTemplateData,
   DomainTemplatesQuery,
   DomainTemplateUpdateData,
   DomainTemplateUpdateVersionData,
   DomainTemplateVersionData,
   GetDomainTemplateAPIResponse,
-  IDomainTemplatesClient,
   ListDomainTemplatesAPIResponse,
   ListDomainTemplatesResult,
   ListDomainTemplateVersionsAPIResponse,
@@ -25,10 +24,11 @@ import {
   TemplateVersion,
   UpdateOrDeleteDomainTemplateAPIResponse,
   UpdateOrDeleteDomainTemplateResult
-} from '../../interfaces/Domains';
+} from '../../Types/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
+import { IDomainTemplate, IDomainTemplatesClient } from '../../interfaces/Domains';
 
-export class DomainTemplateItem implements DomainTemplate {
+export class DomainTemplateItem implements IDomainTemplate {
   name : string;
   description : string;
   createdAt : Date | '';
@@ -37,7 +37,7 @@ export class DomainTemplateItem implements DomainTemplate {
   version?: TemplateVersion;
   versions?: ShortTemplateVersion[];
 
-  constructor(domainTemplateFromAPI: DomainTemplate) {
+  constructor(domainTemplateFromAPI: IDomainTemplate) {
     this.name = domainTemplateFromAPI.name;
     this.description = domainTemplateFromAPI.description;
     this.createdAt = domainTemplateFromAPI.createdAt ? new Date(domainTemplateFromAPI.createdAt) : '';
@@ -124,7 +124,7 @@ export default class DomainTemplatesClient
   protected parseList(response: ListDomainTemplatesAPIResponse): ListDomainTemplatesResult {
     const data = {} as ListDomainTemplatesResult;
 
-    data.items = response.body.items.map((d: DomainTemplate) => new DomainTemplateItem(d));
+    data.items = response.body.items.map((d: IDomainTemplate) => new DomainTemplateItem(d));
 
     data.pages = this.parsePageLinks(response, '?', 'p');
     data.status = response.status;

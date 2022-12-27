@@ -1,33 +1,6 @@
 /* eslint-disable camelcase */
 import urljoin from 'url-join';
 import {
-  DomainResponseData,
-  DestroyedDomainResponse,
-  DomainsQuery,
-  DomainInfo,
-  DomainListResponseData,
-  DomainShortData,
-  DNSRecord,
-  ConnectionSettingsResponse,
-  ConnectionSettings,
-  UpdatedConnectionSettings,
-  UpdatedConnectionSettingsRes,
-  DKIMAuthorityInfo,
-  UpdatedDKIMAuthority,
-  UpdatedDKIMAuthorityResponse,
-  DKIMSelectorInfo,
-  UpdatedDKIMSelectorResponse,
-  WebPrefixInfo,
-  UpdatedWebPrefixResponse,
-  ReplacementForPool,
-  MessageResponse,
-  DomainTrackingResponse,
-  DomainTrackingData,
-  OpenTrackingInfo,
-  ClickTrackingInfo,
-  UnsubscribeTrackingInfo,
-  UpdateDomainTrackingResponse,
-  UpdatedOpenTracking,
   IDomainTemplatesClient,
   IDomainTagsClient
 } from '../../interfaces/Domains/index';
@@ -43,6 +16,35 @@ import { IDomainCredentials } from '../../interfaces/Domains/DomainCredentials';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
+import {
+  DNSRecord,
+  DomainShortData,
+  DestroyedDomainResponse,
+  MessageResponse,
+  DomainListResponseData,
+  DomainResponseData,
+  DomainTrackingResponse,
+  DomainTrackingData,
+  UpdateDomainTrackingResponse,
+  UpdatedOpenTracking,
+  DomainsQuery,
+  DomainInfo,
+  ConnectionSettings,
+  ConnectionSettingsResponse,
+  UpdatedConnectionSettings,
+  UpdatedConnectionSettingsRes,
+  OpenTrackingInfo,
+  ClickTrackingInfo,
+  UnsubscribeTrackingInfo,
+  ReplacementForPool,
+  DKIMAuthorityInfo,
+  UpdatedDKIMAuthority,
+  UpdatedDKIMAuthorityResponse,
+  DKIMSelectorInfo,
+  UpdatedDKIMSelectorResponse,
+  WebPrefixInfo,
+  UpdatedWebPrefixResponse
+} from '../../Types/Domains';
 
 export class Domain {
   name: string;

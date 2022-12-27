@@ -1,18 +1,17 @@
 import urljoin from 'url-join';
 import APIResponse from '../../interfaces/ApiResponse';
-import Request from '../common/Request';
-
+import { IDomainCredentials } from '../../interfaces/Domains';
 import {
-  CreatedUpdatedDomainCredentialsResponse,
-  DeletedDomainCredentialsResponse,
-  DomainCredentials,
-  DomainCredentialsList,
-  DomainCredentialsQuery,
   DomainCredentialsResponseData,
+  DomainCredentialsList,
+  CreatedUpdatedDomainCredentialsResponse,
   DomainCredentialsResult,
-  IDomainCredentials,
+  DeletedDomainCredentialsResponse,
+  DomainCredentialsQuery,
+  DomainCredentials,
   UpdateDomainCredentialsData
-} from '../../interfaces/Domains/DomainCredentials';
+} from '../../Types/Domains';
+import Request from '../common/Request';
 
 export default class DomainCredentialsClient implements IDomainCredentials {
   baseRoute: string;

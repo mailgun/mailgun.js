@@ -1,7 +1,8 @@
 import Request from '../common/Request';
-import { CreateDomainTemplateVersionResult, DomainTemplate, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, IDomainTemplatesClient, ListDomainTemplatesAPIResponse, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from '../../interfaces/Domains';
+import { CreateDomainTemplateVersionResult, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, ListDomainTemplatesAPIResponse, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from '../../Types/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
-export declare class DomainTemplateItem implements DomainTemplate {
+import { IDomainTemplate, IDomainTemplatesClient } from '../../interfaces/Domains';
+export declare class DomainTemplateItem implements IDomainTemplate {
     name: string;
     description: string;
     createdAt: Date | '';
@@ -9,7 +10,7 @@ export declare class DomainTemplateItem implements DomainTemplate {
     id: string;
     version?: TemplateVersion;
     versions?: ShortTemplateVersion[];
-    constructor(domainTemplateFromAPI: DomainTemplate);
+    constructor(domainTemplateFromAPI: IDomainTemplate);
 }
 export default class DomainTemplatesClient extends NavigationThruPages<ListDomainTemplatesResult> implements IDomainTemplatesClient {
     baseRoute: string;

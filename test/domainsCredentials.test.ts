@@ -5,7 +5,7 @@ import Request from '../lib/Classes/common/Request';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
-import { DomainCredentialsList, DomainCredentialsResult } from '../lib/interfaces/Domains/index';
+import { DomainCredentialsList, DomainCredentialsResult } from '../lib/Types/Domains';
 
 // TODO: fix types
 describe('DomainsCredentialsClient', function () {

@@ -1,10 +1,11 @@
-import { DomainsQuery, DomainInfo, DomainShortData, DNSRecord, ConnectionSettings, UpdatedConnectionSettings, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse, ReplacementForPool, MessageResponse, DomainTrackingData, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, UpdatedOpenTracking, IDomainTemplatesClient, IDomainTagsClient } from '../../interfaces/Domains/index';
+import { IDomainTemplatesClient, IDomainTagsClient } from '../../interfaces/Domains/index';
 import APIResponse from '../../interfaces/ApiResponse';
 import Request from '../common/Request';
 import { IDomainCredentials } from '../../interfaces/Domains/DomainCredentials';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
+import { DNSRecord, DomainShortData, MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse } from '../../Types/Domains';
 export declare class Domain {
     name: string;
     require_tls: boolean;

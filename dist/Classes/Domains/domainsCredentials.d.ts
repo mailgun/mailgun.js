@@ -1,5 +1,6 @@
+import { IDomainCredentials } from '../../interfaces/Domains';
+import { DomainCredentialsList, DomainCredentialsResult, DomainCredentialsQuery, DomainCredentials, UpdateDomainCredentialsData } from '../../Types/Domains';
 import Request from '../common/Request';
-import { DomainCredentials, DomainCredentialsList, DomainCredentialsQuery, DomainCredentialsResult, IDomainCredentials, UpdateDomainCredentialsData } from '../../interfaces/Domains/DomainCredentials';
 export default class DomainCredentialsClient implements IDomainCredentials {
     baseRoute: string;
     request: Request;

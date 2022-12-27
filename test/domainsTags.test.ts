@@ -12,7 +12,7 @@ import {
   DomainTagsItem,
   DomainTagsList,
   DomainTagsMessageRes
-} from '../lib/interfaces/Domains/index';
+} from '../lib/Types/Domains';
 
 describe('DomainsTagsClient', function () {
   let client: DomainsTagsClient;

@@ -6,7 +6,7 @@ import Request from '../lib/Classes/common/Request';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
-import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/interfaces/Domains/index';
+import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/Types/Domains';
 
 // TODO: fix types
 describe('DomainsTemplatesClient', function () {

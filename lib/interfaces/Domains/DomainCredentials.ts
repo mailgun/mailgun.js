@@ -1,56 +1,10 @@
-/* eslint-disable camelcase */
-export type DomainCredentialsQuery = {
-    limit: number;
-    skip: number;
-}
-
-export type DomainCredentials = {
-    login: string;
-    password: string;
-}
-
-export interface DomainCredentialsItem {
-    created_at: string,
-    login: string,
-    mailbox: string,
-    size_bytes: number | null
-}
-export interface DomainCredentialsResponseData {
-    status: number;
-    body: {
-        items: DomainCredentialsItem[];
-        total_count: number;
-    }
-}
-
-export interface DomainCredentialsList {
-    items: DomainCredentialsItem[];
-    totalCount: number;
-}
-export interface DomainCredentialsResult {
-    status: number,
-    message: string;
-    spec?: string;
-}
-
-export interface CreatedUpdatedDomainCredentialsResponse {
-    status: number,
-    body: {
-        message: string;
-    }
-}
-
-export interface DeletedDomainCredentialsResponse {
-    status: number,
-    body: {
-        message: string;
-        spec: string;
-    }
-}
-
-export type UpdateDomainCredentialsData = {
-    password: string;
-}
+import {
+  DomainCredentials,
+  DomainCredentialsList,
+  DomainCredentialsQuery,
+  DomainCredentialsResult,
+  UpdateDomainCredentialsData
+} from '../../Types/Domains';
 
 export interface IDomainCredentials {
     list(domain: string, query: DomainCredentialsQuery): Promise<DomainCredentialsList>
