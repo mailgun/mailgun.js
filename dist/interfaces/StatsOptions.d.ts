@@ -12,7 +12,7 @@ export interface StatsOptions {
     resolution: string;
     stats: Stat[];
 }
-export declare type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
+export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
 export interface StatsQuery {
     event: StatsEvent | StatsEvent[];
     start?: string | Date;

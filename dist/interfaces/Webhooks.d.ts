@@ -15,7 +15,7 @@ export interface WebhookList {
         urls: string[];
     };
 }
-export declare type WebhooksQuery = {
+export type WebhooksQuery = {
     limit?: number;
     skip?: number;
 };

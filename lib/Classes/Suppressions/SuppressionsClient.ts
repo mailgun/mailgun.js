@@ -1,7 +1,8 @@
-/* eslint-disable camelcase */
 import urljoin from 'url-join';
 
-import Request from './common/Request';
+/* eslint-disable camelcase */
+
+import Request from '../common/Request';
 import {
   SuppressionCreationData,
   SuppressionCreationResponse,
@@ -12,7 +13,6 @@ import {
   SuppressionList,
   SuppressionListQuery,
   SuppressionListResponse,
-  SuppressionModels,
   SuppressionResponse,
   IBounce,
   BounceData,
@@ -22,71 +22,19 @@ import {
   UnsubscribeData,
   IWhiteList,
   WhiteListData,
-} from '../interfaces/Suppressions/index';
-import APIError from './common/Error';
-import APIErrorOptions from '../interfaces/APIErrorOptions';
-import NavigationThruPages from './common/NavigationThruPages';
+} from '../../interfaces/Suppressions/index';
+import APIError from '../common/Error';
+import APIErrorOptions from '../../interfaces/APIErrorOptions';
+import NavigationThruPages from '../common/NavigationThruPages';
+import Bounce from './Bounce';
+import Complaint from './Complaint';
+import Unsubscribe from './Unsubscribe';
+import WhiteList from './WhiteList';
+import Suppression from './Suppression';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
 };
-export class Suppression {
-  type: string;
-  constructor(type: SuppressionModels) {
-    this.type = type;
-  }
-}
-export class Bounce extends Suppression implements IBounce {
-  address: string;
-  code: number;
-  error: string;
-  created_at: Date;
-
-  constructor(data: BounceData) {
-    super(SuppressionModels.BOUNCES);
-    this.address = data.address;
-    this.code = +data.code;
-    this.error = data.error;
-    this.created_at = new Date(data.created_at);
-  }
-}
-
-export class Complaint extends Suppression implements IComplaint {
-  address: string;
-  created_at: Date;
-
-  constructor(data: ComplaintData) {
-    super(SuppressionModels.COMPLAINTS);
-    this.address = data.address;
-    this.created_at = new Date(data.created_at);
-  }
-}
-
-export class Unsubscribe extends Suppression implements IUnsubscribe {
-  address: string;
-  tags: string[];
-  created_at: Date;
-
-  constructor(data: UnsubscribeData) {
-    super(SuppressionModels.UNSUBSCRIBES);
-    this.address = data.address;
-    this.tags = data.tags;
-    this.created_at = new Date(data.created_at);
-  }
-}
-
-export class WhiteList extends Suppression implements IWhiteList {
-  value: string;
-  reason: string;
-  createdAt: Date;
-
-  constructor(data: WhiteListData) {
-    super(SuppressionModels.WHITELISTS);
-    this.value = data.value;
-    this.reason = data.reason;
-    this.createdAt = new Date(data.createdAt);
-  }
-}
 
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
   request: Request;

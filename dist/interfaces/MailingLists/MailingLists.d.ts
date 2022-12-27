@@ -1,10 +1,10 @@
 import { PagesList, ParsedPagesList } from '../NavigationThruPages';
-export declare type ListsQuery = {
+export type ListsQuery = {
     address?: string;
     limit?: number;
     page?: string;
 };
-export declare type CreateUpdateList = {
+export type CreateUpdateList = {
     address: string;
     name?: string;
     description?: string;

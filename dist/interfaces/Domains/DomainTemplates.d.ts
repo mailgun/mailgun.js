@@ -4,7 +4,7 @@ export declare enum YesNo {
     YES = "yes",
     NO = "no"
 }
-export declare type DomainTemplateData = {
+export type DomainTemplateData = {
     name: string;
     description: string;
     template: string;
@@ -12,22 +12,22 @@ export declare type DomainTemplateData = {
     engine?: string;
     comment?: string;
 };
-export declare type DomainTemplateVersionData = {
+export type DomainTemplateVersionData = {
     template: string;
     tag: string;
     engine?: string;
     comment?: string;
     active?: YesNo;
 };
-export declare type DomainTemplateUpdateData = {
+export type DomainTemplateUpdateData = {
     description: string;
 };
-export declare type DomainTemplateUpdateVersionData = {
+export type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
 };
-export declare type DomainTemplatesQuery = {
+export type DomainTemplatesQuery = {
     /** 'page' (optionally 'p') params from previous response's 'paging' object.
      * Value must be stringified as query params. Ex: '?page=first','?page=next&p=name-of-last-item'
      .... */
@@ -35,7 +35,7 @@ export declare type DomainTemplatesQuery = {
     /** Number of records to retrieve. Default value is 10. */
     limit?: number;
 };
-export declare type TemplateQuery = {
+export type TemplateQuery = {
     active: YesNo;
 };
 export interface ShortTemplateVersion {

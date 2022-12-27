@@ -17,38 +17,38 @@ export interface IpPoolListResult {
     message: string;
     status: number;
 }
-export declare type IpPoolUpdateData = {
+export type IpPoolUpdateData = {
     name: string;
     description: string;
     ips: string[];
 };
-export declare type IpPoolMessageResponse = {
+export type IpPoolMessageResponse = {
     body: {
         message: string;
     };
     status: number;
 };
-export declare type IpPoolMessageResult = {
+export type IpPoolMessageResult = {
     message: string;
     status: number;
 };
-export declare type IpPoolDeleteData = {
+export type IpPoolDeleteData = {
     ip?: string;
     pool_id?: string;
 };
-export declare type IpPoolCreateData = {
+export type IpPoolCreateData = {
     name: string;
     description?: string;
     ips?: string[];
 };
-export declare type IpPoolCreateResponse = {
+export type IpPoolCreateResponse = {
     body: {
         message: string;
         pool_id: string;
     };
     status: number;
 };
-export declare type IpPoolCreateResult = {
+export type IpPoolCreateResult = {
     status: number;
     message: string;
     pool_id: string;

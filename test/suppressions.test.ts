@@ -3,7 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 
 import Request from '../lib/Classes/common/Request';
-import SuppressionClient from '../lib/Classes/SuppressionsClient';
+import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 import { WhiteListData } from '../lib/interfaces/Suppressions/WhiteList';

@@ -1,8 +1,8 @@
-export declare type DomainCredentialsQuery = {
+export type DomainCredentialsQuery = {
     limit: number;
     skip: number;
 };
-export declare type DomainCredentials = {
+export type DomainCredentials = {
     login: string;
     password: string;
 };
@@ -41,7 +41,7 @@ export interface DeletedDomainCredentialsResponse {
         spec: string;
     };
 }
-export declare type UpdateDomainCredentialsData = {
+export type UpdateDomainCredentialsData = {
     password: string;
 };
 export interface IDomainCredentials {

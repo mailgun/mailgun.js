@@ -1,4 +1,4 @@
-export declare type ValidationQuery = {
+export type ValidationQuery = {
     address: string;
 };
 export interface ValidationResult {
