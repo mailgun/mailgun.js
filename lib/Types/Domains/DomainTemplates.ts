@@ -1,6 +1,6 @@
 import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
 import { YesNo } from '../../Enums';
-import { IDomainTemplate } from '../../interfaces/Domains';
+import { IDomainTemplate } from '../../Interfaces/Domains';
 import { PagesList, ParsedPagesList } from '../Common';
 
 /* eslint-disable camelcase */

@@ -13,7 +13,7 @@ import {
   MailListMembersResponse
 } from '../../Types/MailingLists';
 import NavigationThruPages from '../common/NavigationThruPages';
-import { IMailListsMembers } from '../../interfaces/MailingLists';
+import { IMailListsMembers } from '../../Interfaces/MailingLists';
 
 export default class MailListsMembers
   extends NavigationThruPages<MailListMembersResult>

@@ -5,7 +5,7 @@ import Complaint from './Complaint';
 import Unsubscribe from './Unsubscribe';
 import WhiteList from './WhiteList';
 import Suppression from './Suppression';
-import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../interfaces/Suppressions';
+import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions';
 import { SuppressionList, SuppressionListResponse, SuppressionDataType, BounceData, ComplaintData, UnsubscribeData, WhiteListData, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
     request: Request;

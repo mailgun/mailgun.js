@@ -1,12 +1,12 @@
-import { PagesList, ParsedPagesList } from '../Types/Common';
+import { PagesList, ParsedPagesList } from '../Common';
 
-export interface EventsPage {
+export type EventsPage = {
     id: string;
     number: string;
     url: string;
 }
 
-export interface FilterField {
+export type FilterField = {
     event?: string;
     list?: string;
     attachment?: string;
@@ -21,21 +21,21 @@ export interface FilterField {
     severity?: string;
 }
 
-export interface EventsQuery extends FilterField{
+export type EventsQuery = FilterField & {
     page?: string;
     begin?: string;
     end?: string;
     ascending?: 'yes'| 'no';
     limit?: number;
 }
-export interface EventsResponse {
+export type EventsResponse = {
     body: {
         items: [];
         paging: PagesList;
     },
     status: number
 }
-export interface DomainEvent {
+export type DomainEvent = {
     severity: string;
     tags: string[];
     storage: {
@@ -89,7 +89,7 @@ export interface DomainEvent {
     event: string;
 }
 
-export interface EventsList {
+export type EventsList = {
     items: DomainEvent[];
     pages: ParsedPagesList;
     status: number;

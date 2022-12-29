@@ -1,4 +1,4 @@
-export interface Stat {
+export type Stat = {
   time: string | Date,
   delivered: {
     smtp: number,
@@ -7,7 +7,7 @@ export interface Stat {
   }
 }
 
-export interface StatsOptions {
+export type StatsOptions = {
   start: string | Date;
   end: string | Date;
   resolution: string;
@@ -16,7 +16,7 @@ export interface StatsOptions {
 
 export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
 
-export interface StatsQuery {
+export type StatsQuery = {
   event: StatsEvent | StatsEvent[];
   start?: string | Date;
   end?: string | Date;

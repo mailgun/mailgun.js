@@ -1,6 +1,6 @@
 import NavigationThruPages from '../common/NavigationThruPages';
 import Request from '../common/Request';
-import { IMultipleValidationClient } from '../../interfaces/Validations';
+import { IMultipleValidationClient } from '../../Interfaces/Validations';
 import { MultipleValidationJobResult, MultipleValidationJobData, MultipleValidationJobsListResult, MultipleValidationJobsListResponse, MultipleValidationJobsListQuery, MultipleValidationCreationData, CreatedMultipleValidationJob, CanceledMultipleValidationJob } from '../../Types/Validations/MultipleValidation';
 export declare class MultipleValidationJob implements MultipleValidationJobResult {
     createdAt: Date;

@@ -1,5 +1,5 @@
 import Request from '../common/Request';
-import { IDomainTagStatisticResult, IDomainTagsClient } from '../../interfaces/Domains';
+import { IDomainTagStatisticResult, IDomainTagsClient } from '../../Interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
 import { Resolution } from '../../Enums';
 import { DomainTagsItem, DomainTagsItemInfo, DomainTagStatisticItem, DomainTagStatAPIResponse, DomainTagsList, DomainTagsResponseData, DomainTagsQuery, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagCountriesAggregation, DomainTagProvidersAggregation, DomainTagDevicesAggregation } from '../../Types/Domains';

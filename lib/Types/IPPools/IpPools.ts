@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export interface IpPool {
+export type IpPool = {
   description: string;
   ips: string[];
   is_linked: boolean;
@@ -7,7 +7,7 @@ export interface IpPool {
   pool_id: string;
 }
 
-export interface IpPoolListResponse {
+export type IpPoolListResponse = {
   body: {
     ip_pools: IpPool,
     message: string
@@ -15,7 +15,7 @@ export interface IpPoolListResponse {
   status: number
 }
 
-export interface IpPoolListResult {
+export type IpPoolListResult = {
   ip_pools: IpPool,
   message: string,
   status: number

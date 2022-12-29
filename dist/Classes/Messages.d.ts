@@ -1,4 +1,4 @@
-import { MailgunMessageData, MessagesSendAPIResponse, MessagesSendResult } from '../interfaces/Messages';
+import { MailgunMessageData, MessagesSendAPIResponse, MessagesSendResult } from '../Types/Messages';
 import Request from './common/Request';
 export default class MessagesClient {
     request: Request;

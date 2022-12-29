@@ -1,4 +1,4 @@
-import { IDomainCredentials } from '../../interfaces/Domains';
+import { IDomainCredentials } from '../../Interfaces/Domains';
 import { DomainCredentialsList, DomainCredentialsResult, DomainCredentialsQuery, DomainCredentials, UpdateDomainCredentialsData } from '../../Types/Domains';
 import Request from '../common/Request';
 export default class DomainCredentialsClient implements IDomainCredentials {

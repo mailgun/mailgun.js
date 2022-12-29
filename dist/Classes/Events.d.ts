@@ -1,5 +1,5 @@
 import NavigationThruPages from './common/NavigationThruPages';
-import { EventsList, EventsQuery, EventsResponse } from '../interfaces/Events';
+import { EventsList, EventsQuery, EventsResponse } from '../Types/Events';
 import Request from './common/Request';
 export default class EventClient extends NavigationThruPages<EventsList> {
     request: Request;

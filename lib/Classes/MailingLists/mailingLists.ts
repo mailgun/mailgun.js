@@ -11,7 +11,7 @@ import {
   MailingListResult,
   MailingListApiResponse
 } from '../../Types/MailingLists';
-import { IMailListsMembers } from '../../interfaces/MailingLists/MailingListMembers';
+import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers';
 import NavigationThruPages from '../common/NavigationThruPages';
 
 export default class ListsClient

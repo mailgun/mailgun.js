@@ -1,7 +1,7 @@
 import Request from '../common/Request';
 import { MailListMembersQuery, CreateUpdateMailListMembers, MailListMember, MultipleMembersData, DeletedMember, NewMultipleMembersResponse, MailListMembersResult, MailListMembersResponse } from '../../Types/MailingLists';
 import NavigationThruPages from '../common/NavigationThruPages';
-import { IMailListsMembers } from '../../interfaces/MailingLists';
+import { IMailListsMembers } from '../../Interfaces/MailingLists';
 export default class MailListsMembers extends NavigationThruPages<MailListMembersResult> implements IMailListsMembers {
     baseRoute: string;
     request: Request;

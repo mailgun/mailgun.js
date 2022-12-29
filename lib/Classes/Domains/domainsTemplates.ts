@@ -26,7 +26,7 @@ import {
   UpdateOrDeleteDomainTemplateResult
 } from '../../Types/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
-import { IDomainTemplate, IDomainTemplatesClient } from '../../interfaces/Domains';
+import { IDomainTemplate, IDomainTemplatesClient } from '../../Interfaces/Domains';
 
 export class DomainTemplateItem implements IDomainTemplate {
   name : string;

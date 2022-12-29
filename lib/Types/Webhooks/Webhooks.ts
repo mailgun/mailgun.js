@@ -1,19 +1,19 @@
-export interface APIWebhook {
+export type APIWebhook = {
     url?: string
     urls?: string[];
 }
 
-export interface WebhookResponseBody {
+export type WebhookResponseBody = {
     message: string;
     webhook: APIWebhook;
 }
 
-export interface WebhookResponse {
+export type WebhookResponse = {
     status: number;
     body: WebhookResponseBody;
 }
 
-export interface WebhookList {
+export type WebhookList = {
     [id: string]: {
         urls: string[]
     }
@@ -24,7 +24,7 @@ export type WebhooksQuery = {
     skip?: number;
 }
 
-export interface ValidationResponse {
+export type ValidationResponse = {
     code: number;
     message: string;
 }

@@ -6,7 +6,7 @@ import {
   WebhookList,
   WebhookResponse,
   WebhooksQuery
-} from '../interfaces/Webhooks';
+} from '../Types/Webhooks';
 import Request from './common/Request';
 
 class Webhook {

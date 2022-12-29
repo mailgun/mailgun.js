@@ -2,7 +2,7 @@ import NavigationThruPages from '../common/NavigationThruPages';
 import { APIResponse } from '../../Types/Common/ApiResponse';
 
 import Request from '../common/Request';
-import { IMultipleValidationClient } from '../../interfaces/Validations';
+import { IMultipleValidationClient } from '../../Interfaces/Validations';
 import {
   MultipleValidationJobResult,
   MultipleValidationJobData,

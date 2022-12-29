@@ -1,6 +1,6 @@
 import Request from '../common/Request';
 import { ListsQuery, CreateUpdateList, DestroyedList, MailingList, StartValidationResult, ValidationResult, CancelValidationResult, MailingListResult, MailingListApiResponse } from '../../Types/MailingLists';
-import { IMailListsMembers } from '../../interfaces/MailingLists/MailingListMembers';
+import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers';
 import NavigationThruPages from '../common/NavigationThruPages';
 export default class ListsClient extends NavigationThruPages<MailingListResult> {
     baseRoute: string;

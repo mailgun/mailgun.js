@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
 import { APIResponse } from '../../Types/Common/ApiResponse';
-import { IDomainCredentials } from '../../interfaces/Domains';
+import { IDomainCredentials } from '../../Interfaces/Domains';
 import {
   DomainCredentialsResponseData,
   DomainCredentialsList,

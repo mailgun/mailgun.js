@@ -1,7 +1,6 @@
-import { IDomainTemplatesClient, IDomainTagsClient } from '../../interfaces/Domains/index';
+import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials } from '../../Interfaces/Domains';
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import Request from '../common/Request';
-import { IDomainCredentials } from '../../interfaces/Domains/DomainCredentials';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';

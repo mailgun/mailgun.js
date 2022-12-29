@@ -1,9 +1,10 @@
 import formData from 'form-data';
 
 import nock from 'nock';
+import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
 import StatsClient from '../lib/Classes/Stats';
-import { StatsOptions, StatsQuery } from '../lib/interfaces/StatsOptions';
+import { StatsOptions, StatsQuery } from '../lib/Types/Stats';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 describe('StatsClient', function () {
@@ -49,6 +50,56 @@ describe('StatsClient', function () {
         stats.stats[0].delivered.http.should.eql(1);
         stats.stats[0].delivered.smtp.should.eql(2);
         stats.stats[0].delivered.total.should.eql(3);
+      });
+    });
+
+    it('works with js dates', async () => {
+      const queryWithDates = {
+        event: 'delivered',
+        start: new Date('2022-12-25T00:00:00.000Z'),
+        end: new Date('2022-12-29T00:00:00.000Z'),
+      } as StatsQuery;
+      let requestObject: any;
+      api.get('/v3/domain.com/stats/total')
+        .query((actualQueryObject: any) => {
+          requestObject = actualQueryObject;
+          return true;
+        }) // response regardless of the passed query string
+        .reply(200, {
+          end: 'Mon, 23 Mar 2015 00:00:00 UTC',
+          resolution: 'day',
+          start: 'Mon, 16 Mar 2015 00:00:00 UTC',
+          stats: []
+        });
+
+      await client.getDomain('domain.com', queryWithDates);
+      expect(requestObject).to.eql({
+        event: 'delivered',
+        start: '1671937200',
+        end: '1672282800'
+      });
+    });
+
+    it('works with events array dates', async () => {
+      const queryWithTwoEvents = {
+        event: ['delivered', 'accepted']
+      } as StatsQuery;
+      let requestObject: any;
+      api.get('/v3/domain.com/stats/total')
+        .query((actualQueryObject: any) => {
+          requestObject = actualQueryObject;
+          return true;
+        }) // response regardless of the passed query string
+        .reply(200, {
+          end: 'Mon, 23 Mar 2015 00:00:00 UTC',
+          resolution: 'day',
+          start: 'Mon, 16 Mar 2015 00:00:00 UTC',
+          stats: []
+        });
+
+      await client.getDomain('domain.com', queryWithTwoEvents);
+      expect(requestObject).to.eql({
+        event: ['delivered', 'accepted']
       });
     });
   });

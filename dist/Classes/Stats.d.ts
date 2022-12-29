@@ -1,5 +1,5 @@
 import Request from './common/Request';
-import { StatsQuery, StatsOptions, Stat } from '../interfaces/StatsOptions';
+import { StatsQuery, StatsOptions, Stat } from '../Types/Stats';
 declare class Stats {
     start: Date;
     end: Date;
@@ -10,6 +10,7 @@ declare class Stats {
 export default class StatsClient {
     request: Request;
     constructor(request: Request);
+    private convertDateToEpochTimeString;
     private prepareSearchParams;
     _parseStats(response: {
         body: StatsOptions;

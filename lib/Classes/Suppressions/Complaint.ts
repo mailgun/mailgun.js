@@ -1,5 +1,5 @@
 import { SuppressionModels } from '../../Enums';
-import { IComplaint } from '../../interfaces/Suppressions';
+import { IComplaint } from '../../Interfaces/Suppressions';
 import { ComplaintData } from '../../Types/Suppressions';
 import Suppression from './Suppression';
 

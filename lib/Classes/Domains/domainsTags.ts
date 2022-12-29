@@ -5,7 +5,7 @@ import Request from '../common/Request';
 import {
   IDomainTagStatisticResult,
   IDomainTagsClient
-} from '../../interfaces/Domains';
+} from '../../Interfaces/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
 import { Resolution } from '../../Enums';
 import {

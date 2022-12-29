@@ -16,7 +16,7 @@ import {
   IComplaint,
   IUnsubscribe,
   IWhiteList
-} from '../../interfaces/Suppressions';
+} from '../../Interfaces/Suppressions';
 import {
   SuppressionList,
   SuppressionListResponse,

@@ -5,7 +5,7 @@ import formData from 'form-data';
 import EventClient from '../lib/Classes/Events';
 import MgRequest from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { EventsList } from '../lib/interfaces/Events';
+import { EventsList } from '../lib/Types/Events';
 
 describe('EventsClient', function () {
   let client: EventClient;

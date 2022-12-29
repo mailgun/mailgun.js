@@ -1,5 +1,5 @@
 import { SuppressionModels } from '../../Enums';
-import { IUnsubscribe } from '../../interfaces/Suppressions';
+import { IUnsubscribe } from '../../Interfaces/Suppressions';
 import { UnsubscribeData } from '../../Types/Suppressions';
 
 import Suppression from './Suppression';

@@ -5,7 +5,7 @@ import formData from 'form-data';
 import Request from '../lib/Classes/common/Request';
 import IpsClient from '../lib/Classes/IPs';
 
-import { IpData, IpsListResponseBody } from '../lib/interfaces/Ips';
+import { IpData, IpsListResponseBody } from '../lib/Types/IPs';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 // TODO: fix types

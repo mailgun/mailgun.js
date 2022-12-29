@@ -1,7 +1,7 @@
 import Request from '../common/Request';
 import { CreateDomainTemplateVersionResult, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, ListDomainTemplatesAPIResponse, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from '../../Types/Domains';
 import NavigationThruPages from '../common/NavigationThruPages';
-import { IDomainTemplate, IDomainTemplatesClient } from '../../interfaces/Domains';
+import { IDomainTemplate, IDomainTemplatesClient } from '../../Interfaces/Domains';
 export declare class DomainTemplateItem implements IDomainTemplate {
     name: string;
     description: string;

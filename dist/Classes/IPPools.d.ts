@@ -1,5 +1,5 @@
 import Request from './common/Request';
-import { IpPoolCreateData, IpPoolCreateResult, IpPoolDeleteData, IpPoolListResult, IpPoolMessageResult, IpPoolUpdateData } from '../interfaces/IpPools';
+import { IpPoolCreateData, IpPoolCreateResult, IpPoolDeleteData, IpPoolListResult, IpPoolMessageResult, IpPoolUpdateData } from '../Types/IPPools';
 export default class IpPoolsClient {
     request: Request;
     constructor(request: Request);

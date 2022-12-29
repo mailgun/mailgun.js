@@ -1,6 +1,6 @@
 import * as NodeFormData from 'form-data';
 import { RequestOptions, InputFormData, APIResponse } from '../../Types/Common';
-import { IpPoolDeleteData } from '../../interfaces/IpPools';
+import { IpPoolDeleteData } from '../../Types/IPPools';
 declare class Request {
     private username;
     private key;

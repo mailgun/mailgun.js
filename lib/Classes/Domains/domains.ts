@@ -2,16 +2,15 @@
 import urljoin from 'url-join';
 import {
   IDomainTemplatesClient,
-  IDomainTagsClient
-} from '../../interfaces/Domains/index';
+  IDomainTagsClient,
+  IDomainCredentials
+} from '../../Interfaces/Domains';
 
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import APIError from '../common/Error';
 import { APIErrorOptions } from '../../Types/Common/APIErrorOptions';
 
 import Request from '../common/Request';
-
-import { IDomainCredentials } from '../../interfaces/Domains/DomainCredentials';
 
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';

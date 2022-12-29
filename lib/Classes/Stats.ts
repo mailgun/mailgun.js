@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
 import Request from './common/Request';
-import { StatsQuery, StatsOptions, Stat } from '../interfaces/StatsOptions';
+import { StatsQuery, StatsOptions, Stat } from '../Types/Stats';
 
 class Stats {
   start: Date;
@@ -27,16 +27,34 @@ export default class StatsClient {
     this.request = request;
   }
 
+  private convertDateToEpochTimeString(inputDate: Date): string {
+    // https://stackoverflow.com/questions/3367415/get-epoch-for-a-specific-date-using-javascript
+    const timezoneDiff = new Date(1970, 0, 1).getTime();
+    const timeUTC = inputDate.getTime() - timezoneDiff;
+    const timeUTCinSeconds = timeUTC / 1000; // Time since Epoch in seconds
+    return timeUTCinSeconds.toString();
+  }
+
   private prepareSearchParams(query: StatsQuery | undefined): Array<Array<string>> {
     let searchParams = [] as Array<Array<string>>;
     if (typeof query === 'object' && Object.keys(query).length) {
       searchParams = Object.entries(query).reduce((arrayWithPairs, currentPair) => {
         const [key, value] = currentPair;
-        if (Array.isArray(value) && value.length) {
+
+        if (Array.isArray(value) && value.length) { // event: ['delivered', 'accepted']
           const repeatedProperty = value.map((item) => [key, item]);
-          return [...arrayWithPairs, ...repeatedProperty];
+          return [...arrayWithPairs, ...repeatedProperty]; // [[event,delivered], [event,accepted]]
         }
-        arrayWithPairs.push([key, value]);
+
+        if (value instanceof Date) {
+          arrayWithPairs.push([key, this.convertDateToEpochTimeString(value)]);
+          return arrayWithPairs;
+        }
+
+        if (typeof value === 'string') {
+          arrayWithPairs.push([key, value]);
+        }
+
         return arrayWithPairs;
       }, [] as Array<Array<string>>);
     }

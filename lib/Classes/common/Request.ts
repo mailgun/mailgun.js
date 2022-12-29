@@ -13,7 +13,7 @@ import {
 } from '../../Types/Common';
 
 import FormDataBuilder from './FormDataBuilder';
-import { IpPoolDeleteData } from '../../interfaces/IpPools';
+import { IpPoolDeleteData } from '../../Types/IPPools';
 
 class Request {
   private username: string;
@@ -65,6 +65,7 @@ class Request {
     }
     let response: AxiosResponse;
     const urlValue = urljoin(this.url, url);
+
     try {
       response = await axios.request({
         method: method.toLocaleUpperCase(),

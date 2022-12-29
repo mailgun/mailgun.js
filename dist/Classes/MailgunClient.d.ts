@@ -1,4 +1,4 @@
-import MailgunClientOptions from '../interfaces/MailgunClientOptions';
+import { MailgunClientOptions } from '../Types/MailgunClient';
 import DomainClient from './Domains/domains';
 import EventClient from './Events';
 import StatsClient from './Stats';
@@ -11,7 +11,7 @@ import IpsClient from './IPs';
 import IpPoolsClient from './IPPools';
 import ListsClient from './MailingLists/mailingLists';
 import { InputFormData } from '../Types/Common';
-import { IMailgunClient } from '../interfaces/IMailgunClient';
+import { IMailgunClient } from '../Interfaces/MailgunClient';
 export default class MailgunClient implements IMailgunClient {
     private request;
     domains: DomainClient;

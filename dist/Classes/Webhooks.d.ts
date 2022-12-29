@@ -1,5 +1,5 @@
 import { WebhooksIds } from '../Enums';
-import { ValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from '../interfaces/Webhooks';
+import { ValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from '../Types/Webhooks';
 import Request from './common/Request';
 declare class Webhook {
     id: string;

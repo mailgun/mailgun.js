@@ -1,6 +1,6 @@
 import MailgunClient from './Classes/MailgunClient';
 import { InputFormData } from './Types/Common';
-import MailgunClientOptions from './interfaces/MailgunClientOptions';
+import { MailgunClientOptions } from './Types/MailgunClient';
 
 export default class Mailgun {
   static get default(): typeof Mailgun { return this; }

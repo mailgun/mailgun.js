@@ -1,5 +1,5 @@
 import { SuppressionModels } from '../../Enums';
-import { IBounce } from '../../interfaces/Suppressions';
+import { IBounce } from '../../Interfaces/Suppressions';
 import { BounceData } from '../../Types/Suppressions';
 import Suppression from './Suppression';
 

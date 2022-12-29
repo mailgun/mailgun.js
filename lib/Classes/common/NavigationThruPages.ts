@@ -10,10 +10,12 @@ import {
   UpdatedUrlAndQuery,
   APIErrorOptions
 } from '../../Types/Common';
-import { IBounce } from '../../interfaces/Suppressions/Bounce';
-import { IComplaint } from '../../interfaces/Suppressions/Complaint';
-import { IUnsubscribe } from '../../interfaces/Suppressions/Unsubscribe';
-import { IWhiteList } from '../../interfaces/Suppressions/WhiteList';
+import {
+  IBounce,
+  IComplaint,
+  IUnsubscribe,
+  IWhiteList
+} from '../../Interfaces/Suppressions';
 import Request from './Request';
 import {
   SuppressionDataType

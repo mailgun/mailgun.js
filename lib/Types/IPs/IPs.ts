@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-export interface IpsListResponseBody {
+export type IpsListResponseBody = {
   assignable_to_pools: boolean;
   items: string[];
   total_count: number;
 }
 
-export interface IpData {
+export type IpData = {
   ip: string;
   dedicated: boolean;
   rdns: string;

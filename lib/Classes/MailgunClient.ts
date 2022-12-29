@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import Request from './common/Request';
-import MailgunClientOptions from '../interfaces/MailgunClientOptions';
+import { MailgunClientOptions } from '../Types/MailgunClient';
 
 import DomainClient from './Domains/domains';
 import EventClient from './Events';
@@ -19,7 +19,7 @@ import DomainCredentialsClient from './Domains/domainsCredentials';
 import MultipleValidationClient from './Validations/multipleValidation';
 import DomainTemplatesClient from './Domains/domainsTemplates';
 import DomainTagsClient from './Domains/domainsTags';
-import { IMailgunClient } from '../interfaces/IMailgunClient';
+import { IMailgunClient } from '../Interfaces/MailgunClient';
 
 export default class MailgunClient implements IMailgunClient {
   private request;

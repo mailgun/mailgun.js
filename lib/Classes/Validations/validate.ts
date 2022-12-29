@@ -1,4 +1,4 @@
-import { IValidateClient, IMultipleValidationClient } from '../../interfaces/Validations';
+import { IValidateClient, IMultipleValidationClient } from '../../Interfaces/Validations';
 import { ValidationQuery, ValidationResult, ValidationResponse } from '../../Types/Validations';
 import Request from '../common/Request';
 

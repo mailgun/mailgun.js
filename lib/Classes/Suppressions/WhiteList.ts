@@ -1,5 +1,5 @@
 import { SuppressionModels } from '../../Enums';
-import { IWhiteList } from '../../interfaces/Suppressions';
+import { IWhiteList } from '../../Interfaces/Suppressions';
 import { WhiteListData } from '../../Types/Suppressions';
 import Suppression from './Suppression';
 

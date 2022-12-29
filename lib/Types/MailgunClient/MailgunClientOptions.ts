@@ -1,10 +1,8 @@
 /* eslint-disable camelcase */
- interface MailgunClientOptions {
+export type MailgunClientOptions = {
   username: string;
   key: string;
   url?: string;
   public_key?: string;
   timeout?: number;
 }
-
-export default MailgunClientOptions;

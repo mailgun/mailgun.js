@@ -1,5 +1,5 @@
 import MgRequest from './common/Request';
-import { IpData, IpsListResponseBody } from '../interfaces/Ips';
+import { IpData, IpsListResponseBody } from '../Types/IPs';
 export default class IpsClient {
     request: MgRequest;
     constructor(request: MgRequest);
