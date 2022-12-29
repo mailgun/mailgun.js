@@ -10,7 +10,7 @@ import ValidateClient from './Validations/validate';
 import IpsClient from './IPs';
 import IpPoolsClient from './IPPools';
 import ListsClient from './MailingLists/mailingLists';
-import { InputFormData } from '../interfaces/IFormData';
+import { InputFormData } from '../Types/Common';
 import { IMailgunClient } from '../interfaces/IMailgunClient';
 export default class MailgunClient implements IMailgunClient {
     private request;

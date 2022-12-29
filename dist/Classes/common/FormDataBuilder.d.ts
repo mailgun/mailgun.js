@@ -1,5 +1,5 @@
 import * as NodeFormData from 'form-data';
-import { InputFormData } from '../../interfaces/IFormData';
+import { InputFormData } from '../../Types/Common';
 declare class FormDataBuilder {
     private FormDataConstructor;
     constructor(FormDataConstructor: InputFormData);

@@ -1,5 +1,5 @@
 import MailgunClient from './Classes/MailgunClient';
-import { InputFormData } from './interfaces/IFormData';
+import { InputFormData } from './Types/Common';
 import MailgunClientOptions from './interfaces/MailgunClientOptions';
 
 export default class Mailgun {

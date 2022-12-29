@@ -3,7 +3,6 @@ import formData from 'form-data';
 
 import Request from '../lib/Classes/common/Request';
 import ListsClient from '../lib/Classes/MailingLists/mailingLists';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
 import {
   CancelValidationResult,
@@ -11,7 +10,7 @@ import {
   StartValidationResult,
   ValidationResult
 } from '../lib/Types/MailingLists';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 describe('ListsClient', function () {
   let client: any;

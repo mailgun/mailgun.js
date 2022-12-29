@@ -3,8 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/Classes/common/Request';
 import ValidateClient from '../lib/Classes/Validations/validate';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 
 describe('ValidateClient', function () {

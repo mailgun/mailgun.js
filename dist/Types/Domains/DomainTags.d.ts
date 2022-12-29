@@ -1,5 +1,5 @@
 import { Resolution } from '../../Enums';
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 export type DomainTagsQuery = {
     limit: number;
     page?: string;

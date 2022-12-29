@@ -4,8 +4,7 @@ import path from 'path';
 
 import nock from 'nock';
 import Request from '../lib/Classes/common/Request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import MultipleValidationClient, { MultipleValidationJob } from '../lib/Classes/Validations/multipleValidation';
 import {
   CanceledMultipleValidationJob,

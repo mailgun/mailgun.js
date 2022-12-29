@@ -12,11 +12,11 @@ import MessagesClient from '../lib/Classes/Messages';
 import RoutesClient from '../lib/Classes/Routes';
 import ValidateClient from '../lib/Classes/Validations/validate';
 
-import { InputFormData } from '../lib/interfaces/IFormData';
 import StatsClient from '../lib/Classes/Stats';
 import ListsClient from '../lib/Classes/MailingLists/mailingLists';
 import IpPoolsClient from '../lib/Classes/IPPools';
 import IpsClient from '../lib/Classes/IPs';
+import { InputFormData } from '../lib/Types/Common';
 
 describe('Client', function () {
   let client: any;

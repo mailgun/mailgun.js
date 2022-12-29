@@ -9,7 +9,7 @@ import {
   WhiteListData
 } from '.';
 
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 
 /* eslint-disable camelcase */
 

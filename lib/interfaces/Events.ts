@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from './NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Types/Common';
 
 export interface EventsPage {
     id: string;

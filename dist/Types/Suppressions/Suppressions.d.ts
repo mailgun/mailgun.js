@@ -3,7 +3,7 @@ import Complaint from '../../Classes/Suppressions/Complaint';
 import Unsubscribe from '../../Classes/Suppressions/Unsubscribe';
 import WhiteList from '../../Classes/Suppressions/WhiteList';
 import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from '.';
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 export type SuppressionList = {
     items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
     pages: ParsedPagesList;

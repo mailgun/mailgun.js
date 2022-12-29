@@ -1,5 +1,5 @@
 import APIError from './common/Error';
-import APIErrorOptions from '../interfaces/APIErrorOptions';
+import { APIErrorOptions } from '../Types/Common/APIErrorOptions';
 import {
   MailgunMessageData,
   MessagesSendAPIResponse,

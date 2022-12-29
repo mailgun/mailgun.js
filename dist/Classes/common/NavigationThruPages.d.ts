@@ -1,4 +1,4 @@
-import { ParsedPage, ParsedPagesList, QueryWithPage, ResponseWithPaging } from '../../interfaces/NavigationThruPages';
+import { ParsedPage, ParsedPagesList, QueryWithPage, ResponseWithPaging } from '../../Types/Common';
 import { IBounce } from '../../interfaces/Suppressions/Bounce';
 import { IComplaint } from '../../interfaces/Suppressions/Complaint';
 import { IUnsubscribe } from '../../interfaces/Suppressions/Unsubscribe';

@@ -5,10 +5,8 @@ import base64 from 'base-64';
 import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import APIError from '../lib/Classes/common/Error';
-import APIResponse from '../lib/interfaces/ApiResponse';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
 
 describe('Request', function () {
   let headers: { [key: string]: string };

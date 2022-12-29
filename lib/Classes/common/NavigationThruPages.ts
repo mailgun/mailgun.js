@@ -1,14 +1,15 @@
 import urljoin from 'url-join';
 import APIError from './Error';
-import APIErrorOptions from '../../interfaces/APIErrorOptions';
+
 import {
   PagesListAccumulator,
   ParsedPage,
   ParsedPagesList,
   QueryWithPage,
   ResponseWithPaging,
-  UpdatedUrlAndQuery
-} from '../../interfaces/NavigationThruPages';
+  UpdatedUrlAndQuery,
+  APIErrorOptions
+} from '../../Types/Common';
 import { IBounce } from '../../interfaces/Suppressions/Bounce';
 import { IComplaint } from '../../interfaces/Suppressions/Complaint';
 import { IUnsubscribe } from '../../interfaces/Suppressions/Unsubscribe';

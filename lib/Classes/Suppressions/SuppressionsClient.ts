@@ -5,7 +5,6 @@ import urljoin from 'url-join';
 import Request from '../common/Request';
 
 import APIError from '../common/Error';
-import APIErrorOptions from '../../interfaces/APIErrorOptions';
 import NavigationThruPages from '../common/NavigationThruPages';
 import Bounce from './Bounce';
 import Complaint from './Complaint';
@@ -34,6 +33,7 @@ import {
   SuppressionDestroyResult,
   SuppressionDestroyResponse
 } from '../../Types/Suppressions';
+import { APIErrorOptions } from '../../Types/Common/APIErrorOptions';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }

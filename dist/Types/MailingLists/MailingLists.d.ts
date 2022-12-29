@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 export type ListsQuery = {
     address?: string;
     limit?: number;

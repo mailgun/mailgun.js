@@ -1,5 +1,5 @@
 import APIError from '../lib/Classes/common/Error';
-import APIErrorOptions from '../lib/interfaces/APIErrorOptions';
+import { APIErrorOptions } from '../lib/Types/Common/APIErrorOptions';
 
 describe('APIError', function () {
   let error;

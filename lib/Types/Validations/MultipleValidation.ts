@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 
 /* eslint-disable camelcase */
 export type MultipleValidationJobData = {

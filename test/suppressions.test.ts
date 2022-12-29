@@ -4,8 +4,7 @@ import nock from 'nock';
 
 import Request from '../lib/Classes/common/Request';
 import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { WhiteListData } from '../lib/Types/Suppressions';
 
 chai.should();

@@ -7,8 +7,7 @@ import spies from 'chai-spies';
 
 import Request from '../lib/Classes/common/Request';
 import MessagesClient from '../lib/Classes/Messages';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { MessagesSendResult } from '../lib/interfaces/Messages';
 
 chai.use(spies);

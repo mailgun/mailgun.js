@@ -4,12 +4,12 @@ import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
 import DomainClient, { Domain } from '../lib/Classes/Domains/domains';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+
+import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
-import APIResponse from '../lib/interfaces/ApiResponse';
+
 import {
   MessageResponse,
   ConnectionSettings,

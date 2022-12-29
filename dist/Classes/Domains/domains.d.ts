@@ -1,5 +1,5 @@
 import { IDomainTemplatesClient, IDomainTagsClient } from '../../interfaces/Domains/index';
-import APIResponse from '../../interfaces/ApiResponse';
+import { APIResponse } from '../../Types/Common/ApiResponse';
 import Request from '../common/Request';
 import { IDomainCredentials } from '../../interfaces/Domains/DomainCredentials';
 import DomainCredentialsClient from './domainsCredentials';

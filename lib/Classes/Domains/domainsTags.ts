@@ -1,5 +1,5 @@
 import urljoin from 'url-join';
-import APIResponse from '../../interfaces/ApiResponse';
+import { APIResponse } from '../../Types/Common/ApiResponse';
 import Request from '../common/Request';
 
 import {

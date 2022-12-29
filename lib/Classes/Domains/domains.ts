@@ -5,9 +5,9 @@ import {
   IDomainTagsClient
 } from '../../interfaces/Domains/index';
 
-import APIResponse from '../../interfaces/ApiResponse';
+import { APIResponse } from '../../Types/Common/ApiResponse';
 import APIError from '../common/Error';
-import APIErrorOptions from '../../interfaces/APIErrorOptions';
+import { APIErrorOptions } from '../../Types/Common/APIErrorOptions';
 
 import Request from '../common/Request';
 

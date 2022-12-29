@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import Request from './common/Request';
 import MailgunClientOptions from '../interfaces/MailgunClientOptions';
-import { RequestOptions } from '../interfaces/RequestOptions';
 
 import DomainClient from './Domains/domains';
 import EventClient from './Events';
@@ -15,7 +14,7 @@ import IpsClient from './IPs';
 import IpPoolsClient from './IPPools';
 import ListsClient from './MailingLists/mailingLists';
 import MailListsMembers from './MailingLists/mailListMembers';
-import { InputFormData } from '../interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../Types/Common';
 import DomainCredentialsClient from './Domains/domainsCredentials';
 import MultipleValidationClient from './Validations/multipleValidation';
 import DomainTemplatesClient from './Domains/domainsTemplates';

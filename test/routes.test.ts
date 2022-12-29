@@ -3,8 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../lib/Classes/common/Request';
 import RoutesClient from '../lib/Classes/Routes';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 interface Data {
   actions: string[],

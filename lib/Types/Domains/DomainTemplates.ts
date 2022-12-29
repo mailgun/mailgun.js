@@ -1,7 +1,7 @@
 import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
 import { YesNo } from '../../Enums';
 import { IDomainTemplate } from '../../interfaces/Domains';
-import { PagesList, ParsedPagesList } from '../../interfaces/NavigationThruPages';
+import { PagesList, ParsedPagesList } from '../Common';
 
 /* eslint-disable camelcase */
 export type DomainTemplateData = {
