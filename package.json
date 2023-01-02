@@ -59,7 +59,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-webpack": "^0.13.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-tsdoc": "^0.2.10",
     "form-data": "^3.0.1",
     "husky": "^7.0.1",
