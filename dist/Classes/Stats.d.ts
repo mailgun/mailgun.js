@@ -1,5 +1,6 @@
 import Request from './common/Request';
 import { StatsQuery, StatsOptions, Stat } from '../Types/Stats';
+import { ILogger } from '../Interfaces/Common';
 declare class Stats {
     start: Date;
     end: Date;
@@ -9,8 +10,9 @@ declare class Stats {
 }
 export default class StatsClient {
     request: Request;
-    constructor(request: Request);
-    private convertDateToEpochTimeString;
+    private logger;
+    constructor(request: Request, logger?: ILogger);
+    private convertDateToUTC;
     private prepareSearchParams;
     _parseStats(response: {
         body: StatsOptions;

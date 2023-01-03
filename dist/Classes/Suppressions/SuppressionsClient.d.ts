@@ -6,7 +6,7 @@ import Unsubscribe from './Unsubscribe';
 import WhiteList from './WhiteList';
 import Suppression from './Suppression';
 import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions';
-import { SuppressionList, SuppressionListResponse, SuppressionDataType, BounceData, ComplaintData, UnsubscribeData, WhiteListData, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions';
+import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
     request: Request;
     models: Map<string, any>;
@@ -14,8 +14,8 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
     protected parseList(response: SuppressionListResponse, Model: {
         new (data: SuppressionDataType): IBounce | IComplaint | IUnsubscribe | IWhiteList;
     }): SuppressionList;
-    _parseItem<T extends Suppression>(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData, Model: {
-        new (data: BounceData | ComplaintData | UnsubscribeData | WhiteListData): T;
+    _parseItem<T extends Suppression>(data: SuppressionDataType, Model: {
+        new (dataType: SuppressionDataType): T;
     }): T;
     private createWhiteList;
     private checkType;

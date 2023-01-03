@@ -3,7 +3,7 @@ import formData from 'form-data';
 import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
-import StatsClient from '../lib/Classes/Stats';
+import StatsClient from '../lib/Classes/Stats/StatsClient';
 import { StatsOptions, StatsQuery } from '../lib/Types/Stats';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
@@ -12,7 +12,12 @@ describe('StatsClient', function () {
   let api: any;
 
   beforeEach(function () {
-    client = new StatsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new StatsClient(
+      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData),
+      {
+        warn: () => undefined
+      }
+    );
     api = nock('https://api.mailgun.net');
   });
 
@@ -75,8 +80,8 @@ describe('StatsClient', function () {
       await client.getDomain('domain.com', queryWithDates);
       expect(requestObject).to.eql({
         event: 'delivered',
-        start: '1671937200',
-        end: '1672282800'
+        start: 'Sun, 25 Dec 2022 00:00:00 GMT',
+        end: 'Thu, 29 Dec 2022 00:00:00 GMT'
       });
     });
 

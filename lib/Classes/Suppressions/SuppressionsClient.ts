@@ -69,10 +69,9 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
   }
 
   _parseItem<T extends Suppression>(
-    data : BounceData | ComplaintData | UnsubscribeData | WhiteListData,
+    data : SuppressionDataType,
     Model: {
-      new(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData):
-      T
+      new(dataType: SuppressionDataType):T
     }
   ): T {
     return new Model(data);

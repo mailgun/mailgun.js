@@ -4,7 +4,7 @@ import { MailgunClientOptions } from '../Types/MailgunClient';
 
 import DomainClient from './Domains/domains';
 import EventClient from './Events';
-import StatsClient from './Stats';
+import StatsClient from './Stats/StatsClient';
 import SuppressionClient from './Suppressions/SuppressionsClient';
 import WebhooksClient from './Webhooks';
 import MessagesClient from './Messages';

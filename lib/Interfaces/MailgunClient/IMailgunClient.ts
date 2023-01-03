@@ -6,7 +6,7 @@ import IpsClient from '../../Classes/IPs';
 import ListsClient from '../../Classes/MailingLists/mailingLists';
 import MessagesClient from '../../Classes/Messages';
 import RoutesClient from '../../Classes/Routes';
-import StatsClient from '../../Classes/Stats';
+import StatsClient from '../../Classes/Stats/StatsClient';
 import SuppressionClient from '../../Classes/Suppressions/SuppressionsClient';
 import ValidateClient from '../../Classes/Validations/validate';
 import WebhookClient from '../../Classes/Webhooks';
