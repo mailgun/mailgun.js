@@ -181,6 +181,22 @@ describe('SuppressionsClient', function () {
       expect(page.page).to.be.eql('?page=previous&address=previous@mailgun.com');
       page.iteratorPosition.should.eql('previous@mailgun.com');
     });
+
+    it('should not fail when requesting an empty page of results', async () => {
+      api.get('/v3/domain.com/bounces?page-next&address=next@mailgun.com').reply(200, {
+        paging: {
+          first: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=first',
+          last: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=last',
+          previous: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=next@mailgun.com',
+        },
+      });
+      const bounces = await client.list('domain.com', 'bounces', {
+        page: '?page-next&address=next@mailgun.com',
+      });
+
+      expect(bounces.pages.previous.page).to.be.eql('?page=previous&address=next@mailgun.com');
+      expect(bounces.items).to.be.empty;
+    });
   });
 
   describe('get', function () {
