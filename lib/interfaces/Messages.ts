@@ -48,12 +48,12 @@ export type MailgunMessageData = MailgunMessageContent & {
     /**
      * Same as `To` but for `carbon copy`
      */
-    cc?: string;
+    cc?: string[];
 
     /**
      * Same as `To` but for `blind carbon copy`
      */
-    bcc?: string;
+    bcc?: string[];
 
     /**
      * Message subject
