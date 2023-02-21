@@ -2,7 +2,7 @@ import urljoin from 'url-join';
 import { WebhooksIds } from '../Enums';
 
 import {
-  ValidationResponse,
+  WebhookValidationResponse,
   WebhookList,
   WebhookResponse,
   WebhooksQuery
@@ -45,7 +45,10 @@ export default class WebhooksClient {
 
   _parseWebhookTest(response: { body: { code: number, message: string } })
   : {code: number, message:string} {
-    return { code: response.body.code, message: response.body.message } as ValidationResponse;
+    return {
+      code: response.body.code,
+      message: response.body.message
+    } as WebhookValidationResponse;
   }
 
   list(domain: string, query: WebhooksQuery): Promise<WebhookList> {
@@ -61,7 +64,7 @@ export default class WebhooksClient {
   create(domain: string,
     id: string,
     url: string,
-    test = false): Promise<Webhook | ValidationResponse> {
+    test = false): Promise<Webhook | WebhookValidationResponse> {
     if (test) {
       return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id, 'test'), { url })
         .then(this._parseWebhookTest);

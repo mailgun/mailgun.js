@@ -5,10 +5,10 @@ import Request from '../lib/Classes/common/Request';
 import ListsClient from '../lib/Classes/MailingLists/mailingLists';
 import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
 import {
-  CancelValidationResult,
+  MailingListCancelValidationResult,
   MailingList,
   StartValidationResult,
-  ValidationResult
+  MailingListValidationResult
 } from '../lib/Types/MailingLists';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
@@ -178,7 +178,7 @@ describe('ListsClient', function () {
         }
       });
 
-      return client.validationResult('test@example.com').then(function (data: ValidationResult) {
+      return client.validationResult('test@example.com').then(function (data: MailingListValidationResult) {
         data.should.eql({
           status: 200,
           validationResult: {
@@ -216,7 +216,7 @@ describe('ListsClient', function () {
       api.delete('/v3/lists/test@example.com/validate').reply(200, {
         message: 'test message'
       });
-      return client.cancelValidation('test@example.com').then(function (data: CancelValidationResult) {
+      return client.cancelValidation('test@example.com').then(function (data: MailingListCancelValidationResult) {
         data.should.eql({
           status: 200,
           message: 'test message'

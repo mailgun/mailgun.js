@@ -26,7 +26,7 @@ export type StartValidationResult = {
     message: string;
 }
 
-export type ValidationResponse = {
+export type MailingListValidationResponse = {
     status: string;
     download_url: {
       csv: string;
@@ -51,18 +51,18 @@ export type ValidationResponse = {
       }
     }
 }
-export type ValidationApiResponse = ValidationResponse & {
+export type MailingListValidationApiResponse = MailingListValidationResponse & {
     created_at: number;
 }
-export type ValidationResultData = ValidationResponse & {
+export type MailingListValidationResultData = MailingListValidationResponse & {
     created_at: Date;
 }
-export type ValidationResult = {
+export type MailingListValidationResult = {
     status: number;
-    validationResult: ValidationResultData;
+    validationResult: MailingListValidationResultData;
 }
 
-export type CancelValidationResult = {
+export type MailingListCancelValidationResult = {
     status: number;
     message: string;
 }

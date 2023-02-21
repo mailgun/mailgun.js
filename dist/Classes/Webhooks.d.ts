@@ -1,5 +1,5 @@
 import { WebhooksIds } from '../Enums';
-import { ValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from '../Types/Webhooks';
+import { WebhookValidationResponse, WebhookList, WebhookResponse, WebhooksQuery } from '../Types/Webhooks';
 import Request from './common/Request';
 declare class Webhook {
     id: string;
@@ -26,7 +26,7 @@ export default class WebhooksClient {
     };
     list(domain: string, query: WebhooksQuery): Promise<WebhookList>;
     get(domain: string, id: WebhooksIds): Promise<Webhook>;
-    create(domain: string, id: string, url: string, test?: boolean): Promise<Webhook | ValidationResponse>;
+    create(domain: string, id: string, url: string, test?: boolean): Promise<Webhook | WebhookValidationResponse>;
     update(domain: string, id: string, url: string): Promise<Webhook>;
     destroy(domain: string, id: string): Promise<Webhook>;
 }

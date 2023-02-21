@@ -4,10 +4,10 @@ import {
   CreateUpdateList,
   DestroyedList,
   MailingList,
-  ValidationApiResponse,
+  MailingListValidationApiResponse,
   StartValidationResult,
-  ValidationResult,
-  CancelValidationResult,
+  MailingListValidationResult,
+  MailingListCancelValidationResult,
   MailingListResult,
   MailingListApiResponse
 } from '../../Types/MailingLists';
@@ -27,14 +27,17 @@ export default class ListsClient
     this.members = members;
   }
 
-  private parseValidationResult(status: number, data: ValidationApiResponse): ValidationResult {
+  private parseValidationResult(
+    status: number,
+    data: MailingListValidationApiResponse
+  ): MailingListValidationResult {
     return {
       status,
       validationResult: {
         ...data,
         created_at: new Date(data.created_at * 1000) // add millisecond to Unix timestamp
       }
-    } as ValidationResult;
+    } as MailingListValidationResult;
   }
 
   protected parseList(response: MailingListApiResponse): MailingListResult {
@@ -80,21 +83,21 @@ export default class ListsClient
       }) as StartValidationResult);
   }
 
-  validationResult(mailListAddress: string): Promise<ValidationResult> {
+  validationResult(mailListAddress: string): Promise<MailingListValidationResult> {
     return this.request.get(`${this.baseRoute}/${mailListAddress}/validate`)
       .then(
         (response) => this.parseValidationResult(
           response.status,
-           response.body as ValidationApiResponse
+           response.body as MailingListValidationApiResponse
         )
       );
   }
 
-  cancelValidation(mailListAddress: string): Promise<CancelValidationResult> {
+  cancelValidation(mailListAddress: string): Promise<MailingListCancelValidationResult> {
     return this.request.delete(`${this.baseRoute}/${mailListAddress}/validate`)
       .then((response) => ({
         status: response.status,
         message: response.body.message
-      } as CancelValidationResult));
+      } as MailingListCancelValidationResult));
   }
 }

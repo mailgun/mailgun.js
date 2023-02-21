@@ -19,7 +19,7 @@ export type WebhooksQuery = {
     limit?: number;
     skip?: number;
 };
-export type ValidationResponse = {
+export type WebhookValidationResponse = {
     code: number;
     message: string;
 };

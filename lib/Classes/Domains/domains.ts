@@ -8,7 +8,7 @@ import {
 
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import APIError from '../common/Error';
-import { APIErrorOptions } from '../../Types/Common/APIErrorOptions';
+import { APIErrorOptions } from '../../Types/Common';
 
 import Request from '../common/Request';
 

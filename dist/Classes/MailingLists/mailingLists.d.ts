@@ -1,5 +1,5 @@
 import Request from '../common/Request';
-import { ListsQuery, CreateUpdateList, DestroyedList, MailingList, StartValidationResult, ValidationResult, CancelValidationResult, MailingListResult, MailingListApiResponse } from '../../Types/MailingLists';
+import { ListsQuery, CreateUpdateList, DestroyedList, MailingList, StartValidationResult, MailingListValidationResult, MailingListCancelValidationResult, MailingListResult, MailingListApiResponse } from '../../Types/MailingLists';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers';
 import NavigationThruPages from '../common/NavigationThruPages';
 export default class ListsClient extends NavigationThruPages<MailingListResult> {
@@ -15,6 +15,6 @@ export default class ListsClient extends NavigationThruPages<MailingListResult> 
     update(mailListAddress: string, data: CreateUpdateList): Promise<MailingList>;
     destroy(mailListAddress: string): Promise<DestroyedList>;
     validate(mailListAddress: string): Promise<StartValidationResult>;
-    validationResult(mailListAddress: string): Promise<ValidationResult>;
-    cancelValidation(mailListAddress: string): Promise<CancelValidationResult>;
+    validationResult(mailListAddress: string): Promise<MailingListValidationResult>;
+    cancelValidation(mailListAddress: string): Promise<MailingListCancelValidationResult>;
 }

@@ -24,7 +24,7 @@ export type WebhooksQuery = {
     skip?: number;
 }
 
-export type ValidationResponse = {
+export type WebhookValidationResponse = {
     code: number;
     message: string;
 }

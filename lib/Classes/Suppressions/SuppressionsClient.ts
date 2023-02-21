@@ -21,10 +21,6 @@ import {
   SuppressionList,
   SuppressionListResponse,
   SuppressionDataType,
-  BounceData,
-  ComplaintData,
-  UnsubscribeData,
-  WhiteListData,
   SuppressionCreationData,
   SuppressionCreationResult,
   SuppressionCreationResponse,
@@ -33,7 +29,7 @@ import {
   SuppressionDestroyResult,
   SuppressionDestroyResponse
 } from '../../Types/Suppressions';
-import { APIErrorOptions } from '../../Types/Common/APIErrorOptions';
+import { APIErrorOptions } from '../../Types/Common';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
