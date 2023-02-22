@@ -14,6 +14,7 @@ declare class Request {
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, onCallOptions?: Record<string, unknown | Record<string, unknown>>): Promise<APIResponse>;
     private getResponseBody;
+    private joinAndTransformHeaders;
     query(method: string, url: string, query?: Record<string, unknown> | Array<Array<string>>, options?: Record<string, unknown>): Promise<APIResponse>;
     command(method: string, url: string, data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData, options?: Record<string, unknown>, addDefaultHeaders?: boolean): Promise<APIResponse>;
     get(url: string, query?: Record<string, unknown> | Array<Array<string>>, options?: Record<string, unknown>): Promise<APIResponse>;
@@ -23,5 +24,6 @@ declare class Request {
     patchWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse>;
     put(url: string, data?: Record<string, unknown> | string, options?: Record<string, unknown>): Promise<APIResponse>;
     delete(url: string, data?: IpPoolDeleteData): Promise<APIResponse>;
+    private makeHeadersFromObject;
 }
 export default Request;
