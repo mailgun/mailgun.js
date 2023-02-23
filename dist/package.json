@@ -23,7 +23,7 @@
     "definition": "./index.d.ts"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.3.3",
     "base-64": "^1.0.0",
     "url-join": "^4.0.1"
   },
