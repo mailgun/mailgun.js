@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.2.0](https://github.com/mailgun/mailgun.js/compare/v8.1.0...v8.2.0) (2023-03-02)
+
+
+### Features
+
+* Add type propert to errors ([71efcc5](https://github.com/mailgun/mailgun.js/commits/71efcc534ec69400b335091950dc59f372263486))
+
+
+### Other changes
+
+* Update d.ts file ([b25f2bf](https://github.com/mailgun/mailgun.js/commits/b25f2bf1bc996b30dba14181cddb31bd0b80b4d8))
+
 ## [8.1.0](https://github.com/mailgun/mailgun.js/compare/v8.0.6...v8.1.0) (2023-02-23)
 
 
