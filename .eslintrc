@@ -51,6 +51,12 @@
         "eslint-plugin-tsdoc",
         "@typescript-eslint"
       ]
+    },
+    {
+      "files": ["test/*"],
+      "rules": {
+          "no-unused-expressions": "off"
+      }
     }
   ]
 }
