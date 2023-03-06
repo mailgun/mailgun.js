@@ -1,3 +1,5 @@
+import APIError from './error';
+import APIErrorOptions from './interfaces/APIErrorOptions';
 import {
   MailgunMessageData,
   MessagesSendAPIResponse,
@@ -25,9 +27,12 @@ export default class MessagesClient {
     ]);
 
     if (!data || Object.keys(data).length === 0) {
-      return {};
+      throw new APIError({
+        status: 400,
+        message: 'Message data object can not be empty'
+      } as APIErrorOptions);
     }
-    const updatedData = Object.keys(data).reduce((acc, key) => {
+    return Object.keys(data).reduce((acc, key) => {
       if (yesNoProperties.has(key) && typeof data[key] === 'boolean') {
         acc[key] = data[key] ? 'yes' : 'no';
       } else {
@@ -35,8 +40,6 @@ export default class MessagesClient {
       }
       return acc;
     }, {} as MailgunMessageData);
-
-    return updatedData;
   }
 
   _parseResponse(response: MessagesSendAPIResponse): MessagesSendResult {

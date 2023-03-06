@@ -1,41 +1,44 @@
 import Request from './request';
-import { BounceData, ComplaintData, ParsedPage, ParsedPagesList, SuppressionCreationData, SuppressionCreationResult, SuppressionDestroyResult, SuppressionList, SuppressionListQuery, SuppressionListResponse, SuppressionModels, UnsubscribeData, WhiteListData } from './interfaces/Supressions';
+import { SuppressionCreationData, SuppressionCreationResult, SuppressionDataType, SuppressionDestroyResult, SuppressionList, SuppressionListQuery, SuppressionListResponse, SuppressionModels } from './interfaces/Suppressions/Suppressions';
+import { IBounce, BounceData } from './interfaces/Suppressions/Bounce';
+import { IComplaint, ComplaintData } from './interfaces/Suppressions/Complaint';
+import { IUnsubscribe, UnsubscribeData } from './interfaces/Suppressions/Unsubscribe';
+import { IWhiteList, WhiteListData } from './interfaces/Suppressions/WhiteList';
+import NavigationThruPages from './common/NavigationThruPages';
 export declare class Suppression {
     type: string;
     constructor(type: SuppressionModels);
 }
-export declare class Bounce extends Suppression {
+export declare class Bounce extends Suppression implements IBounce {
     address: string;
     code: number;
     error: string;
     created_at: Date;
     constructor(data: BounceData);
 }
-export declare class Complaint extends Suppression {
-    address: string | undefined;
+export declare class Complaint extends Suppression implements IComplaint {
+    address: string;
     created_at: Date;
     constructor(data: ComplaintData);
 }
-export declare class Unsubscribe extends Suppression {
+export declare class Unsubscribe extends Suppression implements IUnsubscribe {
     address: string;
     tags: string[];
     created_at: Date;
     constructor(data: UnsubscribeData);
 }
-export declare class WhiteList extends Suppression {
+export declare class WhiteList extends Suppression implements IWhiteList {
     value: string;
     reason: string;
     createdAt: Date;
     constructor(data: WhiteListData);
 }
-export default class SuppressionClient {
+export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
     request: Request;
     models: Map<string, any>;
     constructor(request: Request);
-    _parsePage(id: string, pageUrl: string): ParsedPage;
-    _parsePageLinks(response: SuppressionListResponse): ParsedPagesList;
-    _parseList(response: SuppressionListResponse, Model: {
-        new (data: BounceData | ComplaintData | UnsubscribeData | WhiteListData): Bounce | Complaint | Unsubscribe | WhiteList;
+    protected parseList(response: SuppressionListResponse, Model: {
+        new (data: SuppressionDataType): IBounce | IComplaint | IUnsubscribe | IWhiteList;
     }): SuppressionList;
     _parseItem<T extends Suppression>(data: BounceData | ComplaintData | UnsubscribeData | WhiteListData, Model: {
         new (data: BounceData | ComplaintData | UnsubscribeData | WhiteListData): T;

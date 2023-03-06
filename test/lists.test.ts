@@ -39,15 +39,46 @@ describe('ListsClient', function () {
   });
 
   describe('list', function () {
-    it('fetches all mail lists', function () {
+    it('fetches all mail lists', async function () {
       const lists = [defaultList];
 
       api.get('/v3/lists/pages').reply(200, {
-        items: lists
+        items: lists,
+        paging: {
+          first: 'https://api.mailgun.net/v3/lists/pages?page=first&limit=1',
+          last: 'https://api.mailgun.net/v3/lists/pages?page=last&limit=1',
+          next: 'https://api.mailgun.net/v3/lists/pages?page=next&address=test%40test.com&limit=1',
+          previous: 'https://api.mailgun.net/v3/lists/pages?page=prev&address=test%40test.com&limit=1',
+        }
       });
 
-      return client.list().then(function (listsRes: MailingList[]) {
-        listsRes[0].should.eql(defaultList);
+      const result = await client.list();
+      result.items[0].should.eql(defaultList);
+      result.pages.should.be.eql({
+        first: {
+          id: 'first',
+          page: '?page=first&limit=1',
+          iteratorPosition: undefined,
+          url: 'https://api.mailgun.net/v3/lists/pages?page=first&limit=1'
+        },
+        last: {
+          id: 'last',
+          page: '?page=last&limit=1',
+          iteratorPosition: undefined,
+          url: 'https://api.mailgun.net/v3/lists/pages?page=last&limit=1'
+        },
+        next: {
+          id: 'next',
+          page: '?page=next&address=test%40test.com&limit=1',
+          iteratorPosition: 'test@test.com',
+          url: 'https://api.mailgun.net/v3/lists/pages?page=next&address=test%40test.com&limit=1'
+        },
+        previous: {
+          id: 'previous',
+          page: '?page=prev&address=test%40test.com&limit=1',
+          iteratorPosition: 'test@test.com',
+          url: 'https://api.mailgun.net/v3/lists/pages?page=prev&address=test%40test.com&limit=1'
+        }
       });
     });
   });

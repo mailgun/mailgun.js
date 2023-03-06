@@ -70,6 +70,8 @@ describe('DomainsTagsClient', function () {
         });
         credentialsList.pages.last.should.eql({
           id: 'last',
+          iteratorPosition: '',
+          page: '?limit=1000&page=last&tag=',
           url: 'https://api.mailgun.net/v3/testDomain/tags?limit=1000&page=last&tag='
         });
       });

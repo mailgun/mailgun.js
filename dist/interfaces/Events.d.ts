@@ -1,3 +1,4 @@
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 export interface EventsPage {
     id: string;
     number: string;
@@ -24,17 +25,12 @@ export interface EventsQuery extends FilterField {
     ascending?: 'yes' | 'no';
     limit?: number;
 }
-export interface PagesList {
-    previous: string;
-    first: string;
-    last: string;
-    next: string;
-}
 export interface EventsResponse {
     body: {
         items: [];
         paging: PagesList;
     };
+    status: number;
 }
 export interface DomainEvent {
     severity: string;
@@ -89,21 +85,8 @@ export interface DomainEvent {
     recipient: string;
     event: string;
 }
-export interface ParsedPage {
-    id: string;
-    number: string;
-    url: string;
-}
-export interface ParsedPagesList {
-    previous: ParsedPage;
-    first: ParsedPage;
-    last: ParsedPage;
-    next: ParsedPage;
-}
 export interface EventsList {
     items: DomainEvent[];
     pages: ParsedPagesList;
-}
-export interface PagesListAccumulator {
-    [index: string]: EventsPage;
+    status: number;
 }

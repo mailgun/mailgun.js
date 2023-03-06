@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "7.0.3",
+  "version": "8.2.1",
   "main": "./mailgun.node.js",
   "browser": "./mailgun.web.js",
   "types": "./index.d.ts",
@@ -23,10 +23,9 @@
     "definition": "./index.d.ts"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.3.3",
     "base-64": "^1.0.0",
-    "url-join": "^4.0.1",
-    "webpack-merge": "^5.4.0"
+    "url-join": "^4.0.1"
   },
   "contributors": [
     {

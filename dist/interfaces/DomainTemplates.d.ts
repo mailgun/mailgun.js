@@ -1,13 +1,8 @@
 import { DomainTemplateItem } from '../domainsTemplates';
+import { PagesList, ParsedPagesList } from './NavigationThruPages';
 export declare enum YesNo {
     YES = "yes",
     NO = "no"
-}
-export declare enum Pages {
-    FIRST = "first",
-    LAST = "last",
-    NEXT = "next",
-    PREV = "prev"
 }
 export declare type DomainTemplateData = {
     name: string;
@@ -33,9 +28,12 @@ export declare type DomainTemplateUpdateVersionData = {
     active?: YesNo;
 };
 export declare type DomainTemplatesQuery = {
-    page: Pages;
-    limit: number;
-    p: string;
+    /** 'page' (optionally 'p') params from previous response's 'paging' object.
+     * Value must be stringified as query params. Ex: '?page=first','?page=next&p=name-of-last-item'
+     .... */
+    page?: `?${string}`;
+    /** Number of records to retrieve. Default value is 10. */
+    limit?: number;
 };
 export declare type TemplateQuery = {
     active: YesNo;
@@ -82,12 +80,8 @@ export interface ListDomainTemplatesAPIResponse {
 }
 export interface ListDomainTemplatesResult {
     items: DomainTemplate[];
-    pages: {
-        first: string;
-        last: string;
-        next: string;
-        previous: string;
-    };
+    pages: ParsedPagesList;
+    status: number;
 }
 export interface GetDomainTemplateAPIResponse {
     status: number;
@@ -162,22 +156,12 @@ export interface ListDomainTemplateVersionsAPIResponse {
             id: string;
             versions: ShortTemplateVersion[];
         };
-        paging: {
-            first: string;
-            last: string;
-            next: string;
-            previous: string;
-        };
+        paging: PagesList;
     };
 }
 export interface ListDomainTemplateVersionsResult {
     template: DomainTemplateItem;
-    pages: {
-        first: string;
-        last: string;
-        next: string;
-        previous: string;
-    };
+    pages: ParsedPagesList;
 }
 export interface IDomainTemplatesClient {
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>;

@@ -97,10 +97,13 @@ export default class DomainClient {
     return response.body;
   }
 
-  private _parseDomainList(response: DomainListResponseData): Domain[] {
-    return response.body.items.map(function (item) {
-      return new Domain(item);
-    });
+  private parseDomainList(response: DomainListResponseData): Domain[] {
+    if (response.body && response.body.items) {
+      return response.body.items.map(function (item) {
+        return new Domain(item);
+      });
+    }
+    return [];
   }
 
   private _parseDomain(response: DomainResponseData): Domain {
@@ -121,7 +124,7 @@ export default class DomainClient {
 
   list(query?: DomainsQuery): Promise<Domain[]> {
     return this.request.get('/v3/domains', query)
-      .then((res : APIResponse) => this._parseDomainList(res as DomainListResponseData));
+      .then((res : APIResponse) => this.parseDomainList(res as DomainListResponseData));
   }
 
   get(domain: string) : Promise<Domain> {
@@ -132,7 +135,7 @@ export default class DomainClient {
   create(data: DomainInfo) : Promise<Domain> {
     const postObj = { ...data };
     if ('force_dkim_authority' in postObj && typeof postObj.force_dkim_authority === 'boolean') {
-      postObj.force_dkim_authority = postObj.toString() === 'true' ? 'true' : 'false';
+      postObj.force_dkim_authority = postObj.force_dkim_authority.toString() === 'true' ? 'true' : 'false';
     }
 
     return this.request.postWithFD('/v3/domains', postObj)

@@ -30,7 +30,7 @@ export default class DomainClient {
     domainTags: IDomainTagsClient;
     constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient, domainTagsClient: DomainTagsClient);
     private _parseMessage;
-    private _parseDomainList;
+    private parseDomainList;
     private _parseDomain;
     private _parseTrackingSettings;
     private _parseTrackingUpdate;

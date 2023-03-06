@@ -1,4 +1,38 @@
-export type MailgunMessageData = {
+/**
+ * Ensures the object has least one key present and not undefined
+ *
+ * @see {@link https://stackoverflow.com/a/49725198}
+ */
+export type AtLeastOneKeyPresent<
+  Object_,
+  Keys extends keyof Object_ = keyof Object_
+> = Pick<Object_, Exclude<keyof Object_, Keys>> &
+  {
+    [K in Keys]-?: Required<Pick<Object_, K>> &
+      Partial<Pick<Object_, Exclude<Keys, K>>>;
+  }[Keys];
+
+export type MailgunMessageContent = AtLeastOneKeyPresent<{
+    /**
+     * Body of the message. (text version)
+     */
+    text?: string;
+
+    /**
+     * Body of the message. (HTML version)
+     */
+    html?: string;
+    /**
+     * Body of the message. (MIME version)
+     */
+    message?: string | Buffer | Blob;
+     /**
+     * Name of a template stored via [template API](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates). See [Templates](https://documentation.mailgun.com/en/latest/user_manual.html#templating) for more information
+     */
+    template?: string;
+}>;
+
+export type MailgunMessageData = MailgunMessageContent & {
     /**
      * Email address for `From` header
      */
@@ -14,27 +48,17 @@ export type MailgunMessageData = {
     /**
      * Same as `To` but for `carbon copy`
      */
-    cc?: string;
+    cc?: string | string[];
 
     /**
      * Same as `To` but for `blind carbon copy`
      */
-    bcc?: string;
+    bcc?: string | string[];
 
     /**
      * Message subject
      */
     subject?: string;
-
-    /**
-     * Body of the message. (text version)
-     */
-    text?: string;
-
-    /**
-     * Body of the message. (HTML version)
-     */
-    html?: string;
 
     /**
      * [AMP](https://developers.google.com/gmail/ampemail/) part of the message. Please follow google guidelines to compose and send AMP emails.
@@ -54,11 +78,6 @@ export type MailgunMessageData = {
      * You can post multiple `inline` values.
      */
     inline?: any;
-
-    /**
-     * Name of a template stored via [template API](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates). See [Templates](https://documentation.mailgun.com/en/latest/user_manual.html#templating) for more information
-     */
-    template?: string;
 
     /**
      * Use this parameter to send a message to specific version of a template

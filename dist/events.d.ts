@@ -1,11 +1,9 @@
-import { EventsList, EventsPage, EventsQuery, EventsResponse, ParsedPagesList } from './interfaces/Events';
+import NavigationThruPages from './common/NavigationThruPages';
+import { EventsList, EventsQuery, EventsResponse } from './interfaces/Events';
 import Request from './request';
-export default class EventClient {
+export default class EventClient extends NavigationThruPages<EventsList> {
     request: Request;
     constructor(request: Request);
-    _parsePageNumber(url: string): string;
-    _parsePage(id: string, url: string): EventsPage;
-    _parsePageLinks(response: EventsResponse): ParsedPagesList;
-    _parseEventList(response: EventsResponse): EventsList;
+    protected parseList(response: EventsResponse): EventsList;
     get(domain: string, query?: EventsQuery): Promise<EventsList>;
 }

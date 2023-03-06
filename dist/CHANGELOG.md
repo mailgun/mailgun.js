@@ -2,6 +2,172 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.2.1](https://github.com/mailgun/mailgun.js/compare/v8.2.0...v8.2.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* **#342:** Items Can be Missing When Paging ([95ca758](https://github.com/mailgun/mailgun.js/commits/95ca7587eba6067a278179f7f015366c97a4f757)), closes [#342](https://github.com/mailgun/mailgun.js/issues/342)
+
+
+### Other changes
+
+* Udpate build ([1db5554](https://github.com/mailgun/mailgun.js/commits/1db555450f63d21f415c164cfef43de377399133))
+* Update eslit rules for tests ([0d0a00d](https://github.com/mailgun/mailgun.js/commits/0d0a00db7a2dc342dfc3e615ce51a07c597cdbc1))
+* Update suppressions tests to decrease usage of any ([2d3754a](https://github.com/mailgun/mailgun.js/commits/2d3754a4b632a074d7275535ea708380bfa064ad))
+
+## [8.2.0](https://github.com/mailgun/mailgun.js/compare/v8.1.0...v8.2.0) (2023-03-02)
+
+
+### Features
+
+* Add type propert to errors ([71efcc5](https://github.com/mailgun/mailgun.js/commits/71efcc534ec69400b335091950dc59f372263486))
+
+
+### Other changes
+
+* Update d.ts file ([b25f2bf](https://github.com/mailgun/mailgun.js/commits/b25f2bf1bc996b30dba14181cddb31bd0b80b4d8))
+
+## [8.1.0](https://github.com/mailgun/mailgun.js/compare/v8.0.6...v8.1.0) (2023-02-23)
+
+
+### Features
+
+* Add support for FormData Node.js in v18 ([7176d24](https://github.com/mailgun/mailgun.js/commits/7176d2412465b81d098d6dc30a3f96c0d3749dfe))
+
+
+### Bug Fixes
+
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([28732c8](https://github.com/mailgun/mailgun.js/commits/28732c8f469c494c878c224d3ca76ab74adc267e))
+* Headers object processing ([f3f5523](https://github.com/mailgun/mailgun.js/commits/f3f5523e518f5d658a361255a34b2ae16c945a64))
+
+
+### Other changes
+
+* Add build and changelog steps ([433b41f](https://github.com/mailgun/mailgun.js/commits/433b41ffe7102f412d654a087e54fe620c349e4b))
+* Add indents to the readme file ([8934a2f](https://github.com/mailgun/mailgun.js/commits/8934a2fd92d4055b077ac031755f10c7fe775974))
+* Add linter to GA. Fix linter issues ([cc63d14](https://github.com/mailgun/mailgun.js/commits/cc63d14eed799a83d2903ebec27c2f91374a4316))
+* Add suppresions destroy method to documentation ([5c1deb8](https://github.com/mailgun/mailgun.js/commits/5c1deb8bcf75e525eae8842b20d45262ad2df705))
+
+### [8.0.6](https://github.com/mailgun/mailgun.js/compare/v8.0.5...v8.0.6) (2022-11-17)
+
+
+### Bug Fixes
+
+* Fix domains list method when items property is null ([4153941](https://github.com/mailgun/mailgun.js/commits/41539418a1b774a79bc05082d7df9409cc5bdf81))
+
+### [8.0.5](https://github.com/mailgun/mailgun.js/compare/v8.0.4...v8.0.5) (2022-11-17)
+
+
+### Bug Fixes
+
+* **deps:** bump loader-utils from 2.0.3 to 2.0.4 ([59f140c](https://github.com/mailgun/mailgun.js/commits/59f140cdbaaa9276c1b9cba6e97aea8a2863d223))
+
+
+### Other changes
+
+* Update standard-version types array to include pull-requests from dependabot ([ba165a8](https://github.com/mailgun/mailgun.js/commits/ba165a81391f8bd68d8f62109d715757b7708a97))
+
+### [8.0.4](https://github.com/mailgun/mailgun.js/compare/v8.0.3...v8.0.4) (2022-11-16)
+
+
+### Bug Fixes
+
+* **types:** Clarify DomainTemplatesQuery properties ([dcc633c](https://github.com/mailgun/mailgun.js/commits/dcc633c131e3e118518c27b0e4c9c34957d57bff))
+
+### [8.0.3](https://github.com/mailgun/mailgun.js/compare/v8.0.2...v8.0.3) (2022-11-16)
+
+### Bug Fixes
+* Bumps [loader-utils](https://github.com/webpack/loader-utils) from 2.0.2 to 2.0.3.
+
+
+### [8.0.2](https://github.com/mailgun/mailgun.js/compare/v8.0.1...v8.0.2) (2022-10-24)
+
+
+### Bug Fixes
+
+* Increase limit on body size ([8cd6fad](https://github.com/mailgun/mailgun.js/commits/8cd6fad1c497839a22a08a682690287a44954428))
+
+
+### Other changes
+
+* Update comment ([d2dbff5](https://github.com/mailgun/mailgun.js/commits/d2dbff516acfe70a0a8b6addff755a3fb9bc55c7))
+
+### [8.0.1](https://github.com/mailgun/mailgun.js/compare/v8.0.0...v8.0.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* Move webpack-merge to the dev dependencies ([68304c2](https://github.com/mailgun/mailgun.js/commits/68304c20f28ad38b8202ddf008c4a5f0786f1f54))
+
+
+### Other changes
+
+* Update build ([633e539](https://github.com/mailgun/mailgun.js/commits/633e5392b5bc2843fa08e3541a63f5b67179dcf6))
+* Update send-email example ([a5a7c5a](https://github.com/mailgun/mailgun.js/commits/a5a7c5aeaa560cf8e6d6d9936b9c0137e84ba7e9))
+
+## [8.0.0](https://github.com/mailgun/mailgun.js/compare/v7.0.4...v8.0.0) (2022-07-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* (MultipleValidationClient) Changed result interface for Multiple Validation.
+* (ListsClient) property with the name 'skip' was replaced by 'page' in the ListsQuery interface.
+* (ListsClient.list)'list' method changed the response interface to MailingListResult
+* Unify iterating thru pages in Domain Templates
+* (SuppressionClient) Some interfaces moved from Suppressions.d.ts to separate files
+(SuppressionClient.list) Property with name 'address' was replaced by iteratorPosition in the response in 'pages'
+* (EventClient.get) Number propery was replaced by iteratorPosition in pages property of response
+* (DomainTagsClient) Page property was added to DomainTagsQuery.
+* (DomainTagsClient) Status property was added to DomainTagsList.
+* (DomainTagsClient) Address property replaced by iteratorPosition in ParsedPage for list method.
+* (MailListsMembers) Updated listMembers response to be object with MailListMembersResult interface
+
+### Features
+
+* Add query to MultipleValidationClient ([2a7fd64](https://github.com/mailgun/mailgun.js/commits/2a7fd646af22675c75c81d144821f1d05ce87815))
+* Unify iterating thru pages in domain tags ([2ee7bd2](https://github.com/mailgun/mailgun.js/commits/2ee7bd2afee6d397ae41357c9cf66e4c88e7feff))
+* Unify iterating thru pages in Domain Templates ([2dcf453](https://github.com/mailgun/mailgun.js/commits/2dcf453ad9c53d2359620f890edd709f373e9aee))
+* Unify iterating thru pages in events ([41de3bb](https://github.com/mailgun/mailgun.js/commits/41de3bb084dc3c5b90abb81cdcfe7c365b6df097))
+* Unify iterating thru pages in Mailing lists ([40a6859](https://github.com/mailgun/mailgun.js/commits/40a685944057c308e7cb09c7f8d02b2b7177b87e))
+* Unify iterating thru pages in Multiple Validations ([db0d1f8](https://github.com/mailgun/mailgun.js/commits/db0d1f8629dda5849ff54a95607b7b388dde57d9))
+* Unify iterating thru pages in suppressions ([11962dc](https://github.com/mailgun/mailgun.js/commits/11962dcb7f8fe716af4f559ab97984154f3a30c6))
+
+
+### Bug Fixes
+
+* Fix assignment for force_dkim_authority ([ab442fe](https://github.com/mailgun/mailgun.js/commits/ab442fea88631e0e09c9399f14e1498782cc8373))
+
+
+### Breaking changes
+
+* Add pages navigation for mail list members ([a62ebbf](https://github.com/mailgun/mailgun.js/commits/a62ebbfc26768d56d78d1514836e97f8fdf1351f))
+
+
+### Other changes
+
+* Add release:test command ([6fd1e48](https://github.com/mailgun/mailgun.js/commits/6fd1e48f17bfb001f3fa337a85bbca9714025532))
+* Increase test coverage ([93014da](https://github.com/mailgun/mailgun.js/commits/93014dafc2ff91cc9b8ef52830472e9d354cb605))
+* Move duplicate logic to common class ([4603fd2](https://github.com/mailgun/mailgun.js/commits/4603fd2d35c0e94499aa0914b3c42168ece6d203))
+* Regenerate docs ([665068d](https://github.com/mailgun/mailgun.js/commits/665068d210b1b36b17cb4678dab178686db0c232))
+* Update commitlint rules ([a5a8897](https://github.com/mailgun/mailgun.js/commits/a5a8897932cb2499f62aabaf31f6f5c8650236a5))
+* Update readme ([3c32f1b](https://github.com/mailgun/mailgun.js/commits/3c32f1b726c0f19bcd5e009bd36b12c98e23cc8d))
+
+### [7.0.4](https://github.com/mailgun/mailgun.js/compare/v7.0.3...v7.0.4) (2022-07-07)
+
+
+### Bug Fixes
+
+* Message Data (one of text, html, template required) ([abd2862](https://github.com/mailgun/mailgun.js/commits/abd2862fcf36ca54d68dea14cb2b2658d33092ec))
+
+
+### Other changes
+
+* Add content to message data ([a878cc1](https://github.com/mailgun/mailgun.js/commits/a878cc1acb0b4ca441b100278ca0fd2b47d137e3))
+* Add propetry for mime messages ([f701cfb](https://github.com/mailgun/mailgun.js/commits/f701cfb591f08dbb882953bb2b77131fae089bad))
+* Fix build error ([c7fcb5e](https://github.com/mailgun/mailgun.js/commits/c7fcb5e05bd84fc6ef04589bde37846a11f9466d))
+* Fix tests ([b4791c4](https://github.com/mailgun/mailgun.js/commits/b4791c4e746a97aec359635272c2b29cb956ab6f))
+
 ### [7.0.3](https://github.com/mailgun/mailgun.js/compare/v7.0.2...v7.0.3) (2022-06-30)
 
 

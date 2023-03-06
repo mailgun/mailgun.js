@@ -1,5 +1,6 @@
 import Request from './request';
-import { CreateDomainTemplateVersionResult, DomainTemplate, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, IDomainTemplatesClient, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from './interfaces/DomainTemplates';
+import { CreateDomainTemplateVersionResult, DomainTemplate, DomainTemplateData, DomainTemplatesQuery, DomainTemplateUpdateData, DomainTemplateUpdateVersionData, DomainTemplateVersionData, IDomainTemplatesClient, ListDomainTemplatesAPIResponse, ListDomainTemplatesResult, ListDomainTemplateVersionsResult, MutateDomainTemplateVersionResult, NotificationResult, ShortTemplateVersion, TemplateQuery, TemplateVersion, UpdateOrDeleteDomainTemplateResult } from './interfaces/DomainTemplates';
+import NavigationThruPages from './common/NavigationThruPages';
 export declare class DomainTemplateItem implements DomainTemplate {
     name: string;
     description: string;
@@ -10,7 +11,7 @@ export declare class DomainTemplateItem implements DomainTemplate {
     versions?: ShortTemplateVersion[];
     constructor(domainTemplateFromAPI: DomainTemplate);
 }
-export default class DomainTemplatesClient implements IDomainTemplatesClient {
+export default class DomainTemplatesClient extends NavigationThruPages<ListDomainTemplatesResult> implements IDomainTemplatesClient {
     baseRoute: string;
     request: Request;
     constructor(request: Request);
@@ -19,7 +20,7 @@ export default class DomainTemplatesClient implements IDomainTemplatesClient {
     private parseMutationResponse;
     private parseNotificationResponse;
     private parseMutateTemplateVersionResponse;
-    private parseList;
+    protected parseList(response: ListDomainTemplatesAPIResponse): ListDomainTemplatesResult;
     private parseListTemplateVersions;
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>;
     get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem>;

@@ -64,7 +64,7 @@ export type DomainResponseData = {
 export interface DomainListResponseData {
     status: number;
     body: {
-        items: DomainsListItem[];
+        items: DomainsListItem[] | null;
         total_count: number;
     }
 }
