@@ -39,11 +39,11 @@ export declare type MailgunMessageData = MailgunMessageContent & {
     /**
      * Same as `To` but for `carbon copy`
      */
-    cc?: string;
+    cc?: string | string[];
     /**
      * Same as `To` but for `blind carbon copy`
      */
-    bcc?: string;
+    bcc?: string | string[];
     /**
      * Message subject
      */

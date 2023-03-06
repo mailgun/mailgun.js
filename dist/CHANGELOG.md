@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.2.1](https://github.com/mailgun/mailgun.js/compare/v8.2.0...v8.2.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* **#342:** Items Can be Missing When Paging ([95ca758](https://github.com/mailgun/mailgun.js/commits/95ca7587eba6067a278179f7f015366c97a4f757)), closes [#342](https://github.com/mailgun/mailgun.js/issues/342)
+
+
+### Other changes
+
+* Udpate build ([1db5554](https://github.com/mailgun/mailgun.js/commits/1db555450f63d21f415c164cfef43de377399133))
+* Update eslit rules for tests ([0d0a00d](https://github.com/mailgun/mailgun.js/commits/0d0a00db7a2dc342dfc3e615ce51a07c597cdbc1))
+* Update suppressions tests to decrease usage of any ([2d3754a](https://github.com/mailgun/mailgun.js/commits/2d3754a4b632a074d7275535ea708380bfa064ad))
+
 ## [8.2.0](https://github.com/mailgun/mailgun.js/compare/v8.1.0...v8.2.0) (2023-03-02)
 
 
