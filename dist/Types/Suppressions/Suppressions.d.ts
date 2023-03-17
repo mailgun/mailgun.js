@@ -1,11 +1,8 @@
-import Bounce from '../../Classes/Suppressions/Bounce';
-import Complaint from '../../Classes/Suppressions/Complaint';
-import Unsubscribe from '../../Classes/Suppressions/Unsubscribe';
-import WhiteList from '../../Classes/Suppressions/WhiteList';
 import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from '.';
+import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces';
 import { PagesList, ParsedPagesList } from '../Common';
 export type SuppressionList = {
-    items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
+    items: (IBounce | IComplaint | IUnsubscribe | IWhiteList)[];
     pages: ParsedPagesList;
     status: number;
 };

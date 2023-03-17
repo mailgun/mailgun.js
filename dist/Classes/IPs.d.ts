@@ -1,6 +1,7 @@
 import MgRequest from './common/Request';
 import { IpData, IpsListResponseBody } from '../Types/IPs';
-export default class IpsClient {
+import { IIPsClient } from '../Interfaces';
+export default class IpsClient implements IIPsClient {
     request: MgRequest;
     constructor(request: MgRequest);
     list(query: any): Promise<IpsListResponseBody>;

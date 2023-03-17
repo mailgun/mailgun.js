@@ -24,13 +24,13 @@ export default class DomainTemplatesClient extends NavigationThruPages<ListDomai
     protected parseList(response: ListDomainTemplatesAPIResponse): ListDomainTemplatesResult;
     private parseListTemplateVersions;
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>;
-    get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem>;
-    create(domain: string, data: DomainTemplateData): Promise<DomainTemplateItem>;
+    get(domain: string, templateName: string, query?: TemplateQuery): Promise<IDomainTemplate>;
+    create(domain: string, data: DomainTemplateData): Promise<IDomainTemplate>;
     update(domain: string, templateName: string, data: DomainTemplateUpdateData): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroy(domain: string, templateName: string): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroyAll(domain: string): Promise<NotificationResult>;
     createVersion(domain: string, templateName: string, data: DomainTemplateVersionData): Promise<CreateDomainTemplateVersionResult>;
-    getVersion(domain: string, templateName: string, tag: string): Promise<DomainTemplateItem>;
+    getVersion(domain: string, templateName: string, tag: string): Promise<IDomainTemplate>;
     updateVersion(domain: string, templateName: string, tag: string, data: DomainTemplateUpdateVersionData): Promise<MutateDomainTemplateVersionResult>;
     destroyVersion(domain: string, templateName: string, tag: string): Promise<MutateDomainTemplateVersionResult>;
     listVersions(domain: string, templateName: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplateVersionsResult>;

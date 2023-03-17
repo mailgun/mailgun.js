@@ -168,8 +168,8 @@ export default class DomainsClient implements IDomainsClient {
     return this.request.delete(urljoin('/v3/domains', domain, 'ips', ip));
   }
 
-  linkIpPool(domain: string, pool_id: string): Promise<APIResponse> {
-    return this.request.postWithFD(urljoin('/v3/domains', domain, 'ips'), { pool_id });
+  linkIpPool(domain: string, poolId: string): Promise<APIResponse> {
+    return this.request.postWithFD(urljoin('/v3/domains', domain, 'ips'), { pool_id: poolId });
   }
 
   unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse> {

@@ -1,4 +1,4 @@
 import { ValidationResult } from '../../Types/Validations';
-export interface IValidateClient {
+export interface IValidationClient {
     get(address: string): Promise<ValidationResult>;
 }

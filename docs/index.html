@@ -13,8 +13,8 @@
 <div class="tsd-page-title">
 <h2>mailgun.js</h2></div>
 <div class="tsd-panel tsd-typography">
-<a href="#mailgunjs-" id="mailgunjs-" style="color: inherit; text-decoration: none;">
-  <h1>Mailgun.js <a href="https://travis-ci.org/mailgun/mailgun-js"><img src="https://travis-ci.org/mailgun/mailgun-js.svg" alt="Build Status"></a></h1>
+<a href="#mailgunjs" id="mailgunjs" style="color: inherit; text-decoration: none;">
+  <h1>Mailgun.js</h1>
 </a>
 <p>A javascript sdk for Mailgun built with webpack, babel &amp; es6. This can be used in node or in the browser*.</p>
 <p>NOTE: If used in the browser, a proxy is required to communicate with the Mailgun api due to cors limitations. Also, do not publish your private api key in frontend code.</p>
@@ -40,6 +40,7 @@
 <a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
   <h1>Documentation</h1>
 </a>
+<p><a href="https://documentation.mailgun.com/en/latest/api_reference.html">Mailgun API Documentation</a>:</p>
 
 <a href="#install" id="install" style="color: inherit; text-decoration: none;">
   <h2>Install</h2>
@@ -280,7 +281,7 @@
 </code></pre>
 </li>
 <li><p>Node.js example of send file as inline image</p>
-<pre><code class="language-js"><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">fsPromises</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-1">&#39;fs&#39;</span><span class="hl-0">).</span><span class="hl-5">promises</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">path</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-1">&#39;path&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">filepath</span><span class="hl-0"> = </span><span class="hl-5">path</span><span class="hl-0">.</span><span class="hl-4">resolve</span><span class="hl-0">(</span><span class="hl-5">__dirname</span><span class="hl-0">, </span><span class="hl-1">&#39;../test.jpg&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">let</span><span class="hl-0"> </span><span class="hl-5">messageParams</span><span class="hl-0"> = {</span><br/><span class="hl-0">      </span><span class="hl-5">from:</span><span class="hl-0"> </span><span class="hl-1">&quot;Excited User &lt;mailgun@sandbox-123.mailgun.org&gt;&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-5">to:</span><span class="hl-0"> [</span><span class="hl-1">&quot;test@example.com&quot;</span><span class="hl-0">],</span><br/><span class="hl-0">      </span><span class="hl-5">subject:</span><span class="hl-0"> </span><span class="hl-1">&quot;Test subject&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-5">html:</span><span class="hl-0"> </span><span class="hl-1">&#39;&lt;div&gt;&lt;img alt=&quot;image&quot; id=&quot;1&quot; src=&quot;cid:test.jpg&quot;/&gt;&lt;/div&gt; Some extra text&#39;</span><br/><span class="hl-0">  }</span><br/><br/><span class="hl-0">  </span><span class="hl-5">fsPromises</span><span class="hl-0">.</span><span class="hl-4">readFile</span><span class="hl-0">(</span><span class="hl-5">filepath</span><span class="hl-0">)</span><br/><span class="hl-0">  .</span><span class="hl-4">then</span><span class="hl-0">(</span><span class="hl-5">data</span><span class="hl-0"> </span><span class="hl-2">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">file</span><span class="hl-0"> = {</span><br/><span class="hl-0">        </span><span class="hl-5">filename:</span><span class="hl-0"> </span><span class="hl-1">&#39;test.jpg&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-5">data</span><br/><span class="hl-0">    }</span><br/><br/><span class="hl-0">    </span><span class="hl-5">messageParams</span><span class="hl-0">.</span><span class="hl-5">inline</span><span class="hl-0"> = </span><span class="hl-5">file</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-7">return</span><span class="hl-0"> </span><span class="hl-5">mg</span><span class="hl-0">.</span><span class="hl-5">messages</span><span class="hl-0">.</span><span class="hl-4">create</span><span class="hl-0">(</span><span class="hl-1">&#39;sandbox-123.mailgun.org&#39;</span><span class="hl-0">, </span><span class="hl-5">messageParams</span><span class="hl-0">);</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  .</span><span class="hl-4">then</span><span class="hl-0">(</span><span class="hl-5">response</span><span class="hl-0"> </span><span class="hl-2">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-5">console</span><span class="hl-0">.</span><span class="hl-4">log</span><span class="hl-0">(</span><span class="hl-5">response</span><span class="hl-0">);</span><br/><span class="hl-0">  })</span>
+<pre><code class="language-js"><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">fsPromises</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-1">&#39;fs&#39;</span><span class="hl-0">).</span><span class="hl-5">promises</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">path</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-1">&#39;path&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">filepath</span><span class="hl-0"> = </span><span class="hl-5">path</span><span class="hl-0">.</span><span class="hl-4">resolve</span><span class="hl-0">(</span><span class="hl-5">__dirname</span><span class="hl-0">, </span><span class="hl-1">&#39;../test.jpg&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">let</span><span class="hl-0"> </span><span class="hl-5">messageParams</span><span class="hl-0"> = {</span><br/><span class="hl-0">      </span><span class="hl-5">from:</span><span class="hl-0"> </span><span class="hl-1">&quot;Excited User &lt;mailgun@sandbox-123.mailgun.org&gt;&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-5">to:</span><span class="hl-0"> [</span><span class="hl-1">&quot;test@example.com&quot;</span><span class="hl-0">],</span><br/><span class="hl-0">      </span><span class="hl-5">subject:</span><span class="hl-0"> </span><span class="hl-1">&quot;Test subject&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-5">html:</span><span class="hl-0"> </span><span class="hl-1">&#39;&lt;div&gt;&lt;img alt=&quot;image&quot; id=&quot;1&quot; src=&quot;cid:test.jpg&quot;/&gt;&lt;/div&gt; Some extra text&#39;</span><br/><span class="hl-0">  }</span><br/><br/><span class="hl-0">  </span><span class="hl-5">fsPromises</span><span class="hl-0">.</span><span class="hl-4">readFile</span><span class="hl-0">(</span><span class="hl-5">filepath</span><span class="hl-0">)</span><br/><span class="hl-0">  .</span><span class="hl-4">then</span><span class="hl-0">(</span><span class="hl-5">data</span><span class="hl-0"> </span><span class="hl-2">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-2">const</span><span class="hl-0"> </span><span class="hl-3">file</span><span class="hl-0"> = {</span><br/><span class="hl-0">        </span><span class="hl-5">filename:</span><span class="hl-0"> </span><span class="hl-1">&#39;test.jpg&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-5">data</span><br/><span class="hl-0">    }</span><br/><br/><span class="hl-0">    </span><span class="hl-5">messageParams</span><span class="hl-0">.</span><span class="hl-5">inline</span><span class="hl-0"> = </span><span class="hl-5">file</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-7">return</span><span class="hl-0"> </span><span class="hl-5">mg</span><span class="hl-0">.</span><span class="hl-5">messages</span><span class="hl-0">.</span><span class="hl-4">create</span><span class="hl-0">(</span><span class="hl-1">&#39;sandbox-123.mailgun.org&#39;</span><span class="hl-0">, </span><span class="hl-5">messageParams</span><span class="hl-0">);</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  .</span><span class="hl-4">then</span><span class="hl-0">(</span><span class="hl-5">response</span><span class="hl-0"> </span><span class="hl-2">=&gt;</span><span class="hl-0"> </span><span class="hl-5">console</span><span class="hl-0">.</span><span class="hl-4">log</span><span class="hl-0">(</span><span class="hl-5">response</span><span class="hl-0">))</span>
 </code></pre>
 </li>
 <li><p>Browser example of send file</p>
@@ -306,7 +307,9 @@ Usually can get it from the onChange event of input tag with type file.</p>
 </a>
 <p>  Mailgun’s templates uses a fork of the very popular template engine <a href="https://handlebarsjs.com/">handlebars</a>.</p>
 <p>  To provide values for a substitution you need to use &#39;h:X-Mailgun-Variables&#39; property in the message description.</p>
-<p>  Make sure that this property is a JSON string like {&quot;title&quot;:&quot;A title&quot;, &quot;body&quot;:&quot;The body&quot;}.</p>
+<p>  Make sure that this property is a JSON string like:</p>
+<pre><code class="language-js"><span class="hl-3">JSON</span><span class="hl-0">.</span><span class="hl-4">stringify</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;title&quot;</span><span class="hl-5">:</span><span class="hl-0"> </span><span class="hl-1">&quot;A title&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;body&quot;</span><span class="hl-5">:</span><span class="hl-0"> </span><span class="hl-1">&quot;The body&quot;</span><br/><span class="hl-0">})</span>
+</code></pre>
 <p>  You can find few examples of how to use templates below.</p>
 <ul>
 <li><p>Providing values for <strong>title</strong> and <strong>slug</strong> variables to render in template</p>
@@ -1371,98 +1374,26 @@ This is needed for correct exporting d.ts files.</p>
 <ul>
 <li class="current selected"><a href="modules.html">mailgun.js</a>
 <ul>
-<li class="tsd-kind-module"><a href="modules/Classes_Domains_domains.html">Classes/<wbr/>Domains/domains</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Domains_domainsCredentials.html">Classes/<wbr/>Domains/domains<wbr/>Credentials</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Domains_domainsTags.html">Classes/<wbr/>Domains/domains<wbr/>Tags</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Domains_domainsTemplates.html">Classes/<wbr/>Domains/domains<wbr/>Templates</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Events.html">Classes/<wbr/>Events</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_IPPools.html">Classes/IPPools</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_IPs.html">Classes/IPs</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_MailgunClient.html">Classes/<wbr/>Mailgun<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_MailingLists_mailListMembers.html">Classes/<wbr/>Mailing<wbr/>Lists/mail<wbr/>List<wbr/>Members</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_MailingLists_mailingLists.html">Classes/<wbr/>Mailing<wbr/>Lists/mailing<wbr/>Lists</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Messages.html">Classes/<wbr/>Messages</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Routes.html">Classes/<wbr/>Routes</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Stats_StatsClient.html">Classes/<wbr/>Stats/<wbr/>Stats<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Stats_StatsContainer.html">Classes/<wbr/>Stats/<wbr/>Stats<wbr/>Container</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_Bounce.html">Classes/<wbr/>Suppressions/<wbr/>Bounce</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_Complaint.html">Classes/<wbr/>Suppressions/<wbr/>Complaint</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_Suppression.html">Classes/<wbr/>Suppressions/<wbr/>Suppression</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_SuppressionsClient.html">Classes/<wbr/>Suppressions/<wbr/>Suppressions<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_Unsubscribe.html">Classes/<wbr/>Suppressions/<wbr/>Unsubscribe</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Suppressions_WhiteList.html">Classes/<wbr/>Suppressions/<wbr/>White<wbr/>List</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Validations_multipleValidation.html">Classes/<wbr/>Validations/multiple<wbr/>Validation</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Validations_validate.html">Classes/<wbr/>Validations/validate</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_Webhooks.html">Classes/<wbr/>Webhooks</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_common_Error.html">Classes/common/<wbr/>Error</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_common_FormDataBuilder.html">Classes/common/<wbr/>Form<wbr/>Data<wbr/>Builder</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_common_NavigationThruPages.html">Classes/common/<wbr/>Navigation<wbr/>Thru<wbr/>Pages</a></li>
-<li class="tsd-kind-module"><a href="modules/Classes_common_Request.html">Classes/common/<wbr/>Request</a></li>
-<li class="tsd-kind-module"><a href="modules/Enums.html">Enums</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces.html">Interfaces</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Common.html">Interfaces/<wbr/>Common</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Common_Logger.html">Interfaces/<wbr/>Common/<wbr/>Logger</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Domains.html">Interfaces/<wbr/>Domains</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Domains_DomainCredentials.html">Interfaces/<wbr/>Domains/<wbr/>Domain<wbr/>Credentials</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Domains_DomainTags.html">Interfaces/<wbr/>Domains/<wbr/>Domain<wbr/>Tags</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Domains_DomainTemplates.html">Interfaces/<wbr/>Domains/<wbr/>Domain<wbr/>Templates</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_MailgunClient.html">Interfaces/<wbr/>Mailgun<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_MailgunClient_IMailgunClient.html">Interfaces/<wbr/>Mailgun<wbr/>Client/IMailgun<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_MailingLists.html">Interfaces/<wbr/>Mailing<wbr/>Lists</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_MailingLists_MailingListMembers.html">Interfaces/<wbr/>Mailing<wbr/>Lists/<wbr/>Mailing<wbr/>List<wbr/>Members</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Stats.html">Interfaces/<wbr/>Stats</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Stats_StatsClient.html">Interfaces/<wbr/>Stats/<wbr/>Stats<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Stats_StatsContainer.html">Interfaces/<wbr/>Stats/<wbr/>Stats<wbr/>Container</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Suppressions.html">Interfaces/<wbr/>Suppressions</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Suppressions_Bounce.html">Interfaces/<wbr/>Suppressions/<wbr/>Bounce</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Suppressions_Complaint.html">Interfaces/<wbr/>Suppressions/<wbr/>Complaint</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Suppressions_Unsubscribe.html">Interfaces/<wbr/>Suppressions/<wbr/>Unsubscribe</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Suppressions_WhiteList.html">Interfaces/<wbr/>Suppressions/<wbr/>White<wbr/>List</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Validations.html">Interfaces/<wbr/>Validations</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Validations_MultipleValidation.html">Interfaces/<wbr/>Validations/<wbr/>Multiple<wbr/>Validation</a></li>
-<li class="tsd-kind-module"><a href="modules/Interfaces_Validations_Validation.html">Interfaces/<wbr/>Validations/<wbr/>Validation</a></li>
-<li class="tsd-kind-module"><a href="modules/Types.html">Types</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common.html">Types/<wbr/>Common</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common_ApiResponse.html">Types/<wbr/>Common/<wbr/>Api<wbr/>Response</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common_Error.html">Types/<wbr/>Common/<wbr/>Error</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common_FormData.html">Types/<wbr/>Common/<wbr/>Form<wbr/>Data</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common_NavigationThruPages.html">Types/<wbr/>Common/<wbr/>Navigation<wbr/>Thru<wbr/>Pages</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Common_RequestOptions.html">Types/<wbr/>Common/<wbr/>Request<wbr/>Options</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains.html">Types/<wbr/>Domains</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains_DomainCredentials.html">Types/<wbr/>Domains/<wbr/>Domain<wbr/>Credentials</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains_DomainTags.html">Types/<wbr/>Domains/<wbr/>Domain<wbr/>Tags</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains_DomainTemplates.html">Types/<wbr/>Domains/<wbr/>Domain<wbr/>Templates</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains_DomainTracking.html">Types/<wbr/>Domains/<wbr/>Domain<wbr/>Tracking</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Domains_Domains.html">Types/<wbr/>Domains/<wbr/>Domains</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Events.html">Types/<wbr/>Events</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Events_Events.html">Types/<wbr/>Events/<wbr/>Events</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_IPPools.html">Types/IPPools</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_IPPools_IpPools.html">Types/IPPools/<wbr/>Ip<wbr/>Pools</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_IPs.html">Types/IPs</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_IPs_IPs.html">Types/IPs/IPs</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_MailgunClient.html">Types/<wbr/>Mailgun<wbr/>Client</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_MailgunClient_MailgunClientOptions.html">Types/<wbr/>Mailgun<wbr/>Client/<wbr/>Mailgun<wbr/>Client<wbr/>Options</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_MailingLists.html">Types/<wbr/>Mailing<wbr/>Lists</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_MailingLists_MailingListMembers.html">Types/<wbr/>Mailing<wbr/>Lists/<wbr/>Mailing<wbr/>List<wbr/>Members</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_MailingLists_MailingLists.html">Types/<wbr/>Mailing<wbr/>Lists/<wbr/>Mailing<wbr/>Lists</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Messages.html">Types/<wbr/>Messages</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Messages_Messages.html">Types/<wbr/>Messages/<wbr/>Messages</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Routes.html">Types/<wbr/>Routes</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Routes_Routes.html">Types/<wbr/>Routes/<wbr/>Routes</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Stats.html">Types/<wbr/>Stats</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Stats_Stats.html">Types/<wbr/>Stats/<wbr/>Stats</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions.html">Types/<wbr/>Suppressions</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions_Bounce.html">Types/<wbr/>Suppressions/<wbr/>Bounce</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions_Complaint.html">Types/<wbr/>Suppressions/<wbr/>Complaint</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions_Suppressions.html">Types/<wbr/>Suppressions/<wbr/>Suppressions</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions_Unsubscribe.html">Types/<wbr/>Suppressions/<wbr/>Unsubscribe</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Suppressions_WhiteList.html">Types/<wbr/>Suppressions/<wbr/>White<wbr/>List</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Validations.html">Types/<wbr/>Validations</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Validations_MultipleValidation.html">Types/<wbr/>Validations/<wbr/>Multiple<wbr/>Validation</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Validations_Validation.html">Types/<wbr/>Validations/<wbr/>Validation</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Webhooks.html">Types/<wbr/>Webhooks</a></li>
-<li class="tsd-kind-module"><a href="modules/Types_Webhooks_Webhooks.html">Types/<wbr/>Webhooks/<wbr/>Webhooks</a></li>
-<li class="tsd-kind-module"><a href="modules/index.html">index</a></li></ul></li></ul></div></details></nav></div></div>
+<li class="tsd-kind-namespace"><a href="modules/Enums.html">Enums</a></li>
+<li class="tsd-kind-namespace"><a href="modules/Interfaces.html">Interfaces</a></li>
+<li class="tsd-kind-namespace"><a href="modules/Types.html">Types</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Common.html">Common</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Domains.html">Domains</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Events.html">Events</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.IPPools.html">IPPools</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.IPs.html">IPs</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.MailgunClient.html">Mailgun<wbr/>Client</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.MailingLists.html">Mailing<wbr/>Lists</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Messages.html">Messages</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Routes.html">Routes</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Stats.html">Stats</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Suppressions.html">Suppressions</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Validations.html">Validations</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/Types.Webhooks.html">Webhooks</a></li></ul></li></ul></li></ul></div></details></nav>
+<nav class="tsd-navigation secondary menu-sticky">
+<ul>
+<li class="tsd-kind-class"><a href="classes/default.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg>default</a></li></ul></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div><script src="assets/main.js"></script></body></html>

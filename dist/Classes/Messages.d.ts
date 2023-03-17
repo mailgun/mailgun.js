@@ -1,6 +1,7 @@
 import { MailgunMessageData, MessagesSendAPIResponse, MessagesSendResult } from '../Types/Messages';
 import Request from './common/Request';
-export default class MessagesClient {
+import { IMessagesClient } from '../Interfaces';
+export default class MessagesClient implements IMessagesClient {
     request: Request;
     constructor(request: Request);
     private prepareBooleanValues;

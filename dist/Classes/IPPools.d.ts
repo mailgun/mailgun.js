@@ -1,6 +1,7 @@
 import Request from './common/Request';
 import { IpPoolCreateData, IpPoolCreateResult, IpPoolDeleteData, IpPoolListResult, IpPoolMessageResult, IpPoolUpdateData } from '../Types/IPPools';
-export default class IpPoolsClient {
+import { IIPPoolsClient } from '../Interfaces';
+export default class IpPoolsClient implements IIPPoolsClient {
     request: Request;
     constructor(request: Request);
     list(): Promise<IpPoolListResult>;

@@ -1,4 +1,3 @@
-import { DomainTagStatistic } from '../../Classes/Domains/domainsTags';
 import { Resolution } from '../../Enums';
 import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsList, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagStatisticItem } from '../../Types/Domains';
 export interface IDomainTagStatisticResult {
@@ -14,7 +13,7 @@ export interface IDomainTagsClient {
     get(domain: string, tag: string): Promise<DomainTagsItem>;
     update(domain: string, tag: string, description: string): Promise<DomainTagsMessageRes>;
     destroy(domain: string, tag: string): Promise<DomainTagsMessageRes>;
-    statistic(domain: string, tag: string, query: DomainTagsStatisticQuery): Promise<DomainTagStatistic>;
+    statistic(domain: string, tag: string, query: DomainTagsStatisticQuery): Promise<IDomainTagStatisticResult>;
     countries(domain: string, tag: string): Promise<DomainTagCountriesAggregation>;
     providers(domain: string, tag: string): Promise<DomainTagProvidersAggregation>;
     devices(domain: string, tag: string): Promise<DomainTagDevicesAggregation>;

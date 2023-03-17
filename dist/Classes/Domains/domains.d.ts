@@ -1,4 +1,4 @@
-import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials } from '../../Interfaces/Domains';
+import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials, IDomainClient } from '../../Interfaces/Domains';
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import Request from '../common/Request';
 import DomainCredentialsClient from './domainsCredentials';
@@ -20,7 +20,7 @@ export declare class Domain {
     sending_dns_records: DNSRecord[] | null;
     constructor(data: DomainShortData, receiving?: DNSRecord[] | null, sending?: DNSRecord[] | null);
 }
-export default class DomainClient {
+export default class DomainClient implements IDomainClient {
     request: Request;
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;

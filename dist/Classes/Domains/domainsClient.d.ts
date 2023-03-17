@@ -1,0 +1,36 @@
+import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials, IDomainsClient } from '../../Interfaces/Domains';
+import { APIResponse } from '../../Types/Common/ApiResponse';
+import Request from '../common/Request';
+import DomainCredentialsClient from './domainsCredentials';
+import DomainTemplatesClient from './domainsTemplates';
+import DomainTagsClient from './domainsTags';
+import { MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain } from '../../Types/Domains';
+export default class DomainsClient implements IDomainsClient {
+    request: Request;
+    domainCredentials: IDomainCredentials;
+    domainTemplates: IDomainTemplatesClient;
+    domainTags: IDomainTagsClient;
+    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient, domainTagsClient: DomainTagsClient);
+    private _parseMessage;
+    private parseDomainList;
+    private _parseDomain;
+    private _parseTrackingSettings;
+    private _parseTrackingUpdate;
+    list(query?: DomainsQuery): Promise<TDomain[]>;
+    get(domain: string): Promise<TDomain>;
+    create(data: DomainInfo): Promise<TDomain>;
+    verify(domain: string): Promise<TDomain>;
+    destroy(domain: string): Promise<MessageResponse>;
+    getConnection(domain: string): Promise<ConnectionSettings>;
+    updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings>;
+    getTracking(domain: string): Promise<DomainTrackingData>;
+    updateTracking(domain: string, type: string, data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo): Promise<UpdatedOpenTracking>;
+    getIps(domain: string): Promise<string[]>;
+    assignIp(domain: string, ip: string): Promise<APIResponse>;
+    deleteIp(domain: string, ip: string): Promise<APIResponse>;
+    linkIpPool(domain: string, poolId: string): Promise<APIResponse>;
+    unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse>;
+    updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority>;
+    updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResponse>;
+    updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse>;
+}
