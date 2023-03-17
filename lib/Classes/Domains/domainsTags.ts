@@ -87,7 +87,7 @@ export default class DomainTagsClient
 
   private _parseTagStatistic(
     response: DomainTagStatAPIResponse
-  ): DomainTagStatistic {
+  ): IDomainTagStatisticResult {
     return new DomainTagStatistic(response);
   }
 

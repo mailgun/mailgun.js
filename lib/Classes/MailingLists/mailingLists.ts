@@ -13,9 +13,11 @@ import {
 } from '../../Types/MailingLists';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers';
 import NavigationThruPages from '../common/NavigationThruPages';
+import { IMailingListsClient } from '../../Interfaces';
 
-export default class ListsClient
-  extends NavigationThruPages<MailingListResult> {
+export default class MailingListsClient
+  extends NavigationThruPages<MailingListResult>
+  implements IMailingListsClient {
   baseRoute: string;
   request: Request;
   members: IMailListsMembers;

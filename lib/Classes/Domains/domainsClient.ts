@@ -1,9 +1,9 @@
-/* eslint-disable camelcase */
 import urljoin from 'url-join';
 import {
   IDomainTemplatesClient,
   IDomainTagsClient,
-  IDomainCredentials
+  IDomainCredentials,
+  IDomainsClient
 } from '../../Interfaces/Domains';
 
 import { APIResponse } from '../../Types/Common/ApiResponse';
@@ -16,8 +16,6 @@ import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
 import {
-  DNSRecord,
-  DomainShortData,
   DestroyedDomainResponse,
   MessageResponse,
   DomainListResponseData,
@@ -42,41 +40,12 @@ import {
   DKIMSelectorInfo,
   UpdatedDKIMSelectorResponse,
   WebPrefixInfo,
-  UpdatedWebPrefixResponse
+  UpdatedWebPrefixResponse,
+  TDomain,
 } from '../../Types/Domains';
+import Domain from './domain';
 
-export class Domain {
-  name: string;
-  require_tls: boolean;
-  skip_verification: boolean;
-  state: string;
-  wildcard: boolean;
-  spam_action: string;
-  created_at: string;
-  smtp_password: string;
-  smtp_login: string;
-  type: string;
-  receiving_dns_records: DNSRecord[] | null;
-  sending_dns_records: DNSRecord[] | null;
-
-  constructor(data: DomainShortData, receiving?: DNSRecord[] | null, sending?: DNSRecord[] | null) {
-    this.name = data.name;
-    this.require_tls = data.require_tls;
-    this.skip_verification = data.skip_verification;
-    this.state = data.state;
-    this.wildcard = data.wildcard;
-    this.spam_action = data.spam_action;
-    this.created_at = data.created_at;
-    this.smtp_password = data.smtp_password;
-    this.smtp_login = data.smtp_login;
-    this.type = data.type;
-
-    this.receiving_dns_records = receiving || null;
-    this.sending_dns_records = sending || null;
-  }
-}
-
-export default class DomainClient {
+export default class DomainsClient implements IDomainsClient {
   request: Request;
   public domainCredentials: IDomainCredentials;
   public domainTemplates: IDomainTemplatesClient;
@@ -98,7 +67,7 @@ export default class DomainClient {
     return response.body;
   }
 
-  private parseDomainList(response: DomainListResponseData): Domain[] {
+  private parseDomainList(response: DomainListResponseData): TDomain[] {
     if (response.body && response.body.items) {
       return response.body.items.map(function (item) {
         return new Domain(item);
@@ -107,7 +76,7 @@ export default class DomainClient {
     return [];
   }
 
-  private _parseDomain(response: DomainResponseData): Domain {
+  private _parseDomain(response: DomainResponseData): TDomain {
     return new Domain(
       response.body.domain,
       response.body.receiving_dns_records,
@@ -123,17 +92,17 @@ export default class DomainClient {
     return response.body;
   }
 
-  list(query?: DomainsQuery): Promise<Domain[]> {
+  list(query?: DomainsQuery): Promise<TDomain[]> {
     return this.request.get('/v3/domains', query)
       .then((res : APIResponse) => this.parseDomainList(res as DomainListResponseData));
   }
 
-  get(domain: string) : Promise<Domain> {
+  get(domain: string) : Promise<TDomain> {
     return this.request.get(`/v3/domains/${domain}`)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  create(data: DomainInfo) : Promise<Domain> {
+  create(data: DomainInfo) : Promise<TDomain> {
     const postObj = { ...data };
     if ('force_dkim_authority' in postObj && typeof postObj.force_dkim_authority === 'boolean') {
       postObj.force_dkim_authority = postObj.force_dkim_authority.toString() === 'true' ? 'true' : 'false';
@@ -143,7 +112,7 @@ export default class DomainClient {
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  verify(domain: string): Promise<Domain> {
+  verify(domain: string): Promise<TDomain> {
     return this.request.put(`/v3/domains/${domain}/verify`)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }

@@ -2,7 +2,7 @@
 import Request from './common/Request';
 import { MailgunClientOptions } from '../Types/MailgunClient';
 
-import DomainClient from './Domains/domains';
+import DomainsClient from './Domains/domainsClient';
 import EventClient from './Events';
 import StatsClient from './Stats/StatsClient';
 import SuppressionClient from './Suppressions/SuppressionsClient';
@@ -12,29 +12,43 @@ import RoutesClient from './Routes';
 import ValidateClient from './Validations/validate';
 import IpsClient from './IPs';
 import IpPoolsClient from './IPPools';
-import ListsClient from './MailingLists/mailingLists';
+import MailingListsClient from './MailingLists/mailingLists';
 import MailListsMembers from './MailingLists/mailListMembers';
 import { InputFormData, RequestOptions } from '../Types/Common';
 import DomainCredentialsClient from './Domains/domainsCredentials';
 import MultipleValidationClient from './Validations/multipleValidation';
 import DomainTemplatesClient from './Domains/domainsTemplates';
 import DomainTagsClient from './Domains/domainsTags';
-import { IMailgunClient } from '../Interfaces/MailgunClient';
+
+import {
+  IDomainsClient,
+  IWebHooksClient,
+  IMailgunClient,
+  IMailingListsClient,
+  IEventClient,
+  IStatsClient,
+  ISuppressionClient,
+  IMessagesClient,
+  IRoutesClient,
+  IValidationClient,
+  IIPsClient,
+  IIPPoolsClient
+} from '../Interfaces';
 
 export default class MailgunClient implements IMailgunClient {
   private request;
 
-  public domains;
-  public webhooks;
-  public events;
-  public stats;
-  public suppressions;
-  public messages;
-  public routes;
-  public validate;
-  public ips;
-  public ip_pools;
-  public lists;
+  public domains: IDomainsClient;
+  public webhooks: IWebHooksClient;
+  public events: IEventClient;
+  public stats: IStatsClient;
+  public suppressions: ISuppressionClient;
+  public messages: IMessagesClient;
+  public routes: IRoutesClient;
+  public validate: IValidationClient;
+  public ips: IIPsClient;
+  public ip_pools: IIPPoolsClient;
+  public lists: IMailingListsClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -59,7 +73,7 @@ export default class MailgunClient implements IMailgunClient {
     const domainTagsClient = new DomainTagsClient(this.request);
     const multipleValidationClient = new MultipleValidationClient(this.request);
 
-    this.domains = new DomainClient(
+    this.domains = new DomainsClient(
       this.request,
       domainCredentialsClient,
       domainTemplatesClient,
@@ -73,7 +87,7 @@ export default class MailgunClient implements IMailgunClient {
     this.routes = new RoutesClient(this.request);
     this.ips = new IpsClient(this.request);
     this.ip_pools = new IpPoolsClient(this.request);
-    this.lists = new ListsClient(this.request, mailListsMembers);
+    this.lists = new MailingListsClient(this.request, mailListsMembers);
     this.validate = new ValidateClient(this.request, multipleValidationClient);
   }
 }

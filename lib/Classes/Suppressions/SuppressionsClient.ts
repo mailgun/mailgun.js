@@ -14,6 +14,7 @@ import Suppression from './Suppression';
 import {
   IBounce,
   IComplaint,
+  ISuppressionClient,
   IUnsubscribe,
   IWhiteList
 } from '../../Interfaces/Suppressions';
@@ -35,7 +36,9 @@ const createOptions = {
   headers: { 'Content-Type': 'application/json' }
 };
 
-export default class SuppressionClient extends NavigationThruPages<SuppressionList> {
+export default class SuppressionClient
+  extends NavigationThruPages<SuppressionList>
+  implements ISuppressionClient {
   request: Request;
   models: Map<string, any>;
 
@@ -124,7 +127,7 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
     domain: string,
     type: string,
     address: string
-  ): Promise<Bounce | Complaint | Unsubscribe | WhiteList> {
+  ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
     this.checkType(type);
 
     const model = this.models.get(type);

@@ -73,7 +73,7 @@ export default class DomainTemplatesClient
     this.baseRoute = '/v3/';
   }
 
-  private parseCreationResponse(data: CreateDomainTemplateAPIResponse): DomainTemplateItem {
+  private parseCreationResponse(data: CreateDomainTemplateAPIResponse): IDomainTemplate {
     return new DomainTemplateItem(data.body.template);
   }
 
@@ -148,7 +148,7 @@ export default class DomainTemplatesClient
     return this.requestListWithPages(urljoin(this.baseRoute, domain, '/templates'), query);
   }
 
-  get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem> {
+  get(domain: string, templateName: string, query?: TemplateQuery): Promise<IDomainTemplate> {
     return this.request.get(urljoin(this.baseRoute, domain, '/templates/', templateName), query)
       .then(
         (res: GetDomainTemplateAPIResponse) => new DomainTemplateItem(res.body.template)
@@ -158,7 +158,7 @@ export default class DomainTemplatesClient
   create(
     domain: string,
     data: DomainTemplateData
-  ): Promise<DomainTemplateItem> {
+  ): Promise<IDomainTemplate> {
     return this.request.postWithFD(urljoin(this.baseRoute, domain, '/templates'), data)
       .then((res: CreateDomainTemplateAPIResponse) => this.parseCreationResponse(res));
   }
@@ -193,7 +193,7 @@ export default class DomainTemplatesClient
       );
   }
 
-  getVersion(domain: string, templateName: string, tag: string): Promise<DomainTemplateItem> {
+  getVersion(domain: string, templateName: string, tag: string): Promise<IDomainTemplate> {
     return this.request.get(urljoin(this.baseRoute, domain, '/templates/', templateName, '/versions/', tag))
       .then(
         (res: GetDomainTemplateAPIResponse) => new DomainTemplateItem(res.body.template)

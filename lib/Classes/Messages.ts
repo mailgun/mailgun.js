@@ -6,8 +6,9 @@ import {
   MessagesSendResult
 } from '../Types/Messages';
 import Request from './common/Request';
+import { IMessagesClient } from '../Interfaces';
 
-export default class MessagesClient {
+export default class MessagesClient implements IMessagesClient {
   request: Request;
 
   constructor(request: Request) {

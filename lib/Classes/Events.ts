@@ -7,9 +7,11 @@ import {
 } from '../Types/Events';
 
 import Request from './common/Request';
+import { IEventClient } from '../Interfaces';
 
 export default class EventClient
-  extends NavigationThruPages<EventsList> {
+  extends NavigationThruPages<EventsList>
+  implements IEventClient {
   request: Request;
 
   constructor(request: Request) {

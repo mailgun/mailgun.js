@@ -28,8 +28,8 @@ export interface IDomainTemplate {
 
 export interface IDomainTemplatesClient {
     list(domain: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplatesResult>
-    get(domain: string, templateName: string, query?: TemplateQuery): Promise<DomainTemplateItem>
-    create(domain: string, data: DomainTemplateData): Promise<DomainTemplateItem>
+    get(domain: string, templateName: string, query?: TemplateQuery): Promise<IDomainTemplate>
+    create(domain: string, data: DomainTemplateData): Promise<IDomainTemplate>
     update(
         domain: string,
         templateName: string,
@@ -42,7 +42,7 @@ export interface IDomainTemplatesClient {
         templateName: string,
         data: DomainTemplateVersionData
     ) : Promise<CreateDomainTemplateVersionResult>
-    getVersion(domain: string, templateName: string, tag: string): Promise<DomainTemplateItem>
+    getVersion(domain: string, templateName: string, tag: string): Promise<IDomainTemplate>
     updateVersion(
         domain: string,
         templateName: string,

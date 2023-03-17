@@ -28,3 +28,8 @@ export type WebhookValidationResponse = {
     code: number;
     message: string;
 }
+
+export type WebhookResult = {
+  id: string;
+  url: string | undefined;
+}

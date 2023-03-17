@@ -12,8 +12,9 @@ import {
   IpPoolMessageResult,
   IpPoolUpdateData,
 } from '../Types/IPPools';
+import { IIPPoolsClient } from '../Interfaces';
 
-export default class IpPoolsClient {
+export default class IpPoolsClient implements IIPPoolsClient {
   request: Request;
 
   constructor(request: Request) {

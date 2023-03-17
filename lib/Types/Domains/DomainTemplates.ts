@@ -1,4 +1,3 @@
-import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
 import { YesNo } from '../../Enums';
 import { IDomainTemplate } from '../../Interfaces/Domains';
 import { PagesList, ParsedPagesList } from '../Common';
@@ -172,6 +171,6 @@ export type ListDomainTemplateVersionsAPIResponse = {
 }
 
 export type ListDomainTemplateVersionsResult = {
-    template: DomainTemplateItem;
+    template: IDomainTemplate;
     pages: ParsedPagesList;
 }

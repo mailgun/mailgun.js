@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { DomainTagStatistic } from '../../Classes/Domains/domainsTags';
 import { Resolution } from '../../Enums';
 import {
   DomainTagCountriesAggregation,
@@ -37,7 +36,7 @@ export interface IDomainTagsClient {
         domain: string,
         tag: string,
         query: DomainTagsStatisticQuery
-    ): Promise<DomainTagStatistic>
+    ): Promise<IDomainTagStatisticResult>
     countries(domain: string, tag: string): Promise<DomainTagCountriesAggregation>
     providers(domain: string, tag: string): Promise<DomainTagProvidersAggregation>
     devices(domain: string, tag: string): Promise<DomainTagDevicesAggregation>

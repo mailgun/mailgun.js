@@ -1,15 +1,17 @@
 import urljoin from 'url-join';
 import { WebhooksIds } from '../Enums';
+import { IWebHooksClient } from '../Interfaces/Webhooks';
 
 import {
   WebhookValidationResponse,
   WebhookList,
   WebhookResponse,
-  WebhooksQuery
+  WebhooksQuery,
+  WebhookResult
 } from '../Types/Webhooks';
 import Request from './common/Request';
 
-class Webhook {
+export class Webhook implements WebhookResult {
   id: string;
   url: string | undefined;
 
@@ -19,19 +21,19 @@ class Webhook {
   }
 }
 
-export default class WebhooksClient {
+export default class WebhooksClient implements IWebHooksClient {
   request: Request;
 
   constructor(request: Request) {
     this.request = request;
   }
 
-  _parseWebhookList(response: { body: { webhooks: WebhookList } }): WebhookList {
+  private _parseWebhookList(response: { body: { webhooks: WebhookList } }): WebhookList {
     return response.body.webhooks;
   }
 
   _parseWebhookWithID(id: string) {
-    return function (response: WebhookResponse): Webhook {
+    return function (response: WebhookResponse): WebhookResult {
       const webhookResponse = response?.body?.webhook;
       let url = webhookResponse?.url;
       if (!url) {
@@ -43,7 +45,7 @@ export default class WebhooksClient {
     };
   }
 
-  _parseWebhookTest(response: { body: { code: number, message: string } })
+  private _parseWebhookTest(response: { body: { code: number, message: string } })
   : {code: number, message:string} {
     return {
       code: response.body.code,
@@ -56,7 +58,7 @@ export default class WebhooksClient {
       .then(this._parseWebhookList);
   }
 
-  get(domain: string, id: WebhooksIds): Promise<Webhook> {
+  get(domain: string, id: WebhooksIds): Promise<WebhookResult> {
     return this.request.get(urljoin('/v3/domains', domain, 'webhooks', id))
       .then(this._parseWebhookWithID(id));
   }
@@ -64,7 +66,7 @@ export default class WebhooksClient {
   create(domain: string,
     id: string,
     url: string,
-    test = false): Promise<Webhook | WebhookValidationResponse> {
+    test = false): Promise<WebhookResult | WebhookValidationResponse> {
     if (test) {
       return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id, 'test'), { url })
         .then(this._parseWebhookTest);
@@ -74,12 +76,12 @@ export default class WebhooksClient {
       .then(this._parseWebhookWithID(id));
   }
 
-  update(domain: string, id: string, url: string): Promise<Webhook> {
+  update(domain: string, id: string, url: string): Promise<WebhookResult> {
     return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id), { url })
       .then(this._parseWebhookWithID(id));
   }
 
-  destroy(domain: string, id: string) : Promise<Webhook> {
+  destroy(domain: string, id: string) : Promise<WebhookResult> {
     return this.request.delete(urljoin('/v3/domains', domain, 'webhooks', id))
       .then(this._parseWebhookWithID(id));
   }
