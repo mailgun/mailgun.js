@@ -115,7 +115,7 @@
     "commitUrlFormat": "https://github.com/mailgun/mailgun.js/commits/{{hash}}",
     "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
-      "prerelease": "npm test && npm run build:release",
+      "prerelease": "npm test && npm run build:release && npm run docs",
       "postchangelog": "npm run build:prepublish && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
     }
