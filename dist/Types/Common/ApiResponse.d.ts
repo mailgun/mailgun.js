@@ -1,4 +1,4 @@
-export declare type APIResponse = {
+export type APIResponse = {
     status: number;
     body: any;
 };

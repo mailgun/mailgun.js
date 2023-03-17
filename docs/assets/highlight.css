@@ -1,37 +1,37 @@
 :root {
     --light-hl-0: #000000;
     --dark-hl-0: #D4D4D4;
-    --light-hl-1: #0000FF;
-    --dark-hl-1: #569CD6;
-    --light-hl-2: #0070C1;
-    --dark-hl-2: #4FC1FF;
-    --light-hl-3: #795E26;
-    --dark-hl-3: #DCDCAA;
-    --light-hl-4: #A31515;
-    --dark-hl-4: #CE9178;
+    --light-hl-1: #A31515;
+    --dark-hl-1: #CE9178;
+    --light-hl-2: #0000FF;
+    --dark-hl-2: #569CD6;
+    --light-hl-3: #0070C1;
+    --dark-hl-3: #4FC1FF;
+    --light-hl-4: #795E26;
+    --dark-hl-4: #DCDCAA;
     --light-hl-5: #001080;
     --dark-hl-5: #9CDCFE;
     --light-hl-6: #008000;
     --dark-hl-6: #6A9955;
     --light-hl-7: #AF00DB;
     --dark-hl-7: #C586C0;
-    --light-hl-8: #267F99;
-    --dark-hl-8: #4EC9B0;
-    --light-hl-9: #098658;
-    --dark-hl-9: #B5CEA8;
+    --light-hl-8: #098658;
+    --dark-hl-8: #B5CEA8;
+    --light-hl-9: #800000;
+    --dark-hl-9: #808080;
     --light-hl-10: #800000;
-    --dark-hl-10: #808080;
-    --light-hl-11: #800000;
-    --dark-hl-11: #569CD6;
-    --light-hl-12: #FF0000;
-    --dark-hl-12: #9CDCFE;
-    --light-hl-13: #000000;
-    --dark-hl-13: #C8C8C8;
-    --light-hl-14: #EE0000;
-    --dark-hl-14: #D7BA7D;
+    --dark-hl-10: #569CD6;
+    --light-hl-11: #E50000;
+    --dark-hl-11: #9CDCFE;
+    --light-hl-12: #000000;
+    --dark-hl-12: #C8C8C8;
+    --light-hl-13: #EE0000;
+    --dark-hl-13: #D7BA7D;
+    --light-hl-14: #CD3131;
+    --dark-hl-14: #F44747;
     --light-hl-15: #0451A5;
     --dark-hl-15: #9CDCFE;
-    --light-code-background: #F5F5F5;
+    --light-code-background: #FFFFFF;
     --dark-code-background: #1E1E1E;
 }
 
@@ -75,7 +75,7 @@
     --code-background: var(--dark-code-background);
 } }
 
-body.light {
+:root[data-theme='light'] {
     --hl-0: var(--light-hl-0);
     --hl-1: var(--light-hl-1);
     --hl-2: var(--light-hl-2);
@@ -95,7 +95,7 @@ body.light {
     --code-background: var(--light-code-background);
 }
 
-body.dark {
+:root[data-theme='dark'] {
     --hl-0: var(--dark-hl-0);
     --hl-1: var(--dark-hl-1);
     --hl-2: var(--dark-hl-2);

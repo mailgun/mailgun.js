@@ -1,5 +1,5 @@
 import { PagesList, ParsedPagesList } from '../Common';
-export declare type MultipleValidationJobData = {
+export type MultipleValidationJobData = {
     created_at: number;
     id: string;
     quantity: number;
@@ -25,7 +25,7 @@ export declare type MultipleValidationJobData = {
         };
     };
 };
-export declare type MultipleValidationJobResult = {
+export type MultipleValidationJobResult = {
     createdAt: Date;
     id: string;
     quantity: number;
@@ -52,29 +52,29 @@ export declare type MultipleValidationJobResult = {
         };
     };
 };
-export declare type CreatedMultipleValidationJob = {
+export type CreatedMultipleValidationJob = {
     id: string;
     message: string;
 };
-export declare type MultipleValidationCreationData = {
+export type MultipleValidationCreationData = {
     file: Record<string, unknown>;
     [key: string]: unknown | undefined;
 };
-export declare type MultipleValidationCreationDataUpdated = {
+export type MultipleValidationCreationDataUpdated = {
     multipleValidationFile: Record<string, unknown>;
     [key: string]: unknown | undefined;
 };
-export declare type MultipleValidationJobsListResult = {
+export type MultipleValidationJobsListResult = {
     jobs: MultipleValidationJobResult[];
     pages: ParsedPagesList;
     total: number;
     status: number;
 };
-export declare type MultipleValidationJobsListQuery = {
+export type MultipleValidationJobsListQuery = {
     limit: number;
     page: string;
 };
-export declare type MultipleValidationJobsListResponse = {
+export type MultipleValidationJobsListResponse = {
     status: number;
     body: {
         paging: PagesList;
@@ -82,7 +82,7 @@ export declare type MultipleValidationJobsListResponse = {
         total: number;
     };
 };
-export declare type CanceledMultipleValidationJob = {
+export type CanceledMultipleValidationJob = {
     message: string;
     status: number;
 };

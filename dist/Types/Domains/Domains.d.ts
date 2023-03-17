@@ -1,10 +1,10 @@
-export declare type DomainsQuery = {
+export type DomainsQuery = {
     authority?: string;
     state?: 'active' | 'unverified' | 'disabled';
     limit?: number;
     skip?: number;
 };
-export declare type DomainInfo = {
+export type DomainInfo = {
     name: string;
     smtp_password: string;
     spam_action?: 'disabled' | 'block' | 'tag';
@@ -15,7 +15,7 @@ export declare type DomainInfo = {
     pool_id?: '';
     web_scheme: 'http' | 'https';
 };
-export declare type DomainShortData = {
+export type DomainShortData = {
     name: string;
     require_tls: boolean;
     skip_verification: boolean;
@@ -27,7 +27,7 @@ export declare type DomainShortData = {
     smtp_login: string;
     type: string;
 };
-export declare type DomainData = DomainShortData & {
+export type DomainData = DomainShortData & {
     id: string;
     is_disabled: boolean;
     web_prefix: string;
@@ -44,7 +44,7 @@ export interface DNSRecord {
     valid: string;
     value: string;
 }
-export declare type DomainResponseData = {
+export type DomainResponseData = {
     status: number;
     body: {
         domain: DomainData;
@@ -53,69 +53,69 @@ export declare type DomainResponseData = {
         sending_dns_records: DNSRecord[];
     };
 };
-export declare type DomainListResponseData = {
+export type DomainListResponseData = {
     status: number;
     body: {
         items: DomainsListItem[] | null;
         total_count: number;
     };
 };
-export declare type MessageResponse = {
+export type MessageResponse = {
     message: string;
 };
-export declare type DestroyedDomainResponse = {
+export type DestroyedDomainResponse = {
     status: number;
     body: MessageResponse;
 };
-export declare type ConnectionSettings = {
+export type ConnectionSettings = {
     require_tls: boolean;
     skip_verification: boolean;
 };
-export declare type ConnectionSettingsResponse = {
+export type ConnectionSettingsResponse = {
     body: {
         connection: ConnectionSettings;
     };
     status: number;
 };
-export declare type UpdatedConnectionSettings = {
+export type UpdatedConnectionSettings = {
     message: string;
     require_tls: boolean;
     skip_verification: boolean;
 };
-export declare type UpdatedConnectionSettingsRes = {
+export type UpdatedConnectionSettingsRes = {
     body: UpdatedConnectionSettings;
     status: number;
 };
-export declare type DKIMAuthorityInfo = {
+export type DKIMAuthorityInfo = {
     self: boolean | 'yes' | 'no' | 'true' | 'false';
 };
-export declare type UpdatedDKIMAuthority = {
+export type UpdatedDKIMAuthority = {
     changed: boolean;
     message: string;
     sending_dns_records: DNSRecord[];
 };
-export declare type UpdatedDKIMAuthorityResponse = {
+export type UpdatedDKIMAuthorityResponse = {
     body: UpdatedDKIMAuthority;
     status: 200;
 };
-export declare type DKIMSelectorInfo = {
+export type DKIMSelectorInfo = {
     dkimSelector: string;
 };
-export declare type UpdatedDKIMSelectorResponse = {
+export type UpdatedDKIMSelectorResponse = {
     body: MessageResponse;
     status: number;
 };
-export declare type WebPrefixInfo = {
+export type WebPrefixInfo = {
     webPrefix: string;
 };
-export declare type UpdatedWebPrefix = {
+export type UpdatedWebPrefix = {
     message: string;
 };
-export declare type UpdatedWebPrefixResponse = {
+export type UpdatedWebPrefixResponse = {
     body: MessageResponse;
     status: number;
 };
-export declare type ReplacementForPool = {
+export type ReplacementForPool = {
     pool_id?: string;
     ip?: string;
 };

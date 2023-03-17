@@ -4,10 +4,10 @@
  *
  * @see {@link https://stackoverflow.com/a/49725198}
  */
-export declare type AtLeastOneKeyPresent<Object_, Keys extends keyof Object_ = keyof Object_> = Pick<Object_, Exclude<keyof Object_, Keys>> & {
+export type AtLeastOneKeyPresent<Object_, Keys extends keyof Object_ = keyof Object_> = Pick<Object_, Exclude<keyof Object_, Keys>> & {
     [K in Keys]-?: Required<Pick<Object_, K>> & Partial<Pick<Object_, Exclude<Keys, K>>>;
 }[Keys];
-export declare type MailgunMessageContent = AtLeastOneKeyPresent<{
+export type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
      * Body of the message. (text version)
      */
@@ -25,7 +25,7 @@ export declare type MailgunMessageContent = AtLeastOneKeyPresent<{
     */
     template?: string;
 }>;
-export declare type MailgunMessageData = MailgunMessageContent & {
+export type MailgunMessageData = MailgunMessageContent & {
     /**
      * Email address for `From` header
      */
@@ -165,14 +165,14 @@ export declare type MailgunMessageData = MailgunMessageContent & {
     'v:my-var'?: string;
     [key: string]: unknown;
 };
-export declare type MessagesSendAPIResponse = {
+export type MessagesSendAPIResponse = {
     status: number;
     body: {
         id: string;
         message: string;
     };
 };
-export declare type MessagesSendResult = {
+export type MessagesSendResult = {
     id?: string;
     message?: string;
     status: number;

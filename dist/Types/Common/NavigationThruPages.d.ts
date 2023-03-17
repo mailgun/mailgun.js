@@ -1,33 +1,33 @@
-export declare type PagesList = {
+export type PagesList = {
     previous: string;
     first: string;
     last: string;
     next: string;
 };
-export declare type ParsedPage = {
+export type ParsedPage = {
     id: string;
     page: string;
     iteratorPosition: string | undefined;
     url: string;
 };
-export declare type ParsedPagesList = {
+export type ParsedPagesList = {
     previous: ParsedPage;
     first: ParsedPage;
     last: ParsedPage;
     next: ParsedPage;
 };
-export declare type PagesListAccumulator = {
+export type PagesListAccumulator = {
     [index: string]: ParsedPage;
 };
-export declare type ResponseWithPaging = {
+export type ResponseWithPaging = {
     body: {
         paging: PagesList;
     };
 };
-export declare type QueryWithPage = {
+export type QueryWithPage = {
     page?: string;
 };
-export declare type UpdatedUrlAndQuery = {
+export type UpdatedUrlAndQuery = {
     url: string;
     updatedQuery: Record<string, unknown>;
 };

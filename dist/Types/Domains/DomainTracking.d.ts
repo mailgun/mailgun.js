@@ -1,4 +1,4 @@
-export declare type DomainTrackingData = {
+export type DomainTrackingData = {
     click: {
         active: boolean;
     };
@@ -11,13 +11,13 @@ export declare type DomainTrackingData = {
         text_footer: string;
     };
 };
-export declare type DomainTrackingResponse = {
+export type DomainTrackingResponse = {
     status: number;
     body: {
         tracking: DomainTrackingData;
     };
 };
-export declare type UpdatedOpenTracking = {
+export type UpdatedOpenTracking = {
     message: string;
     open?: {
         active: boolean;
@@ -31,17 +31,17 @@ export declare type UpdatedOpenTracking = {
         text_footer: string;
     };
 };
-export declare type UpdateDomainTrackingResponse = {
+export type UpdateDomainTrackingResponse = {
     status: number;
     body: UpdatedOpenTracking;
 };
-export declare type OpenTrackingInfo = {
+export type OpenTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false';
 };
-export declare type ClickTrackingInfo = {
+export type ClickTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false' | 'htmlonly';
 };
-export declare type UnsubscribeTrackingInfo = {
+export type UnsubscribeTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false';
     html_footer: string;
     text_footer: string;

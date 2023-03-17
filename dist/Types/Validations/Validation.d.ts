@@ -1,7 +1,7 @@
-export declare type ValidationQuery = {
+export type ValidationQuery = {
     address: string;
 };
-export declare type ValidationResult = {
+export type ValidationResult = {
     address: string;
     is_disposable_address: boolean;
     is_role_address: boolean;
@@ -9,7 +9,7 @@ export declare type ValidationResult = {
     result: string;
     risk: string;
 };
-export declare type ValidationResponse = {
+export type ValidationResponse = {
     status: number;
     body: ValidationResult;
 };

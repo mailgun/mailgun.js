@@ -1,26 +1,26 @@
 import { PagesList, ParsedPagesList } from '../Common';
-export declare type ListsQuery = {
+export type ListsQuery = {
     address?: string;
     limit?: number;
     page?: string;
 };
-export declare type CreateUpdateList = {
+export type CreateUpdateList = {
     address: string;
     name?: string;
     description?: string;
     access_level?: 'readonly' | 'members' | 'everyone';
     reply_preference?: 'list' | 'sender';
 };
-export declare type DestroyedList = {
+export type DestroyedList = {
     address: string;
     message: string;
 };
-export declare type StartValidationResult = {
+export type StartValidationResult = {
     status: number;
     id: string;
     message: string;
 };
-export declare type MailingListValidationResponse = {
+export type MailingListValidationResponse = {
     status: string;
     download_url: {
         csv: string;
@@ -45,21 +45,21 @@ export declare type MailingListValidationResponse = {
         };
     };
 };
-export declare type MailingListValidationApiResponse = MailingListValidationResponse & {
+export type MailingListValidationApiResponse = MailingListValidationResponse & {
     created_at: number;
 };
-export declare type MailingListValidationResultData = MailingListValidationResponse & {
+export type MailingListValidationResultData = MailingListValidationResponse & {
     created_at: Date;
 };
-export declare type MailingListValidationResult = {
+export type MailingListValidationResult = {
     status: number;
     validationResult: MailingListValidationResultData;
 };
-export declare type MailingListCancelValidationResult = {
+export type MailingListCancelValidationResult = {
     status: number;
     message: string;
 };
-export declare type MailingList = {
+export type MailingList = {
     access_level: string;
     address: string;
     created_at: string;
@@ -68,12 +68,12 @@ export declare type MailingList = {
     name: string;
     reply_preference: null | string;
 };
-export declare type MailingListResult = {
+export type MailingListResult = {
     items: MailingList[];
     status: number;
     pages: ParsedPagesList;
 };
-export declare type MailingListApiResponse = {
+export type MailingListApiResponse = {
     body: {
         items: MailingList[];
         paging: PagesList;

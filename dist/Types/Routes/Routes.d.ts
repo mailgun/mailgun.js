@@ -1,4 +1,4 @@
-export declare type Route = {
+export type Route = {
     actions: string[];
     created_at: string;
     description: string;
@@ -6,20 +6,20 @@ export declare type Route = {
     id: string;
     priority: number;
 };
-export declare type UpdateRouteResponse = Route & {
+export type UpdateRouteResponse = Route & {
     message: string;
 };
-export declare type DestroyRouteResponse = {
+export type DestroyRouteResponse = {
     id: string;
     message: string;
 };
-export declare type CreateUpdateRouteData = {
+export type CreateUpdateRouteData = {
     priority?: number;
     description?: string;
     expression: string;
     action: string[];
 };
-export declare type RoutesListQuery = {
+export type RoutesListQuery = {
     limit?: number;
     skip?: number;
 };

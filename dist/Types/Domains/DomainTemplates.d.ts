@@ -2,7 +2,7 @@ import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
 import { YesNo } from '../../Enums';
 import { IDomainTemplate } from '../../Interfaces/Domains';
 import { PagesList, ParsedPagesList } from '../Common';
-export declare type DomainTemplateData = {
+export type DomainTemplateData = {
     name: string;
     description: string;
     template: string;
@@ -10,22 +10,22 @@ export declare type DomainTemplateData = {
     engine?: string;
     comment?: string;
 };
-export declare type DomainTemplateVersionData = {
+export type DomainTemplateVersionData = {
     template: string;
     tag: string;
     engine?: string;
     comment?: string;
     active?: YesNo;
 };
-export declare type DomainTemplateUpdateData = {
+export type DomainTemplateUpdateData = {
     description: string;
 };
-export declare type DomainTemplateUpdateVersionData = {
+export type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
 };
-export declare type DomainTemplatesQuery = {
+export type DomainTemplatesQuery = {
     /** 'page' (optionally 'p') params from previous response's 'paging' object.
      * Value must be stringified as query params. Ex: '?page=first','?page=next&p=name-of-last-item'
      .... */
@@ -33,10 +33,10 @@ export declare type DomainTemplatesQuery = {
     /** Number of records to retrieve. Default value is 10. */
     limit?: number;
 };
-export declare type TemplateQuery = {
+export type TemplateQuery = {
     active: YesNo;
 };
-export declare type ShortTemplateVersion = {
+export type ShortTemplateVersion = {
     tag: string;
     engine: string;
     mjml: string;
@@ -45,17 +45,17 @@ export declare type ShortTemplateVersion = {
     active: boolean;
     id: string;
 };
-export declare type TemplateVersion = ShortTemplateVersion & {
+export type TemplateVersion = ShortTemplateVersion & {
     template: string;
 };
-export declare type CreateDomainTemplateAPIResponse = {
+export type CreateDomainTemplateAPIResponse = {
     status: number;
     body: {
         message: string;
         template: IDomainTemplate;
     };
 };
-export declare type ListDomainTemplatesAPIResponse = {
+export type ListDomainTemplatesAPIResponse = {
     status: number;
     body: {
         items: IDomainTemplate[];
@@ -67,18 +67,18 @@ export declare type ListDomainTemplatesAPIResponse = {
         };
     };
 };
-export declare type ListDomainTemplatesResult = {
+export type ListDomainTemplatesResult = {
     items: IDomainTemplate[];
     pages: ParsedPagesList;
     status: number;
 };
-export declare type GetDomainTemplateAPIResponse = {
+export type GetDomainTemplateAPIResponse = {
     status: number;
     body: {
         template: IDomainTemplate;
     };
 };
-export declare type UpdateOrDeleteDomainTemplateAPIResponse = {
+export type UpdateOrDeleteDomainTemplateAPIResponse = {
     status: number;
     body: {
         message: string;
@@ -87,34 +87,34 @@ export declare type UpdateOrDeleteDomainTemplateAPIResponse = {
         };
     };
 };
-export declare type UpdateOrDeleteDomainTemplateResult = {
+export type UpdateOrDeleteDomainTemplateResult = {
     status: number;
     message: string;
     templateName?: string;
 };
-export declare type NotificationAPIResponse = {
+export type NotificationAPIResponse = {
     status: number;
     body: {
         message: string;
     };
 };
-export declare type NotificationResult = {
+export type NotificationResult = {
     status: number;
     message: string;
 };
-export declare type CreateDomainTemplateVersionAPIResponse = {
+export type CreateDomainTemplateVersionAPIResponse = {
     status: number;
     body: {
         message: string;
         template: IDomainTemplate;
     };
 };
-export declare type CreateDomainTemplateVersionResult = {
+export type CreateDomainTemplateVersionResult = {
     status: number;
     message: string;
     template: IDomainTemplate;
 };
-export declare type MutateDomainTemplateVersionAPIResponse = {
+export type MutateDomainTemplateVersionAPIResponse = {
     status: number;
     body: {
         message: string;
@@ -126,7 +126,7 @@ export declare type MutateDomainTemplateVersionAPIResponse = {
         };
     };
 };
-export declare type MutateDomainTemplateVersionResult = {
+export type MutateDomainTemplateVersionResult = {
     status: number;
     message: string;
     templateName: string;
@@ -134,7 +134,7 @@ export declare type MutateDomainTemplateVersionResult = {
         tag: string;
     };
 };
-export declare type ListDomainTemplateVersionsAPIResponse = {
+export type ListDomainTemplateVersionsAPIResponse = {
     status: number;
     body: {
         template: {
@@ -148,7 +148,7 @@ export declare type ListDomainTemplateVersionsAPIResponse = {
         paging: PagesList;
     };
 };
-export declare type ListDomainTemplateVersionsResult = {
+export type ListDomainTemplateVersionsResult = {
     template: DomainTemplateItem;
     pages: ParsedPagesList;
 };
