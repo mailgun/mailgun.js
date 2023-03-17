@@ -1,25 +1,25 @@
-export type APIWebhook = {
+export declare type APIWebhook = {
     url?: string;
     urls?: string[];
 };
-export type WebhookResponseBody = {
+export declare type WebhookResponseBody = {
     message: string;
     webhook: APIWebhook;
 };
-export type WebhookResponse = {
+export declare type WebhookResponse = {
     status: number;
     body: WebhookResponseBody;
 };
-export type WebhookList = {
+export declare type WebhookList = {
     [id: string]: {
         urls: string[];
     };
 };
-export type WebhooksQuery = {
+export declare type WebhooksQuery = {
     limit?: number;
     skip?: number;
 };
-export type WebhookValidationResponse = {
+export declare type WebhookValidationResponse = {
     code: number;
     message: string;
 };

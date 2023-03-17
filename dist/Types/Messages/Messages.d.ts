@@ -4,10 +4,10 @@
  *
  * @see {@link https://stackoverflow.com/a/49725198}
  */
-export type AtLeastOneKeyPresent<Object_, Keys extends keyof Object_ = keyof Object_> = Pick<Object_, Exclude<keyof Object_, Keys>> & {
+export declare type AtLeastOneKeyPresent<Object_, Keys extends keyof Object_ = keyof Object_> = Pick<Object_, Exclude<keyof Object_, Keys>> & {
     [K in Keys]-?: Required<Pick<Object_, K>> & Partial<Pick<Object_, Exclude<Keys, K>>>;
 }[Keys];
-export type MailgunMessageContent = AtLeastOneKeyPresent<{
+export declare type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
      * Body of the message. (text version)
      */
@@ -25,7 +25,7 @@ export type MailgunMessageContent = AtLeastOneKeyPresent<{
     */
     template?: string;
 }>;
-export type MailgunMessageData = MailgunMessageContent & {
+export declare type MailgunMessageData = MailgunMessageContent & {
     /**
      * Email address for `From` header
      */
@@ -39,11 +39,11 @@ export type MailgunMessageData = MailgunMessageContent & {
     /**
      * Same as `To` but for `carbon copy`
      */
-    cc?: string;
+    cc?: string | string[];
     /**
      * Same as `To` but for `blind carbon copy`
      */
-    bcc?: string;
+    bcc?: string | string[];
     /**
      * Message subject
      */
@@ -165,14 +165,14 @@ export type MailgunMessageData = MailgunMessageContent & {
     'v:my-var'?: string;
     [key: string]: unknown;
 };
-export type MessagesSendAPIResponse = {
+export declare type MessagesSendAPIResponse = {
     status: number;
     body: {
         id: string;
         message: string;
     };
 };
-export type MessagesSendResult = {
+export declare type MessagesSendResult = {
     id?: string;
     message?: string;
     status: number;

@@ -1,15 +1,15 @@
-import { AxiosRequestHeaders } from 'axios';
+import { AxiosRequestHeaders, RawAxiosRequestHeaders } from 'axios';
 import { MailgunClientOptions } from '../MailgunClient';
-export type OnCallEmptyHeaders = {
+export declare type OnCallEmptyHeaders = {
     [key: string]: undefined;
 };
-export type RequestOptions = MailgunClientOptions & {
-    headers: AxiosRequestHeaders;
+export declare type RequestOptions = MailgunClientOptions & {
+    headers: AxiosRequestHeaders | RawAxiosRequestHeaders;
     timeout: number;
 };
-export type OnCallRequestOptions = {
+export declare type OnCallRequestOptions = {
     timeout?: number;
-    headers?: AxiosRequestHeaders;
+    headers?: AxiosRequestHeaders | RawAxiosRequestHeaders;
     query?: any;
     [key: string]: unknown | undefined;
 };

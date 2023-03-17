@@ -1,4 +1,4 @@
-export type APIErrorOptions = {
+export declare type APIErrorOptions = {
     headers: {
         [key: string]: any;
     };
@@ -8,7 +8,7 @@ export type APIErrorOptions = {
     url: string;
     statusText: string;
 };
-export type APIErrorType = {
+export declare type APIErrorType = {
     stack: string;
     status: number;
     message: string;

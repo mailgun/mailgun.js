@@ -1,4 +1,4 @@
-export type MailgunClientOptions = {
+export declare type MailgunClientOptions = {
     username: string;
     key: string;
     url?: string;

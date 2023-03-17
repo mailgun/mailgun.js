@@ -1,4 +1,4 @@
-export type BounceData = {
+export declare type BounceData = {
     address: string;
     code: number;
     error: string;

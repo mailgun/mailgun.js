@@ -1,10 +1,10 @@
 import { PagesList, ParsedPagesList } from '../Common';
-export type EventsPage = {
+export declare type EventsPage = {
     id: string;
     number: string;
     url: string;
 };
-export type FilterField = {
+export declare type FilterField = {
     event?: string;
     list?: string;
     attachment?: string;
@@ -18,21 +18,21 @@ export type FilterField = {
     tags?: string;
     severity?: string;
 };
-export type EventsQuery = FilterField & {
+export declare type EventsQuery = FilterField & {
     page?: string;
     begin?: string;
     end?: string;
     ascending?: 'yes' | 'no';
     limit?: number;
 };
-export type EventsResponse = {
+export declare type EventsResponse = {
     body: {
         items: [];
         paging: PagesList;
     };
     status: number;
 };
-export type DomainEvent = {
+export declare type DomainEvent = {
     severity: string;
     tags: string[];
     storage: {
@@ -85,7 +85,7 @@ export type DomainEvent = {
     recipient: string;
     event: string;
 };
-export type EventsList = {
+export declare type EventsList = {
     items: DomainEvent[];
     pages: ParsedPagesList;
     status: number;

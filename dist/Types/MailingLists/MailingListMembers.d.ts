@@ -1,6 +1,6 @@
 import { PagesList, ParsedPagesList } from '../Common';
 import { MailingList } from './MailingLists';
-export type MailListMember = {
+export declare type MailListMember = {
     address: string;
     name: string;
     subscribed: boolean;
@@ -8,52 +8,52 @@ export type MailListMember = {
         [key: string]: unknown;
     };
 };
-export type MailListMembersQuery = {
+export declare type MailListMembersQuery = {
     subscribed?: 'yes' | 'no';
     limit?: number;
     page?: string;
 };
-export type MultipleMembersData = {
+export declare type MultipleMembersData = {
     members: Array<MailListMember>;
     upsert: 'yes' | 'no';
 };
-export type MultipleMembersReqData = {
+export declare type MultipleMembersReqData = {
     members: string;
     upsert: 'yes' | 'no';
 };
-export type CreateUpdateMailListMembers = {
+export declare type CreateUpdateMailListMembers = {
     address: string;
     name?: string;
     vars?: string;
     subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
 };
-export type CreateUpdateMailListMembersReq = {
+export declare type CreateUpdateMailListMembersReq = {
     address: string;
     name?: string;
     vars?: string;
     subscribed?: 'yes' | 'no' | boolean;
     upsert?: 'yes' | 'no';
 };
-export type DeletedMember = {
+export declare type DeletedMember = {
     member: {
         address: string;
     };
     message: string;
 };
-export type NewMultipleMembersResponse = {
+export declare type NewMultipleMembersResponse = {
     list: MailingList;
     message: string;
     'task-id': string;
 };
-export type MailListMembersResponse = {
+export declare type MailListMembersResponse = {
     body: {
         items: MailListMember[];
         paging: PagesList;
     };
     status: number;
 };
-export type MailListMembersResult = {
+export declare type MailListMembersResult = {
     items: MailListMember[];
     pages: ParsedPagesList;
     status: number;

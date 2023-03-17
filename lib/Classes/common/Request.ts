@@ -1,10 +1,11 @@
 import * as base64 from 'base-64';
 import urljoin from 'url-join';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, {
+  AxiosError, AxiosResponse, AxiosHeaders, RawAxiosRequestHeaders
+} from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './Error';
 import {
-  OnCallEmptyHeaders,
   OnCallRequestOptions,
   RequestOptions,
   APIErrorOptions,
@@ -20,7 +21,7 @@ class Request {
   private key: string;
   private url: string;
   private timeout: number;
-  private headers: Record<string, unknown>;
+  private headers: AxiosHeaders;
   private formDataBuilder: FormDataBuilder;
   private maxBodyLength: number;
 
@@ -29,7 +30,7 @@ class Request {
     this.key = options.key;
     this.url = options.url as string;
     this.timeout = options.timeout;
-    this.headers = options.headers || {};
+    this.headers = this.makeHeadersFromObject(options.headers);
     this.formDataBuilder = new FormDataBuilder(formData);
     this.maxBodyLength = 52428800; // 50 MB
   }
@@ -40,17 +41,8 @@ class Request {
     onCallOptions?: Record<string, unknown | Record<string, unknown> >
   ): Promise<APIResponse> {
     const options: OnCallRequestOptions = { ...onCallOptions };
-    const basic = base64.encode(`${this.username}:${this.key}`);
-    const onCallHeaders = options.headers ? options.headers : {};
-
-    const headers: HeadersInit| OnCallEmptyHeaders = {
-      Authorization: `Basic ${basic}`,
-      ...this.headers,
-      ...onCallHeaders
-    };
-
     delete options?.headers;
-
+    const requestHeaders = this.joinAndTransformHeaders(onCallOptions);
     const params = { ...options };
 
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
@@ -71,7 +63,7 @@ class Request {
         method: method.toLocaleUpperCase(),
         timeout: this.timeout,
         url: urlValue,
-        headers,
+        headers: requestHeaders,
         ...params,
         maxBodyLength: this.maxBodyLength
       });
@@ -110,6 +102,35 @@ class Request {
       res.body = response.data;
     }
     return res;
+  }
+
+  private joinAndTransformHeaders(
+    onCallOptions?: OnCallRequestOptions
+  ): AxiosHeaders {
+    const requestHeaders = new AxiosHeaders();
+
+    const basic = base64.encode(`${this.username}:${this.key}`);
+    requestHeaders.setAuthorization(`Basic ${basic}`);
+    requestHeaders.set(this.headers);
+
+    const receivedOnCallHeaders = onCallOptions && onCallOptions.headers;
+    const onCallHeaders = this.makeHeadersFromObject(receivedOnCallHeaders);
+    requestHeaders.set(onCallHeaders);
+    return requestHeaders;
+  }
+
+  private makeHeadersFromObject(
+    headersObject: RawAxiosRequestHeaders = {}
+  ): AxiosHeaders {
+    let requestHeaders = new AxiosHeaders();
+    requestHeaders = Object.entries(headersObject).reduce(
+      (headersAccumulator: AxiosHeaders, currentPair) => {
+        const [key, value] = currentPair;
+        headersAccumulator.set(key, value);
+        return headersAccumulator;
+      }, requestHeaders
+    );
+    return requestHeaders;
   }
 
   query(

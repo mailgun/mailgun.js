@@ -4,28 +4,28 @@ import Unsubscribe from '../../Classes/Suppressions/Unsubscribe';
 import WhiteList from '../../Classes/Suppressions/WhiteList';
 import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from '.';
 import { PagesList, ParsedPagesList } from '../Common';
-export type SuppressionList = {
+export declare type SuppressionList = {
     items: (Bounce | Complaint | Unsubscribe | WhiteList)[];
     pages: ParsedPagesList;
     status: number;
 };
-export type SuppressionListQuery = {
+export declare type SuppressionListQuery = {
     limit?: number;
     page?: string;
 };
-export type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
-export type SuppressionListResponse = {
+export declare type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
+export declare type SuppressionListResponse = {
     body: {
         items: BounceData[] | ComplaintData[] | UnsubscribeData[] | WhiteListData[];
         paging: PagesList;
     };
     status: number;
 };
-export type SuppressionResponse = {
+export declare type SuppressionResponse = {
     body: SuppressionDataType;
     status: number;
 };
-export type SuppressionDestroyResponse = {
+export declare type SuppressionDestroyResponse = {
     body: {
         message: string;
         value?: string;
@@ -33,13 +33,13 @@ export type SuppressionDestroyResponse = {
     };
     status: number;
 };
-export type SuppressionDestroyResult = {
+export declare type SuppressionDestroyResult = {
     message: string;
     value: string;
     address: string;
     status: number;
 };
-export type SuppressionCreationData = {
+export declare type SuppressionCreationData = {
     address: string;
     code?: number;
     error?: string;
@@ -47,7 +47,7 @@ export type SuppressionCreationData = {
     tag?: string;
     created_at?: string;
 };
-export type SuppressionCreationResponse = {
+export declare type SuppressionCreationResponse = {
     body: {
         message: string;
         type?: string;
@@ -55,7 +55,7 @@ export type SuppressionCreationResponse = {
     };
     status: number;
 };
-export type SuppressionCreationResult = {
+export declare type SuppressionCreationResult = {
     message: string;
     type: string;
     value: string;

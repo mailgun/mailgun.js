@@ -10,6 +10,7 @@ import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common'
 
 describe('Request', function () {
   let headers: { [key: string]: string };
+  const baseURL = 'https://api.mailgun.com';
 
   beforeEach(function () {
     headers = {};
@@ -17,19 +18,23 @@ describe('Request', function () {
   });
 
   describe('request', async function () {
-    it('makes API request', async function () {
+    it('makes API request with correct headers', async function () {
+      let reqHeaders = {};
       headers.Test = 'Custom Header';
       headers['X-CSRF-Token'] = 'protectme';
 
-      nock('https://api.mailgun.com', { reqheaders: headers })
+      nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource1')
         .query({ some: 'parameter' })
-        .reply(200, {});
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .reply(200, function (_, requestBody) {
+          reqHeaders = this.req.headers;
+        });
 
       const req = new Request({
         username: 'api',
         key: 'key',
-        url: 'https://api.mailgun.com',
+        url: baseURL,
         headers: { 'X-CSRF-Token': 'protectme' },
         timeout: 10000
       }, formData as InputFormData);
@@ -38,14 +43,17 @@ describe('Request', function () {
         headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
         query: { some: 'parameter' }
       });
+      expect(reqHeaders).to.have.property('authorization').to.eql('Basic YXBpOmtleQ==');
+      expect(reqHeaders).to.have.property('test').to.eql('Custom Header');
+      expect(reqHeaders).to.have.property('x-csrf-token').to.eql('protectme');
     });
 
     it('parses API response', function () {
-      nock('https://api.mailgun.com', { reqheaders: headers })
+      nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource')
         .reply(200, { id: 1, message: 'hello' });
 
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
       const res = req.request('get', '/v2/some/resource')
         .then(function (response: APIResponse) {
           expect(response.status).to.eql(200);
@@ -56,11 +64,11 @@ describe('Request', function () {
     });
 
     it('parses API response with string', async function () {
-      nock('https://api.mailgun.com', { reqheaders: headers })
+      nock(baseURL, { reqheaders: headers })
         .get('/v3/some/resource')
         .reply(200, 'Mailgun Magnificent API');
 
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
       try {
         await req.request('get', '/v3/some/resource');
       } catch (error) {
@@ -73,11 +81,11 @@ describe('Request', function () {
     });
 
     it('handles API error', function () {
-      nock('https://api.mailgun.com', { reqheaders: headers })
+      nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource')
         .reply(429, 'Too many requests');
 
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
       const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {
         expect(error.status).to.eql(429);
         expect(error.details).to.eql('Too many requests');
@@ -87,13 +95,13 @@ describe('Request', function () {
     });
 
     it('handles axios error', async () => {
-      nock('https://api.mailgun.com', { reqheaders: headers })
+      nock(baseURL, { reqheaders: headers })
         .post('/v2/some/resource')
         .reply(400, 'Too big body');
 
       const twentyFiveMegabytesInBytes = 52428899;
       const moreThanExpectedLimitBuffer = Buffer.alloc(twentyFiveMegabytesInBytes);
-      const req = new Request({ username: 'api', key: 'key', url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
       try {
         await req.postWithFD(
           '/v2/some/resource',
@@ -118,12 +126,12 @@ describe('Request', function () {
     const search = { query: 'data' };
 
     it('sends data as query parameter', async function () {
-      nock('https://api.mailgun.com')
+      nock(baseURL)
         .get('/v2/some/resource2')
         .query(search)
         .reply(200, {});
 
-      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
       await req.query('get', '/v2/some/resource2', search);
     });
   });
@@ -132,11 +140,11 @@ describe('Request', function () {
     const body = { query: 'data' };
 
     it('sends data as form-encoded request body', function () {
-      nock('https://api.mailgun.com')
+      nock(baseURL)
         .post('/v2/some/resource')
         .reply(200, {});
 
-      const req = new Request({ url: 'https://api.mailgun.com' } as RequestOptions, formData as InputFormData);
+      const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
       const res = req.command('post', '/v2/some/resource', body);
 
       return res;

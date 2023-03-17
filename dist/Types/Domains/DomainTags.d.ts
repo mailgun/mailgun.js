@@ -1,45 +1,45 @@
 import { Resolution } from '../../Enums';
 import { PagesList, ParsedPagesList } from '../Common';
-export type DomainTagsQuery = {
+export declare type DomainTagsQuery = {
     limit: number;
     page?: string;
 };
-export type DomainTagsStatisticQuery = {
+export declare type DomainTagsStatisticQuery = {
     event: string;
     start?: number;
     end?: number;
     resolution?: Resolution;
     duration?: string;
 };
-export type DomainTagsItemInfo = {
+export declare type DomainTagsItemInfo = {
     tag: string;
     description: string;
     'first-seen': string;
     'last-seen': string;
 };
-export type DomainTagsItem = {
+export declare type DomainTagsItem = {
     tag: string;
     description: string;
     'first-seen': Date;
     'last-seen': Date;
 };
-export type DomainTagsResponseData = {
+export declare type DomainTagsResponseData = {
     status: number;
     body: {
         items: DomainTagsItemInfo[];
         paging: PagesList;
     };
 };
-export type DomainTagsList = {
+export declare type DomainTagsList = {
     status: number;
     items: DomainTagsItem[];
     pages: ParsedPagesList;
 };
-export type DomainTagsMessageRes = {
+export declare type DomainTagsMessageRes = {
     message: string;
     status?: number;
 };
-export type DomainTagAPIResponseStatsItem = {
+export declare type DomainTagAPIResponseStatsItem = {
     time: string;
     accepted?: {
         incoming: number;
@@ -84,7 +84,7 @@ export type DomainTagAPIResponseStatsItem = {
         total: number;
     };
 };
-export type DomainTagStatAPIResponse = {
+export declare type DomainTagStatAPIResponse = {
     body: {
         tag: string;
         description: string;
@@ -94,10 +94,10 @@ export type DomainTagStatAPIResponse = {
         stats: DomainTagAPIResponseStatsItem[];
     };
 };
-export type DomainTagStatisticItem = Omit<DomainTagAPIResponseStatsItem, 'time'> & {
+export declare type DomainTagStatisticItem = Omit<DomainTagAPIResponseStatsItem, 'time'> & {
     time: Date;
 };
-export type DomainTagCountriesAPIResponse = {
+export declare type DomainTagCountriesAPIResponse = {
     body: {
         tag: string;
         country: {
@@ -112,7 +112,7 @@ export type DomainTagCountriesAPIResponse = {
         };
     };
 };
-export type DomainTagCountriesAggregation = {
+export declare type DomainTagCountriesAggregation = {
     tag: string;
     country: {
         [key: string]: {
@@ -125,7 +125,7 @@ export type DomainTagCountriesAggregation = {
         };
     };
 };
-export type DomainTagProvidersAPIResponse = {
+export declare type DomainTagProvidersAPIResponse = {
     body: {
         tag: string;
         provider: {
@@ -143,7 +143,7 @@ export type DomainTagProvidersAPIResponse = {
     };
     status: number;
 };
-export type DomainTagProvidersAggregation = {
+export declare type DomainTagProvidersAggregation = {
     tag: string;
     provider: {
         [key: string]: {
@@ -158,7 +158,7 @@ export type DomainTagProvidersAggregation = {
         };
     };
 };
-export type DeviceStatistic = {
+export declare type DeviceStatistic = {
     clicked: number;
     complained: number;
     opened: number;
@@ -166,20 +166,20 @@ export type DeviceStatistic = {
     unique_opened: number;
     unsubscribed: number;
 };
-export type DevicesTypes = {
+export declare type DevicesTypes = {
     desktop: DeviceStatistic;
     mobile: DeviceStatistic;
     tablet: DeviceStatistic;
     unknown: DeviceStatistic;
 };
-export type DomainTagDevicesAPIResponse = {
+export declare type DomainTagDevicesAPIResponse = {
     body: {
         tag: string;
         device: DevicesTypes;
     };
     status: number;
 };
-export type DomainTagDevicesAggregation = {
+export declare type DomainTagDevicesAggregation = {
     tag: string;
     device: DevicesTypes;
 };

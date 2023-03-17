@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.2.1](https://github.com/mailgun/mailgun.js/compare/v8.2.0...v8.2.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* **#342:** Items Can be Missing When Paging ([95ca758](https://github.com/mailgun/mailgun.js/commits/95ca7587eba6067a278179f7f015366c97a4f757)), closes [#342](https://github.com/mailgun/mailgun.js/issues/342)
+
+
+### Other changes
+
+* Udpate build ([1db5554](https://github.com/mailgun/mailgun.js/commits/1db555450f63d21f415c164cfef43de377399133))
+* Update eslit rules for tests ([0d0a00d](https://github.com/mailgun/mailgun.js/commits/0d0a00db7a2dc342dfc3e615ce51a07c597cdbc1))
+* Update suppressions tests to decrease usage of any ([2d3754a](https://github.com/mailgun/mailgun.js/commits/2d3754a4b632a074d7275535ea708380bfa064ad))
+
+## [8.2.0](https://github.com/mailgun/mailgun.js/compare/v8.1.0...v8.2.0) (2023-03-02)
+
+
+### Features
+
+* Add type propert to errors ([71efcc5](https://github.com/mailgun/mailgun.js/commits/71efcc534ec69400b335091950dc59f372263486))
+
+
+### Other changes
+
+* Update d.ts file ([b25f2bf](https://github.com/mailgun/mailgun.js/commits/b25f2bf1bc996b30dba14181cddb31bd0b80b4d8))
+
+## [8.1.0](https://github.com/mailgun/mailgun.js/compare/v8.0.6...v8.1.0) (2023-02-23)
+
+
+### Features
+
+* Add support for FormData Node.js in v18 ([7176d24](https://github.com/mailgun/mailgun.js/commits/7176d2412465b81d098d6dc30a3f96c0d3749dfe))
+
+
+### Bug Fixes
+
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([28732c8](https://github.com/mailgun/mailgun.js/commits/28732c8f469c494c878c224d3ca76ab74adc267e))
+* Headers object processing ([f3f5523](https://github.com/mailgun/mailgun.js/commits/f3f5523e518f5d658a361255a34b2ae16c945a64))
+
+
+### Other changes
+
+* Add build and changelog steps ([433b41f](https://github.com/mailgun/mailgun.js/commits/433b41ffe7102f412d654a087e54fe620c349e4b))
+* Add indents to the readme file ([8934a2f](https://github.com/mailgun/mailgun.js/commits/8934a2fd92d4055b077ac031755f10c7fe775974))
+* Add linter to GA. Fix linter issues ([cc63d14](https://github.com/mailgun/mailgun.js/commits/cc63d14eed799a83d2903ebec27c2f91374a4316))
+* Add suppresions destroy method to documentation ([5c1deb8](https://github.com/mailgun/mailgun.js/commits/5c1deb8bcf75e525eae8842b20d45262ad2df705))
+
 ### [8.0.6](https://github.com/mailgun/mailgun.js/compare/v8.0.5...v8.0.6) (2022-11-17)
 
 

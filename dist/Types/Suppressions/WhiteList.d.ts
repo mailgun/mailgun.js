@@ -1,4 +1,4 @@
-export type WhiteListData = {
+export declare type WhiteListData = {
     type: string;
     value: string;
     reason: string;

@@ -1,7 +1,7 @@
 import * as NodeFormData from 'form-data';
-export type FormDataOptions = {
+export declare type FormDataOptions = {
     [key: string]: any;
 };
-export type InputFormData = {
+export declare type InputFormData = {
     new (options?: HTMLFormElement | FormDataOptions): NodeFormData | FormData;
 };

@@ -1,4 +1,4 @@
-export type ComplaintData = {
+export declare type ComplaintData = {
     address: string;
     created_at: string | Date;
 };

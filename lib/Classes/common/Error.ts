@@ -1,9 +1,10 @@
 import { APIErrorOptions, APIErrorType } from '../../Types/Common';
 
 export default class APIError extends Error implements APIErrorType {
-  status: number;
-  stack: string;
-  details: string;
+  public status: number ;
+  public stack: string;
+  public details: string;
+  public type: string;
 
   constructor({
     status,
@@ -25,5 +26,6 @@ export default class APIError extends Error implements APIErrorType {
     this.status = status;
     this.message = message || error || statusText;
     this.details = bodyMessage;
+    this.type = 'MailgunAPIError';
   }
 }

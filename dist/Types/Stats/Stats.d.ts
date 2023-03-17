@@ -1,4 +1,4 @@
-export type Stat = {
+export declare type Stat = {
     time: string | Date;
     delivered: {
         smtp: number;
@@ -6,14 +6,14 @@ export type Stat = {
         total: number;
     };
 };
-export type StatsOptions = {
+export declare type StatsOptions = {
     start: string | Date;
     end: string | Date;
     resolution: string;
     stats: Stat[];
 };
-export type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
-export type StatsQuery = {
+export declare type StatsEvent = 'accepted' | 'delivered' | 'opened' | 'clicked' | 'unsubscribed' | 'stored' | 'complained' | 'failed';
+export declare type StatsQuery = {
     event: StatsEvent | StatsEvent[];
     start?: string | Date;
     end?: string | Date;

@@ -57,7 +57,7 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
     }
   ): SuppressionList {
     const data = {} as SuppressionList;
-    data.items = response.body.items.map((item) => new Model(item));
+    data.items = response.body.items?.map((item) => new Model(item)) || [];
 
     data.pages = this.parsePageLinks(response, '?', 'address');
     data.status = response.status;
