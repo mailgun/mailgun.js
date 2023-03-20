@@ -20,7 +20,8 @@ describe('APIError', function () {
 
     it('sets details if body is a string', () => {
       const error = new APIError({
-        body: 'oops. something went wrong'
+        body: 'oops. something went wrong',
+        status: 500
       } as APIErrorOptions);
 
       error.details.should.eql('oops. something went wrong');

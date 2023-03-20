@@ -5,15 +5,17 @@ import Request from '../lib/Classes/common/Request';
 import ValidateClient from '../lib/Classes/Validations/validate';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
+import { ValidationResult } from '../lib/Types/Validations';
+import { IValidationClient } from '../lib/Interfaces';
 
 describe('ValidateClient', function () {
-  let client: ValidateClient;
+  let validateClient: IValidationClient;
   let api: nock.Scope;
 
   beforeEach(function () {
     const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     const multipleValidationClient = new MultipleValidationClient(reqObject);
-    client = new ValidateClient(reqObject, multipleValidationClient);
+    validateClient = new ValidateClient(reqObject, multipleValidationClient);
     api = nock('https://api.mailgun.net');
   });
 
@@ -21,9 +23,9 @@ describe('ValidateClient', function () {
     api.done();
   });
 
-  describe('get', function () {
-    it('validates a single email address', function () {
-      const data: any = {
+  describe('get', async () => {
+    it('validates a single email address', async () => {
+      const data: nock.ReplyBody = {
         address: 'Alice <alice@example.com>',
         did_you_mean: null,
         is_valid: false,
@@ -34,9 +36,8 @@ describe('ValidateClient', function () {
         .query({ address: 'foo@example.com' })
         .reply(200, data);
 
-      return client.get('foo@example.com').then(function (response: any) {
-        response.should.eql(data);
-      });
+      const response: ValidationResult = await validateClient.get('foo@example.com');
+      response.should.eql(data);
     });
   });
 });

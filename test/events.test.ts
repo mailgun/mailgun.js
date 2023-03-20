@@ -21,7 +21,7 @@ describe('EventsClient', function () {
   });
 
   describe('GET', function () {
-    let response: any;
+    let response: Record<string, unknown>;
 
     beforeEach(function () {
       response = {

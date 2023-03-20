@@ -1,4 +1,3 @@
-import { DomainTemplateItem } from '../../Classes/Domains/domainsTemplates';
 import {
   CreateDomainTemplateVersionResult,
   DomainTemplateData,

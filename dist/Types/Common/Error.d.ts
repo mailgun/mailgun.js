@@ -1,12 +1,15 @@
 export type APIErrorOptions = {
-    headers: {
-        [key: string]: any;
+    headers?: {
+        [key: string]: unknown;
     };
     status: number;
-    message: string;
-    body: any;
-    url: string;
-    statusText: string;
+    message?: string;
+    body: {
+        error?: string;
+        message?: string;
+    };
+    url?: string;
+    statusText?: string;
 };
 export type APIErrorType = {
     stack: string;

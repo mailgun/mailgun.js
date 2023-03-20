@@ -1,22 +1,15 @@
 /* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
+import { IRoutesClient } from '../lib/Interfaces/Routes/IRoutesClient';
 import Request from '../lib/Classes/common/Request';
 import RoutesClient from '../lib/Classes/Routes';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
-
-interface Data {
-  actions: string[],
-  created_at: string,
-  description: string,
-  expression: string,
-  id: string,
-  priority: number
-}
+import { DestroyRouteResponse, Route, UpdateRouteResponse } from '../lib/Types/Routes';
 
 describe('RoutesClient', function () {
-  let client: any;
-  let api: any;
+  let client: IRoutesClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new RoutesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
@@ -27,7 +20,7 @@ describe('RoutesClient', function () {
     api.done();
   });
 
-  describe('list', function () {
+  describe('list', async () => {
     const data = [
       {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
@@ -39,19 +32,18 @@ describe('RoutesClient', function () {
       }
     ];
 
-    it('fetches all routes', function () {
+    it('fetches all routes', async () => {
       api.get('/v3/routes').reply(200, {
         items: data
       });
 
-      return client.list().then(function (response: Data[]) {
-        response.should.eql(data);
-      });
+      const response: Route[] = await client.list({});
+      response.should.eql(data);
     });
   });
 
-  describe('get', function () {
-    it('fetches single route by id', function () {
+  describe('get', async () => {
+    it('fetches single route by id', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
         created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
@@ -63,14 +55,13 @@ describe('RoutesClient', function () {
 
       api.get('/v3/routes/123').reply(200, { route: data });
 
-      return client.get('123').then(function (response: Data) {
-        response.should.eql(data);
-      });
+      const response: Route = await client.get('123');
+      response.should.eql(data);
     });
   });
 
-  describe('create', function () {
-    it('creates route', function () {
+  describe('create', async () => {
+    it('creates route', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
         created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
@@ -82,19 +73,18 @@ describe('RoutesClient', function () {
 
       api.post('/v3/routes').reply(200, { route: data });
 
-      return client.create({
+      const response: Route = await client.create({
         priority: 0,
         description: 'sample',
         expression: 'match_recipient(".*@example.org")',
         action: ['forward("http://myhost.com/messages/")', 'stop()']
-      }).then(function (response: Data) {
-        response.should.eql(data);
       });
+      response.should.eql(data);
     });
   });
 
-  describe('update', function () {
-    it('updates route', function () {
+  describe('update', async () => {
+    it('updates route', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
         created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
@@ -107,19 +97,18 @@ describe('RoutesClient', function () {
 
       api.put('/v3/routes/123').reply(200, { data });
 
-      return client.update('123', {
+      const response: UpdateRouteResponse = await client.update('123', {
         priority: 0,
         description: 'sample',
         expression: 'match_recipient(".*@example.org")',
         action: ['forward("http://myhost.com/messages/")', 'stop()']
-      }).then(function (response: Data) {
-        response.should.eql({ data });
       });
+      response.should.eql({ data });
     });
   });
 
   describe('destroy', function () {
-    it('deletes route', function () {
+    it('deletes route', async () => {
       const data = {
         id: '562da483125730608a7d1719',
         message: 'Route has been deleted'
@@ -127,9 +116,8 @@ describe('RoutesClient', function () {
 
       api.delete('/v3/routes/123').reply(200, { data });
 
-      return client.destroy('123').then(function (response: Data) {
-        response.should.eql({ data });
-      });
+      const response: DestroyRouteResponse = await client.destroy('123');
+      response.should.eql({ data });
     });
   });
 });

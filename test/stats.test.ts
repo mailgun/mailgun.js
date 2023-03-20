@@ -6,10 +6,11 @@ import Request from '../lib/Classes/common/Request';
 import StatsClient from '../lib/Classes/Stats/StatsClient';
 import { StatsOptions, StatsQuery } from '../lib/Types/Stats';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { IStatsClient } from '../lib/Interfaces';
 
 describe('StatsClient', function () {
-  let client: StatsClient;
-  let api: any;
+  let client: IStatsClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new StatsClient(
@@ -25,10 +26,10 @@ describe('StatsClient', function () {
     api.done();
   });
 
-  describe('getDomain', function () {
-    const query = { event: 'delivered' } as StatsQuery;
+  describe('getDomain', async () => {
+    const query = { event: 'delivered' };
 
-    it('fetches stats for a given domain', function () {
+    it('fetches stats for a given domain', async () => {
       api.get('/v3/domain.com/stats/total')
         .query(query)
         .reply(200, {
@@ -47,15 +48,14 @@ describe('StatsClient', function () {
           ]
         });
 
-      return client.getDomain('domain.com', query).then(function (stats: StatsOptions) {
-        (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-        (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
+      const stats: StatsOptions = await client.getDomain('domain.com', query as StatsQuery);
+      (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
+      (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
 
-        (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-        stats.stats[0].delivered.http.should.eql(1);
-        stats.stats[0].delivered.smtp.should.eql(2);
-        stats.stats[0].delivered.total.should.eql(3);
-      });
+      (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
+      stats.stats[0].delivered.http.should.eql(1);
+      stats.stats[0].delivered.smtp.should.eql(2);
+      stats.stats[0].delivered.total.should.eql(3);
     });
 
     it('works with js dates', async () => {
@@ -64,9 +64,9 @@ describe('StatsClient', function () {
         start: new Date('2022-12-25T00:00:00.000Z'),
         end: new Date('2022-12-29T00:00:00.000Z'),
       } as StatsQuery;
-      let requestObject: any;
+      let requestObject: nock.Body | undefined;
       api.get('/v3/domain.com/stats/total')
-        .query((actualQueryObject: any) => {
+        .query((actualQueryObject:nock.Body) => {
           requestObject = actualQueryObject;
           return true;
         }) // response regardless of the passed query string
@@ -89,9 +89,9 @@ describe('StatsClient', function () {
       const queryWithTwoEvents = {
         event: ['delivered', 'accepted']
       } as StatsQuery;
-      let requestObject: any;
+      let requestObject: nock.Body | undefined;
       api.get('/v3/domain.com/stats/total')
-        .query((actualQueryObject: any) => {
+        .query((actualQueryObject: nock.Body) => {
           requestObject = actualQueryObject;
           return true;
         }) // response regardless of the passed query string
@@ -109,10 +109,10 @@ describe('StatsClient', function () {
     });
   });
 
-  describe('getAccount', function () {
+  describe('getAccount', async () => {
     const query = { event: 'delivered' };
 
-    it('fetches stats for a given account', function () {
+    it('fetches stats for a given account', async () => {
       api.get('/v3/stats/total')
         .query(query)
         .reply(200, {
@@ -131,15 +131,14 @@ describe('StatsClient', function () {
           ]
         });
 
-      return client.getAccount({ event: ['delivered'] }).then(function (stats: StatsOptions) {
-        (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-        (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
+      const stats: StatsOptions = await client.getAccount({ event: ['delivered'] });
+      (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
+      (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
 
-        (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-        stats.stats[0].delivered.http.should.eql(1);
-        stats.stats[0].delivered.smtp.should.eql(2);
-        stats.stats[0].delivered.total.should.eql(3);
-      });
+      (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
+      stats.stats[0].delivered.http.should.eql(1);
+      stats.stats[0].delivered.smtp.should.eql(2);
+      stats.stats[0].delivered.total.should.eql(3);
     });
   });
 });

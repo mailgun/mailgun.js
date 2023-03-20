@@ -55,7 +55,7 @@ export type DomainEvent = {
     campaigns: [];
     reason: string;
     'user-variables': {
-        [key: string]: any;
+        [key: string]: unknown;
     };
     flags: {
         'is-routed': boolean;
@@ -64,7 +64,7 @@ export type DomainEvent = {
         'is-test-mode': boolean;
     };
     'log-level': string;
-    template?: any;
+    template?: unknown;
     timestamp: number;
     envelope: {
         transport: string;

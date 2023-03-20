@@ -10,8 +10,8 @@ import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 // TODO: fix types
 describe('DomainClient', function () {
-  let client: any;
-  let api: any;
+  let client: IpsClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));

@@ -2,17 +2,24 @@ import nock from 'nock';
 import formData from 'form-data';
 import Request from '../lib/Classes/common/Request';
 import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
-import { DeletedMember, MailListMember, NewMultipleMembersResponse } from '../lib/Types/MailingLists';
+import {
+  CreateUpdateMailListMembers,
+  DeletedMember,
+  MailListMember,
+  MultipleMembersData,
+  NewMultipleMembersResponse
+} from '../lib/Types/MailingLists';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { IMailListsMembers } from '../lib/Interfaces';
 
 describe('mailListsMembersClient', function () {
-  let client: any;
-  let api: any;
+  let mailListsMembersClient: IMailListsMembers;
+  let api: nock.Scope;
   let defaultListMember : MailListMember;
 
   beforeEach(function () {
     const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
-    client = new MailListMembers(reqObject);
+    mailListsMembersClient = new MailListMembers(reqObject);
     api = nock('https://api.mailgun.net');
     defaultListMember = {
       address: 'testingMailingListMemberAddress@example.com',
@@ -37,7 +44,7 @@ describe('mailListsMembersClient', function () {
         }
       });
 
-      const result = await client.listMembers('list-name');
+      const result = await mailListsMembersClient.listMembers('list-name');
 
       result.should.have.property('items');
       result.items.length.should.be.equal(1);
@@ -50,63 +57,71 @@ describe('mailListsMembersClient', function () {
     });
   });
 
-  describe('getMember', function () {
-    it('gets a specific mailing list member', function () {
+  describe('getMember', async () => {
+    it('gets a specific mailing list member', async () => {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
       api.get(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, {
         member: defaultListMember
       });
 
-      return client.getMember('testingMailingListAddress@example.com', 'testingMailingListMemberAddress@example.com')
-        .then(function (listMember: MailListMember) {
-          listMember.should.eql(defaultListMember);
-        });
+      const listMember: MailListMember = await mailListsMembersClient.getMember('testingMailingListAddress@example.com', 'testingMailingListMemberAddress@example.com');
+      listMember.should.eql(defaultListMember);
     });
   });
 
-  describe('createMember', function () {
-    it('adds list member to the mailing list ', function () {
-      const member:any = { ...defaultListMember };
-      member.subscribed = true;
+  describe('createMember', async () => {
+    it('adds list member to the mailing list ', async () => {
+      const member: CreateUpdateMailListMembers = {
+        ...defaultListMember,
+        subscribed: true,
+        vars: JSON.stringify(defaultListMember.vars)
+      };
+
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
         member
       });
 
-      return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
-        newListMember.should.eql(member);
-      });
+      const newListMember: MailListMember = await mailListsMembersClient
+        .createMember(mailingListAddress, member);
+      newListMember.should.eql(member);
     });
 
-    it('works with string value in subscribed field', function () {
-      const member:any = { ...defaultListMember };
-      member.subscribed = 'yes';
+    it('works with string value in subscribed field', async () => {
+      const member: CreateUpdateMailListMembers = {
+        ...defaultListMember,
+        subscribed: 'yes',
+        vars: JSON.stringify(defaultListMember.vars)
+      };
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
         member
       });
 
-      return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
-        newListMember.should.eql(member);
-      });
+      const newListMember: MailListMember = await mailListsMembersClient
+        .createMember(mailingListAddress, member);
+      newListMember.should.eql(member);
     });
 
-    it('works with false value in subscribed field', function () {
-      const member:any = { ...defaultListMember };
-      member.subscribed = false;
+    it('works with false value in subscribed field', async () => {
+      const member: CreateUpdateMailListMembers = {
+        ...defaultListMember,
+        subscribed: false,
+        vars: JSON.stringify(defaultListMember.vars)
+      };
       const mailingListAddress = 'testingMailingListAddress@example.com';
       api.post(`/v3/lists/${mailingListAddress}/members`).reply(200, {
         member
       });
 
-      return client.createMember(mailingListAddress, member).then(function (newListMember:any) {
-        newListMember.should.eql(member);
-      });
+      const newListMember: MailListMember = await mailListsMembersClient
+        .createMember(mailingListAddress, member);
+      newListMember.should.eql(member);
     });
   });
 
-  describe('createMembers', function () {
+  describe('createMembers', async () => {
     const mailingListAddress = 'testingMailingListAddress@example.com';
     let response : NewMultipleMembersResponse;
 
@@ -126,7 +141,7 @@ describe('mailListsMembersClient', function () {
       };
     });
 
-    it('adds list of members to the mailing list', function () {
+    it('adds list of members to the mailing list', async () => {
       const newMembersListPlaceholder = new Array(5).fill(0);
       const newMembersList = newMembersListPlaceholder.map((_, index) => ({
         address: `test${index}@example.com`,
@@ -138,57 +153,63 @@ describe('mailListsMembersClient', function () {
 
       api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
 
-      return client.createMembers(mailingListAddress, {
-        members: newMembersList,
-        upsert: 'yes'
-      }).then(function (result: NewMultipleMembersResponse) {
-        result.should.eql(response);
-      });
+      const result: NewMultipleMembersResponse = await mailListsMembersClient.createMembers(
+        mailingListAddress, {
+          members: newMembersList,
+          upsert: 'yes'
+        }
+      );
+      result.should.eql(response);
     });
 
-    it('works with string value in members field', function () {
+    it('works with string value in members field', async () => {
       const newMembersListPlaceholder = new Array(5).fill(0);
       const newMembersList = newMembersListPlaceholder.map((_, index) => ({
         address: `test${index}@example.com`,
         name: `test name ${index}`,
-        vars: JSON.stringify({ gender: 'female', age: index }),
+        vars: { gender: 'female', age: index },
         subscribed: true,
         upsert: 'yes'
-
       }));
       api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
-      return client.createMembers(mailingListAddress, {
-        members: newMembersList,
-        upsert: 'yes'
-      }).then(function (result: NewMultipleMembersResponse) {
-        result.should.eql(response);
-      });
+      const result: NewMultipleMembersResponse = await mailListsMembersClient
+        .createMembers(mailingListAddress, {
+          members: newMembersList,
+          upsert: 'yes'
+        } as MultipleMembersData);
+      result.should.eql(response);
     });
   });
 
-  describe('updateMember', function () {
-    it('updates list member in the mailing list ', function () {
+  describe('updateMember', async () => {
+    it('updates list member in the mailing list ', async () => {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
+      const member: CreateUpdateMailListMembers = {
+        ...defaultListMember,
+        vars: JSON.stringify(defaultListMember.vars)
+      };
       api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, { member: defaultListMember });
 
-      return client.updateMember(
+      const res: MailListMember = await mailListsMembersClient.updateMember(
         mailingListAddress,
         mailingListMemberAddress,
-        defaultListMember
-      ).then(function (res: MailListMember) {
-        res.should.eql(defaultListMember);
-      });
+        member
+      );
+      res.should.eql(defaultListMember);
     });
 
     it('works with string value in subscribed field', function () {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
-      const member: any = { ...defaultListMember };
-      member.subscribed = 'yes';
+      const member: CreateUpdateMailListMembers = {
+        ...defaultListMember,
+        subscribed: 'yes',
+        vars: JSON.stringify(defaultListMember.vars)
+      };
       api.put(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, { member: defaultListMember });
 
-      return client.updateMember(
+      return mailListsMembersClient.updateMember(
         mailingListAddress,
         mailingListMemberAddress,
         member
@@ -209,7 +230,7 @@ describe('mailListsMembersClient', function () {
 
       api.delete(`/v3/lists/${mailingListAddress}/members/${mailingListMemberAddress}`).reply(200, res);
 
-      return client.destroyMember(
+      return mailListsMembersClient.destroyMember(
         mailingListAddress,
         mailingListMemberAddress
       ).then(function (deletedMemberRes: DeletedMember) {

@@ -8,3 +8,6 @@ export type IpData = {
     dedicated: boolean;
     rdns: string;
 };
+export type IPsListQuery = {
+    dedicated: boolean | string;
+};

@@ -6,12 +6,14 @@ import formData from 'form-data';
 import Request from '../lib/Classes/common/Request';
 import MessagesClient from '../lib/Classes/Messages';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { IMessagesClient } from '../lib/Interfaces';
+import { MessagesSendResult } from '../lib/Types/Messages';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
 describe('MessagesClient', function () {
-  let client: any;
-  let api: any;
+  let client: IMessagesClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
@@ -32,7 +34,7 @@ describe('MessagesClient', function () {
         id: '<20111114174239.25659.5817@samples.mailgun.org>'
       });
 
-      const res = await client.create('sandbox.mailgun.org', {
+      const res: MessagesSendResult = await client.create('sandbox.mailgun.org', {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',

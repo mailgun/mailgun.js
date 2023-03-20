@@ -1,4 +1,3 @@
-import urljoin from 'url-join';
 import Request from '../common/Request';
 import {
   MailListMembersQuery,

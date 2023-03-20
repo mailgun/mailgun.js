@@ -1,5 +1,5 @@
-import { IpData, IpsListResponseBody } from '../../Types/IPs';
+import { IpData, IPsListQuery, IpsListResponseBody } from '../../Types/IPs';
 export interface IIPsClient {
-    list(query: any): Promise<IpsListResponseBody>;
+    list(query: IPsListQuery): Promise<IpsListResponseBody>;
     get(ip: string): Promise<IpData>;
 }

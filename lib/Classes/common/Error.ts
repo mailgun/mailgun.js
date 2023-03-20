@@ -17,14 +17,14 @@ export default class APIError extends Error implements APIErrorType {
     if (typeof body === 'string') {
       bodyMessage = body;
     } else {
-      bodyMessage = body?.message;
-      error = body?.error;
+      bodyMessage = body?.message || '';
+      error = body?.error || '';
     }
     super();
 
     this.stack = '';
     this.status = status;
-    this.message = message || error || statusText;
+    this.message = message || error || statusText || '';
     this.details = bodyMessage;
     this.type = 'MailgunAPIError';
   }
