@@ -140,7 +140,7 @@ class Request {
   command(
     method: string,
     url: string,
-    data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData,
+    data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData,
     options?: Record<string, unknown>,
     addDefaultHeaders = true
   ): Promise<APIResponse> {
