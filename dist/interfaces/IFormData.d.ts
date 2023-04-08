@@ -3,5 +3,5 @@ export interface IFormDataOptions {
     [key: string]: any;
 }
 export interface InputFormData {
-    new (options?: IFormDataOptions & HTMLFormElement): NodeFormData;
+    new (options?: IFormDataOptions): NodeFormData;
 }
