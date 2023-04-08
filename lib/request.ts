@@ -181,21 +181,21 @@ class Request {
     data: Record<string, unknown> | Record<string, unknown>[]
   ): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('post', url, formData, {
+    return this.command('post', url, formData as NodeFormData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }, false);
   }
 
   putWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('put', url, formData, {
+    return this.command('put', url, formData as NodeFormData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }, false);
   }
 
   patchWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
-    return this.command('patch', url, formData, {
+    return this.command('patch', url, formData as NodeFormData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }, false);
   }
