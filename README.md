@@ -1393,14 +1393,15 @@ Method naming conventions:
 
   ```JS
   {
-    address: 'alice@example.com',
-    did_you_mean: null,
-    is_valid: false,
-    parts: {
-       display_name: null,
-        domain: null,
-        local_part: null
-    }
+    "address": "foo@mailgun.net",
+    "is_disposable_address": false,
+    "is_role_address": false,
+    "reason": [
+      "catch_all",
+      "unknown_provider"
+    ],
+    "result": "catch_all",
+    "risk": "medium"
   }
   ```
 
@@ -2097,4 +2098,3 @@ git pull
 Next, run ```npm run release```.
 
 After that, `cd ./dist` and then run ```npm login``` and ```npm publish``` to publish changes on npm.
-
