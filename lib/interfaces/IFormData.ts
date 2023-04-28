@@ -5,5 +5,5 @@ export interface IFormDataOptions {
 }
 
 export interface InputFormData {
-  new (options?: HTMLFormElement | IFormDataOptions): NodeFormData | FormData;
+  new (options?: IFormDataOptions): NodeFormData;
 }
