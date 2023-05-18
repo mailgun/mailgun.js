@@ -9,6 +9,10 @@ __Table of Contents__
 - [Documentation](#documentation)
   - [Install](#install)
   - [Setup Client](#setup-client)
+    - [Available Imports](#imports)
+    - [Types imports](#types-imports)
+    - [Interfaces and Enums imports](#interfaces-and-enums-imports)
+  - [Generated docs](#generated-docs)
   - [Methods](#methods)
   - [Browser Demo](#browser-demo)
   - [Examples](https://github.com/mailgun/mailgun-js/tree/master/examples)
@@ -37,19 +41,36 @@ Next, require the module and instantiate a mailgun client by calling `new Mailgu
 
 NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
-```js
-const formData = require('form-data');
-const Mailgun = require('mailgun.js');
-const mailgun = new Mailgun(formData);
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
-```
-
-In the case your mailgun account is eu hosted you would need to define eu's subdomain as `url` in mailgun's Client constructor:
+### Imports
+Once the package is installed, you can import the library using `import` or `require` approach:
 
 ```js
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere', url: 'https://api.eu.mailgun.net'});
+  const formData = require('form-data');
+  const Mailgun = require('mailgun.js');
+  const mailgun = new Mailgun(formData);
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+```
+```js
+  import * as FormData from 'form-data';
+  import Mailgun from 'mailgun.js';
+  const mailgun = new Mailgun(formData);
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+```
+### Types imports
+Starting from version **9.0.0.** types can be includes as named import:
+```TS
+ import Mailgun, { MailgunClientOptions, MessagesSendResult } from 'mailgun.js';
 ```
 
+### Interfaces and Enums imports
+Starting from version **9.0.0.** Interfaces and Enums can be imported in the next way:
+```TS
+  import { IMailgunClient } from 'mailgun.js/Interfaces';
+  import { YesNo } from 'mailgun.js/Enums';
+```
+
+### Generated docs
+The list of all available Types, Interfaces and Enums is auto-generated and located in the docs/ folder.
 
 ## Methods
 
