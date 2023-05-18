@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AMD Build</title>
+</head>
+<body>
+  <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+  <script>
+
+    require(['../../dist/browser/umd/mailgun.umd.js'], function(Mailgun) {
+        const mg = new Mailgun(FormData);
+        const mailgunClient = mg.client({
+            "username": "api",
+            "key": "key"
+        });
+        console.log(mailgunClient);
+
+
+        var elemDiv = document.createElement('div');
+        elemDiv.innerText = 'Mailgun client imported via requirejs';
+        document.body.appendChild(elemDiv);
+    });
+  </script>
+</body>
+</html>

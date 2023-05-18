@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ESM build</title>
+</head>
+<body>
+ <!-- Using script tag with type="module" -->
+ <script type="module">
+  import Mailgun from './esm/mailgun.esm.js';
+  const mg1 = new Mailgun(FormData);
+  const mailgunClient1 = mg1.client({
+      "username": "api",
+      "key": "key"
+  });
+  console.log('Mailgun Client', mailgunClient1)
+
+  var elemDiv = document.createElement('div');
+  elemDiv.innerText = 'Mailgun successfully imported via script with type="module"';
+  elemDiv.style.color = '#4BB543';
+  document.body.appendChild(elemDiv);
+</script>
+
+<!-- Using dynamic import() with async/await -->
+<script>
+  async function loadMyModule() {
+    const { default: Mailgun } = await import('./esm/mailgun.esm.js');
+    const mg = new Mailgun(FormData);
+    const mailgunClient = mg.client({
+        "username": "api",
+        "key": "key"
+    });
+    console.log('Mailgun Client with dynamic import', mailgunClient)
+
+    var elemDiv = document.createElement('div');
+    elemDiv.style.color = '#4BB543';
+    elemDiv.innerText = 'Mailgun successfully imported using dynamic import() with async/await';
+    document.body.appendChild(elemDiv);
+  }
+  loadMyModule();
+</script>
+<h3>ESM modules can't be imported from the file directly. <br>Please use `npm run start:esm-example` on a root level to run an example. And then navigate to http://localhost:8080/
+<br>Otherwise, you will have an error: <br> <code>Access to script at from origin 'null' has been blocked by CORS policy.</code></h3>
+</body>
+</html>

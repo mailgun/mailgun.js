@@ -222,5 +222,3 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
       }));
   }
 }
-
-module.exports = SuppressionClient;

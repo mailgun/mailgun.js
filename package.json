@@ -1,15 +1,16 @@
 {
   "name": "mailgun.js",
-  "version": "8.2.1",
-  "main": "./dist/mailgun.node.js",
-  "browser": "./dist/mailgun.web.js",
-  "types": "./index.d.ts",
+  "version": "8.2.2",
+  "main": "./node/cjs/mailgun.cjs.js",
+  "browser": "./browser/umd/mailgun.umd.js",
+  "types": "./lib/index.d.ts",
   "author": "Mailgun",
   "license": "MIT",
   "keywords": [
     "mailgun",
     "email"
   ],
+  "type": "module",
   "private": true,
   "repository": {
     "type": "git",
@@ -22,33 +23,43 @@
   "scripts": {
     "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build:prepublish",
     "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build:prepublish",
-    "build:prepublish": "node ./SetupPackage.js",
+    "build:r": "rollup -c && npm run build:prepublish",
+    "build:prepublish": "node ./SetupPackage.cjs",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
-    "test": "multi='dot=- xunit=./results.xml' nyc --reporter=text-summary --reporter=lcov --report-dir=.coverage mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
+    "test": "multi='dot=- xunit=./results.xml' nyc --reporter=text-summary --reporter=lcov --report-dir=.coverage mocha -t 10000",
+    "test:imports": "playwright test",
     "test:watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "lint": "eslint . && eslint . --ext .ts",
     "release": "standard-version -a",
     "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start:esm-example": "http-server ./examples/browser/esm"
   },
   "typescript": {
     "definition": "./index.d.ts"
   },
   "dependencies": {
     "axios": "^1.3.3",
-    "base-64": "^1.0.0",
+    "base64-esm": "^1.0.0",
+    "ts-node-dev": "^2.0.0",
     "url-join": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.21.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^12.1.4",
+    "@playwright/test": "^1.33.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
     "@types/base-64": "^1.0.0",
     "@types/chai": "^4.2.14",
     "@types/chai-spies": "^1.0.3",
+    "@types/form-data": "^2.5.0",
     "@types/mocha": "^8.2.0",
     "@types/url-join": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
@@ -56,26 +67,34 @@
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
+    "cross-blob": "^3.0.2",
+    "cypress": "^12.10.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-tsdoc": "^0.2.10",
+    "esm": "^3.2.25",
     "form-data": "^3.0.1",
+    "http-server": "^14.1.1",
     "husky": "^7.0.1",
     "json-loader": "^0.5.7",
-    "mocha": "^9.2.0",
+    "mocha": "^10.0.0",
     "mocha-multi": "^1.1.3",
     "nock": "^13.0.4",
     "nyc": "^15.1.0",
     "path-browserify": "^1.0.1",
+    "playwright": "^1.32.3",
+    "requirejs": "^2.3.6",
+    "rollup": "^3.20.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-typescript2": "^0.34.1",
     "standard-version": "^9.3.1",
     "terser-webpack-plugin": "^5.2.0",
     "ts-loader": "^8.0.12",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.22.11",
     "typescript": "^4.1.3",
-    "webpack": "^5.3.2",
     "webpack-cli": "^4.1.0",
     "webpack-merge": "^5.8.0"
   },
@@ -118,6 +137,18 @@
       "prerelease": "npm test && npm run build:release",
       "postchangelog": "npm run build:prepublish && git add -A dist",
       "posttag": "git push && git push --tags && rm -rf build"
+    }
+  },
+  "exports": {
+    ".": {
+      "browser": {
+        "require": "./browser/umd/mailgun.umd.js",
+        "import": "./browser/esm/mailgun.esm.js"
+      },
+      "node": {
+        "require": "./node/cjs/mailgun.cjs.js",
+        "import": "./node/esm/mailgun.esm.mjs"
+      }
     }
   }
 }

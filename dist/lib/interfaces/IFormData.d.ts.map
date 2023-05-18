@@ -1,0 +1,1 @@
+{"version":3,"file":"IFormData.d.ts","sourceRoot":"","sources":["../../../lib/interfaces/IFormData.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,YAAY,MAAM,WAAW,CAAC;AAE1C,MAAM,WAAW,gBAAgB;IAC/B,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAC;CACpB;AAED,MAAM,WAAW,aAAa;IAC5B,KAAK,OAAO,CAAC,EAAE,eAAe,GAAG,gBAAgB,GAAG,YAAY,GAAG,QAAQ,CAAC;CAC7E"}

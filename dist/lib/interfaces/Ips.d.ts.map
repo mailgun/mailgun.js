@@ -1,0 +1,1 @@
+{"version":3,"file":"Ips.d.ts","sourceRoot":"","sources":["../../../lib/interfaces/Ips.ts"],"names":[],"mappings":"AACA,MAAM,WAAW,mBAAmB;IAClC,mBAAmB,EAAE,OAAO,CAAC;IAC7B,KAAK,EAAE,MAAM,EAAE,CAAC;IAChB,WAAW,EAAE,MAAM,CAAC;CACrB;AAED,MAAM,WAAW,MAAM;IACrB,EAAE,EAAE,MAAM,CAAC;IACX,SAAS,EAAE,OAAO,CAAC;IACnB,IAAI,EAAE,MAAM,CAAC;CACd"}

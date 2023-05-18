@@ -1,7 +1,7 @@
-import * as base64 from 'base-64';
+import { base64Encode } from 'base64-esm'
 import urljoin from 'url-join';
 import axios, {
-  AxiosError, AxiosResponse, AxiosHeaders, RawAxiosRequestHeaders
+  AxiosError, AxiosHeaders, AxiosRequestHeaders, AxiosResponse, RawAxiosRequestHeaders
 } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './error';
@@ -17,7 +17,7 @@ class Request {
   private key: string;
   private url: string;
   private timeout: number;
-  private headers: AxiosHeaders;
+  private headers: AxiosRequestHeaders;
   private formDataBuilder: FormDataBuilder;
   private maxBodyLength: number;
 
@@ -104,7 +104,7 @@ class Request {
   ): AxiosHeaders {
     const requestHeaders = new AxiosHeaders();
 
-    const basic = base64.encode(`${this.username}:${this.key}`);
+    const basic = base64Encode(`${this.username}:${this.key}`);
     requestHeaders.setAuthorization(`Basic ${basic}`);
     requestHeaders.set(this.headers);
 

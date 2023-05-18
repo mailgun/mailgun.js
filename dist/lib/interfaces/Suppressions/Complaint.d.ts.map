@@ -1,0 +1,1 @@
+{"version":3,"file":"Complaint.d.ts","sourceRoot":"","sources":["../../../../lib/interfaces/Suppressions/Complaint.ts"],"names":[],"mappings":"AACA,MAAM,WAAW,aAAa;IAC1B,OAAO,EAAE,MAAM,CAAC;IAChB,UAAU,EAAE,MAAM,GAAG,IAAI,CAAC;CAC7B;AAED,MAAM,WAAW,UAAU;IACvB,OAAO,EAAE,MAAM,CAAC;IAChB,UAAU,EAAE,IAAI,CAAC;IACjB,IAAI,EAAE,MAAM,CAAC;CAChB"}

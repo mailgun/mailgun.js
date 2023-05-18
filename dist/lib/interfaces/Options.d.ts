@@ -1,0 +1,9 @@
+interface Options {
+    username: string;
+    key: string;
+    url?: string;
+    public_key?: string;
+    timeout?: number;
+}
+export default Options;
+//# sourceMappingURL=Options.d.ts.map

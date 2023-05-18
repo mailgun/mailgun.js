@@ -1,10 +1,10 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
-import DomainsTagsClient, { DomainTagStatistic } from '../lib/domainsTags';
+import Request from '../lib/request.js';
+import { RequestOptions } from '../lib/interfaces/RequestOptions.js';
+import { InputFormData } from '../lib/interfaces/IFormData.js';
+import DomainsTagsClient, { DomainTagStatistic } from '../lib/domainsTags.js';
 import {
   DomainTagCountriesAggregation,
   DomainTagDevicesAggregation,

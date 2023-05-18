@@ -1,8 +1,9 @@
 import formData from 'form-data';
 import fs from 'fs';
 import path from 'path';
-
 import nock from 'nock';
+import { fileURLToPath } from 'url';
+
 import Request from '../lib/request';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
@@ -13,6 +14,8 @@ import {
   MultipleValidationJobsListResult
 } from '../lib/interfaces/MultipleValidation';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 
 describe('ValidateClient', function () {

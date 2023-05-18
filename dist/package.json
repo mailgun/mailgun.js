@@ -1,9 +1,9 @@
 {
   "name": "mailgun.js",
-  "version": "8.2.1",
-  "main": "./mailgun.node.js",
-  "browser": "./mailgun.web.js",
-  "types": "./index.d.ts",
+  "version": "8.2.2",
+  "main": "./node/cjs/mailgun.cjs.js",
+  "browser": "./browser/umd/mailgun.umd.js",
+  "types": "./lib/index.d.ts",
   "author": "Mailgun",
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "axios": "^1.3.3",
-    "base-64": "^1.0.0",
+    "base64-esm": "^1.0.0",
+    "ts-node-dev": "^2.0.0",
     "url-join": "^4.0.1"
   },
   "contributors": [
@@ -36,5 +37,17 @@
       "name": "Eddy Hernandez",
       "url": "https://github.com/eddywashere"
     }
-  ]
+  ],
+  "exports": {
+    ".": {
+      "browser": {
+        "require": "./browser/umd/mailgun.umd.js",
+        "import": "./browser/esm/mailgun.esm.js"
+      },
+      "node": {
+        "require": "./node/cjs/mailgun.cjs.js",
+        "import": "./node/esm/mailgun.esm.mjs"
+      }
+    }
+  }
 }

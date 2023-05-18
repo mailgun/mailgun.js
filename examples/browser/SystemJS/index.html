@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SystemJS build</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.10.3/system.min.js"></script>
+  <script>
+    System.import('../../dist/browser/umd/mailgun.umd.js').then(function(MailgunExport) {
+        const Mailgun = MailgunExport.default;
+        const mg = new Mailgun(FormData);
+        const mailgunClient = mg.client({
+            "username": "api",
+            "key": "key"
+        });
+        console.log(mailgunClient);
+
+
+        var elemDiv = document.createElement('div');
+        elemDiv.innerText = 'Mailgun imported via systemjs';
+        document.body.appendChild(elemDiv);
+    });
+  </script>
+</body>
+</html>

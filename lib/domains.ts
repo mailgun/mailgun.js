@@ -21,13 +21,13 @@ import {
   UpdatedWebPrefixResponse,
   ReplacementForPool,
   MessageResponse,
-} from './interfaces/Domains';
+} from './interfaces/Domains.js';
 
-import APIResponse from './interfaces/ApiResponse';
-import APIError from './error';
-import APIErrorOptions from './interfaces/APIErrorOptions';
+import APIResponse from './interfaces/ApiResponse.js';
+import APIError from './error.js';
+import APIErrorOptions from './interfaces/APIErrorOptions.js';
 
-import Request from './request';
+import Request from './request.js';
 import {
   DomainTrackingResponse,
   DomainTrackingData,
@@ -36,13 +36,13 @@ import {
   UnsubscribeTrackingInfo,
   UpdateDomainTrackingResponse,
   UpdatedOpenTracking
-} from './interfaces/DomainTracking';
-import { IDomainCredentials } from './interfaces/DomainCredentials';
-import { IDomainTemplatesClient } from './interfaces/DomainTemplates';
-import DomainCredentialsClient from './domainsCredentials';
-import DomainTemplatesClient from './domainsTemplates';
-import { IDomainTagsClient } from './interfaces/DomainTags';
-import DomainTagsClient from './domainsTags';
+} from './interfaces/DomainTracking.js';
+import { IDomainCredentials } from './interfaces/DomainCredentials.js';
+import { IDomainTemplatesClient } from './interfaces/DomainTemplates.js';
+import DomainCredentialsClient from './domainsCredentials.js';
+import DomainTemplatesClient from './domainsTemplates.js';
+import { IDomainTagsClient } from './interfaces/DomainTags.js';
+import DomainTagsClient from './domainsTags.js';
 
 export class Domain {
   name: string;

@@ -2,12 +2,17 @@ import fs from 'fs';
 import nock from 'nock';
 import { expect } from 'chai';
 import formData from 'form-data';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import Request from '../lib/request';
 import MessagesClient from '../lib/messages';
 import { RequestOptions } from '../lib/interfaces/RequestOptions';
 import { InputFormData } from '../lib/interfaces/IFormData';
 
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
 describe('MessagesClient', function () {

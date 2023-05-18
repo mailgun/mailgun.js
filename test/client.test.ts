@@ -1,22 +1,22 @@
-import formData from 'form-data';
+import NodeFormData from 'form-data';
 
 import { expect } from 'chai';
 
-import Client from '../lib/client';
-import Request from '../lib/request';
-import DomainsClient from '../lib/domains';
-import EventsClient from '../lib/events';
-import WebhooksClient from '../lib/webhooks';
-import SuppressionsClient from '../lib/suppressions';
-import MessagesClient from '../lib/messages';
-import RoutesClient from '../lib/routes';
-import ValidateClient from '../lib/validate';
+import Client from '../lib/client.js';
+import Request from '../lib/request.js';
+import DomainsClient from '../lib/domains.js';
+import EventsClient from '../lib/events.js';
+import WebhooksClient from '../lib/webhooks.js';
+import SuppressionsClient from '../lib/suppressions.js';
+import MessagesClient from '../lib/messages.js';
+import RoutesClient from '../lib/routes.js';
+import ValidateClient from '../lib/validate.js';
 
-import { InputFormData } from '../lib/interfaces/IFormData';
-import StatsClient from '../lib/stats';
-import ListsClient from '../lib/lists';
-import IpPoolsClient from '../lib/ip-pools';
-import IpsClient from '../lib/ips';
+import { InputFormData } from '../lib/interfaces/IFormData.js';
+import StatsClient from '../lib/stats.js';
+import ListsClient from '../lib/lists.js';
+import IpPoolsClient from '../lib/ip-pools.js';
+import IpsClient from '../lib/ips.js';
 
 describe('Client', function () {
   let client: any;
@@ -27,13 +27,13 @@ describe('Client', function () {
       key: 'key',
       public_key: 'key',
       timeout: 10000
-    }, formData as InputFormData);
+    }, NodeFormData as InputFormData);
   });
 
   it('raises error when username is not provided', function () {
     expect(
       function () {
-        return new Client({ key: 'key' } as any, formData as InputFormData);
+        return new Client({ key: 'key' } as any, NodeFormData as InputFormData);
       }
     ).to.throw('Parameter "username" is required');
   });
@@ -41,7 +41,7 @@ describe('Client', function () {
   it('raises error when key is not provided', function () {
     expect(
       function () {
-        return new Client({ username: 'username' } as any, formData as InputFormData);
+        return new Client({ username: 'username' } as any, NodeFormData as InputFormData);
       }
     ).to.throw('Parameter "key" is required');
   });

@@ -1,10 +1,10 @@
 {
-  "include": ["lib", "test"],
+  "include": ["lib", "test", "tests/imports"],
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "es5",
+    "module": "ESNext",
+    "target": "es6",
     "allowJs": true,
     "declaration": true,
     "esModuleInterop": true,
@@ -13,12 +13,20 @@
     "incremental": true,
     "skipLibCheck": true,
     "strict": true,
-    "declarationDir": "./dist",
+    "sourceMap": true,
+    "declarationDir": "./dist/",
+    "declarationMap": true,
   },
   "typedocOptions": {
     "out": "docs",
     "entryPointStrategy": "expand",
     "entryPoints": ["./lib"],
     "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**"]
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "showConfig": true,
+    "transpileOnly": true,
   }
 }
