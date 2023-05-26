@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.2.2](https://github.com/mailgun/mailgun.js/compare/v8.2.1...v8.2.2) (2023-05-26)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump webpack from 5.70.0 to 5.76.0 ([3b28232](https://github.com/mailgun/mailgun.js/commits/3b2823281e5ff59f1d04e55bf4f37da6bc691df7))
+* **deps:** bump yaml and @commitlint/cli ([c6d1538](https://github.com/mailgun/mailgun.js/commits/c6d153874e306a8b4209b544005918e5307ce332))
+
 ### [8.2.1](https://github.com/mailgun/mailgun.js/compare/v8.2.0...v8.2.1) (2023-03-06)
 
 

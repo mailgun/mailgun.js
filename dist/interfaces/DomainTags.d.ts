@@ -5,11 +5,11 @@ export declare enum Resolution {
     DAY = "day",
     MONTH = "month"
 }
-export declare type DomainTagsQuery = {
+export type DomainTagsQuery = {
     limit: number;
     page?: string;
 };
-export declare type DomainTagsStatisticQuery = {
+export type DomainTagsStatisticQuery = {
     event: string;
     start?: number;
     end?: number;

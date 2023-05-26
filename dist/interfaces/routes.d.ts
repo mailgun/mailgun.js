@@ -13,13 +13,13 @@ export interface DestroyRouteResponse {
     id: string;
     message: string;
 }
-export declare type CreateUpdateRouteData = {
+export type CreateUpdateRouteData = {
     priority?: number;
     description?: string;
     expression: string;
     action: string[];
 };
-export declare type RoutesListQuery = {
+export type RoutesListQuery = {
     limit?: number;
     skip?: number;
 };

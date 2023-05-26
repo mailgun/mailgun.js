@@ -35,13 +35,13 @@ export interface UpdateDomainTrackingResponse {
     status: number;
     body: UpdatedOpenTracking;
 }
-export declare type OpenTrackingInfo = {
+export type OpenTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false';
 };
-export declare type ClickTrackingInfo = {
+export type ClickTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false' | 'htmlonly';
 };
-export declare type UnsubscribeTrackingInfo = {
+export type UnsubscribeTrackingInfo = {
     active: 'yes' | 'no' | 'true' | 'false';
     html_footer: string;
     text_footer: string;

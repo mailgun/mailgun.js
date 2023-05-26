@@ -1,4 +1,4 @@
-export declare type DomainsQuery = {
+export type DomainsQuery = {
     authority?: string;
     state?: 'active' | 'unverified' | 'disabled';
     limit?: number;
@@ -44,7 +44,7 @@ export interface DNSRecord {
     valid: string;
     value: string;
 }
-export declare type DomainResponseData = {
+export type DomainResponseData = {
     status: number;
     body: {
         domain: DomainData;
@@ -67,7 +67,7 @@ export interface DestroyedDomainResponse {
     status: number;
     body: MessageResponse;
 }
-export declare type ConnectionSettings = {
+export type ConnectionSettings = {
     require_tls: boolean;
     skip_verification: boolean;
 };

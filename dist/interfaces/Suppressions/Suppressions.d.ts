@@ -15,11 +15,11 @@ export interface SuppressionList {
     pages: ParsedPagesList;
     status: number;
 }
-export declare type SuppressionListQuery = {
+export type SuppressionListQuery = {
     limit?: number;
     page?: string;
 };
-export declare type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
+export type SuppressionDataType = BounceData | ComplaintData | UnsubscribeData | WhiteListData;
 export interface SuppressionListResponse {
     body: {
         items: BounceData[] | ComplaintData[] | UnsubscribeData[] | WhiteListData[];
@@ -45,7 +45,7 @@ export interface SuppressionDestroyResult {
     address: string;
     status: number;
 }
-export declare type SuppressionCreationData = {
+export type SuppressionCreationData = {
     address: string;
     code?: number;
     error?: string;
