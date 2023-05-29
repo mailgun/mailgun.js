@@ -57,7 +57,7 @@ Once the package is installed, you can import the library using `import` or `req
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 ### Types imports
-Starting from version **9.0.0.** types can be includes as named import:
+Starting from version **9.0.0.** Types can be includes as named import:
 ```TS
  import Mailgun, { MailgunClientOptions, MessagesSendResult } from 'mailgun.js';
 ```
@@ -65,8 +65,11 @@ Starting from version **9.0.0.** types can be includes as named import:
 ### Interfaces and Enums imports
 Starting from version **9.0.0.** Interfaces and Enums can be imported in the next way:
 ```TS
-  import { IMailgunClient } from 'mailgun.js/Interfaces';
-  import { YesNo } from 'mailgun.js/Enums';
+  import Mailgun, { Interfaces, Enums } from 'mailgun.js';
+  ...
+  const mailgunClient: Interfaces.IMailgunClient = mailgun.client(clientOptions);
+  const yes = Enums.YesNo.YES;
+  ...
 ```
 
 ### Generated docs

@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.0](https://github.com/mailgun/mailgun.js/compare/v8.2.2...v9.0.0) (2023-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Types available as a named import from the package
+* Add missing types and interfaces
+* Move StatsClient and StatsContainer classes to different files
+* Move rest of the types to appropriate folders
+* Move common types to another folder
+* Move Validations types to another folder
+* Move Suppressions types to another folder
+* Move MailingLists types to another folder
+* Move domains types to another folder
+* WebhookClient class renamed to WebhooksClient
+* Client class renamed to MailgunClient
+* Options interfase renamed to MailgunClientOptions
+
+### Features
+
+* Add missing types and interfaces ([ea4f289](https://github.com/mailgun/mailgun.js/commits/ea4f2898c93504354c57eb26bf6264dbfdec80e2))
+* Add types,enums, and interfaces to default export from SDK ([6ccc043](https://github.com/mailgun/mailgun.js/commits/6ccc0433569cb55de48125a527cf6d527f329c6f))
+* TS version update ([8523c11](https://github.com/mailgun/mailgun.js/commits/8523c118e2320e13a2d4ce430bbef1d9756dc082))
+* Types available as a named import from the package ([adf93c8](https://github.com/mailgun/mailgun.js/commits/adf93c81391f2224a11432739c0caa75c6c7079b))
+
+
+### Breaking changes
+
+* Group enums to own folder ([306e19a](https://github.com/mailgun/mailgun.js/commits/306e19a56c97ce03c9b8af5fc6363a0726864c61))
+* Group related Classes and Interfaces to folders ([8d785fa](https://github.com/mailgun/mailgun.js/commits/8d785fa1fd6232dca4651b8f38666192369961c3))
+* Move common types to another folder ([d31b802](https://github.com/mailgun/mailgun.js/commits/d31b8026799d5d2d66a940cccb9973e6e78e6681))
+* Move domains types to another folder ([6f5b479](https://github.com/mailgun/mailgun.js/commits/6f5b479d8e03c3e2ba3b40dc6f31982e20f87a47))
+* Move MailingLists types to another folder ([416e7be](https://github.com/mailgun/mailgun.js/commits/416e7be1860e2ce7883fadcbf7d124be23b3bf5b))
+* Move rest of the types to appropriate folders ([4c0c81a](https://github.com/mailgun/mailgun.js/commits/4c0c81a8da036f438cb549d741b6322e8653367a))
+* Move StatsClient and StatsContainer classes to different files ([bfc25cf](https://github.com/mailgun/mailgun.js/commits/bfc25cf9ff926657b73e8dc7c7593f67ec9e2dc7))
+* Move Suppressions types to another folder ([efd2e92](https://github.com/mailgun/mailgun.js/commits/efd2e929b82200bfca7407e424069462a543b7da))
+* Move Validations types to another folder ([a64112a](https://github.com/mailgun/mailgun.js/commits/a64112aa32c8f03b8dd8e467f5a87e9e1a2d4b49))
+
+
+### Other changes
+
+* Add typedock generation step to release ([d7afc0e](https://github.com/mailgun/mailgun.js/commits/d7afc0ea06db5b38f228f1beb32aeeee1b925dd5))
+* Decrease number of eslint warnings ([c372344](https://github.com/mailgun/mailgun.js/commits/c37234443a4a853ac5a668a32ddd140d8bc3d6a9))
+* Merge branch 'master' into expose-types ([53f6435](https://github.com/mailgun/mailgun.js/commits/53f643512686619506cebf8fe59bb546306d6263))
+* Move suppressions classes to different files ([2b692de](https://github.com/mailgun/mailgun.js/commits/2b692deb2b7acb11cb3ce189342d751844d441b5))
+* Rename suppressions.ts file to SuppressionClient.ts ([b3ba0ac](https://github.com/mailgun/mailgun.js/commits/b3ba0acc90111d953f2278b4c0d49729cd649c8b))
+* Update interfaces folder name to be Interfaces in dist ([0b22bcd](https://github.com/mailgun/mailgun.js/commits/0b22bcd6be02b111a1030df2b0d3c0ae6d491e3c))
+* Update readme one more time ([0f5a98b](https://github.com/mailgun/mailgun.js/commits/0f5a98b507d2dca3668d2efda05c0aa7d42a1043))
+* Update registry for npm ([3175093](https://github.com/mailgun/mailgun.js/commits/3175093de9501eb5976387a31c237fdd349da1fd))
+* Update ts-loader and ts-node ([d6b0ba0](https://github.com/mailgun/mailgun.js/commits/d6b0ba0b96a9346a7f7347c0b2ddb40bee16a608))
+* Update Typedoc documentation ([6ae20c2](https://github.com/mailgun/mailgun.js/commits/6ae20c2b82968ac89c4bd01e1a8c45c122c5445e))
+
 ### [8.2.2](https://github.com/mailgun/mailgun.js/compare/v8.2.1...v8.2.2) (2023-05-26)
 
 
