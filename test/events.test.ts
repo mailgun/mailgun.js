@@ -2,11 +2,10 @@ import { expect } from 'chai';
 import nock from 'nock';
 
 import formData from 'form-data';
-import EventClient from '../lib/events';
-import MgRequest from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
-import { EventsList, EventsResponse } from '../lib/interfaces/Events';
+import EventClient from '../lib/Classes/Events';
+import MgRequest from '../lib/Classes/common/Request';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { EventsList } from '../lib/Types/Events';
 
 describe('EventsClient', function () {
   let client: EventClient;
@@ -22,7 +21,7 @@ describe('EventsClient', function () {
   });
 
   describe('GET', function () {
-    let response: any;
+    let response: Record<string, unknown>;
 
     beforeEach(function () {
       response = {

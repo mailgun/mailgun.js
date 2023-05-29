@@ -2,24 +2,26 @@ import formData from 'form-data';
 
 import { expect } from 'chai';
 
-import Client from '../lib/client';
-import Request from '../lib/request';
-import DomainsClient from '../lib/domains';
-import EventsClient from '../lib/events';
-import WebhooksClient from '../lib/webhooks';
-import SuppressionsClient from '../lib/suppressions';
-import MessagesClient from '../lib/messages';
-import RoutesClient from '../lib/routes';
-import ValidateClient from '../lib/validate';
+import Client from '../lib/Classes/MailgunClient';
+import Request from '../lib/Classes/common/Request';
+import EventsClient from '../lib/Classes/Events';
+import WebhooksClient from '../lib/Classes/Webhooks';
+import SuppressionsClient from '../lib/Classes/Suppressions/SuppressionsClient';
+import MessagesClient from '../lib/Classes/Messages';
+import RoutesClient from '../lib/Classes/Routes';
+import ValidateClient from '../lib/Classes/Validations/validate';
 
-import { InputFormData } from '../lib/interfaces/IFormData';
-import StatsClient from '../lib/stats';
-import ListsClient from '../lib/lists';
-import IpPoolsClient from '../lib/ip-pools';
-import IpsClient from '../lib/ips';
+import StatsClient from '../lib/Classes/Stats/StatsClient';
+import ListsClient from '../lib/Classes/MailingLists/mailingLists';
+import IpPoolsClient from '../lib/Classes/IPPools';
+import IpsClient from '../lib/Classes/IPs';
+import { InputFormData } from '../lib/Types/Common';
+import DomainsClient from '../lib/Classes/Domains/domainsClient';
+import { MailgunClientOptions } from '../lib/Types/MailgunClient';
+import { IMailgunClient } from '../lib/Interfaces';
 
 describe('Client', function () {
-  let client: any;
+  let client: IMailgunClient;
 
   beforeEach(function () {
     client = new Client({
@@ -33,7 +35,7 @@ describe('Client', function () {
   it('raises error when username is not provided', function () {
     expect(
       function () {
-        return new Client({ key: 'key' } as any, formData as InputFormData);
+        return new Client({ key: 'key' } as MailgunClientOptions, formData as InputFormData);
       }
     ).to.throw('Parameter "username" is required');
   });
@@ -41,13 +43,13 @@ describe('Client', function () {
   it('raises error when key is not provided', function () {
     expect(
       function () {
-        return new Client({ username: 'username' } as any, formData as InputFormData);
+        return new Client({ username: 'username' } as MailgunClientOptions, formData as InputFormData);
       }
     ).to.throw('Parameter "key" is required');
   });
 
   it('exposes raw request client', function () {
-    client.request.should.be.instanceOf(Request);
+    client.should.have.property('request').to.be.instanceOf(Request);
   });
 
   it('creates domain client', function () {

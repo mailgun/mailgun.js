@@ -18,7 +18,7 @@
   "typedocOptions": {
     "out": "docs",
     "entryPointStrategy": "expand",
-    "entryPoints": ["./lib"],
+    "entryPoints": ["./lib/index.ts"],
     "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**"]
   }
 }

@@ -1,24 +1,21 @@
 import chai, { expect } from 'chai';
 import formData from 'form-data';
 import nock from 'nock';
+import APIError from '../lib/Classes/common/Error';
 
-import Request from '../lib/request';
-import SuppressionClient, {
-  Bounce,
-  Unsubscribe,
-  Complaint,
-  WhiteList
-} from '../lib/suppressions';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import Request from '../lib/Classes/common/Request';
+import Bounce from '../lib/Classes/Suppressions/Bounce';
+import Complaint from '../lib/Classes/Suppressions/Complaint';
+import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient';
+import Unsubscribe from '../lib/Classes/Suppressions/Unsubscribe';
+import WhiteList from '../lib/Classes/Suppressions/WhiteList';
+import { InputFormData, ParsedPage, RequestOptions } from '../lib/Types/Common';
 import {
   SuppressionCreationResult,
   SuppressionDestroyResult,
   SuppressionList,
   SuppressionListResponse
-} from '../lib/interfaces/Suppressions/Suppressions';
-import { ParsedPage } from '../lib/interfaces/NavigationThruPages';
-import APIError from '../lib/error';
+} from '../lib/Types/Suppressions';
 
 chai.should();
 

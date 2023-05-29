@@ -2,25 +2,27 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/request';
-import DomainClient, { Domain } from '../lib/domains';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import { InputFormData } from '../lib/interfaces/IFormData';
-import DomainCredentialsClient from '../lib/domainsCredentials';
+import Request from '../lib/Classes/common/Request';
+
+import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
+import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
+
 import {
-  ConnectionSettings,
   MessageResponse,
+  ConnectionSettings,
   UpdatedConnectionSettings,
   UpdatedDKIMAuthority,
-  UpdatedDKIMSelectorResponse, UpdatedWebPrefixResponse
-} from '../lib/interfaces/Domains';
-import DomainTemplatesClient from '../lib/domainsTemplates';
-import DomainTagsClient from '../lib/domainsTags';
-import APIResponse from '../lib/interfaces/ApiResponse';
+  UpdatedDKIMSelectorResponse,
+  UpdatedWebPrefixResponse,
+  TDomain
+} from '../lib/Types/Domains';
+import DomainsClient from '../lib/Classes/Domains/domainsClient';
 
 // TODO: fix types
-describe('DomainClient', function () {
-  let client: DomainClient;
+describe('DomainsClient', function () {
+  let client: DomainsClient;
   let api: nock.Scope;
 
   beforeEach(function () {
@@ -28,7 +30,7 @@ describe('DomainClient', function () {
     const domainCredentialsClient = new DomainCredentialsClient(reqObject);
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
     const domainTagsClient = new DomainTagsClient(reqObject);
-    client = new DomainClient(
+    client = new DomainsClient(
       reqObject,
       domainCredentialsClient,
       domainTemplatesClient,
@@ -60,7 +62,7 @@ describe('DomainClient', function () {
         items: domains
       });
 
-      return client.list().then(function (dm: Domain[]) {
+      return client.list().then(function (dm: TDomain[]) {
         dm[0].should.eql({
           created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
           name: 'testing.example.com',
@@ -82,7 +84,7 @@ describe('DomainClient', function () {
       api.get('/v3/domains').reply(200, {
         items: null
       });
-      const res :Domain[] = await client.list();
+      const res :TDomain[] = await client.list();
       res.should.be.an('array');
       res.length.should.equal(0);
     });
@@ -109,7 +111,7 @@ describe('DomainClient', function () {
         sending_dns_records: []
       });
 
-      return client.get('testing.example.com').then(function (domain: Domain) {
+      return client.get('testing.example.com').then(function (domain: TDomain) {
         domain.should.eql({
           created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
           name: 'testing.example.com',
@@ -153,7 +155,7 @@ describe('DomainClient', function () {
         name: 'another.example.com',
         smtp_password: 'smtp_password',
         web_scheme: 'https'
-      }).then(function (domain: Domain) {
+      }).then(function (domain: TDomain) {
         domain.should.eql({
           created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
           name: 'another.example.com',
@@ -251,7 +253,7 @@ describe('DomainClient', function () {
         ]
       });
 
-      return client.verify('test.example.com').then(function (domain: Domain) {
+      return client.verify('test.example.com').then(function (domain: TDomain) {
         domain.should.eql({
           created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
           name: 'test.example.com',

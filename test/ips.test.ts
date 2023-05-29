@@ -2,17 +2,16 @@
 
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import IpsClient from '../lib/ips';
+import Request from '../lib/Classes/common/Request';
+import IpsClient from '../lib/Classes/IPs';
 
-import { IpData, IpsListResponseBody } from '../lib/interfaces/Ips';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import { IpData, IpsListResponseBody } from '../lib/Types/IPs';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 // TODO: fix types
 describe('DomainClient', function () {
-  let client: any;
-  let api: any;
+  let client: IpsClient;
+  let api: nock.Scope;
 
   beforeEach(function () {
     client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));

@@ -1,9 +1,8 @@
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/request';
-import { RequestOptions } from '../lib/interfaces/RequestOptions';
-import IpPoolsClient from '../lib/ip-pools';
-import { InputFormData } from '../lib/interfaces/IFormData';
+import Request from '../lib/Classes/common/Request';
+import IpPoolsClient from '../lib/Classes/IPPools';
+import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
 describe('IpPoolsClient', function () {
   let client: IpPoolsClient;
