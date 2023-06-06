@@ -1,6 +1,6 @@
 import formData from 'form-data';
 
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 
 import Client from '../lib/Classes/MailgunClient';
 import Request from '../lib/Classes/common/Request';
@@ -19,6 +19,9 @@ import { InputFormData } from '../lib/Types/Common';
 import DomainsClient from '../lib/Classes/Domains/domainsClient';
 import { MailgunClientOptions } from '../lib/Types/MailgunClient';
 import { IMailgunClient } from '../lib/Interfaces';
+import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 
 describe('Client', function () {
   let client: IMailgunClient;
@@ -54,6 +57,16 @@ describe('Client', function () {
 
   it('creates domain client', function () {
     client.domains.should.be.instanceOf(DomainsClient);
+  });
+
+  it('creates domain tags client', () => {
+    client.domains.domainTags.should.be.instanceOf(DomainTagsClient);
+  });
+  it('creates domain credentials client', () => {
+    client.domains.domainCredentials.should.be.instanceOf(DomainCredentialsClient);
+  });
+  it('creates domain templates client', () => {
+    client.domains.domainTemplates.should.be.instanceOf(DomainTemplatesClient);
   });
 
   it('creates event client', function () {
