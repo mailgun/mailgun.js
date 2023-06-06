@@ -22,6 +22,7 @@ import { IMailgunClient } from '../lib/Interfaces';
 import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
+import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 
 describe('Client', function () {
   let client: IMailgunClient;
@@ -107,5 +108,9 @@ describe('Client', function () {
 
   it('creates address validate client', function () {
     client.validate.should.be.instanceOf(ValidateClient);
+  });
+
+  it('creates multiple validation client', function () {
+    client.validate.multipleValidation.should.be.instanceOf(MultipleValidationClient);
   });
 });

@@ -3,11 +3,12 @@ import {
   MultipleValidationJobResult,
   CreatedMultipleValidationJob,
   CanceledMultipleValidationJob,
-  MultipleValidationCreationData
+  MultipleValidationCreationData,
+  MultipleValidationJobsListQuery
 } from '../../Types/Validations';
 
 export interface IMultipleValidationClient {
-  list(): Promise<MultipleValidationJobsListResult>
+  list(query?:MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult>
   get(listId: string): Promise<MultipleValidationJobResult>
   create(
     listId: string,
