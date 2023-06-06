@@ -73,7 +73,7 @@ Starting from version **9.0.0.** Interfaces and Enums can be imported in the nex
 ```
 
 ### Generated docs
-The list of all available Types, Interfaces and Enums is auto-generated and located in the docs/ folder.
+The list of all available Types, Interfaces and Enums is auto-generated and located in the [docs](/docs/index.html) folder.
 
 ## Methods
 
