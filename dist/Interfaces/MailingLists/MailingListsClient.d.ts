@@ -1,5 +1,7 @@
 import { CreateUpdateList, DestroyedList, ListsQuery, MailingList, MailingListCancelValidationResult, MailingListResult, MailingListValidationResult, StartValidationResult } from '../../Types/MailingLists';
+import { IMailListsMembers } from './MailingListMembers';
 export interface IMailingListsClient {
+    members: IMailListsMembers;
     list(query?: ListsQuery): Promise<MailingListResult>;
     get(mailListAddress: string): Promise<MailingList>;
     create(data: CreateUpdateList): Promise<MailingList>;

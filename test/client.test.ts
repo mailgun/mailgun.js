@@ -23,6 +23,7 @@ import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
+import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers';
 
 describe('Client', function () {
   let client: IMailgunClient;
@@ -104,6 +105,10 @@ describe('Client', function () {
 
   it('creates lists client', function () {
     client.lists.should.be.instanceOf(ListsClient);
+  });
+
+  it('creates mail lists members client', function () {
+    client.lists.members.should.be.instanceOf(MailListsMembers);
   });
 
   it('creates address validate client', function () {
