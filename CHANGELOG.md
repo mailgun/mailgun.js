@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.0.1](https://github.com/mailgun/mailgun.js/compare/v9.0.0...v9.0.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* Add public properties to IDomainsClient interface ([f4ca325](https://github.com/mailgun/mailgun.js/commits/f4ca3253c9042cd67739024cc6096996dbdcd026))
+* Add public properties to IMailListsMembers interface ([0782c8d](https://github.com/mailgun/mailgun.js/commits/0782c8d3d04b520cce6eaec51231089ba44864a1))
+* Add public properties to IMultipleValidationClient interface ([f1fd614](https://github.com/mailgun/mailgun.js/commits/f1fd6142c5ccbf5b772ce91d51d165fcb867af54))
+
+
+### Other changes
+
+* Add tests for IDomainsClient public props ([8f1b81e](https://github.com/mailgun/mailgun.js/commits/8f1b81e663d4c26f16e22b3073045abf98061f14))
+
 ## [9.0.0](https://github.com/mailgun/mailgun.js/compare/v8.2.2...v9.0.0) (2023-05-29)
 
 
