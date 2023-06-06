@@ -1,6 +1,7 @@
 import formData from 'form-data';
 
 import nock from 'nock';
+import { IDomainTagsClient } from '../lib/Interfaces/Domains/DomainTags';
 import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import DomainsTagsClient, { DomainTagStatistic } from '../lib/Classes/Domains/domainsTags';
@@ -14,7 +15,7 @@ import {
 } from '../lib/Types/Domains';
 
 describe('DomainsTagsClient', function () {
-  let client: DomainsTagsClient;
+  let client: IDomainTagsClient;
   let api: nock.Scope;
 
   beforeEach(function () {
@@ -262,7 +263,7 @@ describe('DomainsTagsClient', function () {
     });
   });
 
-  describe('providers', function () {
+  describe('devices', function () {
     it('returns statistic by devices for a tag', function () {
       api.get('/v3/testDomain/tags/tagName/stats/aggregates/devices').reply(200, {
         device: {

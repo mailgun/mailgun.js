@@ -20,9 +20,9 @@ export default class MailingListsClient
   implements IMailingListsClient {
   baseRoute: string;
   request: Request;
-  members: IMailListsMembers;
+  public members: IMailListsMembers;
 
-  constructor(request: Request, members:IMailListsMembers) {
+  constructor(request: Request, members: IMailListsMembers) {
     super(request);
     this.request = request;
     this.baseRoute = '/v3/lists';

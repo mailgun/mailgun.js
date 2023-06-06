@@ -19,8 +19,14 @@ import {
   UpdatedWebPrefixResponse,
   WebPrefixInfo
 } from '../../Types/Domains';
+import { IDomainCredentials } from './DomainCredentials';
+import { IDomainTagsClient } from './DomainTags';
+import { IDomainTemplatesClient } from './DomainTemplates';
 
 export interface IDomainsClient {
+    domainCredentials: IDomainCredentials
+    domainTemplates: IDomainTemplatesClient
+    domainTags: IDomainTagsClient
     list(query?: DomainsQuery): Promise<TDomain[]>
     get(domain: string): Promise<TDomain>
     create(data: DomainInfo): Promise<TDomain>

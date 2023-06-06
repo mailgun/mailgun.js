@@ -78,7 +78,7 @@ export type MultipleValidationJobsListResult = {
 
 export type MultipleValidationJobsListQuery = {
     limit: number;
-    page: string;
+    page?: string;
 }
 
 export type MultipleValidationJobsListResponse = {
