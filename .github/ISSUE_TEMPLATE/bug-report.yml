@@ -1,0 +1,60 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: mailgun_version
+    label: What mailgun.js Version?
+    attributes:
+      label: Version
+      description: What version of mailgun.js are you running?
+    validations:
+      required: true
+  - type: dropdown
+    id: form_data_version
+    description: "FormData is required for Mailgun constructor. Please specify the which implementation are you using"
+    attributes:
+      label: What FormData Version?
+      multiple: false
+      options:
+        - Browser Form data
+        - Node.js native form data
+        - npm package (please additionally specify the name and version in 'What happened' section)
+  - type: input
+    id: node_js_version
+    label: What Node.js Version?
+    attributes:
+      label: Version
+      description: What version of Node.js are you running (if applicable)?
+    validations:
+      required: false
+  - type: dropdown
+    id: browser_version
+    attributes:
+      label: What browsers are you seeing the problem on (if applicable)?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
