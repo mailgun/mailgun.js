@@ -1,3 +1,5 @@
+mailgun.js / [Exports](modules.md)
+
 # Mailgun.js
 
 A javascript sdk for Mailgun built with webpack, babel & es6. This can be used in node or in the browser*.
@@ -73,7 +75,7 @@ Starting from version **9.0.0.** Interfaces and Enums can be imported in the nex
 ```
 
 ### Generated docs
-The list of all available Types, Interfaces and Enums is auto-generated and located in the [docs](./docs/modules.md) folder.
+The list of all available Types, Interfaces and Enums is auto-generated and located in the [docs](/docs/modules.md) folder.
 
 ## Methods
 
@@ -180,7 +182,6 @@ Method naming conventions:
   o:tracking-opens  | Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. Pass yes or no.
   h:X-My-Header     | h: prefix followed by an arbitrary value allows to append a custom MIME header to the message (X-My-Header in this case). For example, h:Reply-To to specify Reply-To address.
   v:my-var          | v: prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See Attaching Data to Messages for more information.
-
 
   - HTML/TEXT Example:
 
@@ -760,7 +761,6 @@ Method naming conventions:
     .catch(err => console.error(err)); // logs any error
   ```
 
-
   ```JS
   {
     message: 'success',
@@ -800,7 +800,6 @@ Method naming conventions:
   ```
 
   Options:
-
 
   | Parameter | Description                                                                                                                                                                                                                                                                     |
   |:----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1139,7 +1138,6 @@ Method naming conventions:
         address: 'bob@example.com',
         status: 200
       ```
-
 
 ### Webhooks
 
@@ -2049,7 +2047,6 @@ A client to manage members within a specific mailing list.
     );
     ```
 
-
 ## Browser Demo
 
 ![image](https://cloud.githubusercontent.com/assets/399776/10718632/e8fe56e4-7b34-11e5-84c8-cfcfde978711.png)
@@ -2126,4 +2123,3 @@ git pull
 Next, run ```npm run release```.
 
 After that, `cd ./dist` and then run ```npm login``` and ```npm publish``` to publish changes on npm.
-
