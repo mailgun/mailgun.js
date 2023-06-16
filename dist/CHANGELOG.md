@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.1.0](https://github.com/mailgun/mailgun.js/compare/v9.0.1...v9.1.0) (2023-06-16)
+
+
+### Features
+
+* Add tags property for unsubscribe data type ([3a02a50](https://github.com/mailgun/mailgun.js/commits/3a02a50bc824ed2393075a262399f3e660cf771c))
+
+
+### Other changes
+
+* Add issues template ([c7e8515](https://github.com/mailgun/mailgun.js/commits/c7e85152f7cc725a15612385c090a4f794461a78))
+* Add to release commit TS docs files ([7c7376e](https://github.com/mailgun/mailgun.js/commits/7c7376e1fd3802e79c5259b74418aa8063e4e2f7))
+* Freshest docs ([5258cda](https://github.com/mailgun/mailgun.js/commits/5258cda2b1864e4f71681db1549df8b90daa8ca6))
+* Rename issue template file ([4f7857d](https://github.com/mailgun/mailgun.js/commits/4f7857db8b0e331c89d2e6e3a19aa47c87bf3e39))
+* Update readme with a link to docs ([371a46f](https://github.com/mailgun/mailgun.js/commits/371a46f8c20d5418d6389df769eabd4e957f7732))
+* Update typedoc to use markdown ([393c6f1](https://github.com/mailgun/mailgun.js/commits/393c6f186cd2416c0e2802aa50848bf6556a1a15))
+
 ### [9.0.1](https://github.com/mailgun/mailgun.js/compare/v9.0.0...v9.0.1) (2023-06-06)
 
 

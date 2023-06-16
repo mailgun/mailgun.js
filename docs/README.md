@@ -75,7 +75,7 @@ Starting from version **9.0.0.** Interfaces and Enums can be imported in the nex
 ```
 
 ### Generated docs
-The list of all available Types, Interfaces and Enums is auto-generated and located in the [docs](/docs/modules.md) folder.
+The list of all available Types, Interfaces and Enums is auto-generated and located in the [docs](./docs/modules.md) folder.
 
 ## Methods
 
@@ -103,9 +103,22 @@ The following service methods are available to instantiated clients. The example
       - [getAccount](#getaccount)
     - [suppressions](#suppressions)
       - [list](#list-1)
+        - [Bounces Example](#bounces-example)
+        - [Unsubscribes Example](#unsubscribes-example)
+        - [Complaints Example](#complaints-example)
       - [get](#get-2)
+        - [Bounces Example](#bounces-example-1)
+        - [Unsubscribes Example](#unsubscribes-example-1)
+        - [Complaints Example](#complaints-example-1)
       - [create](#create-2)
+        - [Bounces Example](#bounces-example-2)
+        - [Unsubscribes Example](#unsubscribes-example-2)
+          - [Unsubscribe from particular tags](#unsubscribe-from-particular-tags)
+        - [Complaints Example](#complaints-example-2)
       - [destroy](#destroy-1)
+        - [Bounces Example](#bounces-example-3)
+        - [Unsubscribes Example](#unsubscribes-example-3)
+        - [Complaints Example](#complaints-example-3)
     - [webhooks](#webhooks)
       - [list](#list-2)
       - [get](#get-3)
@@ -923,7 +936,7 @@ Method naming conventions:
 
   `mg.suppressions.list(domain, suppressionType, query?)`
 
-  - Bounces Example:
+  - #### Bounces Example:
 
     ```js
     mg.suppressions.list('foobar.example.com', 'bounces')
@@ -931,7 +944,7 @@ Method naming conventions:
       .catch(err => console.error(err)); // logs any error
     ```
 
-  - Unsubscribes Example:
+  - #### Unsubscribes Example:
 
     ```js
     mg.suppressions.list('foobar.example.com', 'unsubscribes')
@@ -939,7 +952,7 @@ Method naming conventions:
       .catch(err => console.error(err)); // logs any error
     ```
 
-  - Complaints Example:
+  - #### Complaints Example:
 
     ```js
     mg.suppressions.list('foobar.example.com', 'complaints')
@@ -972,7 +985,7 @@ Method naming conventions:
 
   `mg.suppressions.get(domain, suppressionType, address)`
 
-  - Bounces Example:
+  - #### Bounces Example:
 
     ```js
     mg.suppressions.get('foobar.example.com', 'bounces', 'address@example.com')
@@ -980,7 +993,7 @@ Method naming conventions:
       .catch(err => console.error(err)); // logs any error
     ```
 
-  - Unsubscribes Example:
+  - #### Unsubscribes Example:
 
     ```js
     mg.suppressions.get('foobar.example.com', 'unsubscribes', 'address@example.com')
@@ -988,7 +1001,7 @@ Method naming conventions:
       .catch(err => console.error(err)); // logs any error
     ```
 
-  - Complaints Example:
+  - #### Complaints Example:
 
     ```js
     mg.suppressions.get('foobar.example.com', 'complaints', 'address@example.com')
@@ -1010,7 +1023,7 @@ Method naming conventions:
 -   #### create
     `mg.suppressions.create(domain, suppressionType, data || data[])`
 
-    - Bounces Example:
+    - #### Bounces Example:
       ```JS
       mg.suppressions.create('foobar.example.com', 'bounces', [{address: 'bob@example.com'}])
         .then(msg => console.log(msg)) // logs response data
@@ -1034,7 +1047,7 @@ Method naming conventions:
       }
       ```
 
-    - Unsubscribes Example:
+    - #### Unsubscribes Example:
 
       ```js
       mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com'}])
@@ -1048,6 +1061,7 @@ Method naming conventions:
       |:-----------|:-----------------------------------------------------------------------------------------------------------------|
       | address    | Valid email address                                                                                              |
       | tag        | Tag to unsubscribe from, use * to unsubscribe an address from all domain’s correspondence (optional, default: *) |
+      | tags       | Array with tags to unsubscribe from |
       | created_at | Timestamp of a bounce event in RFC2822 format (optional, default: current time)                                  |
 
       Promise returns:
@@ -1058,7 +1072,21 @@ Method naming conventions:
       }
       ```
 
-    - Complaints Example:
+      - #### Unsubscribe from particular tags
+          ```js
+          mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com', tags: ['your_tag_to_unsubscribe', 'another_tag_to_unsubscribe']}])
+            .then(msg => console.log(msg)) // logs response data
+            .catch(err => console.error(err)); // logs any error
+          ```
+          Promise returns:
+
+          ```JS
+          {
+            message: "1 address has been added to the unsubscribes table"
+          }
+          ```
+
+    - #### Complaints Example:
 
       ```js
       mg.suppressions.create('foobar.example.com', 'complaints', [{address: 'bob@example.com'}])
@@ -1084,7 +1112,7 @@ Method naming conventions:
 -   #### destroy
     `mg.suppressions.destroy(domain, suppressionType, address)`
 
-    - Bounces Example:
+    - #### Bounces Example:
 
       ```JS
       mg.suppressions.destroy('foobar.example.com', 'bounces', 'bob@example.com')
@@ -1103,7 +1131,7 @@ Method naming conventions:
       }
       ```
 
-    - Unsubscribes Example:
+    - #### Unsubscribes Example:
 
       ```js
       mg.suppressions.destroy('foobar.example.com', 'unsubscribes', 'bob@example.com')
@@ -1122,7 +1150,7 @@ Method naming conventions:
       }
       ```
 
-    - Complaints Example:
+    - #### Complaints Example:
 
       ```js
       mg.suppressions.destroy('foobar.example.com', 'complaints', 'bob@example.com')
