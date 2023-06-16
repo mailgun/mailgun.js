@@ -229,8 +229,8 @@ describe('SuppressionsClient', function () {
   });
 
   describe('create', function () {
-    describe('create bounce', function () {
-      it('creates suppression', async () => {
+    describe('bounces', () => {
+      it('creates bounce', async () => {
         api.post('/v3/domain.com/bounces').reply(200, {
           message: '1 addresses have been added to the bounces table'
         });
@@ -240,10 +240,8 @@ describe('SuppressionsClient', function () {
         });
         createdBounce.message.should.eql('1 addresses have been added to the bounces table');
       });
-    });
 
-    describe('create multiple bounces', function () {
-      it('creates bounces', async () => {
+      it('creates multiple bounces', async () => {
         const message = '2 addresses have been added to the bounces table';
         api.post('/v3/domain.com/bounces').reply(200, {
           message
@@ -256,7 +254,20 @@ describe('SuppressionsClient', function () {
         createdBounces.message.should.eql(message);
       });
     });
-    describe('create whitelists', function () {
+
+    describe('whitelists', function () {
+      it('throws in case type is unknown', async () => {
+        try {
+          await client.create('domain.com', 'wrong type',
+            { address: 'myaddress' });
+        } catch (error: unknown) {
+          const err: APIError = error as APIError;
+          err.message.should.eql('Unknown type value');
+          err.details.should.eql('Type may be only one of [bounces, complaints, unsubscribes, whitelists]');
+          err.status.should.eql(400);
+        }
+      });
+
       it('creates whitelist', async function () {
         const message = '1 addresses have been added to the whitelists table';
         api.post('/v3/domain.com/whitelists').reply(200, {
@@ -269,9 +280,7 @@ describe('SuppressionsClient', function () {
         );
         createdWhitelist.message.should.eql(message);
       });
-    });
 
-    describe('create multiple whitelists', function () {
       it('throws in case multiple whitelists provided', async () => {
         try {
           await client.create('domain.com', 'whitelists',
@@ -285,16 +294,55 @@ describe('SuppressionsClient', function () {
       });
     });
 
-    it('throws in case type is unknown', async () => {
-      try {
-        await client.create('domain.com', 'wrong type',
-          { address: 'myaddress' });
-      } catch (error: unknown) {
-        const err: APIError = error as APIError;
-        err.message.should.eql('Unknown type value');
-        err.details.should.eql('Type may be only one of [bounces, complaints, unsubscribes, whitelists]');
-        err.status.should.eql(400);
-      }
+    describe('unsubscribes', () => {
+      it('creates unsubscribe', async () => {
+        api.post('/v3/domain.com/unsubscribes').reply(200, {
+          message: '1 addresses have been added to the unsubscribes table'
+        });
+        const createdUnsubscribe: SuppressionCreationResult = await client.create(
+          'domain.com',
+          'unsubscribes',
+          [{ address: 'test5@example.com', tags: ['test'] }]
+        );
+        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+      });
+
+      it('creates unsubscribe(tag may be provided)', async () => {
+        api.post('/v3/domain.com/unsubscribes').reply(200, {
+          message: '1 addresses have been added to the unsubscribes table'
+        });
+        const createdUnsubscribe: SuppressionCreationResult = await client.create(
+          'domain.com',
+          'unsubscribes',
+          [{ address: 'test5@example.com', tag: 'test' }]
+        );
+        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+      });
+
+      it('creates unsubscribe(tag is not required)', async () => {
+        api.post('/v3/domain.com/unsubscribes').reply(200, {
+          message: '1 addresses have been added to the unsubscribes table'
+        });
+        const createdUnsubscribe: SuppressionCreationResult = await client.create(
+          'domain.com',
+          'unsubscribes',
+          [{ address: 'test5@example.com' }]
+        );
+        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+      });
+
+      it('creates multiple unsubscribes', async () => {
+        const message = '2 addresses have been added to the unsubscribes table';
+        api.post('/v3/domain.com/unsubscribes').reply(200, {
+          message
+        });
+        const createdUnsubscribes: SuppressionCreationResult = await client.create(
+          'domain.com',
+          'unsubscribes',
+          [{ address: 'test5@example.com', tags: ['test'] }, { address: 'test6@example.com', tags: ['test'] }]
+        );
+        createdUnsubscribes.message.should.eql(message);
+      });
     });
   });
 
