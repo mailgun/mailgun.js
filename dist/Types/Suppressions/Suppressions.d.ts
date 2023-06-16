@@ -43,6 +43,7 @@ export type SuppressionCreationData = {
     domain?: string;
     tag?: string;
     created_at?: string;
+    tags?: string[];
 };
 export type SuppressionCreationResponse = {
     body: {
