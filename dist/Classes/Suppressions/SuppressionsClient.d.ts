@@ -14,6 +14,7 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
         new (dataType: SuppressionDataType): T;
     }): T;
     private createWhiteList;
+    private createUnsubscribe;
     private checkType;
     private prepareResponse;
     list(domain: string, type: string, query?: SuppressionListQuery): Promise<SuppressionList>;
