@@ -40,16 +40,17 @@ export default class SuppressionClient
   extends NavigationThruPages<SuppressionList>
   implements ISuppressionClient {
   request: Request;
-  models: Map<string, any>;
+  models: object;
 
   constructor(request: Request) {
     super(request);
     this.request = request;
-    this.models = new Map();
-    this.models.set('bounces', Bounce);
-    this.models.set('complaints', Complaint);
-    this.models.set('unsubscribes', Unsubscribe);
-    this.models.set('whitelists', WhiteList);
+    this.models = {
+      bounces: Bounce,
+      complaints: Complaint,
+      unsubscribes: Unsubscribe,
+      whitelists: WhiteList,
+    };
   }
 
   protected parseList(
@@ -139,14 +140,15 @@ export default class SuppressionClient
       .then(this.prepareResponse);
   }
 
-  private checkType(type: string) {
-    if (!this.models.has(type)) {
-      throw new APIError({
-        status: 400,
-        statusText: 'Unknown type value',
-        body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
-      } as APIErrorOptions);
+  private getModel(type: string) {
+    if (type in this.models) {
+      return this.models[type as keyof typeof this.models];
     }
+    throw new APIError({
+      status: 400,
+      statusText: 'Unknown type value',
+      body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
+    } as APIErrorOptions);
   }
 
   private prepareResponse(response: SuppressionCreationResponse): SuppressionCreationResult {
@@ -163,8 +165,7 @@ export default class SuppressionClient
     type: string,
     query?: SuppressionListQuery
   ): Promise<SuppressionList> {
-    this.checkType(type);
-    const model = this.models.get(type);
+    const model = this.getModel(type);
     return this.requestListWithPages(urljoin('v3', domain, type), query, model);
   }
 
@@ -173,9 +174,7 @@ export default class SuppressionClient
     type: string,
     address: string
   ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
-    this.checkType(type);
-
-    const model = this.models.get(type);
+    const model = this.getModel(type);
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))
       .then((response: SuppressionResponse) => this._parseItem<typeof model>(response.body, model));
@@ -186,7 +185,7 @@ export default class SuppressionClient
     type: string,
     data: SuppressionCreationData | SuppressionCreationData[]
   ): Promise<SuppressionCreationResult> {
-    this.checkType(type);
+    this.getModel(type);
     // supports adding multiple suppressions by default
     let postData;
     const isDataArray = Array.isArray(data);
@@ -215,7 +214,7 @@ export default class SuppressionClient
     type: string,
     address: string
   ): Promise<SuppressionDestroyResult> {
-    this.checkType(type);
+    this.getModel(type);
     return this.request
       .delete(urljoin('v3', domain, type, encodeURIComponent(address)))
       .then((response: SuppressionDestroyResponse) => ({
