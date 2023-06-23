@@ -113,6 +113,7 @@ The following service methods are available to instantiated clients. The example
       - [create](#create-2)
         - [Bounces Example](#bounces-example-2)
         - [Unsubscribes Example](#unsubscribes-example-2)
+          - [Unsubscribe from one tag](#unsubscribe-from-one-tag)
           - [Unsubscribe from particular tags](#unsubscribe-from-particular-tags)
         - [Complaints Example](#complaints-example-2)
       - [destroy](#destroy-1)
@@ -1041,7 +1042,7 @@ Method naming conventions:
 
       Promise returns:
 
-      ```JSON
+      ```js
       {
         message: "1 address has been added to the bounces table"
       }
@@ -1050,7 +1051,7 @@ Method naming conventions:
     - #### Unsubscribes Example:
 
       ```js
-      mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com'}])
+      mg.suppressions.create('foobar.example.com', 'unsubscribes', {address: 'bob@example.com'})
         .then(msg => console.log(msg)) // logs response data
         .catch(err => console.error(err)); // logs any error
       ```
@@ -1071,7 +1072,19 @@ Method naming conventions:
         message: "1 address has been added to the unsubscribes table"
       }
       ```
+       - #### Unsubscribe from one tag
+          ```js
+          mg.suppressions.create('foobar.example.com', 'unsubscribes', {address: 'bob@example.com', tag: 'your_tag_to_unsubscribe']})
+            .then(msg => console.log(msg)) // logs response data
+            .catch(err => console.error(err)); // logs any error
+          ```
+          Promise returns:
 
+          ```JS
+          {
+            message: "1 address has been added to the unsubscribes table"
+          }
+          ```
       - #### Unsubscribe from particular tags
           ```js
           mg.suppressions.create('foobar.example.com', 'unsubscribes', [{address: 'bob@example.com', tags: ['your_tag_to_unsubscribe', 'another_tag_to_unsubscribe']}])

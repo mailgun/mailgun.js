@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.1.1](https://github.com/mailgun/mailgun.js/compare/v9.1.0...v9.1.1) (2023-06-23)
+
+
+### Bug Fixes
+
+* Creating one unsubscribe with the tag property ([6f27372](https://github.com/mailgun/mailgun.js/commits/6f2737229d14977093e4f8076c053be77002322c))
+* Replace models map by object to remove eslint warning ([1faada1](https://github.com/mailgun/mailgun.js/commits/1faada106b50bb05ddac0b5af1b139264059a12b))
+
+
+### Other changes
+
+* Readme update ([3ccc575](https://github.com/mailgun/mailgun.js/commits/3ccc57535ac6d4eda46b12b5cad398c4eb11ff9d))
+
 ## [9.1.0](https://github.com/mailgun/mailgun.js/compare/v9.0.1...v9.1.0) (2023-06-16)
 
 

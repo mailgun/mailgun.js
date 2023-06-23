@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[Types/Domains/Domains.ts:47](https://github.com/mailgun/mailgun.js/blob/baf58b4/lib/Types/Domains/Domains.ts#L47)
+[Types/Domains/Domains.ts:47](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L47)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:48](https://github.com/mailgun/mailgun.js/blob/baf58b4/lib/Types/Domains/Domains.ts#L48)
+[Types/Domains/Domains.ts:48](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L48)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:49](https://github.com/mailgun/mailgun.js/blob/baf58b4/lib/Types/Domains/Domains.ts#L49)
+[Types/Domains/Domains.ts:49](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L49)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:50](https://github.com/mailgun/mailgun.js/blob/baf58b4/lib/Types/Domains/Domains.ts#L50)
+[Types/Domains/Domains.ts:50](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L50)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:51](https://github.com/mailgun/mailgun.js/blob/baf58b4/lib/Types/Domains/Domains.ts#L51)
+[Types/Domains/Domains.ts:51](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L51)
