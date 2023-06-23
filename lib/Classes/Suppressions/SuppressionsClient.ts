@@ -40,16 +40,17 @@ export default class SuppressionClient
   extends NavigationThruPages<SuppressionList>
   implements ISuppressionClient {
   request: Request;
-  models: Map<string, any>;
+  models: object;
 
   constructor(request: Request) {
     super(request);
     this.request = request;
-    this.models = new Map();
-    this.models.set('bounces', Bounce);
-    this.models.set('complaints', Complaint);
-    this.models.set('unsubscribes', Unsubscribe);
-    this.models.set('whitelists', WhiteList);
+    this.models = {
+      bounces: Bounce,
+      complaints: Complaint,
+      unsubscribes: Unsubscribe,
+      whitelists: WhiteList,
+    };
   }
 
   protected parseList(
@@ -78,9 +79,10 @@ export default class SuppressionClient
 
   private createWhiteList(
     domain: string,
-    data: SuppressionCreationData | SuppressionCreationData[]
+    data: SuppressionCreationData | SuppressionCreationData[],
+    isDataArray: boolean
   ): Promise<SuppressionCreationResult> {
-    if (Array.isArray(data)) {
+    if (isDataArray) {
       throw new APIError({
         status: 400,
         statusText: 'Data property should be an object',
@@ -94,14 +96,59 @@ export default class SuppressionClient
       .then(this.prepareResponse);
   }
 
-  private checkType(type: string) {
-    if (!this.models.has(type)) {
+  private createUnsubscribe(
+    domain: string,
+    data: SuppressionCreationData | SuppressionCreationData[]
+  ): Promise<SuppressionCreationResult> {
+    if (Array.isArray(data)) { // User provided an array
+      const isContainsTag = data.some((unsubscribe: SuppressionCreationData) => unsubscribe.tag);
+      if (isContainsTag) {
+        throw new APIError({
+          status: 400,
+          statusText: 'Tag property should not be used for creating multiple unsubscribes.',
+          body: {
+            message: 'Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.'
+          }
+        } as APIErrorOptions);
+      }
+      return this.request
+        .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), createOptions)
+        .then(this.prepareResponse);
+    }
+
+    if (data?.tags) {
       throw new APIError({
         status: 400,
-        statusText: 'Unknown type value',
-        body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
+        statusText: 'Tags property should not be used for creating one unsubscribe.',
+        body: {
+          message: 'Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead'
+        }
       } as APIErrorOptions);
     }
+    if (Array.isArray(data.tag)) {
+      throw new APIError({
+        status: 400,
+        statusText: 'Tag property can not be an array',
+        body: {
+          message: 'Please use array of unsubscribes as second argument of create method to be able to provide few tags'
+        }
+      } as APIErrorOptions);
+    }
+    /* We need Form Data for unsubscribes if we want to support the "tag" property */
+    return this.request
+      .postWithFD(urljoin('v3', domain, 'unsubscribes'), data)
+      .then(this.prepareResponse);
+  }
+
+  private getModel(type: string) {
+    if (type in this.models) {
+      return this.models[type as keyof typeof this.models];
+    }
+    throw new APIError({
+      status: 400,
+      statusText: 'Unknown type value',
+      body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
+    } as APIErrorOptions);
   }
 
   private prepareResponse(response: SuppressionCreationResponse): SuppressionCreationResult {
@@ -118,8 +165,7 @@ export default class SuppressionClient
     type: string,
     query?: SuppressionListQuery
   ): Promise<SuppressionList> {
-    this.checkType(type);
-    const model = this.models.get(type);
+    const model = this.getModel(type);
     return this.requestListWithPages(urljoin('v3', domain, type), query, model);
   }
 
@@ -128,9 +174,7 @@ export default class SuppressionClient
     type: string,
     address: string
   ): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList> {
-    this.checkType(type);
-
-    const model = this.models.get(type);
+    const model = this.getModel(type);
     return this.request
       .get(urljoin('v3', domain, type, encodeURIComponent(address)))
       .then((response: SuppressionResponse) => this._parseItem<typeof model>(response.body, model));
@@ -141,14 +185,20 @@ export default class SuppressionClient
     type: string,
     data: SuppressionCreationData | SuppressionCreationData[]
   ): Promise<SuppressionCreationResult> {
-    this.checkType(type);
+    this.getModel(type);
     // supports adding multiple suppressions by default
     let postData;
+    const isDataArray = Array.isArray(data);
+
     if (type === 'whitelists') {
-      return this.createWhiteList(domain, data);
+      return this.createWhiteList(domain, data, isDataArray);
     }
 
-    if (!Array.isArray(data)) {
+    if (type === 'unsubscribes') {
+      return this.createUnsubscribe(domain, data);
+    }
+
+    if (!isDataArray) {
       postData = [data];
     } else {
       postData = [...data];
@@ -164,7 +214,7 @@ export default class SuppressionClient
     type: string,
     address: string
   ): Promise<SuppressionDestroyResult> {
-    this.checkType(type);
+    this.getModel(type);
     return this.request
       .delete(urljoin('v3', domain, type, encodeURIComponent(address)))
       .then((response: SuppressionDestroyResponse) => ({

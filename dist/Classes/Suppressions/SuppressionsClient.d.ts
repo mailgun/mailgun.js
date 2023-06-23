@@ -5,7 +5,7 @@ import { IBounce, IComplaint, ISuppressionClient, IUnsubscribe, IWhiteList } fro
 import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> implements ISuppressionClient {
     request: Request;
-    models: Map<string, any>;
+    models: object;
     constructor(request: Request);
     protected parseList(response: SuppressionListResponse, Model: {
         new (data: SuppressionDataType): IBounce | IComplaint | IUnsubscribe | IWhiteList;
@@ -14,7 +14,8 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
         new (dataType: SuppressionDataType): T;
     }): T;
     private createWhiteList;
-    private checkType;
+    private createUnsubscribe;
+    private getModel;
     private prepareResponse;
     list(domain: string, type: string, query?: SuppressionListQuery): Promise<SuppressionList>;
     get(domain: string, type: string, address: string): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList>;

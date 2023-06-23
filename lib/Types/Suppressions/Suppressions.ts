@@ -59,13 +59,8 @@ export type SuppressionCreationData = {
   code?: number;
   error?: string;
   domain?: string;
-  tag?: string;
+  tag?: string; // works only with FormData usage for one unsubscribe
   created_at?: string ;
-  /* Official documentation says that endpoint for "unsubscribes"  supports "tag" property
-  but in reality it ignores the value of it.
-  At the same time "tags" property seems working fine.
-  https://github.com/mailgun/mailgun.js/issues/365
-   */
   tags?: string[];
 }
 

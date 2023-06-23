@@ -295,53 +295,118 @@ describe('SuppressionsClient', function () {
     });
 
     describe('unsubscribes', () => {
-      it('creates unsubscribe', async () => {
-        api.post('/v3/domain.com/unsubscribes').reply(200, {
-          message: '1 addresses have been added to the unsubscribes table'
+      describe('one unsubscribe', () => {
+        it('creates unsubscribe(tag may be provided)', async () => {
+          api.post('/v3/domain.com/unsubscribes').reply(200, {
+            message: '1 addresses have been added to the unsubscribes table'
+          });
+          const createdUnsubscribe: SuppressionCreationResult = await client.create(
+            'domain.com',
+            'unsubscribes',
+            { address: 'test5@example.com', tag: 'test' }
+          );
+          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
         });
-        const createdUnsubscribe: SuppressionCreationResult = await client.create(
-          'domain.com',
-          'unsubscribes',
-          [{ address: 'test5@example.com', tags: ['test'] }]
-        );
-        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
-      });
 
-      it('creates unsubscribe(tag may be provided)', async () => {
-        api.post('/v3/domain.com/unsubscribes').reply(200, {
-          message: '1 addresses have been added to the unsubscribes table'
+        it('creates unsubscribe(tag is not required)', async () => {
+          api.post('/v3/domain.com/unsubscribes').reply(200, {
+            message: '1 addresses have been added to the unsubscribes table'
+          });
+          const createdUnsubscribe: SuppressionCreationResult = await client.create(
+            'domain.com',
+            'unsubscribes',
+            { address: 'test5@example.com' }
+          );
+          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
         });
-        const createdUnsubscribe: SuppressionCreationResult = await client.create(
-          'domain.com',
-          'unsubscribes',
-          [{ address: 'test5@example.com', tag: 'test' }]
-        );
-        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
-      });
 
-      it('creates unsubscribe(tag is not required)', async () => {
-        api.post('/v3/domain.com/unsubscribes').reply(200, {
-          message: '1 addresses have been added to the unsubscribes table'
+        it('usage of "tags" property is forbidden', async () => {
+          // tags property works only if array of unsubscribes was provided as argument
+          try {
+            await client.create(
+              'domain.com',
+              'unsubscribes',
+              { address: 'test5@example.com', tags: ['test'] }
+            );
+          } catch (error) {
+            const err: APIError = error as APIError;
+            err.message.should.eql('Tags property should not be used for creating one unsubscribe.');
+            err.details.should.eql('Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead');
+            err.status.should.eql(400);
+          }
         });
-        const createdUnsubscribe: SuppressionCreationResult = await client.create(
-          'domain.com',
-          'unsubscribes',
-          [{ address: 'test5@example.com' }]
-        );
-        createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
-      });
 
-      it('creates multiple unsubscribes', async () => {
-        const message = '2 addresses have been added to the unsubscribes table';
-        api.post('/v3/domain.com/unsubscribes').reply(200, {
-          message
+        it('tag property can not be an array', async () => {
+          // API ignores all values from array except for the first one.
+          try {
+            await client.create(
+              'domain.com',
+              'unsubscribes',
+              // @ts-expect-error: Method may be called from node without TS.
+              { address: 'test5@example.com', tag: ['test'] }
+            );
+          } catch (error) {
+            const err: APIError = error as APIError;
+            err.message.should.eql('Tag property can not be an array');
+            err.details.should.eql('Please use array of unsubscribes as second argument of create method to be able to provide few tags');
+            err.status.should.eql(400);
+          }
         });
-        const createdUnsubscribes: SuppressionCreationResult = await client.create(
-          'domain.com',
-          'unsubscribes',
-          [{ address: 'test5@example.com', tags: ['test'] }, { address: 'test6@example.com', tags: ['test'] }]
-        );
-        createdUnsubscribes.message.should.eql(message);
+      });
+      describe('array of unsubscribes', () => {
+        it('creates multiple unsubscribes', async () => {
+          const message = '2 addresses have been added to the unsubscribes table';
+          api.post('/v3/domain.com/unsubscribes').reply(200, {
+            message
+          });
+          const createdUnsubscribes: SuppressionCreationResult = await client.create(
+            'domain.com',
+            'unsubscribes',
+            [{ address: 'test5@example.com', tags: ['test'] }, { address: 'test6@example.com', tags: ['test'] }]
+          );
+          createdUnsubscribes.message.should.eql(message);
+        });
+
+        it('creates one unsubscribe with one tag using array', async () => {
+          api.post('/v3/domain.com/unsubscribes').reply(200, {
+            message: '1 addresses have been added to the unsubscribes table'
+          });
+          const createdUnsubscribe: SuppressionCreationResult = await client.create(
+            'domain.com',
+            'unsubscribes',
+            [{ address: 'test5@example.com', tags: ['test'] }]
+          );
+          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+        });
+
+        it('tags property may be omitted', async () => {
+          api.post('/v3/domain.com/unsubscribes').reply(200, {
+            message: '1 addresses have been added to the unsubscribes table'
+          });
+          const createdUnsubscribe: SuppressionCreationResult = await client.create(
+            'domain.com',
+            'unsubscribes',
+            [{ address: 'test5@example.com' }]
+          );
+          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+        });
+
+        it('usage of "tag" property is forbidden', async () => {
+          // tag property is ignored when an array is provided
+          try {
+            await client.create(
+              'domain.com',
+              'unsubscribes',
+              // @ts-expect-error: Method may be called from non TS environment.
+              [{ address: 'test5@example.com', tag: ['test'] }]
+            );
+          } catch (error) {
+            const err: APIError = error as APIError;
+            err.message.should.eql('Tag property should not be used for creating multiple unsubscribes.');
+            err.details.should.eql('Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.');
+            err.status.should.eql(400);
+          }
+        });
       });
     });
   });
