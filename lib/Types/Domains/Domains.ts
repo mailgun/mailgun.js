@@ -49,6 +49,7 @@ export interface DNSRecord {
     record_type: string;
     valid: string;
     value: string;
+    priority?: string;
 }
 
 export type DomainResponseData = {
