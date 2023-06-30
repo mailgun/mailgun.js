@@ -29,4 +29,4 @@
 
 #### Defined in
 
-[Interfaces/EventClient/IEventClient.ts:6](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Interfaces/EventClient/IEventClient.ts#L6)
+[Interfaces/EventClient/IEventClient.ts:6](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Interfaces/EventClient/IEventClient.ts#L6)

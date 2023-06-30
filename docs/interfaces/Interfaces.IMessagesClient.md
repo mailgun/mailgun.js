@@ -29,4 +29,4 @@
 
 #### Defined in
 
-[Interfaces/Messages/IMessagesClient.ts:4](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Interfaces/Messages/IMessagesClient.ts#L4)
+[Interfaces/Messages/IMessagesClient.ts:4](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Interfaces/Messages/IMessagesClient.ts#L4)

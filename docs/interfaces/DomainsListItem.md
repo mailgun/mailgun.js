@@ -37,7 +37,7 @@ DomainShortData.created\_at
 
 #### Defined in
 
-[Types/Domains/Domains.ts:28](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L28)
+[Types/Domains/Domains.ts:28](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L28)
 
 ___
 
@@ -51,7 +51,7 @@ DomainShortData.name
 
 #### Defined in
 
-[Types/Domains/Domains.ts:22](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L22)
+[Types/Domains/Domains.ts:22](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L22)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:42](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L42)
+[Types/Domains/Domains.ts:42](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L42)
 
 ___
 
@@ -75,7 +75,7 @@ DomainShortData.require\_tls
 
 #### Defined in
 
-[Types/Domains/Domains.ts:23](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L23)
+[Types/Domains/Domains.ts:23](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L23)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:43](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L43)
+[Types/Domains/Domains.ts:43](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L43)
 
 ___
 
@@ -99,7 +99,7 @@ DomainShortData.skip\_verification
 
 #### Defined in
 
-[Types/Domains/Domains.ts:24](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L24)
+[Types/Domains/Domains.ts:24](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L24)
 
 ___
 
@@ -113,7 +113,7 @@ DomainShortData.smtp\_login
 
 #### Defined in
 
-[Types/Domains/Domains.ts:30](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L30)
+[Types/Domains/Domains.ts:30](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L30)
 
 ___
 
@@ -127,7 +127,7 @@ DomainShortData.smtp\_password
 
 #### Defined in
 
-[Types/Domains/Domains.ts:29](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L29)
+[Types/Domains/Domains.ts:29](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L29)
 
 ___
 
@@ -141,7 +141,7 @@ DomainShortData.spam\_action
 
 #### Defined in
 
-[Types/Domains/Domains.ts:27](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L27)
+[Types/Domains/Domains.ts:27](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L27)
 
 ___
 
@@ -155,7 +155,7 @@ DomainShortData.state
 
 #### Defined in
 
-[Types/Domains/Domains.ts:25](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L25)
+[Types/Domains/Domains.ts:25](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L25)
 
 ___
 
@@ -169,7 +169,7 @@ DomainShortData.type
 
 #### Defined in
 
-[Types/Domains/Domains.ts:31](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L31)
+[Types/Domains/Domains.ts:31](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L31)
 
 ___
 
@@ -183,4 +183,4 @@ DomainShortData.wildcard
 
 #### Defined in
 
-[Types/Domains/Domains.ts:26](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Types/Domains/Domains.ts#L26)
+[Types/Domains/Domains.ts:26](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Types/Domains/Domains.ts#L26)

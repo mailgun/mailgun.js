@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/Stats/StatsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Interfaces/Stats/StatsClient.ts#L6)
+[Interfaces/Stats/StatsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Interfaces/Stats/StatsClient.ts#L6)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Stats/StatsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/bbdf081/lib/Interfaces/Stats/StatsClient.ts#L5)
+[Interfaces/Stats/StatsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/9d7076d/lib/Interfaces/Stats/StatsClient.ts#L5)

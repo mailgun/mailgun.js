@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.1.2](https://github.com/mailgun/mailgun.js/compare/v9.1.1...v9.1.2) (2023-06-30)
+
+
+### Bug Fixes
+
+* Added priority? to DNSRecord type ([65a9d02](https://github.com/mailgun/mailgun.js/commits/65a9d02e81dc2c78a64095c073ab69530081577d))
+* Dependencies update ([60478d0](https://github.com/mailgun/mailgun.js/commits/60478d0b5075defaf032ac91dd6e21ea9dba3b1b))
+
+
+### Other changes
+
+* Update build ([bdc3dc5](https://github.com/mailgun/mailgun.js/commits/bdc3dc5afe7cca544e02238aa31d5e07e10ad5d8))
+
 ### [9.1.1](https://github.com/mailgun/mailgun.js/compare/v9.1.0...v9.1.1) (2023-06-23)
 
 
