@@ -7,6 +7,7 @@ import {
   DomainInfo,
   DomainsQuery,
   DomainTrackingData,
+  DomainUpdateInfo,
   MessageResponse,
   OpenTrackingInfo,
   ReplacementForPool,
@@ -30,6 +31,7 @@ export interface IDomainsClient {
     list(query?: DomainsQuery): Promise<TDomain[]>
     get(domain: string): Promise<TDomain>
     create(data: DomainInfo): Promise<TDomain>
+    update(domain: string, data: DomainUpdateInfo): Promise<TDomain>
     verify(domain: string): Promise<TDomain>
     destroy(domain: string): Promise<MessageResponse>
     getConnection(domain: string): Promise<ConnectionSettings>

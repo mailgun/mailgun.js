@@ -102,7 +102,11 @@ describe('DomainsClient', function () {
         type: 'custom',
         wildcard: true,
         skip_verification: true,
-        require_tls: true
+        require_tls: true,
+        id: 'test_id',
+        is_disabled: false,
+        web_prefix: 'email',
+        web_scheme: 'https'
       };
 
       api.get('/v3/domains/testing.example.com').reply(200, {
@@ -124,7 +128,12 @@ describe('DomainsClient', function () {
           spam_action: 'disabled',
           state: 'unverified',
           type: 'custom',
-          wildcard: true
+          wildcard: true,
+          // next properties exist only in get, create and update responses
+          id: 'test_id',
+          is_disabled: false,
+          web_prefix: 'email',
+          web_scheme: 'https'
         });
       });
     });
@@ -142,7 +151,12 @@ describe('DomainsClient', function () {
         type: 'custom',
         wildcard: true,
         skip_verification: true,
-        require_tls: true
+        require_tls: true,
+        // next properties exist only in get, create and update responses
+        id: 'test_id',
+        is_disabled: false,
+        web_prefix: 'email',
+        web_scheme: 'https'
       };
 
       api.post('/v3/domains').reply(200, {
@@ -168,12 +182,16 @@ describe('DomainsClient', function () {
           spam_action: 'disabled',
           state: 'unverified',
           type: 'custom',
-          wildcard: true
+          wildcard: true,
+          is_disabled: false,
+          web_prefix: 'email',
+          web_scheme: 'https',
+          id: 'test_id',
         });
       });
     });
 
-    it('converts boolean true force_dkim_authority to string', async () => {
+    it('converts boolean true for force_dkim_authority and wildcard to string', async () => {
       let requestObject;
       api.post('/v3/domains').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
@@ -190,11 +208,13 @@ describe('DomainsClient', function () {
         smtp_password: 'smtp_password',
         web_scheme: 'https',
         force_dkim_authority: true,
+        wildcard: true,
       });
       expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
     });
 
-    it('converts boolean false force_dkim_authority to string', async () => {
+    it('converts boolean false for force_dkim_authority and wildcard to string', async () => {
       let requestObject;
       api.post('/v3/domains').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
@@ -211,8 +231,102 @@ describe('DomainsClient', function () {
         smtp_password: 'smtp_password',
         web_scheme: 'https',
         force_dkim_authority: false,
+        wildcard: false,
       });
       expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
+    });
+  });
+  describe('update', function () {
+    it('updates the domain', async () => {
+      const domainData = {
+        created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+        name: 'another.example.com',
+        smtp_login: 'postmaster@another.example.com',
+        smtp_password: 'password',
+        spam_action: 'disabled',
+        state: 'unverified',
+        type: 'custom',
+        wildcard: true,
+        skip_verification: true,
+        require_tls: true,
+        // next properties exist only in get, create and update responses
+        id: 'test_id',
+        is_disabled: false,
+        web_prefix: 'email',
+        web_scheme: 'http',
+      };
+
+      api.put('/v3/domains/testing.example.com').reply(200, {
+        domain: domainData,
+        receiving_dns_records: [],
+        sending_dns_records: []
+      });
+
+      const domain: TDomain = await client.update('testing.example.com', {
+        wildcard: 'true',
+        web_scheme: 'http',
+        spam_action: 'disabled'
+      });
+
+      domain.should.eql({
+        created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+        name: 'another.example.com',
+        receiving_dns_records: [],
+        require_tls: true,
+        sending_dns_records: [],
+        skip_verification: true,
+        smtp_login: 'postmaster@another.example.com',
+        smtp_password: 'password',
+        state: 'unverified',
+        type: 'custom',
+        wildcard: true,
+        spam_action: 'disabled',
+        id: 'test_id',
+        is_disabled: false,
+        web_prefix: 'email',
+        web_scheme: 'http',
+      });
+    });
+
+    it('converts boolean true for wildcard to string', async () => {
+      let requestObject;
+      api.put('/v3/domains/testing.example.com').reply(200, function (_uri, requestBody) {
+        requestObject = requestBody as formData;
+        return {
+          domain: {
+            name: 'another.example.com',
+            smtp_password: 'smtp_password',
+            web_scheme: 'https',
+          }
+        };
+      });
+      await client.update('testing.example.com', {
+        wildcard: true,
+        web_scheme: 'http',
+        spam_action: 'disabled'
+      });
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
+    });
+
+    it('converts boolean false for wildcard to string', async () => {
+      let requestObject;
+      api.put('/v3/domains/testing.example.com').reply(200, function (_uri, requestBody) {
+        requestObject = requestBody as formData;
+        return {
+          domain: {
+            name: 'another.example.com',
+            smtp_password: 'smtp_password',
+            web_scheme: 'https',
+          }
+        };
+      });
+      await client.update('testing.example.com', {
+        wildcard: false,
+        web_scheme: 'http',
+        spam_action: 'disabled'
+      });
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
     });
   });
 

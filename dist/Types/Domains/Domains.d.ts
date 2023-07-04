@@ -4,16 +4,24 @@ export type DomainsQuery = {
     limit?: number;
     skip?: number;
 };
-export type DomainInfo = {
+export type DomainUpdateInfo = {
+    spam_action?: 'disabled' | 'block' | 'tag';
+    web_scheme?: 'http' | 'https';
+    wildcard?: boolean | 'true' | 'false';
+};
+export type DomainUpdateInfoReq = DomainUpdateInfo & {
+    wildcard?: 'true' | 'false';
+};
+export type DomainInfo = DomainUpdateInfo & {
     name: string;
     smtp_password: string;
-    spam_action?: 'disabled' | 'block' | 'tag';
-    wildcard?: boolean;
     force_dkim_authority?: boolean | 'true' | 'false';
     dkim_key_size?: 1024 | 2048;
     ips?: '';
     pool_id?: '';
-    web_scheme: 'http' | 'https';
+};
+export type DomainInfoReq = DomainInfo & {
+    force_dkim_authority?: 'true' | 'false';
 };
 export type DomainShortData = {
     name: string;
@@ -133,4 +141,8 @@ export type TDomain = {
     type: string;
     receiving_dns_records: DNSRecord[] | null;
     sending_dns_records: DNSRecord[] | null;
+    id?: string;
+    is_disabled?: boolean;
+    web_prefix?: string;
+    web_scheme?: string;
 };

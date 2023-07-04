@@ -1,5 +1,5 @@
 import { APIResponse } from '../../Types/Common';
-import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainInfo, DomainsQuery, DomainTrackingData, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResponse, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains';
+import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainInfo, DomainsQuery, DomainTrackingData, DomainUpdateInfo, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResponse, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains';
 import { IDomainCredentials } from './DomainCredentials';
 import { IDomainTagsClient } from './DomainTags';
 import { IDomainTemplatesClient } from './DomainTemplates';
@@ -10,6 +10,7 @@ export interface IDomainsClient {
     list(query?: DomainsQuery): Promise<TDomain[]>;
     get(domain: string): Promise<TDomain>;
     create(data: DomainInfo): Promise<TDomain>;
+    update(domain: string, data: DomainUpdateInfo): Promise<TDomain>;
     verify(domain: string): Promise<TDomain>;
     destroy(domain: string): Promise<MessageResponse>;
     getConnection(domain: string): Promise<ConnectionSettings>;

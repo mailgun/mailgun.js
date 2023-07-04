@@ -1,4 +1,10 @@
-import { DNSRecord, DomainShortData, TDomain } from '../../Types/Domains';
+import {
+  DNSRecord,
+  DomainData,
+  DomainShortData,
+  TDomain
+} from '../../Types/Domains';
+
 /* eslint-disable camelcase */
 export default class Domain implements TDomain {
   name: string;
@@ -13,9 +19,13 @@ export default class Domain implements TDomain {
   type: string;
   receiving_dns_records: DNSRecord[] | null;
   sending_dns_records: DNSRecord[] | null;
+  id?: string;
+  is_disabled?: boolean;
+  web_prefix?: string;
+  web_scheme?: string;
 
   constructor(
-    data: DomainShortData,
+    data: DomainShortData | DomainData,
     receiving?: DNSRecord[] | null,
     sending?: DNSRecord[] | null
   ) {
@@ -29,8 +39,21 @@ export default class Domain implements TDomain {
     this.smtp_password = data.smtp_password;
     this.smtp_login = data.smtp_login;
     this.type = data.type;
-
     this.receiving_dns_records = receiving || null;
     this.sending_dns_records = sending || null;
+    /*
+      domain list has shorter response then get, create, and update methods.
+    */
+
+    const dynamicKeys: (keyof DomainData)[] = ['id', 'is_disabled', 'web_prefix', 'web_scheme'];
+
+    const dynamicProperties = dynamicKeys.reduce((acc, propertyName) => {
+      if (propertyName in data) {
+        const prop = propertyName as keyof Domain;
+        acc[prop] = (data as DomainData)[propertyName];
+      }
+      return acc;
+    }, {} as Record<keyof Domain, string | boolean>);
+    Object.assign(this, dynamicProperties);
   }
 }

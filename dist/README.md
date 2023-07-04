@@ -89,6 +89,7 @@ The following service methods are available to instantiated clients. The example
       - [list](#list)
       - [get](#get)
       - [create](#create-1)
+      - [update](#update)
       - [destroy](#destroy)
       - [getTracking](#gettracking)
       - [updateTracking](#updatetracking)
@@ -122,13 +123,13 @@ The following service methods are available to instantiated clients. The example
       - [list](#list-2)
       - [get](#get-3)
       - [create](#create-3)
-      - [update](#update)
+      - [update](#update-1)
       - [destroy](#destroy-2)
     - [routes](#routes)
       - [list](#list-3)
       - [get](#get-4)
       - [create](#create-4)
-      - [update](#update-1)
+      - [update](#update-2)
       - [destroy](#destroy-3)
     - [validate](#validate)
       - [get](#get-5)
@@ -141,7 +142,7 @@ The following service methods are available to instantiated clients. The example
       - [list](#list-5)
       - [get](#get-6)
       - [create](#create-6)
-      - [update](#update-2)
+      - [update](#update-3)
       - [destroy](#destroy-5)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
@@ -485,13 +486,13 @@ Method naming conventions:
 
 - #### get
 
-  `mg.domains.get()`
+  `mg.domains.get(domain)`
 
   Example:
 
   ```JS
-  mg.domains.get()
-    .then(domains => console.log(domains)) // logs array of domains
+  mg.domains.get('testing.example.com')
+    .then(domains => console.log(domains)) // logs domain object
     .catch(err => console.error(err)); // logs any error
   ```
 
@@ -538,7 +539,11 @@ Method naming conventions:
     spam_action: 'disabled',
     state: 'unverified',
     type: 'custom',
-    wildcard: true
+    wildcard: true,
+    id: '64a4291ebbe4ec7e1d78bc80',
+    is_disabled: false,
+    web_prefix: 'email',
+    web_scheme: 'http'
   }
   ```
 
@@ -556,59 +561,149 @@ Method naming conventions:
 
   Create method accepts data object with next properties:
 
+  | Parameter 	| Description 	|
+  |---	|---	|
+  | name 	| Name of the domain (ex. domain.com) 	|
+  | smtp_password 	| Password for SMTP authentication 	|
+  | spam_action 	| `disabled`, `block`, or `tag`<br>If `disabled`, no spam filtering will occur for inbound messages.<br>If `block`, inbound spam messages will not be delivered.<br>If `tag`, inbound messages will be tagged with a spam header. [Spam Filter](https://documentation.mailgun.com/en/latest/user_manual.html#um-spam-filter)<br>The default is `disabled`. 	|
+  | wildcard 	| Can be string `'true'` or `'false'` or `boolean`<br>Determines whether the domain will accept email for sub-domains when sending messages.<br>The default is `false`. 	|
+  | force_dkim_authority 	| Can be string `'true'` or `'false'` or `boolean`<br>If set to `true`, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account<br>If set to `false`, the domain will have the same DKIM authority as the root domain registered on the same mailgun account<br>The default is `false`. 	|
+  | dkim_key_size 	| **1024** or **2048**<br>Set the length of your domain’s generated DKIM key<br>The default is **1024** 	|
+  | ips 	| An optional, comma-separated list of IP addresses to be assigned to this domain. If not specified, all dedicated IP addresses on the account will be assigned. If the request cannot be fulfilled (e.g. a requested IP is not assigned to the account, etc), a 400 will be returned. 	|
+  | pool_id 	| The id of the IP Pool that you wish to assign to the domain. The pool must contain at least 1 IP. (Note: IP Pools are only available on certain plans; see http://mailgun.com/pricing) 	|
+  | web_scheme 	| String with `http` or `https`<br>Set your **open**, **click** and **unsubscribe** URLs to use `http` or `https`<br>The default is `http` 	|
+
+  Promise returns:
+
+  ```JS
+  name: 'foobar.example.com',
+  require_tls: false,
+  skip_verification: false,
+  state: 'unverified',
+  wildcard: false,
+  spam_action: 'disabled',
+  created_at: 'Tue, 04 Jul 2023 14:09:18 GMT',
+  smtp_password: undefined,
+  smtp_login: 'postmaster@foobar.example.com',
+  type: 'custom',
+  receiving_dns_records: [{
+      "name": "foobar.example.com",
+      "record_type": "TXT",
+      "valid": "unknown",
+      "value": "v=spf1 include:mailgun.org ~all"
+    },
+    {
+      "name": "k1._domainkey.foobar.example.com",
+      "record_type": "TXT",
+      "valid": "unknown",
+      "value": "k=rsa; 123456"
+    },
+    {
+      "name": "email.foobar.example.com",
+      "record_type": "CNAME",
+      "valid": "unknown",
+      "value": "mailgun.org"
+    }
+  ],
+  sending_dns_records: [{
+      "priority": "10",
+      "record_type": "MX",
+      "valid": "unknown",
+      "value": "mxa.mailgun.org"
+    },
+    {
+      "priority": "10",
+      "record_type": "MX",
+      "valid": "unknown",
+      "value": "mxb.mailgun.org"
+  }],
+  id: '64a4291ebbe4ec7e1d78bc80',
+  is_disabled: false,
+  web_prefix: 'email',
+  web_scheme: 'http'
+  ```
+
+- #### update
+
+  `mg.domains.update(domain, options)`
+
+  Example:
+
+  ```js
+  mg.domains.update('foobar.example.com',{
+      wildcard: 'true',
+      web_scheme: 'http',
+      spam_action: 'disabled',
+    })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Update method accepts data object with next properties:
+
   | Property    | Description                                                                                                                                   |
   |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-  | name          | Name of the domain (ex. domain.com)                                                                                                           |
-  | smtp_password | Password for SMTP authentication                                                                                                              |
-  | spam_action   | disabled or tag Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged wtih a spam header. See Spam Filter. |
-  | wildcard      | true or false Determines whether the domain will accept email for sub-domains.                                                                |
+  | spam_action   | Can be string with value `disabled`, `block`, or `tag`. If *disabled*, no spam filtering will occur for inbound messages. If `block`, inbound spam messages will not be delivered. If `tag`, inbound messages will be tagged with a spam header. See [Spam Filter](https://documentation.mailgun.com/en/latest/user_manual.html#um-spam-filter).|
+  | web_scheme | Can be string with value `http` or `https`. Set your **open**, **click** and **unsubscribe** URLs to use `http` or `https`. The default is `http`|
+  | wildcard   | Can be string `'true'` or `'false'` or `boolean`. Determines whether the domain will accept email for sub-domains. The default is `false`.|
 
   Promise returns:
 
   ```JS
   {
-    created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
     name: 'foobar.example.com',
-    receiving_dns_records: [{
-        "name": "foobar.example.com",
-        "record_type": "TXT",
-        "valid": "unknown",
-        "value": "v=spf1 include:mailgun.org ~all"
-      },
-      {
-        "name": "k1._domainkey.foobar.example.com",
-        "record_type": "TXT",
-        "valid": "unknown",
-        "value": "k=rsa; 123456"
-      },
-      {
-        "name": "email.foobar.example.com",
-        "record_type": "CNAME",
-        "valid": "unknown",
-        "value": "mailgun.org"
-      }],
-    require_tls: true,
-    sending_dns_records: [{
-        "priority": "10",
-        "record_type": "MX",
-        "valid": "unknown",
-        "value": "mxa.mailgun.org"
-      },
-      {
-        "priority": "10",
-        "record_type": "MX",
-        "valid": "unknown",
-        "value": "mxb.mailgun.org"
-      }],
-    skip_verification: true,
-    smtp_login: 'postmaster@foobar.example.com',
-    smtp_password: 'password',
-    spam_action: 'disabled',
+    require_tls: false,
+    skip_verification: false,
     state: 'unverified',
+    wildcard: true,
+    spam_action: 'disabled',
+    created_at: 'Tue, 04 Jul 2023 14:09:18 GMT',
+    smtp_password: undefined,
+    smtp_login: 'postmaster@foobar.example.com',
     type: 'custom',
-    wildcard: false
+    receiving_dns_records: [
+      {
+        is_active: true,
+        cached: [],
+        priority: '10',
+        record_type: 'MX',
+        valid: 'unknown',
+        value: 'mxa.mailgun.org'
+      },
+      {
+        is_active: true,
+        cached: [],
+        priority: '10',
+        record_type: 'MX',
+        valid: 'unknown',
+        value: 'mxb.mailgun.org'
+      }
+    ],
+    sending_dns_records: [
+      {
+        is_active: true,
+        cached: [],
+        name: 'foobar.example.com',
+        record_type: 'TXT',
+        valid: 'unknown',
+        value: 'v=spf1 include:mailgun.org ~all'
+      },
+      {
+        is_active: true,
+        cached: [],
+        name: 'email.foobar.example.com',
+        record_type: 'CNAME',
+        valid: 'unknown',
+        value: 'mailgun.org'
+      }
+    ],
+    id: '64a5880eere4eg7e1d85bc69',
+    is_disabled: false,
+    web_prefix: 'email',
+    web_scheme: 'http'
   }
   ```
+
 - #### destroy
 
   `mg.domains.destroy(domainAddress)`
