@@ -4,13 +4,14 @@ import Request from '../common/Request';
 import DomainCredentialsClient from './domainsCredentials';
 import DomainTemplatesClient from './domainsTemplates';
 import DomainTagsClient from './domainsTags';
-import { MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain } from '../../Types/Domains';
+import { MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, UpdatedDKIMSelectorResponse, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain, DomainUpdateInfo } from '../../Types/Domains';
 export default class DomainsClient implements IDomainsClient {
     request: Request;
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;
     domainTags: IDomainTagsClient;
     constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient, domainTagsClient: DomainTagsClient);
+    private _handleBoolValues;
     private _parseMessage;
     private parseDomainList;
     private _parseDomain;
@@ -19,6 +20,7 @@ export default class DomainsClient implements IDomainsClient {
     list(query?: DomainsQuery): Promise<TDomain[]>;
     get(domain: string): Promise<TDomain>;
     create(data: DomainInfo): Promise<TDomain>;
+    update(domain: string, data: DomainUpdateInfo): Promise<TDomain>;
     verify(domain: string): Promise<TDomain>;
     destroy(domain: string): Promise<MessageResponse>;
     getConnection(domain: string): Promise<ConnectionSettings>;

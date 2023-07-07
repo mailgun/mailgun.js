@@ -42,6 +42,10 @@ import {
   WebPrefixInfo,
   UpdatedWebPrefixResponse,
   TDomain,
+  DomainUpdateInfo,
+  DomainUpdateInfoReq,
+  DomainInfoReq,
+  BoolToString,
 } from '../../Types/Domains';
 import Domain from './domain';
 
@@ -61,6 +65,21 @@ export default class DomainsClient implements IDomainsClient {
     this.domainCredentials = domainCredentialsClient;
     this.domainTemplates = domainTemplatesClient;
     this.domainTags = domainTagsClient;
+  }
+
+  private _handleBoolValues(
+    data: DomainInfo | DomainUpdateInfo
+  ): DomainInfoReq | DomainUpdateInfoReq {
+    const propsForReplacement = data as BoolToString;
+    const replacedProps = Object.keys(propsForReplacement).reduce((acc, key) => {
+      const prop = key as keyof BoolToString;
+      if (typeof propsForReplacement[prop] === 'boolean') {
+        const value = propsForReplacement[prop] as boolean;
+        acc[prop] = (value.toString() === 'true') ? 'true' : 'false';
+      }
+      return acc;
+    }, {} as Record<keyof BoolToString, 'true'| 'false'>);
+    return { ...data, ...replacedProps } as DomainUpdateInfoReq | DomainInfoReq;
   }
 
   private _parseMessage(response: DestroyedDomainResponse) : MessageResponse {
@@ -103,12 +122,14 @@ export default class DomainsClient implements IDomainsClient {
   }
 
   create(data: DomainInfo) : Promise<TDomain> {
-    const postObj = { ...data };
-    if ('force_dkim_authority' in postObj && typeof postObj.force_dkim_authority === 'boolean') {
-      postObj.force_dkim_authority = postObj.force_dkim_authority.toString() === 'true' ? 'true' : 'false';
-    }
-
+    const postObj = this._handleBoolValues(data);
     return this.request.postWithFD('/v3/domains', postObj)
+      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+  }
+
+  update(domain: string, data: DomainUpdateInfo) : Promise<TDomain> {
+    const putData = this._handleBoolValues(data);
+    return this.request.putWithFD(`/v3/domains/${domain}`, putData)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 

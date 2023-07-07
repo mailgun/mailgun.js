@@ -6,16 +6,32 @@ export type DomainsQuery = {
     skip?: number;
 }
 
-export type DomainInfo = {
+export type DomainUpdateInfo = {
+    spam_action?: 'disabled' | 'block' | 'tag';
+    web_scheme?: 'http' | 'https';
+    wildcard?: boolean | 'true' | 'false';
+}
+
+export type DomainUpdateInfoReq = DomainUpdateInfo & {
+    wildcard?: 'true' | 'false'; // api supports only strings
+}
+
+export type DomainInfo = DomainUpdateInfo & {
     name: string;
     smtp_password: string;
-    spam_action?: 'disabled' | 'block' | 'tag';
-    wildcard?: boolean;
     force_dkim_authority?: boolean | 'true' | 'false';
     dkim_key_size?: 1024 | 2048;
     ips?: '';
     pool_id?: '';
-    web_scheme: 'http' | 'https'
+}
+
+export type DomainInfoReq = DomainInfo & {
+    force_dkim_authority?: 'true' | 'false';
+}
+
+export type BoolToString = {
+    force_dkim_authority?: DomainInfo['force_dkim_authority'];
+    wildcard?: DomainUpdateInfo['wildcard'];
 }
 
 export type DomainShortData = {
@@ -29,8 +45,8 @@ export type DomainShortData = {
     smtp_password: string;
     smtp_login: string;
     type: string;
-
 }
+
 export type DomainData = DomainShortData & {
     id: string;
     is_disabled: boolean;
@@ -155,4 +171,8 @@ export type TDomain = {
   type: string;
   receiving_dns_records: DNSRecord[] | null;
   sending_dns_records: DNSRecord[] | null;
+  id?: string;
+  is_disabled?: boolean;
+  web_prefix?: string;
+  web_scheme?: string;
 }
