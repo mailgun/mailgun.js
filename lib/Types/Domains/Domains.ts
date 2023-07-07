@@ -29,6 +29,11 @@ export type DomainInfoReq = DomainInfo & {
     force_dkim_authority?: 'true' | 'false';
 }
 
+export type BoolToString = {
+    force_dkim_authority?: DomainInfo['force_dkim_authority'];
+    wildcard?: DomainUpdateInfo['wildcard'];
+}
+
 export type DomainShortData = {
     name: string;
     require_tls: boolean;

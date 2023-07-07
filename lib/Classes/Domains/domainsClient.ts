@@ -45,6 +45,7 @@ import {
   DomainUpdateInfo,
   DomainUpdateInfoReq,
   DomainInfoReq,
+  BoolToString,
 } from '../../Types/Domains';
 import Domain from './domain';
 
@@ -69,20 +70,15 @@ export default class DomainsClient implements IDomainsClient {
   private _handleBoolValues(
     data: DomainInfo | DomainUpdateInfo
   ): DomainInfoReq | DomainUpdateInfoReq {
-    type ReplacedProps = {
-      // eslint-disable-next-line camelcase
-      force_dkim_authority?: DomainInfo['force_dkim_authority'];
-      wildcard?: DomainUpdateInfo['wildcard'];
-    }
-    const propsForReplacement = data as ReplacedProps;
+    const propsForReplacement = data as BoolToString;
     const replacedProps = Object.keys(propsForReplacement).reduce((acc, key) => {
-      const prop = key as keyof ReplacedProps;
+      const prop = key as keyof BoolToString;
       if (typeof propsForReplacement[prop] === 'boolean') {
         const value = propsForReplacement[prop] as boolean;
-        acc[prop as keyof ReplacedProps] = (value.toString() === 'true') ? 'true' : 'false';
+        acc[prop] = (value.toString() === 'true') ? 'true' : 'false';
       }
       return acc;
-    }, {} as Record<keyof ReplacedProps, 'true'| 'false'>);
+    }, {} as Record<keyof BoolToString, 'true'| 'false'>);
     return { ...data, ...replacedProps } as DomainUpdateInfoReq | DomainInfoReq;
   }
 
