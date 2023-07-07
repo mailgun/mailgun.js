@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.2.0](https://github.com/mailgun/mailgun.js/compare/v9.1.2...v9.2.0) (2023-07-07)
+
+
+### Features
+
+* Add skiped domain update method ([cef4e3b](https://github.com/mailgun/mailgun.js/commits/cef4e3ba97e0003f27a5ef9a5d905b942838cb9d))
+
+
+### Other changes
+
+* Move type from class file ([24c6002](https://github.com/mailgun/mailgun.js/commits/24c6002b64e0377fef8cdaf49591f3fb925a5821))
+
 ### [9.1.2](https://github.com/mailgun/mailgun.js/compare/v9.1.1...v9.1.2) (2023-06-30)
 
 
