@@ -18,7 +18,7 @@ export enum WebhooksIds {
     OPENED = 'opened',
     PERMANENT_FAIL = 'permanent_fail',
     TEMPORARY_FAIL = 'temporary_fail',
-    UNSUBSCRIBED = 'unsubscribe',
+    UNSUBSCRIBED = 'unsubscribed',
 }
 
 export enum YesNo {
