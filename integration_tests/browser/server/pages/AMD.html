@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMD import</title>
+</head>
+<script src='http://localhost:3000/lib/require.2.3.6.js'></script>
+<script>
+  // RequireJS is a popular AMD loader
+  require(['http://localhost:3000/dist/mailgun.web.js'], function(Mailgun) {
+    const mailgun = new Mailgun.default(FormData);
+    const client = mailgun.client({
+      username: 'js_test_username',
+      key: 'js_test_key',
+      public_key: 'js_test_key',
+      timeout: 10000,
+      url: 'http://localhost:3000/'
+    });
+    window.packageExport = Mailgun;
+    window.mailgunClient = client;
+  })
+</script>
+<body>
+<input type="file" name="fileUpload" id="fileUpload">
+</body>
+</html>

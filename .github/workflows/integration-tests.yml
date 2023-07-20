@@ -1,0 +1,71 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  integration_node:
+    name: node.js
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Print node version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run build
+        run: npm run build
+
+      - name: Run Node.js related integration tests
+        run:  npm run test:integration:node
+
+  integration_browser:
+    name: browser
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Copy dist for test server
+        run: cp ${{github.workspace}}/dist/mailgun.web.js ${{github.workspace}}/integration_tests/browser/server/dist/mailgun.web.js
+
+      - name: Serve Files
+        uses: Eun/http-server-action@v1
+        with:
+          directory: ${{ github.workspace}}/integration_tests/browser/server/
+          port: 3000
+          no-cache: false
+          allowed-methods: |
+            ["GET", "HEAD", "POST"]
+          log: "log.txt"
+          logTime: "false"
+
+      - run: curl -vvvv http://localhost:3000/pages/AMD.html && cat log.txt
+
+      - name: Run Browser integration tests
+        run: npm run test:integration:browser
