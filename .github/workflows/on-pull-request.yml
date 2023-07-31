@@ -1,4 +1,4 @@
-name: CI
+name: Build and test
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Run tests
+      - name: Run TS tests
         run: npm test
 
       - name: Show expected changes in the changelog file

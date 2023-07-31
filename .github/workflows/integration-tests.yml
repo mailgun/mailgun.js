@@ -1,0 +1,64 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  on-pull-request:
+    name: test
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 20.x]
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Print node version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run build
+        run: npm run build
+
+      - if: ((matrix.node-version != '14.x') && (matrix.node-version != '16.x')) # starting from v18 there is FormData implementation in Node.js
+        name: Run Node.js integration tests with builtin FormData
+        run: export LAUNCH_TYPE=native && npm run test:node
+
+      - name: Run Node.js integration tests with form-data package
+        run: export LAUNCH_TYPE=package && npm run test:node
+
+      - name: Copy dist for test server
+        run: cp ${{ github.workspace}}/dist/mailgun.web.js ${{ github.workspace}}/integration_tests/server/dist/mailgun.web.js
+
+      - name: Serve Files
+        uses: Eun/http-server-action@v1
+        with:
+          directory: ${{ github.workspace}}/integration_tests/server/
+          port: 3000
+          no-cache: false
+          allowed-methods: |
+            ["GET", "HEAD", "POST"]
+          log: "log.txt"
+          logTime: "false"
+
+      - run: curl -vvvv http://localhost:3000/pages/AMD.html && cat log.txt
+
+      - name: Run Browser integration tests
+        run: export LAUNCH_TYPE=amd && npm run test:browser
+
+      - name: Show expected changes in the changelog file
+        run: npm run release:test

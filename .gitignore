@@ -5,3 +5,5 @@ build
 
 ./test.js
 .coverage/
+.DS_Store
+.nvmrc

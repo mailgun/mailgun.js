@@ -1,5 +1,6 @@
 import * as NodeFormData from 'form-data';
-import { InputFormData } from '../../Types/Common';
+import { APIErrorOptions, InputFormData } from '../../Types/Common';
+import APIError from './Error';
 
 class FormDataBuilder {
   private FormDataConstructor: InputFormData;
@@ -31,8 +32,8 @@ class FormDataBuilder {
     return formData;
   }
 
-  private isNodeFormData(formDataInstance: NodeFormData | FormData)
-  : formDataInstance is NodeFormData {
+  private isFormDataPackage(formDataInstance: NodeFormData | FormData)
+  : boolean {
     return (<NodeFormData>formDataInstance).getHeaders !== undefined;
   }
 
@@ -63,14 +64,37 @@ class FormDataBuilder {
     data: Buffer | Blob | string,
     formDataInstance: NodeFormData | FormData
   ): void {
-    if (Buffer.isBuffer(data) || typeof data === 'string') {
-      const nodeFormData = formDataInstance as NodeFormData;
-      const preparedData = typeof data === 'string' ? Buffer.from(data) : data;
-      nodeFormData.append(key, preparedData, { filename: 'MimeMessage' });
-    } else {
-      const browserFormData = formDataInstance as FormData;
-      browserFormData.append(key, data, 'MimeMessage');
+    if (typeof data === 'string') { // if string only two parameters should be used.
+      formDataInstance.append(key, data as string);
+      return;
     }
+
+    if (this.isFormDataPackage(formDataInstance)) { // form-data package is used
+      const nodeFormData = formDataInstance as NodeFormData;
+      nodeFormData.append(key, data, { filename: 'MimeMessage' });
+      return;
+    }
+
+    if (typeof Blob !== undefined) { // either node > 18 or browser
+      const browserFormData = formDataInstance as FormData; // Browser compliant FormData
+      if (data instanceof Blob) {
+        browserFormData.append(key, data, 'MimeMessage');
+        return;
+      }
+      if (typeof Buffer !== 'undefined') { // node environment
+        if (Buffer.isBuffer(data)) {
+          const blobInstance = new Blob([data]);
+          browserFormData.append(key, blobInstance, 'MimeMessage');
+          return;
+        }
+      }
+    }
+
+    throw new APIError({
+      status: 400,
+      statusText: `Unknown data type for ${key} property`,
+      body: 'The mime data should have type of Buffer, String or Blob'
+    } as APIErrorOptions);
   }
 
   private addFilesToFD(
@@ -88,11 +112,30 @@ class FormDataBuilder {
       const objData = isStreamData ? obj : obj.data;
       // getAttachmentOptions should be called with obj parameter to prevent loosing filename
       const options = this.getAttachmentOptions(obj);
-      if (this.isNodeFormData(formData)) {
-        formData.append(key, objData, options);
+      if (typeof objData === 'string') {
+        formData.append(key, objData as string);
         return;
       }
-      formData.append(key, objData, options.filename);
+
+      if (this.isFormDataPackage(formData)) {
+        const fd = formData as NodeFormData;
+        fd.append(key, objData, options);
+        return;
+      }
+
+      if (typeof Blob !== undefined) { // either node > 18 or browser
+        const browserFormData = formDataInstance as FormData; // Browser compliant FormData
+        if (objData instanceof Blob) {
+          browserFormData.append(key, objData, options.filename);
+          return;
+        }
+        if (typeof Buffer !== 'undefined') { // node environment
+          if (Buffer.isBuffer(objData)) {
+            const blobInstance = new Blob([objData]);
+            browserFormData.append(key, blobInstance, options.filename);
+          }
+        }
+      }
     };
 
     if (Array.isArray(value)) {

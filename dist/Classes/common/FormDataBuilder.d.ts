@@ -4,7 +4,7 @@ declare class FormDataBuilder {
     private FormDataConstructor;
     constructor(FormDataConstructor: InputFormData);
     createFormData(data: any): NodeFormData | FormData;
-    private isNodeFormData;
+    private isFormDataPackage;
     private getAttachmentOptions;
     private addMimeDataToFD;
     private addFilesToFD;
