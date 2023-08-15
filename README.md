@@ -97,6 +97,7 @@ The following service methods are available to instantiated clients. The example
       - [assignIp](#assignip)
     - [events](#events)
       - [get](#get-1)
+        - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
     - [stats](#stats)
       - [getDomain](#getdomain)
       - [getAccount](#getaccount)
@@ -898,13 +899,15 @@ Method naming conventions:
 
 - #### get
 
-  `mg.events.get(domain, query)`
+  `mg.events.get(domain, data)`
 
   Example:
 
   ```js
-  mg.events.get('foobar.example.com', { page: 'mypageid' })
-    .then(data => console.log(data.items)) // logs array of event objects
+  mg.events.get('foobar.example.com', {
+      page: 'mypageid',
+      event: 'opened'
+  }).then(data => console.log(data.items)) // logs array of event objects
     .catch(err => console.error(err)); // logs any error
   ```
 
@@ -918,8 +921,17 @@ Method naming conventions:
   | end       | The end of the search time range. It can be specified as a string (see Date Format) or linux epoch seconds. Refer to Time Range for details.                                                                                                                                    |
   | ascending | Defines the direction of the search time range if the range end time is not specified. Can be either yes or no. Refer to Time Range for details.                                                                                                                                |
   | limit     | Number of entries to return. (300 max)                                                                                                                                                                                                                                          |
-  | <field>   | <field> is the name of the Filter Field. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator. |
-
+  | **field** | **field** is the name of the *[Filter Field](https://documentation.mailgun.com/en/latest/api-events.html#filter-field)*. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator. |
+  - #### Example with Date and *Filter field*
+    ```js
+      const date = new Date(2023, 7, 2, 0, 0, 0, 0); // Wed Aug 02 2023 00:00:00 GMT+0300
+        const events = await mg.events.get('foobar.example.com', {
+          begin: date.toUTCString(), // 'Tue, 01 Aug 2023 21:00:00 GMT'
+          ascending: 'yes',
+          limit: 5,
+          event: 'delivered'
+        });
+    ```
   Promise returns: items (array of event objects), pages (paging keys grouped by id)
 
   ```JS
@@ -1477,7 +1489,7 @@ Method naming conventions:
 
   Promise returns: response body
 
-  ```JS
+  ```js
   {
     actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
     created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
