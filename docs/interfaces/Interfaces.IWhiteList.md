@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/WhiteList.ts:5](https://github.com/mailgun/mailgun.js/blob/044491a/lib/Interfaces/Suppressions/WhiteList.ts#L5)
+[Interfaces/Suppressions/WhiteList.ts:5](https://github.com/mailgun/mailgun.js/blob/a212f26/lib/Interfaces/Suppressions/WhiteList.ts#L5)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/WhiteList.ts:4](https://github.com/mailgun/mailgun.js/blob/044491a/lib/Interfaces/Suppressions/WhiteList.ts#L4)
+[Interfaces/Suppressions/WhiteList.ts:4](https://github.com/mailgun/mailgun.js/blob/a212f26/lib/Interfaces/Suppressions/WhiteList.ts#L4)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/WhiteList.ts:2](https://github.com/mailgun/mailgun.js/blob/044491a/lib/Interfaces/Suppressions/WhiteList.ts#L2)
+[Interfaces/Suppressions/WhiteList.ts:2](https://github.com/mailgun/mailgun.js/blob/a212f26/lib/Interfaces/Suppressions/WhiteList.ts#L2)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/WhiteList.ts:3](https://github.com/mailgun/mailgun.js/blob/044491a/lib/Interfaces/Suppressions/WhiteList.ts#L3)
+[Interfaces/Suppressions/WhiteList.ts:3](https://github.com/mailgun/mailgun.js/blob/a212f26/lib/Interfaces/Suppressions/WhiteList.ts#L3)

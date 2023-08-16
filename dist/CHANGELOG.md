@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.2.1](https://github.com/mailgun/mailgun.js/compare/v9.2.0...v9.2.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* Node.js native FormData issue ([f00dd57](https://github.com/mailgun/mailgun.js/commits/f00dd57137334e663b01dc833deefad2f36b23f6))
+
+
+### Other changes
+
+* Update readme for events ([83996c9](https://github.com/mailgun/mailgun.js/commits/83996c95fce7d8ecc3f2c5b8fcd0241500a7b1a5))
+
 ## [9.2.0](https://github.com/mailgun/mailgun.js/compare/v9.1.2...v9.2.0) (2023-07-07)
 
 
