@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[Interfaces/IPPools/IIPPoolsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/633bce9/lib/Interfaces/IPPools/IIPPoolsClient.ts#L9)
+[Interfaces/IPPools/IIPPoolsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/IPPools/IIPPoolsClient.ts#L9)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[Interfaces/IPPools/IIPPoolsClient.ts:11](https://github.com/mailgun/mailgun.js/blob/633bce9/lib/Interfaces/IPPools/IIPPoolsClient.ts#L11)
+[Interfaces/IPPools/IIPPoolsClient.ts:11](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/IPPools/IIPPoolsClient.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[Interfaces/IPPools/IIPPoolsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/633bce9/lib/Interfaces/IPPools/IIPPoolsClient.ts#L8)
+[Interfaces/IPPools/IIPPoolsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/IPPools/IIPPoolsClient.ts#L8)
 
 ___
 
@@ -87,4 +87,4 @@ ___
 
 #### Defined in
 
-[Interfaces/IPPools/IIPPoolsClient.ts:10](https://github.com/mailgun/mailgun.js/blob/633bce9/lib/Interfaces/IPPools/IIPPoolsClient.ts#L10)
+[Interfaces/IPPools/IIPPoolsClient.ts:10](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/IPPools/IIPPoolsClient.ts#L10)

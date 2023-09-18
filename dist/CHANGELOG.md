@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.3.0](https://github.com/mailgun/mailgun.js/compare/v9.2.1...v9.3.0) (2023-09-18)
+
+
+### Features
+
+* Update webhook.update method to allow multiple URLs ([633bce9](https://github.com/mailgun/mailgun.js/commits/633bce9f2a7a704972251af16aeafdc73d5cbbde))
+
+
+### Other changes
+
+* Update docs ([3a3b8d8](https://github.com/mailgun/mailgun.js/commits/3a3b8d8a9ced9f6a2d63ce42010980d20cfaf815))
+
 ### [9.2.1](https://github.com/mailgun/mailgun.js/compare/v9.2.0...v9.2.1) (2023-08-16)
 
 
