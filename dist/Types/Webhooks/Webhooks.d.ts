@@ -25,5 +25,9 @@ export type WebhookValidationResponse = {
 };
 export type WebhookResult = {
     id: string;
+    /**
+     * @deprecated url property is deprecated. Use "urls" instead.
+     */
     url: string | undefined;
+    urls: string[];
 };

@@ -14,10 +14,12 @@ import Request from './common/Request';
 export class Webhook implements WebhookResult {
   id: string;
   url: string | undefined;
+  urls: string[];
 
-  constructor(id: string, url: string | undefined) {
+  constructor(id: string, url: string | undefined, urls: string[]) {
     this.id = id;
     this.url = url;
+    this.urls = urls;
   }
 }
 
@@ -36,12 +38,16 @@ export default class WebhooksClient implements IWebHooksClient {
     return function (response: WebhookResponse): WebhookResult {
       const webhookResponse = response?.body?.webhook;
       let url = webhookResponse?.url;
+      let urls = webhookResponse?.urls;
       if (!url) {
-        url = webhookResponse?.urls && webhookResponse.urls.length
-          ? webhookResponse.urls[0]
+        url = urls && urls.length
+          ? urls[0]
           : undefined;
       }
-      return new Webhook(id, url);
+      if ((!urls || urls.length === 0) && url) {
+        urls = [url];
+      }
+      return new Webhook(id, url, urls as string[]);
     };
   }
 
@@ -76,8 +82,8 @@ export default class WebhooksClient implements IWebHooksClient {
       .then(this._parseWebhookWithID(id));
   }
 
-  update(domain: string, id: string, url: string): Promise<WebhookResult> {
-    return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id), { url })
+  update(domain: string, id: string, urlValues: string | string[]): Promise<WebhookResult> {
+    return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id), { url: urlValues })
       .then(this._parseWebhookWithID(id));
   }
 

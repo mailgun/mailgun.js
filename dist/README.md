@@ -1335,7 +1335,7 @@ Method naming conventions:
 
   ```JS
   {
-    'open': { 'url': 'http://requestb.in' }
+    'open': { 'url': 'http://requestb.in', 'urls': ['trackclick.com'] }
   }
   ```
 
@@ -1355,7 +1355,7 @@ Method naming conventions:
 
   ```JS
   {
-    'open': { 'url': 'http://requestb.in' }
+    'open': { 'url': 'http://requestb.in', 'urls': ['http://requestb.in'] }
   }
   ```
 
@@ -1392,9 +1392,23 @@ Method naming conventions:
 
   ```JS
   {
-    'open': { 'url': 'http://requestb.in' }
+    'open': { 'url': 'http://requestb.in', 'urls': ['http://requestb.in'] }
   }
   ```
+
+  ```js
+  mg.webhooks.update('foobar.example.com', 'open', ['http://requestb.in', 'http://requestb1.in' ]) // bounce, deliver, drop, spam, unsubscribe, click, open
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    'open': { 'url': 'http://requestb.in', 'urls': ['http://requestb.in', 'http://requestb1.in'] }
+  }
+  ```
+
 
 - #### destroy
 
@@ -1412,7 +1426,7 @@ Method naming conventions:
 
   ```JS
   {
-    'open': { 'url': 'http://requestb.in' }
+    'open': { 'url': 'http://requestb.in', 'urls': ['http://requestb.in']}
   }
   ```
 

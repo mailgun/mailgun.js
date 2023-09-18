@@ -40,12 +40,12 @@ describe('WebhooksClient', function () {
     it('fetches single webhook', async () => {
       api.get('/v3/domains/domain.com/webhooks/clicked').reply(200, {
         webhook: {
-          url: 'trackclick.com'
+          url: 'trackclick.com',
         }
       });
 
       const webhook: WebhookResult = await client.get('domain.com', WebhooksIds.CLICKED);
-      webhook.should.eql({ id: 'clicked', url: 'trackclick.com' });
+      webhook.should.eql({ id: 'clicked', url: 'trackclick.com', urls: ['trackclick.com'] });
     });
 
     it('fetches single webhook with multiple urls', async () => {
@@ -56,7 +56,7 @@ describe('WebhooksClient', function () {
       });
 
       const webhook: WebhookResult = await client.get('domain.com', WebhooksIds.CLICKED);
-      webhook.should.eql({ id: 'clicked', url: 'trackclick.com' });
+      webhook.should.eql({ id: 'clicked', url: 'trackclick.com', urls: ['trackclick.com', 'trackclick1.com'] });
     });
 
     it('sets url to undefined if no urls', async () => {
@@ -67,7 +67,7 @@ describe('WebhooksClient', function () {
       });
 
       const webhook: WebhookResult = await client.get('domain.com', WebhooksIds.CLICKED);
-      webhook.should.eql({ id: 'clicked', url: undefined });
+      webhook.should.eql({ id: 'clicked', url: undefined, urls: [] });
     });
   });
 
@@ -82,7 +82,7 @@ describe('WebhooksClient', function () {
         });
 
       const webhook: WebhookResult = await client.create('domain.com', 'click', 'trackclick.com', false) as WebhookResult;
-      webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      webhook.should.eql({ id: 'click', url: 'trackclick.com', urls: ['trackclick.com'] });
     });
 
     it('tests webhook', async () => {
@@ -108,7 +108,21 @@ describe('WebhooksClient', function () {
         });
 
       const webhook: WebhookResult = await client.update('domain.com', 'click', 'trackclick.com');
-      webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      webhook.should.eql({ id: 'click', url: 'trackclick.com', urls: ['trackclick.com'] });
+    });
+
+    it('updates webhook with multiple urls', async () => {
+      const urls = ['trackclick.com', 'trackclick1.com', 'trackclick2.com'];
+      api.put('/v3/domains/domain.com/webhooks/click')
+        .reply(200, {
+          message: 'Webhook has been updated',
+          webhook: {
+            urls
+          }
+        });
+
+      const webhook: WebhookResult = await client.update('domain.com', 'click', urls);
+      webhook.should.eql({ id: 'click', url: 'trackclick.com', urls });
     });
   });
 
@@ -117,12 +131,12 @@ describe('WebhooksClient', function () {
       api.delete('/v3/domains/domain.com/webhooks/click').reply(200, {
         message: 'Webhook has been deleted',
         webhook: {
-          url: 'trackclick.com'
+          url: 'trackclick.com',
         }
       });
 
       const webhook: WebhookResult = await client.destroy('domain.com', 'click');
-      webhook.should.eql({ id: 'click', url: 'trackclick.com' });
+      webhook.should.eql({ id: 'click', url: 'trackclick.com', urls: ['trackclick.com'] });
     });
   });
 });
