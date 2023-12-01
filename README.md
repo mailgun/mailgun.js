@@ -41,6 +41,8 @@ Next, require the module and instantiate a mailgun client by calling `new Mailgu
 
 NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
+IMPORTANT: if you are using EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
+
 ### Imports
 Once the package is installed, you can import the library using `import` or `require` approach:
 
