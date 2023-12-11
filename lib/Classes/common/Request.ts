@@ -10,11 +10,12 @@ import {
   RequestOptions,
   APIErrorOptions,
   InputFormData,
-  APIResponse
-} from '../../Types/Common';
+  APIResponse,
+  IpPoolDeleteData
+} from '../../Types';
 
 import FormDataBuilder from './FormDataBuilder';
-import { IpPoolDeleteData } from '../../Types/IPPools';
+import SubaccountsClient from '../Subaccounts';
 
 class Request {
   private username: string;
@@ -131,6 +132,17 @@ class Request {
       }, requestHeaders
     );
     return requestHeaders;
+  }
+
+  setSubaccountHeader(subaccountId: string): void {
+    const headers = this.makeHeadersFromObject({
+      [SubaccountsClient.SUBACCOUNT_HEADER]: subaccountId
+    });
+    this.headers.set(headers);
+  }
+
+  resetSubaccountHeader(): void {
+    this.headers.delete(SubaccountsClient.SUBACCOUNT_HEADER);
   }
 
   query(

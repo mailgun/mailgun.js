@@ -1,10 +1,10 @@
 import APIError from './common/Error';
-import { APIErrorOptions } from '../Types/Common';
 import {
+  APIErrorOptions,
   MailgunMessageData,
   MessagesSendAPIResponse,
   MessagesSendResult
-} from '../Types/Messages';
+} from '../Types';
 import Request from './common/Request';
 import { IMessagesClient } from '../Interfaces';
 

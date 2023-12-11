@@ -10,6 +10,7 @@ __Table of Contents__
   - [Install](#install)
   - [Setup Client](#setup-client)
     - [Available Imports](#imports)
+    - [Using Subaccounts](#using-subaccounts)
     - [Types imports](#types-imports)
     - [Interfaces and Enums imports](#interfaces-and-enums-imports)
   - [Generated docs](#generated-docs)
@@ -55,6 +56,17 @@ Once the package is installed, you can import the library using `import` or `req
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+```
+### Using Subaccounts
+Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
+```js
+  import * as FormData from 'form-data';
+  import Mailgun from 'mailgun.js';
+  const mailgun = new Mailgun(FormData);
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+  mg.setSubaccount('subaccount-id');
+  // then, if you need to reset it back to the primary account:
+  mg.resetSubaccount();
 ```
 ### Types imports
 Starting from version **9.0.0.** Types can be includes as named import:
@@ -152,6 +164,12 @@ The following service methods are available to instantiated clients. The example
       - [createMembers](#createmembers)
       - [updateMember](#updatemember)
       - [destroyMember](#destroymember)
+    - [subaccounts](#subaccounts)
+      - [list](#list-6)
+      - [get](#get-8)
+      - [create](#create-7)
+      - [enable](#enable)
+      - [disable](#disable)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -2044,6 +2062,115 @@ A client to manage members within a specific mailing list.
     message: 'Mailing list member has been deleted'
   }
   ```
+### Subaccounts
+
+  A client to manage subaccounts.
+
+- #### list
+
+  `mg.subaccounts.list(query)` - [api docs](https://documentation.mailgun.com/en/latest/subaccounts.html)
+
+  Example:
+
+  ```js
+  mg.subaccounts.list()
+    .then(subaccounts => console.log(subaccounts)) // logs array of subaccounts
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: array of Subaccounts instances
+
+  ```JS
+  [
+    { id: "XYZ", name: "test.subaccount1", status: "open" },
+    { id: "YYY", name: "test.subaccount2", status: "open" }
+  ]
+  ```
+
+  Query data may have next properties:
+
+  | Property | Description                                                            |
+  |:---------|:-----------------------------------------------------------------------|
+  | limit    | Maximum number of records to return. (10 by default)                   |
+  | skip     | Number of records to skip. (0 by default)                              |
+  | sort     | "asc" or "desc".                                                       |
+  | enabled  | Returns all enabled/disabled subaccounts. (Defaults to all if omitted) |
+
+- #### get
+
+  `mg.subaccounts.get(subaccount_id)`
+
+  Example:
+
+  ```JS
+  mg.subaccounts.get('123')
+    .then(subaccount => console.log(subaccount)) // logs subaccount object
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: Subaccount instance
+
+  ```JS
+  { id: "123", name: "test.subaccount1", status: "open" }
+  ```
+
+- #### create
+
+  `mg.subaccounts.create(name)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.create('foobar')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: Subaccount instance
+
+  ```JS
+  { id: "123", name: "foobar", status: "open" }
+  ```
+
+  Create method accepts data object with next properties:
+
+  | Parameter 	 | Description 	                                             |
+  |-------------|-----------------------------------------------------------|
+  | name 	     | Name of the subaccount being created (ex. 'mysubaccount') 	 |
+
+- #### enable
+
+  `mg.subaccounts.enable(subaccount_id)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.enable('123')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Subaccount instance
+
+  ```JS
+  { id: "123", name: "foobar", status: "open" }
+  ```
+
+- #### disable
+
+  `mg.subaccounts.disable(subaccount_id)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.disable('123')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Subaccount instance
+
+  ```JS
+  { id: "123", name: "foobar", status: "disabled" }
+  ```
 
 ## Navigation thru lists
   Most of the methods that return items in a list support pagination.
@@ -2210,7 +2337,6 @@ A client to manage members within a specific mailing list.
     }
     );
     ```
-
 
 ## Browser Demo
 
