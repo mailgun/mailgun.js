@@ -32,7 +32,8 @@ import {
   IRoutesClient,
   IValidationClient,
   IIPsClient,
-  IIPPoolsClient, ISubaccountsClient
+  IIPPoolsClient,
+  ISubaccountsClient,
 } from '../Interfaces';
 
 export default class MailgunClient implements IMailgunClient {

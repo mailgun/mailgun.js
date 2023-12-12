@@ -12,8 +12,8 @@ export type SubaccountListItem = {
 }
 
 export type SubaccountListResponseData = {
-    subaccounts: SubaccountListItem[];
-    total: number;
+  subaccounts: SubaccountListItem[];
+  total: number;
 }
 
 export type SubaccountResponseData = {

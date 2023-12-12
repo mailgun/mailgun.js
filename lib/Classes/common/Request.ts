@@ -136,6 +136,7 @@ class Request {
 
   setSubaccountHeader(subaccountId: string): void {
     const headers = this.makeHeadersFromObject({
+      ...this.headers,
       [SubaccountsClient.SUBACCOUNT_HEADER]: subaccountId
     });
     this.headers.set(headers);

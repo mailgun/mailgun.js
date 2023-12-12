@@ -1,8 +1,9 @@
 import Request from './common/Request';
 import { ISubaccountsClient } from '../Interfaces';
 import {
-  SubaccountListItem, SubaccountListResponseData, SubaccountResponseData,
-  SubaccountsQuery
+  SubaccountListResponseData,
+  SubaccountResponseData,
+  SubaccountsQuery,
 } from '../Types';
 
 export default class SubaccountsClient implements ISubaccountsClient {
