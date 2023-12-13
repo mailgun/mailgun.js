@@ -8,6 +8,7 @@ export * from './MailingLists';
 export * from './Messages';
 export * from './Routes';
 export * from './Stats';
+export * from './Subaccounts';
 export * from './Suppressions';
 export * from './Validations';
 export * from './Webhooks';
