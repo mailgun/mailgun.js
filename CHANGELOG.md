@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.4.0](https://github.com/mailgun/mailgun.js/compare/v9.3.0...v9.4.0) (2023-12-13)
+
+
+### Features
+
+* Add subaccounts ([3ca1d56](https://github.com/mailgun/mailgun.js/commits/3ca1d56955f7651bcba758c75cdbee3be48d5748))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @babel/traverse from 7.22.5 to 7.23.2 ([53f3e8f](https://github.com/mailgun/mailgun.js/commits/53f3e8fd673857b75ab0844bb1e04e016dad6ed5))
+* **deps:** bump axios from 1.3.3 to 1.6.0 ([729032d](https://github.com/mailgun/mailgun.js/commits/729032d7a19ec307255c401bd698f5e7835925fb))
+
+
+### Other changes
+
+* Update the formatting, merge headers to avoid overriding ([6e46eca](https://github.com/mailgun/mailgun.js/commits/6e46ecac1742660673931a99735988e4ffb046ce))
+
 ## [9.3.0](https://github.com/mailgun/mailgun.js/compare/v9.2.1...v9.3.0) (2023-09-18)
 
 

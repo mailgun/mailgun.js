@@ -26,6 +26,7 @@
 - [IRoutesClient](../interfaces/Interfaces.IRoutesClient.md)
 - [IStatsClient](../interfaces/Interfaces.IStatsClient.md)
 - [IStatsContainer](../interfaces/Interfaces.IStatsContainer.md)
+- [ISubaccountsClient](../interfaces/Interfaces.ISubaccountsClient.md)
 - [ISuppressionClient](../interfaces/Interfaces.ISuppressionClient.md)
 - [IUnsubscribe](../interfaces/Interfaces.IUnsubscribe.md)
 - [IValidationClient](../interfaces/Interfaces.IValidationClient.md)
