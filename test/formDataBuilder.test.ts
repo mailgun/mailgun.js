@@ -50,7 +50,7 @@ describe('FormDataBuilder', function () {
     });
   });
 
-  if (Blob || global.FormData) {
+  if (Blob && global.FormData) {
     describe('createFormData (Browser FormData + Blob)', async () => {
       before(function () {
         builder = new FormDataBuilder(global.FormData as InputFormData);
@@ -107,6 +107,6 @@ describe('FormDataBuilder', function () {
     });
   } else {
     // eslint-disable-next-line no-console
-    console.warn('global.FormData does not exist. Skipping the FormData + Blob test');
+    console.warn('global.FormData does not exist. Skipping the FormData + Buffer test');
   }
 });
