@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.4.1](https://github.com/mailgun/mailgun.js/compare/v9.4.0...v9.4.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* Filename is not respected for attachments with type string ([7e2cd18](https://github.com/mailgun/mailgun.js/commits/7e2cd18dd273053bcc7067070080afba5e38730f))
+* Update condition in tests ([72ecbaa](https://github.com/mailgun/mailgun.js/commits/72ecbaa0c98c080e7f06029ad25d8552c8a80d7e))
+
+
+### Other changes
+
+* Update CI to run on multiple node versions ([b0e9ae0](https://github.com/mailgun/mailgun.js/commits/b0e9ae08840ab53e33c03d985971ea4a4db139ae))
+
 ## [9.4.0](https://github.com/mailgun/mailgun.js/compare/v9.3.0...v9.4.0) (2023-12-13)
 
 
