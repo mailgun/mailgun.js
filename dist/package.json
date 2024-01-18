@@ -27,6 +27,9 @@
     "base-64": "^1.0.0",
     "url-join": "^4.0.1"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "contributors": [
     {
       "name": "Brad Gignac",

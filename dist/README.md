@@ -28,7 +28,7 @@ __Table of Contents__
 
 ## Install
 
-- Requires node.js >= 12.x
+- Requires node.js >= 18.x
 
 Install mailgun.js with:
 
@@ -2414,4 +2414,3 @@ git pull
 Next, run ```npm run release```.
 
 After that, `cd ./dist` and then run ```npm login``` and ```npm publish``` to publish changes on npm.
-
