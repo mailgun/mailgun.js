@@ -11,34 +11,62 @@ on:
       - main
 
 jobs:
-  on-pull-request:
-    name: test
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    lint:
+      name: lint
+      runs-on: 'ubuntu-latest'
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+        - uses: actions/setup-node@v3
+          with:
+            node-version: "18.x"
 
-      - name: Print node version
-        run: node -v
+        - name: Install dependencies
+          run: npm ci
 
-      - name: Install dependencies
-        run: npm ci
+        - name: Run linter
+          run: npm run lint
+    test:
+      name: Test
+      strategy:
+        matrix:
+          node-version: [18.x, 20.x]
+      runs-on: 'ubuntu-latest'
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
 
-      - name: Run linter
-        run: npm run lint
+        - uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
 
-      - name: Run build
-        run: npm run build
+        - name: Print node version
+          run: node -v
 
-      - name: Run tests
-        run: npm test
+        - name: Install dependencies
+          run: npm ci
 
-      - name: Show expected changes in the changelog file
-        run: npm run release:test
+        - name: Run build
+          run: npm run build
+
+        - name: Run tests
+          run: npm test
+
+        - name: Show expected changes in the changelog file
+          run: npm run release:test
+    changelog:
+      name: Changelog check
+      runs-on: 'ubuntu-latest'
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: "18.x"
+        - name: Print node version
+          run: node -v
+        - name: Install dependencies
+          run: npm ci
+        - name: Show expected changes in the changelog file
+          run: npm run release:test
