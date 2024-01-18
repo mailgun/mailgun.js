@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.0.0](https://github.com/mailgun/mailgun.js/compare/v9.4.1...v10.0.0) (2024-01-18)
+
+
+### Bug Fixes
+
+* Run npm audit fix ([dee7b00](https://github.com/mailgun/mailgun.js/commits/dee7b00060aafeec579294ce2b6a83a17ce5dae7))
+
+
+### Breaking changes
+
+* Update minimaly supported version of Node.js ([5121d8a](https://github.com/mailgun/mailgun.js/commits/5121d8ac9817081d33c5dbf2db0eedef634eb627))
+
+
+### Other changes
+
+* Update CI to decrease linter noise ([f89bbf1](https://github.com/mailgun/mailgun.js/commits/f89bbf189f1d6d2071c650b03bd69b2e69147d5d))
+
 ### [9.4.1](https://github.com/mailgun/mailgun.js/compare/v9.4.0...v9.4.1) (2024-01-04)
 
 

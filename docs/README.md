@@ -30,7 +30,7 @@ __Table of Contents__
 
 ## Install
 
-- Requires node.js >= 12.x
+- Requires node.js >= 18.x
 
 Install mailgun.js with:
 

@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "9.4.1",
+  "version": "10.0.0",
   "main": "./dist/mailgun.node.js",
   "browser": "./dist/mailgun.web.js",
   "types": "./index.d.ts",
@@ -81,8 +81,8 @@
     "webpack-cli": "^4.1.0",
     "webpack-merge": "^5.8.0"
   },
-  "engines" : {
-    "node" : ">=18.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   },
   "contributors": [
     {
