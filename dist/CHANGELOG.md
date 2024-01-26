@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.0.1](https://github.com/mailgun/mailgun.js/compare/v10.0.0...v10.0.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* Update vulnerable version of lodash.set ([cf6c8e9](https://github.com/mailgun/mailgun.js/commits/cf6c8e96a9e6bdb2dd1682ee703ee29c4024da6f))
+
 ## [10.0.0](https://github.com/mailgun/mailgun.js/compare/v9.4.1...v10.0.0) (2024-01-18)
 
 
