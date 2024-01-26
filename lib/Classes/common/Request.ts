@@ -1,7 +1,11 @@
 import * as base64 from 'base-64';
 import urljoin from 'url-join';
 import axios, {
-  AxiosError, AxiosResponse, AxiosHeaders, RawAxiosRequestHeaders
+  AxiosError,
+  AxiosResponse,
+  AxiosHeaders,
+  RawAxiosRequestHeaders,
+  AxiosProxyConfig,
 } from 'axios';
 import * as NodeFormData from 'form-data';
 import APIError from './Error';
@@ -25,6 +29,7 @@ class Request {
   private headers: AxiosHeaders;
   private formDataBuilder: FormDataBuilder;
   private maxBodyLength: number;
+  private proxy: AxiosProxyConfig | undefined;
 
   constructor(options: RequestOptions, formData: InputFormData) {
     this.username = options.username;
@@ -34,6 +39,7 @@ class Request {
     this.headers = this.makeHeadersFromObject(options.headers);
     this.formDataBuilder = new FormDataBuilder(formData);
     this.maxBodyLength = 52428800; // 50 MB
+    this.proxy = options?.proxy;
   }
 
   async request(
@@ -66,7 +72,8 @@ class Request {
         url: urlValue,
         headers: requestHeaders,
         ...params,
-        maxBodyLength: this.maxBodyLength
+        maxBodyLength: this.maxBodyLength,
+        proxy: this.proxy,
       });
     } catch (err: unknown) {
       const errorResponse = err as AxiosError;

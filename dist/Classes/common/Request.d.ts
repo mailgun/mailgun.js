@@ -8,6 +8,7 @@ declare class Request {
     private headers;
     private formDataBuilder;
     private maxBodyLength;
+    private proxy;
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, onCallOptions?: Record<string, unknown | Record<string, unknown>>): Promise<APIResponse>;
     private getResponseBody;
