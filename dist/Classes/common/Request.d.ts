@@ -1,6 +1,5 @@
 import * as NodeFormData from 'form-data';
-import { RequestOptions, InputFormData, APIResponse } from '../../Types/Common';
-import { IpPoolDeleteData } from '../../Types/IPPools';
+import { RequestOptions, InputFormData, APIResponse, IpPoolDeleteData } from '../../Types';
 declare class Request {
     private username;
     private key;
@@ -14,6 +13,8 @@ declare class Request {
     private getResponseBody;
     private joinAndTransformHeaders;
     private makeHeadersFromObject;
+    setSubaccountHeader(subaccountId: string): void;
+    resetSubaccountHeader(): void;
     query(method: string, url: string, query?: Record<string, unknown> | Array<Array<string>>, options?: Record<string, unknown>): Promise<APIResponse>;
     command(method: string, url: string, data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData, options?: Record<string, unknown>, addDefaultHeaders?: boolean): Promise<APIResponse>;
     get(url: string, query?: Record<string, unknown> | Array<Array<string>>, options?: Record<string, unknown>): Promise<APIResponse>;

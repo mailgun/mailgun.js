@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "9.3.0",
+  "version": "10.0.1",
   "main": "./dist/mailgun.node.js",
   "browser": "./dist/mailgun.web.js",
   "types": "./index.d.ts",
@@ -25,6 +25,7 @@
     "build:prepublish": "node ./SetupPackage.js",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "test": "multi='dot=- xunit=./results.xml' nyc --reporter=text-summary --reporter=lcov --report-dir=.coverage mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
+    "test:debug": "multi='dot=- xunit=./results.xml' nyc --reporter=text-summary --reporter=lcov --report-dir=.coverage mocha --inspect-brk -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test:watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
     "lint": "eslint . --ext .ts",
@@ -66,7 +67,7 @@
     "json-loader": "^0.5.7",
     "mocha": "^9.2.0",
     "mocha-multi": "^1.1.3",
-    "nock": "^13.0.4",
+    "nock": "^13.5.0",
     "nyc": "^15.1.0",
     "path-browserify": "^1.0.1",
     "standard-version": "^9.3.1",
@@ -79,6 +80,9 @@
     "webpack": "^5.76.0",
     "webpack-cli": "^4.1.0",
     "webpack-merge": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "contributors": [
     {

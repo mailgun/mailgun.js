@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[Interfaces/Validations/MultipleValidation.ts:13](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/Validations/MultipleValidation.ts#L13)
+[Interfaces/Validations/MultipleValidation.ts:13](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/Validations/MultipleValidation.ts#L13)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Validations/MultipleValidation.ts:17](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/Validations/MultipleValidation.ts#L17)
+[Interfaces/Validations/MultipleValidation.ts:17](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/Validations/MultipleValidation.ts#L17)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Validations/MultipleValidation.ts:12](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/Validations/MultipleValidation.ts#L12)
+[Interfaces/Validations/MultipleValidation.ts:12](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/Validations/MultipleValidation.ts#L12)
 
 ___
 
@@ -92,4 +92,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Validations/MultipleValidation.ts:11](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/Validations/MultipleValidation.ts#L11)
+[Interfaces/Validations/MultipleValidation.ts:11](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/Validations/MultipleValidation.ts#L11)

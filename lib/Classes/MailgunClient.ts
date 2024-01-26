@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import Request from './common/Request';
-import { MailgunClientOptions } from '../Types/MailgunClient';
+import { MailgunClientOptions, InputFormData, RequestOptions } from '../Types';
 
 import DomainsClient from './Domains/domainsClient';
 import EventClient from './Events';
@@ -14,11 +14,11 @@ import IpsClient from './IPs';
 import IpPoolsClient from './IPPools';
 import MailingListsClient from './MailingLists/mailingLists';
 import MailListsMembers from './MailingLists/mailListMembers';
-import { InputFormData, RequestOptions } from '../Types/Common';
 import DomainCredentialsClient from './Domains/domainsCredentials';
 import MultipleValidationClient from './Validations/multipleValidation';
 import DomainTemplatesClient from './Domains/domainsTemplates';
 import DomainTagsClient from './Domains/domainsTags';
+import SubaccountsClient from './Subaccounts';
 
 import {
   IDomainsClient,
@@ -32,7 +32,8 @@ import {
   IRoutesClient,
   IValidationClient,
   IIPsClient,
-  IIPPoolsClient
+  IIPPoolsClient,
+  ISubaccountsClient,
 } from '../Interfaces';
 
 export default class MailgunClient implements IMailgunClient {
@@ -49,6 +50,7 @@ export default class MailgunClient implements IMailgunClient {
   public ips: IIPsClient;
   public ip_pools: IIPPoolsClient;
   public lists: IMailingListsClient;
+  public subaccounts: ISubaccountsClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -89,5 +91,14 @@ export default class MailgunClient implements IMailgunClient {
     this.ip_pools = new IpPoolsClient(this.request);
     this.lists = new MailingListsClient(this.request, mailListsMembers);
     this.validate = new ValidateClient(this.request, multipleValidationClient);
+    this.subaccounts = new SubaccountsClient(this.request);
+  }
+
+  setSubaccount(subaccountId: string): void {
+    this.request?.setSubaccountHeader(subaccountId);
+  }
+
+  resetSubaccount(): void {
+    this.request?.resetSubaccountHeader();
   }
 }

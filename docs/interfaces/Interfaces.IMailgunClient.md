@@ -16,9 +16,15 @@
 - [messages](Interfaces.IMailgunClient.md#messages)
 - [routes](Interfaces.IMailgunClient.md#routes)
 - [stats](Interfaces.IMailgunClient.md#stats)
+- [subaccounts](Interfaces.IMailgunClient.md#subaccounts)
 - [suppressions](Interfaces.IMailgunClient.md#suppressions)
 - [validate](Interfaces.IMailgunClient.md#validate)
 - [webhooks](Interfaces.IMailgunClient.md#webhooks)
+
+### Methods
+
+- [resetSubaccount](Interfaces.IMailgunClient.md#resetsubaccount)
+- [setSubaccount](Interfaces.IMailgunClient.md#setsubaccount)
 
 ## Properties
 
@@ -28,7 +34,7 @@
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:15](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L15)
+[Interfaces/MailgunClient/IMailgunClient.ts:16](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L16)
 
 ___
 
@@ -38,7 +44,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:17](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L17)
+[Interfaces/MailgunClient/IMailgunClient.ts:18](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L18)
 
 ___
 
@@ -48,7 +54,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:24](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L24)
+[Interfaces/MailgunClient/IMailgunClient.ts:25](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L25)
 
 ___
 
@@ -58,7 +64,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:23](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L23)
+[Interfaces/MailgunClient/IMailgunClient.ts:24](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L24)
 
 ___
 
@@ -68,7 +74,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:25](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L25)
+[Interfaces/MailgunClient/IMailgunClient.ts:26](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L26)
 
 ___
 
@@ -78,7 +84,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:20](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L20)
+[Interfaces/MailgunClient/IMailgunClient.ts:21](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L21)
 
 ___
 
@@ -88,7 +94,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:21](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L21)
+[Interfaces/MailgunClient/IMailgunClient.ts:22](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L22)
 
 ___
 
@@ -98,7 +104,17 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:18](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L18)
+[Interfaces/MailgunClient/IMailgunClient.ts:19](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L19)
+
+___
+
+### subaccounts
+
+• **subaccounts**: [`ISubaccountsClient`](Interfaces.ISubaccountsClient.md)
+
+#### Defined in
+
+[Interfaces/MailgunClient/IMailgunClient.ts:27](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L27)
 
 ___
 
@@ -108,7 +124,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:19](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L19)
+[Interfaces/MailgunClient/IMailgunClient.ts:20](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L20)
 
 ___
 
@@ -118,7 +134,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:22](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L22)
+[Interfaces/MailgunClient/IMailgunClient.ts:23](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L23)
 
 ___
 
@@ -128,4 +144,38 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:16](https://github.com/mailgun/mailgun.js/blob/97f6852/lib/Interfaces/MailgunClient/IMailgunClient.ts#L16)
+[Interfaces/MailgunClient/IMailgunClient.ts:17](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L17)
+
+## Methods
+
+### resetSubaccount
+
+▸ **resetSubaccount**(): `void`
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[Interfaces/MailgunClient/IMailgunClient.ts:29](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L29)
+
+___
+
+### setSubaccount
+
+▸ **setSubaccount**(`subaccountId`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `subaccountId` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[Interfaces/MailgunClient/IMailgunClient.ts:28](https://github.com/mailgun/mailgun.js/blob/999bc13/lib/Interfaces/MailgunClient/IMailgunClient.ts#L28)

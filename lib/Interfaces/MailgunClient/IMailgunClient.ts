@@ -10,6 +10,7 @@ import { IValidationClient } from '../Validations';
 import { IIPsClient } from '../IPs';
 import { IIPPoolsClient } from '../IPPools';
 import { IMailingListsClient } from '../MailingLists';
+import { ISubaccountsClient } from '../Subaccounts';
 
 export interface IMailgunClient {
     domains: IDomainsClient;
@@ -23,4 +24,7 @@ export interface IMailgunClient {
     ips: IIPsClient;
     ip_pools: IIPPoolsClient;
     lists: IMailingListsClient;
+    subaccounts: ISubaccountsClient;
+    setSubaccount(subaccountId: string): void;
+    resetSubaccount(): void;
 }

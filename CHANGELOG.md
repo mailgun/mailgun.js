@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.0.1](https://github.com/mailgun/mailgun.js/compare/v10.0.0...v10.0.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* Update vulnerable version of lodash.set ([cf6c8e9](https://github.com/mailgun/mailgun.js/commits/cf6c8e96a9e6bdb2dd1682ee703ee29c4024da6f))
+
+## [10.0.0](https://github.com/mailgun/mailgun.js/compare/v9.4.1...v10.0.0) (2024-01-18)
+
+
+### Bug Fixes
+
+* Run npm audit fix ([dee7b00](https://github.com/mailgun/mailgun.js/commits/dee7b00060aafeec579294ce2b6a83a17ce5dae7))
+
+
+### Breaking changes
+
+* Update minimaly supported version of Node.js ([5121d8a](https://github.com/mailgun/mailgun.js/commits/5121d8ac9817081d33c5dbf2db0eedef634eb627))
+
+
+### Other changes
+
+* Update CI to decrease linter noise ([f89bbf1](https://github.com/mailgun/mailgun.js/commits/f89bbf189f1d6d2071c650b03bd69b2e69147d5d))
+
+### [9.4.1](https://github.com/mailgun/mailgun.js/compare/v9.4.0...v9.4.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* Filename is not respected for attachments with type string ([7e2cd18](https://github.com/mailgun/mailgun.js/commits/7e2cd18dd273053bcc7067070080afba5e38730f))
+* Update condition in tests ([72ecbaa](https://github.com/mailgun/mailgun.js/commits/72ecbaa0c98c080e7f06029ad25d8552c8a80d7e))
+
+
+### Other changes
+
+* Update CI to run on multiple node versions ([b0e9ae0](https://github.com/mailgun/mailgun.js/commits/b0e9ae08840ab53e33c03d985971ea4a4db139ae))
+
+## [9.4.0](https://github.com/mailgun/mailgun.js/compare/v9.3.0...v9.4.0) (2023-12-13)
+
+
+### Features
+
+* Add subaccounts ([3ca1d56](https://github.com/mailgun/mailgun.js/commits/3ca1d56955f7651bcba758c75cdbee3be48d5748))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @babel/traverse from 7.22.5 to 7.23.2 ([53f3e8f](https://github.com/mailgun/mailgun.js/commits/53f3e8fd673857b75ab0844bb1e04e016dad6ed5))
+* **deps:** bump axios from 1.3.3 to 1.6.0 ([729032d](https://github.com/mailgun/mailgun.js/commits/729032d7a19ec307255c401bd698f5e7835925fb))
+
+
+### Other changes
+
+* Update the formatting, merge headers to avoid overriding ([6e46eca](https://github.com/mailgun/mailgun.js/commits/6e46ecac1742660673931a99735988e4ffb046ce))
+
 ## [9.3.0](https://github.com/mailgun/mailgun.js/compare/v9.2.1...v9.3.0) (2023-09-18)
 
 

@@ -10,14 +10,14 @@ import SuppressionsClient from '../lib/Classes/Suppressions/SuppressionsClient';
 import MessagesClient from '../lib/Classes/Messages';
 import RoutesClient from '../lib/Classes/Routes';
 import ValidateClient from '../lib/Classes/Validations/validate';
+import SubaccountsClient from '../lib/Classes/Subaccounts';
 
 import StatsClient from '../lib/Classes/Stats/StatsClient';
 import ListsClient from '../lib/Classes/MailingLists/mailingLists';
 import IpPoolsClient from '../lib/Classes/IPPools';
 import IpsClient from '../lib/Classes/IPs';
-import { InputFormData } from '../lib/Types/Common';
+import { InputFormData, MailgunClientOptions } from '../lib';
 import DomainsClient from '../lib/Classes/Domains/domainsClient';
-import { MailgunClientOptions } from '../lib/Types/MailgunClient';
 import { IMailgunClient } from '../lib/Interfaces';
 import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
@@ -57,6 +57,16 @@ describe('Client', function () {
     client.should.have.property('request').to.be.instanceOf(Request);
   });
 
+  it('sets and resets subaccount header for requests', function () {
+    client.setSubaccount('XYZ');
+    client.should.have.property('request').to.be.instanceOf(Request);
+    client.should.have.property('request').to.haveOwnProperty('headers')
+      .to.contain({ [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' });
+    client.resetSubaccount();
+    client.should.have.property('request').to.haveOwnProperty('headers')
+      .to.not.haveOwnProperty(SubaccountsClient.SUBACCOUNT_HEADER);
+  });
+
   it('creates domain client', function () {
     client.domains.should.be.instanceOf(DomainsClient);
   });
@@ -64,9 +74,11 @@ describe('Client', function () {
   it('creates domain tags client', () => {
     client.domains.domainTags.should.be.instanceOf(DomainTagsClient);
   });
+
   it('creates domain credentials client', () => {
     client.domains.domainCredentials.should.be.instanceOf(DomainCredentialsClient);
   });
+
   it('creates domain templates client', () => {
     client.domains.domainTemplates.should.be.instanceOf(DomainTemplatesClient);
   });
@@ -117,5 +129,9 @@ describe('Client', function () {
 
   it('creates multiple validation client', function () {
     client.validate.multipleValidation.should.be.instanceOf(MultipleValidationClient);
+  });
+
+  it('creates subaccounts client', function () {
+    client.subaccounts.should.be.instanceOf(SubaccountsClient);
   });
 });

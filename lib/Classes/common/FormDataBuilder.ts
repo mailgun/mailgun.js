@@ -112,19 +112,21 @@ class FormDataBuilder {
       const objData = isStreamData ? obj : obj.data;
       // getAttachmentOptions should be called with obj parameter to prevent loosing filename
       const options = this.getAttachmentOptions(obj);
-      if (typeof objData === 'string') {
-        formData.append(key, objData as string);
-        return;
-      }
 
       if (this.isFormDataPackage(formData)) {
         const fd = formData as NodeFormData;
-        fd.append(key, objData, options);
+        const data = typeof objData === 'string' ? Buffer.from(objData) : objData;
+        fd.append(key, data, options);
         return;
       }
 
       if (typeof Blob !== undefined) { // either node > 18 or browser
         const browserFormData = formDataInstance as FormData; // Browser compliant FormData
+        if (typeof objData === 'string') {
+          const blobInstance = new Blob([objData]);
+          browserFormData.append(key, blobInstance, options.filename);
+          return;
+        }
         if (objData instanceof Blob) {
           browserFormData.append(key, objData, options.filename);
           return;
