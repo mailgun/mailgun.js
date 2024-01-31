@@ -44,6 +44,8 @@ Next, require the module and instantiate a mailgun client by calling `new Mailgu
 
 NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
 
+IMPORTANT: if you are using EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
+
 ### Imports
 Once the package is installed, you can import the library using `import` or `require` approach:
 
@@ -69,6 +71,29 @@ Primary accounts can make API calls on behalf of their subaccounts. [API documen
   mg.setSubaccount('subaccount-id');
   // then, if you need to reset it back to the primary account:
   mg.resetSubaccount();
+```
+
+### Proxy configuration
+By leveraging client configuration options, users can effortlessly establish proxy connections that align with their network requirements.
+Ex:
+```js
+  import * as FormData from 'form-data';
+  import Mailgun from 'mailgun.js';
+  const mailgun = new Mailgun(FormData);
+
+  const mg = mailgun.client({
+    username: 'api',
+    key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
+    proxy: {
+      protocol: 'https' // 'http' ,
+      host: '127.0.0.1', // use your proxy host here
+      port: 9000, // use your proxy port here
+      auth: { // may be omitted if proxy doesn't require authentication
+        username: 'user_name', // provide username
+        password: 'user_password' // provide password
+      }
+    },
+  });
 ```
 ### Types imports
 Starting from version **9.0.0.** Types can be includes as named import:

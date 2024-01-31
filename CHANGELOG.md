@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.1.0](https://github.com/mailgun/mailgun.js/compare/v10.0.1...v10.1.0) (2024-01-31)
+
+
+### Features
+
+* Add proxy configuration to the client ([fa013f1](https://github.com/mailgun/mailgun.js/commits/fa013f1f49792d1e42b4e718b629514198393f4e))
+
+
+### Bug Fixes
+
+* **docs:** Add url param for EU infrastructure ([360b867](https://github.com/mailgun/mailgun.js/commits/360b867c03da6f70669e6bba0c3070fdd9f10885))
+
+
+### Other changes
+
+* Update readme ([3897e59](https://github.com/mailgun/mailgun.js/commits/3897e59554316994579960eb5f3ee7373b72f29d))
+
 ### [10.0.1](https://github.com/mailgun/mailgun.js/compare/v10.0.0...v10.0.1) (2024-01-26)
 
 
