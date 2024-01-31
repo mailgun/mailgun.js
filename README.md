@@ -70,6 +70,29 @@ Primary accounts can make API calls on behalf of their subaccounts. [API documen
   // then, if you need to reset it back to the primary account:
   mg.resetSubaccount();
 ```
+
+### Proxy configuration
+By leveraging client configuration options, users can effortlessly establish proxy connections that align with their network requirements.
+Ex:
+```js
+  import * as FormData from 'form-data';
+  import Mailgun from 'mailgun.js';
+  const mailgun = new Mailgun(FormData);
+
+  const mg = mailgun.client({
+    username: 'api',
+    key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
+    proxy: {
+      protocol: 'https' // 'http' ,
+      host: '127.0.0.1', // use your proxy host here
+      port: 9000, // use your proxy port here
+      auth: { // may be omitted if proxy doesn't require authentication
+        username: 'user_name', // provide username
+        password: 'user_password' // provide password
+      }
+    },
+  });
+```
 ### Types imports
 Starting from version **9.0.0.** Types can be includes as named import:
 ```TS
