@@ -3,24 +3,24 @@ import fs from 'fs';
 import path from 'path';
 
 import nock from 'nock';
+import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import MultipleValidationClient, { MultipleValidationJob } from '../lib/Classes/Validations/multipleValidation';
 import {
   CanceledMultipleValidationJob,
-  CreatedMultipleValidationJob,
   MultipleValidationJobsListResult
 } from '../lib/Types/Validations';
 
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 
-describe('ValidateClient', function () {
+describe('ValidateClient', () => {
   const fsPromises = fs.promises;
   let client: MultipleValidationClient;
   let api: nock.Scope;
   let responseData = {};
 
-  beforeEach(function () {
+  beforeEach(() => {
     const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     client = new MultipleValidationClient(reqObject);
     api = nock('https://api.mailgun.net');
@@ -52,11 +52,11 @@ describe('ValidateClient', function () {
     };
   });
 
-  afterEach(function () {
+  afterEach(() => {
     api.done();
   });
 
-  describe('List', function () {
+  describe('List', () => {
     it('should provide list of all bulk validation jobs', async () => {
       const data = {
         jobs: [
@@ -136,7 +136,7 @@ describe('ValidateClient', function () {
       const result: MultipleValidationJobsListResult = await client.list();
       result.should.eql(expectedResult);
     });
-    it('returns result if no downloads and summary objects', async function () {
+    it('returns result if no downloads and summary objects', async () => {
       const data = {
         jobs: [
           {
@@ -205,7 +205,7 @@ describe('ValidateClient', function () {
       result.should.eql(expectedResult);
     });
 
-    it('returns result if no url in downloads objects', async function () {
+    it('returns result if no url in downloads objects', async () => {
       const data = {
         jobs: [
           {
@@ -290,8 +290,8 @@ describe('ValidateClient', function () {
     });
   });
 
-  describe('get', function () {
-    it('should returns status of a bulk validation job.', function () {
+  describe('get', () => {
+    it('should returns status of a bulk validation job.', async () => {
       const listId = 'testValidationList';
       const data = {
         ...responseData
@@ -327,35 +327,265 @@ describe('ValidateClient', function () {
           }
         }
       };
-      return client.get(listId).then(function (response: MultipleValidationJob) {
-        response.should.eql(expectedResult);
+      const res = await client.get(listId);
+      expect(res).eql(expectedResult);
+    });
+  });
+
+  describe('create', () => {
+    const data = {
+      id: 'testValidationList',
+      message: 'The validation job was submitted.'
+    };
+    let requestBody: nock.Body | undefined;
+
+    beforeEach(() => {
+      api.post('/v4/address/validate/bulk/testValidationList',
+        (body) => {
+          requestBody = body;
+          return true;
+        })
+        .reply(200, data);
+    });
+
+    describe('form-data package', () => {
+      beforeEach(() => {
+        const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+        client = new MultipleValidationClient(reqObject);
+      });
+
+      it('Creates a bulk validation job with custom file (readFile)', async () => {
+        const file = {
+          filename: 'test.csv',
+          data: await fsPromises.readFile(filepath)
+        };
+
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+        expect(requestBody).include('Content-Type: text/csv');
+      });
+
+      it('Creates a bulk validation job with custom file (readStream)', async () => {
+        const file = {
+          filename: 'test.csv',
+          data: fs.createReadStream(filepath)
+        };
+
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+        expect(requestBody).include('Content-Type: text/csv');
+      });
+
+      it('Creates a bulk validation job with custom file (csv string)', async () => {
+        const file = {
+          filename: 'test.csv',
+          data: 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n',
+          contentType: 'text/csv',
+        };
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+        expect(requestBody).include('Content-Type: text/csv');
+      });
+
+      it('Creates a bulk validation job with custom file (buffer)', async () => {
+        const file = {
+          filename: 'test.csv',
+          data: Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'),
+          contentType: 'text/csv',
+        };
+
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+        expect(requestBody).include('Content-Type: text/csv');
+      });
+
+      it('Creates a bulk validation job with with data from readFile', async () => {
+        const file = await fsPromises.readFile(filepath);
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+        expect(requestBody).include('Content-Type: application/octet-stream');
+      });
+
+      it('Creates a bulk validation job with with data from readStream', async () => {
+        const file = fs.createReadStream(filepath);
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+        expect(requestBody).include('Content-Type: text/csv');
+      });
+
+      it('Creates a bulk validation job with with data from csv string', async () => {
+        const file = 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n';
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+        expect(requestBody).include('Content-Type: application/octet-stream');
+      });
+
+      it('Creates a bulk validation job with with data from buffer', async () => {
+        const file = Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n');
+        const res = await client.create('testValidationList', { file });
+        res.should.eql({ status: 200, ...data });
+        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+        expect(requestBody).include('Content-Type: application/octet-stream');
       });
     });
-  });
 
-  describe('create', function () {
-    it('Creates a bulk validation job.', async function () {
-      const listId = 'testValidationList';
-      const data = {
-        id: 'testValidationList',
-        message: 'The validation job was submitted.'
-      };
-      const file = {
-        filename: 'test.jpg',
-        data: await fsPromises.readFile(filepath)
-      };
-      api.post(`/v4/address/validate/bulk/${listId}`)
-        .reply(200, data);
-
-      return client.create(listId, { file })
-        .then(function (response: CreatedMultipleValidationJob) {
-          response.should.eql({ status: 200, ...data });
+    if (globalThis.FormData) {
+      describe('Browser compliant FormData', () => {
+        beforeEach(() => {
+          const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, globalThis.FormData as InputFormData);
+          client = new MultipleValidationClient(reqObject);
         });
-    });
+
+        it('Creates a bulk validation job with custom file (readFile)', async () => {
+          const file = {
+            filename: 'test.csv',
+            data: await fsPromises.readFile(filepath)
+          };
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with custom file (readStream)', async () => {
+          const file = {
+            filename: 'test.csv',
+            data: fs.createReadStream(filepath)
+          };
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with custom file (csv string)', async () => {
+          const file = {
+            filename: 'test.csv',
+            data: 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n',
+            contentType: 'text/csv',
+          };
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with custom file (buffer)', async () => {
+          const file = {
+            filename: 'test.csv',
+            data: Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'),
+            contentType: 'text/csv',
+          };
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with with data from readFile', async () => {
+          const file = await fsPromises.readFile(filepath);
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with with data from readStream', async () => {
+          const file = fs.createReadStream(filepath);
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with with data from csv string', async () => {
+          const file = 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n';
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        it('Creates a bulk validation job with with data from buffer', async () => {
+          const file = Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n');
+          const res = await client.create('testValidationList', { file });
+          res.should.eql({ status: 200, ...data });
+          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+          expect(requestBody).include('Content-Type: application/octet-stream');
+        });
+
+        if (globalThis.Blob) {
+          describe('Creates a bulk validation job with with (Browser compliant FormData + Blob)', async () => {
+            it('Creates a bulk validation job with custom file (Blob)', async () => {
+              const file = {
+                filename: 'test.csv',
+                data: new Blob(['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'])
+              };
+              const res = await client.create('testValidationList', { file });
+              res.should.eql({ status: 200, ...data });
+              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+              expect(requestBody).include('Content-Type: application/octet-stream');
+            });
+
+            it('Creates a bulk validation job with data from Blob', async () => {
+              const file = new Blob(['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n']);
+              const res = await client.create('testValidationList', { file });
+              res.should.eql({ status: 200, ...data });
+              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
+              expect(requestBody).include('Content-Type: application/octet-stream');
+            });
+          });
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn('Blob does not exist. Skipping bulk validation + Blob tests');
+        }
+        if (globalThis.File) {
+          describe('Creates a bulk validation job with with (Browser compliant FormData + File)', async () => {
+            it('Creates a bulk validation job with custom file (Blob)', async () => {
+              const file = {
+                filename: 'test_file.csv',
+                data: new globalThis.File(
+                  ['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'],
+                  'test.csv'
+                )
+              };
+              const res = await client.create('testValidationList', { file });
+              res.should.eql({ status: 200, ...data });
+              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test_file.csv"');
+              expect(requestBody).include('Content-Type: application/octet-stream');
+            });
+
+            it('Creates a bulk validation job with data from File', async () => {
+              const file = new globalThis.File(
+                ['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'],
+                'test.csv'
+              );
+              const res = await client.create('testValidationList', { file });
+              res.should.eql({ status: 200, ...data });
+              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
+              expect(requestBody).include('Content-Type: application/octet-stream');
+            });
+          });
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn('globalThis.File does not exist. bulk validation + File tests');
+        }
+      });
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn('global.FormData does not exist. Skipping the FormData + Buffer test');
+    }
   });
 
-  describe('destroy', function () {
-    it('should cancel current running bulk validation job.', async function () {
+  describe('destroy', () => {
+    it('should cancel current running bulk validation job.', async () => {
       const listId = 'testValidationList';
       const data = {
         message: 'Validation job canceled.',
@@ -364,10 +594,8 @@ describe('ValidateClient', function () {
       api.delete(`/v4/address/validate/bulk/${listId}`)
         .reply(200, { message: 'Validation job canceled.' });
 
-      return client.destroy(listId)
-        .then(function (response: CanceledMultipleValidationJob) {
-          response.should.eql(data);
-        });
+      const res = await client.destroy(listId);
+      expect(res).to.eql(data);
     });
   });
 });

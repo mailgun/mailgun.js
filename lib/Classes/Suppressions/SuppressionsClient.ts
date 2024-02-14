@@ -30,7 +30,6 @@ import {
   SuppressionDestroyResult,
   SuppressionDestroyResponse
 } from '../../Types/Suppressions';
-import { APIErrorOptions } from '../../Types/Common';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
@@ -83,16 +82,13 @@ export default class SuppressionClient
     isDataArray: boolean
   ): Promise<SuppressionCreationResult> {
     if (isDataArray) {
-      throw new APIError({
-        status: 400,
-        statusText: 'Data property should be an object',
-        body: {
-          message: 'Whitelist\'s creation process does not support multiple creations. Data property should be an object'
-        }
-      } as APIErrorOptions);
+      throw APIError.getUserDataError(
+        'Data property should be an object',
+        'Whitelist\'s creation process does not support multiple creations. Data property should be an object'
+      );
     }
     return this.request
-      .postWithFD(urljoin('v3', domain, 'whitelists'), data)
+      .postWithFD(urljoin('v3', domain, 'whitelists'), data as SuppressionCreationData)
       .then(this.prepareResponse);
   }
 
@@ -103,13 +99,10 @@ export default class SuppressionClient
     if (Array.isArray(data)) { // User provided an array
       const isContainsTag = data.some((unsubscribe: SuppressionCreationData) => unsubscribe.tag);
       if (isContainsTag) {
-        throw new APIError({
-          status: 400,
-          statusText: 'Tag property should not be used for creating multiple unsubscribes.',
-          body: {
-            message: 'Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.'
-          }
-        } as APIErrorOptions);
+        throw APIError.getUserDataError(
+          'Tag property should not be used for creating multiple unsubscribes.',
+          'Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.'
+        );
       }
       return this.request
         .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), createOptions)
@@ -117,22 +110,16 @@ export default class SuppressionClient
     }
 
     if (data?.tags) {
-      throw new APIError({
-        status: 400,
-        statusText: 'Tags property should not be used for creating one unsubscribe.',
-        body: {
-          message: 'Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead'
-        }
-      } as APIErrorOptions);
+      throw APIError.getUserDataError(
+        'Tags property should not be used for creating one unsubscribe.',
+        'Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead'
+      );
     }
     if (Array.isArray(data.tag)) {
-      throw new APIError({
-        status: 400,
-        statusText: 'Tag property can not be an array',
-        body: {
-          message: 'Please use array of unsubscribes as second argument of create method to be able to provide few tags'
-        }
-      } as APIErrorOptions);
+      throw APIError.getUserDataError(
+        'Tag property can not be an array',
+        'Please use array of unsubscribes as second argument of create method to be able to provide few tags'
+      );
     }
     /* We need Form Data for unsubscribes if we want to support the "tag" property */
     return this.request
@@ -144,11 +131,10 @@ export default class SuppressionClient
     if (type in this.models) {
       return this.models[type as keyof typeof this.models];
     }
-    throw new APIError({
-      status: 400,
-      statusText: 'Unknown type value',
-      body: { message: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]' }
-    } as APIErrorOptions);
+    throw APIError.getUserDataError(
+      'Unknown type value',
+      'Type may be only one of [bounces, complaints, unsubscribes, whitelists]'
+    );
   }
 
   private prepareResponse(response: SuppressionCreationResponse): SuppressionCreationResult {

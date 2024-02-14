@@ -1,4 +1,5 @@
 import { PagesList, ParsedPagesList } from '../Common';
+import { CustomFile, CustomFileData } from '../Messages';
 
 /* eslint-disable camelcase */
 export type MultipleValidationJobData = {
@@ -61,12 +62,10 @@ export type CreatedMultipleValidationJob = {
     message: string;
 }
 export type MultipleValidationCreationData = {
-    file: Record<string, unknown>;
-    [key: string]: unknown | undefined;
+    file: CustomFileData | CustomFile
 }
 export type MultipleValidationCreationDataUpdated = {
-    multipleValidationFile: Record<string, unknown>;
-    [key: string]: unknown | undefined;
+    multipleValidationFile: CustomFileData | CustomFile;
 }
 
 export type MultipleValidationJobsListResult = {

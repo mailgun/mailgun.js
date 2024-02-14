@@ -6,6 +6,16 @@ export default class APIError extends Error implements APIErrorType {
   public details: string;
   public type: string;
 
+  public static getUserDataError(statusText: string, message: string) {
+    return new this({
+      status: 400,
+      statusText,
+      body: {
+        message
+      }
+    });
+  }
+
   constructor({
     status,
     statusText,

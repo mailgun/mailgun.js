@@ -32,11 +32,13 @@ export declare class MultipleValidationJob implements MultipleValidationJobResul
 }
 export default class MultipleValidationClient extends NavigationThruPages<MultipleValidationJobsListResult> implements IMultipleValidationClient {
     request: Request;
+    private attachmentsHandler;
     constructor(request: Request);
     private handleResponse;
     protected parseList(response: MultipleValidationJobsListResponse): MultipleValidationJobsListResult;
     list(query?: MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult>;
     get(listId: string): Promise<MultipleValidationJob>;
+    private convertToExpectedShape;
     create(listId: string, data: MultipleValidationCreationData): Promise<CreatedMultipleValidationJob>;
     destroy(listId: string): Promise<CanceledMultipleValidationJob>;
 }

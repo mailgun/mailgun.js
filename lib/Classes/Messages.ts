@@ -1,6 +1,5 @@
 import APIError from './common/Error';
 import {
-  APIErrorOptions,
   MailgunMessageData,
   MessagesSendAPIResponse,
   MessagesSendResult
@@ -28,10 +27,7 @@ export default class MessagesClient implements IMessagesClient {
     ]);
 
     if (!data || Object.keys(data).length === 0) {
-      throw new APIError({
-        status: 400,
-        message: 'Message data object can not be empty'
-      } as APIErrorOptions);
+      throw APIError.getUserDataError('Message data object can not be empty', 'Message data object can not be empty');
     }
     return Object.keys(data).reduce((acc, key) => {
       if (yesNoProperties.has(key) && typeof data[key] === 'boolean') {

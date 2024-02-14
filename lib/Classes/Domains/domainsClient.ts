@@ -8,8 +8,6 @@ import {
 
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import APIError from '../common/Error';
-import { APIErrorOptions } from '../../Types/Common';
-
 import Request from '../common/Request';
 
 import DomainCredentialsClient from './domainsCredentials';
@@ -168,7 +166,7 @@ export default class DomainsClient implements IDomainsClient {
     data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo
   ): Promise<UpdatedOpenTracking> {
     if (typeof data?.active === 'boolean') {
-      throw new APIError({ status: 400, statusText: 'Received boolean value for active property', body: { message: 'Property "active" must contain string value.' } } as APIErrorOptions);
+      throw APIError.getUserDataError('Received boolean value for active property', 'Property "active" must contain string value.');
     }
     return this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), data)
       .then((res : APIResponse) => this._parseTrackingUpdate(res as UpdateDomainTrackingResponse));
@@ -196,13 +194,7 @@ export default class DomainsClient implements IDomainsClient {
   unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse> {
     let searchParams = '';
     if (replacement.pool_id && replacement.ip) {
-      throw new APIError(
-        {
-          status: 400,
-          statusText: 'Too much data for replacement',
-          body: { message: 'Please specify either pool_id or ip (not both)' }
-        } as APIErrorOptions
-      );
+      throw APIError.getUserDataError('Too much data for replacement', 'Please specify either pool_id or ip (not both)');
     } else if (replacement.pool_id) {
       searchParams = `?pool_id=${replacement.pool_id}`;
     } else if (replacement.ip) {

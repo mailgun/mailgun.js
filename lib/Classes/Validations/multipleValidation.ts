@@ -14,6 +14,8 @@ import {
   MultipleValidationCreationDataUpdated,
   CanceledMultipleValidationJob
 } from '../../Types/Validations/MultipleValidation';
+import AttachmentsHandler from '../common/AttachmentsHandler';
+import APIError from '../common/Error';
 
 export class MultipleValidationJob implements MultipleValidationJobResult {
   createdAt: Date;
@@ -80,10 +82,12 @@ export default class MultipleValidationClient
   extends NavigationThruPages<MultipleValidationJobsListResult>
   implements IMultipleValidationClient {
   request: Request;
+  private attachmentsHandler: AttachmentsHandler;
 
   constructor(request: Request) {
     super();
     this.request = request;
+    this.attachmentsHandler = new AttachmentsHandler();
   }
 
   private handleResponse<T>(response: APIResponse): T {
@@ -115,17 +119,30 @@ export default class MultipleValidationClient
     return new MultipleValidationJob(response.body, response.status);
   }
 
+  private convertToExpectedShape(data: MultipleValidationCreationData)
+    : MultipleValidationCreationDataUpdated {
+    let multipleValidationData: MultipleValidationCreationDataUpdated;
+    if (this.attachmentsHandler.isBuffer(data.file)) {
+      multipleValidationData = { multipleValidationFile: data.file };
+    } else if (typeof data.file === 'string') {
+      multipleValidationData = { multipleValidationFile: { data: data.file } };
+    } else if (this.attachmentsHandler.isStream(data.file)) {
+      multipleValidationData = { multipleValidationFile: data.file };
+    } else {
+      multipleValidationData = { multipleValidationFile: data.file };
+    }
+
+    return multipleValidationData;
+  }
+
   async create(
     listId: string,
     data: MultipleValidationCreationData
   ): Promise<CreatedMultipleValidationJob> {
-    const multipleValidationData: MultipleValidationCreationDataUpdated = {
-      multipleValidationFile: {
-        ...data?.file
-      },
-      ...data
-    };
-    delete multipleValidationData.file;
+    if (!data || !data.file) {
+      throw APIError.getUserDataError('"file" property expected.', 'Make sure second argument has "file" property.');
+    }
+    const multipleValidationData = this.convertToExpectedShape(data);
     const response = await this.request.postWithFD(`/v4/address/validate/bulk/${listId}`, multipleValidationData);
     return this.handleResponse<CreatedMultipleValidationJob>(response);
   }

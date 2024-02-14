@@ -1,28 +1,57 @@
 import * as NodeFormData from 'form-data';
-import { APIErrorOptions, InputFormData } from '../../Types/Common';
+import { Readable } from 'stream';
+import { FormDataInput, InputFormData } from '../../Types/Common';
 import APIError from './Error';
+
+import {
+  CustomFile,
+  CustomFileData,
+  FormDataInputValue,
+  MessageAttachment,
+  MimeMessage
+} from '../../Types';
+import AttachmentsHandler from './AttachmentsHandler';
+import { AttachmentInfo } from '../../Types/Common/Attachments';
 
 class FormDataBuilder {
   private FormDataConstructor: InputFormData;
+  private fileKeys: string[];
+  private attachmentsHandler: AttachmentsHandler;
+
   constructor(FormDataConstructor: InputFormData) {
     this.FormDataConstructor = FormDataConstructor;
+    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
+    this.attachmentsHandler = new AttachmentsHandler();
   }
 
-  public createFormData(data: any): NodeFormData | FormData {
+  public createFormData(data: FormDataInput): NodeFormData | FormData {
     if (!data) {
       throw new Error('Please provide data object');
     }
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
-        const fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
-        if (fileKeys.includes(key)) {
-          this.addFilesToFD(key, data[key], formDataAcc);
-          return formDataAcc;
+        if (this.fileKeys.includes(key)) {
+          const attachmentValue = data[key];
+          if (this.isMessageAttachment(attachmentValue)) {
+            this.addFilesToFD(key, attachmentValue, formDataAcc);
+            return formDataAcc;
+          }
+          throw APIError.getUserDataError(
+            `Unknown value ${data[key]} with type ${typeof data[key]} for property "${key}"`,
+            `The key "${key}" should have type of Buffer, Stream, File, or String `
+          );
         }
 
         if (key === 'message') { // mime message
-          this.addMimeDataToFD(key, data[key], formDataAcc);
+          const messageValue = data[key];
+          if (!messageValue || !this.isMIME(messageValue)) {
+            throw APIError.getUserDataError(
+              `Unknown data type for "${key}" property`,
+              'The mime data should have type of Buffer, String or Blob'
+            );
+          }
+          this.addMimeDataToFD(key, messageValue, formDataAcc);
           return formDataAcc;
         }
 
@@ -32,36 +61,9 @@ class FormDataBuilder {
     return formData;
   }
 
-  private isFormDataPackage(formDataInstance: NodeFormData | FormData)
-  : boolean {
-    return (<NodeFormData>formDataInstance).getHeaders !== undefined;
-  }
-
-  private getAttachmentOptions(item: {
-    filename?: string;
-    contentType? : string;
-    knownLength?: number;
-  }): {
-    filename?: string,
-    contentType?: string,
-    knownLength?: number
-  } {
-    if (typeof item !== 'object' || this.isStream(item)) return {};
-    const {
-      filename,
-      contentType,
-      knownLength
-    } = item;
-    return {
-      ...(filename ? { filename } : { filename: 'file' }),
-      ...(contentType && { contentType }),
-      ...(knownLength && { knownLength })
-    };
-  }
-
   private addMimeDataToFD(
     key: string,
-    data: Buffer | Blob | string,
+    data: MimeMessage,
     formDataInstance: NodeFormData | FormData
   ): void {
     if (typeof data === 'string') { // if string only two parameters should be used.
@@ -81,37 +83,60 @@ class FormDataBuilder {
         browserFormData.append(key, data, 'MimeMessage');
         return;
       }
-      if (typeof Buffer !== 'undefined') { // node environment
-        if (Buffer.isBuffer(data)) {
-          const blobInstance = new Blob([data]);
-          browserFormData.append(key, blobInstance, 'MimeMessage');
-          return;
-        }
+      if (this.attachmentsHandler.isBuffer(data)) { // node environment
+        const blobInstance = new Blob([data]);
+        browserFormData.append(key, blobInstance, 'MimeMessage');
       }
     }
+  }
 
-    throw new APIError({
-      status: 400,
-      statusText: `Unknown data type for ${key} property`,
-      body: 'The mime data should have type of Buffer, String or Blob'
-    } as APIErrorOptions);
+  public isMIME(data: unknown) : data is MimeMessage {
+    return typeof data === 'string'
+      || (typeof Blob !== 'undefined' && data instanceof Blob)
+      || this.attachmentsHandler.isBuffer(data)
+      || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
+  }
+
+  private isFormDataPackage(obj: unknown): obj is NodeFormData {
+    return typeof obj === 'object'
+      && obj !== null
+      && typeof (obj as NodeFormData).getHeaders === 'function';
+  }
+
+  private isMessageAttachment(value: unknown): value is MessageAttachment {
+    return (
+      this.attachmentsHandler.isCustomFile(value)
+      || typeof value === 'string'
+      || (typeof File !== 'undefined' && value instanceof File)
+      || (typeof Blob !== 'undefined' && value instanceof Blob)
+      || this.attachmentsHandler.isBuffer(value)
+      || this.attachmentsHandler.isStream(value)
+      || (
+        Array.isArray(value) && value.every(
+          (item) => this.attachmentsHandler.isCustomFile(item)
+            || (typeof File !== 'undefined' && item instanceof File)
+            || (typeof Blob !== 'undefined' && value instanceof Blob)
+            || this.attachmentsHandler.isBuffer(item)
+            || this.attachmentsHandler.isStream(item)
+        )
+      )
+
+    );
   }
 
   private addFilesToFD(
-    propertyName: string,
-    value: any,
+    propertyName: typeof this.fileKeys[number],
+    value: MessageAttachment,
     formDataInstance: NodeFormData | FormData
   ): void {
     const appendFileToFD = (
       originalKey: string,
-      obj: any,
+      attachment: CustomFile | File | string| CustomFileData,
       formData: NodeFormData | FormData
     ): void => {
       const key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
-      const isStreamData = this.isStream(obj);
-      const objData = isStreamData ? obj : obj.data;
-      // getAttachmentOptions should be called with obj parameter to prevent loosing filename
-      const options = this.getAttachmentOptions(obj);
+      const objData = this.attachmentsHandler.convertToFDexpectedShape(attachment);
+      const options: AttachmentInfo = this.attachmentsHandler.getAttachmentInfo(attachment);
 
       if (this.isFormDataPackage(formData)) {
         const fd = formData as NodeFormData;
@@ -122,20 +147,24 @@ class FormDataBuilder {
 
       if (typeof Blob !== undefined) { // either node > 18 or browser
         const browserFormData = formDataInstance as FormData; // Browser compliant FormData
-        if (typeof objData === 'string') {
+
+        if (typeof objData === 'string' || this.attachmentsHandler.isBuffer(objData)) {
           const blobInstance = new Blob([objData]);
           browserFormData.append(key, blobInstance, options.filename);
           return;
         }
+
         if (objData instanceof Blob) {
           browserFormData.append(key, objData, options.filename);
           return;
         }
-        if (typeof Buffer !== 'undefined') { // node environment
-          if (Buffer.isBuffer(objData)) {
-            const blobInstance = new Blob([objData]);
-            browserFormData.append(key, blobInstance, options.filename);
-          }
+
+        if (this.attachmentsHandler.isStream(objData)) {
+          const blob = this.attachmentsHandler.getBlobFromStream(
+            objData as unknown as Readable,
+            options.knownLength as number
+          );
+          browserFormData.set(key, blob as unknown as File, options.filename);
         }
       }
     };
@@ -149,21 +178,33 @@ class FormDataBuilder {
     }
   }
 
-  private isStream(data: any) {
-    return typeof data === 'object' && typeof data.pipe === 'function';
-  }
-
   private addCommonPropertyToFD(
     key: string,
-    value: any,
+    value: FormDataInputValue,
     formDataAcc: NodeFormData | FormData
   ): void {
+    const addValueBasedOnFD = (fdKey: string, fdValue: FormDataInputValue): void => {
+      if (this.isFormDataPackage(formDataAcc)) {
+        return formDataAcc.append(fdKey, fdValue);
+      }
+      if (typeof fdValue === 'string') {
+        return formDataAcc.append(fdKey, fdValue);
+      }
+      if (typeof Blob !== undefined && fdValue instanceof Blob) {
+        return formDataAcc.append(fdKey, fdValue);
+      }
+      throw APIError.getUserDataError(
+        'Unknown value type for Form Data. String or Blob expected',
+        'Browser compliant FormData allows only string or Blob values for properties that are not attachments.'
+      );
+    };
+
     if (Array.isArray(value)) {
-      value.forEach(function (item: any) {
-        formDataAcc.append(key, item);
+      value.forEach(function (item: FormDataInputValue) {
+        addValueBasedOnFD(key, item);
       });
     } else if (value != null) {
-      formDataAcc.append(key, value);
+      addValueBasedOnFD(key, value);
     }
   }
 }
