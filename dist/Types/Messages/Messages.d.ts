@@ -1,4 +1,5 @@
 /// <reference types="node" />
+/// <reference types="node" />
 /**
  * Ensures the object has least one key present and not undefined
  *
@@ -7,6 +8,17 @@
 export type AtLeastOneKeyPresent<Object_, Keys extends keyof Object_ = keyof Object_> = Pick<Object_, Exclude<keyof Object_, Keys>> & {
     [K in Keys]-?: Required<Pick<Object_, K>> & Partial<Pick<Object_, Exclude<Keys, K>>>;
 }[Keys];
+export type MimeMessage = string | Blob | Buffer | NodeJS.ReadableStream;
+export type CustomFileData = string | Blob | File | Buffer | NodeJS.ReadableStream;
+export type CustomFile = {
+    data: CustomFileData;
+    filename?: string;
+    contentType?: string;
+    knownLength?: number;
+    [key: string]: unknown;
+};
+export type MessageAttachment = CustomFile | CustomFile[] | File | File[] | string | CustomFileData | CustomFileData[];
+export type FormDataInputValue = MimeMessage | CustomFileData | string | string[] | boolean | MessageAttachment | undefined | number;
 export type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
      * Body of the message. (text version)
@@ -19,7 +31,7 @@ export type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
      * Body of the message. (MIME version)
      */
-    message?: string | Buffer | Blob;
+    message?: MimeMessage;
     /**
     * Name of a template stored via [template API](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates). See [Templates](https://documentation.mailgun.com/en/latest/user_manual.html#templating) for more information
     */
@@ -57,7 +69,7 @@ export type MailgunMessageData = MailgunMessageContent & {
      *
      * **Important:** You must use `multipart/form-data` encoding when sending attachments.
      */
-    attachment?: any;
+    attachment?: MessageAttachment;
     /**
      * Attachment with `inline` disposition. Can be used to send inline images (see example).
      *
@@ -163,7 +175,7 @@ export type MailgunMessageData = MailgunMessageContent & {
      * `v:` prefix followed by an arbitrary name allows to attach a custom JSON data to the message. See [Attaching Data to Messages](https://documentation.mailgun.com/en/latest/user_manual.html#manual-customdata) for more information.
      */
     'v:my-var'?: string;
-    [key: string]: unknown;
+    [key: string]: FormDataInputValue;
 };
 export type MessagesSendAPIResponse = {
     status: number;

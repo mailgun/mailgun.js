@@ -1,6 +1,6 @@
 import formData from 'form-data';
 
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 
 import Client from '../lib/Classes/MailgunClient';
 import Request from '../lib/Classes/common/Request';

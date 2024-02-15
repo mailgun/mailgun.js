@@ -15,7 +15,8 @@ import {
   APIErrorOptions,
   InputFormData,
   APIResponse,
-  IpPoolDeleteData
+  IpPoolDeleteData,
+  FormDataInput
 } from '../../Types';
 
 import FormDataBuilder from './FormDataBuilder';
@@ -203,7 +204,7 @@ class Request {
 
   postWithFD(
     url: string,
-    data: Record<string, unknown> | Record<string, unknown>[]
+    data: FormDataInput
   ): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('post', url, formData, {
@@ -211,21 +212,21 @@ class Request {
     }, false);
   }
 
-  putWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
+  putWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('put', url, formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }, false);
   }
 
-  patchWithFD(url: string, data: Record<string, unknown>): Promise<APIResponse> {
+  patchWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('patch', url, formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }, false);
   }
 
-  put(url: string, data?: Record<string, unknown> | string, options?: Record<string, unknown>)
+  put(url: string, data?: FormDataInput | string, options?: Record<string, unknown>)
   : Promise<APIResponse> {
     return this.command('put', url, data, options);
   }
