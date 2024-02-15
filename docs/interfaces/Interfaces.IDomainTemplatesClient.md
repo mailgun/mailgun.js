@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:31](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L31)
+[Interfaces/Domains/DomainTemplates.ts:31](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L31)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:39](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L39)
+[Interfaces/Domains/DomainTemplates.ts:39](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L39)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:37](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L37)
+[Interfaces/Domains/DomainTemplates.ts:37](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L37)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:38](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L38)
+[Interfaces/Domains/DomainTemplates.ts:38](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L38)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:51](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L51)
+[Interfaces/Domains/DomainTemplates.ts:51](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L51)
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:30](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L30)
+[Interfaces/Domains/DomainTemplates.ts:30](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L30)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:44](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L44)
+[Interfaces/Domains/DomainTemplates.ts:44](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L44)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:29](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L29)
+[Interfaces/Domains/DomainTemplates.ts:29](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L29)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:55](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L55)
+[Interfaces/Domains/DomainTemplates.ts:55](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L55)
 
 ___
 
@@ -233,7 +233,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L32)
+[Interfaces/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L32)
 
 ___
 
@@ -256,4 +256,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTemplates.ts:45](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Domains/DomainTemplates.ts#L45)
+[Interfaces/Domains/DomainTemplates.ts:45](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Domains/DomainTemplates.ts#L45)

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.2.0](https://github.com/mailgun/mailgun.js/compare/v10.1.0...v10.2.0) (2024-02-15)
+
+
+### Features
+
+* Better types and handling for different FormData implementations ([c547be9](https://github.com/mailgun/mailgun.js/commits/c547be9895dc1fcfb625ddf0aadc82778e82a259))
+
 ## [10.1.0](https://github.com/mailgun/mailgun.js/compare/v10.0.1...v10.1.0) (2024-01-31)
 
 

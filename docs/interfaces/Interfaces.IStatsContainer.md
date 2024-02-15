@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[Interfaces/Stats/StatsContainer.ts:5](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Stats/StatsContainer.ts#L5)
+[Interfaces/Stats/StatsContainer.ts:5](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Stats/StatsContainer.ts#L5)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Stats/StatsContainer.ts:6](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Stats/StatsContainer.ts#L6)
+[Interfaces/Stats/StatsContainer.ts:6](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Stats/StatsContainer.ts#L6)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Stats/StatsContainer.ts:4](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Stats/StatsContainer.ts#L4)
+[Interfaces/Stats/StatsContainer.ts:4](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Stats/StatsContainer.ts#L4)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Stats/StatsContainer.ts:7](https://github.com/mailgun/mailgun.js/blob/c04a97a/lib/Interfaces/Stats/StatsContainer.ts#L7)
+[Interfaces/Stats/StatsContainer.ts:7](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Stats/StatsContainer.ts#L7)
