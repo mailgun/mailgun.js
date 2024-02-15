@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /**
  * Ensures the object has least one key present and not undefined
  *
@@ -41,6 +42,13 @@ export type FormDataInputValue =
   | MessageAttachment
   | undefined
   | number // doc says it should be auto-converted https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
+  | JsonObject
+
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonArray = Json[];
+export type JsonObject = { [key: string]: Json };
+export type JsonComposite = JsonArray | JsonObject;
+export type Json = JsonPrimitive | JsonComposite;
 
 export type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
@@ -119,6 +127,12 @@ export type MailgunMessageData = MailgunMessageContent & {
      * in the text part of the message in case of template sending
      */
     't:text'?: boolean | 'yes' | 'no';
+
+    /**
+     * A valid JSON-encoded dictionary used as the input for template variable expansion.
+     * See [Templates](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates) for more information.
+     */
+    't:variables'?: string | JsonObject;
 
     /**
      * Tag string. See [Tagging](https://documentation.mailgun.com/en/latest/user_manual.html#tagging) for more information.

@@ -104,6 +104,18 @@ describe('FormDataBuilder', function () {
       expect(data).include('Content-Disposition: form-data; name="attachment"; filename="file"');
       expect(data).include('Content-Type: application/octet-stream');
     });
+
+    it('Converts object to String value', async () => {
+      // Prevents TypeError: source.on is not a function for form-data package
+      const formDataWithValue = builder.createFormData({
+        't:variables': {
+          testProp: 'testValue'
+        }
+      }) as NodeFormData;
+      const data = formDataWithValue.getBuffer().toString();
+      expect(data).include('Content-Disposition: form-data; name="t:variables"');
+      expect(data).include('{"testProp":"testValue"}');
+    });
   });
 
   if (global.FormData) {
