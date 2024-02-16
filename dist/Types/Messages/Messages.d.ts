@@ -18,7 +18,14 @@ export type CustomFile = {
     [key: string]: unknown;
 };
 export type MessageAttachment = CustomFile | CustomFile[] | File | File[] | string | CustomFileData | CustomFileData[];
-export type FormDataInputValue = MimeMessage | CustomFileData | string | string[] | boolean | MessageAttachment | undefined | number;
+export type FormDataInputValue = MimeMessage | CustomFileData | string | string[] | boolean | MessageAttachment | undefined | number | JsonObject;
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonArray = Json[];
+export type JsonObject = {
+    [key: string]: Json;
+};
+export type JsonComposite = JsonArray | JsonObject;
+export type Json = JsonPrimitive | JsonComposite;
 export type MailgunMessageContent = AtLeastOneKeyPresent<{
     /**
      * Body of the message. (text version)
@@ -85,6 +92,11 @@ export type MailgunMessageData = MailgunMessageContent & {
      * in the text part of the message in case of template sending
      */
     't:text'?: boolean | 'yes' | 'no';
+    /**
+     * A valid JSON-encoded dictionary used as the input for template variable expansion.
+     * See [Templates](https://documentation.mailgun.com/en/latest/api-templates.html#api-templates) for more information.
+     */
+    't:variables'?: string | JsonObject;
     /**
      * Tag string. See [Tagging](https://documentation.mailgun.com/en/latest/user_manual.html#tagging) for more information.
      */

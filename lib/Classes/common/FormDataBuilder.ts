@@ -185,6 +185,14 @@ class FormDataBuilder {
   ): void {
     const addValueBasedOnFD = (fdKey: string, fdValue: FormDataInputValue): void => {
       if (this.isFormDataPackage(formDataAcc)) {
+        if (typeof fdValue === 'object') {
+          // eslint-disable-next-line no-console
+          console.warn('The received value is an object. \n'
+          + '"JSON.Stringify" will be used to avoid TypeError \n'
+          + 'To remove this warning: \n'
+          + 'Consider switching to built-in FormData or converting the value on your own.\n');
+          return formDataAcc.append(fdKey, JSON.stringify(fdValue));
+        }
         return formDataAcc.append(fdKey, fdValue);
       }
       if (typeof fdValue === 'string') {
