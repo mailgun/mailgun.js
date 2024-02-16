@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[Interfaces/Webhooks/IWebHooksClient.ts:14](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Webhooks/IWebHooksClient.ts#L14)
+[Interfaces/Webhooks/IWebHooksClient.ts:14](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Webhooks/IWebHooksClient.ts#L14)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Webhooks/IWebHooksClient.ts:20](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Webhooks/IWebHooksClient.ts#L20)
+[Interfaces/Webhooks/IWebHooksClient.ts:20](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Webhooks/IWebHooksClient.ts#L20)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Webhooks/IWebHooksClient.ts:13](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Webhooks/IWebHooksClient.ts#L13)
+[Interfaces/Webhooks/IWebHooksClient.ts:13](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Webhooks/IWebHooksClient.ts#L13)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Webhooks/IWebHooksClient.ts:12](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Webhooks/IWebHooksClient.ts#L12)
+[Interfaces/Webhooks/IWebHooksClient.ts:12](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Webhooks/IWebHooksClient.ts#L12)
 
 ___
 
@@ -120,4 +120,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Webhooks/IWebHooksClient.ts:19](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Webhooks/IWebHooksClient.ts#L19)
+[Interfaces/Webhooks/IWebHooksClient.ts:19](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Webhooks/IWebHooksClient.ts#L19)

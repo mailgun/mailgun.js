@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:22](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L22)
+[Interfaces/Suppressions/ISuppressionsClient.ts:22](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L22)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:28](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L28)
+[Interfaces/Suppressions/ISuppressionsClient.ts:28](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L28)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L16)
+[Interfaces/Suppressions/ISuppressionsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L16)
 
 ___
 
@@ -99,4 +99,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/9c77dbb/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L14)
+[Interfaces/Suppressions/ISuppressionsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L14)

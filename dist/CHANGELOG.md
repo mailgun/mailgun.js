@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.2.1](https://github.com/mailgun/mailgun.js/compare/v10.2.0...v10.2.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* Source.on is not a function for t:variables ([e647143](https://github.com/mailgun/mailgun.js/commits/e64714326b443b70022c646ab4d0c123d1bf6abe))
+
 ## [10.2.0](https://github.com/mailgun/mailgun.js/compare/v10.1.0...v10.2.0) (2024-02-15)
 
 
