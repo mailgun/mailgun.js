@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[Enums/index.ts:8](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Enums/index.ts#L8)
+[Enums/index.ts:8](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Enums/index.ts#L8)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[Enums/index.ts:9](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Enums/index.ts#L9)
+[Enums/index.ts:9](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Enums/index.ts#L9)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[Enums/index.ts:10](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Enums/index.ts#L10)
+[Enums/index.ts:10](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Enums/index.ts#L10)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[Enums/index.ts:11](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Enums/index.ts#L11)
+[Enums/index.ts:11](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Enums/index.ts#L11)

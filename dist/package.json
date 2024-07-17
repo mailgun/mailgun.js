@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "10.2.1",
+  "version": "10.2.2",
   "main": "./mailgun.node.js",
   "browser": "./mailgun.web.js",
   "types": "./index.d.ts",
@@ -23,7 +23,7 @@
     "definition": "./index.d.ts"
   },
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.7.2",
     "base-64": "^1.0.0",
     "url-join": "^4.0.1"
   },

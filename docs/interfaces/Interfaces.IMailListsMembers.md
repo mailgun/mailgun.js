@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:18](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L18)
+[Interfaces/MailingLists/MailingListMembers.ts:18](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L18)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:21](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L21)
+[Interfaces/MailingLists/MailingListMembers.ts:21](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L21)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
+[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:17](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L17)
+[Interfaces/MailingLists/MailingListMembers.ts:17](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L17)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:12](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L12)
+[Interfaces/MailingLists/MailingListMembers.ts:12](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L12)
 
 ___
 
@@ -140,4 +140,4 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/0486635/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
+[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/a423705/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
