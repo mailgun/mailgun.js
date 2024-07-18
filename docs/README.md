@@ -56,7 +56,7 @@ Once the package is installed, you can import the library using `import` or `req
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 ```js
-  import * as FormData from 'form-data';
+  import FormData from 'form-data';
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
@@ -64,7 +64,7 @@ Once the package is installed, you can import the library using `import` or `req
 ### Using Subaccounts
 Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
 ```js
-  import * as FormData from 'form-data';
+  import FormData from 'form-data';
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
@@ -77,7 +77,7 @@ Primary accounts can make API calls on behalf of their subaccounts. [API documen
 By leveraging client configuration options, users can effortlessly establish proxy connections that align with their network requirements.
 Ex:
 ```js
-  import * as FormData from 'form-data';
+  import FormData from 'form-data';
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
 
