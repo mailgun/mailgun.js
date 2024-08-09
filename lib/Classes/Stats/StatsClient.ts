@@ -24,7 +24,7 @@ export default class StatsClient implements IStatsClient {
     */
     this.logger.warn(`Date:"${inputDate}" was auto-converted to UTC time zone.
 Value "${inputDate.toUTCString()}" will be used for request.
-Consider using sting type for property "${key}" to avoid auto-converting`);
+Consider using string type for property "${key}" to avoid auto-converting`);
     return [key, inputDate.toUTCString()];
   }
 

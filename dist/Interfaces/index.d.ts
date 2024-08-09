@@ -12,3 +12,4 @@ export * from './Routes';
 export * from './IPs';
 export * from './IPPools';
 export * from './Subaccounts';
+export * from './InboxPlacements';

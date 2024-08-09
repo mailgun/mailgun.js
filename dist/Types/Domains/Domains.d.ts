@@ -109,7 +109,7 @@ export type UpdatedDKIMAuthority = {
 };
 export type UpdatedDKIMAuthorityResponse = {
     body: UpdatedDKIMAuthority;
-    status: 200;
+    status: number;
 };
 export type DKIMSelectorInfo = {
     dkimSelector: string;
