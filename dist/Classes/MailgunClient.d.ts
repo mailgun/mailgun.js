@@ -1,5 +1,5 @@
 import { MailgunClientOptions, InputFormData } from '../Types';
-import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient } from '../Interfaces';
+import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient } from '../Interfaces';
 export default class MailgunClient implements IMailgunClient {
     private request;
     domains: IDomainsClient;
@@ -14,6 +14,7 @@ export default class MailgunClient implements IMailgunClient {
     ip_pools: IIPPoolsClient;
     lists: IMailingListsClient;
     subaccounts: ISubaccountsClient;
+    inboxPlacements: IInboxPlacementsClient;
     constructor(options: MailgunClientOptions, formData: InputFormData);
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;

@@ -34,7 +34,15 @@ import {
   IIPsClient,
   IIPPoolsClient,
   ISubaccountsClient,
+  IInboxPlacementsClient,
 } from '../Interfaces';
+import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient';
+import InboxPlacementsClient from './InboxPlacements/inboxPlacements';
+import InboxPlacementsResultsClient from './InboxPlacements/Results/InboxPlacementsResultsClient';
+import InboxPlacementsAttributesClient from './InboxPlacements/AttributesClient';
+import InboxPlacementsFiltersClient from './InboxPlacements/FiltersClient';
+import IPRSharingClient from './InboxPlacements/Results/InboxPlacementsResultsSharingClient';
+import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPlacementsProviders';
 
 export default class MailgunClient implements IMailgunClient {
   private request;
@@ -51,6 +59,7 @@ export default class MailgunClient implements IMailgunClient {
   public ip_pools: IIPPoolsClient;
   public lists: IMailingListsClient;
   public subaccounts: ISubaccountsClient;
+  public inboxPlacements: IInboxPlacementsClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -74,6 +83,30 @@ export default class MailgunClient implements IMailgunClient {
     const domainTemplatesClient = new DomainTemplatesClient(this.request);
     const domainTagsClient = new DomainTagsClient(this.request);
     const multipleValidationClient = new MultipleValidationClient(this.request);
+    const InboxPlacementsResultsSharingClient = new IPRSharingClient(this.request);
+
+    const seedsListsAttributes = new InboxPlacementsAttributesClient(this.request, '/v4/inbox/seedlists/a');
+    const resultsAttributesClient = new InboxPlacementsAttributesClient(this.request, '/v4/inbox/results/a');
+
+    const seedsListsFiltersClient = new InboxPlacementsFiltersClient(this.request, '/v4/inbox/seedlists/_filters');
+    const resultsFiltersClient = new InboxPlacementsFiltersClient(this.request, '/v4/inbox/results/_filters');
+
+    const seedsListsClient = new SeedsListsClient(
+      this.request,
+      seedsListsAttributes,
+      seedsListsFiltersClient
+    );
+
+    const inboxPlacementsResultsClient = new InboxPlacementsResultsClient(
+      this.request,
+      resultsAttributesClient,
+      resultsFiltersClient,
+      InboxPlacementsResultsSharingClient
+    );
+
+    const inboxPlacementsProvidersClient = new InboxPlacementsProvidersClient(
+      this.request
+    );
 
     this.domains = new DomainsClient(
       this.request,
@@ -92,6 +125,12 @@ export default class MailgunClient implements IMailgunClient {
     this.lists = new MailingListsClient(this.request, mailListsMembers);
     this.validate = new ValidateClient(this.request, multipleValidationClient);
     this.subaccounts = new SubaccountsClient(this.request);
+    this.inboxPlacements = new InboxPlacementsClient(
+      this.request,
+      seedsListsClient,
+      inboxPlacementsResultsClient,
+      inboxPlacementsProvidersClient,
+    );
   }
 
   setSubaccount(subaccountId: string): void {

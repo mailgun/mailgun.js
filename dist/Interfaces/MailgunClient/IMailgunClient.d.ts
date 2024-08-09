@@ -10,6 +10,7 @@ import { IIPsClient } from '../IPs';
 import { IIPPoolsClient } from '../IPPools';
 import { IMailingListsClient } from '../MailingLists';
 import { ISubaccountsClient } from '../Subaccounts';
+import { IInboxPlacementsClient } from '../InboxPlacements';
 export interface IMailgunClient {
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
@@ -23,6 +24,7 @@ export interface IMailgunClient {
     ip_pools: IIPPoolsClient;
     lists: IMailingListsClient;
     subaccounts: ISubaccountsClient;
+    inboxPlacements: IInboxPlacementsClient;
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;
 }
