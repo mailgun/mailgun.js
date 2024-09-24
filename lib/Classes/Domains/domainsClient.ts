@@ -10,17 +10,12 @@ import { APIResponse } from '../../Types/Common/ApiResponse';
 import APIError from '../common/Error';
 import Request from '../common/Request';
 
-import DomainCredentialsClient from './domainsCredentials';
-import DomainTemplatesClient from './domainsTemplates';
-import DomainTagsClient from './domainsTags';
 import {
   DestroyedDomainResponse,
   MessageResponse,
   DomainListResponseData,
   DomainResponseData,
-  DomainTrackingResponse,
   DomainTrackingData,
-  UpdateDomainTrackingResponse,
   UpdatedOpenTracking,
   DomainsQuery,
   DomainInfo,
@@ -48,20 +43,22 @@ import {
   UpdatedDKIMSelectorResult,
 } from '../../Types/Domains';
 import Domain from './domain';
-import { ILogger } from '../../Interfaces';
+import { ILogger, IDomainTrackingClient } from '../../Interfaces';
 
 export default class DomainsClient implements IDomainsClient {
   request: Request;
   public domainCredentials: IDomainCredentials;
   public domainTemplates: IDomainTemplatesClient;
   public domainTags: IDomainTagsClient;
+  public domainTracking: IDomainTrackingClient;
   private logger: ILogger;
 
   constructor(
     request: Request,
-    domainCredentialsClient: DomainCredentialsClient,
-    domainTemplatesClient: DomainTemplatesClient,
-    domainTagsClient: DomainTagsClient,
+    domainCredentialsClient: IDomainCredentials,
+    domainTemplatesClient: IDomainTemplatesClient,
+    domainTagsClient: IDomainTagsClient,
+    domainTracking: IDomainTrackingClient,
     logger: ILogger = console
   ) {
     this.request = request;
@@ -69,6 +66,7 @@ export default class DomainsClient implements IDomainsClient {
     this.domainTemplates = domainTemplatesClient;
     this.domainTags = domainTagsClient;
     this.logger = logger;
+    this.domainTracking = domainTracking;
   }
 
   private _handleBoolValues(
@@ -105,18 +103,6 @@ export default class DomainsClient implements IDomainsClient {
       response.body.receiving_dns_records,
       response.body.sending_dns_records
     );
-  }
-
-  private _parseTrackingSettings(response: DomainTrackingResponse) : DomainTrackingData {
-    return response.body.tracking;
-  }
-
-  private _parseTrackingUpdate(response: UpdateDomainTrackingResponse) :UpdatedOpenTracking {
-    return response.body;
-  }
-
-  private _isOpenTrackingInfoWitPlace(obj: unknown): obj is OpenTrackingInfo {
-    return typeof obj === 'object' && 'place_at_the_top' in (obj as OpenTrackingInfo);
   }
 
   list(query?: DomainsQuery): Promise<TDomain[]> {
@@ -168,31 +154,31 @@ export default class DomainsClient implements IDomainsClient {
   }
 
   // Tracking
+  /**
+  * @deprecated 'domains.getTracking' method is deprecated, and will be removed.
+  * Please use 'domains.domainTracking.getTracking' instead.
+  */
 
   getTracking(domain: string) : Promise<DomainTrackingData> {
-    return this.request.get(urljoin('/v3/domains', domain, 'tracking'))
-      .then(this._parseTrackingSettings);
+    this.logger.warn(`
+      'domains.getTracking' method is deprecated, and will be removed. Please use 'domains.domainTracking.getTracking' instead.
+    `);
+    return this.domainTracking.getTracking(domain);
   }
 
+  /**
+  * @deprecated 'domains.updateTracking' method is deprecated, and will be removed.
+  * Please use 'domains.domainTracking.updateTracking' instead.
+  */
   updateTracking(
     domain: string,
     type: string,
     data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo
   ): Promise<UpdatedOpenTracking> {
-    const preparedData: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo = {
-      ...data
-    };
-    if (typeof data?.active === 'boolean') {
-      preparedData.active = (data?.active) ? 'yes' : 'no';
-    }
-
-    if (this._isOpenTrackingInfoWitPlace(data)) {
-      if (typeof data?.place_at_the_top === 'boolean') {
-        (preparedData as OpenTrackingInfo).place_at_the_top = (data?.place_at_the_top) ? 'yes' : 'no';
-      }
-    }
-    return this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), preparedData)
-      .then((res : APIResponse) => this._parseTrackingUpdate(res as UpdateDomainTrackingResponse));
+    this.logger.warn(`
+      'domains.updateTracking' method is deprecated, and will be removed. Please use 'domains.domainTracking.updateTracking' instead.
+    `);
+    return this.domainTracking.updateTracking(domain, type, data);
   }
 
   // IPs

@@ -46,3 +46,22 @@ export type UnsubscribeTrackingInfo = {
   html_footer?: string;
   text_footer?: string;
 }
+
+export type GetDomainTrackingCertificateResponse = {
+  responseStatusCode: number
+  status: string;
+  error: string;
+  certificate: string;
+}
+
+export type GenerateDomainTrackingCertificateResponse = {
+  message: string;
+  location: string;
+  status: number;
+}
+
+export type RegenerateDomainTrackingCertificateResponse = {
+  message: string;
+  location: string;
+  status: number;
+}

@@ -3,10 +3,12 @@ import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorI
 import { IDomainCredentials } from './DomainCredentials';
 import { IDomainTagsClient } from './DomainTags';
 import { IDomainTemplatesClient } from './DomainTemplates';
+import { IDomainTrackingClient } from './DomainTracking';
 export interface IDomainsClient {
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;
     domainTags: IDomainTagsClient;
+    domainTracking: IDomainTrackingClient;
     list(query?: DomainsQuery): Promise<TDomain[]>;
     get(domain: string, query?: DomainGetQuery): Promise<TDomain>;
     create(data: DomainInfo): Promise<TDomain>;

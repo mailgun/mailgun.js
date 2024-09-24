@@ -6,7 +6,7 @@ import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { IMetricsClient } from '../lib/Interfaces/Metrics/MetricsClient';
 import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
-import { MetricsAPIQuery, MetricsResult } from '../lib/Types/Metrics';
+import { MetricsResult } from '../lib/Types/Metrics';
 import { Resolution } from '../lib/Enums';
 
 describe('MetricsClient', function () {
