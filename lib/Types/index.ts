@@ -7,6 +7,7 @@ export * from './MailgunClient';
 export * from './MailingLists';
 export * from './Messages';
 export * from './Routes';
+export * from './SecureTracking';
 export * from './Stats';
 export * from './Subaccounts';
 export * from './Suppressions';
