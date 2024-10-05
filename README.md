@@ -536,7 +536,7 @@ Method naming conventions:
 
   ```JS
   mg.domains.get('testing.example.com')
-    .then(domains => console.log(domains)) // logs domain object
+    .then(domain => console.log(domain)) // logs domain object
     .catch(err => console.error(err)); // logs any error
   ```
 
