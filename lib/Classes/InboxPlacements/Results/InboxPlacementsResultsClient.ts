@@ -104,10 +104,11 @@ Consider using string type for property "${key}" to avoid auto-converting`);
     const inboxPlacementsResult: InboxPlacementsResult = {
       ...data,
       Box: box,
-      ...handledSeedListDates
+      ...handledSeedListDates,
+      id: data.Id,
     };
 
-    delete (inboxPlacementsResult as {Id?: string}).Id;
+    delete (inboxPlacementsResult as {ID?: string}).ID;
 
     return inboxPlacementsResult;
   }

@@ -8,7 +8,8 @@ export default class InboxPlacementsClient implements IInboxPlacementsClient {
   request: Request;
   public seedsLists: ISeedsListsClient;
   public results: IInboxPlacementsResultsClient;
-  providers: IInboxPlacementsProvidersClient
+  public providers: IInboxPlacementsProvidersClient;
+
   constructor(
     request: Request,
     seedsListsClient: ISeedsListsClient,

@@ -2,17 +2,17 @@ import { PagesList, ParsedPagesList } from '../../Common';
 
 /* eslint-disable camelcase */
 export type InboxPlacementsResultsQuery = {
-  sender: string;
-  subject: string;
-  provider: string;
-  target_email: string;
-  time_after: string | Date;
-  time_before: string | Date;
-  cursor: string;
-  sort: string;
-  offset: number;
-  ascending: boolean;
-  limit: number;
+  sender?: string;
+  subject?: string;
+  provider?: string;
+  target_email?: string;
+  time_after?: string | Date;
+  time_before?: string | Date;
+  cursor?: string;
+  sort?: string;
+  offset?: number;
+  ascending?: boolean;
+  limit?: number;
 };
 
 export type InboxPlacementsResultsDates = {
@@ -59,7 +59,7 @@ export type InboxPlacementsBoxAPIShape = {
   CreatedTS: number;
   tags: string[];
   SeedQuality: number;
-  is_auto_generated: boolean
+  is_auto_generated: boolean;
 };
 
 export type InboxPlacementsBox = Omit<InboxPlacementsBoxAPIShape, 'created_at'| 'updated_at' | 'last_result_at'> & {
@@ -124,6 +124,7 @@ export type InboxPlacementsResult = Omit<InboxPlacementsResultAPIShape, 'Id' | '
   created_at: Date;
   updated_at: Date;
   sharing_expires_at: Date;
+  id: string;
 };
 
 export type InboxPlacementsResultAPIResponse = {

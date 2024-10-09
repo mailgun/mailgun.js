@@ -105,7 +105,7 @@ export type SeedsListsAPIResponse = {
 };
 
 export type SeedsListsResult = {
-  items: SeedList[];
+  items: SeedList[] | [];
   status: number;
   pages: ParsedPagesList
 };

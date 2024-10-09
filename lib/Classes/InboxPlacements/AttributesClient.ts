@@ -29,6 +29,9 @@ export default class InboxPlacementsAttributesClient implements IInboxPlacements
 
   async get(attributeName: string): Promise<InboxPlacementsValuesResult> {
     const response = await this.request.get(`${this.path}/${attributeName}`) as InboxPlacementsValuesApiResponse;
-    return response.body;
+    return {
+      ...response.body,
+      status: response.status
+    };
   }
 }

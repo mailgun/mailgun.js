@@ -2,8 +2,12 @@
 export type InboxPlacementsData = {
   from: string;
   subject: string;
-  html: string;
   provider_filter?: string[];
+  html?: string;
+  template_name?: string;
+  variables?: {
+    [propName: string]: string;
+  }
   seed_list?: string;
 }
 

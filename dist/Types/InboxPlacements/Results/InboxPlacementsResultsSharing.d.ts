@@ -16,7 +16,12 @@ export type IPRSharingResult = Omit<IPRSharingApiShape, 'expires_at'> & {
     expires_at: Date;
 };
 export type IPRSharingUpdateData = {
-    enabled: true;
+    enabled: boolean;
 };
-export type IPRSharingUpdateAPIResponse = IPRSharingAPIResponse;
+export type IPRSharingUpdateAPIResponse = {
+    body: {
+        sharing: IPRSharingApiShape;
+    };
+    status: number;
+};
 export type IPRSharingUpdateResult = IPRSharingResult;

@@ -128,9 +128,11 @@ Consider using string type for property "${key}" to avoid auto-converting`);
   }
 
   protected parseList(response: SeedsListsAPIResponse): SeedsListsResult {
-    const data = {} as SeedsListsResult;
+    const data = {
+      items: []
+    } as SeedsListsResult;
 
-    data.items = response.body.items.map(
+    data.items = response.body.items?.map(
       (item: SeedListAPIShape): SeedList => this.prepareSeedList(item)
     );
 
@@ -143,7 +145,10 @@ Consider using string type for property "${key}" to avoid auto-converting`);
   async list(query: SeedsListsQuery): Promise<SeedsListsResult> {
     const queryData = this.prepareQueryData(query);
     const response: SeedsListsAPIResponse = await this.request.get('/v4/inbox/seedlists', queryData) as SeedsListsAPIResponse;
-    return this.parseList(response);
+    return {
+      ...this.parseList(response),
+      status: 200
+    };
   }
 
   async get(id: string): Promise<SeedListResult> {
