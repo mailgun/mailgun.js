@@ -93,7 +93,7 @@ export type SeedsListsAPIResponse = {
     status: number;
 };
 export type SeedsListsResult = {
-    items: SeedList[];
+    items: SeedList[] | [];
     status: number;
     pages: ParsedPagesList;
 };
