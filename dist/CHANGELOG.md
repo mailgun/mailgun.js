@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.2.4](https://github.com/mailgun/mailgun.js/compare/v10.2.3...v10.2.4) (2024-11-21)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump webpack from 5.76.0 to 5.94.0 ([166f27c](https://github.com/mailgun/mailgun.js/commits/166f27ca06d7728143aad98051c6d9009900a51c))
+* **deps:** bump axios from 1.7.2 to 1.7.4 ([22ae183](https://github.com/mailgun/mailgun.js/commits/22ae18375e64a1ea9b4f1657dd91363110360c1a))
+* Fix vulnarable dependency ([039866b](https://github.com/mailgun/mailgun.js/commits/039866bc050f52145ca2da14bebe536aed067b20))
+
+
+### Other changes
+
+* Add tests coverage thresholds ([bfca371](https://github.com/mailgun/mailgun.js/commits/bfca3710da7492cfb0430d1da8370af55fbaa226))
+
 ### [10.2.3](https://github.com/mailgun/mailgun.js/compare/v10.2.2...v10.2.3) (2024-07-18)
 
 ### [10.2.2](https://github.com/mailgun/mailgun.js/compare/v10.2.1...v10.2.2) (2024-07-17)

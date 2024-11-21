@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/Bounce.ts:3](https://github.com/mailgun/mailgun.js/blob/90086ca/lib/Interfaces/Suppressions/Bounce.ts#L3)
+[Interfaces/Suppressions/Bounce.ts:3](https://github.com/mailgun/mailgun.js/blob/1615be3/lib/Interfaces/Suppressions/Bounce.ts#L3)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Bounce.ts:4](https://github.com/mailgun/mailgun.js/blob/90086ca/lib/Interfaces/Suppressions/Bounce.ts#L4)
+[Interfaces/Suppressions/Bounce.ts:4](https://github.com/mailgun/mailgun.js/blob/1615be3/lib/Interfaces/Suppressions/Bounce.ts#L4)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Bounce.ts:6](https://github.com/mailgun/mailgun.js/blob/90086ca/lib/Interfaces/Suppressions/Bounce.ts#L6)
+[Interfaces/Suppressions/Bounce.ts:6](https://github.com/mailgun/mailgun.js/blob/1615be3/lib/Interfaces/Suppressions/Bounce.ts#L6)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Bounce.ts:5](https://github.com/mailgun/mailgun.js/blob/90086ca/lib/Interfaces/Suppressions/Bounce.ts#L5)
+[Interfaces/Suppressions/Bounce.ts:5](https://github.com/mailgun/mailgun.js/blob/1615be3/lib/Interfaces/Suppressions/Bounce.ts#L5)
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Bounce.ts:7](https://github.com/mailgun/mailgun.js/blob/90086ca/lib/Interfaces/Suppressions/Bounce.ts#L7)
+[Interfaces/Suppressions/Bounce.ts:7](https://github.com/mailgun/mailgun.js/blob/1615be3/lib/Interfaces/Suppressions/Bounce.ts#L7)

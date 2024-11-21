@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "10.2.3",
+  "version": "10.2.4",
   "main": "./dist/mailgun.node.js",
   "browser": "./dist/mailgun.web.js",
   "types": "./index.d.ts",
