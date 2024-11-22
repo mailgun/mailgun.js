@@ -11,6 +11,7 @@ import { IIPsClient } from '../IPs';
 import { IIPPoolsClient } from '../IPPools';
 import { IMailingListsClient } from '../MailingLists';
 import { ISubaccountsClient } from '../Subaccounts';
+import { ISecureTrackingClient } from '../SecureTracking';
 
 export interface IMailgunClient {
     domains: IDomainsClient;
@@ -25,6 +26,7 @@ export interface IMailgunClient {
     ip_pools: IIPPoolsClient;
     lists: IMailingListsClient;
     subaccounts: ISubaccountsClient;
+    secure_tracking: ISecureTrackingClient;
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;
 }

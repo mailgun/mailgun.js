@@ -19,6 +19,7 @@ import MultipleValidationClient from './Validations/multipleValidation';
 import DomainTemplatesClient from './Domains/domainsTemplates';
 import DomainTagsClient from './Domains/domainsTags';
 import SubaccountsClient from './Subaccounts';
+import SecureTrackingClient from './SecureTracking';
 
 import {
   IDomainsClient,
@@ -34,6 +35,7 @@ import {
   IIPsClient,
   IIPPoolsClient,
   ISubaccountsClient,
+  ISecureTrackingClient,
 } from '../Interfaces';
 
 export default class MailgunClient implements IMailgunClient {
@@ -51,6 +53,7 @@ export default class MailgunClient implements IMailgunClient {
   public ip_pools: IIPPoolsClient;
   public lists: IMailingListsClient;
   public subaccounts: ISubaccountsClient;
+  public secure_tracking: ISecureTrackingClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -92,6 +95,7 @@ export default class MailgunClient implements IMailgunClient {
     this.lists = new MailingListsClient(this.request, mailListsMembers);
     this.validate = new ValidateClient(this.request, multipleValidationClient);
     this.subaccounts = new SubaccountsClient(this.request);
+    this.secure_tracking = new SecureTrackingClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {
