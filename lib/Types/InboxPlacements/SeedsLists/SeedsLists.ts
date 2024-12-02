@@ -127,10 +127,11 @@ export type SeedsListsCreatingData = {
   sending_domains?: string;
   name?: string;
   seed_filter?: string;
+  provider_filter?: string;
   remote_id?: string;
 };
 
-export type SeedsListsUpdatingData = Omit<SeedsListsCreatingData, 'remote_id'>;
+export type SeedsListsUpdatingData = Omit<SeedsListsCreatingData, 'remote_id'> & {shuffle?: boolean;};
 
 export type SeedListAPIResponse = {
   body: SeedListAPIShape,

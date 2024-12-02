@@ -240,6 +240,7 @@ describe('SeedsListsClient', () => {
         sending_domains: 'new sending_domains value',
         name: 'new name value',
         seed_filter: 'new seed_filter value',
+        shuffle: true
       });
 
       updatedSeedsList.should.be.an('object');
