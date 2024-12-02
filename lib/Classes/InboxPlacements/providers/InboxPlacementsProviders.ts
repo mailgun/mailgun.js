@@ -1,5 +1,10 @@
 import { IInboxPlacementsProvidersClient } from '../../../Interfaces/InboxPlacements/providers/InboxPlacementsProviders';
-import { InboxPlacementsProvider, InboxPlacementsProviderAPIShape, InboxPlacementsProvidersList, InboxPlacementsProvidersListAPIResponse } from '../../../Types/InboxPlacements';
+import {
+  InboxPlacementsProvider,
+  InboxPlacementsProviderAPIShape,
+  InboxPlacementsProvidersList,
+  InboxPlacementsProvidersListAPIResponse
+} from '../../../Types/InboxPlacements';
 import Request from '../../common/Request';
 
 export default class InboxPlacementsProvidersClient implements IInboxPlacementsProvidersClient {
