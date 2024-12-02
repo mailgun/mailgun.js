@@ -195,6 +195,18 @@ The following service methods are available to instantiated clients. The example
       - [create](#create-7)
       - [enable](#enable)
       - [disable](#disable)
+    - [Inbox Placements](#inbox-placements)
+      - [SeedsLists](#seedslists)
+        - [list](#list-7)
+        - [get](#get-9)
+        - [create](#create-8)
+        - [update](#update-4)
+        - [destroy](#destroy-6)
+        - [Attributes](#attributes)
+          - [list](#list-8)
+          - [get](#get-10)
+        - [Filters](#filters)
+          - [list](#list-9)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -2197,6 +2209,392 @@ A client to manage members within a specific mailing list.
   { id: "123", name: "foobar", status: "disabled" }
   ```
 
+
+### Inbox Placements
+  A client to allows you to see the likely deliverability of your email campaigns.
+- #### SeedsLists
+  - #### list
+    `mg.inbox_placements.seedsLists.list()`
+
+      Example:
+
+      ```JS
+      mg.inbox_placements.seedsLists.list()
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); //logs any error
+      ```
+
+      Promise returns: available SeedsLists
+      ```JS
+      {
+        status: 200,
+        items: [
+          {
+            kid: 'kid',
+            ID: 'ID',
+            AccountID: 'AccountID',
+            created_at: new Date('2024-08-09T14:32:57.183Z'),
+            updated_at: new Date('2024-08-09T14:33:57.183Z'),
+            last_result_at: new Date('2024-08-09T14:32:57.183Z'),
+            Seeds: [
+              {
+                AccountID: 'acount id',
+                id: 'seed id',
+                token: 'token',
+                email: 'email',
+                provider: 'provider',
+                sync_state: 'sync_state',
+                local_state: 'local_state',
+                created_at: new Date('2024-08-09T14:32:57.183Z'),
+                updated_at: new Date('2024-08-09T14:32:57.183Z'),
+                message_count: 0,
+                max_email_count_hit_at: new Date('2024-08-09T14:32:57.183Z'),
+                total_msgs: 0,
+                matched_msgs: 0,
+                spam_message: 0,
+                expected_msgs: 0,
+                last_sent_to_at: new Date('2024-08-09T14:32:57.183Z'),
+                last_delivered_at: new Date('2024-08-09T14:32:57.183Z'),
+                account_quality: 0,
+                quality_label: 'quality_label',
+                password: 'password',
+                phone_number: 'phone_number',
+                attributes: {},
+                totp: {
+                  secret: 'secret',
+                }
+              },
+              ...
+            ],
+            target_email: 'test_email@test.com',
+            sending_domains: ['test_domain.com'],
+            has_results: true,
+            name: 'test name',
+            seed_filter: 'test filter',
+            mailing_list: 'test mailing_list',
+            CreatedTS: 1723214101728,
+            tags: {
+              sfmc_remote_id: 'test sfmc_remote_id',
+            },
+            delivery_stats: {
+              all: {
+                delivered: 0,
+                missing: 0,
+                pending: 0,
+                spam: 0,
+                inbox: 0,
+                total: 0,
+                provider: 'test provider',
+                categories: {
+                  primary: 0,
+                  promotions: 0,
+                  updates: 0,
+                }
+              }
+            },
+            SeedQuality: 1,
+            is_auto_generated: true,
+          },
+          ...
+        ],
+        paging: {
+          first: 'first_page_link',
+          last: 'last_page_link',
+          next: 'next_page_link',
+          previous: 'previous_page_link',
+        }
+      }
+      ```
+
+  - #### get
+    `mg.inbox_placements.seedsLists.get(seedsListId)`
+
+    Example:
+
+    ```JS
+    mg.inbox_placements.seedsLists.get(seedsListId);
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+    ```
+
+    Promise returns: SeedsLists item by id
+    ```JS
+    {
+      status: 200,
+      kid: 'kid',
+      ID: 'ID',
+      AccountID: 'AccountID',
+      created_at: new Date('2024-08-09T14:32:57.183Z'),
+      updated_at: new Date('2024-08-09T14:33:57.183Z'),
+      last_result_at: new Date('2024-08-09T14:32:57.183Z'),
+      Seeds: [
+        {
+          AccountID: 'acount id',
+          id: 'seed id',
+          token: 'token',
+          email: 'email',
+          provider: 'provider',
+          sync_state: 'sync_state',
+          local_state: 'local_state',
+          created_at: new Date('2024-08-09T14:32:57.183Z'),
+          updated_at: new Date('2024-08-09T14:32:57.183Z'),
+          message_count: 0,
+          max_email_count_hit_at: new Date('2024-08-09T14:32:57.183Z'),
+          total_msgs: 0,
+          matched_msgs: 0,
+          spam_message: 0,
+          expected_msgs: 0,
+          last_sent_to_at: new Date('2024-08-09T14:32:57.183Z'),
+          last_delivered_at: new Date('2024-08-09T14:32:57.183Z'),
+          account_quality: 0,
+          quality_label: 'quality_label',
+          password: 'password',
+          phone_number: 'phone_number',
+          attributes: {},
+          totp: {
+            secret: 'secret',
+          }
+        },
+        ...
+      ],
+      target_email: 'test_email@test.com',
+      sending_domains: ['test_domain.com'],
+      has_results: true,
+      name: 'test name',
+      seed_filter: 'test filter',
+      mailing_list: 'test mailing_list',
+      CreatedTS: 1723214101728,
+      tags: {
+        sfmc_remote_id: 'test sfmc_remote_id',
+      },
+      delivery_stats: {
+        all: {
+          delivered: 0,
+          missing: 0,
+          pending: 0,
+          spam: 0,
+          inbox: 0,
+          total: 0,
+          provider: 'test provider',
+          categories: {
+            primary: 0,
+            promotions: 0,
+            updates: 0,
+          }
+        }
+      },
+      SeedQuality: 1,
+      is_auto_generated: true,
+    }
+    ```
+  - #### create
+    ```js
+    mg.inbox_placements.seedsLists.create({
+      name: 'seedLists name',
+      sending_domains: 'your_sending_domain',
+      seed_filter: 'seed filter',
+      remote_id: 'remote_id'
+    })
+    ```
+
+
+    Example:
+
+    ```JS
+    mg.inbox_placements.seedsLists.create({
+      sending_domains: 'your_sending_domain',
+      name: 'seedLists name';
+      seed_filter: 'seed filter';
+      remote_id: 'remote_id';
+    });
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+    ```
+
+    Promise returns: created SeedsLists item
+    ```JS
+    {
+      kid: 'kid',
+      created_at: new Date('2024-08-09T14:32:57.183Z'),
+      updated_at: new Date('2024-08-09T14:32:57.183Z'),
+      last_result_at: new Date('2024-08-09T14:32:57.183Z'),
+      target_email: 'test_email@test.com',
+      sending_domains: [ 'your_sending_domain' ],
+      has_results: false,
+      name: 'seedLists name',
+      seed_filter: 'seed filter',
+      provider_filter: [],
+      mailing_list: 'test_email@test.com',
+      previous_mailing_list: '',
+      tags: {
+        sfmc_remote_id: 'remote_id'
+      },
+      delivery_stats: {
+        all: {
+          delivered: 0,
+          missing: 0,
+          pending: 0,
+          spam: 0,
+          inbox: 0,
+          total: 0,
+          provider: 'all',
+          categories: {}
+        }
+      },
+      is_auto_generated: false,
+      version: 2,
+      Seeds: null,
+      status: 200
+    }
+    ```
+
+  - #### update
+
+    ```JS
+    mg.inbox_placements.seedsLists.update(seedsListId,{
+      name: 'new seedLists name', // optional
+      provider_filter: 'provider_filter', // optional
+      shuffle: true, // optional
+      sending_domains: 'your_sending_domain' // optional
+    })
+    ```
+
+
+    Example:
+
+    ```JS
+     mg.inbox_placements.seedsLists.update(seedsListId,{
+      name: 'new seedLists name',
+      provider_filter: 'gmail.com',
+      sending_domains: 'your_sending_domain'
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+    ```
+
+    Promise returns: updated SeedsLists item
+    ```JS
+    {
+      kid: '674dcab31169b0619005a9f8',
+      created_at: new Date('2024-08-09T14:32:57.183Z'),
+      updated_at: 2024-12-02T14:59:42.231Z,
+      last_result_at: new Date('2024-08-09T14:32:57.183Z'),
+      target_email: 'test_email@test.com',
+      sending_domains: [ 'your_sending_domain' ],
+      has_results: false,
+      name: 'seedLists name',
+      seed_filter: '.*',
+      provider_filter: ['gmail.com'],
+      mailing_list: 'test_email@test.com',
+      previous_mailing_list: '',
+      tags: {
+         sfmc_remote_id: 'remote_id'
+      },
+      delivery_stats: {
+        all: {
+          delivered: 0,
+          missing: 0,
+          pending: 0,
+          spam: 0,
+          inbox: 0,
+          total: 0,
+          provider: 'all',
+          categories: {}
+        }
+      },
+      is_auto_generated: false,
+      version: 2,
+      Seeds: null,
+      status: 200
+    }
+    ```
+
+  - #### destroy
+    ```js
+    mg.inbox_placements.seedsLists.destroy(seedsListId)
+    ```
+
+    Example:
+
+    ```JS
+     mg.inbox_placements.seedsLists.destroy(seedsListId)
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+    ```
+
+    Promise returns: status object
+    ```JS
+    {
+      status: 200,
+      body: null
+    }
+    ```
+
+  - #### Attributes
+    - #### list
+      `mg.inbox_placements.seedsLists.attributes.list()`
+
+      Example:
+
+      ```JS
+      mg.inbox_placements.seedsLists.attributes.list()
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); //logs any error
+      ```
+      Promise returns: SeedsLists attributes
+      ```JS
+      {
+        status: 200,
+        items:[{
+          attribute: 'available attribute',
+          values: ['attribute_value', ...]
+        }, ...]
+      }
+      ```
+    - #### get
+      `mg.inbox_placements.attributes.get('attribute_name');`
+
+      Example:
+      ```JS
+      mg.inbox_placements.seedsLists.attributes.get('attribute_name')
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); //logs any error
+      ```
+      Promise returns: SeedsLists attribute
+      ```JS
+      {
+        status: 200,
+        items: {
+          attribute: 'attribute_name',
+            values: ['attribute_value', ...]
+          }
+      }
+      ```
+  - #### Filters
+    - #### list
+      `mg.inbox_placements.seedsLists.filters.list()`
+
+      Example:
+
+      ```JS
+      mg.inbox_placements.seedsLists.filters.list()
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); //logs any error
+      ```
+      Promise returns: SeedsLists filters
+      ```JS
+      {
+        status: 200,
+        supported_filters:{
+          filters: [
+            {
+            parameter: 'parameter_name',
+            description: 'parameter_description'
+            }, ....
+          ]
+        }
+      }
+      ```
 ## Navigation thru lists
   Most of the methods that return items in a list support pagination.
   There are two ways to receive part of the list:
@@ -2385,7 +2783,7 @@ Demo should be up and running at http://0.0.0.0:4001/examples/
 
 ## Requirements
 
-- Requires node.js >= 4.x
+- Requires node.js >= 18.x
 
 Install node dependencies with:
 

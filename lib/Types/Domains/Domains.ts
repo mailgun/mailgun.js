@@ -107,13 +107,13 @@ export type ConnectionSettingsResponse = {
 }
 
 export type UpdatedConnectionSettings = {
-    message: string,
-    require_tls: boolean,
+    message: string;
+    require_tls: boolean;
     skip_verification: boolean
 }
 
 export type UpdatedConnectionSettingsRes = {
-    body: UpdatedConnectionSettings,
+    body: UpdatedConnectionSettings;
     status: number
 }
 
@@ -122,14 +122,14 @@ export type DKIMAuthorityInfo = {
 }
 
 export type UpdatedDKIMAuthority = {
-    changed: boolean,
-    message: string,
+    changed: boolean;
+    message: string;
     sending_dns_records: DNSRecord[]
 }
 
 export type UpdatedDKIMAuthorityResponse = {
-    body: UpdatedDKIMAuthority,
-    status: 200
+    body: UpdatedDKIMAuthority;
+    status: number;
 }
 
 export type DKIMSelectorInfo = {
@@ -137,7 +137,7 @@ export type DKIMSelectorInfo = {
 }
 
 export type UpdatedDKIMSelectorResponse = {
-    body:MessageResponse,
+    body:MessageResponse;
     status: number
 }
 
@@ -149,7 +149,7 @@ export type UpdatedWebPrefix = {
     message : string
 }
 export type UpdatedWebPrefixResponse = {
-    body:MessageResponse,
+    body:MessageResponse;
     status: number
 }
 
