@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.3.0](https://github.com/mailgun/mailgun.js/compare/v10.2.4...v10.3.0) (2024-12-23)
+
+
+### Features
+
+* Add support for Inbox Placements ([5450a4b](https://github.com/mailgun/mailgun.js/commits/5450a4b37c5876d2668e2b7a5a1e1c0941afde68))
+
 ### [10.2.4](https://github.com/mailgun/mailgun.js/compare/v10.2.3...v10.2.4) (2024-11-21)
 
 
