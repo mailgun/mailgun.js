@@ -24,6 +24,7 @@ import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers';
+import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements';
 
 describe('Client', () => {
   let client: IMailgunClient;
@@ -117,6 +118,10 @@ describe('Client', () => {
 
   it('creates subaccounts client', () => {
     client.subaccounts.should.be.instanceOf(SubaccountsClient);
+  });
+
+  it('creates inbox placements client', () => {
+    client.inboxPlacements.should.be.instanceOf(InboxPlacementsClient);
   });
 
   describe('User configuration', () => {
