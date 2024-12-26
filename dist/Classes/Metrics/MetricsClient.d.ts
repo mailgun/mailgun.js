@@ -8,6 +8,7 @@ export default class MetricsClient implements IMetricsClient {
     constructor(request: Request, logger?: ILogger);
     private convertDateToUTC;
     private prepareQuery;
+    private handleResponse;
     getAccount(query?: MetricsQuery): Promise<MetricsResult>;
     getAccountUsage(query?: MetricsQuery): Promise<MetricsResult>;
 }

@@ -2,7 +2,7 @@
 import { Resolution } from '../../Enums';
 
 export type MetricsFilterValue = {
-  label: string;
+  label?: string;
   value: string;
 }
 export type MetricsFilter = {
@@ -96,13 +96,13 @@ export type MetricsResponseItem = {
 export type MetricsResult = {
   items: MetricsResponseItem[];
   resolution: string;
-  start: string;
+  start: Date | null;
   aggregates: {
     metrics: Metrics;
   }
   dimensions: string[];
   pagination: MetricsPagination;
-  end: string;
-  duration: string;
+  end: Date | null;
+  duration?: string;
   status: number;
 }

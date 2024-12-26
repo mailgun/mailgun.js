@@ -22,6 +22,6 @@ export type MetricsAPIResponse = {
     dimensions: string[];
     pagination: MetricsPagination;
     end: string;
-    duration: string;
+    duration?: string;
   }
 }

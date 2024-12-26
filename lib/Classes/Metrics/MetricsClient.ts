@@ -45,21 +45,28 @@ Consider using string type for property "${key}" to avoid auto-converting`);
     return result;
   }
 
+  private handleResponse(response: MetricsAPIResponse): MetricsResult {
+    const resBody = response.body;
+    const startDate = Date.parse(resBody.start) ? new Date(resBody.start) : null;
+    const endDate = Date.parse(resBody.end) ? new Date(resBody.end) : null;
+    const result: MetricsResult = {
+      ...resBody,
+      status: response.status,
+      start: startDate,
+      end: endDate
+    };
+    return result;
+  }
+
   async getAccount(query?: MetricsQuery): Promise<MetricsResult> {
     const queryData = this.prepareQuery(query);
     const response: MetricsAPIResponse = await this.request.post('/v1/analytics/metrics', queryData);
-    return {
-      ...response.body,
-      status: response.status
-    };
+    return this.handleResponse(response);
   }
 
   async getAccountUsage(query?: MetricsQuery): Promise<MetricsResult> {
     const queryData = this.prepareQuery(query);
     const response: MetricsAPIResponse = await this.request.post('/v1/analytics/usage/metrics', queryData);
-    return {
-      ...response.body,
-      status: response.status
-    };
+    return this.handleResponse(response);
   }
 }
