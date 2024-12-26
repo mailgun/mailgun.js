@@ -1,11 +1,13 @@
 import { MailgunClientOptions, InputFormData } from '../Types';
 import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient } from '../Interfaces';
+import { IMetricsClient } from '../Interfaces/Metrics/MetricsClient';
 export default class MailgunClient implements IMailgunClient {
     private request;
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
     events: IEventClient;
     stats: IStatsClient;
+    metrics: IMetricsClient;
     suppressions: ISuppressionClient;
     messages: IMessagesClient;
     routes: IRoutesClient;
