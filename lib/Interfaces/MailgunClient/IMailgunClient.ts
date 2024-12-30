@@ -12,12 +12,14 @@ import { IIPPoolsClient } from '../IPPools';
 import { IMailingListsClient } from '../MailingLists';
 import { ISubaccountsClient } from '../Subaccounts';
 import { IInboxPlacementsClient } from '../InboxPlacements';
+import { IMetricsClient } from '../Metrics/MetricsClient';
 
 export interface IMailgunClient {
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
     events: IEventClient;
     stats: IStatsClient;
+    metrics: IMetricsClient;
     suppressions: ISuppressionClient;
     messages: IMessagesClient;
     routes: IRoutesClient;

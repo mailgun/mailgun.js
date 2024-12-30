@@ -43,6 +43,8 @@ import InboxPlacementsAttributesClient from './InboxPlacements/AttributesClient'
 import InboxPlacementsFiltersClient from './InboxPlacements/FiltersClient';
 import IPRSharingClient from './InboxPlacements/Results/InboxPlacementsResultsSharingClient';
 import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPlacementsProviders';
+import MetricsClient from './Metrics/MetricsClient';
+import { IMetricsClient } from '../Interfaces/Metrics/MetricsClient';
 
 export default class MailgunClient implements IMailgunClient {
   private request;
@@ -51,6 +53,7 @@ export default class MailgunClient implements IMailgunClient {
   public webhooks: IWebHooksClient;
   public events: IEventClient;
   public stats: IStatsClient;
+  public metrics: IMetricsClient;
   public suppressions: ISuppressionClient;
   public messages: IMessagesClient;
   public routes: IRoutesClient;
@@ -117,6 +120,7 @@ export default class MailgunClient implements IMailgunClient {
     this.webhooks = new WebhooksClient(this.request);
     this.events = new EventClient(this.request);
     this.stats = new StatsClient(this.request);
+    this.metrics = new MetricsClient(this.request);
     this.suppressions = new SuppressionClient(this.request);
     this.messages = new MessagesClient(this.request);
     this.routes = new RoutesClient(this.request);

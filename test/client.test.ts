@@ -25,6 +25,7 @@ import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers';
 import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements';
+import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
 
 describe('Client', () => {
   let client: IMailgunClient;
@@ -82,6 +83,10 @@ describe('Client', () => {
 
   it('creates stats client', () => {
     client.stats.should.be.instanceOf(StatsClient);
+  });
+
+  it('creates metrics client', () => {
+    client.metrics.should.be.instanceOf(MetricsClient);
   });
 
   it('creates messages client', () => {
