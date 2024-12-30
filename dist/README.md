@@ -136,8 +136,12 @@ The following service methods are available to instantiated clients. The example
       - [get](#get-1)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
     - [stats](#stats)
+      - [Stats Options](#stats-options)
       - [getDomain](#getdomain)
       - [getAccount](#getaccount)
+    - [Metrics](#metrics)
+      - [getAccount](#getaccount-1)
+      - [getAccountUsage](#getaccountusage)
     - [suppressions](#suppressions)
       - [list](#list-1)
         - [Bounces Example](#bounces-example)
@@ -1023,7 +1027,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 ### Stats
-  - Stats Options
+- #### Stats Options
 
     | Parameter  | Description                                                                                                                |
     |:-----------|:---------------------------------------------------------------------------------------------------------------------------|
@@ -1107,6 +1111,145 @@ The following service methods are available to instantiated clients. The example
       time: Sun Mar 15 2015 17:00:00 GMT-0700 (PDT),
       delivered: { smtp: 2, http: 1, total: 3 }
     }]
+  }
+  ```
+
+
+  ```
+
+### Metrics
+  Mailgun collects many different events and generates event metrics which are available in your Control Panel. This data is also available via our analytics metrics [API endpoint](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics).
+
+- #### getAccount
+  Gets filtered metrics for an account
+
+  `mg.metrics.getAccount(MetricsQuery);`
+
+  Example:
+  ```JS
+    mg.metrics.getAccount({
+      start: '2024-12-16T10:47:51.661Z',
+      end: '2024-12-23T10:47:51.661Z',
+      resolution: 'hour',
+      metrics: ['opened_count'],
+      filter: {
+        AND: [{
+          attribute: 'domain',
+          comparator: 'contains',
+          values: [{
+            value: 'mailgun'
+          }]
+        }]
+      },
+      include_subaccounts: true,
+      include_aggregates: true
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+  *getAccount* method accepts data object with next properties:
+  | Property    | Type |Description                                                                                                                                   |
+  |:--------------|:-----|:-----------------------------------------------------------------------------------------------------------------------------------|
+  | start      | String that contains date in RFC 2822 format: https://datatracker.ietf.org/doc/html/rfc2822.html#page-14 or JS Date object | A start date (default: 7 days before current time)|
+  | end        | String that contains date in RFC 2822 format: https://datatracker.ietf.org/doc/html/rfc2822.html#page-14 or JS Date object | An end date (default: current time)|
+  | resolution | String | A resolution in the format of 'day' 'hour' 'month'. Default is day.|
+  | duration   | String | A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.|
+  | dimensions | Array of strings | Attributes of the metric data such as 'subaccount'.|
+  | metrics    | Array of strings | Name of the metrics to receive the stats for such as 'processed_count'.|
+  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics/operation/api.(*MetricsAPI).PostMetricQuery-fm-3!path=filter&t=request) for an object shape. |
+  | include_subaccounts | Boolean | Include stats from all subaccounts. |
+  | include_aggregates  | Boolean | Include top-level aggregate metrics.|
+
+  Promise returns: MetricsResult
+
+  ```JS
+  {
+    start: new Date('2024-12-16T01:00:00.000Z'),
+    end: new Date('2024-12-23T00:00:00.000Z'),
+    resolution: 'hour',
+    dimensions: [ 'time' ],
+    pagination: { sort: '', skip: 0, limit: 1500, total: 1 },
+    items: [
+      {
+        dimensions: [{
+          {
+            dimension: 'time',
+            value: 'Sat, 21 Dec 2024 17:00:00 +0000',
+            display_value: 'Sat, 21 Dec 2024 17:00:00 +0000'
+          }
+        }],
+        metrics: { opened_count: 1 }
+      },
+      ...
+    ],
+    aggregates: { metrics: { opened_count: 1 } },
+    status: 200
+  }
+  ```
+
+- #### getAccountUsage
+  Gets filtered **usage metrics** for an account
+  `mg.metrics.getAccountUsage(MetricsQuery);`
+
+  Example:
+  ```JS
+    mg.metrics.getAccountUsage({
+      start: '2024-12-16T10:47:51.661Z',
+      end: '2024-12-23T10:47:51.661Z',
+      resolution: 'hour',
+      metrics: ['opened_count'],
+      filter: {
+        AND: [{
+          attribute: 'domain',
+          comparator: 'contains',
+          values: [{
+            value: 'mailgun'
+          }]
+        }]
+      },
+      include_subaccounts: true,
+      include_aggregates: true
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+  *getAccountUsage* method accepts data object with next properties:
+  | Property    | Type |Description                                                                                                                                   |
+  |:--------------|:-----|:-----------------------------------------------------------------------------------------------------------------------------------|
+  | start      | String that contains date in RFC 2822 format: https://datatracker.ietf.org/doc/html/rfc2822.html#page-14 or JS Date object | A start date (default: 7 days before current time)|
+  | end        | String that contains date in RFC 2822 format: https://datatracker.ietf.org/doc/html/rfc2822.html#page-14 or JS Date object | An end date (default: current time)|
+  | resolution | String | A resolution in the format of 'day' 'hour' 'month'. Default is day.|
+  | duration   | String | A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.|
+  | dimensions | Array of strings | Attributes of the metric data such as 'subaccount'.|
+  | metrics    | Array of strings | Name of the metrics to receive the stats for such as 'processed_count'.|
+  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics/operation/api.(*MetricsAPI).PostMetricQuery-fm-3!path=filter&t=request) for an object shape. |
+  | include_subaccounts | Boolean | Include stats from all subaccounts. |
+  | include_aggregates  | Boolean | Include top-level aggregate metrics.|
+
+  Promise returns: MetricsResult
+
+  ```JS
+  {
+    start: new Date('2024-12-16T01:00:00.000Z'),
+    end: new Date('2024-12-23T00:00:00.000Z'),
+    resolution: 'hour',
+    dimensions: [ 'time' ],
+    pagination: { sort: '', skip: 0, limit: 1500, total: 1 },
+    items: [
+      {
+        dimensions: [{
+          {
+            dimension: 'time',
+            value: 'Sat, 21 Dec 2024 17:00:00 +0000',
+            display_value: 'Sat, 21 Dec 2024 17:00:00 +0000'
+          }
+        }],
+        metrics: { opened_count: 1 }
+      },
+      ...
+    ],
+    aggregates: { metrics: { opened_count: 1 } },
+    status: 200
   }
   ```
 
@@ -3165,7 +3308,6 @@ A client to manage members within a specific mailing list.
       results: 'link to result page',
     }
   }
-  ```
 
 ## Navigation thru lists
   Most of the methods that return items in a list support pagination.

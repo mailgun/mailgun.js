@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:13](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L13)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:13](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L13)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L14)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L14)
 
 ## Methods
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L17)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L17)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:19](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L19)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:19](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L19)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L16)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L16)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:15](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L15)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:15](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L15)
 
 ___
 
@@ -138,4 +138,4 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/c7a5a6d/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L18)
+[Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Interfaces/InboxPlacements/SeedsLists/SeedsListsClient.ts#L18)

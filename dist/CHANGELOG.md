@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.4.0](https://github.com/mailgun/mailgun.js/compare/v10.3.0...v10.4.0) (2024-12-30)
+
+
+### Features
+
+* Add support for metrics ([de16ccd](https://github.com/mailgun/mailgun.js/commits/de16ccd9b8dfdab5ab6e87fb8eba44cef80dd1a5))
+
+
+### Other changes
+
+* Add tests ([78f9990](https://github.com/mailgun/mailgun.js/commits/78f9990fe6e6972f52df1af8ad1e720110890aa7))
+* Update readme ([a724689](https://github.com/mailgun/mailgun.js/commits/a7246892a24f98393453c6a0e53e8bdf4ec64fd8))
+
 ## [10.3.0](https://github.com/mailgun/mailgun.js/compare/v10.2.4...v10.3.0) (2024-12-23)
 
 
