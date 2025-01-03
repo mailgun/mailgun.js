@@ -132,60 +132,72 @@ The following service methods are available to instantiated clients. The example
       - [updateTracking](#updatetracking)
       - [getIps](#getips)
       - [assignIp](#assignip)
-    - [events](#events)
+    - [domain templates](#domain-templates)
+      - [list](#list-1)
       - [get](#get-1)
+      - [create](#create-2)
+      - [update](#update-1)
+      - [destroy](#destroy-1)
+      - [destroyAll](#destroyall)
+      - [listVersions](#listversions)
+      - [getVersion](#getversion)
+      - [createVersion](#createversion)
+      - [updateVersion](#updateversion)
+      - [destroyVersion](#destroyversion)
+    - [events](#events)
+      - [get](#get-2)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
     - [stats](#stats)
       - [Stats Options](#stats-options)
       - [getDomain](#getdomain)
       - [getAccount](#getaccount)
-    - [Metrics](#metrics)
+    - [metrics](#metrics)
       - [getAccount](#getaccount-1)
       - [getAccountUsage](#getaccountusage)
     - [suppressions](#suppressions)
-      - [list](#list-1)
+      - [list](#list-2)
         - [Bounces Example](#bounces-example)
         - [Unsubscribes Example](#unsubscribes-example)
         - [Complaints Example](#complaints-example)
-      - [get](#get-2)
+      - [get](#get-3)
         - [Bounces Example](#bounces-example-1)
         - [Unsubscribes Example](#unsubscribes-example-1)
         - [Complaints Example](#complaints-example-1)
-      - [create](#create-2)
+      - [create](#create-3)
         - [Bounces Example](#bounces-example-2)
         - [Unsubscribes Example](#unsubscribes-example-2)
           - [Unsubscribe from one tag](#unsubscribe-from-one-tag)
           - [Unsubscribe from particular tags](#unsubscribe-from-particular-tags)
         - [Complaints Example](#complaints-example-2)
-      - [destroy](#destroy-1)
+      - [destroy](#destroy-2)
         - [Bounces Example](#bounces-example-3)
         - [Unsubscribes Example](#unsubscribes-example-3)
         - [Complaints Example](#complaints-example-3)
     - [webhooks](#webhooks)
-      - [list](#list-2)
-      - [get](#get-3)
-      - [create](#create-3)
-      - [update](#update-1)
-      - [destroy](#destroy-2)
-    - [routes](#routes)
       - [list](#list-3)
       - [get](#get-4)
       - [create](#create-4)
       - [update](#update-2)
       - [destroy](#destroy-3)
-    - [validate](#validate)
-      - [get](#get-5)
-    - [multiple validation](#multiple-validation)
-      - [create](#create-5)
+    - [routes](#routes)
       - [list](#list-4)
       - [get](#get-5)
-      - [destroy](#destroy-4)
-    - [mailing lists](#mailing-lists)
-      - [list](#list-5)
-      - [get](#get-6)
-      - [create](#create-6)
+      - [create](#create-5)
       - [update](#update-3)
+      - [destroy](#destroy-4)
+    - [validate](#validate)
+      - [get](#get-6)
+    - [multiple validation](#multiple-validation)
+      - [create](#create-6)
+      - [list](#list-5)
+      - [get](#get-7)
       - [destroy](#destroy-5)
+    - [mailing lists](#mailing-lists)
+      - [list](#list-6)
+      - [get](#get-8)
+      - [create](#create-7)
+      - [update](#update-4)
+      - [destroy](#destroy-6)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
       - [getMember](#getmember)
@@ -194,38 +206,38 @@ The following service methods are available to instantiated clients. The example
       - [updateMember](#updatemember)
       - [destroyMember](#destroymember)
     - [subaccounts](#subaccounts)
-      - [list](#list-6)
-      - [get](#get-8)
-      - [create](#create-7)
+      - [list](#list-7)
+      - [get](#get-9)
+      - [create](#create-8)
       - [enable](#enable)
       - [disable](#disable)
-    - [Inbox Placements](#inbox-placements)
+    - [inbox placements](#inbox-placements)
       - [SeedsLists](#seedslists)
-        - [list](#list-7)
-        - [get](#get-9)
-        - [create](#create-8)
-        - [update](#update-4)
-        - [destroy](#destroy-6)
-        - [SeedsLists Attributes](#attributes)
-          - [list](#list-8)
-          - [get](#get-10)
-        - [SeedsLists Filters](#filters)
-          - [list](#list-9)
-      - [Providers](#providers)
-        - [list](#list-10)
-      - [Results](#results)
-        - [list](#list-11)
-        - [get](#get-11)
+        - [list](#list-8)
+        - [get](#get-10)
+        - [create](#create-9)
+        - [update](#update-5)
         - [destroy](#destroy-7)
+        - [SeedsLists Attributes](#attributes)
+          - [list](#list-9)
+          - [get](#get-11)
+        - [SeedsLists Filters](#filters)
+          - [list](#list-10)
+      - [Providers](#providers)
+        - [list](#list-11)
+      - [Results](#results)
+        - [list](#list-12)
+        - [get](#get-12)
+        - [destroy](#destroy-8)
         - [getResultByShareId](#getresultbyshareid)
         - [Results Attributes](#attributes-1)
-          - [list](#list-12)
-          - [get](#get-12)
-        - [Results Filters](#filters-1)
           - [list](#list-13)
-        - [Sharing](#sharing)
           - [get](#get-13)
-          - [update](#update-5)
+        - [Results Filters](#filters-1)
+          - [list](#list-14)
+        - [Sharing](#sharing)
+          - [get](#get-14)
+          - [update](#update-6)
       - [Run Test](#run-test)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
@@ -524,7 +536,7 @@ The following service methods are available to instantiated clients. The example
 
 - #### list
 
-  `mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/en/latest/api-domains.html)
+  `mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/)
 
   Example:
 
@@ -969,6 +981,440 @@ The following service methods are available to instantiated clients. The example
     message: 'success'
   }
   ```
+
+### Domain templates
+
+- #### list
+  Returns a list of templates for the domain.
+
+  `mg.domains.domainTemplates.list('domainId', query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetPage-fm-9)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.list('domainId',{
+    limit: 10
+  })
+    .then(domainTemplates => console.log(domainTemplates)) // logs array of domain templates
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Query data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | limit     | Maximum number of records to return. (100 by default) |
+  | page      | params from previous response's 'paging' object. Value must be stringified as query params. e.g. '?page=first','?page=next&p=name-of-last-item'|
+
+  Promise returns: object with domain's templates
+  ```JS
+  {
+    items: [
+      {
+        name: 'template_name',
+        description: 'template description ',
+        createdAt: new Date('2021-08-24T22:26:55.000Z'),
+        createdBy: '',
+        id: '48d63154-8c8f-4104-ab14-687d01dbf296'
+      },
+      ...
+    ]
+  }
+  ```
+
+- #### get
+
+  Returns metadata information about the stored template specified in the url. If the active flag is provided, the content of the active version of the template is returned.
+
+  `mg.domains.domainTemplates.get('domainId', 'templateName', query)`  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Get-fm-6)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.get('domainId', 'template_name', {
+     active: 'yes'
+  }).then(data => console.log(data)) // logs template
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Query data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | active    | If this flag is set to yes the active version of the template is included in the response. |
+
+  Promise returns: object with domain template and active version
+  ```JS
+  {
+    name: 'template_name',
+    description: 'This is the description of the template',
+    createdAt: new Date('2021-08-24T22:26:55.000Z'),
+    createdBy: '',
+    id: '46565d87-68b6-4edb-8b3c-34554af4bb77'
+    version: {
+      tag: 'tag',
+      template: '<html>template content</html>',
+      engine: 'handlebars',
+      mjml: '',
+      createdAt: new Date('2021-08-22T22:26:55.000Z'),
+      comment: 'Version comment',
+      active: true,
+      id: '3efd2b85-0f41-4a1d-9898-05d7e7459c4a',
+      headers: {
+        From: 'from value'
+      }
+    }
+  }
+  ```
+
+- #### create
+  Store a new template, including its name, description and (optionally) the template content.
+  If the template content is provided, a new version is automatically created and becomes the active version.
+
+  `mg.domains.domainTemplates.create(domainId, templateData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Post-fm-4)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.create('domainId', {
+    name: 'template_name',
+    createdBy: '',
+    tag: 'tag',
+    template: '<html>template content</html>',
+    description: 'template description',
+    comment: 'Version comment',
+    headers: JSON.stringify({
+      From: 'from value'
+    }),
+    engine: 'handlebars'
+  }).then(data => console.log(data)) // logs created template
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Template data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | name (required)    | Name of the template being stored. Supports utf-8 characters and name will be down cased. |
+  | createdBy    | Optional metadata field api user can indicate who created the template. |
+  | tag    | Initial tag of the created version. If the template parameter is provided and the tag is missing, the default value **initial** is used. |
+  | template    | Content of the template. |
+  | description    | Description of the template being stored |
+  | comment    | Version comment. This is valid only if a new version is being created. (template parameter is provided.) |
+  | headers    | Key Value json dictionary of headers to be stored with the template. Where key is the header name and value is the header value. The header names **From**, **Subject**, and **Reply-To** are the only ones currently supported. These headers will be inserted into the mime at the time we attempt delivery.Headers set at the message level will override headers set on the template. e.g. Setting the From header at the time of sending will override the From header saved on the template. Additionally, headers generated by templates are not reflected on the accepted event as they are not prepended to the message until the message is prepped for delivery. if a From header is not provided either in the message or template, we will default to postmaster@your-sending-domain.tld |
+  | engine    | The template engine to be used when rendering the template. Supported value are handlebars and go (golang template). The default if parameter is not provided is handlebars. |
+
+  Promise returns: created domain template and active version
+
+  ```JS
+  {
+    name: 'template_name',
+    description: 'template description',
+    createdAt: new Date('2025-01-03T12:33:10.000Z'),
+    createdBy: '',
+    id: '46565d87-68b6-4edb-8b3c-34554af4bb77',
+    version: {
+      tag: 'tag',
+      template: '<html>template content</html>',
+      engine: 'handlebars',
+      mjml: '',
+      createdAt: new Date('2025-01-03T12:33:10.000Z'),
+      comment: 'Version comment',
+      active: true,
+      id: '3efd2b85-0f41-4a1d-9898-05d7e7459c4a',
+      headers: { From: 'from value' }
+    }
+  }
+  ```
+
+- #### update
+  Update the description of a template.
+
+  `mg.domains.domainTemplates.update('domainId', 'templateName', data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Put-fm-12)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.update('domainId', 'templateName', {
+    description: 'new template description',
+  }).then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | description    | Update description of the template being updated. |
+
+  Promise returns:
+  ```JS
+  {
+    status: 200,
+    message: 'template has been updated',
+    templateName: 'template_name'
+  }
+  ```
+
+- #### destroy
+  Delete the template specified in the url. NOTE: This method deletes all versions of the specified template.
+
+  `mg.domains.domainTemplates.destroy('domainId', 'templateName')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Delete-fm-13)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.destroy('domainId', 'templateName')
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    status: 200,
+    message: 'template has been deleted',
+    templateName: 'template_name'
+  }
+  ```
+
+- #### destroyAll
+  Delete all templates and their versions for the domain.
+
+  `mg.domains.domainTemplates.destroyAll('domainId')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).DeleteAll-fm-15)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.destroyAll('domainId')
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    status: 200,
+    message: "templates have been deleted"
+  }
+  ```
+
+- #### listVersions
+  Returns a paginated list of template versions.
+
+  `mg.domains.domainTemplates.listVersions('domainId', 'template_name', queryData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetVersionsPage-fm-8)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.listVersions('domainId', 'template_name', {
+    limit: 10,
+  })
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Query data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | limit     | Maximum number of records to return. (100 by default) |
+  | page      | params from previous response's 'paging' object. Value must be stringified as query params. e.g. '?page=first','?page=next&p=name-of-last-item'|
+
+  Promise returns:
+  ```JS
+  {
+    template: {
+      name: 'template_name',
+      description: 'template description',
+      createdAt: new Date('2025-01-03T12:33:10.000Z'),
+      createdBy: '',
+      id: '46565d87-68b6-4edb-8b3c-34554af4bb77',
+      versions: [
+        {
+        tag: 'tag',
+        engine: 'handlebars',
+        mjml: '',
+        createdAt:  new Date('2025-01-03T12:33:10.000Z'),
+        comment: 'Version comment',
+        active: true,
+        id: 'b3f09533-a03f-4e10-9aac-a91115297b6c'
+        }
+       ]
+    }
+  }
+  ```
+
+- #### getVersion
+
+  Retrieve the information and content of the specified version of a template.
+
+  `mg.domains.domainTemplates.getVersion('domainId', 'template_name', 'tag')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetVersion-fm-7)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.getVersion('domainId', 'template_name','tag')
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    template: {
+      name: 'template_name',
+      description: 'template description',
+      createdAt: new Date('2025-01-03T12:33:10.000Z'),
+      createdBy: '',
+      id: '46565d87-68b6-4edb-8b3c-34554af4bb77',
+      versions: [
+        {
+          tag: 'tag',
+          template: '<html>template content</html>',
+          engine: 'handlebars',
+          mjml: '',
+          createdAt: new Date('2025-01-03T12:33:10.000Z'),
+          comment: 'Version comment',
+          active: true,
+          id: 'b3f09533-a03f-4e10-9aac-a91115297b6c',
+          headers: {
+            From: 'from value'
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+- #### createVersion
+  Adds a new template version. If the template doesn’t contain any other versions, the first version becomes active. A template can store up to 40 versions.
+
+  `mg.domains.domainTemplates.createVersion('domainId', 'template_name', versionData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).PostVersion-fm-5)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.createVersion('domainId', 'template_name',{
+    {
+      template: `<html>template content</html>`,
+      tag: 'v1',
+      engine: 'handlebars',
+      comment: 'comment',
+      active: 'yes',
+      headers: JSON.stringify({
+        From: 'from value'
+      })
+    }
+  })
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Template version data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | template    | Content of the template. |
+  | tag    | Initial tag of the created version. If the template parameter is provided and the tag is missing, the default value **initial** is used. |
+  | engine    | The template engine to be used when rendering the template. Supported value are handlebars and go (golang template). The default if parameter is not provided is handlebars. |
+  | comment    | Version comment. This is valid only if a new version is being created. (template parameter is provided.) |
+  | active     | If this flag is set to yes, this version becomes active. |
+  | headers    | Key Value json dictionary of headers to be stored with the template. Where key is the header name and value is the header value. The header names **From**, **Subject**, and **Reply-To** are the only ones currently supported. These headers will be inserted into the mime at the time we attempt delivery.Headers set at the message level will override headers set on the template. e.g. Setting the From header at the time of sending will override the From header saved on the template. Additionally, headers generated by templates are not reflected on the accepted event as they are not prepended to the message until the message is prepped for delivery. if a From header is not provided either in the message or template, we will default to postmaster@your-sending-domain.tld |
+
+  Promise returns:
+  ```JS
+  {
+    status: 200,
+    message: 'new version of the template has been stored',
+    template: l {
+      name: 'template_name',
+      description: 'new template description',
+      createdAt: new Date('2025-01-03T12:33:10.000Z'),
+      createdBy: '',
+      id: '46565d87-68b6-4edb-8b3c-34554af4bb77',
+      version: {
+        tag: 'v1',
+        template: '<html>template content</html>',
+        engine: 'handlebars',
+        mjml: '',
+        createdAt: new Date('2025-01-03T13:41:26.000Z'),
+        comment: 'comment',
+        active: true,
+        id: '3efd2b85-0f41-4a1d-9898-05d7e7459c4a',
+        headers: [Object]
+      }
+    }
+  }
+  ```
+
+- #### updateVersion
+  Update information or content of the specific template version.
+  Existing fields not included in the request will not be changed
+
+  `mg.domains.domainTemplates.updateVersion('domainId', 'template_name', 'tag' , versionData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).PutVersion-fm-11)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.updateVersion('domainId', 'template_name', 'v1',{
+    {
+      template: `<html>template content</html>`,
+      engine: 'handlebars',
+      comment: 'comment',
+      active: 'yes',
+      headers: JSON.stringify({
+        From: 'from value'
+      })
+    }
+  })
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Template version data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | template    | Content of the template. |
+  | engine    | The template engine to be used when rendering the template. Supported value are handlebars and go (golang template). The default if parameter is not provided is handlebars. |
+  | comment    | Version comment. This is valid only if a new version is being created. (template parameter is provided.) |
+  | active     | If this flag is set to yes, this version becomes active. |
+  | headers    | Key Value json dictionary of headers to be stored with the template. Where key is the header name and value is the header value. The header names **From**, **Subject**, and **Reply-To** are the only ones currently supported. These headers will be inserted into the mime at the time we attempt delivery.Headers set at the message level will override headers set on the template. e.g. Setting the From header at the time of sending will override the From header saved on the template. Additionally, headers generated by templates are not reflected on the accepted event as they are not prepended to the message until the message is prepped for delivery. if a From header is not provided either in the message or template, we will default to postmaster@your-sending-domain.tld |
+
+  Promise returns:
+  ```JS
+  {
+     status: 200,
+     message: 'version has been updated',
+     templateName: 'template_name',
+     templateVersion: {
+      tag: 'v1'
+     }
+  }
+  ```
+
+- #### destroyVersion
+  Delete a specific template version.
+
+  `mg.domains.domainTemplates.destroyVersion('domainId', 'template_name', 'tag' )` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).DeleteVersion-fm-14)
+
+  Example:
+
+  ```js
+  mg.domains.domainTemplates.destroyVersion('domainId', 'template_name', 'v1')
+    .then(data => console.log(data)) // logs data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns:
+    ```JS
+    {
+      status: 200,
+      message: 'version has been deleted',
+      templateName: 'template_name',
+      templateVersion: { tag: 'v1' }
+    }
+    ```
 
 ### Events
 
