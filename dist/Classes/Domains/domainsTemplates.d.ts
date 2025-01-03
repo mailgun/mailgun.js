@@ -29,9 +29,9 @@ export default class DomainTemplatesClient extends NavigationThruPages<ListDomai
     update(domain: string, templateName: string, data: DomainTemplateUpdateData): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroy(domain: string, templateName: string): Promise<UpdateOrDeleteDomainTemplateResult>;
     destroyAll(domain: string): Promise<NotificationResult>;
-    createVersion(domain: string, templateName: string, data: DomainTemplateVersionData): Promise<CreateDomainTemplateVersionResult>;
+    listVersions(domain: string, templateName: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplateVersionsResult>;
     getVersion(domain: string, templateName: string, tag: string): Promise<IDomainTemplate>;
+    createVersion(domain: string, templateName: string, data: DomainTemplateVersionData): Promise<CreateDomainTemplateVersionResult>;
     updateVersion(domain: string, templateName: string, tag: string, data: DomainTemplateUpdateVersionData): Promise<MutateDomainTemplateVersionResult>;
     destroyVersion(domain: string, templateName: string, tag: string): Promise<MutateDomainTemplateVersionResult>;
-    listVersions(domain: string, templateName: string, query?: DomainTemplatesQuery): Promise<ListDomainTemplateVersionsResult>;
 }
