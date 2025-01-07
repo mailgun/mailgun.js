@@ -36,13 +36,14 @@ export type UpdateDomainTrackingResponse = {
     body: UpdatedOpenTracking;
 };
 export type OpenTrackingInfo = {
-    active: 'yes' | 'no' | 'true' | 'false';
+    place_at_the_top?: 'yes' | 'no' | 'true' | 'false' | boolean;
+    active: 'yes' | 'no' | 'true' | 'false' | boolean;
 };
 export type ClickTrackingInfo = {
-    active: 'yes' | 'no' | 'true' | 'false' | 'htmlonly';
+    active?: 'yes' | 'no' | 'true' | 'false' | 'htmlonly' | boolean;
 };
 export type UnsubscribeTrackingInfo = {
-    active: 'yes' | 'no' | 'true' | 'false';
-    html_footer: string;
-    text_footer: string;
+    active?: 'yes' | 'no' | 'true' | 'false' | boolean;
+    html_footer?: string;
+    text_footer?: string;
 };

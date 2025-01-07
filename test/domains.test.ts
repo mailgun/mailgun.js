@@ -16,7 +16,8 @@ import {
   UpdatedDKIMAuthority,
   UpdatedDKIMSelectorResponse,
   UpdatedWebPrefixResponse,
-  TDomain
+  TDomain,
+  UpdatedDKIMSelectorResult
 } from '../lib/Types/Domains';
 import DomainsClient from '../lib/Classes/Domains/domainsClient';
 
@@ -34,7 +35,9 @@ describe('DomainsClient', function () {
       reqObject,
       domainCredentialsClient,
       domainTemplatesClient,
-      domainTagsClient
+      domainTagsClient,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      { warn: () => {} }
     );
     api = nock('https://api.mailgun.net');
   });
@@ -55,33 +58,30 @@ describe('DomainsClient', function () {
         type: 'custom',
         wildcard: true,
         skip_verification: true,
-        require_tls: true
+        require_tls: true,
+        id: 'test_id',
+        is_disabled: false,
+        use_automatic_sender_security: false,
+        web_prefix: 'web_prefix_value',
+        web_scheme: 'https'
       }];
 
-      api.get('/v3/domains').reply(200, {
+      api.get('/v4/domains').reply(200, {
         items: domains
       });
 
       return client.list().then(function (dm: TDomain[]) {
         dm[0].should.eql({
-          created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
-          name: 'testing.example.com',
+          ...domains[0],
+          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
           receiving_dns_records: null,
-          require_tls: true,
           sending_dns_records: null,
-          skip_verification: true,
-          smtp_login: 'postmaster@testing.example.com',
-          smtp_password: 'password',
-          spam_action: 'disabled',
-          state: 'unverified',
-          type: 'custom',
-          wildcard: true
         });
       });
     });
 
     it('returns empty array if items property is empty', async () => {
-      api.get('/v3/domains').reply(200, {
+      api.get('/v4/domains').reply(200, {
         items: null
       });
       const res :TDomain[] = await client.list();
@@ -91,7 +91,7 @@ describe('DomainsClient', function () {
   });
 
   describe('get', function () {
-    it('gets a specific domain and populates dns records', function () {
+    it('takes a specific domain and populates dns records', function () {
       const domainData = {
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'testing.example.com',
@@ -106,10 +106,11 @@ describe('DomainsClient', function () {
         id: 'test_id',
         is_disabled: false,
         web_prefix: 'email',
-        web_scheme: 'https'
+        web_scheme: 'https',
+        use_automatic_sender_security: false,
       };
 
-      api.get('/v3/domains/testing.example.com').reply(200, {
+      api.get('/v4/domains/testing.example.com').reply(200, {
         domain: domainData,
         receiving_dns_records: [],
         sending_dns_records: []
@@ -117,24 +118,59 @@ describe('DomainsClient', function () {
 
       return client.get('testing.example.com').then(function (domain: TDomain) {
         domain.should.eql({
-          created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
-          name: 'testing.example.com',
+          ...domainData,
+          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
           receiving_dns_records: [],
-          require_tls: true,
           sending_dns_records: [],
-          skip_verification: true,
-          smtp_login: 'postmaster@testing.example.com',
-          smtp_password: 'password',
-          spam_action: 'disabled',
-          state: 'unverified',
-          type: 'custom',
-          wildcard: true,
-          // next properties exist only in get, create and update responses
-          id: 'test_id',
-          is_disabled: false,
-          web_prefix: 'email',
-          web_scheme: 'https'
         });
+      });
+    });
+
+    it('returns additional props if presented', async () => {
+      const domainData = {
+        created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+        name: 'testing.example.com',
+        smtp_login: 'postmaster@testing.example.com',
+        smtp_password: 'password',
+        spam_action: 'disabled',
+        state: 'unverified',
+        type: 'custom',
+        wildcard: true,
+        skip_verification: true,
+        require_tls: true,
+        id: 'test_id',
+        is_disabled: false,
+        web_prefix: 'email',
+        web_scheme: 'https',
+        use_automatic_sender_security: false,
+        dkim_host: 'dkim_host_value', // property depends on request
+        mailfrom_host: 'dkim_host_value' // property depends on request
+      };
+      const params = new URLSearchParams({
+        'h:extended': 'true',
+        'h:with_dns': 'false',
+      });
+      api.get('/v4/domains/testing.example.com').query(params).reply(200, {
+        domain: domainData,
+        receiving_dns_records: null,
+        sending_dns_records: null
+      });
+
+      const domain = await client.get(
+        'testing.example.com',
+        {
+          extended: true,
+          with_dns: false
+        }
+      );
+
+      domain.should.eql({
+        ...domainData,
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: null,
+        sending_dns_records: null,
+        dkim_host: 'dkim_host_value',
+        mailfrom_host: 'dkim_host_value',
       });
     });
   });
@@ -156,10 +192,11 @@ describe('DomainsClient', function () {
         id: 'test_id',
         is_disabled: false,
         web_prefix: 'email',
-        web_scheme: 'https'
+        web_scheme: 'https',
+        use_automatic_sender_security: false,
       };
 
-      api.post('/v3/domains').reply(200, {
+      api.post('/v4/domains').reply(200, {
         domain: domainData,
         receiving_dns_records: [],
         sending_dns_records: []
@@ -171,29 +208,17 @@ describe('DomainsClient', function () {
         web_scheme: 'https'
       }).then(function (domain: TDomain) {
         domain.should.eql({
-          created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
-          name: 'another.example.com',
+          ...domainData,
+          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
           receiving_dns_records: [],
-          require_tls: true,
           sending_dns_records: [],
-          skip_verification: true,
-          smtp_login: 'postmaster@another.example.com',
-          smtp_password: 'password',
-          spam_action: 'disabled',
-          state: 'unverified',
-          type: 'custom',
-          wildcard: true,
-          is_disabled: false,
-          web_prefix: 'email',
-          web_scheme: 'https',
-          id: 'test_id',
         });
       });
     });
 
-    it('converts boolean true for force_dkim_authority and wildcard to string', async () => {
+    it('converts boolean TRUE values to string', async () => {
       let requestObject;
-      api.post('/v3/domains').reply(200, function (_uri, requestBody) {
+      api.post('/v4/domains').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
         return {
           domain: {
@@ -209,14 +234,20 @@ describe('DomainsClient', function () {
         web_scheme: 'https',
         force_dkim_authority: true,
         wildcard: true,
+        encrypt_incoming_message: true,
+        force_root_dkim_host: true,
+        use_automatic_sender_security: true,
       });
       expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------');
       expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
     });
 
-    it('converts boolean false for force_dkim_authority and wildcard to string', async () => {
+    it('converts boolean FALSE values to string', async () => {
       let requestObject;
-      api.post('/v3/domains').reply(200, function (_uri, requestBody) {
+      api.post('/v4/domains').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
         return {
           domain: {
@@ -232,9 +263,15 @@ describe('DomainsClient', function () {
         web_scheme: 'https',
         force_dkim_authority: false,
         wildcard: false,
+        encrypt_incoming_message: false,
+        force_root_dkim_host: false,
+        use_automatic_sender_security: false,
       });
       expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------');
       expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
     });
   });
   describe('update', function () {
@@ -255,9 +292,10 @@ describe('DomainsClient', function () {
         is_disabled: false,
         web_prefix: 'email',
         web_scheme: 'http',
+        use_automatic_sender_security: false,
       };
 
-      api.put('/v3/domains/testing.example.com').reply(200, {
+      api.put('/v4/domains/testing.example.com').reply(200, {
         domain: domainData,
         receiving_dns_records: [],
         sending_dns_records: []
@@ -270,28 +308,16 @@ describe('DomainsClient', function () {
       });
 
       domain.should.eql({
-        created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
-        name: 'another.example.com',
+        ...domainData,
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
         receiving_dns_records: [],
-        require_tls: true,
         sending_dns_records: [],
-        skip_verification: true,
-        smtp_login: 'postmaster@another.example.com',
-        smtp_password: 'password',
-        state: 'unverified',
-        type: 'custom',
-        wildcard: true,
-        spam_action: 'disabled',
-        id: 'test_id',
-        is_disabled: false,
-        web_prefix: 'email',
-        web_scheme: 'http',
       });
     });
 
-    it('converts boolean true for wildcard to string', async () => {
+    it('converts boolean TRUE values to string', async () => {
       let requestObject;
-      api.put('/v3/domains/testing.example.com').reply(200, function (_uri, requestBody) {
+      api.put('/v4/domains/testing.example.com').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
         return {
           domain: {
@@ -304,14 +330,16 @@ describe('DomainsClient', function () {
       await client.update('testing.example.com', {
         wildcard: true,
         web_scheme: 'http',
-        spam_action: 'disabled'
+        spam_action: 'disabled',
+        use_automatic_sender_security: true,
       });
       expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
     });
 
-    it('converts boolean false for wildcard to string', async () => {
+    it('converts boolean FALSE values to string', async () => {
       let requestObject;
-      api.put('/v3/domains/testing.example.com').reply(200, function (_uri, requestBody) {
+      api.put('/v4/domains/testing.example.com').reply(200, function (_uri, requestBody) {
         requestObject = requestBody as formData;
         return {
           domain: {
@@ -324,9 +352,11 @@ describe('DomainsClient', function () {
       await client.update('testing.example.com', {
         wildcard: false,
         web_scheme: 'http',
-        spam_action: 'disabled'
+        spam_action: 'disabled',
+        use_automatic_sender_security: false,
       });
       expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
     });
   });
 
@@ -342,10 +372,15 @@ describe('DomainsClient', function () {
         type: 'custom',
         wildcard: true,
         skip_verification: true,
-        require_tls: true
+        require_tls: true,
+        id: 'test_id',
+        is_disabled: false,
+        use_automatic_sender_security: false,
+        web_prefix: 'web_prefix_value',
+        web_scheme: 'https'
       };
 
-      api.put('/v3/domains/test.example.com/verify').reply(200, {
+      api.put('/v4/domains/test.example.com/verify').reply(200, {
         domain: domainData,
         receiving_dns_records: [
           {
@@ -369,8 +404,8 @@ describe('DomainsClient', function () {
 
       return client.verify('test.example.com').then(function (domain: TDomain) {
         domain.should.eql({
-          created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
-          name: 'test.example.com',
+          ...domainData,
+          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
           receiving_dns_records: [
             {
               cached: ['test-value1', 'test-value2'],
@@ -380,7 +415,6 @@ describe('DomainsClient', function () {
               value: 'test-value'
             }
           ],
-          require_tls: true,
           sending_dns_records: [
             {
               cached: ['test-value'],
@@ -389,14 +423,7 @@ describe('DomainsClient', function () {
               valid: 'valid',
               value: 'test-value'
             }
-          ],
-          skip_verification: true,
-          smtp_login: 'postmaster@test.example.com',
-          smtp_password: 'password',
-          spam_action: 'disabled',
-          state: 'active',
-          type: 'custom',
-          wildcard: true
+          ]
         });
       });
     });
@@ -419,7 +446,7 @@ describe('DomainsClient', function () {
   describe('getConnection', function () {
     it('returns connection settings for the defined domain', function () {
       api.get('/v3/domains/test.example.com/connection').reply(200, {
-        connection: { require_tls: false, skip_verification: false }
+        require_tls: false, skip_verification: false
       });
 
       return client.getConnection('test.example.com').then(function (data: ConnectionSettings) {
@@ -487,18 +514,105 @@ describe('DomainsClient', function () {
       });
     });
 
-    it('checks input parameter', async function () {
-      try {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        await client.updateTracking('domain.com', 'open', { active: true });
-      } catch (error) {
-        expect(error).to.include({
-          status: 400,
-          details: 'Property "active" must contain string value.',
-          message: 'Received boolean value for active property'
+    describe('converts boolean values to string (OPEN)', () => {
+      it('converts boolean TRUE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/open').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              open: {
+                active: true,
+                place_at_the_top: true,
+              }
+            };
+          });
+        await client.updateTracking('domain.com', 'open', { active: true, place_at_the_top: true });
+        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+        expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nyes\r\n----------------------------');
+      });
+
+      it('converts boolean FALSE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/open').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              open: {
+                active: false,
+                place_at_the_top: false,
+              }
+            };
+          });
+        await client.updateTracking('domain.com', 'open', {
+          active: false,
+          place_at_the_top: false,
         });
-      }
+        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+        expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nno\r\n----------------------------');
+      });
+    });
+
+    describe('converts boolean values to string (CLICK)', () => {
+      it('converts boolean TRUE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/click').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              click: { active: true }
+            };
+          });
+        await client.updateTracking('domain.com', 'click', { active: true });
+        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+      });
+
+      it('converts boolean FALSE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/click').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              click: { active: false }
+            };
+          });
+        await client.updateTracking('domain.com', 'click', { active: false });
+        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+      });
+    });
+
+    describe('converts boolean values to string (UNSUBSCRIBE)', () => {
+      it('converts boolean TRUE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              unsubscribe: { active: true }
+            };
+          });
+        await client.updateTracking('domain.com', 'unsubscribe', { active: true });
+        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+      });
+
+      it('converts boolean FALSE values to string', async () => {
+        let requestObject;
+        api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
+          function (_uri, requestBody) {
+            requestObject = requestBody as formData;
+            return {
+              message: 'message_value',
+              unsubscribe: { active: false }
+            };
+          });
+        await client.updateTracking('domain.com', 'unsubscribe', { active: false });
+        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+      });
     });
   });
 
@@ -602,16 +716,15 @@ describe('DomainsClient', function () {
   });
 
   describe('updateDKIMSelector', () => {
-    it('updates the DKIM selector for a domains', () => {
+    it('updates the DKIM selector for a domains', async () => {
       api.put('/v3/domains/test.example.com/dkim_selector?dkim_selector=dkim_selector_value').reply(200, { message: 'Domain DKIM selector updated' });
-
-      return client.updateDKIMSelector('test.example.com', { dkimSelector: 'dkim_selector_value' }).then((response: UpdatedDKIMSelectorResponse) => {
-        response.should.eql(
-          {
-            body: { message: 'Domain DKIM selector updated' }, status: 200
-          }
-        );
-      });
+      const response: UpdatedDKIMSelectorResult = await client.updateDKIMSelector('test.example.com', { dkimSelector: 'dkim_selector_value' });
+      response.should.eql(
+        {
+          message: 'Domain DKIM selector updated',
+          status: 200
+        }
+      );
     });
   });
 

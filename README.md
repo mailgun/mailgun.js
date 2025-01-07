@@ -127,9 +127,14 @@ The following service methods are available to instantiated clients. The example
       - [get](#get)
       - [create](#create-1)
       - [update](#update)
+      - [verify](#verify)
       - [destroy](#destroy)
       - [getTracking](#gettracking)
       - [updateTracking](#updatetracking)
+      - [getConnection](#getconnection)
+      - [updateConnection](#updateconnection)
+      - [updateDKIMAuthority](#updatedkimauthority)
+      - [updateDKIMSelector](#updatedkimselector)
       - [getIps](#getips)
       - [assignIp](#assignip)
     - [domain templates](#domain-templates)
@@ -533,10 +538,11 @@ The following service methods are available to instantiated clients. The example
   ```
 
 ### Domains
+  Domains API manages domains, domain keys and DNS verification.
 
 - #### list
-
-  `mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/)
+  Get the list of domains. Can be filtered by state or authority. Sorting is optional. The list is paginated and limited to 1000 items per page.
+  `mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/GET-v4-domains)
 
   Example:
 
@@ -550,18 +556,23 @@ The following service methods are available to instantiated clients. The example
 
   ```JS
   [{
-    created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
     name: 'testing.example.com',
-    receiving_dns_records: null,
     require_tls: true,
-    sending_dns_records: null,
     skip_verification: true,
-    smtp_login: 'postmaster@testing.example.com',
-    smtp_password: 'password',
-    spam_action: 'disabled',
     state: 'unverified',
-    type: 'custom',
     wildcard: true
+    spam_action: 'disabled',
+    created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
+    smtp_password: undefined,
+    smtp_login: 'postmaster@testing.example.com',
+    type: 'custom',
+    receiving_dns_records: null,
+    sending_dns_records: null,
+    id: '697d01d38712cf0322bb24d1',
+    is_disabled: false,
+    web_prefix: 'test',
+    web_scheme: 'https',
+    use_automatic_sender_security: true
   }]
   ```
 
@@ -571,159 +582,248 @@ The following service methods are available to instantiated clients. The example
   |:----------|:------------------------------------------------------|
   | limit     | Maximum number of records to return. (100 by default) |
   | skip      | Number of records to skip. (0 by default)             |
+  | state     | To only get domains with a specific state. Can be either active, unverified or disabled. |
+  | sort      | Valid sort options are **name** which defaults to asc order, **name:asc**, or **name:desc**. If sorting is not specified domains are returned in reverse creation date order. |
+  | authority | To only get domains with a specific authority. If state is specified then only state filtering will be proceed |
+  | search    | Search domains by the given partial or complete name. Does not support wildcards|
 
 - #### get
+  Fetches representation of a domain that includes details about the domain's state and settings.
 
-  `mg.domains.get(domain)`
+  `mg.domains.get(domain, query)`  - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/GET-v4-domains--name-)
 
   Example:
 
   ```JS
-  mg.domains.get('testing.example.com')
-    .then(domains => console.log(domains)) // logs domain object
+  mg.domains.get('testing.example.com', {
+    extended: true
+  })
+    .then(domain => console.log(domain)) // logs domain object
     .catch(err => console.error(err)); // logs any error
   ```
+
+   Query object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | extended  | Default to false. If set to true, domain payload will include dkim_host, mailfrom_host and pod |
+  | with_dns  | Default to true, domain payload will include sending and receiving dns records payload|
 
   Promise returns: Domain instance
 
   ```JS
   {
-    created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
     name: 'testing.example.com',
-    receiving_dns_records: [{
-        "name": "testing.example.com",
-        "record_type": "TXT",
-        "valid": "unknown",
-        "value": "v=spf1 include:mailgun.org ~all"
-      },
-      {
-        "name": "k1._domainkey.testing.example.com",
-        "record_type": "TXT",
-        "valid": "unknown",
-        "value": "k=rsa; 123456"
-      },
-      {
-        "name": "email.testing.example.com",
-        "record_type": "CNAME",
-        "valid": "unknown",
-        "value": "mailgun.org"
-      }],
     require_tls: true,
-    sending_dns_records: [{
-        "priority": "10",
-        "record_type": "MX",
-        "valid": "unknown",
-        "value": "mxa.mailgun.org"
-      },
-      {
-        "priority": "10",
-        "record_type": "MX",
-        "valid": "unknown",
-        "value": "mxb.mailgun.org"
-      }],
     skip_verification: true,
-    smtp_login: 'postmaster@testing.example.com',
-    smtp_password: 'password',
-    spam_action: 'disabled',
     state: 'unverified',
-    type: 'custom',
     wildcard: true,
-    id: '64a4291ebbe4ec7e1d78bc80',
+    spam_action: 'disabled',
+    created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+    smtp_password: undefined,
+    smtp_login: 'postmaster@testing.example.com',
+    type: 'custom',
+    receiving_dns_records: [ // may be null if with_dns is set to false.
+      {
+        is_active: true,
+        cached: [],
+        priority: '10',
+        record_type: 'TXT',
+        valid: "unknown",
+        value: "dns_record_value"
+      },
+      ...
+      ],
+    sending_dns_records: [ // may be null if with_dns is set to false.
+      {
+        is_active: true,
+        cached: [],
+        name: 'dns_record_name',
+        record_type: 'CNAME',
+        valid: 'unknown',
+        value: 'dns_record_value'
+      },
+      ...
+      ],
+    id: '697d01d38712cf0322bb24d1',
     is_disabled: false,
     web_prefix: 'email',
-    web_scheme: 'http'
+    web_scheme: 'http',
+    use_automatic_sender_security: true,
+    dkim_host: 'dkim_host_value', // absent if 'extended' was not set to true.
+    mailfrom_host: 'mailfrom_host_value', // absent if 'extended' was not set to true.
   }
   ```
 
 - #### create
+  Creates a domain for sending emails
 
-  `mg.domains.create(data)`
+  `mg.domains.create(data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/POST-v4-domains)
 
   Example:
 
   ```js
-  mg.domains.create({name: 'foobar.example.com'})
-    .then(msg => console.log(msg)) // logs response data
+  mg.domains.create({
+    name: 'foobar.example.com',
+    dkim_key_size: 1024,
+    dkim_selector: 's1',
+    encrypt_incoming_message: true,
+    force_dkim_authority: false,
+    force_root_dkim_host: false,
+    wildcard: true,
+    pool_id: 'pool_id',
+    ips: '',
+    spam_action: 'tag',
+    smtp_password: 'smtp_password_value',
+    use_automatic_sender_security: true,
+    web_prefix: 'test',
+    web_scheme: 'https',
+  })
+    .then(data => console.log(data)) // logs response data
     .catch(err => console.error(err)); // logs any error
   ```
 
   Create method accepts data object with next properties:
 
-  | Parameter 	| Description 	|
-  |---	|---	|
-  | name 	| Name of the domain (ex. domain.com) 	|
-  | smtp_password 	| Password for SMTP authentication 	|
-  | spam_action 	| `disabled`, `block`, or `tag`<br>If `disabled`, no spam filtering will occur for inbound messages.<br>If `block`, inbound spam messages will not be delivered.<br>If `tag`, inbound messages will be tagged with a spam header. [Spam Filter](https://documentation.mailgun.com/en/latest/user_manual.html#um-spam-filter)<br>The default is `disabled`. 	|
-  | wildcard 	| Can be string `'true'` or `'false'` or `boolean`<br>Determines whether the domain will accept email for sub-domains when sending messages.<br>The default is `false`. 	|
-  | force_dkim_authority 	| Can be string `'true'` or `'false'` or `boolean`<br>If set to `true`, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account<br>If set to `false`, the domain will have the same DKIM authority as the root domain registered on the same mailgun account<br>The default is `false`. 	|
-  | dkim_key_size 	| **1024** or **2048**<br>Set the length of your domain’s generated DKIM key<br>The default is **1024** 	|
-  | ips 	| An optional, comma-separated list of IP addresses to be assigned to this domain. If not specified, all dedicated IP addresses on the account will be assigned. If the request cannot be fulfilled (e.g. a requested IP is not assigned to the account, etc), a 400 will be returned. 	|
-  | pool_id 	| The id of the IP Pool that you wish to assign to the domain. The pool must contain at least 1 IP. (Note: IP Pools are only available on certain plans; see http://mailgun.com/pricing) 	|
-  | web_scheme 	| String with `http` or `https`<br>Set your **open**, **click** and **unsubscribe** URLs to use `http` or `https`<br>The default is `http` 	|
+  | Parameter   | Description   |
+  |---  |---  |
+  | name (required) | Name of the domain (ex. domain.com) |
+  | dkim_host_name  | Set the DKIM host name for the domain that is being created. Note, the value must be a valid domain name, and can be the domain name being created, a subdomain of the domain being created, or the root domain. This parameter cannot be used in conjunction with `force_dkim_authority` or `force_root_dkim_host`. |
+  | dkim_key_size   | **1024** or **2048**<br>Set the length of your domain’s generated DKIM key<br>The default is **1024**   |
+  | dkim_selector | Explicitly set the value of the DKIM selector for the domain being created. If the domain key does not already exist, one will be created. The selector must be a valid atom per RFC2822. e.g valid value foobar, invalid value foo.bar https://datatracker.ietf.org/doc/html/rfc2822#section-3.2.4|
+  | encrypt_incoming_message  | Enable encrypting incoming messages for the given domain. This cannot be altered via API after being set for security purposes. Reach out to Support to disable if necessary. Default to false|
+  | force_dkim_authority| If set to true, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account. If set to false, the domain will have the same DKIM authority as the root domain registered on the same mailgun account. Default to false. |
+  | force_root_dkim_host | If set to true, the root domain will be the DKIM Host for the domain being created even if the root domain itself is not registered with Mailgun. The domain being created will still need to pass domain verification with valid spf records for the domain and valid DKIM record for the root domain. This does not effect the smtp mail-from host for the domain being created. The mail-from host will remain the domain name being created, not the root domain.|
+  | wildcard  | Determines whether the domain will accept email for sub-domains when sending messages. Default to false. |
+  | pool_id   | Requested IP Pool to be assigned to the domain at creation. |
+  | ips   | An optional, comma-separated list of IP addresses to be assigned to this domain. If not specified, all dedicated IP addresses on the account will be assigned. If the request cannot be fulfilled (e.g. a requested IP is not assigned to the account, etc), a 400 will be returned.  |
+  | spam_action   | `disabled`, `block`, or `tag`<br>If `disabled`, no spam filtering will occur for inbound messages.<br>If `block`, inbound spam messages will not be delivered.<br>If `tag`, inbound messages will be tagged with a spam header. [Spam Filter](https://documentation.mailgun.com/en/latest/user_manual.html#um-spam-filter)<br>The default is `disabled`.  |
+  | smtp_password   | Password for SMTP authentication  |
+  | use_automatic_sender_security | Enable Automatic Sender Security. This requires setting DNS CNAME entries for DKIM keys instead of a TXT record. Defaults to false. |
+  | web_prefix | Sets your open, click and unsubscribe URLs domain name prefix. Links rewritten or added by Mailgun in your emails will look like ://./... Default to email |
+  | web_scheme  |Sets your open, click and unsubscribe URLs to use http or https. Value either `http` or `https`. Defaults to http. In order for https to work, you must have a valid cert created for your domain. See Domain Tracking for TLS cert generation. |
 
   Promise returns:
 
   ```JS
-  name: 'foobar.example.com',
-  require_tls: false,
-  skip_verification: false,
-  state: 'unverified',
-  wildcard: false,
-  spam_action: 'disabled',
-  created_at: 'Tue, 04 Jul 2023 14:09:18 GMT',
-  smtp_password: undefined,
-  smtp_login: 'postmaster@foobar.example.com',
-  type: 'custom',
-  receiving_dns_records: [{
-      "name": "foobar.example.com",
-      "record_type": "TXT",
-      "valid": "unknown",
-      "value": "v=spf1 include:mailgun.org ~all"
-    },
-    {
-      "name": "k1._domainkey.foobar.example.com",
-      "record_type": "TXT",
-      "valid": "unknown",
-      "value": "k=rsa; 123456"
-    },
-    {
-      "name": "email.foobar.example.com",
-      "record_type": "CNAME",
-      "valid": "unknown",
-      "value": "mailgun.org"
-    }
-  ],
-  sending_dns_records: [{
-      "priority": "10",
-      "record_type": "MX",
-      "valid": "unknown",
-      "value": "mxa.mailgun.org"
-    },
-    {
-      "priority": "10",
-      "record_type": "MX",
-      "valid": "unknown",
-      "value": "mxb.mailgun.org"
-  }],
-  id: '64a4291ebbe4ec7e1d78bc80',
-  is_disabled: false,
-  web_prefix: 'email',
-  web_scheme: 'http'
+  {
+    name: 'foobar.example.com',
+    require_tls: false,
+    skip_verification: false,
+    state: 'unverified',
+    wildcard: true,
+    spam_action: 'tag',
+    created_at: 2025-01-08T12:52:29.000Z,
+    smtp_password: undefined,
+    smtp_login: new Date('postmaster@foobar.example.com'),
+    type: 'custom',
+    receiving_dns_records: [
+      {
+        is_active: true,
+        cached: [],
+        priority: '10',
+        record_type: 'MX',
+        valid: 'unknown',
+        value: 'dns_record_value'
+      },
+      ...
+    ],
+    sending_dns_records: [
+      {
+        is_active: false,
+        cached: [],
+        name: 'sending_dns_record_name',
+        record_type: 'CNAME',
+        valid: 'unknown',
+        value: 'sending_dns_record_value'
+      },
+      ...
+    ],
+    id: '64a4291ebbe4ec7e1d78bc80',
+    is_disabled: false,
+    web_prefix: 'test',
+    web_scheme: 'https',
+    use_automatic_sender_security: true
+  }
   ```
 
-- #### update
+- #### verify
+  Verify the domains DNS records (includes A, CNAME, SPF, DKIM and MX records) to ensure the domain is ready and able to send
 
-  `mg.domains.update(domain, options)`
+  `mg.domains.verify(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/PUT-v4-domains--name--verify)
+
+  Example:
+
+  ```JS
+  mg.domains.destroy('foobar.example.com')
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    name: 'foobar.example.com',
+    require_tls: false,
+    skip_verification: false,
+    state: 'active',
+    wildcard: false,
+    spam_action: 'tag',
+    created_at: new Date('2017-10-05T14:55:20.000Z'),
+    smtp_password: undefined,
+    smtp_login: 'postmaster@foobar.example.com',
+    type: 'custom',
+    receiving_dns_records: [
+      {
+        is_active: true,
+        cached: [Array],
+        priority: '10',
+        record_type: 'MX',
+        valid: 'valid',
+        value: 'receiving_dns_record_value'
+      },
+      ...
+    ],
+    sending_dns_records: [
+      {
+        is_active: true,
+        cached: [],
+        name: 'foobar.example.com',
+        record_type: 'CNAME',
+        valid: 'unknown',
+        value: 'sending_dns_record_value'
+      },
+      ...
+    ],
+    id: '64a5880eere4eg7e1d85bc69',
+    is_disabled: false,
+    web_prefix: 'email',
+    web_scheme: 'https',
+    use_automatic_sender_security: true
+  }
+  ```
+
+
+- #### update
+  Update domains configuration like smtp credentials, enable/disable automatic sender security, spam actions, wildcard, or tracking web scheme.
+
+  `mg.domains.update(domain, options)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/PUT-v4-domains--name-)
 
   Example:
 
   ```js
   mg.domains.update('foobar.example.com',{
-      wildcard: 'true',
+      mailfrom_host: 'mailfrom_host_value',
+      message_ttl: 20,
+      smtp_password: 'smtp_password_value'
+      spam_action: 'tag',
+      use_automatic_sender_security: true
       web_scheme: 'http',
-      spam_action: 'disabled',
+      web_prefix: 'web_prefix_value'
+      wildcard: 'true',
     })
-    .then(msg => console.log(msg)) // logs response data
+    .then(data => console.log(data)) // logs response data
     .catch(err => console.error(err)); // logs any error
   ```
 
@@ -731,8 +831,13 @@ The following service methods are available to instantiated clients. The example
 
   | Property    | Description                                                                                                                                   |
   |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+  | mailfrom_host | The hostname to update to. Must be in lower case |
+  | message_ttl   | Duration of the message retrieval TTL in seconds |
+  | smtp_password | Updates the domain's SMTP credentials with the given string |
   | spam_action   | Can be string with value `disabled`, `block`, or `tag`. If *disabled*, no spam filtering will occur for inbound messages. If `block`, inbound spam messages will not be delivered. If `tag`, inbound messages will be tagged with a spam header. See [Spam Filter](https://documentation.mailgun.com/en/latest/user_manual.html#um-spam-filter).|
+  | use_automatic_sender_security | enable or disable Automatic Sender Security. If enabled, requires setting DNS CNAME entries for DKIM keys instead of a TXT record. Domain must be reverified after changing this field. Defaults to `false`|
   | web_scheme | Can be string with value `http` or `https`. Set your **open**, **click** and **unsubscribe** URLs to use `http` or `https`. The default is `http`|
+  | web_prefix | Web prefix to be used for tracking. Must be a valid atom. Nothing will be updated if omitted |
   | wildcard   | Can be string `'true'` or `'false'` or `boolean`. Determines whether the domain will accept email for sub-domains. The default is `false`.|
 
   Promise returns:
@@ -745,7 +850,7 @@ The following service methods are available to instantiated clients. The example
     state: 'unverified',
     wildcard: true,
     spam_action: 'disabled',
-    created_at: 'Tue, 04 Jul 2023 14:09:18 GMT',
+    created_at: new Date('2025-01-08T12:52:29.000Z'),
     smtp_password: undefined,
     smtp_login: 'postmaster@foobar.example.com',
     type: 'custom',
@@ -756,16 +861,9 @@ The following service methods are available to instantiated clients. The example
         priority: '10',
         record_type: 'MX',
         valid: 'unknown',
-        value: 'mxa.mailgun.org'
+        value: 'receiving_dns_record_value'
       },
-      {
-        is_active: true,
-        cached: [],
-        priority: '10',
-        record_type: 'MX',
-        valid: 'unknown',
-        value: 'mxb.mailgun.org'
-      }
+      ...
     ],
     sending_dns_records: [
       {
@@ -774,47 +872,45 @@ The following service methods are available to instantiated clients. The example
         name: 'foobar.example.com',
         record_type: 'TXT',
         valid: 'unknown',
-        value: 'v=spf1 include:mailgun.org ~all'
+        value: 'sending_dns_record_value'
       },
-      {
-        is_active: true,
-        cached: [],
-        name: 'email.foobar.example.com',
-        record_type: 'CNAME',
-        valid: 'unknown',
-        value: 'mailgun.org'
-      }
+      ...
     ],
     id: '64a5880eere4eg7e1d85bc69',
     is_disabled: false,
-    web_prefix: 'email',
-    web_scheme: 'http'
+    web_prefix: 'test',
+    web_scheme: 'https',
+    use_automatic_sender_security: true
   }
   ```
 
-- #### destroy
 
-  `mg.domains.destroy(domainAddress)`
+
+- #### destroy
+  The domain must not be disabled or used as an authority for an other domain. Sandbox domain can't be deleted.
+  `mg.domains.destroy(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/DELETE-v3-domains--name-)
 
   Example:
 
   ```JS
   mg.domains.destroy('foobar.example.com')
-    .then(msg => console.log(msg)) // logs response data
+    .then(data => console.log(data)) // logs response data
     .catch(err => console.error(err)); // logs any error
   ```
 
-  Promise returns:
+  Promise returns message:
 
   ```JS
   {
-    message: "Domain has been deleted"
+    message: "Domain will be deleted in the background"
   }
   ```
 
-- #### getTracking
 
-  `mg.domains.getTracking(domainAddress)`
+- #### getTracking
+  Mailgun offers tracking for clicks, unsubscribes, and opens, with optional HTTPS protocol support on tracking URLs. To enable HTTPS, Mailgun uses Let’s Encrypt with HTTP-01 challenges through your existing tracking CNAME record to issue a TLS certificate. This setup also includes support for HTTP Strict Transport Security (HSTS) for enhanced security.
+
+  `mg.domains.getTracking(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking)
 
   Example:
 
@@ -843,13 +939,18 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### updateTracking
+  A common method to turn on/off the click, open, and unsubscribe tracking at the domain level.
 
   `mg.domains.updateTracking(domain, trackingType, data)`
 
   - Open Tracking Example:
 
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-open)
     ```js
-    mg.domains.updateTracking('foobar.example.com', 'open', {active: true})
+    mg.domains.updateTracking('foobar.example.com', 'open', {
+      active: true,
+      place_at_the_top: true,
+    })
       .then(msg => console.log(msg)) // logs response data
       .catch(err => console.error(err)); // logs any error
     ```
@@ -859,6 +960,7 @@ The following service methods are available to instantiated clients. The example
     | Property | Description                                |
     |:----------|:-------------------------------------------|
     | active    | Boolean, enables or disables open tracking |
+    | place_at_the_top| Setting this param to true will place the open tracking pixel at the top of the HTML body when inserted into the email mime. Omit this param to keep current setting. |
 
     Promise returns:
 
@@ -866,13 +968,15 @@ The following service methods are available to instantiated clients. The example
     {
       message: 'Tracking settings have been updated',
       open: {
-        active: true
+        active: true,
+        place_at_the_top: true,
       }
     }
     ```
 
   - Click Tracking Example:
 
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-click)
     ```JS
     mg.domains.updateTracking('foobar.example.com', 'click', {active: true})
       .then(msg => console.log(msg)) // logs response data
@@ -896,8 +1000,9 @@ The following service methods are available to instantiated clients. The example
     }
     ```
 
-  - Unsubscribe Tracking Example:
+  - Unsubscribe Tracking Example
 
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-unsubscribe)
     ```js
     mg.domains.updateTracking('foobar.example.com', 'unsubscribe', {
         active: true,
@@ -921,15 +1026,136 @@ The following service methods are available to instantiated clients. The example
     ```JS
     {
       message: 'Tracking settings have been updated',
-      "unsubscribe": {
-        "active": true,
-        "html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-        "text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+      unsubscribe: {
+        active: true,
+        html_footer: '\n<br>\n<p><a href=\'%unsubscribe_url%\">unsubscribe</a></p>\n',
+        text_footer: '\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n'
       }
     }
     ```
 
+- #### getConnection
+  Returns domain's delivery connection settings.
+
+  `mg.domains.getConnection(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Connection/#tag/Domain-Connection/operation/GET-v3-domains--name--connection)
+
+  Example:
+
+  ```JS
+  mg.domains.getConnection(domainAddress)
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    require_tls: false,
+    skip_verification: false
+  }
+  ```
+
+- #### updateConnection
+  Update a domain's TLS connection settings.
+
+  `mg.domains.updateConnection(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Connection/#tag/Domain-Connection/operation/PUT-v3-domains--name--connection)
+
+  Example:
+
+  ```JS
+  mg.domains.updateConnection(domainAddress, {
+    require_tls: true;
+    skip_verification: false;
+  })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'Domain connection settings have been updated, may take 10 minutes to fully propagate',
+    require_tls: false,
+    skip_verification: false
+  }
+  ```
+
+- #### updateDKIMAuthority
+  You can delegate the domain authority to an other domain. Domain's authority is set to itself by default.
+
+  `mg.domains.updateDKIMAuthority(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Keys/#tag/Domain-Keys/operation/PUT-v3-domains--name--dkim-authority)
+
+  Example:
+
+  ```JS
+  mg.domains.updateDKIMAuthority(domainAddress, {
+    self: true
+  })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Data object accepts next properties:
+
+  | Property    | Description                                                                                                                                   |
+  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+  | self | Change the DKIM authority for a domain. If set to true, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account If set to false, the domain will have the same DKIM authority as the root domain registered on the same mailgun account |
+
+  Promise returns:
+
+  ```JS
+  {
+  message: 'Domain DKIM authority has been changed',
+  sending_dns_records: [
+    {
+      is_active: true,
+      cached: [],
+      name: 'sending_dns_record_name',
+      record_type: 'TXT',
+      valid: 'unknown',
+      value: 'sending_dns_record_value'
+    },
+    ...
+  ],
+  changed: true
+  }
+  ```
+
+- #### updateDKIMSelector
+  Selector is the unique identifier of your key. It has to be different from other keys selector.
+
+  `mg.domains.updateDKIMSelector(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Keys/#tag/Domain-Keys/operation/PUT-v3-domains--name--dkim-selector)
+
+  Example:
+
+  ```JS
+  mg.domains.updateDKIMSelector(domainAddress, {
+    dkimSelector: 'dkimSelector_value'
+  })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Data object accepts next properties:
+
+  | Property    | Description                                                                                                                                   |
+  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+  | dkimSelector | Selector is the unique identifier of your key. It has to be different from other keys selector. |
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'DKIM selector changed',
+    status: 200
+  }
+  ```
+
 - #### getIps
+    **Deprecated, and will be removed in the future releases**
+
     `mg.domains.getIps(domain)`
 
     Example:
@@ -947,6 +1173,7 @@ The following service methods are available to instantiated clients. The example
     ```
 
 - #### assignIp
+   **Deprecated, and will be removed in the future releases**
   `mg.domains.assignIp(domain, ip)`
 
   Example:
@@ -966,6 +1193,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### deleteIp
+  **Deprecated, and will be removed in the future releases**
   `mg.domains.deleteIp(domain, ip)`
 
   Example:
