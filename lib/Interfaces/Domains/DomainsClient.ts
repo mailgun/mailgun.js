@@ -4,6 +4,7 @@ import {
   ConnectionSettings,
   DKIMAuthorityInfo,
   DKIMSelectorInfo,
+  DomainGetQuery,
   DomainInfo,
   DomainsQuery,
   DomainTrackingData,
@@ -15,7 +16,7 @@ import {
   UnsubscribeTrackingInfo,
   UpdatedConnectionSettings,
   UpdatedDKIMAuthority,
-  UpdatedDKIMSelectorResponse,
+  UpdatedDKIMSelectorResult,
   UpdatedOpenTracking,
   UpdatedWebPrefixResponse,
   WebPrefixInfo
@@ -29,7 +30,7 @@ export interface IDomainsClient {
     domainTemplates: IDomainTemplatesClient
     domainTags: IDomainTagsClient
     list(query?: DomainsQuery): Promise<TDomain[]>
-    get(domain: string): Promise<TDomain>
+    get(domain: string, query?: DomainGetQuery): Promise<TDomain>
     create(data: DomainInfo): Promise<TDomain>
     update(domain: string, data: DomainUpdateInfo): Promise<TDomain>
     verify(domain: string): Promise<TDomain>
@@ -49,6 +50,6 @@ export interface IDomainsClient {
     linkIpPool(domain: string, pool_id: string): Promise<APIResponse>
     unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse>
     updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority>
-    updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResponse>
+    updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResult>
     updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse>
 }

@@ -44,25 +44,31 @@ import {
   DomainUpdateInfoReq,
   DomainInfoReq,
   BoolToString,
+  DomainGetQuery,
+  UpdatedDKIMSelectorResult,
 } from '../../Types/Domains';
 import Domain from './domain';
+import { ILogger } from '../../Interfaces';
 
 export default class DomainsClient implements IDomainsClient {
   request: Request;
   public domainCredentials: IDomainCredentials;
   public domainTemplates: IDomainTemplatesClient;
   public domainTags: IDomainTagsClient;
+  private logger: ILogger;
 
   constructor(
     request: Request,
     domainCredentialsClient: DomainCredentialsClient,
     domainTemplatesClient: DomainTemplatesClient,
-    domainTagsClient: DomainTagsClient
+    domainTagsClient: DomainTagsClient,
+    logger: ILogger = console
   ) {
     this.request = request;
     this.domainCredentials = domainCredentialsClient;
     this.domainTemplates = domainTemplatesClient;
     this.domainTags = domainTagsClient;
+    this.logger = logger;
   }
 
   private _handleBoolValues(
@@ -109,30 +115,38 @@ export default class DomainsClient implements IDomainsClient {
     return response.body;
   }
 
+  private _isOpenTrackingInfoWitPlace(obj: unknown): obj is OpenTrackingInfo {
+    return typeof obj === 'object' && 'place_at_the_top' in (obj as OpenTrackingInfo);
+  }
+
   list(query?: DomainsQuery): Promise<TDomain[]> {
-    return this.request.get('/v3/domains', query)
+    return this.request.get('/v4/domains', query)
       .then((res : APIResponse) => this.parseDomainList(res as DomainListResponseData));
   }
 
-  get(domain: string) : Promise<TDomain> {
-    return this.request.get(`/v3/domains/${domain}`)
+  get(domain: string, query?: DomainGetQuery) : Promise<TDomain> {
+    const preparedQuery = query ? {
+      'h:extended': query?.extended ?? false,
+      'h:with_dns': query?.with_dns ?? true,
+    } : {};
+    return this.request.get(`/v4/domains/${domain}`, preparedQuery)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
   create(data: DomainInfo) : Promise<TDomain> {
     const postObj = this._handleBoolValues(data);
-    return this.request.postWithFD('/v3/domains', postObj)
+    return this.request.postWithFD('/v4/domains', postObj)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
   update(domain: string, data: DomainUpdateInfo) : Promise<TDomain> {
     const putData = this._handleBoolValues(data);
-    return this.request.putWithFD(`/v3/domains/${domain}`, putData)
+    return this.request.putWithFD(`/v4/domains/${domain}`, putData)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
   verify(domain: string): Promise<TDomain> {
-    return this.request.put(`/v3/domains/${domain}/verify`)
+    return this.request.put(`/v4/domains/${domain}/verify`)
       .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
@@ -144,7 +158,7 @@ export default class DomainsClient implements IDomainsClient {
   getConnection(domain: string): Promise<ConnectionSettings> {
     return this.request.get(`/v3/domains/${domain}/connection`)
       .then((res : APIResponse) => res as ConnectionSettingsResponse)
-      .then((res:ConnectionSettingsResponse) => res.body.connection as ConnectionSettings);
+      .then((res:ConnectionSettingsResponse) => res.body as ConnectionSettings);
   }
 
   updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings> {
@@ -165,33 +179,63 @@ export default class DomainsClient implements IDomainsClient {
     type: string,
     data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo
   ): Promise<UpdatedOpenTracking> {
+    const preparedData: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo = {
+      ...data
+    };
     if (typeof data?.active === 'boolean') {
-      throw APIError.getUserDataError('Received boolean value for active property', 'Property "active" must contain string value.');
+      preparedData.active = (data?.active) ? 'yes' : 'no';
     }
-    return this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), data)
+
+    if (this._isOpenTrackingInfoWitPlace(data)) {
+      if (typeof data?.place_at_the_top === 'boolean') {
+        (preparedData as OpenTrackingInfo).place_at_the_top = (data?.place_at_the_top) ? 'yes' : 'no';
+      }
+    }
+    return this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), preparedData)
       .then((res : APIResponse) => this._parseTrackingUpdate(res as UpdateDomainTrackingResponse));
   }
 
   // IPs
-
+  /**
+  * @deprecated "domains.getIps" method is deprecated, and will be removed in the future releases.
+  */
   getIps(domain: string): Promise<string[]> {
+    this.logger.warn('"domains.getIps" method is deprecated and will be removed in the future releases.');
     return this.request.get(urljoin('/v3/domains', domain, 'ips'))
       .then((response: APIResponse) => response?.body?.items);
   }
 
+  /**
+  * @deprecated "domains.assignIp" method is deprecated, and will be removed in the future releases.
+  */
   assignIp(domain: string, ip: string): Promise<APIResponse> {
+    this.logger.warn('"domains.assignIp" method is deprecated and will be removed in the future releases.');
     return this.request.postWithFD(urljoin('/v3/domains', domain, 'ips'), { ip });
   }
 
+  /**
+  * @deprecated "domains.deleteIp" method is deprecated, and will be moved to the IpsClient.
+  */
   deleteIp(domain: string, ip: string): Promise<APIResponse> {
+    this.logger.warn('"domains.deleteIp" method is deprecated and will be moved into the IpsClient in the future releases.');
     return this.request.delete(urljoin('/v3/domains', domain, 'ips', ip));
   }
 
+  /**
+  * @deprecated "domains.linkIpPool" method is deprecated, and will be removed
+  * in the future releases.
+  */
   linkIpPool(domain: string, poolId: string): Promise<APIResponse> {
+    this.logger.warn('"domains.linkIpPool" method is deprecated, and will be removed in the future releases.');
     return this.request.postWithFD(urljoin('/v3/domains', domain, 'ips'), { pool_id: poolId });
   }
 
+  /**
+  * @deprecated "domains.unlinkIpPoll" method is deprecated, and will be moved into the IpsClient
+  * in the future releases.
+  */
   unlinkIpPoll(domain: string, replacement: ReplacementForPool): Promise<APIResponse> {
+    this.logger.warn('"domains.unlinkIpPoll" method is deprecated, and will be moved into the IpsClient in the future releases.');
     let searchParams = '';
     if (replacement.pool_id && replacement.ip) {
       throw APIError.getUserDataError('Too much data for replacement', 'Please specify either pool_id or ip (not both)');
@@ -209,12 +253,25 @@ export default class DomainsClient implements IDomainsClient {
       .then((res : UpdatedDKIMAuthorityResponse) => res.body as UpdatedDKIMAuthority);
   }
 
-  updateDKIMSelector(domain: string, data: DKIMSelectorInfo): Promise<UpdatedDKIMSelectorResponse> {
-    return this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, { query: `dkim_selector=${data.dkimSelector}` })
-      .then((res : APIResponse) => res as UpdatedDKIMSelectorResponse);
+  async updateDKIMSelector(
+    domain: string,
+    data: DKIMSelectorInfo
+  ): Promise<UpdatedDKIMSelectorResult> {
+    const res: UpdatedDKIMSelectorResponse = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, { query: `dkim_selector=${data.dkimSelector}` });
+
+    return {
+      status: res.status,
+      message: res?.body?.message
+    };
   }
 
+  /**
+  * @deprecated "domains.updateWebPrefix" method is deprecated.
+  * Please use domains.update to set new "web_prefix".
+  * Current method will be removed in the future releases.
+  */
   updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse> {
+    this.logger.warn('"domains.updateWebPrefix" method is deprecated, please use domains.update to set new "web_prefix". Current method will be removed in the future releases.');
     return this.request.put(`/v3/domains/${domain}/web_prefix`, {}, { query: `web_prefix=${data.webPrefix}` })
       .then((res : APIResponse) => res as UpdatedWebPrefixResponse);
   }

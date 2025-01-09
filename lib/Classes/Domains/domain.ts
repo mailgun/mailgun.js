@@ -1,7 +1,7 @@
 import {
   DNSRecord,
   DomainData,
-  DomainShortData,
+  DomainDynamicPropsType,
   TDomain
 } from '../../Types/Domains';
 
@@ -13,19 +13,22 @@ export default class Domain implements TDomain {
   state: string;
   wildcard: boolean;
   spam_action: string;
-  created_at: string;
+  created_at: Date;
   smtp_password: string;
   smtp_login: string;
   type: string;
   receiving_dns_records: DNSRecord[] | null;
   sending_dns_records: DNSRecord[] | null;
-  id?: string;
-  is_disabled?: boolean;
-  web_prefix?: string;
-  web_scheme?: string;
+  id: string;
+  is_disabled: boolean;
+  web_prefix: string;
+  web_scheme: string;
+  use_automatic_sender_security: boolean;
+  dkim_host?: string;
+  mailfrom_host?: string;
 
   constructor(
-    data: DomainShortData | DomainData,
+    data: DomainData,
     receiving?: DNSRecord[] | null,
     sending?: DNSRecord[] | null
   ) {
@@ -35,25 +38,30 @@ export default class Domain implements TDomain {
     this.state = data.state;
     this.wildcard = data.wildcard;
     this.spam_action = data.spam_action;
-    this.created_at = data.created_at;
+    this.created_at = new Date(data.created_at);
     this.smtp_password = data.smtp_password;
     this.smtp_login = data.smtp_login;
     this.type = data.type;
     this.receiving_dns_records = receiving || null;
     this.sending_dns_records = sending || null;
-    /*
-      domain list has shorter response then get, create, and update methods.
-    */
+    this.id = data.id;
+    this.is_disabled = data.is_disabled;
+    this.web_prefix = data.web_prefix;
+    this.web_scheme = data.web_scheme;
+    this.use_automatic_sender_security = data.use_automatic_sender_security;
 
-    const dynamicKeys: (keyof DomainData)[] = ['id', 'is_disabled', 'web_prefix', 'web_scheme'];
+    /*
+      domain get and update methods may have richer response than create method.
+    */
+    const dynamicKeys: (keyof DomainDynamicPropsType)[] = ['dkim_host', 'mailfrom_host'];
 
     const dynamicProperties = dynamicKeys.reduce((acc, propertyName) => {
-      if (propertyName in data) {
-        const prop = propertyName as keyof Domain;
-        acc[prop] = (data as DomainData)[propertyName];
+      if (data[propertyName]) {
+        const prop = propertyName as keyof DomainDynamicPropsType;
+        acc[prop] = data[propertyName];
       }
       return acc;
-    }, {} as Record<keyof Domain, string | boolean>);
+    }, {} as DomainDynamicPropsType);
     Object.assign(this, dynamicProperties);
   }
 }
