@@ -11,6 +11,7 @@
 - [domainCredentials](Interfaces.IDomainsClient.md#domaincredentials)
 - [domainTags](Interfaces.IDomainsClient.md#domaintags)
 - [domainTemplates](Interfaces.IDomainsClient.md#domaintemplates)
+- [domainTracking](Interfaces.IDomainsClient.md#domaintracking)
 
 ### Methods
 
@@ -41,7 +42,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:29](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L29)
+[Interfaces/Domains/DomainsClient.ts:31](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L31)
 
 ___
 
@@ -51,7 +52,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:31](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L31)
+[Interfaces/Domains/DomainsClient.ts:33](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L33)
 
 ___
 
@@ -61,7 +62,17 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:30](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L30)
+[Interfaces/Domains/DomainsClient.ts:32](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L32)
+
+___
+
+### domainTracking
+
+• **domainTracking**: [`IDomainTrackingClient`](Interfaces.IDomainTrackingClient.md)
+
+#### Defined in
+
+[Interfaces/Domains/DomainsClient.ts:34](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L34)
 
 ## Methods
 
@@ -82,7 +93,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:47](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L47)
+[Interfaces/Domains/DomainsClient.ts:50](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L50)
 
 ___
 
@@ -102,7 +113,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:34](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L34)
+[Interfaces/Domains/DomainsClient.ts:37](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L37)
 
 ___
 
@@ -123,7 +134,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:48](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L48)
+[Interfaces/Domains/DomainsClient.ts:51](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L51)
 
 ___
 
@@ -143,7 +154,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:37](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L37)
+[Interfaces/Domains/DomainsClient.ts:40](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L40)
 
 ___
 
@@ -164,7 +175,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:33](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L33)
+[Interfaces/Domains/DomainsClient.ts:36](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L36)
 
 ___
 
@@ -184,7 +195,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:38](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L38)
+[Interfaces/Domains/DomainsClient.ts:41](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L41)
 
 ___
 
@@ -204,7 +215,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:46](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L46)
+[Interfaces/Domains/DomainsClient.ts:49](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L49)
 
 ___
 
@@ -224,7 +235,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:40](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L40)
+[Interfaces/Domains/DomainsClient.ts:43](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L43)
 
 ___
 
@@ -245,7 +256,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:50](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L50)
+[Interfaces/Domains/DomainsClient.ts:53](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L53)
 
 ___
 
@@ -265,7 +276,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:32](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L32)
+[Interfaces/Domains/DomainsClient.ts:35](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L35)
 
 ___
 
@@ -286,7 +297,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:51](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L51)
+[Interfaces/Domains/DomainsClient.ts:54](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L54)
 
 ___
 
@@ -307,7 +318,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:35](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L35)
+[Interfaces/Domains/DomainsClient.ts:38](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L38)
 
 ___
 
@@ -328,7 +339,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:39](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L39)
+[Interfaces/Domains/DomainsClient.ts:42](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L42)
 
 ___
 
@@ -349,7 +360,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:52](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L52)
+[Interfaces/Domains/DomainsClient.ts:55](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L55)
 
 ___
 
@@ -370,7 +381,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:53](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L53)
+[Interfaces/Domains/DomainsClient.ts:56](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L56)
 
 ___
 
@@ -392,7 +403,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:41](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L41)
+[Interfaces/Domains/DomainsClient.ts:44](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L44)
 
 ___
 
@@ -413,7 +424,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:54](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L54)
+[Interfaces/Domains/DomainsClient.ts:57](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L57)
 
 ___
 
@@ -433,4 +444,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainsClient.ts:36](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Interfaces/Domains/DomainsClient.ts#L36)
+[Interfaces/Domains/DomainsClient.ts:39](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Interfaces/Domains/DomainsClient.ts#L39)

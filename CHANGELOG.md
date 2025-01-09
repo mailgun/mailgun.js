@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.1.0](https://github.com/mailgun/mailgun.js/compare/v11.0.0...v11.1.0) (2025-01-09)
+
+
+### Features
+
+* Adding Secure Tracking API support ([b5ff1e0](https://github.com/mailgun/mailgun.js/commits/b5ff1e0a4c6982b302add9b25712818082a62fd0))
+
 ## [11.0.0](https://github.com/mailgun/mailgun.js/compare/v10.4.0...v11.0.0) (2025-01-09)
 
 

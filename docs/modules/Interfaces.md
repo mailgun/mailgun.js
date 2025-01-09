@@ -13,6 +13,7 @@
 - [IDomainTagsClient](../interfaces/Interfaces.IDomainTagsClient.md)
 - [IDomainTemplate](../interfaces/Interfaces.IDomainTemplate.md)
 - [IDomainTemplatesClient](../interfaces/Interfaces.IDomainTemplatesClient.md)
+- [IDomainTrackingClient](../interfaces/Interfaces.IDomainTrackingClient.md)
 - [IDomainsClient](../interfaces/Interfaces.IDomainsClient.md)
 - [IEventClient](../interfaces/Interfaces.IEventClient.md)
 - [IIPPoolsClient](../interfaces/Interfaces.IIPPoolsClient.md)

@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[Types/Domains/Domains.ts:77](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L77)
+[Types/Domains/Domains.ts:77](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L77)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:78](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L78)
+[Types/Domains/Domains.ts:78](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L78)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:82](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L82)
+[Types/Domains/Domains.ts:82](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L82)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:79](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L79)
+[Types/Domains/Domains.ts:79](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L79)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:80](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L80)
+[Types/Domains/Domains.ts:80](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L80)
 
 ___
 
@@ -71,4 +71,4 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:81](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L81)
+[Types/Domains/Domains.ts:81](https://github.com/mailgun/mailgun.js/blob/ef6853f/lib/Types/Domains/Domains.ts#L81)
