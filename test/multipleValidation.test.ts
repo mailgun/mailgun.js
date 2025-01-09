@@ -6,9 +6,8 @@ import nock from 'nock';
 import { expect } from 'chai';
 import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import MultipleValidationClient, { MultipleValidationJob } from '../lib/Classes/Validations/multipleValidation';
+import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 import {
-  CanceledMultipleValidationJob,
   MultipleValidationJobsListResult
 } from '../lib/Types/Validations';
 

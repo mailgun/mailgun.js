@@ -149,6 +149,9 @@ The following service methods are available to instantiated clients. The example
       - [createVersion](#createversion)
       - [updateVersion](#updateversion)
       - [destroyVersion](#destroyversion)
+    - [domain tracking](#domain-tracking)
+      - [getTracking](#gettracking-1)
+      - [updateTracking](#updatetracking-1)
     - [events](#events)
       - [get](#get-2)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
@@ -906,133 +909,11 @@ The following service methods are available to instantiated clients. The example
   }
   ```
 
-
 - #### getTracking
-  Mailgun offers tracking for clicks, unsubscribes, and opens, with optional HTTPS protocol support on tracking URLs. To enable HTTPS, Mailgun uses Let’s Encrypt with HTTP-01 challenges through your existing tracking CNAME record to issue a TLS certificate. This setup also includes support for HTTP Strict Transport Security (HSTS) for enhanced security.
-
-  `mg.domains.getTracking(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking)
-
-  Example:
-
-  ```JS
-  mg.domains.getTracking('foobar.example.com')
-    .then(msg => console.log(msg)) // logs response data
-    .catch(err => console.error(err)); // logs any error
-  ```
-
-  Promise returns:
-
-  ```JS
-  {
-    "click": {
-      "active": false
-    },
-    "open": {
-      "active": false
-    },
-    "unsubscribe": {
-      "active": false,
-      "html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-      "text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
-    }
-  }
-  ```
+  `domains.getTracking` method is deprecated, and will be removed. Please use `domains.domainTracking.getTracking` instead.
 
 - #### updateTracking
-  A common method to turn on/off the click, open, and unsubscribe tracking at the domain level.
-
-  `mg.domains.updateTracking(domain, trackingType, data)`
-
-  - Open Tracking Example:
-
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-open)
-    ```js
-    mg.domains.updateTracking('foobar.example.com', 'open', {
-      active: true,
-      place_at_the_top: true,
-    })
-      .then(msg => console.log(msg)) // logs response data
-      .catch(err => console.error(err)); // logs any error
-    ```
-
-    Open tracking data object properties:
-
-    | Property | Description                                |
-    |:----------|:-------------------------------------------|
-    | active    | Boolean, enables or disables open tracking |
-    | place_at_the_top| Setting this param to true will place the open tracking pixel at the top of the HTML body when inserted into the email mime. Omit this param to keep current setting. |
-
-    Promise returns:
-
-    ```JS
-    {
-      message: 'Tracking settings have been updated',
-      open: {
-        active: true,
-        place_at_the_top: true,
-      }
-    }
-    ```
-
-  - Click Tracking Example:
-
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-click)
-    ```JS
-    mg.domains.updateTracking('foobar.example.com', 'click', {active: true})
-      .then(msg => console.log(msg)) // logs response data
-      .catch(err => console.error(err)); // logs any error
-    ```
-
-    Click tracking data object properties:
-
-    | Property | Description                                 |
-    |:----------|:--------------------------------------------|
-    | active    | Boolean, enables or disables click tracking |
-
-    Promise returns:
-
-    ```JS
-    {
-      message: 'Tracking settings have been updated',
-      click: {
-        active: true
-      }
-    }
-    ```
-
-  - Unsubscribe Tracking Example
-
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-unsubscribe)
-    ```js
-    mg.domains.updateTracking('foobar.example.com', 'unsubscribe', {
-        active: true,
-        html_footer: "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
-        text_footer: "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
-      })
-      .then(msg => console.log(msg)) // logs response data
-      .catch(err => console.error(err)); // logs any error
-    ```
-
-    Unsubscribe Tracking data object properties:
-
-    | Property   | Description                                                   |
-    |:------------|:--------------------------------------------------------------|
-    | active      | Boolean, enables or disables unsubscribe tracking             |
-    | html_footer | string appended to html emails for managing unsubscribe links |
-    | text_footer | string appended to html emails for managing unsubscribe links |
-
-    Promise returns:
-
-    ```JS
-    {
-      message: 'Tracking settings have been updated',
-      unsubscribe: {
-        active: true,
-        html_footer: '\n<br>\n<p><a href=\'%unsubscribe_url%\">unsubscribe</a></p>\n',
-        text_footer: '\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n'
-      }
-    }
-    ```
+   `domains.updateTracking` method is deprecated, and will be removed. Please use `domains.domainTracking.updateTracking` instead.
 
 - #### getConnection
   Returns domain's delivery connection settings.
@@ -1643,6 +1524,207 @@ The following service methods are available to instantiated clients. The example
       templateVersion: { tag: 'v1' }
     }
     ```
+
+### Domain tracking
+
+- #### getTracking
+
+  Mailgun offers tracking for clicks, unsubscribes, and opens, with optional HTTPS protocol support on tracking URLs. To enable HTTPS, Mailgun uses Let’s Encrypt with HTTP-01 challenges through your existing tracking CNAME record to issue a TLS certificate. This setup also includes support for HTTP Strict Transport Security (HSTS) for enhanced security.
+
+  `mg.domains.domainTracking.getTracking(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking)
+
+  Example:
+
+  ```JS
+  mg.domains.domainTracking.getTracking('foobar.example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    "click": {
+      "active": false
+    },
+    "open": {
+      "active": false
+    },
+    "unsubscribe": {
+      "active": false,
+      "html_footer": "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
+      "text_footer": "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+    }
+  }
+  ```
+
+- #### updateTracking
+
+  A common method to turn on/off the click, open, and unsubscribe tracking at the domain level.
+
+  `mg.domains.domainTracking.updateTracking(domain, trackingType, data)`
+
+  - Open Tracking Example:
+
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-open)
+    ```js
+    mg.domains.domainTracking.updateTracking('foobar.example.com', 'open', {
+      active: true,
+      place_at_the_top: true,
+    })
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Open tracking data object properties:
+
+    | Property | Description                                |
+    |:----------|:-------------------------------------------|
+    | active    | Boolean, enables or disables open tracking |
+    | place_at_the_top| Setting this param to true will place the open tracking pixel at the top of the HTML body when inserted into the email mime. Omit this param to keep current setting. |
+
+    Promise returns:
+
+    ```JS
+    {
+      message: 'Tracking settings have been updated',
+      open: {
+        active: true,
+        place_at_the_top: true,
+      }
+    }
+    ```
+
+  - Click Tracking Example:
+
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-click)
+    ```JS
+    mg.domains.domainTracking.updateTracking('foobar.example.com', 'click', {active: true})
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Click tracking data object properties:
+
+    | Property | Description                                 |
+    |:----------|:--------------------------------------------|
+    | active    | Boolean, enables or disables click tracking |
+
+    Promise returns:
+
+    ```JS
+    {
+      message: 'Tracking settings have been updated',
+      click: {
+        active: true
+      }
+    }
+    ```
+
+  - Unsubscribe Tracking Example
+
+    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-unsubscribe)
+    ```js
+    mg.domains.domainTracking.updateTracking('foobar.example.com', 'unsubscribe', {
+        active: true,
+        html_footer: "\n<br>\n<p><a href=\"%unsubscribe_url%\">unsubscribe</a></p>\n",
+        text_footer: "\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n"
+      })
+      .then(msg => console.log(msg)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Unsubscribe Tracking data object properties:
+
+    | Property   | Description                                                   |
+    |:------------|:--------------------------------------------------------------|
+    | active      | Boolean, enables or disables unsubscribe tracking             |
+    | html_footer | string appended to html emails for managing unsubscribe links |
+    | text_footer | string appended to html emails for managing unsubscribe links |
+
+    Promise returns:
+
+    ```JS
+    {
+      message: 'Tracking settings have been updated',
+      unsubscribe: {
+        active: true,
+        html_footer: '\n<br>\n<p><a href=\'%unsubscribe_url%\">unsubscribe</a></p>\n',
+        text_footer: '\n\nTo unsubscribe click: <%unsubscribe_url%>\n\n'
+      }
+    }
+    ```
+
+- #### get
+  Get x509 TLS certificate and status
+
+  `mg.domains.domainTracking.get(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).getStatusV2-fm-8)
+
+  Example:
+
+  ```JS
+  mg.domains.domainTracking.get('foobar.example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    responseStatusCode: 200,
+    status: 'expired',
+    error: 'x509 certificate has expired',
+    certificate: '{CERT}';
+  }
+  ```
+
+- #### generate
+  Initiates generation of a TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll the status endpoint in location field to check for success
+
+  `mg.domains.domainTracking.generate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
+
+  Example:
+
+  ```JS
+  mg.domains.domainTracking.generate('foobar.example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'Initiated x509 key pair generation',
+    location: '/v2/x509/example.com/status',
+    status: 202,
+  }
+  ```
+
+- #### regenerate
+  Initiates regeneration of an expired TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll status endpoint in location field to check for success. This will not regenerate an existing certificate that is still valid
+
+  `mg.domains.domainTracking.regenerate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
+
+  Example:
+
+  ```JS
+  mg.domains.domainTracking.regenerate('foobar.example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'Initiated x509 key pair generation',
+    location: '/v2/x509/example.com/status',
+    status: 202,
+  }
+  ```
 
 ### Events
 

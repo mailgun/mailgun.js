@@ -8,16 +8,17 @@ import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common'
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
+import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking';
 
 import {
   MessageResponse,
   ConnectionSettings,
   UpdatedConnectionSettings,
   UpdatedDKIMAuthority,
-  UpdatedDKIMSelectorResponse,
   UpdatedWebPrefixResponse,
   TDomain,
-  UpdatedDKIMSelectorResult
+  UpdatedDKIMSelectorResult,
+  DomainTrackingData
 } from '../lib/Types/Domains';
 import DomainsClient from '../lib/Classes/Domains/domainsClient';
 
@@ -31,11 +32,13 @@ describe('DomainsClient', function () {
     const domainCredentialsClient = new DomainCredentialsClient(reqObject);
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
     const domainTagsClient = new DomainTagsClient(reqObject);
+    const domainTrackingClient = new DomainTrackingClient(reqObject);
     client = new DomainsClient(
       reqObject,
       domainCredentialsClient,
       domainTemplatesClient,
       domainTagsClient,
+      domainTrackingClient,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       { warn: () => {} }
     );
@@ -443,61 +446,55 @@ describe('DomainsClient', function () {
     });
   });
 
-  describe('getConnection', function () {
-    it('returns connection settings for the defined domain', function () {
+  describe('getConnection', () => {
+    it('returns connection settings for the defined domain', async () => {
       api.get('/v3/domains/test.example.com/connection').reply(200, {
         require_tls: false, skip_verification: false
       });
-
-      return client.getConnection('test.example.com').then(function (data: ConnectionSettings) {
-        data.should.eql({ require_tls: false, skip_verification: false });
-      });
+      const response: ConnectionSettings = await client.getConnection('test.example.com');
+      response.should.eql({ require_tls: false, skip_verification: false });
     });
   });
 
-  describe('updateConnection', function () {
-    it('Updates the connection settings for the defined domain.', function () {
+  describe('updateConnection', async () => {
+    it('Updates the connection settings for the defined domain.', async () => {
+      const connection = {
+        message: 'Domain connection settings have been updated, may take 10 minutes to fully propagate',
+        require_tls: false,
+        skip_verification: false
+      };
       api.put('/v3/domains/test.example.com/connection').reply(200, {
-        connection: {
-          message: 'Domain connection settings have been updated, may take 10 minutes to fully propagate',
-          require_tls: false,
-          skip_verification: false
-        }
+        connection
       });
 
-      return client.updateConnection('test.example.com', {
+      const response: UpdatedConnectionSettings = await client.updateConnection('test.example.com', {
         require_tls: true,
         skip_verification: true
-      }).then(function (data: UpdatedConnectionSettings) {
-        data.should.eql({
-          connection: {
-            message: 'Domain connection settings have been updated, may take 10 minutes to fully propagate',
-            require_tls: false,
-            skip_verification: false
-          }
-        });
+      });
+
+      response.should.eql({
+        connection
       });
     });
   });
 
-  describe('getTracking', function () {
-    it('fetches all tracking settings', function () {
+  describe('getTracking', () => {
+    it('fetches all tracking settings', async () => {
+      const trackingData = {
+        open: { active: true },
+        click: { active: true },
+        unsubscribe: { active: true, html_footer: 'html', text_footer: 'text' }
+      };
       api.get('/v3/domains/domain.com/tracking').reply(200, {
-        tracking: {
-          open: { active: true },
-          click: { active: true },
-          unsubscribe: { active: true, html_footer: 'html', text_footer: 'text' }
-        }
+        tracking: trackingData
       });
-
-      return client.getTracking('domain.com').then(function (tracking: { open: { active: boolean } }) {
-        tracking.open.should.eql({ active: true });
-      });
+      const tracking: DomainTrackingData = await client.getTracking('domain.com');
+      tracking.should.eql(trackingData);
     });
   });
 
-  describe('updateTracking', function () {
-    it('updates tracking settings', async function () {
+  describe('updateTracking', () => {
+    it('updates tracking settings', async () => {
       const open = { active: true };
       api.put('/v3/domains/domain.com/tracking/open').reply(200, {
         message: 'Tracking settings have been updated',
@@ -508,110 +505,7 @@ describe('DomainsClient', function () {
 
       expect(res).to.eql({
         message: 'Tracking settings have been updated',
-        open: {
-          active: true
-        }
-      });
-    });
-
-    describe('converts boolean values to string (OPEN)', () => {
-      it('converts boolean TRUE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/open').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              open: {
-                active: true,
-                place_at_the_top: true,
-              }
-            };
-          });
-        await client.updateTracking('domain.com', 'open', { active: true, place_at_the_top: true });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
-        expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nyes\r\n----------------------------');
-      });
-
-      it('converts boolean FALSE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/open').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              open: {
-                active: false,
-                place_at_the_top: false,
-              }
-            };
-          });
-        await client.updateTracking('domain.com', 'open', {
-          active: false,
-          place_at_the_top: false,
-        });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
-        expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nno\r\n----------------------------');
-      });
-    });
-
-    describe('converts boolean values to string (CLICK)', () => {
-      it('converts boolean TRUE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/click').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              click: { active: true }
-            };
-          });
-        await client.updateTracking('domain.com', 'click', { active: true });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
-      });
-
-      it('converts boolean FALSE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/click').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              click: { active: false }
-            };
-          });
-        await client.updateTracking('domain.com', 'click', { active: false });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
-      });
-    });
-
-    describe('converts boolean values to string (UNSUBSCRIBE)', () => {
-      it('converts boolean TRUE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              unsubscribe: { active: true }
-            };
-          });
-        await client.updateTracking('domain.com', 'unsubscribe', { active: true });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
-      });
-
-      it('converts boolean FALSE values to string', async () => {
-        let requestObject;
-        api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
-          function (_uri, requestBody) {
-            requestObject = requestBody as formData;
-            return {
-              message: 'message_value',
-              unsubscribe: { active: false }
-            };
-          });
-        await client.updateTracking('domain.com', 'unsubscribe', { active: false });
-        expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+        open
       });
     });
   });

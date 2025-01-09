@@ -1,25 +1,20 @@
 import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials, IDomainsClient } from '../../Interfaces/Domains';
 import { APIResponse } from '../../Types/Common/ApiResponse';
 import Request from '../common/Request';
-import DomainCredentialsClient from './domainsCredentials';
-import DomainTemplatesClient from './domainsTemplates';
-import DomainTagsClient from './domainsTags';
 import { MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain, DomainUpdateInfo, DomainGetQuery, UpdatedDKIMSelectorResult } from '../../Types/Domains';
-import { ILogger } from '../../Interfaces';
+import { ILogger, IDomainTrackingClient } from '../../Interfaces';
 export default class DomainsClient implements IDomainsClient {
     request: Request;
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;
     domainTags: IDomainTagsClient;
+    domainTracking: IDomainTrackingClient;
     private logger;
-    constructor(request: Request, domainCredentialsClient: DomainCredentialsClient, domainTemplatesClient: DomainTemplatesClient, domainTagsClient: DomainTagsClient, logger?: ILogger);
+    constructor(request: Request, domainCredentialsClient: IDomainCredentials, domainTemplatesClient: IDomainTemplatesClient, domainTagsClient: IDomainTagsClient, domainTracking: IDomainTrackingClient, logger?: ILogger);
     private _handleBoolValues;
     private _parseMessage;
     private parseDomainList;
     private _parseDomain;
-    private _parseTrackingSettings;
-    private _parseTrackingUpdate;
-    private _isOpenTrackingInfoWitPlace;
     list(query?: DomainsQuery): Promise<TDomain[]>;
     get(domain: string, query?: DomainGetQuery): Promise<TDomain>;
     create(data: DomainInfo): Promise<TDomain>;
@@ -28,7 +23,15 @@ export default class DomainsClient implements IDomainsClient {
     destroy(domain: string): Promise<MessageResponse>;
     getConnection(domain: string): Promise<ConnectionSettings>;
     updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings>;
+    /**
+    * @deprecated 'domains.getTracking' method is deprecated, and will be removed.
+    * Please use 'domains.domainTracking.getTracking' instead.
+    */
     getTracking(domain: string): Promise<DomainTrackingData>;
+    /**
+    * @deprecated 'domains.updateTracking' method is deprecated, and will be removed.
+    * Please use 'domains.domainTracking.updateTracking' instead.
+    */
     updateTracking(domain: string, type: string, data: OpenTrackingInfo | ClickTrackingInfo | UnsubscribeTrackingInfo): Promise<UpdatedOpenTracking>;
     /**
     * @deprecated "domains.getIps" method is deprecated, and will be removed in the future releases.
