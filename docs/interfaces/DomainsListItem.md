@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`DomainShortData`](../modules.md#domainshortdata)
+- [`DomainData`](../modules.md#domaindata)
 
   ↳ **`DomainsListItem`**
 
@@ -13,6 +13,10 @@
 ### Properties
 
 - [created\_at](DomainsListItem.md#created_at)
+- [dkim\_host](DomainsListItem.md#dkim_host)
+- [id](DomainsListItem.md#id)
+- [is\_disabled](DomainsListItem.md#is_disabled)
+- [mailfrom\_host](DomainsListItem.md#mailfrom_host)
 - [name](DomainsListItem.md#name)
 - [receiving\_dns\_records](DomainsListItem.md#receiving_dns_records)
 - [require\_tls](DomainsListItem.md#require_tls)
@@ -23,6 +27,9 @@
 - [spam\_action](DomainsListItem.md#spam_action)
 - [state](DomainsListItem.md#state)
 - [type](DomainsListItem.md#type)
+- [use\_automatic\_sender\_security](DomainsListItem.md#use_automatic_sender_security)
+- [web\_prefix](DomainsListItem.md#web_prefix)
+- [web\_scheme](DomainsListItem.md#web_scheme)
 - [wildcard](DomainsListItem.md#wildcard)
 
 ## Properties
@@ -33,11 +40,67 @@
 
 #### Inherited from
 
-DomainShortData.created\_at
+DomainData.created\_at
 
 #### Defined in
 
-[Types/Domains/Domains.ts:44](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L44)
+[Types/Domains/Domains.ts:63](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L63)
+
+___
+
+### dkim\_host
+
+• `Optional` **dkim\_host**: `string`
+
+#### Inherited from
+
+DomainData.dkim\_host
+
+#### Defined in
+
+[Types/Domains/Domains.ts:67](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L67)
+
+___
+
+### id
+
+• **id**: `string`
+
+#### Inherited from
+
+DomainData.id
+
+#### Defined in
+
+[Types/Domains/Domains.ts:52](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L52)
+
+___
+
+### is\_disabled
+
+• **is\_disabled**: `boolean`
+
+#### Inherited from
+
+DomainData.is\_disabled
+
+#### Defined in
+
+[Types/Domains/Domains.ts:53](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L53)
+
+___
+
+### mailfrom\_host
+
+• `Optional` **mailfrom\_host**: `string`
+
+#### Inherited from
+
+DomainData.mailfrom\_host
+
+#### Defined in
+
+[Types/Domains/Domains.ts:68](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L68)
 
 ___
 
@@ -47,11 +110,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.name
+DomainData.name
 
 #### Defined in
 
-[Types/Domains/Domains.ts:38](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L38)
+[Types/Domains/Domains.ts:57](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L57)
 
 ___
 
@@ -61,7 +124,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:58](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L58)
+[Types/Domains/Domains.ts:72](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L72)
 
 ___
 
@@ -71,11 +134,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.require\_tls
+DomainData.require\_tls
 
 #### Defined in
 
-[Types/Domains/Domains.ts:39](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L39)
+[Types/Domains/Domains.ts:58](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L58)
 
 ___
 
@@ -85,7 +148,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:59](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L59)
+[Types/Domains/Domains.ts:73](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L73)
 
 ___
 
@@ -95,11 +158,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.skip\_verification
+DomainData.skip\_verification
 
 #### Defined in
 
-[Types/Domains/Domains.ts:40](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L40)
+[Types/Domains/Domains.ts:59](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L59)
 
 ___
 
@@ -109,11 +172,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.smtp\_login
+DomainData.smtp\_login
 
 #### Defined in
 
-[Types/Domains/Domains.ts:46](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L46)
+[Types/Domains/Domains.ts:65](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L65)
 
 ___
 
@@ -123,11 +186,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.smtp\_password
+DomainData.smtp\_password
 
 #### Defined in
 
-[Types/Domains/Domains.ts:45](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L45)
+[Types/Domains/Domains.ts:64](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L64)
 
 ___
 
@@ -137,11 +200,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.spam\_action
+DomainData.spam\_action
 
 #### Defined in
 
-[Types/Domains/Domains.ts:43](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L43)
+[Types/Domains/Domains.ts:62](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L62)
 
 ___
 
@@ -151,11 +214,11 @@ ___
 
 #### Inherited from
 
-DomainShortData.state
+DomainData.state
 
 #### Defined in
 
-[Types/Domains/Domains.ts:41](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L41)
+[Types/Domains/Domains.ts:60](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L60)
 
 ___
 
@@ -165,11 +228,53 @@ ___
 
 #### Inherited from
 
-DomainShortData.type
+DomainData.type
 
 #### Defined in
 
-[Types/Domains/Domains.ts:47](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L47)
+[Types/Domains/Domains.ts:66](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L66)
+
+___
+
+### use\_automatic\_sender\_security
+
+• **use\_automatic\_sender\_security**: `boolean`
+
+#### Inherited from
+
+DomainData.use\_automatic\_sender\_security
+
+#### Defined in
+
+[Types/Domains/Domains.ts:56](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L56)
+
+___
+
+### web\_prefix
+
+• **web\_prefix**: `string`
+
+#### Inherited from
+
+DomainData.web\_prefix
+
+#### Defined in
+
+[Types/Domains/Domains.ts:54](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L54)
+
+___
+
+### web\_scheme
+
+• **web\_scheme**: `string`
+
+#### Inherited from
+
+DomainData.web\_scheme
+
+#### Defined in
+
+[Types/Domains/Domains.ts:55](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L55)
 
 ___
 
@@ -179,8 +284,8 @@ ___
 
 #### Inherited from
 
-DomainShortData.wildcard
+DomainData.wildcard
 
 #### Defined in
 
-[Types/Domains/Domains.ts:42](https://github.com/mailgun/mailgun.js/blob/5c5802a/lib/Types/Domains/Domains.ts#L42)
+[Types/Domains/Domains.ts:61](https://github.com/mailgun/mailgun.js/blob/009065a/lib/Types/Domains/Domains.ts#L61)

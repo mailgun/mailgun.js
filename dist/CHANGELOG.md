@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.0.0](https://github.com/mailgun/mailgun.js/compare/v10.4.0...v11.0.0) (2025-01-09)
+
+
+### Other changes
+
+* Update readme by domain templates ([8e12c86](https://github.com/mailgun/mailgun.js/commits/8e12c867e3b9e34cd43ccb59d1b94bf69e2a0a03))
+
+
+### Breaking changes
+
+* Update domains client to use v4 of API ([a2efc8c](https://github.com/mailgun/mailgun.js/commits/a2efc8c9e45cde9376af7bb2df467d9a45260f7d))
+
 ## [10.4.0](https://github.com/mailgun/mailgun.js/compare/v10.3.0...v10.4.0) (2024-12-30)
 
 
