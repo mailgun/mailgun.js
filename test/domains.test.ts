@@ -1,8 +1,5 @@
-import formData from 'form-data';
-
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
 
 import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
 import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
@@ -21,6 +18,8 @@ import {
   DomainTrackingData
 } from '../lib/Types/Domains';
 import DomainsClient from '../lib/Classes/Domains/domainsClient';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 // TODO: fix types
 describe('DomainsClient', function () {
@@ -28,7 +27,7 @@ describe('DomainsClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData);
     const domainCredentialsClient = new DomainCredentialsClient(reqObject);
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
     const domainTagsClient = new DomainTagsClient(reqObject);
@@ -49,8 +48,8 @@ describe('DomainsClient', function () {
     api.done();
   });
 
-  describe('list', function () {
-    it('fetches all domains', function () {
+  describe('list', async () => {
+    it('fetches all domains', async () => {
       const domains = [{
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'testing.example.com',
@@ -72,14 +71,12 @@ describe('DomainsClient', function () {
       api.get('/v4/domains').reply(200, {
         items: domains
       });
-
-      return client.list().then(function (dm: TDomain[]) {
-        dm[0].should.eql({
-          ...domains[0],
-          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
-          receiving_dns_records: null,
-          sending_dns_records: null,
-        });
+      const dm = await client.list();
+      dm[0].should.eql({
+        ...domains[0],
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: null,
+        sending_dns_records: null,
       });
     });
 
@@ -222,7 +219,7 @@ describe('DomainsClient', function () {
     it('converts boolean TRUE values to string', async () => {
       let requestObject;
       api.post('/v4/domains').reply(200, function (_uri, requestBody) {
-        requestObject = requestBody as formData;
+        requestObject = requestBody;
         return {
           domain: {
             name: 'another.example.com',
@@ -241,17 +238,17 @@ describe('DomainsClient', function () {
         force_root_dkim_host: true,
         use_automatic_sender_security: true,
       });
-      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----');
+      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----');
+      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\ntrue\r\n----');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----');
     });
 
     it('converts boolean FALSE values to string', async () => {
       let requestObject;
       api.post('/v4/domains').reply(200, function (_uri, requestBody) {
-        requestObject = requestBody as formData;
+        requestObject = requestBody;
         return {
           domain: {
             name: 'another.example.com',
@@ -270,11 +267,11 @@ describe('DomainsClient', function () {
         force_root_dkim_host: false,
         use_automatic_sender_security: false,
       });
-      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----');
+      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----');
+      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\nfalse\r\n----');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----');
     });
   });
   describe('update', function () {
@@ -321,7 +318,7 @@ describe('DomainsClient', function () {
     it('converts boolean TRUE values to string', async () => {
       let requestObject;
       api.put('/v4/domains/testing.example.com').reply(200, function (_uri, requestBody) {
-        requestObject = requestBody as formData;
+        requestObject = requestBody;
         return {
           domain: {
             name: 'another.example.com',
@@ -336,14 +333,14 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: true,
       });
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----');
     });
 
     it('converts boolean FALSE values to string', async () => {
       let requestObject;
       api.put('/v4/domains/testing.example.com').reply(200, function (_uri, requestBody) {
-        requestObject = requestBody as formData;
+        requestObject = requestBody;
         return {
           domain: {
             name: 'another.example.com',
@@ -358,8 +355,8 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: false,
       });
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----');
+      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----');
     });
   });
 

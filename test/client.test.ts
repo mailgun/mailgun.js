@@ -26,6 +26,7 @@ import MultipleValidationClient from '../lib/Classes/Validations/multipleValidat
 import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers';
 import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements';
 import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
+import AxiosProvider from '../lib/Classes/common/RequestProviders/AxiosProvider';
 
 describe('Client', () => {
   let client: IMailgunClient;
@@ -41,16 +42,6 @@ describe('Client', () => {
 
   it('exposes raw request client', () => {
     client.should.have.property('request').to.be.instanceOf(Request);
-  });
-
-  it('sets and resets subaccount header for requests', () => {
-    client.setSubaccount('XYZ');
-    client.should.have.property('request').to.be.instanceOf(Request);
-    client.should.have.property('request').to.haveOwnProperty('headers')
-      .to.contain({ [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' });
-    client.resetSubaccount();
-    client.should.have.property('request').to.haveOwnProperty('headers')
-      .to.not.haveOwnProperty(SubaccountsClient.SUBACCOUNT_HEADER);
   });
 
   it('creates domain client', () => {
@@ -129,6 +120,18 @@ describe('Client', () => {
     client.inboxPlacements.should.be.instanceOf(InboxPlacementsClient);
   });
 
+  it('sets and resets subaccount header for requests', () => {
+    client.setSubaccount('XYZ');
+    client.should.have.property('request').to.be.instanceOf(Request);
+    client.should.have.property('request').to.have.property('requestProvider').to.be.instanceOf(AxiosProvider);
+    ;
+    client.should.have.property('request').to.have.property('requestProvider').to.haveOwnProperty('headers')
+      .to.contain({ [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' });
+    client.resetSubaccount();
+    client.should.have.property('request').to.have.property('requestProvider').to.haveOwnProperty('headers')
+      .to.not.haveOwnProperty(SubaccountsClient.SUBACCOUNT_HEADER);
+  });
+
   describe('User configuration', () => {
     it('respects proxy settings', () => {
       const mgClient = new Client({
@@ -146,7 +149,8 @@ describe('Client', () => {
         }
       } as MailgunClientOptions, formData as InputFormData);
       mgClient.should.have.property('request');
-      mgClient.should.have.property('request').to.have.property('proxy').to.eql({
+      mgClient.should.have.property('request').to.have.property('requestProvider');
+      mgClient.should.have.property('request').to.have.property('requestProvider').to.have.property('proxy').to.eql({
         protocol: 'https',
         host: '127.0.0.1',
         port: 9000,
@@ -166,7 +170,8 @@ describe('Client', () => {
         url: 'test_url'
       } as MailgunClientOptions, formData as InputFormData);
       mgClient.should.have.property('request');
-      mgClient.should.have.property('request').to.have.property('timeout').to.equal(1000);
+      mgClient.should.have.property('request').to.have.property('requestProvider');
+      mgClient.should.have.property('request').to.have.property('requestProvider').to.have.property('timeout').to.equal(1000);
       mgClient.should.have.property('request').to.have.property('url').to.eql('test_url');
     });
 

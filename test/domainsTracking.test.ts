@@ -1,9 +1,7 @@
 /* eslint-disable camelcase */
-import formData from 'form-data';
 import nock from 'nock';
 import { expect } from 'chai';
 import { IDomainTrackingClient } from '../lib/Interfaces';
-import Request from '../lib/Classes/common/Request';
 import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import {
@@ -12,6 +10,8 @@ import {
   RegenerateDomainTrackingCertificateResponse,
   DomainTrackingData,
 } from '../lib/Types/Domains';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 describe('DomainTrackingClient', function () {
   let client: IDomainTrackingClient;
@@ -19,7 +19,7 @@ describe('DomainTrackingClient', function () {
   let trackingDomain: string;
 
   beforeEach(function () {
-    client = new DomainTrackingClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new DomainTrackingClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData));
     api = nock('https://api.mailgun.net');
     trackingDomain = 'email.testing.example.com';
   });
@@ -119,7 +119,7 @@ describe('DomainTrackingClient', function () {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/open').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 open: {
@@ -129,15 +129,15 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'open', { active: true, place_at_the_top: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
-          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----');
+          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nyes\r\n----');
         });
 
         it('converts boolean FALSE values to string in open tracking', async () => {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/open').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 open: {
@@ -150,8 +150,8 @@ describe('DomainTrackingClient', function () {
             active: false,
             place_at_the_top: false,
           });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
-          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----');
+          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nno\r\n----');
         });
       });
     });
@@ -177,28 +177,28 @@ describe('DomainTrackingClient', function () {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/click').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 click: { active: true }
               };
             });
           await client.updateTracking('domain.com', 'click', { active: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----');
         });
 
         it('converts boolean FALSE values to string in click tracking ', async () => {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/click').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 click: { active: false }
               };
             });
           await client.updateTracking('domain.com', 'click', { active: false });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----');
         });
       });
     });
@@ -232,28 +232,28 @@ describe('DomainTrackingClient', function () {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 unsubscribe: { active: true }
               };
             });
           await client.updateTracking('domain.com', 'unsubscribe', { active: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----');
         });
 
         it('converts boolean FALSE values to string in unsubscribe tracking ', async () => {
           let requestObject;
           api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
             function (_uri, requestBody) {
-              requestObject = requestBody as formData;
+              requestObject = requestBody;
               return {
                 message: 'message_value',
                 unsubscribe: { active: false }
               };
             });
           await client.updateTracking('domain.com', 'unsubscribe', { active: false });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----');
         });
       });
     });

@@ -3,20 +3,21 @@ import nock from 'nock';
 import { expect } from 'chai';
 import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request';
 import MessagesClient from '../lib/Classes/Messages';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { IMessagesClient } from '../lib/Interfaces';
 import { MessagesSendResult } from '../lib/Types/Messages';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
-describe('MessagesClient', function () {
+describe('Messages Attachments Client', function () {
   let client: IMessagesClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new MessagesClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

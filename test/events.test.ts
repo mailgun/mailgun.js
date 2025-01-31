@@ -3,16 +3,16 @@ import nock from 'nock';
 
 import formData from 'form-data';
 import EventClient from '../lib/Classes/Events';
-import MgRequest from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { EventsList } from '../lib/Types/Events';
+import TestRequest from './TestUtils/Request';
 
 describe('EventsClient', function () {
   let client: EventClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new EventClient(new MgRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new EventClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

@@ -1,5 +1,3 @@
-import formData from 'form-data'; // importing this way to not have type error in line 13
-
 import fs from 'fs';
 import nock from 'nock';
 import chai from 'chai';
@@ -9,6 +7,8 @@ import Request from '../lib/Classes/common/Request';
 import MessagesClient from '../lib/Classes/Messages';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { MessagesSendResult } from '../lib/Types/Messages';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 chai.use(spies);
 const expect = chai.expect;
@@ -20,7 +20,7 @@ describe('MessagesClient', function () {
   let api: nock.Scope;
   let request: Request;
   beforeEach(function () {
-    request = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    request = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData);
     chai.spy.on(request, 'postWithFD');
     client = new MessagesClient(request);
     api = nock('https://api.mailgun.net');

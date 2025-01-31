@@ -1,12 +1,11 @@
 import { expect } from 'chai';
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
 
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
 import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/Types/Domains';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 // TODO: fix types
 describe('DomainsTemplatesClient', function () {
@@ -14,7 +13,7 @@ describe('DomainsTemplatesClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData);
     client = new DomainTemplatesClient(reqObject);
     api = nock('https://api.mailgun.net');
   });

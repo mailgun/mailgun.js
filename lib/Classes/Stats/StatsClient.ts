@@ -61,13 +61,13 @@ Consider using string type for property "${key}" to avoid auto-converting`);
 
   getDomain(domain: string, query?: StatsQuery): Promise<IStatsContainer> {
     const searchParams = this.prepareSearchParams(query);
-    return this.request.get(urljoin('/v3', domain, 'stats/total'), searchParams)
+    return this.request.get(urljoin('/v3', domain, 'stats/total'), {searchParams})
       .then(this.parseStats);
   }
 
   getAccount(query?: StatsQuery): Promise<IStatsContainer> {
     const searchParams = this.prepareSearchParams(query);
-    return this.request.get('/v3/stats/total', searchParams)
+    return this.request.get('/v3/stats/total', {searchParams})
       .then(this.parseStats);
   }
 }

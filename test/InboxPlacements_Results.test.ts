@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
 
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
@@ -11,6 +10,7 @@ import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/Filters
 import { IInboxPlacementsResultsClient } from '../lib/Interfaces';
 import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient';
 import IPRSharingClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient';
+import TestRequest from './TestUtils/Request';
 
 // TODO: fix types
 describe('Inbox Placements results', () => {
@@ -120,7 +120,7 @@ describe('Inbox Placements results', () => {
   delete (expectedResult.Box as {ID?: string}).ID;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     const seedsListsAttributes = new InboxPlacementsAttributesClient(reqObject, '/v4/inbox/results/a');
     const seedsListsFiltersClient = new InboxPlacementsFiltersClient(reqObject, '/v4/inbox/results/_filters');
     const InboxPlacementsResultsSharingClient = new IPRSharingClient(reqObject);

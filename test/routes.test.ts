@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
-import formData from 'form-data';
 import nock from 'nock';
 import { IRoutesClient } from '../lib/Interfaces/Routes/IRoutesClient';
-import Request from '../lib/Classes/common/Request';
 import RoutesClient from '../lib/Classes/Routes';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { DestroyRouteResponse, Route, UpdateRouteResponse } from '../lib/Types/Routes';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 describe('RoutesClient', function () {
   let client: IRoutesClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new RoutesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new RoutesClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

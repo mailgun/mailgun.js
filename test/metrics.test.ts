@@ -8,6 +8,7 @@ import { IMetricsClient } from '../lib/Interfaces/Metrics/MetricsClient';
 import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
 import { MetricsResult } from '../lib/Types/Metrics';
 import { Resolution } from '../lib/Enums';
+import TestRequest from './TestUtils/Request';
 
 describe('MetricsClient', function () {
   let client: IMetricsClient;
@@ -51,7 +52,7 @@ describe('MetricsClient', function () {
 
   beforeEach(function () {
     client = new MetricsClient(
-      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData),
+      new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData),
       {
         warn: () => undefined
       }
@@ -150,10 +151,11 @@ describe('MetricsClient', function () {
         include_aggregates: false,
       };
 
-      api.post('/v1/analytics/usage/metrics', (body) => {
-        updatedQuery = body;
-        return true;
-      }).reply(200, metricsResponse);
+      api.post('/v1/analytics/usage/metrics').reply(200, (uri, requestBody) => {
+        // fetch requires stringified data
+        updatedQuery = typeof requestBody === 'string' ? JSON.parse(requestBody): requestBody;
+        return metricsResponse
+      });
 
       await client.getAccountUsage(query);
       expect(updatedQuery).to.be.an('object');

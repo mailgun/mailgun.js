@@ -4,12 +4,12 @@ import path from 'path';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
 import {
   MultipleValidationJobsListResult
 } from '../lib/Types/Validations';
+import TestRequest from './TestUtils/Request';
 
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 
@@ -20,7 +20,7 @@ describe('ValidateClient', () => {
   let responseData = {};
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     client = new MultipleValidationClient(reqObject);
     api = nock('https://api.mailgun.net');
     responseData = {
@@ -349,7 +349,10 @@ describe('ValidateClient', () => {
 
     describe('form-data package', () => {
       beforeEach(() => {
-        const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+        const reqObject = new TestRequest({
+          url: 'https://api.mailgun.net',
+          useFetch: false // disable fetch since it does not work with form-data package
+        } as RequestOptions, formData as InputFormData);
         client = new MultipleValidationClient(reqObject);
       });
 
@@ -438,7 +441,7 @@ describe('ValidateClient', () => {
     if (globalThis.FormData) {
       describe('Browser compliant FormData', () => {
         beforeEach(() => {
-          const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, globalThis.FormData as InputFormData);
+          const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, globalThis.FormData as InputFormData);
           client = new MultipleValidationClient(reqObject);
         });
 

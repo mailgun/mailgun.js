@@ -1,9 +1,7 @@
 import chai, { expect } from 'chai';
-import formData from 'form-data';
 import nock from 'nock';
 import APIError from '../lib/Classes/common/Error';
 
-import Request from '../lib/Classes/common/Request';
 import Bounce from '../lib/Classes/Suppressions/Bounce';
 import Complaint from '../lib/Classes/Suppressions/Complaint';
 import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient';
@@ -16,6 +14,8 @@ import {
   SuppressionList,
   SuppressionListResponse
 } from '../lib/Types/Suppressions';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 chai.should();
 
@@ -24,7 +24,7 @@ describe('SuppressionsClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new SuppressionClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 

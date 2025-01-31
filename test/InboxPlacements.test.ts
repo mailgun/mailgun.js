@@ -1,7 +1,6 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
 
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 
@@ -11,6 +10,7 @@ import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacement
 import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient';
 import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient';
 import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders';
+import TestRequest from './TestUtils/Request';
 
 // TODO: fix types
 describe('Inbox Placements Client', () => {
@@ -18,7 +18,7 @@ describe('Inbox Placements Client', () => {
   let api: nock.Scope;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     client = new InboxPlacementsClient(
       reqObject,
       {} as SeedsListsClient,

@@ -6,6 +6,10 @@ export default class APIError extends Error implements APIErrorType {
   public details: string;
   public type: string;
 
+  public static isApiError(err: unknown): err is APIError {
+    return typeof err === 'object' && (err as APIError)?.type === 'MailgunAPIError';
+  }
+
   public static getUserDataError(statusText: string, message: string) {
     return new this({
       status: 400,

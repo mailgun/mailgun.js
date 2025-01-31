@@ -4,10 +4,15 @@ import fs, { promises } from 'fs';
 import path from 'path';
 import FormDataBuilder from '../lib/Classes/common/FormDataBuilder';
 import { InputFormData } from '../lib';
+const { env } = process;
+
 
 describe('FormDataBuilder', function () {
   let builder: FormDataBuilder;
   const filepath = path.resolve(__dirname, './img/mailgun.png');
+  const isENVUseFetch = Boolean(env.USE_FETCH && env.USE_FETCH === 'true');
+  const FDBConfig = {useFetch: isENVUseFetch};
+
   const readFDStream = (fd: NodeFormData) => {
     const fdDataAwaiter = new Promise((resolve) => {
       let result = '';
@@ -25,7 +30,7 @@ describe('FormDataBuilder', function () {
 
   describe('createFormData (form-data package)', async () => {
     before(function () {
-      builder = new FormDataBuilder(NodeFormData);
+      builder = new FormDataBuilder(NodeFormData, {useFetch: false}); // form-data package can't be used with fetch
     });
 
     it('checks that input object exists', async () => {
@@ -34,6 +39,15 @@ describe('FormDataBuilder', function () {
         builder.createFormData();
       } catch (error: unknown) {
         expect(error).to.has.property('message').equal('Please provide data object');
+      }
+    });
+
+    it('throws if form-data package provided', async () => {
+      try {
+        const incorrectBuilder = new FormDataBuilder(NodeFormData, {useFetch: true});
+        incorrectBuilder.createFormData({});
+      } catch (error: unknown) {
+        expect(error).to.has.property('message').equal('"form-data" npm package detected, and it can not be used together with "fetch" client');
       }
     });
 
@@ -121,7 +135,7 @@ describe('FormDataBuilder', function () {
   if (global.FormData) {
     describe('createFormData node environment with FormData', async () => {
       before(function () {
-        builder = new FormDataBuilder(global.FormData as InputFormData);
+        builder = new FormDataBuilder(global.FormData as InputFormData, FDBConfig);
       });
 
       it('works with ReadStream value', async () => {
@@ -204,7 +218,7 @@ describe('FormDataBuilder', function () {
     if (globalThis.Blob) {
       describe('createFormData (Browser compliant FormData + Blob)', async () => {
         before(function () {
-          builder = new FormDataBuilder(global.FormData as InputFormData);
+          builder = new FormDataBuilder(global.FormData as InputFormData, FDBConfig);
         });
 
         it('Respects filename for blob', async () => {
@@ -230,7 +244,7 @@ describe('FormDataBuilder', function () {
     }
     if (globalThis.File) {
       before(function () {
-        builder = new FormDataBuilder(globalThis.FormData as InputFormData);
+        builder = new FormDataBuilder(globalThis.FormData as InputFormData, FDBConfig);
       });
       describe('createFormData (Browser compliant FormData + File)', async () => {
         it('Respects filename for File', async () => {

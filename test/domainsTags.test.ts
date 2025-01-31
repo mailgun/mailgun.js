@@ -2,7 +2,6 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { IDomainTagsClient } from '../lib/Interfaces/Domains/DomainTags';
-import Request from '../lib/Classes/common/Request';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import DomainsTagsClient, { DomainTagStatistic } from '../lib/Classes/Domains/domainsTags';
 import {
@@ -13,13 +12,14 @@ import {
   DomainTagsList,
   DomainTagsMessageRes
 } from '../lib/Types/Domains';
+import TestRequest from './TestUtils/Request';
 
 describe('DomainsTagsClient', function () {
   let client: IDomainTagsClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
     client = new DomainsTagsClient(reqObject);
     api = nock('https://api.mailgun.net');
   });

@@ -1,4 +1,4 @@
-import { AxiosProxyConfig } from 'axios';
+import { ClientProxyConfig } from '../Common';
 /* eslint-disable camelcase */
 export type MailgunClientOptions = {
   username: string;
@@ -6,5 +6,6 @@ export type MailgunClientOptions = {
   url?: string;
   public_key?: string;
   timeout?: number;
-  proxy?: AxiosProxyConfig;
+  proxy?: ClientProxyConfig;
+  useFetch?: boolean;
 }

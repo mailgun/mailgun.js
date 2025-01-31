@@ -1,7 +1,5 @@
 import nock from 'nock';
-import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request';
 import ListsClient from '../lib/Classes/MailingLists/mailingLists';
 import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
 import {
@@ -14,14 +12,16 @@ import {
 } from '../lib/Types/MailingLists';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { IMailingListsClient } from '../lib/Interfaces';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
-describe('ListsClient', function () {
+describe('MailListsClient', function () {
   let mailingListsClient: IMailingListsClient;
   let api: nock.Scope;
   let defaultList : MailingList;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData);
     const mailListMembers = new MailListMembers(reqObject);
     mailingListsClient = new ListsClient(reqObject, mailListMembers);
     api = nock('https://api.mailgun.net');

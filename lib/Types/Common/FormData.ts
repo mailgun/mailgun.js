@@ -16,3 +16,7 @@ export type InputFormData =
 export type FormDataInput = {
   [key: string]: FormDataInputValue;
 };
+
+export type FormDataBuilderConfig = {
+  useFetch?: boolean
+}

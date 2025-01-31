@@ -1,6 +1,4 @@
 import nock from 'nock';
-import formData from 'form-data';
-import Request from '../lib/Classes/common/Request';
 import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
 import {
   CreateUpdateMailListMembers,
@@ -11,6 +9,8 @@ import {
 } from '../lib/Types/MailingLists';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { IMailListsMembers } from '../lib/Interfaces';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 describe('mailListsMembersClient', function () {
   let mailListsMembersClient: IMailListsMembers;
@@ -18,7 +18,7 @@ describe('mailListsMembersClient', function () {
   let defaultListMember : MailListMember;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData);
     mailListsMembersClient = new MailListMembers(reqObject);
     api = nock('https://api.mailgun.net');
     defaultListMember = {

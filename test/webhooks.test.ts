@@ -1,18 +1,18 @@
-import formData from 'form-data';
 import nock from 'nock';
 import { WebhooksIds } from '../lib/Enums/index';
-import Request from '../lib/Classes/common/Request';
 import WebhooksClient from '../lib/Classes/Webhooks';
 import { IWebHooksClient } from '../lib/Interfaces';
 import { InputFormData, RequestOptions } from '../lib/Types/Common';
 import { WebhookList, WebhookResult, WebhookValidationResponse } from '../lib/Types/Webhooks';
+import TestRequest from './TestUtils/Request';
+import { getTestFormData } from './TestUtils/FormData';
 
 describe('WebhooksClient', function () {
   let client: IWebHooksClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new WebhooksClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new WebhooksClient(new TestRequest({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData() as InputFormData));
     api = nock('https://api.mailgun.net');
   });
 
