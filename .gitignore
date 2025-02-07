@@ -7,3 +7,6 @@ build
 .coverage/
 .nvmrc
 **/.DS_Store
+
+integration_tests/browser/server/dist/*
+!integration_tests/browser/server/dist/.gitkeep

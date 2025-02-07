@@ -1,4 +1,4 @@
-name: CI
+name: Build and test
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
         - name: Run linter
           run: npm run lint
     test:
-      name: Test
+      name: Unit test
       strategy:
         matrix:
-          node-version: [18.x, 20.x]
+          node-version: [18.x, 20.x, 22.x]
       runs-on: 'ubuntu-latest'
       steps:
         - name: Checkout
@@ -53,8 +53,6 @@ jobs:
         - name: Run tests
           run: npm test
 
-        - name: Show expected changes in the changelog file
-          run: npm run release:test
     changelog:
       name: Changelog check
       runs-on: 'ubuntu-latest'
