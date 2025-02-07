@@ -1,14 +1,15 @@
-/* global expect */
-const nock = require('nock');
-const fs = require('fs/promises');
-const path = require('path');
-const { getMailgunClient } = require('./helpers/clientInit');
-const { successResponse } = require('../../../tests_data/messageResponses');
+import { describe, expect, test, } from '@jest/globals';
+import nock from 'nock';
+import fs from 'fs/promises';
+import path from 'path';
+import { getMailgunClient } from './helpers/clientInit';
+import { successResponse } from '../../../tests_data/messageResponses';
 
 describe('Send message functionality', () => {
   const clientWithPackageFD = getMailgunClient({ withFormDataPackage: false });
   const clientWithNativeFD = getMailgunClient({ withFormDataPackage: true });
-  let api;
+  let api: nock.Scope;
+
   const testingTable = [
     { client: clientWithNativeFD, name: '(with native FormData)' },
     { client: clientWithPackageFD, name: '(with package FormData)' }
@@ -56,7 +57,7 @@ describe('Send message functionality', () => {
     });
   });
 
-  it.each(testingTable)('Sends an attachment  $name', async ({ client }) => {
+  test.each(testingTable)('Sends an attachment  $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
     const img = await fs.readFile(path.resolve(__dirname, '../../../tests_data/img/mailgun.png'));
     const result = await client.messages.create('test.domain.com', {

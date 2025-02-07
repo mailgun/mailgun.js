@@ -1,6 +1,6 @@
-const { getMailgunImport, getMailgunClient } = require('./helpers/clientInit');
+import { describe, expect, test } from '@jest/globals';
+import { getMailgunImport, getMailgunClient } from './helpers/clientInit';
 
-/* global expect */
 describe('Import validation', () => {
   test('package exports function', async () => {
     const packageImport = getMailgunImport();

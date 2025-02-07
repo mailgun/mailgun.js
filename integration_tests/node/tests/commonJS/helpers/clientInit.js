@@ -1,3 +1,5 @@
+// should be JS file to use require
+
 const formData = require('form-data');
 const Mailgun = require('../../../../../dist/mailgun.node');
 

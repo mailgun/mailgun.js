@@ -12,5 +12,4 @@ module.exports = async function globalTeardown(globalConfig) {
 
   await fs.rm(path.join(__dirname, '../server/dist/mailgun.web.js'));
   await teardownPuppeteer(globalConfig);
-  console.log('globalTeardown.js has been invoked');
 };
