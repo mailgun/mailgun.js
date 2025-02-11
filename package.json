@@ -20,7 +20,7 @@
     "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build:prepublish",
     "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build:prepublish",
     "build:prepublish": "node ./SetupPackage.js",
-    "build:rollup": " rm -rf dist && rollup -c && npm run build:prepublish && cp ./dist/AMD/mailgun.amd.js ./integration_tests/browser/server/dist/",
+    "build:rollup": " rm -rf dist && rollup -c && npm run build:prepublish && npm run dist:copy",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "test": "multi='dot=- xunit=./results.xml' nyc mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test:debug": "multi='dot=- mocha --inspect-brk -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
@@ -32,6 +32,7 @@
     "release": "standard-version -a",
     "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
+    "dist:copy": "cp -R ./dist/AMD/ ./integration_tests/browser/server/dist/",
     "prepare": "husky install"
   },
   "exports": {

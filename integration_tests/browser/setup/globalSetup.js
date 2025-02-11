@@ -7,8 +7,12 @@ module.exports = async function globalSetup(globalConfig) {
   const ciEnvValue = process.env.CI;
   if (typeof ciEnvValue !== 'string' || ciEnvValue !== 'true') { // local machine
     await fs.copyFile(
-      path.join(__dirname, '../../../dist/mailgun.web.js'),
-      path.join(__dirname, '../server/dist/mailgun.web.js')
+      path.join(__dirname, '../../../dist/AMD/mailgun.amd.js'),
+      path.join(__dirname, '../server/dist/mailgun.amd.js')
+    );
+    await fs.copyFile(
+      path.join(__dirname, '../../../dist/AMD/definitions.amd.js'),
+      path.join(__dirname, '../server/dist/definitions.amd.js')
     );
     try {
       // set up a web server to server pages

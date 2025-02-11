@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable tsdoc/syntax */
 import {
   describe,
@@ -10,37 +11,37 @@ import { IMailgunClient } from '../../../../lib/Interfaces';
 
 type Window = globalThis.Window & {
   mailgunClient?: IMailgunClient
-  packageExport?: {
+  definitionsExport?: {
     Enums: object,
     Interfaces: object,
-    default: object
   }
+  packageExport?: Function
 };
 
-describe('Import validation', () => {
-  let client: IMailgunClient | undefined;
-  let packageExport: {
-    Enums: object,
-    Interfaces: object,
-    default: object
-  } | undefined;
+describe('AMD import validation', () => {
   beforeAll(async () => {
     await page.goto('http://localhost:3000/pages/AMD.html');
     await page.waitForFunction(function () { return typeof (window as Window).mailgunClient !== 'undefined'; });
-    client = await page.evaluate(() => (window as Window).mailgunClient);
-    packageExport = await page.evaluate(() => (window as Window).packageExport);
+    await page.waitForFunction(function () { return typeof (window as Window).packageExport !== 'undefined'; });
+    await page.waitForFunction(function () { return typeof (window as Window).definitionsExport !== 'undefined'; });
   });
 
-  test('package exports function', async () => {
-    expect(typeof packageExport).toBe('object');
-    expect(packageExport).toEqual(expect.objectContaining({
+  test('AMD package exports function', async () => {
+    const isFunction = await page.evaluate(() => (typeof (window as Window).packageExport === 'function'));
+    expect(isFunction).toBe(true);
+  });
+
+  test('AMD definitions exports object', async () => {
+    const definitionsExport = await page.evaluate(() => (window as Window).definitionsExport);
+    expect(typeof definitionsExport).toBe('object');
+    expect(definitionsExport).toEqual(expect.objectContaining({
       Enums: expect.any(Object),
       Interfaces: expect.any(Object),
-      default: expect.any(Object)
     }));
   });
 
-  test('client has expected structure', async () => {
+  test('AMD client has expected structure', async () => {
+    const client = await page.evaluate(() => (window as Window).mailgunClient);
     const expected = ['request', 'domains', 'webhooks', 'events', 'stats', 'suppressions', 'messages', 'routes', 'ips', 'ip_pools', 'lists', 'validate'];
     expect(client).toBeDefined();
     expect(typeof client).toBe('object');

@@ -9,7 +9,9 @@
 <script src='http://localhost:3000/lib/require.2.3.6.js'></script>
 <script>
   // RequireJS is a popular AMD loader
-  require(['http://localhost:3000/dist/mailgun.amd.js'], function(Mailgun) {
+  require(['http://localhost:3000/dist/mailgun.amd.js', 'http://localhost:3000/dist/definitions.amd.js'], function(Mailgun, definitions) {
+    console.log('Mailgun', Mailgun, typeof Mailgun)
+    window.packageExport = Mailgun;
     const mailgun = new Mailgun(FormData);
     const client = mailgun.client({
       username: 'js_test_username',
@@ -18,8 +20,8 @@
       timeout: 10000,
       url: 'http://localhost:3000/'
     });
-    window.packageExport = Mailgun;
     window.mailgunClient = client;
+    window.definitionsExport = definitions;
   })
 </script>
 <body>

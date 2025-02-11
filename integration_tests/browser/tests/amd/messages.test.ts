@@ -10,7 +10,7 @@ type ExtendedWindow = globalThis.Window & {
   packageExport?: object
 };
 
-describe('Send message functionality', () => {
+describe('Send message functionality (AMD)', () => {
   beforeAll(async () => {
     await page.goto('http://localhost:3000/pages/AMD.html');
     await page.waitForFunction(function () { return typeof (window as ExtendedWindow).mailgunClient !== 'undefined'; });
@@ -34,7 +34,7 @@ describe('Send message functionality', () => {
     await page.setRequestInterception(false);
   });
 
-  test('Sends plain email', async () => {
+  test('Sends plain email (AMD)', async () => {
     const result = await page.evaluate(
       (domain, messageData) => (window as ExtendedWindow)?.mailgunClient?.messages.create(
         domain,
@@ -55,7 +55,7 @@ describe('Send message functionality', () => {
     });
   });
 
-  test('Sends mime email', async () => {
+  test('Sends mime email (AMD)', async () => {
     const result = await page.evaluate(
       (domain, messageData) => (window as ExtendedWindow).mailgunClient?.messages.create(
         domain,
@@ -76,7 +76,7 @@ describe('Send message functionality', () => {
     });
   });
 
-  test('Sends an attachment', async () => {
+  test('Sends an attachment (AMD)', async () => {
     await page.waitForSelector('input[type=file]', { timeout: 3000 });
     const input = await page.$('input[type=file]');
     expect(input).toBeTruthy();

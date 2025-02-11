@@ -49,7 +49,6 @@ export default [
     typescript({
       tsconfig: './tsconfig.rollup.json',
       incremental: false,
-      // emitDeclarationOnly: true,
       compilerOptions: {
         outDir: `${distFolder}AMD/`,
         module: 'ESNext',
@@ -125,7 +124,6 @@ export default [
       }
     }),
     commonjs(), // url-join doesn't have default export
-    // nodePolyfills(),
     json(), // mime-db.json -> mime-types -> form-data
   ],
 },
