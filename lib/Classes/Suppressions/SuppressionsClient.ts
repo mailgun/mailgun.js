@@ -17,7 +17,7 @@ import {
   ISuppressionClient,
   IUnsubscribe,
   IWhiteList
-} from '../../Interfaces/Suppressions';
+} from '../../Interfaces/Suppressions/index';
 import {
   SuppressionList,
   SuppressionListResponse,
@@ -29,7 +29,7 @@ import {
   SuppressionResponse,
   SuppressionDestroyResult,
   SuppressionDestroyResponse
-} from '../../Types/Suppressions';
+} from '../../Types/Suppressions/index';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }
@@ -211,5 +211,3 @@ export default class SuppressionClient
       }));
   }
 }
-
-module.exports = SuppressionClient;

@@ -9,8 +9,8 @@
 <script src='http://localhost:3000/lib/require.2.3.6.js'></script>
 <script>
   // RequireJS is a popular AMD loader
-  require(['http://localhost:3000/dist/mailgun.web.js'], function(Mailgun) {
-    const mailgun = new Mailgun.default(FormData);
+  require(['http://localhost:3000/dist/mailgun.amd.js'], function(Mailgun) {
+    const mailgun = new Mailgun(FormData);
     const client = mailgun.client({
       username: 'js_test_username',
       key: 'js_test_key',

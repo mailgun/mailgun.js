@@ -1,9 +1,6 @@
 {
   "name": "mailgun.js",
   "version": "11.1.0",
-  "main": "./dist/mailgun.node.js",
-  "browser": "./dist/mailgun.web.js",
-  "types": "./index.d.ts",
   "author": "Mailgun",
   "license": "MIT",
   "keywords": [
@@ -23,6 +20,7 @@
     "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build:prepublish",
     "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build:prepublish",
     "build:prepublish": "node ./SetupPackage.js",
+    "build:rollup": " rm -rf dist && rollup -c && npm run build:prepublish && cp ./dist/AMD/mailgun.amd.js ./integration_tests/browser/server/dist/",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
     "test": "multi='dot=- xunit=./results.xml' nyc mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
     "test:debug": "multi='dot=- mocha --inspect-brk -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
@@ -36,8 +34,34 @@
     "link": "cd dist && npm link",
     "prepare": "husky install"
   },
-  "typescript": {
-    "definition": "./index.d.ts"
+  "exports": {
+      ".": {
+        "node": {
+          "require": "./CJS/mailgun.node.js",
+          "types": "./Types/index.d.ts",
+          "default": "./CJS/mailgun.node.js"
+        },
+        "browser": {
+          "require": "./AMD/mailgun.amd.js",
+          "types": "./Types/index.d.ts",
+          "default": "./AMD/mailgun.amd.js"
+        }
+      },
+      "./definitions": {
+        "node": {
+          "require": "./CJS/definitions.js",
+          "types": "./Types/definitions.d.ts",
+          "default": "./CJS/definitions.js"
+        },
+        "browser": {
+          "require": "./AMD/definitions.js",
+          "types": "./Types/definitions.d.ts",
+          "default": "./AMD/definitions.js"
+        }
+      }
+  },
+  "typesVersions": {
+    "*": { "*": ["Types/*"] }
   },
   "dependencies": {
     "axios": "^1.7.4",
@@ -50,6 +74,10 @@
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^12.1.4",
     "@jest/globals": "^29.7.0",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/base-64": "^1.0.0",
     "@types/chai": "^4.2.14",
     "@types/chai-spies": "^1.0.3",
@@ -80,6 +108,7 @@
     "nyc": "^15.1.0",
     "path-browserify": "^1.0.1",
     "puppeteer": "^24.1.1",
+    "rollup": "^4.34.5",
     "standard-version": "^9.3.1",
     "terser-webpack-plugin": "^5.2.0",
     "ts-jest": "^29.2.5",
