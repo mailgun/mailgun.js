@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/mailgun/mailgun.js#readme",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.dev.config.js --progress --color && npm run build:prepublish",
-    "build:release": "webpack --config ./webpack/webpack.release.config.js --progress --color && npm run build:prepublish",
+    "build": "webpack --config ./webpack/webpack.dev.config.cjs --progress --color && npm run build:prepublish",
+    "build:release": "webpack --config ./webpack/webpack.release.config.cjs --progress --color && npm run build:prepublish",
     "build:prepublish": "node ./SetupPackage.cjs",
     "build:rollup": " rm -rf dist && rollup -c && npm run build:prepublish && npm run dist:copy",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",

@@ -1,4 +1,4 @@
-import Request from './common/Request.js';
+import type Request from './common/Request.js';
 import { ISubaccountsClient } from '../Interfaces/index.js';
 import { SubaccountListResponseData, SubaccountResponseData, SubaccountsQuery } from '../Types/index.js';
 export default class SubaccountsClient implements ISubaccountsClient {

@@ -1,5 +1,5 @@
 import { APIResponse } from '../../Types/Common/index.js';
-import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainGetQuery, DomainInfo, DomainsQuery, DomainTrackingData, DomainUpdateInfo, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResult, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains/index.js';
+import type { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainGetQuery, DomainInfo, DomainsQuery, DomainTrackingData, DomainUpdateInfo, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResult, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains/index.js';
 import { IDomainCredentials } from './DomainCredentials.js';
 import { IDomainTagsClient } from './DomainTags.js';
 import { IDomainTemplatesClient } from './DomainTemplates.js';

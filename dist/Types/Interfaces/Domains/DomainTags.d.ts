@@ -1,5 +1,5 @@
 import { Resolution } from '../../Enums/index.js';
-import { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsList, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagStatisticItem } from '../../Types/Domains/index.js';
+import type { DomainTagCountriesAggregation, DomainTagDevicesAggregation, DomainTagProvidersAggregation, DomainTagsItem, DomainTagsList, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagStatisticItem } from '../../Types/Domains/index.js';
 export interface IDomainTagStatisticResult {
     tag: string;
     description: string;

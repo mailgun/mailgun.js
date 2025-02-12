@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "target": "es5",
     "allowJs": true,
     "declaration": true,
