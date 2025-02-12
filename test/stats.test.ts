@@ -2,11 +2,15 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
-import StatsClient from '../lib/Classes/Stats/StatsClient';
-import { StatsOptions, StatsQuery } from '../lib/Types/Stats';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { IStatsClient } from '../lib/Interfaces';
+import Request from '../lib/Classes/common/Request.js';
+import StatsClient from '../lib/Classes/Stats/StatsClient.js';
+import {
+  StatsOptions,
+  StatsQuery,
+  InputFormData,
+  RequestOptions
+} from '../lib/Types/index.js';
+import { IStatsClient } from '../lib/Interfaces/index.js';
 
 describe('StatsClient', function () {
   let client: IStatsClient;

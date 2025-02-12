@@ -1,1 +1,1 @@
-export * from './IIPsClient';
+export * from './IIPsClient.js';

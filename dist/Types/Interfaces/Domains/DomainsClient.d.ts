@@ -1,9 +1,9 @@
-import { APIResponse } from '../../Types/Common';
-import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainGetQuery, DomainInfo, DomainsQuery, DomainTrackingData, DomainUpdateInfo, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResult, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains';
-import { IDomainCredentials } from './DomainCredentials';
-import { IDomainTagsClient } from './DomainTags';
-import { IDomainTemplatesClient } from './DomainTemplates';
-import { IDomainTrackingClient } from './DomainTracking';
+import { APIResponse } from '../../Types/Common/index.js';
+import { ClickTrackingInfo, ConnectionSettings, DKIMAuthorityInfo, DKIMSelectorInfo, DomainGetQuery, DomainInfo, DomainsQuery, DomainTrackingData, DomainUpdateInfo, MessageResponse, OpenTrackingInfo, ReplacementForPool, TDomain, UnsubscribeTrackingInfo, UpdatedConnectionSettings, UpdatedDKIMAuthority, UpdatedDKIMSelectorResult, UpdatedOpenTracking, UpdatedWebPrefixResponse, WebPrefixInfo } from '../../Types/Domains/index.js';
+import { IDomainCredentials } from './DomainCredentials.js';
+import { IDomainTagsClient } from './DomainTags.js';
+import { IDomainTemplatesClient } from './DomainTemplates.js';
+import { IDomainTrackingClient } from './DomainTracking.js';
 export interface IDomainsClient {
     domainCredentials: IDomainCredentials;
     domainTemplates: IDomainTemplatesClient;

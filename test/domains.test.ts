@@ -2,13 +2,13 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
-import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
-import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
-import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
-import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking';
+import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common/index.js';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials.js';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates.js';
+import DomainTagsClient from '../lib/Classes/Domains/domainsTags.js';
+import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking.js';
 
 import {
   MessageResponse,
@@ -19,8 +19,8 @@ import {
   TDomain,
   UpdatedDKIMSelectorResult,
   DomainTrackingData
-} from '../lib/Types/Domains';
-import DomainsClient from '../lib/Classes/Domains/domainsClient';
+} from '../lib/Types/Domains/index.js';
+import DomainsClient from '../lib/Classes/Domains/domainsClient.js';
 
 // TODO: fix types
 describe('DomainsClient', function () {

@@ -1,24 +1,24 @@
 /* eslint-disable camelcase */
-import Request from './common/Request';
-import { MailgunClientOptions, InputFormData, RequestOptions } from '../Types';
+import Request from './common/Request.js';
+import { MailgunClientOptions, InputFormData, RequestOptions } from '../Types/index.js';
 
-import DomainsClient from './Domains/domainsClient';
-import EventClient from './Events';
-import StatsClient from './Stats/StatsClient';
-import SuppressionClient from './Suppressions/SuppressionsClient';
-import WebhooksClient from './Webhooks';
-import MessagesClient from './Messages';
-import RoutesClient from './Routes';
-import ValidateClient from './Validations/validate';
-import IpsClient from './IPs';
-import IpPoolsClient from './IPPools';
-import MailingListsClient from './MailingLists/mailingLists';
-import MailListsMembers from './MailingLists/mailListMembers';
-import DomainCredentialsClient from './Domains/domainsCredentials';
-import MultipleValidationClient from './Validations/multipleValidation';
-import DomainTemplatesClient from './Domains/domainsTemplates';
-import DomainTagsClient from './Domains/domainsTags';
-import SubaccountsClient from './Subaccounts';
+import DomainsClient from './Domains/domainsClient.js';
+import EventClient from './Events.js';
+import StatsClient from './Stats/StatsClient.js';
+import SuppressionClient from './Suppressions/SuppressionsClient.js';
+import WebhooksClient from './Webhooks.js';
+import MessagesClient from './Messages.js';
+import RoutesClient from './Routes.js';
+import ValidateClient from './Validations/validate.js';
+import IpsClient from './IPs.js';
+import IpPoolsClient from './IPPools.js';
+import MailingListsClient from './MailingLists/mailingLists.js';
+import MailListsMembers from './MailingLists/mailListMembers.js';
+import DomainCredentialsClient from './Domains/domainsCredentials.js';
+import MultipleValidationClient from './Validations/multipleValidation.js';
+import DomainTemplatesClient from './Domains/domainsTemplates.js';
+import DomainTagsClient from './Domains/domainsTags.js';
+import SubaccountsClient from './Subaccounts.js';
 
 import {
   IDomainsClient,
@@ -35,17 +35,17 @@ import {
   IIPPoolsClient,
   ISubaccountsClient,
   IInboxPlacementsClient,
-} from '../Interfaces';
-import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient';
-import InboxPlacementsClient from './InboxPlacements/inboxPlacements';
-import InboxPlacementsResultsClient from './InboxPlacements/Results/InboxPlacementsResultsClient';
-import InboxPlacementsAttributesClient from './InboxPlacements/AttributesClient';
-import InboxPlacementsFiltersClient from './InboxPlacements/FiltersClient';
-import IPRSharingClient from './InboxPlacements/Results/InboxPlacementsResultsSharingClient';
-import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPlacementsProviders';
-import MetricsClient from './Metrics/MetricsClient';
-import { IMetricsClient } from '../Interfaces/Metrics/MetricsClient';
-import DomainTrackingClient from './Domains/domainsTracking';
+  IMetricsClient,
+} from '../Interfaces/index.js';
+import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
+import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
+import InboxPlacementsResultsClient from './InboxPlacements/Results/InboxPlacementsResultsClient.js';
+import InboxPlacementsAttributesClient from './InboxPlacements/AttributesClient.js';
+import InboxPlacementsFiltersClient from './InboxPlacements/FiltersClient.js';
+import IPRSharingClient from './InboxPlacements/Results/InboxPlacementsResultsSharingClient.js';
+import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPlacementsProviders.js';
+import MetricsClient from './Metrics/MetricsClient.js';
+import DomainTrackingClient from './Domains/domainsTracking.js';
 
 export default class MailgunClient implements IMailgunClient {
   private request;

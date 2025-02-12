@@ -1,1 +1,1 @@
-export * from './IPs';
+export * from './IPs.js';

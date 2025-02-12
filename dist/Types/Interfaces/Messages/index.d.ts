@@ -1,1 +1,1 @@
-export * from './IMessagesClient';
+export * from './IMessagesClient.js';

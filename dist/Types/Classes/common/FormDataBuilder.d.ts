@@ -1,6 +1,6 @@
 import * as NodeFormData from 'form-data';
-import { FormDataInput, InputFormData } from '../../Types/Common';
-import { MimeMessage } from '../../Types';
+import { FormDataInput, InputFormData } from '../../Types/Common/index.js';
+import { MimeMessage } from '../../Types/index.js';
 declare class FormDataBuilder {
     private FormDataConstructor;
     private fileKeys;

@@ -1,7 +1,7 @@
-import Request from '../common/Request';
-import { MailListMembersQuery, CreateUpdateMailListMembers, MailListMember, MultipleMembersData, DeletedMember, NewMultipleMembersResponse, MailListMembersResult, MailListMembersResponse } from '../../Types/MailingLists';
-import NavigationThruPages from '../common/NavigationThruPages';
-import { IMailListsMembers } from '../../Interfaces/MailingLists';
+import Request from '../common/Request.js';
+import { MailListMembersQuery, CreateUpdateMailListMembers, MailListMember, MultipleMembersData, DeletedMember, NewMultipleMembersResponse, MailListMembersResult, MailListMembersResponse } from '../../Types/MailingLists/index.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import { IMailListsMembers } from '../../Interfaces/MailingLists/index.js';
 export default class MailListsMembers extends NavigationThruPages<MailListMembersResult> implements IMailListsMembers {
     baseRoute: string;
     request: Request;

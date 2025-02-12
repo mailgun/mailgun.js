@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../Common';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 export type EventsPage = {
     id: string;
     number: string;

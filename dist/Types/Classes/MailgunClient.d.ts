@@ -1,6 +1,5 @@
-import { MailgunClientOptions, InputFormData } from '../Types';
-import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient } from '../Interfaces';
-import { IMetricsClient } from '../Interfaces/Metrics/MetricsClient';
+import { MailgunClientOptions, InputFormData } from '../Types/index.js';
+import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient } from '../Interfaces/index.js';
 export default class MailgunClient implements IMailgunClient {
     private request;
     domains: IDomainsClient;

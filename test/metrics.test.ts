@@ -2,12 +2,11 @@ import formData from 'form-data';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { IMetricsClient } from '../lib/Interfaces/Metrics/MetricsClient';
-import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
-import { MetricsResult } from '../lib/Types/Metrics';
-import { Resolution } from '../lib/Enums';
+import Request from '../lib/Classes/common/Request.js';
+import { InputFormData, MetricsResult, RequestOptions } from '../lib/Types/index.js';
+import { IMetricsClient } from '../lib/Interfaces/Metrics/MetricsClient.js';
+import MetricsClient from '../lib/Classes/Metrics/MetricsClient.js';
+import { Resolution } from '../lib/Enums/index.js';
 
 describe('MetricsClient', function () {
   let client: IMetricsClient;

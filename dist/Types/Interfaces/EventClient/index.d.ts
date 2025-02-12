@@ -1,1 +1,1 @@
-export * from './IEventClient';
+export * from './IEventClient.js';

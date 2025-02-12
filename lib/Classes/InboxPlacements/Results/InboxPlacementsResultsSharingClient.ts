@@ -1,4 +1,4 @@
-import { IIPRSharingClient } from '../../../Interfaces';
+import { IIPRSharingClient } from '../../../Interfaces/index.js';
 import {
   IPRSharingAPIResponse,
   IPRSharingApiShape,
@@ -6,8 +6,8 @@ import {
   IPRSharingUpdateAPIResponse,
   IPRSharingUpdateData,
   IPRSharingUpdateResult
-} from '../../../Types/InboxPlacements';
-import Request from '../../common/Request';
+} from '../../../Types/InboxPlacements/index.js';
+import Request from '../../common/Request.js';
 
 export default class IPRSharingClient implements IIPRSharingClient {
   request: Request;

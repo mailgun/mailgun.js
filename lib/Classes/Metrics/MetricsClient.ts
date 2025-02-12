@@ -1,9 +1,8 @@
-import Request from '../common/Request';
-import { ILogger } from '../../Interfaces/Common';
-import { IMetricsClient } from '../../Interfaces/Metrics/MetricsClient';
+import Request from '../common/Request.js';
 import {
   MetricsAPIQuery, MetricsAPIResponse, MetricsQuery, MetricsResult
-} from '../../Types/Metrics';
+} from '../../Types/Metrics/index.js';
+import { ILogger, IMetricsClient } from '../../Interfaces/index.js';
 
 export default class MetricsClient implements IMetricsClient {
   request: Request;

@@ -1,1 +1,1 @@
-export * from './IIPPoolsClient';
+export * from './IIPPoolsClient.js';

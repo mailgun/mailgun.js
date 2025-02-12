@@ -1,8 +1,8 @@
-import Request from '../common/Request';
-import NavigationThruPages from '../common/NavigationThruPages';
-import Suppression from './Suppression';
-import { IBounce, IComplaint, ISuppressionClient, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions/index';
-import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions/index';
+import Request from '../common/Request.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import Suppression from './Suppression.js';
+import { IBounce, IComplaint, ISuppressionClient, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions/index.js';
+import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions/index.js';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> implements ISuppressionClient {
     request: Request;
     models: object;

@@ -1,1 +1,1 @@
-export * from './IWebHooksClient';
+export * from './IWebHooksClient.js';

@@ -1,4 +1,4 @@
-import Request from '../common/Request';
+import Request from '../common/Request.js';
 import {
   MailListMembersQuery,
   CreateUpdateMailListMembers,
@@ -10,9 +10,9 @@ import {
   NewMultipleMembersResponse,
   MailListMembersResult,
   MailListMembersResponse
-} from '../../Types/MailingLists';
-import NavigationThruPages from '../common/NavigationThruPages';
-import { IMailListsMembers } from '../../Interfaces/MailingLists';
+} from '../../Types/MailingLists/index.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import { IMailListsMembers } from '../../Interfaces/MailingLists/index.js';
 
 export default class MailListsMembers
   extends NavigationThruPages<MailListMembersResult>

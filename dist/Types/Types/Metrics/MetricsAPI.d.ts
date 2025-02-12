@@ -1,4 +1,4 @@
-import { Metrics, MetricsPagination, MetricsQuery, MetricsResponseItem } from './Metrics';
+import { Metrics, MetricsPagination, MetricsQuery, MetricsResponseItem } from './Metrics.js';
 export type MetricsAPIQuery = Omit<MetricsQuery, 'start' | 'end'> & {
     start?: string;
     end?: string;

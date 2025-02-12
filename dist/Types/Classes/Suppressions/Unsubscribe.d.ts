@@ -1,6 +1,6 @@
-import { IUnsubscribe } from '../../Interfaces/Suppressions';
-import { UnsubscribeData } from '../../Types/Suppressions';
-import Suppression from './Suppression';
+import { IUnsubscribe } from '../../Interfaces/Suppressions/index.js';
+import { UnsubscribeData } from '../../Types/Suppressions/index.js';
+import Suppression from './Suppression.js';
 export default class Unsubscribe extends Suppression implements IUnsubscribe {
     address: string;
     tags: string[];

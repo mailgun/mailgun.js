@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
-import { WebhooksIds } from '../Enums';
-import { IWebHooksClient } from '../Interfaces/Webhooks';
+import { WebhooksIds } from '../Enums/index.js';
+import { IWebHooksClient } from '../Interfaces/Webhooks/index.js';
 
 import {
   WebhookValidationResponse,
@@ -8,8 +8,8 @@ import {
   WebhookResponse,
   WebhooksQuery,
   WebhookResult
-} from '../Types/Webhooks';
-import Request from './common/Request';
+} from '../Types/Webhooks/index.js';
+import Request from './common/Request.js';
 
 export class Webhook implements WebhookResult {
   id: string;

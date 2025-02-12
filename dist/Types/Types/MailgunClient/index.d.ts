@@ -1,1 +1,1 @@
-export * from './MailgunClientOptions';
+export * from './MailgunClientOptions.js';

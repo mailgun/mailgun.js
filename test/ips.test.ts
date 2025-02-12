@@ -2,11 +2,14 @@
 
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/Classes/common/Request';
-import IpsClient from '../lib/Classes/IPs';
-
-import { IpData, IpsListResponseBody } from '../lib/Types/IPs';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import Request from '../lib/Classes/common/Request.js';
+import IpsClient from '../lib/Classes/IPs.js';
+import {
+  IpData,
+  IpsListResponseBody,
+  InputFormData,
+  RequestOptions
+} from '../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainClient', function () {

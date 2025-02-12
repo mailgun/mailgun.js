@@ -1,7 +1,7 @@
-import NavigationThruPages from './common/NavigationThruPages';
-import { EventsList, EventsQuery, EventsResponse } from '../Types/Events';
-import Request from './common/Request';
-import { IEventClient } from '../Interfaces';
+import NavigationThruPages from './common/NavigationThruPages.js';
+import { EventsList, EventsQuery, EventsResponse } from '../Types/Events/index.js';
+import Request from './common/Request.js';
+import { IEventClient } from '../Interfaces/index.js';
 export default class EventClient extends NavigationThruPages<EventsList> implements IEventClient {
     request: Request;
     constructor(request: Request);

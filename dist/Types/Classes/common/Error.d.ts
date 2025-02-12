@@ -1,4 +1,4 @@
-import { APIErrorOptions, APIErrorType } from '../../Types/Common';
+import { APIErrorOptions, APIErrorType } from '../../Types/Common/index.js';
 export default class APIError extends Error implements APIErrorType {
     status: number;
     stack: string;

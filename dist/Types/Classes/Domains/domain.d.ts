@@ -1,4 +1,4 @@
-import { DNSRecord, DomainData, TDomain } from '../../Types/Domains';
+import { DNSRecord, DomainData, TDomain } from '../../Types/Domains/index.js';
 export default class Domain implements TDomain {
     name: string;
     require_tls: boolean;

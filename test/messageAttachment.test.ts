@@ -3,11 +3,10 @@ import nock from 'nock';
 import { expect } from 'chai';
 import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request';
-import MessagesClient from '../lib/Classes/Messages';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { IMessagesClient } from '../lib/Interfaces';
-import { MessagesSendResult } from '../lib/Types/Messages';
+import Request from '../lib/Classes/common/Request.js';
+import MessagesClient from '../lib/Classes/Messages.js';
+import { IMessagesClient } from '../lib/Interfaces/index.js';
+import { InputFormData, RequestOptions, MessagesSendResult } from '../lib/Types/index.js';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 

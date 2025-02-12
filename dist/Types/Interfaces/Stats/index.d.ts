@@ -1,2 +1,2 @@
-export * from './StatsClient';
-export * from './StatsContainer';
+export * from './StatsClient.js';
+export * from './StatsContainer.js';

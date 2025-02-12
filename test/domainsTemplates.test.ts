@@ -2,11 +2,15 @@ import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
-import { DomainTemplateUpdateVersionData, DomainTemplateVersionData } from '../lib/Types/Domains';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates.js';
+import {
+  InputFormData,
+  RequestOptions,
+  DomainTemplateUpdateVersionData,
+  DomainTemplateVersionData
+} from '../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainsTemplatesClient', function () {

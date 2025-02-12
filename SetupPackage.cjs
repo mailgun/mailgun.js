@@ -17,11 +17,11 @@ function main() {
   delete sourceObj.devDependencies;
   delete sourceObj['standard-version'];
 
-  Object.entries(sourceObj).forEach(([key, value]) => {
-    if (typeof value === 'string' && value.startsWith('./dist/')) {
-      sourceObj[key] = sourceObj[key].replace('./dist/', './');
-    }
-  });
+  // Object.entries(sourceObj).forEach(([key, value]) => {
+  //   if (typeof value === 'string' && value.startsWith('./dist/')) {
+  //     sourceObj[key] = sourceObj[key].replace('./dist/', './');
+  //   }
+  // });
   fs.writeFileSync(path.join(__dirname, 'dist/package.json'), Buffer.from(JSON.stringify(sourceObj, null, 2), 'utf-8').toString());
   fs.writeFileSync(path.join(__dirname, 'dist/version.md'), Buffer.from(sourceObj.version, 'utf-8').toString());
 

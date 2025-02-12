@@ -1,1 +1,1 @@
-export * from './IRoutesClient';
+export * from './IRoutesClient.js';

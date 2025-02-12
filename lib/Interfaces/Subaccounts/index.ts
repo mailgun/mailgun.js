@@ -1,1 +1,1 @@
-export * from './ISubaccountsClient';
+export * from './ISubaccountsClient.js';

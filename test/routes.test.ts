@@ -1,11 +1,16 @@
 /* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
-import { IRoutesClient } from '../lib/Interfaces/Routes/IRoutesClient';
-import Request from '../lib/Classes/common/Request';
-import RoutesClient from '../lib/Classes/Routes';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { DestroyRouteResponse, Route, UpdateRouteResponse } from '../lib/Types/Routes';
+import { IRoutesClient } from '../lib/Interfaces/Routes/IRoutesClient.js';
+import Request from '../lib/Classes/common/Request.js';
+import RoutesClient from '../lib/Classes/Routes.js';
+import {
+  InputFormData,
+  RequestOptions,
+  DestroyRouteResponse,
+  Route,
+  UpdateRouteResponse
+} from '../lib/Types/index.js';
 
 describe('RoutesClient', function () {
   let client: IRoutesClient;

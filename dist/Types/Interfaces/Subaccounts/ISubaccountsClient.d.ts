@@ -1,4 +1,4 @@
-import { SubaccountListResponseData, SubaccountResponseData, SubaccountsQuery } from '../../Types';
+import { SubaccountListResponseData, SubaccountResponseData, SubaccountsQuery } from '../../Types/index.js';
 export interface ISubaccountsClient {
     list(query?: SubaccountsQuery): Promise<SubaccountListResponseData>;
     get(id: string): Promise<SubaccountResponseData>;

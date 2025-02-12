@@ -1,4 +1,4 @@
-import { MetricsQuery, MetricsResult } from '../../Types/Metrics';
+import { MetricsQuery, MetricsResult } from '../../Types/Metrics/index.js';
 
 export interface IMetricsClient {
   getAccount(query?: MetricsQuery): Promise<MetricsResult>

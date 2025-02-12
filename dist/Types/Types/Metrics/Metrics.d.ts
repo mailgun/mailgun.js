@@ -1,4 +1,4 @@
-import { Resolution } from '../../Enums';
+import { Resolution } from '../../Enums/index.js';
 export type MetricsFilterValue = {
     label?: string;
     value: string;

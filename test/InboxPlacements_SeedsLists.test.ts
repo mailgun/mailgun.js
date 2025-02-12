@@ -2,13 +2,13 @@ import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
 
-import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient';
-import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient';
-import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient';
+import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
+import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient.js';
+import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient.js';
 
 // TODO: fix types
 describe('SeedsListsClient', () => {

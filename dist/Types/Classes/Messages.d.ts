@@ -1,6 +1,6 @@
-import { MailgunMessageData, MessagesSendAPIResponse, MessagesSendResult } from '../Types';
-import Request from './common/Request';
-import { IMessagesClient } from '../Interfaces';
+import { MailgunMessageData, MessagesSendAPIResponse, MessagesSendResult } from '../Types/index.js';
+import Request from './common/Request.js';
+import { IMessagesClient } from '../Interfaces/index.js';
 export default class MessagesClient implements IMessagesClient {
     request: Request;
     constructor(request: Request);

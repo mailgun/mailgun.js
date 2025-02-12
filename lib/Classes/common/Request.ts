@@ -9,7 +9,7 @@ import axios, {
   AxiosRequestHeaders,
 } from 'axios';
 import * as NodeFormData from 'form-data';
-import APIError from './Error';
+import APIError from './Error.js';
 import {
   OnCallRequestOptions,
   RequestOptions,
@@ -18,10 +18,10 @@ import {
   APIResponse,
   IpPoolDeleteData,
   FormDataInput
-} from '../../Types';
+} from '../../Types/index.js';
 
-import FormDataBuilder from './FormDataBuilder';
-import SubaccountsClient from '../Subaccounts';
+import FormDataBuilder from './FormDataBuilder.js';
+import SubaccountsClient from '../Subaccounts.js';
 
 class Request {
   private username: string;

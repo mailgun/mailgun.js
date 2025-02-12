@@ -2,15 +2,15 @@ import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
 
-import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient';
-import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient';
-import { IInboxPlacementsResultsClient } from '../lib/Interfaces';
-import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient';
-import IPRSharingClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient';
+import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient.js';
+import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient.js';
+import { IInboxPlacementsResultsClient } from '../lib/Interfaces/index.js';
+import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
+import IPRSharingClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient.js';
 
 // TODO: fix types
 describe('Inbox Placements results', () => {

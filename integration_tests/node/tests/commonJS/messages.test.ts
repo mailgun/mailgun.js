@@ -1,8 +1,14 @@
-import { describe, expect, test, } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  test,
+} from '@jest/globals';
 import nock from 'nock';
 import fs from 'fs/promises';
 import path from 'path';
-import { getMailgunClient } from './helpers/clientInit';
+import { getMailgunClient } from './helpers/clientInit.cjs';
 import { successResponse } from '../../../tests_data/messageResponses';
 
 describe('Send message functionality', () => {

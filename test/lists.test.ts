@@ -1,19 +1,20 @@
 import nock from 'nock';
 import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request';
-import ListsClient from '../lib/Classes/MailingLists/mailingLists';
-import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
+import Request from '../lib/Classes/common/Request.js';
+import ListsClient from '../lib/Classes/MailingLists/mailingLists.js';
+import MailListMembers from '../lib/Classes/MailingLists/mailListMembers.js';
 import {
   MailingListCancelValidationResult,
   MailingList,
   StartValidationResult,
   MailingListValidationResult,
   CreateUpdateList,
-  DestroyedList
-} from '../lib/Types/MailingLists';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { IMailingListsClient } from '../lib/Interfaces';
+  DestroyedList,
+  InputFormData,
+  RequestOptions
+} from '../lib/Types/index.js';
+import { IMailingListsClient } from '../lib/Interfaces/index.js';
 
 describe('ListsClient', function () {
   let mailingListsClient: IMailingListsClient;

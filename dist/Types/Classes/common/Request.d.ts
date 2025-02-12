@@ -1,5 +1,5 @@
 import * as NodeFormData from 'form-data';
-import { RequestOptions, InputFormData, APIResponse, IpPoolDeleteData, FormDataInput } from '../../Types';
+import { RequestOptions, InputFormData, APIResponse, IpPoolDeleteData, FormDataInput } from '../../Types/index.js';
 declare class Request {
     private username;
     private key;

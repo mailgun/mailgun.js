@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import { Resolution } from '../../Enums';
-import {
+import { Resolution } from '../../Enums/index.js';
+import type {
   DomainTagCountriesAggregation,
   DomainTagDevicesAggregation,
   DomainTagProvidersAggregation,
@@ -9,7 +9,7 @@ import {
   DomainTagsMessageRes,
   DomainTagsStatisticQuery,
   DomainTagStatisticItem
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
 export interface IDomainTagStatisticResult {
     tag: string;

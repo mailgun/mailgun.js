@@ -1,6 +1,6 @@
-import MailgunClient from './Classes/MailgunClient';
-import { IMailgunClient } from './Interfaces/MailgunClient/index';
-import { InputFormData, MailgunClientOptions } from './Types/index';
+import MailgunClient from './Classes/MailgunClient.js';
+import { IMailgunClient } from './Interfaces/MailgunClient/index.js';
+import { InputFormData, MailgunClientOptions } from './Types/index.js';
 
 export default class Mailgun {
   static get default(): typeof Mailgun { return this; }

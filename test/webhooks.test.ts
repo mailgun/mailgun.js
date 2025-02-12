@@ -1,11 +1,16 @@
 import formData from 'form-data';
 import nock from 'nock';
-import { WebhooksIds } from '../lib/Enums/index';
-import Request from '../lib/Classes/common/Request';
-import WebhooksClient from '../lib/Classes/Webhooks';
-import { IWebHooksClient } from '../lib/Interfaces';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { WebhookList, WebhookResult, WebhookValidationResponse } from '../lib/Types/Webhooks';
+import { WebhooksIds } from '../lib/Enums/index.js';
+import Request from '../lib/Classes/common/Request.js';
+import WebhooksClient from '../lib/Classes/Webhooks.js';
+import { IWebHooksClient } from '../lib/Interfaces/index.js';
+import {
+  InputFormData,
+  RequestOptions,
+  WebhookList,
+  WebhookResult,
+  WebhookValidationResponse
+} from '../lib/Types/index.js';
 
 describe('WebhooksClient', function () {
   let client: IWebHooksClient;

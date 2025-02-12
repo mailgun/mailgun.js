@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import Request from './common/Request';
+import Request from './common/Request.js';
 
 import {
   IpPoolCreateData,
@@ -11,8 +11,8 @@ import {
   IpPoolMessageResponse,
   IpPoolMessageResult,
   IpPoolUpdateData,
-} from '../Types/IPPools';
-import { IIPPoolsClient } from '../Interfaces';
+} from '../Types/index.js';
+import { IIPPoolsClient } from '../Interfaces/index.js';
 
 export default class IpPoolsClient implements IIPPoolsClient {
   request: Request;

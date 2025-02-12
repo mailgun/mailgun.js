@@ -1,5 +1,5 @@
-import { Resolution } from '../../Enums';
-import { PagesList, ParsedPagesList } from '../Common';
+import { Resolution } from '../../Enums/index.js';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 export type DomainTagsQuery = {
     limit: number;
     page?: string;

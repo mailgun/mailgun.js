@@ -1,7 +1,6 @@
-import Request from '../common/Request';
-import { StatsQuery } from '../../Types/Stats';
-import { ILogger } from '../../Interfaces/Common';
-import { IStatsClient, IStatsContainer } from '../../Interfaces/Stats';
+import Request from '../common/Request.js';
+import { StatsQuery } from '../../Types/Stats/index.js';
+import { ILogger, IStatsClient, IStatsContainer } from '../../Interfaces/index.js';
 export default class StatsClient implements IStatsClient {
     request: Request;
     private logger;

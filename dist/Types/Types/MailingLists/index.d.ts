@@ -1,2 +1,2 @@
-export * from './MailingListMembers';
-export * from './MailingLists';
+export * from './MailingListMembers.js';
+export * from './MailingLists.js';

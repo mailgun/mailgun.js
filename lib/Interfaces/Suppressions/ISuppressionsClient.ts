@@ -4,11 +4,11 @@ import {
   SuppressionCreationResult,
   SuppressionListQuery,
   SuppressionDestroyResult
-} from '../../Types/Suppressions';
-import { IBounce } from './Bounce';
-import { IComplaint } from './Complaint';
-import { IUnsubscribe } from './Unsubscribe';
-import { IWhiteList } from './WhiteList';
+} from '../../Types/Suppressions/index.js';
+import { IBounce } from './Bounce.js';
+import { IComplaint } from './Complaint.js';
+import { IUnsubscribe } from './Unsubscribe.js';
+import { IWhiteList } from './WhiteList.js';
 
 export interface ISuppressionClient {
   list(domain: string, type: string, query?: SuppressionListQuery): Promise<SuppressionList>

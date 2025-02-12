@@ -4,9 +4,9 @@ import formData from 'form-data';
 import base64 from 'base-64';
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
-import APIError from '../lib/Classes/common/Error';
-import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common';
+import Request from '../lib/Classes/common/Request.js';
+import APIError from '../lib/Classes/common/Error.js';
+import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common/index.js';
 
 describe('Request', function () {
   let headers: { [key: string]: string };

@@ -1,11 +1,15 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
-import { DomainCredentialsList, DomainCredentialsResult } from '../lib/Types/Domains';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials.js';
+import {
+  DomainCredentialsList,
+  DomainCredentialsResult,
+  InputFormData,
+  RequestOptions
+} from '../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainsCredentialsClient', function () {

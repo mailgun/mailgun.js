@@ -1,18 +1,18 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import { IDomainTagsClient } from '../lib/Interfaces/Domains/DomainTags';
-import Request from '../lib/Classes/common/Request';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import DomainsTagsClient, { DomainTagStatistic } from '../lib/Classes/Domains/domainsTags';
+import { IDomainTagsClient } from '../lib/Interfaces/Domains/DomainTags.js';
+import Request from '../lib/Classes/common/Request.js';
+import DomainsTagsClient, { DomainTagStatistic } from '../lib/Classes/Domains/domainsTags.js';
 import {
+  InputFormData, RequestOptions,
   DomainTagCountriesAggregation,
   DomainTagDevicesAggregation,
   DomainTagProvidersAggregation,
   DomainTagsItem,
   DomainTagsList,
   DomainTagsMessageRes
-} from '../lib/Types/Domains';
+} from '../lib/Types/index.js';
 
 describe('DomainsTagsClient', function () {
   let client: IDomainTagsClient;

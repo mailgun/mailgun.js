@@ -2,16 +2,17 @@
 import formData from 'form-data';
 import nock from 'nock';
 import { expect } from 'chai';
-import { IDomainTrackingClient } from '../lib/Interfaces';
-import Request from '../lib/Classes/common/Request';
-import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { IDomainTrackingClient } from '../lib/Interfaces/index.js';
+import Request from '../lib/Classes/common/Request.js';
+import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking.js';
 import {
+  InputFormData,
+  RequestOptions,
   GetDomainTrackingCertificateResponse,
   GenerateDomainTrackingCertificateResponse,
   RegenerateDomainTrackingCertificateResponse,
   DomainTrackingData,
-} from '../lib/Types/Domains';
+} from '../lib/Types/index.js';
 
 describe('DomainTrackingClient', function () {
   let client: IDomainTrackingClient;

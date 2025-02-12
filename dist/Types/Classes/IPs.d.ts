@@ -1,6 +1,6 @@
-import MgRequest from './common/Request';
-import { IpData, IPsListQuery, IpsListResponseBody } from '../Types/IPs';
-import { IIPsClient } from '../Interfaces';
+import MgRequest from './common/Request.js';
+import { IpData, IPsListQuery, IpsListResponseBody } from '../Types/IPs/index.js';
+import { IIPsClient } from '../Interfaces/index.js';
 export default class IpsClient implements IIPsClient {
     request: MgRequest;
     constructor(request: MgRequest);

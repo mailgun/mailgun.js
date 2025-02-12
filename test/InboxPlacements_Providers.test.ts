@@ -1,12 +1,12 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
 
-import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders';
-import { IInboxPlacementsProvidersClient } from '../lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders';
+import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
+import { IInboxPlacementsProvidersClient } from '../lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.js';
 
 // TODO: fix types
 describe('Inbox Placements Providers', () => {

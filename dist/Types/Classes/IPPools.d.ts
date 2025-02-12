@@ -1,6 +1,6 @@
-import Request from './common/Request';
-import { IpPoolCreateData, IpPoolCreateResult, IpPoolDeleteData, IpPoolListResult, IpPoolMessageResult, IpPoolUpdateData } from '../Types/IPPools';
-import { IIPPoolsClient } from '../Interfaces';
+import Request from './common/Request.js';
+import { IpPoolCreateData, IpPoolCreateResult, IpPoolDeleteData, IpPoolListResult, IpPoolMessageResult, IpPoolUpdateData } from '../Types/index.js';
+import { IIPPoolsClient } from '../Interfaces/index.js';
 export default class IpPoolsClient implements IIPPoolsClient {
     request: Request;
     constructor(request: Request);

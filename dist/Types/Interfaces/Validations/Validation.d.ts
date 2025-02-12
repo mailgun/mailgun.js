@@ -1,5 +1,5 @@
-import { ValidationResult } from '../../Types/Validations';
-import { IMultipleValidationClient } from './MultipleValidation';
+import { ValidationResult } from '../../Types/Validations/index.js';
+import { IMultipleValidationClient } from './MultipleValidation.js';
 export interface IValidationClient {
     multipleValidation: IMultipleValidationClient;
     get(address: string): Promise<ValidationResult>;

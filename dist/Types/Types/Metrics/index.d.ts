@@ -1,2 +1,2 @@
-export * from './Metrics';
-export * from './MetricsAPI';
+export * from './Metrics.js';
+export * from './MetricsAPI.js';

@@ -1,5 +1,5 @@
 import * as NodeFormData from 'form-data';
-import { FormDataInputValue } from '../Messages';
+import { FormDataInputValue } from '../Messages/index.js';
 export type FormDataOptions = {
     [key: string]: NodeFormData;
 };

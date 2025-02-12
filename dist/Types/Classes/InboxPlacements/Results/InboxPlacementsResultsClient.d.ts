@@ -1,7 +1,7 @@
-import { IIPRSharingClient, IInboxPlacementsAttributesClient, IInboxPlacementsFiltersClient, IInboxPlacementsResultsClient, ILogger } from '../../../Interfaces';
-import { InboxPlacementsDestroyResult, InboxPlacementsResultWithStatus, InboxPlacementsResultsList, InboxPlacementsResultsListAPIResponse, InboxPlacementsResultsQuery } from '../../../Types/InboxPlacements';
-import NavigationThruPages from '../../common/NavigationThruPages';
-import Request from '../../common/Request';
+import { IIPRSharingClient, IInboxPlacementsAttributesClient, IInboxPlacementsFiltersClient, IInboxPlacementsResultsClient, ILogger } from '../../../Interfaces/index.js';
+import { InboxPlacementsDestroyResult, InboxPlacementsResultWithStatus, InboxPlacementsResultsList, InboxPlacementsResultsListAPIResponse, InboxPlacementsResultsQuery } from '../../../Types/InboxPlacements/index.js';
+import NavigationThruPages from '../../common/NavigationThruPages.js';
+import Request from '../../common/Request.js';
 export default class InboxPlacementsResultsClient extends NavigationThruPages<InboxPlacementsResultsList> implements IInboxPlacementsResultsClient {
     request: Request;
     attributes: IInboxPlacementsAttributesClient;

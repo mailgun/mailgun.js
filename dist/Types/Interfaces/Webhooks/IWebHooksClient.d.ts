@@ -1,5 +1,5 @@
-import { WebhooksIds } from '../../Enums';
-import { WebhookList, WebhookResult, WebhooksQuery, WebhookValidationResponse } from '../../Types/Webhooks';
+import { WebhooksIds } from '../../Enums/index.js';
+import { WebhookList, WebhookResult, WebhooksQuery, WebhookValidationResponse } from '../../Types/Webhooks/index.js';
 export interface IWebHooksClient {
     list(domain: string, query: WebhooksQuery): Promise<WebhookList>;
     get(domain: string, id: WebhooksIds): Promise<WebhookResult>;

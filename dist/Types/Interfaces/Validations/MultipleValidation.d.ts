@@ -1,4 +1,4 @@
-import { MultipleValidationJobsListResult, MultipleValidationJobResult, CreatedMultipleValidationJob, CanceledMultipleValidationJob, MultipleValidationCreationData, MultipleValidationJobsListQuery } from '../../Types/Validations';
+import { MultipleValidationJobsListResult, MultipleValidationJobResult, CreatedMultipleValidationJob, CanceledMultipleValidationJob, MultipleValidationCreationData, MultipleValidationJobsListQuery } from '../../Types/Validations/index.js';
 export interface IMultipleValidationClient {
     list(query?: MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult>;
     get(listId: string): Promise<MultipleValidationJobResult>;

@@ -1,1 +1,1 @@
-export * from './IMailgunClient';
+export * from './IMailgunClient.js';

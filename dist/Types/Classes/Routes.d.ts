@@ -1,6 +1,6 @@
-import { IRoutesClient } from '../Interfaces';
-import { CreateUpdateRouteData, DestroyRouteResponse, Route, RoutesListQuery, UpdateRouteResponse } from '../Types/Routes';
-import Request from './common/Request';
+import { IRoutesClient } from '../Interfaces/index.js';
+import { CreateUpdateRouteData, DestroyRouteResponse, Route, RoutesListQuery, UpdateRouteResponse } from '../Types/Routes/index.js';
+import Request from './common/Request.js';
 export default class RoutesClient implements IRoutesClient {
     request: Request;
     constructor(request: Request);

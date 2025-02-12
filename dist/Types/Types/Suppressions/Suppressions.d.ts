@@ -1,6 +1,6 @@
-import { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from '.';
-import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces';
-import { PagesList, ParsedPagesList } from '../Common';
+import type { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from './index.js';
+import type { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/index.js';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 export type SuppressionList = {
     items: (IBounce | IComplaint | IUnsubscribe | IWhiteList)[];
     pages: ParsedPagesList;

@@ -1,5 +1,5 @@
-import { PagesList, ParsedPagesList } from '../Common';
-import { CustomFile, CustomFileData } from '../Messages';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { CustomFile, CustomFileData } from '../Messages/index.js';
 export type MultipleValidationJobData = {
     created_at: number;
     id: string;

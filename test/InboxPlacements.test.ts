@@ -1,16 +1,16 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
+import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
 
-import { IInboxPlacementsClient } from '../lib/Interfaces';
-import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements';
+import { IInboxPlacementsClient } from '../lib/Interfaces/index.js';
+import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements.js';
 
-import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient';
-import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient';
-import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders';
+import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
+import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
+import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
 
 // TODO: fix types
 describe('Inbox Placements Client', () => {

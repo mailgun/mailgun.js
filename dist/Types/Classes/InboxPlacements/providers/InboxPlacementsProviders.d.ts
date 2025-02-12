@@ -1,6 +1,6 @@
-import { IInboxPlacementsProvidersClient } from '../../../Interfaces/InboxPlacements/providers/InboxPlacementsProviders';
-import { InboxPlacementsProvidersList } from '../../../Types/InboxPlacements';
-import Request from '../../common/Request';
+import { IInboxPlacementsProvidersClient } from '../../../Interfaces/index.js';
+import { InboxPlacementsProvidersList } from '../../../Types/InboxPlacements/index.js';
+import Request from '../../common/Request.js';
 export default class InboxPlacementsProvidersClient implements IInboxPlacementsProvidersClient {
     request: Request;
     path: string;

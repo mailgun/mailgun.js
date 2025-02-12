@@ -1,16 +1,17 @@
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/Classes/common/Request';
-import MailListMembers from '../lib/Classes/MailingLists/mailListMembers';
+import Request from '../lib/Classes/common/Request.js';
+import MailListMembers from '../lib/Classes/MailingLists/mailListMembers.js';
 import {
+  InputFormData,
+  RequestOptions,
   CreateUpdateMailListMembers,
   DeletedMember,
   MailListMember,
   MultipleMembersData,
   NewMultipleMembersResponse
-} from '../lib/Types/MailingLists';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { IMailListsMembers } from '../lib/Interfaces';
+} from '../lib/Types/index.js';
+import { IMailListsMembers } from '../lib/Interfaces/index.js';
 
 describe('mailListsMembersClient', function () {
   let mailListsMembersClient: IMailListsMembers;

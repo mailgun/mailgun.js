@@ -3,8 +3,8 @@
 /// <reference types="node" />
 /// <reference types="node" />
 import { Readable } from 'stream';
-import { CustomFile, CustomFileData } from '../../Types';
-import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments';
+import { CustomFile, CustomFileData } from '../../Types/index.js';
+import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments.js';
 declare class BlobFromStream {
     private _stream;
     size: number;

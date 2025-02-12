@@ -1,8 +1,8 @@
-import Request from '../common/Request';
-import { IDomainTagStatisticResult, IDomainTagsClient } from '../../Interfaces/Domains';
-import NavigationThruPages from '../common/NavigationThruPages';
-import { Resolution } from '../../Enums';
-import { DomainTagsItem, DomainTagsItemInfo, DomainTagStatisticItem, DomainTagStatAPIResponse, DomainTagsList, DomainTagsResponseData, DomainTagsQuery, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagCountriesAggregation, DomainTagProvidersAggregation, DomainTagDevicesAggregation } from '../../Types/Domains';
+import Request from '../common/Request.js';
+import { IDomainTagStatisticResult, IDomainTagsClient } from '../../Interfaces/Domains/index.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import { Resolution } from '../../Enums/index.js';
+import { DomainTagsItem, DomainTagsItemInfo, DomainTagStatisticItem, DomainTagStatAPIResponse, DomainTagsList, DomainTagsResponseData, DomainTagsQuery, DomainTagsMessageRes, DomainTagsStatisticQuery, DomainTagCountriesAggregation, DomainTagProvidersAggregation, DomainTagDevicesAggregation } from '../../Types/Domains/index.js';
 export declare class DomainTag implements DomainTagsItem {
     tag: string;
     description: string;

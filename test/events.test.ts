@@ -2,10 +2,13 @@ import { expect } from 'chai';
 import nock from 'nock';
 
 import formData from 'form-data';
-import EventClient from '../lib/Classes/Events';
-import MgRequest from '../lib/Classes/common/Request';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { EventsList } from '../lib/Types/Events';
+import EventClient from '../lib/Classes/Events.js';
+import MgRequest from '../lib/Classes/common/Request.js';
+import {
+  InputFormData,
+  RequestOptions,
+  EventsList
+} from '../lib/Types/index.js';
 
 describe('EventsClient', function () {
   let client: EventClient;

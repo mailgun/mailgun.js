@@ -1,7 +1,7 @@
-import { ParsedPage, ParsedPagesList, QueryWithPage, ResponseWithPaging } from '../../Types/Common';
-import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions';
-import Request from './Request';
-import { SuppressionDataType } from '../../Types/Suppressions';
+import { ParsedPage, ParsedPagesList, QueryWithPage, ResponseWithPaging } from '../../Types/Common/index.js';
+import { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions/index.js';
+import Request from './Request.js';
+import { SuppressionDataType } from '../../Types/Suppressions/index.js';
 export default abstract class NavigationThruPages<T> {
     request?: Request;
     constructor(request?: Request);

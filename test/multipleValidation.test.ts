@@ -4,12 +4,9 @@ import path from 'path';
 
 import nock from 'nock';
 import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
-import {
-  MultipleValidationJobsListResult
-} from '../lib/Types/Validations';
+import Request from '../lib/Classes/common/Request.js';
+import { InputFormData, RequestOptions, MultipleValidationJobsListResult } from '../lib/Types/index.js';
+import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation.js';
 
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 

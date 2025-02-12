@@ -2,22 +2,22 @@ import urljoin from 'url-join';
 
 /* eslint-disable camelcase */
 
-import Request from '../common/Request';
+import Request from '../common/Request.js';
 
-import APIError from '../common/Error';
-import NavigationThruPages from '../common/NavigationThruPages';
-import Bounce from './Bounce';
-import Complaint from './Complaint';
-import Unsubscribe from './Unsubscribe';
-import WhiteList from './WhiteList';
-import Suppression from './Suppression';
+import APIError from '../common/Error.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import Bounce from './Bounce.js';
+import Complaint from './Complaint.js';
+import Unsubscribe from './Unsubscribe.js';
+import WhiteList from './WhiteList.js';
+import Suppression from './Suppression.js';
 import {
   IBounce,
   IComplaint,
   ISuppressionClient,
   IUnsubscribe,
   IWhiteList
-} from '../../Interfaces/Suppressions/index';
+} from '../../Interfaces/Suppressions/index.js';
 import {
   SuppressionList,
   SuppressionListResponse,
@@ -29,7 +29,7 @@ import {
   SuppressionResponse,
   SuppressionDestroyResult,
   SuppressionDestroyResponse
-} from '../../Types/Suppressions/index';
+} from '../../Types/Suppressions/index.js';
 
 const createOptions = {
   headers: { 'Content-Type': 'application/json' }

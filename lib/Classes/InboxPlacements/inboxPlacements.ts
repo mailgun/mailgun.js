@@ -1,8 +1,12 @@
-import { IInboxPlacementsClient, IInboxPlacementsResultsClient } from '../../Interfaces';
-import { ISeedsListsClient } from '../../Interfaces/InboxPlacements/SeedsLists/SeedsListsClient';
-import { IInboxPlacementsProvidersClient } from '../../Interfaces/InboxPlacements/providers/InboxPlacementsProviders';
-import { InboxPlacementsData, InboxPlacementsTestResult, InboxPlacementsTestResultAPIResponse } from '../../Types/InboxPlacements';
-import Request from '../common/Request';
+import {
+  IInboxPlacementsClient,
+  IInboxPlacementsProvidersClient,
+  IInboxPlacementsResultsClient,
+  ISeedsListsClient
+} from '../../Interfaces/index.js';
+
+import { InboxPlacementsData, InboxPlacementsTestResult, InboxPlacementsTestResultAPIResponse } from '../../Types/InboxPlacements/index.js';
+import Request from '../common/Request.js';
 
 export default class InboxPlacementsClient implements IInboxPlacementsClient {
   request: Request;

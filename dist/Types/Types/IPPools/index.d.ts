@@ -1,1 +1,1 @@
-export * from './IpPools';
+export * from './IpPools.js';

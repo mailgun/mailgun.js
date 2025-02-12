@@ -1,7 +1,7 @@
-import { ILogger, IInboxPlacementsAttributesClient, ISeedsListsClient, IInboxPlacementsFiltersClient } from '../../../Interfaces';
-import { SeedsListsAPIResponse, SeedsListsCreatingData, SeedsListsQuery, SeedsListsResult, SeedsListsDestroyApiResponse, SeedsListsUpdatingData, SeedListResult } from '../../../Types/InboxPlacements';
-import NavigationThruPages from '../../common/NavigationThruPages';
-import Request from '../../common/Request';
+import { ILogger, IInboxPlacementsAttributesClient, ISeedsListsClient, IInboxPlacementsFiltersClient } from '../../../Interfaces/index.js';
+import { SeedsListsAPIResponse, SeedsListsCreatingData, SeedsListsQuery, SeedsListsResult, SeedsListsDestroyApiResponse, SeedsListsUpdatingData, SeedListResult } from '../../../Types/InboxPlacements/index.js';
+import NavigationThruPages from '../../common/NavigationThruPages.js';
+import Request from '../../common/Request.js';
 export default class SeedsListsClient extends NavigationThruPages<SeedsListsResult> implements ISeedsListsClient {
     request: Request;
     attributes: IInboxPlacementsAttributesClient;

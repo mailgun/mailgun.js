@@ -1,21 +1,23 @@
 import chai, { expect } from 'chai';
 import formData from 'form-data';
 import nock from 'nock';
-import APIError from '../lib/Classes/common/Error';
+import APIError from '../lib/Classes/common/Error.js';
 
-import Request from '../lib/Classes/common/Request';
-import Bounce from '../lib/Classes/Suppressions/Bounce';
-import Complaint from '../lib/Classes/Suppressions/Complaint';
-import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient';
-import Unsubscribe from '../lib/Classes/Suppressions/Unsubscribe';
-import WhiteList from '../lib/Classes/Suppressions/WhiteList';
-import { InputFormData, ParsedPage, RequestOptions } from '../lib/Types/Common';
+import Request from '../lib/Classes/common/Request.js';
+import Bounce from '../lib/Classes/Suppressions/Bounce.js';
+import Complaint from '../lib/Classes/Suppressions/Complaint.js';
+import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient.js';
+import Unsubscribe from '../lib/Classes/Suppressions/Unsubscribe.js';
+import WhiteList from '../lib/Classes/Suppressions/WhiteList.js';
 import {
+  InputFormData,
+  ParsedPage,
+  RequestOptions,
   SuppressionCreationResult,
   SuppressionDestroyResult,
   SuppressionList,
   SuppressionListResponse
-} from '../lib/Types/Suppressions';
+} from '../lib/Types/index.js';
 
 chai.should();
 

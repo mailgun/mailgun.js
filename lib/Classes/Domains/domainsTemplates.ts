@@ -1,5 +1,5 @@
 import urljoin from 'url-join';
-import Request from '../common/Request';
+import Request from '../common/Request.js';
 
 import {
   CreateDomainTemplateAPIResponse,
@@ -24,9 +24,9 @@ import {
   TemplateVersion,
   UpdateOrDeleteDomainTemplateAPIResponse,
   UpdateOrDeleteDomainTemplateResult
-} from '../../Types/Domains';
-import NavigationThruPages from '../common/NavigationThruPages';
-import { IDomainTemplate, IDomainTemplatesClient } from '../../Interfaces/Domains';
+} from '../../Types/Domains/index.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import { IDomainTemplate, IDomainTemplatesClient } from '../../Interfaces/Domains/index.js';
 
 export class DomainTemplateItem implements IDomainTemplate {
   name : string;
@@ -46,7 +46,7 @@ export class DomainTemplateItem implements IDomainTemplate {
 
     if (domainTemplateFromAPI.version) {
       this.version = domainTemplateFromAPI.version;
-      if (domainTemplateFromAPI.version.createdAt) {
+      if (this.version && domainTemplateFromAPI.version.createdAt) {
         this.version.createdAt = new Date(domainTemplateFromAPI.version.createdAt);
       }
     }

@@ -1,14 +1,14 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
+import Request from '../lib/Classes/common/Request.js';
 
 import {
   InputFormData, RequestOptions,
   SubaccountListItem, SubaccountListResponseData, SubaccountResponseData,
-} from '../lib';
+} from '../lib/Types/index.js';
 
-import SubaccountsClient from '../lib/Classes/Subaccounts';
+import SubaccountsClient from '../lib/Classes/Subaccounts.js';
 
 describe('SubaccountsClient', function () {
   let client: SubaccountsClient;

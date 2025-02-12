@@ -1,5 +1,5 @@
-import APIError from '../lib/Classes/common/Error';
-import { APIErrorOptions } from '../lib/Types/Common';
+import APIError from '../lib/Classes/common/Error.js';
+import { APIErrorOptions } from '../lib/Types/Common/index.js';
 
 describe('APIError', function () {
   it('sets status', function () {

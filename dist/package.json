@@ -3,6 +3,7 @@
   "version": "11.1.0",
   "author": "Mailgun",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "mailgun",
     "email"
@@ -19,11 +20,13 @@
   "exports": {
     ".": {
       "node": {
-        "require": "./CJS/mailgun.node.js",
+        "import": "./ESM/mailgun.node.js",
+        "require": "./CJS/mailgun.node.cjs",
         "types": "./Types/index.d.ts",
         "default": "./CJS/mailgun.node.js"
       },
       "browser": {
+        "import": "./ESM/mailgun.browser.js",
         "require": "./AMD/mailgun.amd.js",
         "types": "./Types/index.d.ts",
         "default": "./AMD/mailgun.amd.js"
@@ -31,11 +34,13 @@
     },
     "./definitions": {
       "node": {
-        "require": "./CJS/definitions.js",
+        "import": "./ESM/definitions.node.js",
+        "require": "./CJS/definitions.cjs",
         "types": "./Types/definitions.d.ts",
         "default": "./CJS/definitions.js"
       },
       "browser": {
+        "import": "./ESM/definitions.browser.js",
         "require": "./AMD/definitions.js",
         "types": "./Types/definitions.d.ts",
         "default": "./AMD/definitions.js"

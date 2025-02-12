@@ -1,12 +1,11 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request';
-import ValidateClient from '../lib/Classes/Validations/validate';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
-import { ValidationResult } from '../lib/Types/Validations';
-import { IValidationClient } from '../lib/Interfaces';
+import Request from '../lib/Classes/common/Request.js';
+import ValidateClient from '../lib/Classes/Validations/validate.js';
+import { ValidationResult, InputFormData, RequestOptions } from '../lib/Types/index.js';
+import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation.js';
+import { IValidationClient } from '../lib/Interfaces/index.js';
 
 describe('ValidateClient', function () {
   let validateClient: IValidationClient;

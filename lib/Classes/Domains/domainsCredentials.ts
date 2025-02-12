@@ -1,6 +1,6 @@
 import urljoin from 'url-join';
-import { APIResponse } from '../../Types/Common/ApiResponse';
-import { IDomainCredentials } from '../../Interfaces/Domains';
+import { APIResponse } from '../../Types/Common/ApiResponse.js';
+import { IDomainCredentials } from '../../Interfaces/Domains/index.js';
 import {
   DomainCredentialsResponseData,
   DomainCredentialsList,
@@ -10,8 +10,8 @@ import {
   DomainCredentialsQuery,
   DomainCredentials,
   UpdateDomainCredentialsData
-} from '../../Types/Domains';
-import Request from '../common/Request';
+} from '../../Types/Domains/index.js';
+import Request from '../common/Request.js';
 
 export default class DomainCredentialsClient implements IDomainCredentials {
   baseRoute: string;

@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../Common';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 export type ListsQuery = {
     address?: string;
     limit?: number;

@@ -4,11 +4,11 @@ import {
   IDomainTagsClient,
   IDomainCredentials,
   IDomainsClient
-} from '../../Interfaces/Domains';
+} from '../../Interfaces/Domains/index.js';
 
-import { APIResponse } from '../../Types/Common/ApiResponse';
-import APIError from '../common/Error';
-import Request from '../common/Request';
+import { APIResponse } from '../../Types/Common/ApiResponse.js';
+import APIError from '../common/Error.js';
+import Request from '../common/Request.js';
 
 import {
   DestroyedDomainResponse,
@@ -41,9 +41,9 @@ import {
   BoolToString,
   DomainGetQuery,
   UpdatedDKIMSelectorResult,
-} from '../../Types/Domains';
-import Domain from './domain';
-import { ILogger, IDomainTrackingClient } from '../../Interfaces';
+} from '../../Types/Domains/index.js';
+import Domain from './domain.js';
+import { ILogger, IDomainTrackingClient } from '../../Interfaces/index.js';
 
 export default class DomainsClient implements IDomainsClient {
   request: Request;

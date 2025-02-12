@@ -5,10 +5,9 @@ import nock from 'nock';
 import chai from 'chai';
 import spies from 'chai-spies';
 
-import Request from '../lib/Classes/common/Request';
-import MessagesClient from '../lib/Classes/Messages';
-import { InputFormData, RequestOptions } from '../lib/Types/Common';
-import { MessagesSendResult } from '../lib/Types/Messages';
+import Request from '../lib/Classes/common/Request.js';
+import MessagesClient from '../lib/Classes/Messages.js';
+import { MessagesSendResult, InputFormData, RequestOptions } from '../lib/Types/index.js';
 
 chai.use(spies);
 const expect = chai.expect;

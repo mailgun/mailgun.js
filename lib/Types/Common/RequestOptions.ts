@@ -1,5 +1,5 @@
 import { AxiosRequestHeaders, RawAxiosRequestHeaders } from 'axios';
-import { MailgunClientOptions } from '../MailgunClient';
+import { MailgunClientOptions } from '../MailgunClient/index.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;

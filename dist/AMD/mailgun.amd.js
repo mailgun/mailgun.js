@@ -5701,7 +5701,7 @@ define((function () { 'use strict';
             this.id = domainTemplateFromAPI.id;
             if (domainTemplateFromAPI.version) {
                 this.version = domainTemplateFromAPI.version;
-                if (domainTemplateFromAPI.version.createdAt) {
+                if (this.version && domainTemplateFromAPI.version.createdAt) {
                     this.version.createdAt = new Date(domainTemplateFromAPI.version.createdAt);
                 }
             }

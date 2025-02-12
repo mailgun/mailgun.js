@@ -2,30 +2,30 @@ import formData from 'form-data';
 
 import { expect } from 'chai';
 
-import Client from '../lib/Classes/MailgunClient';
-import Request from '../lib/Classes/common/Request';
-import EventsClient from '../lib/Classes/Events';
-import WebhooksClient from '../lib/Classes/Webhooks';
-import SuppressionsClient from '../lib/Classes/Suppressions/SuppressionsClient';
-import MessagesClient from '../lib/Classes/Messages';
-import RoutesClient from '../lib/Classes/Routes';
-import ValidateClient from '../lib/Classes/Validations/validate';
-import SubaccountsClient from '../lib/Classes/Subaccounts';
+import Client from '../lib/Classes/MailgunClient.js';
+import Request from '../lib/Classes/common/Request.js';
+import EventsClient from '../lib/Classes/Events.js';
+import WebhooksClient from '../lib/Classes/Webhooks.js';
+import SuppressionsClient from '../lib/Classes/Suppressions/SuppressionsClient.js';
+import MessagesClient from '../lib/Classes/Messages.js';
+import RoutesClient from '../lib/Classes/Routes.js';
+import ValidateClient from '../lib/Classes/Validations/validate.js';
+import SubaccountsClient from '../lib/Classes/Subaccounts.js';
 
-import StatsClient from '../lib/Classes/Stats/StatsClient';
-import ListsClient from '../lib/Classes/MailingLists/mailingLists';
-import IpPoolsClient from '../lib/Classes/IPPools';
-import IpsClient from '../lib/Classes/IPs';
-import { InputFormData, MailgunClientOptions } from '../lib';
-import DomainsClient from '../lib/Classes/Domains/domainsClient';
-import { IMailgunClient } from '../lib/Interfaces';
-import DomainTagsClient from '../lib/Classes/Domains/domainsTags';
-import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials';
-import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates';
-import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation';
-import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers';
-import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements';
-import MetricsClient from '../lib/Classes/Metrics/MetricsClient';
+import StatsClient from '../lib/Classes/Stats/StatsClient.js';
+import ListsClient from '../lib/Classes/MailingLists/mailingLists.js';
+import IpPoolsClient from '../lib/Classes/IPPools.js';
+import IpsClient from '../lib/Classes/IPs.js';
+import { InputFormData, MailgunClientOptions } from '../lib/Types/index.js';
+import DomainsClient from '../lib/Classes/Domains/domainsClient.js';
+import { IMailgunClient } from '../lib/Interfaces/index.js';
+import DomainTagsClient from '../lib/Classes/Domains/domainsTags.js';
+import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials.js';
+import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates.js';
+import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation.js';
+import MailListsMembers from '../lib/Classes/MailingLists/mailListMembers.js';
+import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements.js';
+import MetricsClient from '../lib/Classes/Metrics/MetricsClient.js';
 
 describe('Client', () => {
   let client: IMailgunClient;

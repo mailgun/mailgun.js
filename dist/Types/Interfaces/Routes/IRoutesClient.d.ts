@@ -1,4 +1,4 @@
-import { CreateUpdateRouteData, DestroyRouteResponse, Route, RoutesListQuery, UpdateRouteResponse } from '../../Types/Routes';
+import { CreateUpdateRouteData, DestroyRouteResponse, Route, RoutesListQuery, UpdateRouteResponse } from '../../Types/Routes/index.js';
 export interface IRoutesClient {
     list(query: RoutesListQuery): Promise<Route[]>;
     get(id: string): Promise<Route>;

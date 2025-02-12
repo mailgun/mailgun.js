@@ -6,7 +6,7 @@ import pkg from './package.json' with { type: "json" };import json from '@rollup
 const banner = `// mailgun.js v${pkg.version} Copyright (c) ${new Date().getFullYear()} ${pkg.author} and contributors`;
 const distFolder = './dist/'
 export default [
-{ // only declarations
+{ // only Type declarations
   cache: false,
   input: './lib/index.ts',
   output: {
@@ -20,7 +20,6 @@ export default [
       compilerOptions: {
         outDir: `${distFolder}Types/`,
         module: 'ESNext',
-        target: 'es5',
         declaration: true,
         emitDeclarationOnly: true,
         declarationDir: `${distFolder}Types/`,
@@ -35,7 +34,7 @@ export default [
     commonjs() // url-join doesn't have default export
   ]
 },
-{
+{ // AMD Main build
   cache: false,
   input: './lib/index.ts',
   output: {
@@ -53,8 +52,6 @@ export default [
         outDir: `${distFolder}AMD/`,
         module: 'ESNext',
         target: 'es5',
-        declaration: false,
-        declarationDir: null,
       },
       exclude: ['**/test/**', './integration_tests/**/**', "**/dist/*.js"],
     }),
@@ -66,7 +63,7 @@ export default [
     commonjs() // url-join doesn't have default export
   ]
 },
-{ // for the definitions entry-point
+{ // AMD definitions entry-point
   input: ['./lib/definitions.ts'],
   cache: false,
   output: {
@@ -90,17 +87,15 @@ export default [
       outDir: './dist/AMD/',
       module: 'ESNext',
       target: 'es5',
-      declaration: false,
-      declarationDir: null,
     }
   }),
   ]
 },
-{
+{ // CJS Main build
   input: ['./lib/index.ts'],
   cache: false,
   output: {
-    file: `${distFolder}/CJS/mailgun.node.js`,
+    file: `${distFolder}CJS/mailgun.node.cjs`,
     banner,
     format: 'cjs',
     exports: 'default'
@@ -116,8 +111,6 @@ export default [
       incremental: false,
       exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
       compilerOptions: {
-        declaration: false,
-        declarationDir: null,
         outDir: `${distFolder}/CJS/`,
         module: 'ESNext',
         target: 'es5',
@@ -127,11 +120,11 @@ export default [
     json(), // mime-db.json -> mime-types -> form-data
   ],
 },
-{ // for the definitions entry-point
+{ // CJS the definitions entry-point
   input: ['./lib/definitions.ts'],
   cache: false,
   output: {
-    file: `${distFolder}/CJS/definitions.js`,
+    file: `${distFolder}CJS/definitions.cjs`,
     banner,
     format: 'cjs',
     exports: 'named'
@@ -147,8 +140,6 @@ export default [
     incremental: false,
     exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
     compilerOptions: {
-      declaration: false,
-      declarationDir: null,
       outDir: `${distFolder}/CJS/`,
       module: 'ESNext',
       target: 'es5',
@@ -157,64 +148,110 @@ export default [
   ]
 },
 
-// {
-//   input: ['./lib/index.ts'],
-//   cache: false,
-//   output: {
-//     file: './dist/ESM/mailgun.node.js',
-//     banner,
-//     format: 'esm',
-//     // exports: 'default'
-//   },
-//   plugins: [
-//     nodeResolve({
-//       preferBuiltins: true,
-//       browser: false,
-//     }),
-//     typescript({
-//       tsconfig: './tsconfig.rollup.json',
-//       incremental: false,
-//       exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
-//       emitDeclarationOnly: false,
-//       compilerOptions: {
-//         outDir: './dist/ESM',
-//         module: 'nodenext',
-//         target: 'es2020',
-//         declarationDir: './dist/ESM',
-//       }
-//     }),
-//     commonjs(), // url-join doesn't have default export
-//     // nodePolyfills(),
-//     json(), // mime-db.json -> mime-types -> form-data
-//   ],
-// },
-// { // for the definitions entry-point
-//   input: ['./lib/definitions.ts'],
-//   cache: false,
-//   output: {
-//     file: './dist/ESM/definitions.js',
-//     banner,
-//     format: 'esm',
-//     // exports: 'named'
-//   },
-//   plugins: [
-//   nodeResolve({
-//     preferBuiltins: true,
-//     browser: false,
-//     mainFields: 'main'
-//   }),
-//   typescript({
-//     tsconfig: './tsconfig.rollup.json',
-//     incremental: false,
-//     // emitDeclarationOnly: true,
-//     exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
-//     compilerOptions: {
-//       outDir: './dist/ESM',
-//       module: 'nodenext',
-//       target: 'es2020',
-//       declarationDir: './dist/ESM',
-//     }
-//   }),
-//   ]
-// },
+{ // ESM Node main build
+  input: ['./lib/index.ts'],
+  cache: false,
+  output: {
+    file: './dist/ESM/mailgun.node.js',
+    banner,
+    format: 'es',
+    esModule: true
+  },
+  plugins: [
+    nodeResolve({
+      preferBuiltins: true,
+      browser: false,
+      mainFields: ['module']
+    }),
+    typescript({
+      tsconfig: './tsconfig.rollup.json',
+      incremental: false,
+      exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+      compilerOptions: {
+        outDir: './dist/ESM',
+        module: "NodeNext",
+        target: "ESNext",
+      }
+    }),
+    commonjs(), // url-join doesn't have default export
+    json(), // mime-db.json -> mime-types -> form-data
+  ],
+},
+{ // ESM Node definitions entry-point
+  input: ['./lib/definitions.ts'],
+  cache: false,
+  output: {
+    file: './dist/ESM/definitions.node.js',
+    banner,
+    format: 'es',
+    exports: 'named'
+  },
+  plugins: [
+  typescript({
+    tsconfig: './tsconfig.rollup.json',
+    incremental: false,
+    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    compilerOptions: {
+      outDir: './dist/ESM',
+      module: "NodeNext",
+      target: "ESNext",
+    }
+  }),
+  ]
+},
+
+{ // ESM Browser main build
+  input: ['./lib/index.ts'],
+  cache: false,
+  output: {
+    file: './dist/ESM/mailgun.browser.js',
+    banner,
+    format: 'es',
+    esModule: true
+  },
+  plugins: [
+    nodeResolve({
+      browser: true,
+      preferBuiltins: true,
+    }),
+    typescript({
+      tsconfig: './tsconfig.rollup.json',
+      incremental: false,
+      exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+      compilerOptions: {
+        outDir: './dist/ESM',
+        module: "ESNext",
+        target: "ESNext",
+      }
+    }),
+    commonjs(), // url-join doesn't have default export
+    json(), // mime-db.json -> mime-types -> form-data
+  ],
+},
+{ // ESM Browser definitions entry-point
+  input: ['./lib/definitions.ts'],
+  cache: false,
+  output: {
+    file: './dist/ESM/definitions.browser.js',
+    banner,
+    format: 'es',
+    exports: 'named'
+  },
+  plugins: [
+  nodeResolve({
+    preferBuiltins: true,
+    browser: true,
+  }),
+  typescript({
+    tsconfig: './tsconfig.rollup.json',
+    incremental: false,
+    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    compilerOptions: {
+      outDir: './dist/ESM',
+      module: "ESNext",
+      target: "ESNext",
+    }
+  }),
+  ]
+},
 ];

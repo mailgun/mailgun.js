@@ -1,4 +1,4 @@
-import {
+import type {
   CreateDomainTemplateVersionResult,
   DomainTemplateData,
   DomainTemplatesQuery,
@@ -13,7 +13,7 @@ import {
   TemplateQuery,
   TemplateVersion,
   UpdateOrDeleteDomainTemplateResult
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
 export interface IDomainTemplate {
     name: string;
