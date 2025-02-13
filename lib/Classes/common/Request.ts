@@ -6,9 +6,10 @@ import axios, {
   AxiosHeaders,
   RawAxiosRequestHeaders,
   AxiosProxyConfig,
+  AxiosRequestHeaders,
 } from 'axios';
 import * as NodeFormData from 'form-data';
-import APIError from './Error';
+import APIError from './Error.js';
 import {
   OnCallRequestOptions,
   RequestOptions,
@@ -17,17 +18,17 @@ import {
   APIResponse,
   IpPoolDeleteData,
   FormDataInput
-} from '../../Types';
+} from '../../Types/index.js';
 
-import FormDataBuilder from './FormDataBuilder';
-import SubaccountsClient from '../Subaccounts';
+import FormDataBuilder from './FormDataBuilder.js';
+import SubaccountsClient from '../Subaccounts.js';
 
 class Request {
   private username: string;
   private key: string;
   private url: string;
   private timeout: number;
-  private headers: AxiosHeaders;
+  private headers: AxiosRequestHeaders;
   private formDataBuilder: FormDataBuilder;
   private maxBodyLength: number;
   private proxy: AxiosProxyConfig | undefined;
@@ -115,7 +116,7 @@ class Request {
 
   private joinAndTransformHeaders(
     onCallOptions?: OnCallRequestOptions
-  ): AxiosHeaders {
+  ): AxiosRequestHeaders {
     const requestHeaders = new AxiosHeaders();
 
     const basic = base64.encode(`${this.username}:${this.key}`);
@@ -130,10 +131,10 @@ class Request {
 
   private makeHeadersFromObject(
     headersObject: RawAxiosRequestHeaders = {}
-  ): AxiosHeaders {
+  ): AxiosRequestHeaders {
     let requestHeaders = new AxiosHeaders();
     requestHeaders = Object.entries(headersObject).reduce(
-      (headersAccumulator: AxiosHeaders, currentPair) => {
+      (headersAccumulator: AxiosRequestHeaders, currentPair) => {
         const [key, value] = currentPair;
         headersAccumulator.set(key, value);
         return headersAccumulator;

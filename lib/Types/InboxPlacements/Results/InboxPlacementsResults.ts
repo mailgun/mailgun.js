@@ -1,4 +1,4 @@
-import { PagesList, ParsedPagesList } from '../../Common';
+import { PagesList, ParsedPagesList } from '../../Common/index.js';
 
 /* eslint-disable camelcase */
 export type InboxPlacementsResultsQuery = {

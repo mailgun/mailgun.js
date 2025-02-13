@@ -5,7 +5,7 @@ import {
   CanceledMultipleValidationJob,
   MultipleValidationCreationData,
   MultipleValidationJobsListQuery
-} from '../../Types/Validations';
+} from '../../Types/Validations/index.js';
 
 export interface IMultipleValidationClient {
   list(query?:MultipleValidationJobsListQuery): Promise<MultipleValidationJobsListResult>

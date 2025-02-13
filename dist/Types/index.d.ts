@@ -1,14 +1,8 @@
-export * from './Common';
-export * from './Domains';
-export * from './Events';
-export * from './IPPools';
-export * from './IPs';
-export * from './MailgunClient';
-export * from './MailingLists';
-export * from './Messages';
-export * from './Routes';
-export * from './Stats';
-export * from './Subaccounts';
-export * from './Suppressions';
-export * from './Validations';
-export * from './Webhooks';
+import { IMailgunClient } from './Interfaces/MailgunClient/index.js';
+import { InputFormData, MailgunClientOptions } from './Types/index.js';
+export default class Mailgun {
+    static get default(): typeof Mailgun;
+    private formData;
+    constructor(FormData: InputFormData);
+    client(options: MailgunClientOptions): IMailgunClient;
+}

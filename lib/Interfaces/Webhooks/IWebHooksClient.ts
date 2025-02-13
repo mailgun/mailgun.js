@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 
-import { WebhooksIds } from '../../Enums';
+import { WebhooksIds } from '../../Enums/index.js';
 import {
   WebhookList,
   WebhookResult,
   WebhooksQuery,
   WebhookValidationResponse
-} from '../../Types/Webhooks';
+} from '../../Types/Webhooks/index.js';
 
 export interface IWebHooksClient {
   list(domain: string, query: WebhooksQuery): Promise<WebhookList>

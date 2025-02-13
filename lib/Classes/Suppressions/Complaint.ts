@@ -1,7 +1,7 @@
-import { SuppressionModels } from '../../Enums';
-import { IComplaint } from '../../Interfaces/Suppressions';
-import { ComplaintData } from '../../Types/Suppressions';
-import Suppression from './Suppression';
+import { SuppressionModels } from '../../Enums/index.js';
+import { IComplaint } from '../../Interfaces/Suppressions/index.js';
+import { ComplaintData } from '../../Types/Suppressions/index.js';
+import Suppression from './Suppression.js';
 
 export default class Complaint extends Suppression implements IComplaint {
     address: string;

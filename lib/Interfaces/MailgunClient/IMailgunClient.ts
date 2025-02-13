@@ -1,20 +1,22 @@
-import { IWebHooksClient } from '../Webhooks';
+import { IWebHooksClient } from '../Webhooks/index.js';
 /* eslint-disable camelcase */
-import { IDomainsClient } from '../Domains';
-import { IEventClient } from '../EventClient';
-import { IStatsClient } from '../Stats';
-import { IMessagesClient } from '../Messages';
-import { ISuppressionClient } from '../Suppressions';
-import { IRoutesClient } from '../Routes';
-import { IValidationClient } from '../Validations';
-import { IIPsClient } from '../IPs';
-import { IIPPoolsClient } from '../IPPools';
-import { IMailingListsClient } from '../MailingLists';
-import { ISubaccountsClient } from '../Subaccounts';
-import { IInboxPlacementsClient } from '../InboxPlacements';
-import { IMetricsClient } from '../Metrics/MetricsClient';
+import { IDomainsClient } from '../Domains/index.js';
+import { IEventClient } from '../EventClient/index.js';
+import { IStatsClient } from '../Stats/index.js';
+import { IMessagesClient } from '../Messages/index.js';
+import { ISuppressionClient } from '../Suppressions/index.js';
+import { IRoutesClient } from '../Routes/index.js';
+import { IValidationClient } from '../Validations/index.js';
+import { IIPsClient } from '../IPs/index.js';
+import { IIPPoolsClient } from '../IPPools/index.js';
+import { IMailingListsClient } from '../MailingLists/index.js';
+import { ISubaccountsClient } from '../Subaccounts/index.js';
+import { IInboxPlacementsClient } from '../InboxPlacements/index.js';
+import { IMetricsClient } from '../Metrics/MetricsClient.js';
+import type Request from '../../Classes/common/Request.js';
 
 export interface IMailgunClient {
+    request: Request;
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
     events: IEventClient;

@@ -5,9 +5,9 @@ import {
   SeedsListsQuery,
   SeedsListsResult,
   SeedsListsUpdatingData,
-} from '../../../Types/InboxPlacements';
-import { IInboxPlacementsAttributesClient } from '../AttributesClient';
-import { IInboxPlacementsFiltersClient } from '../FiltersClient';
+} from '../../../Types/InboxPlacements/index.js';
+import { IInboxPlacementsAttributesClient } from '../AttributesClient.js';
+import { IInboxPlacementsFiltersClient } from '../FiltersClient.js';
 
 export interface ISeedsListsClient {
   attributes: IInboxPlacementsAttributesClient;

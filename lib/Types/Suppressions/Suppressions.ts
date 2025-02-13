@@ -1,14 +1,14 @@
-import {
+import type {
   BounceData,
   ComplaintData,
   UnsubscribeData,
   WhiteListData
-} from '.';
-import {
+} from './index.js';
+import type {
   IBounce, IComplaint, IUnsubscribe, IWhiteList
-} from '../../Interfaces';
+} from '../../Interfaces/index.js';
 
-import { PagesList, ParsedPagesList } from '../Common';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 
 /* eslint-disable camelcase */
 

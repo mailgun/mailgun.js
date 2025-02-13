@@ -1,11 +1,11 @@
-import { IInboxPlacementsAttributesClient } from '../../Interfaces';
+import { IInboxPlacementsAttributesClient } from '../../Interfaces/index.js';
 import {
   InboxPlacementsAttributesApiResponse,
   InboxPlacementsAttributesResult,
   InboxPlacementsValuesApiResponse,
   InboxPlacementsValuesResult
-} from '../../Types/InboxPlacements';
-import Request from '../common/Request';
+} from '../../Types/InboxPlacements/index.js';
+import Request from '../common/Request.js';
 
 export default class InboxPlacementsAttributesClient implements IInboxPlacementsAttributesClient {
   request: Request;

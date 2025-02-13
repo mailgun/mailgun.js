@@ -3,7 +3,7 @@ import {
   IInboxPlacementsAttributesClient,
   ISeedsListsClient,
   IInboxPlacementsFiltersClient
-} from '../../../Interfaces';
+} from '../../../Interfaces/index.js';
 import {
   SeedList,
   SeedListAPIShape,
@@ -20,9 +20,9 @@ import {
   SeedListResult,
   SeedListGetAPIResponse,
   SeedListAPIResponse
-} from '../../../Types/InboxPlacements';
-import NavigationThruPages from '../../common/NavigationThruPages';
-import Request from '../../common/Request';
+} from '../../../Types/InboxPlacements/index.js';
+import NavigationThruPages from '../../common/NavigationThruPages.js';
+import Request from '../../common/Request.js';
 
 export default class SeedsListsClient
   extends NavigationThruPages<SeedsListsResult>

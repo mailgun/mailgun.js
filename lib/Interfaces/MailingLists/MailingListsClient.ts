@@ -2,8 +2,8 @@ import {
   CreateUpdateList, DestroyedList, ListsQuery, MailingList,
   MailingListCancelValidationResult, MailingListResult,
   MailingListValidationResult, StartValidationResult
-} from '../../Types/MailingLists';
-import { IMailListsMembers } from './MailingListMembers';
+} from '../../Types/MailingLists/index.js';
+import { IMailListsMembers } from './MailingListMembers.js';
 
 export interface IMailingListsClient {
   members: IMailListsMembers;

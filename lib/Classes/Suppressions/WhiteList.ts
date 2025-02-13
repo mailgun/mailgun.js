@@ -1,7 +1,7 @@
-import { SuppressionModels } from '../../Enums';
-import { IWhiteList } from '../../Interfaces/Suppressions';
-import { WhiteListData } from '../../Types/Suppressions';
-import Suppression from './Suppression';
+import { SuppressionModels } from '../../Enums/index.js';
+import { IWhiteList } from '../../Interfaces/Suppressions/index.js';
+import { WhiteListData } from '../../Types/Suppressions/index.js';
+import Suppression from './Suppression.js';
 
 export default class WhiteList extends Suppression implements IWhiteList {
     value: string;

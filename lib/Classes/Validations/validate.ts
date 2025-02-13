@@ -1,6 +1,6 @@
-import { IValidationClient, IMultipleValidationClient } from '../../Interfaces/Validations';
-import { ValidationQuery, ValidationResult, ValidationResponse } from '../../Types/Validations';
-import Request from '../common/Request';
+import { IValidationClient, IMultipleValidationClient } from '../../Interfaces/Validations/index.js';
+import { ValidationQuery, ValidationResult, ValidationResponse } from '../../Types/Validations/index.js';
+import Request from '../common/Request.js';
 
 export default class ValidateClient implements IValidationClient {
   public multipleValidation;

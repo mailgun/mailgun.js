@@ -48,7 +48,7 @@ jobs:
           run: npm ci
 
         - name: Run build
-          run: npm run build
+          run: npm run build:rollup
 
         - name: Run tests
           run: npm test

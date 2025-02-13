@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESM dynamic import</title>
+</head>
+<script>
+  const Mailgun = Promise.all(
+    [
+      import ('http://localhost:3000/dist/ESM/mailgun.browser.js'),
+      import ('http://localhost:3000/dist/ESM/definitions.browser.js')
+    ]).then(imports =>{
+      const [Mailgun, Definitions] = imports;
+      // dynamic import requires access to default property because import returns module object and not the export itself
+      const mailgun = new Mailgun.default(FormData);
+      const client = mailgun.client({
+        username: 'js_test_username',
+        key: 'js_test_key',
+        public_key: 'js_test_key',
+        timeout: 10000,
+        url: 'http://localhost:3000/'
+      });
+      window.packageExport = Mailgun;
+      window.mailgunClient = client;
+      window.definitionsExport = Definitions;
+      document.getElementById('script_status').innerText = 'Loaded'
+    }).catch((err) => console.error(err))
+</script>
+<body>
+<h1>ESM dynamic import</h1>
+<h3 id="script_status">Loading ...</h3>
+<input type="file" name="fileUpload" id="fileUpload">
+</body>
+</html>

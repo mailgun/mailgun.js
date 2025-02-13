@@ -3,7 +3,7 @@ import {
   DomainData,
   DomainDynamicPropsType,
   TDomain
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
 /* eslint-disable camelcase */
 export default class Domain implements TDomain {

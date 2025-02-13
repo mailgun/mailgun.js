@@ -3,7 +3,7 @@ import {
   Metrics, MetricsPagination,
   MetricsQuery,
   MetricsResponseItem
-} from './Metrics';
+} from './Metrics.js';
 
 export type MetricsAPIQuery = Omit<MetricsQuery, 'start' | 'end'> & {
   start?: string;

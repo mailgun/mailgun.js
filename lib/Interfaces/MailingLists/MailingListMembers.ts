@@ -6,7 +6,7 @@ import {
   MultipleMembersData,
   NewMultipleMembersResponse,
   DeletedMember
-} from '../../Types/MailingLists';
+} from '../../Types/MailingLists/index.js';
 
 export interface IMailListsMembers {
   listMembers(

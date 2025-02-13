@@ -1,5 +1,5 @@
 import urljoin from 'url-join';
-import { IDomainTrackingClient } from '../../Interfaces';
+import { IDomainTrackingClient } from '../../Interfaces/index.js';
 import {
   ClickTrackingInfo,
   DomainTrackingData,
@@ -11,8 +11,8 @@ import {
   UnsubscribeTrackingInfo,
   UpdateDomainTrackingResponse,
   UpdatedOpenTracking,
-} from '../../Types';
-import Request from '../common/Request';
+} from '../../Types/index.js';
+import Request from '../common/Request.js';
 
 export default class DomainTrackingClient implements IDomainTrackingClient {
   request: Request;

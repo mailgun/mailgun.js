@@ -1,7 +1,7 @@
 import { Readable } from 'stream';
-import { CustomFile, CustomFileData } from '../../Types';
-import APIError from './Error';
-import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments';
+import { CustomFile, CustomFileData } from '../../Types/index.js';
+import APIError from './Error.js';
+import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments.js';
 
 class BlobFromStream {
   private _stream: Readable

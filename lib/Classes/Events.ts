@@ -1,13 +1,13 @@
 import urljoin from 'url-join';
-import NavigationThruPages from './common/NavigationThruPages';
+import NavigationThruPages from './common/NavigationThruPages.js';
 import {
   EventsList,
   EventsQuery,
   EventsResponse,
-} from '../Types/Events';
+} from '../Types/Events/index.js';
 
-import Request from './common/Request';
-import { IEventClient } from '../Interfaces';
+import Request from './common/Request.js';
+import { IEventClient } from '../Interfaces/index.js';
 
 export default class EventClient
   extends NavigationThruPages<EventsList>

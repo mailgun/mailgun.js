@@ -1,5 +1,5 @@
 import urljoin from 'url-join';
-import APIError from './Error';
+import APIError from './Error.js';
 
 import {
   PagesListAccumulator,
@@ -9,17 +9,17 @@ import {
   ResponseWithPaging,
   UpdatedUrlAndQuery,
   APIErrorOptions
-} from '../../Types/Common';
+} from '../../Types/Common/index.js';
 import {
   IBounce,
   IComplaint,
   IUnsubscribe,
   IWhiteList
-} from '../../Interfaces/Suppressions';
-import Request from './Request';
+} from '../../Interfaces/Suppressions/index.js';
+import Request from './Request.js';
 import {
   SuppressionDataType
-} from '../../Types/Suppressions';
+} from '../../Types/Suppressions/index.js';
 
 export default abstract class NavigationThruPages <T> {
   request?: Request;

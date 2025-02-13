@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESM import</title>
+</head>
+<script type="module">
+  import Mailgun from 'http://localhost:3000/dist/ESM/mailgun.browser.js';
+  import * as Definitions from 'http://localhost:3000/dist/ESM/definitions.browser.js';
+    const mailgun = new Mailgun(FormData);
+    const client = mailgun.client({
+      username: 'js_test_username',
+      key: 'js_test_key',
+      public_key: 'js_test_key',
+      timeout: 10000,
+      url: 'http://localhost:3000/'
+    });
+    window.packageExport = Mailgun;
+    window.mailgunClient = client;
+    window.definitionsExport = Definitions;
+    document.getElementById('script_status').innerText = 'Loaded'
+</script>
+<body>
+<h1>ESM import</h1>
+<h3 id="script_status">Loading ...</h3>
+<input type="file" name="fileUpload" id="fileUpload">
+</body>
+</html>

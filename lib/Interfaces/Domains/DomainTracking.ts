@@ -1,4 +1,4 @@
-import {
+import type {
   ClickTrackingInfo,
   DomainTrackingData,
   GenerateDomainTrackingCertificateResponse,
@@ -7,7 +7,7 @@ import {
   RegenerateDomainTrackingCertificateResponse,
   UnsubscribeTrackingInfo,
   UpdatedOpenTracking,
-} from '../../Types';
+} from '../../Types/index.js';
 
 export interface IDomainTrackingClient {
   get(domain: string): Promise<GetDomainTrackingCertificateResponse>

@@ -1,10 +1,10 @@
-import {
+import type {
   DomainCredentials,
   DomainCredentialsList,
   DomainCredentialsQuery,
   DomainCredentialsResult,
   UpdateDomainCredentialsData
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
 export interface IDomainCredentials {
     list(domain: string, query: DomainCredentialsQuery): Promise<DomainCredentialsList>

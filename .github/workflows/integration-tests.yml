@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Run build
-        run: npm run build
+        run: npm run build:rollup
 
       - name: Run Node.js related integration tests
         run:  npm run test:integration:node
@@ -52,7 +52,7 @@ jobs:
         run: npm ci
 
       - name: Copy dist for test server
-        run: cp ${{github.workspace}}/dist/mailgun.web.js ${{github.workspace}}/integration_tests/browser/server/dist/mailgun.web.js
+        run: cp -R ${{github.workspace}}/dist/ ${{github.workspace}}/integration_tests/browser/server/dist/
 
       - name: Serve Files
         uses: Eun/http-server-action@v1

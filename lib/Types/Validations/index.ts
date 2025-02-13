@@ -1,2 +1,2 @@
-export * from './MultipleValidation';
-export * from './Validation';
+export * from './MultipleValidation.js';
+export * from './Validation.js';

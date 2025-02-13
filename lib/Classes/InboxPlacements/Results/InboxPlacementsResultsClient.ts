@@ -4,7 +4,7 @@ import {
   IInboxPlacementsFiltersClient,
   IInboxPlacementsResultsClient,
   ILogger
-} from '../../../Interfaces';
+} from '../../../Interfaces/index.js';
 
 import {
   InboxPlacementsBox,
@@ -19,10 +19,10 @@ import {
   InboxPlacementsResultsList,
   InboxPlacementsResultsListAPIResponse,
   InboxPlacementsResultsQuery
-} from '../../../Types/InboxPlacements';
+} from '../../../Types/InboxPlacements/index.js';
 
-import NavigationThruPages from '../../common/NavigationThruPages';
-import Request from '../../common/Request';
+import NavigationThruPages from '../../common/NavigationThruPages.js';
+import Request from '../../common/Request.js';
 
 export default class InboxPlacementsResultsClient
   extends NavigationThruPages<InboxPlacementsResultsList>

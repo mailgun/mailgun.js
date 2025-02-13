@@ -3,10 +3,10 @@ import {
   InboxPlacementsResultWithStatus,
   InboxPlacementsResultsList,
   InboxPlacementsResultsQuery
-} from '../../../Types/InboxPlacements';
-import { IInboxPlacementsAttributesClient } from '../AttributesClient';
-import { IInboxPlacementsFiltersClient } from '../FiltersClient';
-import { IIPRSharingClient } from './InboxPlacementsResultsSharing';
+} from '../../../Types/InboxPlacements/index.js';
+import { IInboxPlacementsAttributesClient } from '../AttributesClient.js';
+import { IInboxPlacementsFiltersClient } from '../FiltersClient.js';
+import { IIPRSharingClient } from './InboxPlacementsResultsSharing.js';
 
 export interface IInboxPlacementsResultsClient {
   sharing: IIPRSharingClient;
