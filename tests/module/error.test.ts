@@ -1,10 +1,12 @@
-import APIError from '../lib/Classes/common/Error.js';
-import { APIErrorOptions } from '../lib/Types/Common/index.js';
+import APIError from '../../lib/Classes/common/Error.js';
+import { APIErrorOptions } from '../../lib/Types/Common/index.js';
 
 describe('APIError', function () {
   it('sets status', function () {
     const error = new APIError({ status: 200 } as APIErrorOptions);
-    error.status.should.eql(200);
+    expect(error).toMatchObject({
+      status: 200
+    });
   });
 
   describe('details property', () => {
@@ -14,8 +16,9 @@ describe('APIError', function () {
           message: 'oops. something went wrong'
         }
       } as APIErrorOptions);
-
-      error.details.should.eql('oops. something went wrong');
+      expect(error).toMatchObject({
+        details: 'oops. something went wrong'
+      });
     });
 
     it('sets details if body is a string', () => {
@@ -23,8 +26,9 @@ describe('APIError', function () {
         body: 'oops. something went wrong',
         status: 500
       } as APIErrorOptions);
-
-      error.details.should.eql('oops. something went wrong');
+      expect(error).toMatchObject({
+        details: 'oops. something went wrong'
+      });
     });
   });
 
@@ -35,14 +39,18 @@ describe('APIError', function () {
       }
     } as APIErrorOptions);
 
-    error.message.should.eql('oops. something went wrong');
+    expect(error).toMatchObject({
+      message: 'oops. something went wrong'
+    });
   });
 
   it('Creates instance if no data', () => {
     const error = new APIError({} as APIErrorOptions);
-    error.should.has.property('status');
-    error.should.has.property('message');
-    error.should.has.property('details');
-    error.type.should.eql('MailgunAPIError');
+    expect(error).toMatchObject({
+      status: undefined,
+      message: '',
+      details: '',
+      type: 'MailgunAPIError'
+    });
   });
 });

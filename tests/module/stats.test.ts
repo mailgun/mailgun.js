@@ -1,18 +1,17 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request.js';
-import StatsClient from '../lib/Classes/Stats/StatsClient.js';
+import Request from '../../lib/Classes/common/Request.js';
+import StatsClient from '../../lib/Classes/Stats/StatsClient.js';
 import {
   StatsOptions,
   StatsQuery,
   InputFormData,
   RequestOptions
-} from '../lib/Types/index.js';
-import { IStatsClient } from '../lib/Interfaces/index.js';
+} from '../../lib/Types/index.js';
+import { IStatsClient } from '../../lib/Interfaces/index.js';
 
-describe('StatsClient', function () {
+describe('StatsClient', () => {
   let client: IStatsClient;
   let api: nock.Scope;
 
@@ -30,7 +29,7 @@ describe('StatsClient', function () {
     api.done();
   });
 
-  describe('getDomain', async () => {
+  describe('getDomain', () => {
     const query = { event: 'delivered' };
 
     it('fetches stats for a given domain', async () => {
@@ -53,13 +52,28 @@ describe('StatsClient', function () {
         });
 
       const stats: StatsOptions = await client.getDomain('domain.com', query as StatsQuery);
-      (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-      (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
+      expect(stats).toMatchObject({
+        start: expect.any(Date),
+        end: expect.any(Date),
+        stats: expect.any(Array)
+      });
 
-      (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-      stats.stats[0].delivered.http.should.eql(1);
-      stats.stats[0].delivered.smtp.should.eql(2);
-      stats.stats[0].delivered.total.should.eql(3);
+      expect((stats.start as Date).toUTCString()).toEqual('Mon, 16 Mar 2015 00:00:00 GMT');
+      expect((stats.end as Date).toUTCString()).toEqual('Mon, 23 Mar 2015 00:00:00 GMT');
+
+      expect(stats.stats).toHaveLength(1);
+      expect(stats.stats[0]).toMatchObject({
+        time: expect.any(Date),
+        delivered: expect.objectContaining({
+          http: 1,
+          smtp: 2,
+          total: 3,
+        })
+      });
+      expect((stats.stats[0].time as Date).toUTCString()).toEqual('Mon, 16 Mar 2015 00:00:00 GMT');
+      // stats.stats[0].delivered.http.should.eql(1);
+      // stats.stats[0].delivered.smtp.should.eql(2);
+      // stats.stats[0].delivered.total.should.eql(3);
     });
 
     it('works with js dates', async () => {
@@ -82,7 +96,7 @@ describe('StatsClient', function () {
         });
 
       await client.getDomain('domain.com', queryWithDates);
-      expect(requestObject).to.eql({
+      expect(requestObject).toMatchObject({
         event: 'delivered',
         start: 'Sun, 25 Dec 2022 00:00:00 GMT',
         end: 'Thu, 29 Dec 2022 00:00:00 GMT'
@@ -107,13 +121,13 @@ describe('StatsClient', function () {
         });
 
       await client.getDomain('domain.com', queryWithTwoEvents);
-      expect(requestObject).to.eql({
+      expect(requestObject).toMatchObject({
         event: ['delivered', 'accepted']
       });
     });
   });
 
-  describe('getAccount', async () => {
+  describe('getAccount', () => {
     const query = { event: 'delivered' };
 
     it('fetches stats for a given account', async () => {
@@ -136,13 +150,23 @@ describe('StatsClient', function () {
         });
 
       const stats: StatsOptions = await client.getAccount({ event: ['delivered'] });
-      (stats.start as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-      (stats.end as Date).toUTCString().should.eql('Mon, 23 Mar 2015 00:00:00 GMT');
 
-      (stats.stats[0].time as Date).toUTCString().should.eql('Mon, 16 Mar 2015 00:00:00 GMT');
-      stats.stats[0].delivered.http.should.eql(1);
-      stats.stats[0].delivered.smtp.should.eql(2);
-      stats.stats[0].delivered.total.should.eql(3);
+      expect((stats.start as Date).toUTCString()).toEqual('Mon, 16 Mar 2015 00:00:00 GMT');
+      expect((stats.end as Date).toUTCString()).toEqual('Mon, 23 Mar 2015 00:00:00 GMT');
+
+      expect((stats.stats[0].time as Date).toUTCString()).toEqual('Mon, 16 Mar 2015 00:00:00 GMT');
+
+      expect(stats.stats).toHaveLength(1);
+      expect(stats.stats[0]).toMatchObject({
+        delivered: expect.objectContaining({
+          http: 1,
+          smtp: 2,
+          total: 3
+        })
+      });
+      // stats.stats[0].delivered.http.should.eql(1);
+      // stats.stats[0].delivered.smtp.should.eql(2);
+      // stats.stats[0].delivered.total.should.eql(3);
     });
   });
 });

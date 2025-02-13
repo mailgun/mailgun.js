@@ -48,7 +48,7 @@ import MetricsClient from './Metrics/MetricsClient.js';
 import DomainTrackingClient from './Domains/domainsTracking.js';
 
 export default class MailgunClient implements IMailgunClient {
-  private request;
+  public request;
 
   public domains: IDomainsClient;
   public webhooks: IWebHooksClient;

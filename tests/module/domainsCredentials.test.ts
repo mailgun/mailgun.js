@@ -1,15 +1,15 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials.js';
+import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredentials.js';
 import {
   DomainCredentialsList,
   DomainCredentialsResult,
   InputFormData,
   RequestOptions
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainsCredentialsClient', function () {
@@ -27,7 +27,7 @@ describe('DomainsCredentialsClient', function () {
   });
 
   describe('list', function () {
-    it('fetches all domain credentials', function () {
+    it('fetches all domain credentials', async () => {
       api.get('/v3/domains/testDomain/credentials').reply(200, {
         items: [{
           created_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
@@ -37,22 +37,20 @@ describe('DomainsCredentialsClient', function () {
         }],
         total_count: 1
       });
-
-      return client.list('testDomain').then(function (credentialsList: DomainCredentialsList) {
-        credentialsList.should.be.an('object').to.have.property('items');
-        credentialsList.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-        credentialsList.items[0].should.eql({
-          created_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
-          login: 'testLogin@testing.example.com',
-          mailbox: 'test@testing.example.com',
-          size_bytes: null
-        });
+      const res = await client.list('testDomain');
+      expect(res).toHaveProperty('items');
+      expect(res.items).toHaveLength(1);
+      expect(res.items[0]).toMatchObject({
+        created_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
+        login: 'testLogin@testing.example.com',
+        mailbox: 'test@testing.example.com',
+        size_bytes: null
       });
     });
   });
 
   describe('create', function () {
-    it('creates domain credentials', function () {
+    it('creates domain credentials', async () => {
       const domainCredentialsData = {
         login: 'testLogin',
         password: 'testPassword'
@@ -61,40 +59,34 @@ describe('DomainsCredentialsClient', function () {
       api.post('/v3/domains/testDomain/credentials').reply(200, {
         message: 'Created 1 credentials pair(s)'
       });
-
-      return client.create('testDomain', domainCredentialsData).then(function (res: DomainCredentialsResult) {
-        res.should.eql({ message: 'Created 1 credentials pair(s)', status: 200 });
-      });
+      const res = await client.create('testDomain', domainCredentialsData);
+      expect(res).toMatchObject({ message: 'Created 1 credentials pair(s)', status: 200 });
     });
   });
 
   describe('update', function () {
-    it('updates domain credentials', function () {
+    it('updates domain credentials', async () => {
       api.put('/v3/domains/testDomain/credentials/testLogin').reply(200, {
         message: 'Password changed'
       });
-
-      return client.update('testDomain', 'testLogin', {
+      const res = await client.update('testDomain', 'testLogin', {
         password: 'testPassword1'
-      }).then(function (res: DomainCredentialsResult) {
-        res.should.eql({ message: 'Password changed', status: 200 });
       });
+      expect(res).toMatchObject({ message: 'Password changed', status: 200 });
     });
   });
 
   describe('destroy', function () {
-    it('deletes a domain credentials', function () {
+    it('deletes a domain credentials', async () => {
       api.delete('/v3/domains/testDomain/credentials/testLogin').reply(200, {
         message: 'domain deleted',
         spec: 'testDomain'
       });
-
-      return client.destroy('testDomain', 'testLogin').then(function (data: DomainCredentialsResult) {
-        data.should.eql({
-          message: 'domain deleted',
-          spec: 'testDomain',
-          status: 200
-        });
+      const res = await client.destroy('testDomain', 'testLogin');
+      expect(res).toMatchObject({
+        message: 'domain deleted',
+        spec: 'testDomain',
+        status: 200
       });
     });
   });

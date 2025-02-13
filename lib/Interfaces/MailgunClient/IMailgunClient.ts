@@ -13,8 +13,10 @@ import { IMailingListsClient } from '../MailingLists/index.js';
 import { ISubaccountsClient } from '../Subaccounts/index.js';
 import { IInboxPlacementsClient } from '../InboxPlacements/index.js';
 import { IMetricsClient } from '../Metrics/MetricsClient.js';
+import type Request from '../../Classes/common/Request.js';
 
 export interface IMailgunClient {
+    request: Request;
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
     events: IEventClient;

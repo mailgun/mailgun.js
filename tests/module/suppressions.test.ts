@@ -1,14 +1,13 @@
-import chai, { expect } from 'chai';
 import formData from 'form-data';
 import nock from 'nock';
-import APIError from '../lib/Classes/common/Error.js';
+import APIError from '../../lib/Classes/common/Error.js';
 
-import Request from '../lib/Classes/common/Request.js';
-import Bounce from '../lib/Classes/Suppressions/Bounce.js';
-import Complaint from '../lib/Classes/Suppressions/Complaint.js';
-import SuppressionClient from '../lib/Classes/Suppressions/SuppressionsClient.js';
-import Unsubscribe from '../lib/Classes/Suppressions/Unsubscribe.js';
-import WhiteList from '../lib/Classes/Suppressions/WhiteList.js';
+import Request from '../../lib/Classes/common/Request.js';
+import Bounce from '../../lib/Classes/Suppressions/Bounce.js';
+import Complaint from '../../lib/Classes/Suppressions/Complaint.js';
+import SuppressionClient from '../../lib/Classes/Suppressions/SuppressionsClient.js';
+import Unsubscribe from '../../lib/Classes/Suppressions/Unsubscribe.js';
+import WhiteList from '../../lib/Classes/Suppressions/WhiteList.js';
 import {
   InputFormData,
   ParsedPage,
@@ -17,9 +16,7 @@ import {
   SuppressionDestroyResult,
   SuppressionList,
   SuppressionListResponse
-} from '../lib/Types/index.js';
-
-chai.should();
+} from '../../lib/Types/index.js';
 
 describe('SuppressionsClient', function () {
   let client: SuppressionClient;
@@ -69,16 +66,22 @@ describe('SuppressionsClient', function () {
 
       const result: SuppressionList = await client.list('domain.com', 'bounces');
       const bounce1: Bounce = result.items[0] as Bounce;
-      bounce1.address.should.eql('unknown@unknown.com');
-      bounce1.code.should.eql(550);
-      bounce1.error.should.eql('No such mailbox');
-      (bounce1.created_at as Date).toUTCString().should.eql('Fri, 21 Oct 2011 11:02:55 GMT');
+      expect(bounce1).toMatchObject({
+        address: 'unknown@unknown.com',
+        code: 550,
+        error: 'No such mailbox',
+        created_at: expect.any(Date)
+      });
+      expect((bounce1.created_at as Date).toUTCString()).toEqual('Fri, 21 Oct 2011 11:02:55 GMT');
 
       const bounce2: Bounce = result.items[1] as Bounce;
-      bounce2.address.should.eql('full@disk.com');
-      bounce2.code.should.eql(552);
-      bounce2.error.should.eql('Mailbox full');
-      (bounce2.created_at as Date).toUTCString().should.eql('Fri, 21 Oct 2011 12:02:55 GMT');
+      expect(bounce2).toMatchObject({
+        address: 'full@disk.com',
+        code: 552,
+        error: 'Mailbox full',
+        created_at: expect.any(Date)
+      });
+      expect((bounce2.created_at as Date).toUTCString()).toEqual('Fri, 21 Oct 2011 12:02:55 GMT');
     });
 
     it('fetches unsubscribes', async () => {
@@ -96,14 +99,20 @@ describe('SuppressionsClient', function () {
 
       const result: SuppressionList = await client.list('domain.com', 'unsubscribes');
       const unsubscribe1: Unsubscribe = result.items[0] as Unsubscribe;
-      unsubscribe1.address.should.eql('brad@example.com');
-      unsubscribe1.tags.should.eql(['*']);
-      unsubscribe1.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 11:02:55 GMT');
+      expect(unsubscribe1).toMatchObject({
+        address: 'brad@example.com',
+        created_at: expect.any(Date),
+        tags: ['*']
+      });
+      expect(unsubscribe1.created_at.toUTCString()).toEqual('Fri, 21 Oct 2011 11:02:55 GMT');
 
       const unsubscribe2: Unsubscribe = result.items[1] as Unsubscribe;
-      unsubscribe2.address.should.eql('roman@example.com');
-      unsubscribe2.tags.should.eql(['*']);
-      unsubscribe2.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 12:02:55 GMT');
+      expect(unsubscribe2).toMatchObject({
+        address: 'roman@example.com',
+        created_at: expect.any(Date),
+        tags: ['*']
+      });
+      expect(unsubscribe2.created_at.toUTCString()).toEqual('Fri, 21 Oct 2011 12:02:55 GMT');
     });
 
     it('fetches complaints', async () => {
@@ -120,12 +129,18 @@ describe('SuppressionsClient', function () {
       const result: SuppressionList = await client.list('domain.com', 'complaints');
 
       const complaint1: Complaint = result.items[0] as Complaint;
-      complaint1.address.should.eql('brad@example.com');
-      complaint1.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 11:02:55 GMT');
+      expect(complaint1).toMatchObject({
+        address: 'brad@example.com',
+        created_at: expect.any(Date),
+      });
+      expect(complaint1.created_at.toUTCString()).toEqual('Fri, 21 Oct 2011 11:02:55 GMT');
 
       const complaint2: Complaint = result.items[1] as Complaint;
-      complaint2.address.should.eql('roman@example.com');
-      complaint2.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 12:02:55 GMT');
+      expect(complaint2).toMatchObject({
+        address: 'roman@example.com',
+        created_at: expect.any(Date),
+      });
+      expect(complaint2.created_at.toUTCString()).toEqual('Fri, 21 Oct 2011 12:02:55 GMT');
     });
 
     it('fetches WhiteLists', async () => {
@@ -145,16 +160,30 @@ describe('SuppressionsClient', function () {
 
       const result: SuppressionList = await client.list('domain.com', 'whitelists');
       const whitelist1: WhiteList = result.items[0] as WhiteList;
-      whitelist1.type.should.eql('whitelists');
-      whitelist1.value.should.eql('brad@example.com');
-      whitelist1.reason.should.eql('first reason');
-      whitelist1.createdAt.should.eql(new Date('2021-11-30T10:38:56.000Z'));
+
+      expect(whitelist1).toMatchObject({
+        type: 'whitelists',
+        value: 'brad@example.com',
+        reason: 'first reason',
+        createdAt: expect.any(Date)
+      });
+
+      // whitelist1.type.should.eql('whitelists');
+      // whitelist1.value.should.eql('brad@example.com');
+      // whitelist1.reason.should.eql('first reason');
+      expect(whitelist1.createdAt).toEqual(new Date('2021-11-30T10:38:56.000Z'));
 
       const whitelist2: WhiteList = result.items[1] as WhiteList;
-      whitelist2.type.should.eql('whitelists');
-      whitelist2.value.should.eql('roman@example.com');
-      whitelist2.reason.should.eql('second reason');
-      whitelist2.createdAt.should.eql(new Date('2021-11-30T10:38:56.000Z'));
+      expect(whitelist2).toMatchObject({
+        type: 'whitelists',
+        value: 'roman@example.com',
+        reason: 'second reason',
+        createdAt: expect.any(Date)
+      });
+      // whitelist2.type.should.eql('whitelists');
+      // whitelist2.value.should.eql('roman@example.com');
+      // whitelist2.reason.should.eql('second reason');
+      expect(whitelist2.createdAt).toEqual(new Date('2021-11-30T10:38:56.000Z'));
     });
 
     it('parses page links', async () => {
@@ -163,24 +192,44 @@ describe('SuppressionsClient', function () {
       let page: ParsedPage;
 
       page = bounces.pages.first;
-      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
-      expect(page.page).to.eql('?page=first');
-      expect(page.iteratorPosition).to.be.eql(undefined);
+      expect(page).toMatchObject({
+        url: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=first',
+        page: '?page=first',
+        iteratorPosition: undefined
+      });
+      // page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=first');
+      // expect(page.page).to.eql('?page=first');
+      // expect(page.iteratorPosition).to.be.eql(undefined);
 
       page = bounces.pages.last;
-      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=last');
-      expect(page.page).to.be.eql('?page=last');
-      expect(page.iteratorPosition).to.be.eql(undefined);
+      expect(page).toMatchObject({
+        url: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=last',
+        page: '?page=last',
+        iteratorPosition: undefined
+      });
+      // page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=last');
+      // expect(page.page).to.be.eql('?page=last');
+      // expect(page.iteratorPosition).to.be.eql(undefined);
 
       page = bounces.pages.next;
-      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com');
-      expect(page.page).to.be.eql('?page=next&address=next@mailgun.com');
-      page.should.have.property('iteratorPosition').eql('next@mailgun.com');
+      expect(page).toMatchObject({
+        url: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com',
+        page: '?page=next&address=next@mailgun.com',
+        iteratorPosition: 'next@mailgun.com'
+      });
+      // page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=next&address=next@mailgun.com');
+      // expect(page.page).to.be.eql('?page=next&address=next@mailgun.com');
+      // page.should.have.property('iteratorPosition').eql('next@mailgun.com');
 
       page = bounces.pages.previous;
-      page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com');
-      expect(page.page).to.be.eql('?page=previous&address=previous@mailgun.com');
-      page.should.have.property('iteratorPosition').eql('previous@mailgun.com');
+      expect(page).toMatchObject({
+        url: 'https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com',
+        page: '?page=previous&address=previous@mailgun.com',
+        iteratorPosition: 'previous@mailgun.com'
+      });
+      // page.url.should.eql('https://api.mailgun.net/v3/mailgun.com/bounces?page=previous&address=previous@mailgun.com');
+      // expect(page.page).to.be.eql('?page=previous&address=previous@mailgun.com');
+      // page.should.have.property('iteratorPosition').eql('previous@mailgun.com');
     });
 
     it('should not fail when requesting an empty page of results', async () => {
@@ -194,9 +243,16 @@ describe('SuppressionsClient', function () {
       const bounces = await client.list('domain.com', 'bounces', {
         page: '?page-next&address=next@mailgun.com',
       });
-
-      expect(bounces.pages.previous.page).to.be.eql('?page=previous&address=next@mailgun.com');
-      expect(bounces.items).to.be.empty;
+      expect(bounces).toMatchObject({
+        pages: {
+          previous: {
+            page: '?page=previous&address=next@mailgun.com'
+          }
+        },
+        items: expect.any(Array)
+      });
+      // expect(bounces.pages.previous.page).to.be.eql('?page=previous&address=next@mailgun.com');
+      expect(bounces.items).toHaveLength(0);
     });
   });
 
@@ -210,10 +266,13 @@ describe('SuppressionsClient', function () {
       });
 
       const bounce: Bounce = await client.get('domain.com', 'bounces', 'address?@unknown.com') as Bounce;
-      bounce.address.should.eql('address?@unknown.com');
-      bounce.code.should.eql(550);
-      bounce.error.should.eql('No such mailbox');
-      bounce.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 11:02:55 GMT');
+      expect(bounce).toMatchObject({
+        address: 'address?@unknown.com',
+        code: 550,
+        error: 'No such mailbox',
+        created_at: expect.any(Date)
+      });
+      expect((bounce.created_at as Date).toUTCString()).toEqual('Fri, 21 Oct 2011 11:02:55 GMT');
     });
 
     it('fetches unsubscribe for address', async () => {
@@ -224,9 +283,12 @@ describe('SuppressionsClient', function () {
       });
 
       const unsubscribe: Unsubscribe = await client.get('domain.com', 'unsubscribes', 'roman?@example.com') as Unsubscribe;
-      unsubscribe.address.should.eql('address?@unknown.com');
-      unsubscribe.tags.should.eql(['*']);
-      unsubscribe.created_at.toUTCString().should.eql('Fri, 21 Oct 2011 12:02:55 GMT');
+      expect(unsubscribe).toMatchObject({
+        address: 'address?@unknown.com',
+        tags: ['*'],
+        created_at: expect.any(Date)
+      });
+      expect((unsubscribe.created_at as Date).toUTCString()).toEqual('Fri, 21 Oct 2011 12:02:55 GMT');
     });
   });
 
@@ -240,7 +302,12 @@ describe('SuppressionsClient', function () {
           address: 'myaddress',
           code: 550
         });
-        createdBounce.message.should.eql('1 addresses have been added to the bounces table');
+        expect(createdBounce).toEqual({
+          message: '1 addresses have been added to the bounces table',
+          status: 200,
+          type: '',
+          value: ''
+        });
       });
 
       it('creates multiple bounces', async () => {
@@ -253,7 +320,12 @@ describe('SuppressionsClient', function () {
           'bounces',
           [{ address: 'myaddress' }, { address: 'myaddress1' }]
         );
-        createdBounces.message.should.eql(message);
+        expect(createdBounces).toEqual({
+          message: '2 addresses have been added to the bounces table',
+          status: 200,
+          type: '',
+          value: ''
+        });
       });
     });
 
@@ -263,10 +335,11 @@ describe('SuppressionsClient', function () {
           await client.create('domain.com', 'wrong type',
             { address: 'myaddress' });
         } catch (error: unknown) {
-          const err: APIError = error as APIError;
-          err.message.should.eql('Unknown type value');
-          err.details.should.eql('Type may be only one of [bounces, complaints, unsubscribes, whitelists]');
-          err.status.should.eql(400);
+          expect(error).toMatchObject({
+            message: 'Unknown type value',
+            details: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]',
+            status: 400
+          });
         }
       });
 
@@ -280,7 +353,7 @@ describe('SuppressionsClient', function () {
           'whitelists',
           { address: 'myaddress' }
         );
-        createdWhitelist.message.should.eql(message);
+        expect(createdWhitelist.message).toEqual(message);
       });
 
       it('throws in case multiple whitelists provided', async () => {
@@ -289,9 +362,11 @@ describe('SuppressionsClient', function () {
             [{ address: 'myaddress' }, { address: 'myaddress1' }]);
         } catch (error: unknown) {
           const err: APIError = error as APIError;
-          err.message.should.eql('Data property should be an object');
-          err.details.should.eql("Whitelist's creation process does not support multiple creations. Data property should be an object");
-          err.status.should.eql(400);
+          expect(err).toMatchObject({
+            message: 'Data property should be an object',
+            details: "Whitelist's creation process does not support multiple creations. Data property should be an object",
+            status: 400
+          });
         }
       });
     });
@@ -307,7 +382,7 @@ describe('SuppressionsClient', function () {
             'unsubscribes',
             { address: 'test5@example.com', tag: 'test' }
           );
-          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+          expect(createdUnsubscribe.message).toEqual('1 addresses have been added to the unsubscribes table');
         });
 
         it('creates unsubscribe(tag is not required)', async () => {
@@ -319,7 +394,7 @@ describe('SuppressionsClient', function () {
             'unsubscribes',
             { address: 'test5@example.com' }
           );
-          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+          expect(createdUnsubscribe.message).toEqual('1 addresses have been added to the unsubscribes table');
         });
 
         it('usage of "tags" property is forbidden', async () => {
@@ -331,10 +406,11 @@ describe('SuppressionsClient', function () {
               { address: 'test5@example.com', tags: ['test'] }
             );
           } catch (error) {
-            const err: APIError = error as APIError;
-            err.message.should.eql('Tags property should not be used for creating one unsubscribe.');
-            err.details.should.eql('Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead');
-            err.status.should.eql(400);
+            expect(error).toMatchObject({
+              message: 'Tags property should not be used for creating one unsubscribe.',
+              details: 'Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead',
+              status: 400,
+            });
           }
         });
 
@@ -348,10 +424,11 @@ describe('SuppressionsClient', function () {
               { address: 'test5@example.com', tag: ['test'] }
             );
           } catch (error) {
-            const err: APIError = error as APIError;
-            err.message.should.eql('Tag property can not be an array');
-            err.details.should.eql('Please use array of unsubscribes as second argument of create method to be able to provide few tags');
-            err.status.should.eql(400);
+            expect(error).toMatchObject({
+              message: 'Tag property can not be an array',
+              details: 'Please use array of unsubscribes as second argument of create method to be able to provide few tags',
+              status: 400,
+            });
           }
         });
       });
@@ -366,7 +443,7 @@ describe('SuppressionsClient', function () {
             'unsubscribes',
             [{ address: 'test5@example.com', tags: ['test'] }, { address: 'test6@example.com', tags: ['test'] }]
           );
-          createdUnsubscribes.message.should.eql(message);
+          expect(createdUnsubscribes.message).toEqual(message);
         });
 
         it('creates one unsubscribe with one tag using array', async () => {
@@ -378,7 +455,7 @@ describe('SuppressionsClient', function () {
             'unsubscribes',
             [{ address: 'test5@example.com', tags: ['test'] }]
           );
-          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+          expect(createdUnsubscribe.message).toEqual('1 addresses have been added to the unsubscribes table');
         });
 
         it('tags property may be omitted', async () => {
@@ -390,7 +467,7 @@ describe('SuppressionsClient', function () {
             'unsubscribes',
             [{ address: 'test5@example.com' }]
           );
-          createdUnsubscribe.message.should.eql('1 addresses have been added to the unsubscribes table');
+          expect(createdUnsubscribe.message).toEqual('1 addresses have been added to the unsubscribes table');
         });
 
         it('usage of "tag" property is forbidden', async () => {
@@ -403,10 +480,11 @@ describe('SuppressionsClient', function () {
               [{ address: 'test5@example.com', tag: ['test'] }]
             );
           } catch (error) {
-            const err: APIError = error as APIError;
-            err.message.should.eql('Tag property should not be used for creating multiple unsubscribes.');
-            err.details.should.eql('Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.');
-            err.status.should.eql(400);
+            expect(error).toMatchObject({
+              message: 'Tag property should not be used for creating multiple unsubscribes.',
+              details: 'Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.',
+              status: 400,
+            });
           }
         });
       });
@@ -421,7 +499,7 @@ describe('SuppressionsClient', function () {
       });
 
       const res: SuppressionDestroyResult = await client.destroy('domain.com', 'bounces', 'my?@address.com');
-      res.address.should.eql('my?@address.com');
+      expect(res.address).toEqual('my?@address.com');
     });
   });
 });

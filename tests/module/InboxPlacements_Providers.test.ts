@@ -1,12 +1,12 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
-import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
-import { IInboxPlacementsProvidersClient } from '../lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.js';
+import InboxPlacementsProvidersClient from '../../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
+import { IInboxPlacementsProvidersClient } from '../../lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.js';
 
 // TODO: fix types
 describe('Inbox Placements Providers', () => {
@@ -53,18 +53,19 @@ describe('Inbox Placements Providers', () => {
       });
 
       const IPProviders = await client.list();
-      IPProviders.should.be.an('object').to.have.property('items');
-      IPProviders.should.be.an('object').to.have.property('status');
-      IPProviders.status.should.be.equal(200);
+      expect(IPProviders).toMatchObject({
+        status: 200,
+        items: expect.any(Array),
 
-      IPProviders.items.should.be.an('array').to.have.property('length').to.equal(3);
+      });
+      expect(IPProviders.items).toHaveLength(3);
 
       const expectedProviders = providers.map((provider) => ({
         ...provider,
         created_at: new Date(provider.created_at),
         updated_at: new Date(provider.updated_at)
       }));
-      IPProviders.items.should.eql(expectedProviders);
+      expect(IPProviders.items).toEqual(expectedProviders);
     });
   });
 });

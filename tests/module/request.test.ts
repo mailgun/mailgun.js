@@ -3,10 +3,8 @@ import formData from 'form-data';
 
 import base64 from 'base-64';
 import nock from 'nock';
-import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request.js';
-import APIError from '../lib/Classes/common/Error.js';
-import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common/index.js';
+import Request from '../../lib/Classes/common/Request.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
 describe('Request', function () {
   let headers: { [key: string]: string };
@@ -17,7 +15,11 @@ describe('Request', function () {
     headers.Authorization = `Basic ${base64.encode('api:key')}`;
   });
 
-  describe('request', async function () {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  describe('request', () => {
     it('makes API request with correct headers', async function () {
       let reqHeaders = {};
       headers.Test = 'Custom Header';
@@ -43,24 +45,29 @@ describe('Request', function () {
         headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
         query: { some: 'parameter' }
       });
-      expect(reqHeaders).to.have.property('authorization').to.eql('Basic YXBpOmtleQ==');
-      expect(reqHeaders).to.have.property('test').to.eql('Custom Header');
-      expect(reqHeaders).to.have.property('x-csrf-token').to.eql('protectme');
+      expect(reqHeaders).toMatchObject({
+        authorization: 'Basic YXBpOmtleQ==',
+        test: 'Custom Header',
+        'x-csrf-token': 'protectme'
+      });
+
+      // expect(reqHeaders).to.have.property('test').to.eql('Custom Header');
+      // expect(reqHeaders).to.have.property('x-csrf-token').to.eql('protectme');
     });
 
-    it('parses API response', function () {
+    it('parses API response', async () => {
       nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource')
         .reply(200, { id: 1, message: 'hello' });
 
       const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
-      const res = req.request('get', '/v2/some/resource')
-        .then(function (response: APIResponse) {
-          expect(response.status).to.eql(200);
-          expect(response.body).to.eql({ id: 1, message: 'hello' });
-        });
-
-      return res;
+      const res = await req.request('get', '/v2/some/resource');
+      expect(res).toMatchObject({
+        status: 200,
+        body: {
+          id: 1, message: 'hello'
+        }
+      });
     });
 
     it('parses API response with string', async function () {
@@ -72,7 +79,7 @@ describe('Request', function () {
       try {
         await req.request('get', '/v3/some/resource');
       } catch (error) {
-        expect(error).to.include({
+        expect(error).toMatchObject({
           status: 400,
           details: 'Mailgun Magnificent API',
           message: 'Incorrect url'
@@ -80,18 +87,20 @@ describe('Request', function () {
       }
     });
 
-    it('handles API error', function () {
+    it('handles API error', async () => {
       nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource')
         .reply(429, 'Too many requests');
 
       const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
-      const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {
-        expect(error.status).to.eql(429);
-        expect(error.details).to.eql('Too many requests');
-      });
-
-      return res;
+      try {
+        await req.request('get', '/v2/some/resource');
+      } catch (error) {
+        expect(error).toMatchObject({
+          status: 429,
+          details: 'Too many requests',
+        });
+      }
     });
 
     it('handles axios error', async () => {
@@ -113,11 +122,10 @@ describe('Request', function () {
           }
         );
       } catch (error: unknown) {
-        expect(error).to.have.property('status');
-        expect(error).to.have.property('details');
-        const err: APIError = error as APIError;
-        expect(err.status).to.eql(400);
-        expect(err.details).to.eql('Request body larger than maxBodyLength limit');
+        expect(error).toMatchObject({
+          status: 400,
+          details: 'Request body larger than maxBodyLength limit',
+        });
       }
     });
   });
@@ -132,7 +140,9 @@ describe('Request', function () {
         .reply(200, {});
 
       const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
+      const reqSpy = jest.spyOn(req, 'request');
       await req.query('get', '/v2/some/resource2', search);
+      expect(reqSpy).toHaveBeenCalledWith('get', '/v2/some/resource2', { query: { query: 'data' } });
     });
   });
 
@@ -143,11 +153,15 @@ describe('Request', function () {
       nock(baseURL)
         .post('/v2/some/resource')
         .reply(200, {});
-
       const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
-      const res = req.command('post', '/v2/some/resource', body);
-
-      return res;
+      const reqSpy = jest.spyOn(req, 'request');
+      req.command('post', '/v2/some/resource', body);
+      expect(reqSpy).toHaveBeenCalledWith('post', '/v2/some/resource', {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        body: {
+          query: 'data',
+        },
+      });
     });
   });
 });

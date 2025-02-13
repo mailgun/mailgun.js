@@ -1,11 +1,11 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
-import ValidateClient from '../lib/Classes/Validations/validate.js';
-import { ValidationResult, InputFormData, RequestOptions } from '../lib/Types/index.js';
-import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation.js';
-import { IValidationClient } from '../lib/Interfaces/index.js';
+import Request from '../../lib/Classes/common/Request.js';
+import ValidateClient from '../../lib/Classes/Validations/validate.js';
+import { ValidationResult, InputFormData, RequestOptions } from '../../lib/Types/index.js';
+import MultipleValidationClient from '../../lib/Classes/Validations/multipleValidation.js';
+import { IValidationClient } from '../../lib/Interfaces/index.js';
 
 describe('ValidateClient', function () {
   let validateClient: IValidationClient;
@@ -22,7 +22,7 @@ describe('ValidateClient', function () {
     api.done();
   });
 
-  describe('get', async () => {
+  describe('get', () => {
     it('validates a single email address', async () => {
       const data: nock.ReplyBody = {
         address: 'Alice <alice@example.com>',
@@ -36,7 +36,7 @@ describe('ValidateClient', function () {
         .reply(200, data);
 
       const response: ValidationResult = await validateClient.get('foo@example.com');
-      response.should.eql(data);
+      expect(response).toEqual(data);
     });
   });
 });

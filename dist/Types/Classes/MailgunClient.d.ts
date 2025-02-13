@@ -1,7 +1,8 @@
+import Request from './common/Request.js';
 import { MailgunClientOptions, InputFormData } from '../Types/index.js';
 import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient } from '../Interfaces/index.js';
 export default class MailgunClient implements IMailgunClient {
-    private request;
+    request: Request;
     domains: IDomainsClient;
     webhooks: IWebHooksClient;
     events: IEventClient;

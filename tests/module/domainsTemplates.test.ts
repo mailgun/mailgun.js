@@ -1,16 +1,15 @@
-import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates.js';
+import DomainTemplatesClient from '../../lib/Classes/Domains/domainsTemplates.js';
 import {
   InputFormData,
   RequestOptions,
   DomainTemplateUpdateVersionData,
   DomainTemplateVersionData
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainsTemplatesClient', function () {
@@ -48,28 +47,36 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const templatesList = await client.list('testDomain');
-      templatesList.should.be.an('object').to.have.property('items');
-      templatesList.status.should.be.equal(200);
-      templatesList.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-      templatesList.items[0].should.eql({
+      expect(templatesList).toMatchObject(expect.objectContaining({
+        status: 200,
+        items: expect.any(Array),
+        pages: {
+          first: expect.objectContaining({
+            page: '?limit=10',
+            iteratorPosition: undefined
+          }),
+          last: expect.objectContaining({
+            page: '?page=last&limit=10',
+            iteratorPosition: undefined
+          }),
+          next: expect.objectContaining({
+            page: '?page=next&p=temporary-test-template&limit=10',
+            iteratorPosition: 'temporary-test-template'
+          }),
+          previous: expect.objectContaining({
+            page: '?page=previous&p=temporary-test-template&limit=10',
+            iteratorPosition: 'temporary-test-template'
+          }),
+        }
+      }));
+      expect(templatesList.items).toHaveLength(1);
+      expect(templatesList.items[0]).toMatchObject({
         name: 'test_template',
         description: 'test_template description',
         createdAt: new Date('Mon, 20 Dec 2021 14:47:51 UTC'),
         createdBy: '',
         id: 'someId'
       });
-
-      templatesList.pages.first.page.should.be.equal('?limit=10');
-      expect(templatesList.pages.first.iteratorPosition).to.be.equal(undefined);
-
-      templatesList.pages.last.page.should.be.equal('?page=last&limit=10');
-      expect(templatesList.pages.last.iteratorPosition).to.be.equal(undefined);
-
-      templatesList.pages.next.page.should.be.equal('?page=next&p=temporary-test-template&limit=10');
-      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
-
-      templatesList.pages.previous.page.should.be.equal('?page=previous&p=temporary-test-template&limit=10');
-      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
     });
 
     it('fetches pages of templates with the "page" and "limit" options', async () => {
@@ -95,18 +102,36 @@ describe('DomainsTemplatesClient', function () {
         page: '?page=next&p=temporary-test-template',
         limit: 1,
       });
-      templatesList.should.be.an('object').to.have.property('items');
-      templatesList.pages.first.page.should.be.equal('?limit=1');
-      expect(templatesList.pages.first.iteratorPosition).to.be.equal(undefined);
-
-      templatesList.pages.last.page.should.be.equal('?page=last&limit=1');
-      expect(templatesList.pages.last.iteratorPosition).to.be.equal(undefined);
-
-      templatesList.pages.next.page.should.be.equal('?page=next&p=temporary-test-template&limit=1');
-      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
-
-      templatesList.pages.previous.page.should.be.equal('?page=previous&p=temporary-test-template&limit=1');
-      expect(templatesList.pages.next.iteratorPosition).to.be.equal('temporary-test-template');
+      expect(templatesList).toMatchObject(expect.objectContaining({
+        status: 200,
+        items: expect.any(Array),
+        pages: {
+          first: expect.objectContaining({
+            page: '?limit=1',
+            iteratorPosition: undefined
+          }),
+          last: expect.objectContaining({
+            page: '?page=last&limit=1',
+            iteratorPosition: undefined
+          }),
+          next: expect.objectContaining({
+            page: '?page=next&p=temporary-test-template&limit=1',
+            iteratorPosition: 'temporary-test-template'
+          }),
+          previous: expect.objectContaining({
+            page: '?page=previous&p=temporary-test-template&limit=1',
+            iteratorPosition: 'temporary-test-template'
+          }),
+        }
+      }));
+      expect(templatesList.items).toHaveLength(1);
+      expect(templatesList.items[0]).toMatchObject({
+        name: 'test_template',
+        description: 'test_template description',
+        createdAt: new Date('Mon, 20 Dec 2021 14:47:51 UTC'),
+        createdBy: '',
+        id: 'someId'
+      });
     });
   });
 
@@ -123,8 +148,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const template = await client.get('testDomain', 'testTemplateName');
-      template.should.be.an('object');
-      template.should.eql({
+      expect(template).toMatchObject({
         name: 'test_template',
         description: 'test_template description',
         createdAt: new Date('Mon, 20 Dec 2021 14:47:51 UTC'),
@@ -153,8 +177,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const template = await client.get('testDomain', 'testTemplateName');
-      template.should.be.an('object');
-      template.should.eql({
+      expect(template).toMatchObject({
         name: 'test_template',
         description: 'test_template description',
         createdAt: '',
@@ -204,8 +227,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const template = await client.create('testDomain', templateData);
-      template.should.be.an('object');
-      template.should.eql({
+      expect(template).toMatchObject({
         name: 'test_template1',
         description: 'test_template description 1',
         createdAt: new Date('Wed, 22 Dec 2021 08:59:29 UTC'),
@@ -235,8 +257,7 @@ describe('DomainsTemplatesClient', function () {
       const updatedTemplate = await client.update('testDomain', 'testTemplateName', {
         description: 'updated test_template description'
       });
-      updatedTemplate.should.be.an('object');
-      updatedTemplate.should.eql({
+      expect(updatedTemplate).toMatchObject({
         status: 200,
         message: 'template has been updated',
         templateName: 'test_template1'
@@ -251,8 +272,7 @@ describe('DomainsTemplatesClient', function () {
       const updatedTemplate = await client.update('testDomain', 'testTemplateName', {
         description: 'updated test_template description'
       });
-      updatedTemplate.should.be.an('object');
-      updatedTemplate.should.eql({
+      expect(updatedTemplate).toMatchObject({
         status: 200,
         message: 'template has been updated',
       });
@@ -267,7 +287,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const deletedTemplate = await client.destroy('testDomain', 'testTemplateName');
-      deletedTemplate.should.eql({
+      expect(deletedTemplate).toMatchObject({
         status: 200,
         message: 'template has been deleted',
         templateName: 'test_template1'
@@ -280,7 +300,7 @@ describe('DomainsTemplatesClient', function () {
       api.delete('/v3/testDomain/templates').reply(200, { message: 'templates have been deleted' });
 
       const deletedTemplate = await client.destroyAll('testDomain');
-      deletedTemplate.should.eql({ status: 200, message: 'templates have been deleted' });
+      expect(deletedTemplate).toMatchObject({ status: 200, message: 'templates have been deleted' });
     });
   });
 
@@ -315,8 +335,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const templateVersion = await client.createVersion('testDomain', 'testTemplateName', templateVersionData);
-      templateVersion.should.be.an('object');
-      templateVersion.should.eql({
+      expect(templateVersion).toMatchObject({
         status: 200,
         message: 'new version of the template has been stored',
         template: {
@@ -352,8 +371,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const templateVersion = await client.createVersion('testDomain', 'testTemplateName', templateVersionData);
-      templateVersion.should.be.an('object');
-      templateVersion.should.eql({
+      expect(templateVersion).toMatchObject({
         status: 200,
         message: 'new version of the template has been stored',
       });
@@ -383,8 +401,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const template = await client.getVersion('testDomain', 'testTemplateName', 'v1');
-      template.should.be.an('object');
-      template.should.eql({
+      expect(template).toMatchObject({
         name: 'test_template',
         description: 'test_template description',
         createdAt: new Date('2021-12-22T09:13:27.000Z'),
@@ -416,8 +433,7 @@ describe('DomainsTemplatesClient', function () {
         comment: 'updated comment 2',
         active: 'yes'
       } as DomainTemplateUpdateVersionData);
-      updatedTemplate.should.be.an('object');
-      updatedTemplate.should.eql({
+      expect(updatedTemplate).toMatchObject({
         status: 200,
         message: 'version has been updated',
         templateName: 'test_template',
@@ -435,8 +451,7 @@ describe('DomainsTemplatesClient', function () {
         comment: 'updated comment 2',
         active: 'yes'
       } as DomainTemplateUpdateVersionData);
-      updatedTemplate.should.be.an('object');
-      updatedTemplate.should.eql({
+      expect(updatedTemplate).toMatchObject({
         status: 200,
         message: 'version has been updated'
       });
@@ -451,7 +466,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const deletedTemplate = await client.destroyVersion('testDomain', 'testTemplateName', 'v1');
-      deletedTemplate.should.eql({
+      expect(deletedTemplate).toMatchObject({
         status: 200,
         message: 'version has been deleted',
         templateName: 'test_template',
@@ -497,8 +512,7 @@ describe('DomainsTemplatesClient', function () {
       });
 
       const templatesList = await client.listVersions('testDomain', 'testTemplateName');
-      templatesList.should.be.an('object');
-      templatesList.should.eql({
+      expect(templatesList).toMatchObject({
         pages: {
           first: {
             id: 'first',

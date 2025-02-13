@@ -3,10 +3,9 @@ import fs from 'fs';
 import path from 'path';
 
 import nock from 'nock';
-import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request.js';
-import { InputFormData, RequestOptions, MultipleValidationJobsListResult } from '../lib/Types/index.js';
-import MultipleValidationClient from '../lib/Classes/Validations/multipleValidation.js';
+import Request from '../../lib/Classes/common/Request.js';
+import { InputFormData, RequestOptions, MultipleValidationJobsListResult } from '../../lib/Types/index.js';
+import MultipleValidationClient from '../../lib/Classes/Validations/multipleValidation.js';
 
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 
@@ -130,7 +129,7 @@ describe('ValidateClient', () => {
       };
 
       const result: MultipleValidationJobsListResult = await client.list();
-      result.should.eql(expectedResult);
+      expect(result).toMatchObject(expectedResult);
     });
     it('returns result if no downloads and summary objects', async () => {
       const data = {
@@ -198,7 +197,7 @@ describe('ValidateClient', () => {
       };
 
       const result: MultipleValidationJobsListResult = await client.list();
-      result.should.eql(expectedResult);
+      expect(result).toMatchObject(expectedResult);
     });
 
     it('returns result if no url in downloads objects', async () => {
@@ -282,7 +281,7 @@ describe('ValidateClient', () => {
         total: 1
       };
       const result: MultipleValidationJobsListResult = await client.list();
-      result.should.eql(expectedResult);
+      expect(result).toMatchObject(expectedResult);
     });
   });
 
@@ -324,7 +323,7 @@ describe('ValidateClient', () => {
         }
       };
       const res = await client.get(listId);
-      expect(res).eql(expectedResult);
+      expect(res).toMatchObject(expectedResult);
     });
   });
 
@@ -357,9 +356,9 @@ describe('ValidateClient', () => {
         };
 
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-        expect(requestBody).include('Content-Type: text/csv');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: text/csv'));
       });
 
       it('Creates a bulk validation job with custom file (readStream)', async () => {
@@ -369,9 +368,9 @@ describe('ValidateClient', () => {
         };
 
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-        expect(requestBody).include('Content-Type: text/csv');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: text/csv'));
       });
 
       it('Creates a bulk validation job with custom file (csv string)', async () => {
@@ -381,9 +380,9 @@ describe('ValidateClient', () => {
           contentType: 'text/csv',
         };
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-        expect(requestBody).include('Content-Type: text/csv');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: text/csv'));
       });
 
       it('Creates a bulk validation job with custom file (buffer)', async () => {
@@ -394,41 +393,41 @@ describe('ValidateClient', () => {
         };
 
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-        expect(requestBody).include('Content-Type: text/csv');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: text/csv'));
       });
 
       it('Creates a bulk validation job with with data from readFile', async () => {
         const file = await fsPromises.readFile(filepath);
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-        expect(requestBody).include('Content-Type: application/octet-stream');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
       });
 
       it('Creates a bulk validation job with with data from readStream', async () => {
         const file = fs.createReadStream(filepath);
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-        expect(requestBody).include('Content-Type: text/csv');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: text/csv'));
       });
 
       it('Creates a bulk validation job with with data from csv string', async () => {
         const file = 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n';
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-        expect(requestBody).include('Content-Type: application/octet-stream');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
       });
 
       it('Creates a bulk validation job with with data from buffer', async () => {
         const file = Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n');
         const res = await client.create('testValidationList', { file });
-        res.should.eql({ status: 200, ...data });
-        expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-        expect(requestBody).include('Content-Type: application/octet-stream');
+        expect(res).toMatchObject({ status: 200, ...data });
+        expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+        expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
       });
     });
 
@@ -445,9 +444,9 @@ describe('ValidateClient', () => {
             data: await fsPromises.readFile(filepath)
           };
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with custom file (readStream)', async () => {
@@ -456,9 +455,9 @@ describe('ValidateClient', () => {
             data: fs.createReadStream(filepath)
           };
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with custom file (csv string)', async () => {
@@ -468,9 +467,9 @@ describe('ValidateClient', () => {
             contentType: 'text/csv',
           };
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with custom file (buffer)', async () => {
@@ -480,62 +479,62 @@ describe('ValidateClient', () => {
             contentType: 'text/csv',
           };
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with with data from readFile', async () => {
           const file = await fsPromises.readFile(filepath);
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with with data from readStream', async () => {
           const file = fs.createReadStream(filepath);
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with with data from csv string', async () => {
           const file = 'email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n';
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         it('Creates a bulk validation job with with data from buffer', async () => {
           const file = Buffer.from('email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n');
           const res = await client.create('testValidationList', { file });
-          res.should.eql({ status: 200, ...data });
-          expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-          expect(requestBody).include('Content-Type: application/octet-stream');
+          expect(res).toMatchObject({ status: 200, ...data });
+          expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+          expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
         });
 
         if (globalThis.Blob) {
-          describe('Creates a bulk validation job with with (Browser compliant FormData + Blob)', async () => {
+          describe('Creates a bulk validation job with with (Browser compliant FormData + Blob)', () => {
             it('Creates a bulk validation job with custom file (Blob)', async () => {
               const file = {
                 filename: 'test.csv',
                 data: new Blob(['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n'])
               };
               const res = await client.create('testValidationList', { file });
-              res.should.eql({ status: 200, ...data });
-              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-              expect(requestBody).include('Content-Type: application/octet-stream');
+              expect(res).toMatchObject({ status: 200, ...data });
+              expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+              expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
             });
 
             it('Creates a bulk validation job with data from Blob', async () => {
               const file = new Blob(['email\n1testEmailAdressForCheck@test.com\n2testEmailAdressForCheck@test.com\n']);
               const res = await client.create('testValidationList', { file });
-              res.should.eql({ status: 200, ...data });
-              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="file"');
-              expect(requestBody).include('Content-Type: application/octet-stream');
+              expect(res).toMatchObject({ status: 200, ...data });
+              expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="file"'));
+              expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
             });
           });
         } else {
@@ -543,7 +542,7 @@ describe('ValidateClient', () => {
           console.warn('Blob does not exist. Skipping bulk validation + Blob tests');
         }
         if (globalThis.File) {
-          describe('Creates a bulk validation job with with (Browser compliant FormData + File)', async () => {
+          describe('Creates a bulk validation job with with (Browser compliant FormData + File)', () => {
             it('Creates a bulk validation job with custom file (Blob)', async () => {
               const file = {
                 filename: 'test_file.csv',
@@ -553,9 +552,9 @@ describe('ValidateClient', () => {
                 )
               };
               const res = await client.create('testValidationList', { file });
-              res.should.eql({ status: 200, ...data });
-              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test_file.csv"');
-              expect(requestBody).include('Content-Type: application/octet-stream');
+              expect(res).toMatchObject({ status: 200, ...data });
+              expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test_file.csv"'));
+              expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
             });
 
             it('Creates a bulk validation job with data from File', async () => {
@@ -564,9 +563,9 @@ describe('ValidateClient', () => {
                 'test.csv'
               );
               const res = await client.create('testValidationList', { file });
-              res.should.eql({ status: 200, ...data });
-              expect(requestBody).include('Content-Disposition: form-data; name="file"; filename="test.csv"');
-              expect(requestBody).include('Content-Type: application/octet-stream');
+              expect(res).toMatchObject({ status: 200, ...data });
+              expect(requestBody).toEqual(expect.stringContaining('Content-Disposition: form-data; name="file"; filename="test.csv"'));
+              expect(requestBody).toEqual(expect.stringContaining('Content-Type: application/octet-stream'));
             });
           });
         } else {
@@ -591,7 +590,7 @@ describe('ValidateClient', () => {
         .reply(200, { message: 'Validation job canceled.' });
 
       const res = await client.destroy(listId);
-      expect(res).to.eql(data);
+      expect(res).toMatchObject(data);
     });
   });
 });

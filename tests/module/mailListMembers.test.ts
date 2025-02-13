@@ -1,7 +1,7 @@
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/Classes/common/Request.js';
-import MailListMembers from '../lib/Classes/MailingLists/mailListMembers.js';
+import Request from '../../lib/Classes/common/Request.js';
+import MailListMembers from '../../lib/Classes/MailingLists/mailListMembers.js';
 import {
   InputFormData,
   RequestOptions,
@@ -10,8 +10,8 @@ import {
   MailListMember,
   MultipleMembersData,
   NewMultipleMembersResponse
-} from '../lib/Types/index.js';
-import { IMailListsMembers } from '../lib/Interfaces/index.js';
+} from '../../lib/Types/index.js';
+import { IMailListsMembers } from '../../lib/Interfaces/index.js';
 
 describe('mailListsMembersClient', function () {
   let mailListsMembersClient: IMailListsMembers;
@@ -34,7 +34,7 @@ describe('mailListsMembersClient', function () {
     api.done();
   });
 
-  describe('listMembers', function () {
+  describe('listMembers', () => {
     it('fetches all mail list members', async function () {
       const lists = [defaultListMember];
 
@@ -46,19 +46,22 @@ describe('mailListsMembersClient', function () {
       });
 
       const result = await mailListsMembersClient.listMembers('list-name');
-
-      result.should.have.property('items');
-      result.items.length.should.be.equal(1);
-      result.items[0].should.eql(defaultListMember);
-
-      result.should.have.property('pages');
-      result.pages.first.page.should.be.eql('?page=1');
-      result.pages.first.url.should.be.eql('http://test.com/pages?page=1');
-      result.pages.first.id.should.be.eql('first');
+      expect(result).toMatchObject({
+        items: expect.any(Array),
+        pages: {
+          first: expect.objectContaining({
+            page: '?page=1',
+            url: 'http://test.com/pages?page=1',
+            id: 'first'
+          })
+        }
+      });
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0]).toMatchObject(defaultListMember);
     });
   });
 
-  describe('getMember', async () => {
+  describe('getMember', () => {
     it('gets a specific mailing list member', async () => {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
@@ -67,11 +70,11 @@ describe('mailListsMembersClient', function () {
       });
 
       const listMember: MailListMember = await mailListsMembersClient.getMember('testingMailingListAddress@example.com', 'testingMailingListMemberAddress@example.com');
-      listMember.should.eql(defaultListMember);
+      expect(listMember).toMatchObject(defaultListMember);
     });
   });
 
-  describe('createMember', async () => {
+  describe('createMember', () => {
     it('adds list member to the mailing list ', async () => {
       const member: CreateUpdateMailListMembers = {
         ...defaultListMember,
@@ -86,7 +89,7 @@ describe('mailListsMembersClient', function () {
 
       const newListMember: MailListMember = await mailListsMembersClient
         .createMember(mailingListAddress, member);
-      newListMember.should.eql(member);
+      expect(newListMember).toMatchObject(member);
     });
 
     it('works with string value in subscribed field', async () => {
@@ -102,7 +105,7 @@ describe('mailListsMembersClient', function () {
 
       const newListMember: MailListMember = await mailListsMembersClient
         .createMember(mailingListAddress, member);
-      newListMember.should.eql(member);
+      expect(newListMember).toMatchObject(member);
     });
 
     it('works with false value in subscribed field', async () => {
@@ -118,11 +121,11 @@ describe('mailListsMembersClient', function () {
 
       const newListMember: MailListMember = await mailListsMembersClient
         .createMember(mailingListAddress, member);
-      newListMember.should.eql(member);
+      expect(newListMember).toMatchObject(member);
     });
   });
 
-  describe('createMembers', async () => {
+  describe('createMembers', () => {
     const mailingListAddress = 'testingMailingListAddress@example.com';
     let response : NewMultipleMembersResponse;
 
@@ -160,7 +163,7 @@ describe('mailListsMembersClient', function () {
           upsert: 'yes'
         }
       );
-      result.should.eql(response);
+      expect(result).toMatchObject(response);
     });
 
     it('works with string value in members field', async () => {
@@ -178,11 +181,11 @@ describe('mailListsMembersClient', function () {
           members: newMembersList,
           upsert: 'yes'
         } as MultipleMembersData);
-      result.should.eql(response);
+      expect(result).toMatchObject(response);
     });
   });
 
-  describe('updateMember', async () => {
+  describe('updateMember',  () => {
     it('updates list member in the mailing list ', async () => {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
@@ -197,7 +200,7 @@ describe('mailListsMembersClient', function () {
         mailingListMemberAddress,
         member
       );
-      res.should.eql(defaultListMember);
+      expect(res).toMatchObject(defaultListMember);
     });
 
     it('works with string value in subscribed field', function () {
@@ -215,12 +218,12 @@ describe('mailListsMembersClient', function () {
         mailingListMemberAddress,
         member
       ).then(function (res: MailListMember) {
-        res.should.eql(defaultListMember);
+        expect(res).toMatchObject(defaultListMember);
       });
     });
   });
 
-  describe('destroyMember', function () {
+  describe('destroyMember', () => {
     it('deletes member from the list ', function () {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';
@@ -235,7 +238,7 @@ describe('mailListsMembersClient', function () {
         mailingListAddress,
         mailingListMemberAddress
       ).then(function (deletedMemberRes: DeletedMember) {
-        deletedMemberRes.should.eql(res);
+        expect(deletedMemberRes).toMatchObject(res);
       });
     });
   });

@@ -1,12 +1,11 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request.js';
-import { InputFormData, MetricsResult, RequestOptions } from '../lib/Types/index.js';
-import { IMetricsClient } from '../lib/Interfaces/Metrics/MetricsClient.js';
-import MetricsClient from '../lib/Classes/Metrics/MetricsClient.js';
-import { Resolution } from '../lib/Enums/index.js';
+import Request from '../../lib/Classes/common/Request.js';
+import { InputFormData, MetricsResult, RequestOptions } from '../../lib/Types/index.js';
+import { IMetricsClient } from '../../lib/Interfaces/Metrics/MetricsClient.js';
+import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
+import { Resolution } from '../../lib/Enums/index.js';
 
 describe('MetricsClient', function () {
   let client: IMetricsClient;
@@ -62,15 +61,17 @@ describe('MetricsClient', function () {
     api.done();
   });
 
-  describe('getAccount', async () => {
+  describe('getAccount', () => {
     it('fetches metrics for a given account', async () => {
       api.post('/v1/analytics/metrics')
         .reply(200, metricsResponse);
 
       const result: MetricsResult = await client.getAccount();
-      result.should.be.an('object').to.have.property('items');
-      result.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-      result.should.eql(expectedMetricsResponse);
+      expect(result).toMatchObject(expectedMetricsResponse);
+      // expect(result).toHaveLength(1);
+      // result.should.be.an('object').to.have.property('items');
+      // result.items.should.be.an('array').to.have.property('length').to.be.equal(1);
+      // result.should.eql(expectedMetricsResponse);
     });
 
     it('prepares dates in query', async () => {
@@ -104,8 +105,7 @@ describe('MetricsClient', function () {
       }).reply(200, metricsResponse);
 
       await client.getAccount(query);
-      expect(updatedQuery).to.be.an('object');
-      expect(updatedQuery).eql({
+      expect(updatedQuery).toMatchObject({
         ...query,
         start: startDate.toUTCString(),
         end: endDate.toUTCString()
@@ -113,15 +113,16 @@ describe('MetricsClient', function () {
     });
   });
 
-  describe('getAccountUsage', async () => {
+  describe('getAccountUsage', () => {
     it('fetches metrics for a given account', async () => {
       api.post('/v1/analytics/usage/metrics')
         .reply(200, metricsResponse);
 
       const result: MetricsResult = await client.getAccountUsage();
-      result.should.be.an('object').to.have.property('items');
-      result.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-      result.should.eql(expectedMetricsResponse);
+      expect(result).toMatchObject(expectedMetricsResponse);
+      // result.should.be.an('object').to.have.property('items');
+      // result.items.should.be.an('array').to.have.property('length').to.be.equal(1);
+      // result.should.eql(expectedMetricsResponse);
     });
 
     it('prepares dates in query', async () => {
@@ -155,8 +156,7 @@ describe('MetricsClient', function () {
       }).reply(200, metricsResponse);
 
       await client.getAccountUsage(query);
-      expect(updatedQuery).to.be.an('object');
-      expect(updatedQuery).eql({
+      expect(updatedQuery).toMatchObject({
         ...query,
         start: startDate.toUTCString(),
         end: endDate.toUTCString()

@@ -1,14 +1,13 @@
-import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
-import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
-import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient.js';
-import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient.js';
+import SeedsListsClient from '../../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
+import InboxPlacementsAttributesClient from '../../lib/Classes/InboxPlacements/AttributesClient.js';
+import InboxPlacementsFiltersClient from '../../lib/Classes/InboxPlacements/FiltersClient.js';
 
 // TODO: fix types
 describe('SeedsListsClient', () => {
@@ -146,8 +145,7 @@ describe('SeedsListsClient', () => {
         limit: 10
       });
 
-      expect(requestQuery).to.be.an('object');
-      expect(requestQuery).eql({
+      expect(requestQuery).toMatchObject({
         time_after: timeAfter.toISOString(),
         time_before: timeBefore.toISOString(),
         name: 'test',
@@ -173,15 +171,26 @@ describe('SeedsListsClient', () => {
       });
 
       const seedsLists = await client.list({});
-      seedsLists.should.be.an('object').to.have.property('items');
-      seedsLists.status.should.be.equal(200);
-
-      seedsLists.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-      seedsLists.items[0].should.eql(expectedSeedsList);
-      seedsLists.pages.first.page.should.be.equal('?page=first');
-      seedsLists.pages.last.page.should.be.equal('?page=last');
-      seedsLists.pages.next.page.should.be.equal('?page=next');
-      seedsLists.pages.previous.page.should.be.equal('?page=previous');
+      expect(seedsLists).toMatchObject({
+        status: 200,
+        items: expect.any(Array),
+        pages: {
+          first: expect.objectContaining({
+            page: '?page=first'
+          }),
+          last: expect.objectContaining({
+            page: '?page=last'
+          }),
+          next: expect.objectContaining({
+            page: '?page=next'
+          }),
+          previous: expect.objectContaining({
+            page: '?page=previous'
+          })
+        }
+      });
+      expect(seedsLists.items).toHaveLength(1);
+      expect(seedsLists.items[0]).toMatchObject(expectedSeedsList);
     });
   });
 
@@ -192,8 +201,7 @@ describe('SeedsListsClient', () => {
       });
 
       const receivedSeedsList = await client.get('testId');
-      receivedSeedsList.should.be.an('object');
-      receivedSeedsList.should.eql({
+      expect(receivedSeedsList).toMatchObject({
         ...expectedSeedsList,
         status: 200
       });
@@ -205,8 +213,7 @@ describe('SeedsListsClient', () => {
       });
 
       const receivedSeedsList = await client.get('testId');
-      receivedSeedsList.should.be.an('object');
-      receivedSeedsList.should.eql({
+      expect(receivedSeedsList).toMatchObject({
         ...expectedSeedsList,
         Seeds: null,
         status: 200
@@ -220,8 +227,7 @@ describe('SeedsListsClient', () => {
       });
 
       const newSeedsList = await client.create({});
-      newSeedsList.should.be.an('object');
-      newSeedsList.should.eql({
+      expect(newSeedsList).toMatchObject({
         ...expectedSeedsList,
         status: 200
       });
@@ -243,8 +249,7 @@ describe('SeedsListsClient', () => {
         shuffle: true
       });
 
-      updatedSeedsList.should.be.an('object');
-      updatedSeedsList.should.eql({
+      expect(updatedSeedsList).toMatchObject({
         ...expectedSeedsList,
         sending_domains: 'new sending_domains value',
         name: 'new name value',
@@ -268,8 +273,7 @@ describe('SeedsListsClient', () => {
         seed_filter: 'new seed_filter value',
       });
 
-      updatedSeedsList.should.be.an('object');
-      updatedSeedsList.should.eql({
+      expect(updatedSeedsList).toMatchObject({
         ...expectedSeedsList,
         sending_domains: 'new sending_domains value',
         name: 'new name value',
@@ -285,7 +289,7 @@ describe('SeedsListsClient', () => {
       api.delete('/v4/inbox/seedlists/testId').reply(200, () => null);
 
       const deleteSeedListResponse = await client.destroy('testId');
-      deleteSeedListResponse.should.eql({
+      expect(deleteSeedListResponse).toMatchObject({
         status: 200,
         body: null
       });
@@ -303,14 +307,17 @@ describe('SeedsListsClient', () => {
         });
 
         const seedsListsAttributes = await client.attributes.list();
-        seedsListsAttributes.should.be.an('object').to.have.property('items');
-        seedsListsAttributes.status.should.be.equal(200);
-
-        seedsListsAttributes.items.should.be.an('object');
-        seedsListsAttributes.items.should.eql({
-          attribute: 'test_available attributes',
-          values: ['test_name']
+        expect(seedsListsAttributes).toMatchObject({
+          status: 200,
+          items: expect.objectContaining({
+            attribute: 'test_available attributes',
+            values: ['test_name']
+          })
         });
+        // seedsListsAttributes.should.be.an('object').to.have.property('items');
+        // seedsListsAttributes.status.should.be.equal(200);
+
+        // expect(seedsListsAttributes.items).toMatchObject();
       });
     });
 
@@ -321,8 +328,7 @@ describe('SeedsListsClient', () => {
         });
 
         const receivedSeedsListsAttribute = await client.attributes.get('test_name');
-        receivedSeedsListsAttribute.should.be.an('object');
-        receivedSeedsListsAttribute.should.eql({
+        expect(receivedSeedsListsAttribute).toMatchObject({
           items: { attribute: 'name', values: null },
           status: 200
         });
@@ -350,13 +356,13 @@ describe('SeedsListsClient', () => {
         });
 
         const seedsListsAttributes = await client.filters.list();
-        seedsListsAttributes.should.be.an('object').to.have.property('supported_filters');
-        seedsListsAttributes.should.be.an('object').to.have.property('status');
-        seedsListsAttributes.status.should.be.equal(200);
-
-        seedsListsAttributes.supported_filters.should.be.an('object').to.have.property('filters');
-        seedsListsAttributes.supported_filters.filters.should.be.an('array');
-        seedsListsAttributes.supported_filters.filters.should.eql([
+        expect(seedsListsAttributes).toMatchObject({
+          status: 200,
+          supported_filters: expect.objectContaining({
+            filters: expect.any(Array)
+          })
+        });
+        expect(seedsListsAttributes.supported_filters.filters).toEqual([
           { parameter: 'name', description: 'Get seedlists by name' },
           {
             parameter: 'time_before',

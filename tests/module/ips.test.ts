@@ -2,14 +2,14 @@
 
 import nock from 'nock';
 import formData from 'form-data';
-import Request from '../lib/Classes/common/Request.js';
-import IpsClient from '../lib/Classes/IPs.js';
+import Request from '../../lib/Classes/common/Request.js';
+import IpsClient from '../../lib/Classes/IPs.js';
 import {
   IpData,
   IpsListResponseBody,
   InputFormData,
   RequestOptions
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -36,7 +36,7 @@ describe('DomainClient', function () {
       api.get('/v3/ips').reply(200, ips);
 
       const res: IpsListResponseBody = await client.list();
-      res.should.eql(ips);
+      expect(res).toMatchObject(ips);
     });
   });
 
@@ -53,7 +53,7 @@ describe('DomainClient', function () {
       api.get(`/v3/ips/${ip}`).reply(200, ips);
 
       const res: IpData = await client.get(ip);
-      res.should.eql(ips);
+      expect(res).toMatchObject(ips);
     });
   });
 });

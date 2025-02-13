@@ -1,16 +1,15 @@
-import { expect } from 'chai';
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
-import InboxPlacementsAttributesClient from '../lib/Classes/InboxPlacements/AttributesClient.js';
-import InboxPlacementsFiltersClient from '../lib/Classes/InboxPlacements/FiltersClient.js';
-import { IInboxPlacementsResultsClient } from '../lib/Interfaces/index.js';
-import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
-import IPRSharingClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient.js';
+import InboxPlacementsAttributesClient from '../../lib/Classes/InboxPlacements/AttributesClient.js';
+import InboxPlacementsFiltersClient from '../../lib/Classes/InboxPlacements/FiltersClient.js';
+import { IInboxPlacementsResultsClient } from '../../lib/Interfaces/index.js';
+import InboxPlacementsResultsClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
+import IPRSharingClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient.js';
 
 // TODO: fix types
 describe('Inbox Placements results', () => {
@@ -175,8 +174,7 @@ describe('Inbox Placements results', () => {
         limit: 1
       });
 
-      expect(requestQuery).to.be.an('object');
-      expect(requestQuery).eql({
+      expect(requestQuery).toMatchObject({
         sender: 'test_sender',
         subject: 'test_subject',
         provider: 'test_provider',
@@ -203,15 +201,26 @@ describe('Inbox Placements results', () => {
       });
 
       const result = await client.list({});
-      result.should.be.an('object').to.have.property('items');
-      result.status.should.be.equal(200);
-
-      result.items.should.be.an('array').to.have.property('length').to.be.equal(1);
-      result.items[0].should.eql(expectedResult);
-      result.pages.first.page.should.be.equal('?page=first');
-      result.pages.last.page.should.be.equal('?page=last');
-      result.pages.next.page.should.be.equal('?page=next');
-      result.pages.previous.page.should.be.equal('?page=previous');
+      expect(result).toMatchObject({
+        items: expect.any(Array),
+        status: 200,
+        pages: {
+          first: {
+            page: '?page=first'
+          },
+          last: {
+            page: '?page=last'
+          },
+          next: {
+            page: '?page=next'
+          },
+          previous: {
+            page: '?page=previous'
+          }
+        }
+      });
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0]).toMatchObject(expectedResult);
     });
   });
 
@@ -222,8 +231,7 @@ describe('Inbox Placements results', () => {
       });
 
       const receivedResult = await client.get('testId');
-      receivedResult.should.be.an('object');
-      receivedResult.should.eql({
+      expect(receivedResult).toMatchObject({
         inboxPlacementResult: {
           ...expectedResult
         },
@@ -240,8 +248,7 @@ describe('Inbox Placements results', () => {
       });
 
       const receivedResult = await client.get('testId');
-      receivedResult.should.be.an('object');
-      receivedResult.should.eql({
+      expect(receivedResult).toMatchObject({
         inboxPlacementResult: {
           ...expectedResult,
           Box: {},
@@ -258,7 +265,7 @@ describe('Inbox Placements results', () => {
       });
 
       const deleteIPResultResponse = await client.destroy('testId');
-      deleteIPResultResponse.should.eql({
+      expect(deleteIPResultResponse).toMatchObject({
         status: 200,
         message: 'deleted'
       });
@@ -272,7 +279,7 @@ describe('Inbox Placements results', () => {
       });
 
       const receivedResult = await client.getResultByShareId('testId');
-      receivedResult.should.eql({
+      expect(receivedResult).toMatchObject({
         inboxPlacementResult: {
           ...expectedResult
         },
@@ -292,14 +299,21 @@ describe('Inbox Placements results', () => {
         });
 
         const seedsListsAttributes = await client.attributes.list();
-        seedsListsAttributes.should.be.an('object').to.have.property('items');
-        seedsListsAttributes.status.should.be.equal(200);
-
-        seedsListsAttributes.items.should.be.an('object');
-        seedsListsAttributes.items.should.eql({
-          attribute: 'test_available attributes',
-          values: ['subject', 'sender']
+        expect(seedsListsAttributes).toMatchObject({
+          status: 200,
+          items: expect.objectContaining({
+            attribute: 'test_available attributes',
+            values: ['subject', 'sender']
+          })
         });
+        // seedsListsAttributes.should.be.an('object').to.have.property('items');
+        // seedsListsAttributes.status.should.be.equal(200);
+
+        // seedsListsAttributes.items.should.be.an('object');
+        // seedsListsAttributes.items.should.eql({
+        //   attribute: 'test_available attributes',
+        //   values: ['subject', 'sender']
+        // });
       });
     });
 
@@ -310,8 +324,7 @@ describe('Inbox Placements results', () => {
         });
 
         const receivedSeedsListsAttribute = await client.attributes.get('test_name');
-        receivedSeedsListsAttribute.should.be.an('object');
-        receivedSeedsListsAttribute.should.eql({
+        expect(receivedSeedsListsAttribute).toMatchObject({
           items: { attribute: 'name', values: null },
           status: 200
         });
@@ -342,13 +355,13 @@ describe('Inbox Placements results', () => {
         });
 
         const seedsListsAttributes = await client.filters.list();
-        seedsListsAttributes.should.be.an('object').to.have.property('supported_filters');
-        seedsListsAttributes.should.be.an('object').to.have.property('status');
-        seedsListsAttributes.status.should.be.equal(200);
-
-        seedsListsAttributes.supported_filters.should.be.an('object').to.have.property('filters');
-        seedsListsAttributes.supported_filters.filters.should.be.an('array');
-        seedsListsAttributes.supported_filters.filters.should.eql(filters);
+        expect(seedsListsAttributes).toMatchObject({
+          supported_filters: expect.objectContaining({
+            filters: expect.any(Array)
+          }),
+          status: 200
+        });
+        expect(seedsListsAttributes.supported_filters.filters).toEqual(filters);
       });
     });
   });
@@ -364,8 +377,7 @@ describe('Inbox Placements results', () => {
         });
 
         const sharingResult = await client.sharing.get('test_id');
-        sharingResult.should.be.an('object');
-        sharingResult.should.eql({
+        expect(sharingResult).toMatchObject({
           expires_at: expiresAt,
           status: 200
         });
@@ -387,8 +399,7 @@ describe('Inbox Placements results', () => {
         });
 
         const sharingResult = await client.sharing.update('test_id', { enabled: false });
-        sharingResult.should.be.an('object');
-        sharingResult.should.eql({
+        expect(sharingResult).toMatchObject({
           expires_at: expiresAt,
           result_id: 'test_id',
           enabled: false,

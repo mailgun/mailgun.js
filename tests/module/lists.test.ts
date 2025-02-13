@@ -1,9 +1,9 @@
 import nock from 'nock';
 import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request.js';
-import ListsClient from '../lib/Classes/MailingLists/mailingLists.js';
-import MailListMembers from '../lib/Classes/MailingLists/mailListMembers.js';
+import Request from '../../lib/Classes/common/Request.js';
+import ListsClient from '../../lib/Classes/MailingLists/mailingLists.js';
+import MailListMembers from '../../lib/Classes/MailingLists/mailListMembers.js';
 import {
   MailingListCancelValidationResult,
   MailingList,
@@ -13,8 +13,8 @@ import {
   DestroyedList,
   InputFormData,
   RequestOptions
-} from '../lib/Types/index.js';
-import { IMailingListsClient } from '../lib/Interfaces/index.js';
+} from '../../lib/Types/index.js';
+import { IMailingListsClient } from '../../lib/Interfaces/index.js';
 
 describe('ListsClient', function () {
   let mailingListsClient: IMailingListsClient;
@@ -41,7 +41,7 @@ describe('ListsClient', function () {
     api.done();
   });
 
-  describe('list', async () => {
+  describe('list', () => {
     it('fetches all mail lists', async () => {
       const lists = [defaultList];
 
@@ -56,59 +56,64 @@ describe('ListsClient', function () {
       });
 
       const result = await mailingListsClient.list();
-      result.items[0].should.eql(defaultList);
-      result.pages.should.be.eql({
-        first: {
-          id: 'first',
-          page: '?page=first&limit=1',
-          iteratorPosition: undefined,
-          url: 'https://api.mailgun.net/v3/lists/pages?page=first&limit=1'
-        },
-        last: {
-          id: 'last',
-          page: '?page=last&limit=1',
-          iteratorPosition: undefined,
-          url: 'https://api.mailgun.net/v3/lists/pages?page=last&limit=1'
-        },
-        next: {
-          id: 'next',
-          page: '?page=next&address=test%40test.com&limit=1',
-          iteratorPosition: 'test@test.com',
-          url: 'https://api.mailgun.net/v3/lists/pages?page=next&address=test%40test.com&limit=1'
-        },
-        previous: {
-          id: 'previous',
-          page: '?page=prev&address=test%40test.com&limit=1',
-          iteratorPosition: 'test@test.com',
-          url: 'https://api.mailgun.net/v3/lists/pages?page=prev&address=test%40test.com&limit=1'
-        }
+      expect(result).toMatchObject({
+        status: 200,
+        items: expect.any(Array),
+        pages: expect.objectContaining({
+          first: {
+            id: 'first',
+            page: '?page=first&limit=1',
+            iteratorPosition: undefined,
+            url: 'https://api.mailgun.net/v3/lists/pages?page=first&limit=1'
+          },
+          last: {
+            id: 'last',
+            page: '?page=last&limit=1',
+            iteratorPosition: undefined,
+            url: 'https://api.mailgun.net/v3/lists/pages?page=last&limit=1'
+          },
+          next: {
+            id: 'next',
+            page: '?page=next&address=test%40test.com&limit=1',
+            iteratorPosition: 'test@test.com',
+            url: 'https://api.mailgun.net/v3/lists/pages?page=next&address=test%40test.com&limit=1'
+          },
+          previous: {
+            id: 'previous',
+            page: '?page=prev&address=test%40test.com&limit=1',
+            iteratorPosition: 'test@test.com',
+            url: 'https://api.mailgun.net/v3/lists/pages?page=prev&address=test%40test.com&limit=1'
+          }
+        })
       });
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0]).toMatchObject(defaultList);
     });
   });
 
-  describe('get', async () => {
+  describe('get', () => {
     it('gets a specific mailing list', async () => {
       api.get('/v3/lists/testing.example.com').reply(200, {
         list: defaultList
       });
 
       const result: MailingList = await mailingListsClient.get('testing.example.com');
-      result.should.eql(defaultList);
+      expect(result).toMatchObject(defaultList);
     });
   });
 
-  describe('create', async () => {
+  describe('create', () => {
     it('creates the list', async () => {
       api.post('/v3/lists').reply(200, {
         list: defaultList
       });
 
       const result: MailingList = await mailingListsClient.create({ name: 'another.example.com' } as CreateUpdateList);
-      result.should.eql(defaultList);
+      expect(result).toMatchObject(defaultList);
     });
   });
 
-  describe('destroy', async () => {
+  describe('destroy', () => {
     it('deletes the list', async () => {
       api.delete('/v3/lists/test.example.com').reply(200, {
         address: 'test.example.com',
@@ -116,14 +121,14 @@ describe('ListsClient', function () {
       });
 
       const result: DestroyedList = await mailingListsClient.destroy('test.example.com');
-      result.should.eql({
+      expect(result).toMatchObject({
         address: 'test.example.com',
         message: 'list deleted'
       });
     });
   });
 
-  describe('update', async () => {
+  describe('update', () => {
     it('updates the list', async () => {
       api.put('/v3/lists/test@example.com').reply(200, {
         list: defaultList
@@ -132,18 +137,18 @@ describe('ListsClient', function () {
         'test@example.com',
         { name: 'another name' } as CreateUpdateList
       );
-      result.should.eql(defaultList);
+      expect(result).toMatchObject(defaultList);
     });
   });
 
-  describe('validate', async () => {
+  describe('validate', () => {
     it('start validation of the list', async () => {
       api.post('/v3/lists/test@example.com/validate').reply(200, {
         id: 'testId',
         message: 'test message',
       });
       const data: StartValidationResult = await mailingListsClient.validate('test@example.com');
-      data.should.eql({
+      expect(data).toMatchObject({
         status: 200,
         id: 'testId',
         message: 'test message',
@@ -151,7 +156,7 @@ describe('ListsClient', function () {
     });
   });
 
-  describe('validationResult', async () => {
+  describe('validationResult', () => {
     it('returns correct result shape', async () => {
       api.get('/v3/lists/test@example.com/validate').reply(200, {
         status: 'uploaded',
@@ -181,7 +186,7 @@ describe('ListsClient', function () {
       });
 
       const data: MailingListValidationResult = await mailingListsClient.validationResult('test@example.com');
-      data.should.eql({
+      expect(data).toMatchObject({
         status: 200,
         validationResult: {
           status: 'uploaded',
@@ -212,13 +217,13 @@ describe('ListsClient', function () {
       });
     });
   });
-  describe('cancelValidation', async () => {
+  describe('cancelValidation', () => {
     it('cancels validation process', async () => {
       api.delete('/v3/lists/test@example.com/validate').reply(200, {
         message: 'test message'
       });
       const data: MailingListCancelValidationResult = await mailingListsClient.cancelValidation('test@example.com');
-      data.should.eql({
+      expect(data).toMatchObject({
         status: 200,
         message: 'test message'
       });

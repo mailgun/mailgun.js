@@ -1,14 +1,13 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import { expect } from 'chai';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, APIResponse, RequestOptions } from '../lib/Types/Common/index.js';
-import DomainCredentialsClient from '../lib/Classes/Domains/domainsCredentials.js';
-import DomainTemplatesClient from '../lib/Classes/Domains/domainsTemplates.js';
-import DomainTagsClient from '../lib/Classes/Domains/domainsTags.js';
-import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking.js';
+import { InputFormData, APIResponse, RequestOptions } from '../../lib/Types/Common/index.js';
+import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredentials.js';
+import DomainTemplatesClient from '../../lib/Classes/Domains/domainsTemplates.js';
+import DomainTagsClient from '../../lib/Classes/Domains/domainsTags.js';
+import DomainTrackingClient from '../../lib/Classes/Domains/domainsTracking.js';
 
 import {
   MessageResponse,
@@ -19,8 +18,8 @@ import {
   TDomain,
   UpdatedDKIMSelectorResult,
   DomainTrackingData
-} from '../lib/Types/Domains/index.js';
-import DomainsClient from '../lib/Classes/Domains/domainsClient.js';
+} from '../../lib/Types/Domains/index.js';
+import DomainsClient from '../../lib/Classes/Domains/domainsClient.js';
 
 // TODO: fix types
 describe('DomainsClient', function () {
@@ -50,7 +49,7 @@ describe('DomainsClient', function () {
   });
 
   describe('list', function () {
-    it('fetches all domains', function () {
+    it('fetches all domains', async () => {
       const domains = [{
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'testing.example.com',
@@ -72,14 +71,13 @@ describe('DomainsClient', function () {
       api.get('/v4/domains').reply(200, {
         items: domains
       });
-
-      return client.list().then(function (dm: TDomain[]) {
-        dm[0].should.eql({
-          ...domains[0],
-          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
-          receiving_dns_records: null,
-          sending_dns_records: null,
-        });
+      const dm = await client.list();
+      expect(dm).toHaveLength(1);
+      expect(dm[0]).toMatchObject({
+        ...domains[0],
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: null,
+        sending_dns_records: null,
       });
     });
 
@@ -88,13 +86,12 @@ describe('DomainsClient', function () {
         items: null
       });
       const res :TDomain[] = await client.list();
-      res.should.be.an('array');
-      res.length.should.equal(0);
+      expect(res).toHaveLength(0);
     });
   });
 
   describe('get', function () {
-    it('takes a specific domain and populates dns records', function () {
+    it('takes a specific domain and populates dns records', async () => {
       const domainData = {
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'testing.example.com',
@@ -118,14 +115,12 @@ describe('DomainsClient', function () {
         receiving_dns_records: [],
         sending_dns_records: []
       });
-
-      return client.get('testing.example.com').then(function (domain: TDomain) {
-        domain.should.eql({
-          ...domainData,
-          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
-          receiving_dns_records: [],
-          sending_dns_records: [],
-        });
+      const domain = await client.get('testing.example.com');
+      expect(domain).toMatchObject({
+        ...domainData,
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: [],
+        sending_dns_records: [],
       });
     });
 
@@ -167,7 +162,7 @@ describe('DomainsClient', function () {
         }
       );
 
-      domain.should.eql({
+      expect(domain).toMatchObject({
         ...domainData,
         created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
         receiving_dns_records: null,
@@ -179,7 +174,7 @@ describe('DomainsClient', function () {
   });
 
   describe('create', function () {
-    it('creates a domain', function () {
+    it('creates a domain', async () => {
       const domainData = {
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'another.example.com',
@@ -204,18 +199,17 @@ describe('DomainsClient', function () {
         receiving_dns_records: [],
         sending_dns_records: []
       });
-
-      return client.create({
+      const domain = await client.create({
         name: 'another.example.com',
         smtp_password: 'smtp_password',
         web_scheme: 'https'
-      }).then(function (domain: TDomain) {
-        domain.should.eql({
-          ...domainData,
-          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
-          receiving_dns_records: [],
-          sending_dns_records: [],
-        });
+      });
+
+      expect(domain).toMatchObject({
+        ...domainData,
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: [],
+        sending_dns_records: [],
       });
     });
 
@@ -241,11 +235,11 @@ describe('DomainsClient', function () {
         force_root_dkim_host: true,
         use_automatic_sender_security: true,
       });
-      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------'));
     });
 
     it('converts boolean FALSE values to string', async () => {
@@ -270,11 +264,11 @@ describe('DomainsClient', function () {
         force_root_dkim_host: false,
         use_automatic_sender_security: false,
       });
-      expect(requestObject).to.have.string('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="force_root_dkim_host"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------'));
     });
   });
   describe('update', function () {
@@ -310,7 +304,7 @@ describe('DomainsClient', function () {
         spam_action: 'disabled'
       });
 
-      domain.should.eql({
+      expect(domain).toMatchObject({
         ...domainData,
         created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
         receiving_dns_records: [],
@@ -336,8 +330,8 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: true,
       });
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\ntrue\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------');
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------'));
     });
 
     it('converts boolean FALSE values to string', async () => {
@@ -358,13 +352,13 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: false,
       });
-      expect(requestObject).to.have.string('name="wildcard"\r\n\r\nfalse\r\n----------------------------');
-      expect(requestObject).to.have.string('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------');
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------'));
     });
   });
 
   describe('verify', function () {
-    it('verifies a domain', function () {
+    it('verifies a domain', async () => {
       const domainData = {
         created_at: 'Sun, 19 Oct 2014 18:49:36 GMT',
         name: 'test.example.com',
@@ -404,45 +398,43 @@ describe('DomainsClient', function () {
           },
         ]
       });
-
-      return client.verify('test.example.com').then(function (domain: TDomain) {
-        domain.should.eql({
-          ...domainData,
-          created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
-          receiving_dns_records: [
-            {
-              cached: ['test-value1', 'test-value2'],
-              priority: '10',
-              record_type: 'MX',
-              valid: 'valid',
-              value: 'test-value'
-            }
-          ],
-          sending_dns_records: [
-            {
-              cached: ['test-value'],
-              name: 'test name',
-              record_type: 'TXT',
-              valid: 'valid',
-              value: 'test-value'
-            }
-          ]
-        });
+      const domain = await client.verify('test.example.com');
+      expect(domain).toMatchObject({
+        ...domainData,
+        created_at: new Date('Sun, 19 Oct 2014 18:49:36 GMT'),
+        receiving_dns_records: [
+          {
+            cached: ['test-value1', 'test-value2'],
+            priority: '10',
+            record_type: 'MX',
+            valid: 'valid',
+            value: 'test-value'
+          }
+        ],
+        sending_dns_records: [
+          {
+            cached: ['test-value'],
+            name: 'test name',
+            record_type: 'TXT',
+            valid: 'valid',
+            value: 'test-value'
+          }
+        ]
       });
     });
   });
 
   describe('destroy', function () {
-    it('deletes a domain', function () {
+    it('deletes a domain', async () => {
       api.delete('/v3/domains/test.example.com').reply(200, {
         message: 'domain deleted'
       });
-
-      return client.destroy('test.example.com').then(function (data: MessageResponse) {
-        data.should.eql({
+      const data = await client.destroy('test.example.com');
+      expect(data).toMatchObject(
+        {
           message: 'domain deleted'
-        });
-      });
+        }
+      );
     });
   });
 
@@ -452,11 +444,11 @@ describe('DomainsClient', function () {
         require_tls: false, skip_verification: false
       });
       const response: ConnectionSettings = await client.getConnection('test.example.com');
-      response.should.eql({ require_tls: false, skip_verification: false });
+      expect(response).toMatchObject({ require_tls: false, skip_verification: false });
     });
   });
 
-  describe('updateConnection', async () => {
+  describe('updateConnection', () => {
     it('Updates the connection settings for the defined domain.', async () => {
       const connection = {
         message: 'Domain connection settings have been updated, may take 10 minutes to fully propagate',
@@ -472,7 +464,7 @@ describe('DomainsClient', function () {
         skip_verification: true
       });
 
-      response.should.eql({
+      expect(response).toMatchObject({
         connection
       });
     });
@@ -489,7 +481,7 @@ describe('DomainsClient', function () {
         tracking: trackingData
       });
       const tracking: DomainTrackingData = await client.getTracking('domain.com');
-      tracking.should.eql(trackingData);
+      expect(tracking).toMatchObject(trackingData);
     });
   });
 
@@ -503,7 +495,7 @@ describe('DomainsClient', function () {
 
       const res = await client.updateTracking('domain.com', 'open', { active: 'yes' });
 
-      expect(res).to.eql({
+      expect(res).toMatchObject({
         message: 'Tracking settings have been updated',
         open
       });
@@ -511,73 +503,61 @@ describe('DomainsClient', function () {
   });
 
   describe('getIps', () => {
-    it('should return list of dedicated ips', () => {
+    it('should return list of dedicated ips', async () => {
       const items = ['192.161.0.1', '192.168.0.2'];
       api.get('/v3/domains/domain.com/ips').reply(200, { items });
-
-      return client.getIps('domain.com').then((response: string[]) => {
-        response.should.eql(items);
-      });
+      const res = await client.getIps('domain.com');
+      expect(res).toEqual(expect.arrayContaining(items));
     });
   });
 
   describe('assignIp', () => {
-    it('should assign Ip', () => {
+    it('should assign Ip', async () => {
       const ip = '127.0.0.1';
       api.post('/v3/domains/domain.com/ips').reply(200, { message: 'success' });
-
-      return client.assignIp('domain.com', ip).then((response: APIResponse) => {
-        response.should.eql({ status: 200, body: { message: 'success' } });
-      });
+      const res = await client.assignIp('domain.com', ip);
+      expect(res).toMatchObject({ status: 200, body: { message: 'success' } });
     });
   });
 
   describe('deleteIp', () => {
-    it('should delete assigned Ip', () => {
+    it('should delete assigned Ip', async () => {
       const ip = '127.0.0.1';
       api.delete('/v3/domains/domain.com/ips/127.0.0.1').reply(200, { message: 'success' });
-
-      return client.deleteIp('domain.com', ip).then((response: APIResponse) => {
-        response.should.eql({ status: 200, body: { message: 'success' } });
-      });
+      const res = await client.deleteIp('domain.com', ip);
+      expect(res).toMatchObject({ status: 200, body: { message: 'success' } });
     });
   });
 
   describe('linkIpPool', () => {
-    it('should link ip pool', () => {
+    it('should link ip pool', async () => {
       const ipPool = '121212121212121212121212';
       api.post('/v3/domains/domain.com/ips').reply(200, { message: 'success' });
-
-      return client.linkIpPool('domain.com', ipPool).then((response: APIResponse) => {
-        response.should.eql({ status: 200, body: { message: 'success' } });
-      });
+      const res = await client.linkIpPool('domain.com', ipPool);
+      expect(res).toMatchObject({ status: 200, body: { message: 'success' } });
     });
   });
 
   describe('unlinkIpPoll', () => {
-    it('should unlink ip pool with new ip pool', () => {
+    it('should unlink ip pool with new ip pool', async () => {
       const ipPool = '121212121212121212121212';
       api.delete(`/v3/domains/domain.com/ips/ip_pool?pool_id=${ipPool}`).reply(200, { message: 'success' });
-
-      return client.unlinkIpPoll('domain.com', { pool_id: ipPool }).then((response: APIResponse) => {
-        response.should.eql({ status: 200, body: { message: 'success' } });
-      });
+      const res = await client.unlinkIpPoll('domain.com', { pool_id: ipPool });
+      expect(res).toMatchObject({ status: 200, body: { message: 'success' } });
     });
 
-    it('should unlink ip pool with ip', () => {
+    it('should unlink ip pool with ip', async () => {
       const ip = '127.0.0.1';
       api.delete(`/v3/domains/domain.com/ips/ip_pool?ip=${ip}`).reply(200, { message: 'success' });
-
-      return client.unlinkIpPoll('domain.com', { ip }).then((response: APIResponse) => {
-        response.should.eql({ status: 200, body: { message: 'success' } });
-      });
+      const res = await client.unlinkIpPoll('domain.com', { ip });
+      expect(res).toMatchObject({ status: 200, body: { message: 'success' } });
     });
 
     it('should check replacement data', async () => {
       try {
         await client.unlinkIpPoll('domain.com', { ip: 'test', pool_id: 'test' });
       } catch (error) {
-        expect(error).to.include({
+        expect(error).toMatchObject({
           status: 400,
           details: 'Please specify either pool_id or ip (not both)',
           message: 'Too much data for replacement'
@@ -586,7 +566,7 @@ describe('DomainsClient', function () {
     });
   });
   describe('updateDKIMAuthority', () => {
-    it('changes the DKIM authority for a domain.', () => {
+    it('changes the DKIM authority for a domain.', async () => {
       const expectedRes = {
         changed: true,
         message: 'Domain DKIM authority has been changed',
@@ -602,10 +582,8 @@ describe('DomainsClient', function () {
       };
 
       api.put('/v3/domains/test.example.com/dkim_authority?self=true').reply(200, expectedRes);
-
-      return client.updateDKIMAuthority('test.example.com', { self: 'true' }).then((response: UpdatedDKIMAuthority) => {
-        response.should.eql(expectedRes);
-      });
+      const res = await client.updateDKIMAuthority('test.example.com', { self: 'true' });
+      expect(res).toMatchObject(expectedRes);
     });
   });
 
@@ -613,25 +591,19 @@ describe('DomainsClient', function () {
     it('updates the DKIM selector for a domains', async () => {
       api.put('/v3/domains/test.example.com/dkim_selector?dkim_selector=dkim_selector_value').reply(200, { message: 'Domain DKIM selector updated' });
       const response: UpdatedDKIMSelectorResult = await client.updateDKIMSelector('test.example.com', { dkimSelector: 'dkim_selector_value' });
-      response.should.eql(
-        {
-          message: 'Domain DKIM selector updated',
-          status: 200
-        }
-      );
+      expect(response).toMatchObject({
+        message: 'Domain DKIM selector updated',
+        status: 200
+      });
     });
   });
 
   describe('updateWebPrefix', () => {
-    it('Update the CNAME used for tracking opens and clicks', () => {
+    it('Update the CNAME used for tracking opens and clicks', async () => {
       api.put('/v3/domains/test.example.com/web_prefix?web_prefix=webprefixvalue').reply(200, { message: 'Domain web prefix updated' });
-
-      return client.updateWebPrefix('test.example.com', { webPrefix: 'webprefixvalue' }).then((response: UpdatedWebPrefixResponse) => {
-        response.should.eql(
-          {
-            body: { message: 'Domain web prefix updated' }, status: 200
-          }
-        );
+      const res = await client.updateWebPrefix('test.example.com', { webPrefix: 'webprefixvalue' });
+      expect(res).toMatchObject({
+        body: { message: 'Domain web prefix updated' }, status: 200
       });
     });
   });

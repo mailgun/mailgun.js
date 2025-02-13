@@ -1,9 +1,9 @@
 {
-  "include": ["lib", "test"],
+  "include": ["lib", "tests/module"],
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "target": "es5",
     "allowJs": true,
     "declaration": true,
@@ -14,11 +14,12 @@
     "skipLibCheck": true,
     "strict": true,
     "declarationDir": "./dist",
+    "types": ["jest"]
   },
   "typedocOptions": {
     "out": "docs",
     "entryPointStrategy": "expand",
     "entryPoints": ["./lib/index.ts"],
-    "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**", "integration_tests/**"]
+    "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**", "integration_tests/**/**"]
   }
 }

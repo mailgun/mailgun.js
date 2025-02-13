@@ -1,12 +1,11 @@
 import fs from 'fs';
 import nock from 'nock';
-import { expect } from 'chai';
 import formData from 'form-data';
 
-import Request from '../lib/Classes/common/Request.js';
-import MessagesClient from '../lib/Classes/Messages.js';
-import { IMessagesClient } from '../lib/Interfaces/index.js';
-import { InputFormData, RequestOptions, MessagesSendResult } from '../lib/Types/index.js';
+import Request from '../../lib/Classes/common/Request.js';
+import MessagesClient from '../../lib/Classes/Messages.js';
+import { IMessagesClient } from '../../lib/Interfaces/index.js';
+import { InputFormData, RequestOptions, MessagesSendResult } from '../../lib/Types/index.js';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
@@ -44,7 +43,7 @@ describe('MessagesClient', function () {
         }]
       });
 
-      expect(res.message).to.eql('Queued. Thank you.');
+      expect(res.message).toEqual('Queued. Thank you.');
     });
   });
 });

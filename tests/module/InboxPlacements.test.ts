@@ -1,18 +1,17 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, RequestOptions } from '../lib/Types/Common/index.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
-import { IInboxPlacementsClient } from '../lib/Interfaces/index.js';
-import InboxPlacementsClient from '../lib/Classes/InboxPlacements/inboxPlacements.js';
+import { IInboxPlacementsClient } from '../../lib/Interfaces/index.js';
+import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
 
-import SeedsListsClient from '../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
-import InboxPlacementsResultsClient from '../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
-import InboxPlacementsProvidersClient from '../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
+import SeedsListsClient from '../../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
+import InboxPlacementsResultsClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
+import InboxPlacementsProvidersClient from '../../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
 
-// TODO: fix types
 describe('Inbox Placements Client', () => {
   let client: IInboxPlacementsClient;
   let api: nock.Scope;
@@ -47,7 +46,7 @@ describe('Inbox Placements Client', () => {
         provider_filter: ['test'],
         html: 'some html',
       });
-      runTestResponse.should.eql({
+      expect(runTestResponse).toMatchObject({
         result_id: 'test_result_id',
         links: {
           results: 'test_results'

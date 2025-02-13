@@ -3,11 +3,14 @@
 
 module.exports = {
   testEnvironment: 'node',
-  testMatch: ['**/tests/**/*.test.ts'],
-  // setupFilesAfterEnv: ['./setup/common-js.setup.js'],
+  testMatch: ['**/module/*.test.ts'],
   transform: {
-    '^.+.tsx?$': ['ts-jest', {
-      tsconfig: false
+    '\\.[jt]sx?$': ['ts-jest', {
+      useESM: true
     }],
   },
+  moduleNameMapper: {
+    '^\\.(.+)\\.js': '.$1'
+  },
+  extensionsToTreatAsEsm: ['.ts'],
 };

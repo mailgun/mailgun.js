@@ -1,16 +1,16 @@
 /* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
-import { IRoutesClient } from '../lib/Interfaces/Routes/IRoutesClient.js';
-import Request from '../lib/Classes/common/Request.js';
-import RoutesClient from '../lib/Classes/Routes.js';
+import { IRoutesClient } from '../../lib/Interfaces/Routes/IRoutesClient.js';
+import Request from '../../lib/Classes/common/Request.js';
+import RoutesClient from '../../lib/Classes/Routes.js';
 import {
   InputFormData,
   RequestOptions,
   DestroyRouteResponse,
   Route,
   UpdateRouteResponse
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
 describe('RoutesClient', function () {
   let client: IRoutesClient;
@@ -25,7 +25,7 @@ describe('RoutesClient', function () {
     api.done();
   });
 
-  describe('list', async () => {
+  describe('list', () => {
     const data = [
       {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
@@ -43,11 +43,11 @@ describe('RoutesClient', function () {
       });
 
       const response: Route[] = await client.list({});
-      response.should.eql(data);
+      expect(response).toMatchObject(data);
     });
   });
 
-  describe('get', async () => {
+  describe('get', () => {
     it('fetches single route by id', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
@@ -61,11 +61,11 @@ describe('RoutesClient', function () {
       api.get('/v3/routes/123').reply(200, { route: data });
 
       const response: Route = await client.get('123');
-      response.should.eql(data);
+      expect(response).toMatchObject(data);
     });
   });
 
-  describe('create', async () => {
+  describe('create', () => {
     it('creates route', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
@@ -84,11 +84,11 @@ describe('RoutesClient', function () {
         expression: 'match_recipient(".*@example.org")',
         action: ['forward("http://myhost.com/messages/")', 'stop()']
       });
-      response.should.eql(data);
+      expect(response).toMatchObject(data);
     });
   });
 
-  describe('update', async () => {
+  describe('update', () => {
     it('updates route', async () => {
       const data = {
         actions: ['forward("http://myhost.com/messages/")', 'stop()'],
@@ -108,11 +108,11 @@ describe('RoutesClient', function () {
         expression: 'match_recipient(".*@example.org")',
         action: ['forward("http://myhost.com/messages/")', 'stop()']
       });
-      response.should.eql({ data });
+      expect(response).toMatchObject({ data });
     });
   });
 
-  describe('destroy', function () {
+  describe('destroy', () => {
     it('deletes route', async () => {
       const data = {
         id: '562da483125730608a7d1719',
@@ -122,7 +122,7 @@ describe('RoutesClient', function () {
       api.delete('/v3/routes/123').reply(200, { data });
 
       const response: DestroyRouteResponse = await client.destroy('123');
-      response.should.eql({ data });
+      expect(response).toMatchObject({ data });
     });
   });
 });

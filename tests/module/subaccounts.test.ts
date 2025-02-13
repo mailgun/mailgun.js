@@ -1,14 +1,14 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../lib/Classes/common/Request.js';
+import Request from '../../lib/Classes/common/Request.js';
 
 import {
   InputFormData, RequestOptions,
   SubaccountListItem, SubaccountListResponseData, SubaccountResponseData,
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
-import SubaccountsClient from '../lib/Classes/Subaccounts.js';
+import SubaccountsClient from '../../lib/Classes/Subaccounts.js';
 
 describe('SubaccountsClient', function () {
   let client: SubaccountsClient;
@@ -25,76 +25,72 @@ describe('SubaccountsClient', function () {
   });
 
   describe('list', function () {
-    it('fetches all subaccounts', function () {
+    it('fetches all subaccounts', async () => {
       const subaccounts: SubaccountListItem[] = [
         { id: 'XYZ', name: 'test.subaccount1', status: 'open' },
         { id: 'YYY', name: 'test.subaccount2', status: 'open' }
       ];
 
-      api.get('/v5/accounts/subaccounts').reply(200, { subaccounts });
-
-      return client.list().then(function (subacc: SubaccountListResponseData) {
-        subacc.subaccounts[0].should.eql({ id: 'XYZ', name: 'test.subaccount1', status: 'open' });
+      api.get('/v5/accounts/subaccounts').reply(200, { subaccounts, total: 2 });
+      const subacc = await client.list();
+      expect(subacc).toMatchObject({
+        subaccounts: expect.any(Array),
+        total: 2
       });
+      expect(subacc.subaccounts).toHaveLength(2);
+      expect(subacc.subaccounts[0]).toMatchObject({ id: 'XYZ', name: 'test.subaccount1', status: 'open' });
+      // subacc.subaccounts[0].should.eql();
+      // return client.list().then(function (subacc: SubaccountListResponseData) {
+
+      // });
     });
   });
 
   describe('get', function () {
-    it('gets a specific subaccount', function () {
+    it('gets a specific subaccount', async () => {
       const subaccountData: SubaccountListItem = { id: 'XYZ', name: 'test.subaccount1', status: 'open' };
 
       api.get('/v5/accounts/subaccounts/XYZ').reply(200, { subaccount: subaccountData });
-
-      return client.get('XYZ').then(function (subaccount: SubaccountResponseData) {
-        subaccount.should.eql({
-          subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
-        });
+      const subaccount = await client.get('XYZ');
+      expect(subaccount).toMatchObject({
+        subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
       });
     });
   });
 
   describe('create', function () {
-    it('creates a subaccount', function () {
+    it('creates a subaccount', async () => {
       const subaccountData = { id: 'XYZ', name: 'test.subaccount1', status: 'open' };
 
       api.post('/v5/accounts/subaccounts').reply(200, { subaccount: subaccountData });
-
-      return client.create('test.subaccount1')
-        .then(function (subaccount: SubaccountResponseData) {
-          subaccount.should.eql({
-            subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
-          });
-        });
+      const subAccount = await client.create('test.subaccount1');
+      expect(subAccount).toMatchObject({
+        subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
+      });
     });
   });
 
   describe('enable', function () {
-    it('enables a subaccount', function () {
+    it('enables a subaccount', async () => {
       const subaccountData = { id: 'XYZ', name: 'test.subaccount1', status: 'open' };
 
       api.post('/v5/accounts/subaccounts/XYZ/enable').reply(200, { subaccount: subaccountData });
-
-      return client.enable('XYZ')
-        .then(function (subaccount: SubaccountResponseData) {
-          subaccount.should.eql({
-            subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
-          });
-        });
+      const subAccount = await client.enable('XYZ');
+      expect(subAccount).toMatchObject({
+        subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'open' }
+      });
     });
   });
 
   describe('disable', function () {
-    it('disables a subaccount', function () {
+    it('disables a subaccount', async () => {
       const subaccountData = { id: 'XYZ', name: 'test.subaccount1', status: 'disabled' };
 
       api.post('/v5/accounts/subaccounts/XYZ/disable').reply(200, { subaccount: subaccountData });
-
-      return client.disable('XYZ')
-        .then(function (subaccount: SubaccountResponseData) {
-          subaccount.should.eql({
-            subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'disabled' }
-          });
-        });
+      const subAccount = await client.disable('XYZ');
+      expect(subAccount).toMatchObject({
+        subaccount: { id: 'XYZ', name: 'test.subaccount1', status: 'disabled' }
+      });
     });
   });
 });

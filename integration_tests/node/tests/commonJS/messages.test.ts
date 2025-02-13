@@ -1,3 +1,6 @@
+import nock from 'nock';
+import fs from 'fs/promises';
+import path from 'path';
 import {
   afterEach,
   beforeEach,
@@ -5,9 +8,6 @@ import {
   expect,
   test,
 } from '@jest/globals';
-import nock from 'nock';
-import fs from 'fs/promises';
-import path from 'path';
 import { getMailgunClient } from './helpers/clientInit.cjs';
 import { successResponse } from '../../../tests_data/messageResponses';
 

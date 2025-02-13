@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
 import formData from 'form-data';
 import nock from 'nock';
-import { expect } from 'chai';
-import { IDomainTrackingClient } from '../lib/Interfaces/index.js';
-import Request from '../lib/Classes/common/Request.js';
-import DomainTrackingClient from '../lib/Classes/Domains/domainsTracking.js';
+import { IDomainTrackingClient } from '../../lib/Interfaces/index.js';
+import Request from '../../lib/Classes/common/Request.js';
+import DomainTrackingClient from '../../lib/Classes/Domains/domainsTracking.js';
 import {
   InputFormData,
   RequestOptions,
@@ -12,7 +11,7 @@ import {
   GenerateDomainTrackingCertificateResponse,
   RegenerateDomainTrackingCertificateResponse,
   DomainTrackingData,
-} from '../lib/Types/index.js';
+} from '../../lib/Types/index.js';
 
 describe('DomainTrackingClient', function () {
   let client: IDomainTrackingClient;
@@ -29,7 +28,7 @@ describe('DomainTrackingClient', function () {
     api.done();
   });
 
-  describe('get', async () => {
+  describe('get', () => {
     it('fetches single domain tracking certificate by domain', async () => {
       const data = {
         status: 'expired',
@@ -40,14 +39,14 @@ describe('DomainTrackingClient', function () {
       api.get(`/v2/x509/${trackingDomain}/status`).reply(200, data);
 
       const response: GetDomainTrackingCertificateResponse = await client.get(trackingDomain);
-      expect(response).eql({
+      expect(response).toMatchObject({
         ...data,
         responseStatusCode: 200
       });
     });
   });
 
-  describe('generate', async () => {
+  describe('generate', () => {
     it('generates a domain tracking certificate by domain', async () => {
       const data = {
         message: 'Initiated x509 key pair generation',
@@ -58,14 +57,14 @@ describe('DomainTrackingClient', function () {
 
       const response: GenerateDomainTrackingCertificateResponse = await client
         .generate(trackingDomain);
-      expect(response).eql({
+      expect(response).toMatchObject({
         ...data,
         status: 202,
       });
     });
   });
 
-  describe('regenerate', async () => {
+  describe('regenerate', () => {
     it('regenerates a domain tracking certificate by domain', async () => {
       const data = {
         message: 'Initiated x509 key pair generation',
@@ -76,14 +75,14 @@ describe('DomainTrackingClient', function () {
 
       const response: RegenerateDomainTrackingCertificateResponse = await client
         .regenerate(trackingDomain);
-      expect(response).eql({
+      expect(response).toMatchObject({
         ...data,
         status: 202,
       });
     });
   });
 
-  describe('getTracking', async () => {
+  describe('getTracking', () => {
     it('fetches all tracking settings', async () => {
       const trackingData = {
         open: { active: true },
@@ -94,7 +93,7 @@ describe('DomainTrackingClient', function () {
         tracking: trackingData
       });
       const tracking: DomainTrackingData = await client.getTracking('domain.com');
-      tracking.should.eql(trackingData);
+      expect(tracking).toMatchObject(trackingData);
     });
   });
 
@@ -109,7 +108,7 @@ describe('DomainTrackingClient', function () {
 
         const res = await client.updateTracking('domain.com', 'open', { active: 'yes', place_at_the_top: 'yes' });
 
-        expect(res).to.eql({
+        expect(res).toMatchObject({
           message: 'Tracking settings have been updated',
           open
         });
@@ -130,8 +129,8 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'open', { active: true, place_at_the_top: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
-          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n----------------------------'));
+          expect(requestObject).toEqual(expect.stringContaining('name="place_at_the_top"\r\n\r\nyes\r\n----------------------------'));
         });
 
         it('converts boolean FALSE values to string in open tracking', async () => {
@@ -151,8 +150,8 @@ describe('DomainTrackingClient', function () {
             active: false,
             place_at_the_top: false,
           });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
-          expect(requestObject).to.have.string('name="place_at_the_top"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nno\r\n----------------------------'));
+          expect(requestObject).toEqual(expect.stringContaining('name="place_at_the_top"\r\n\r\nno\r\n----------------------------'));
         });
       });
     });
@@ -167,7 +166,7 @@ describe('DomainTrackingClient', function () {
 
         const res = await client.updateTracking('domain.com', 'click', { active: 'yes' });
 
-        expect(res).to.eql({
+        expect(res).toMatchObject({
           message: 'Tracking settings have been updated',
           click
         });
@@ -185,7 +184,7 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'click', { active: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n----------------------------'));
         });
 
         it('converts boolean FALSE values to string in click tracking ', async () => {
@@ -199,7 +198,7 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'click', { active: false });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nno\r\n----------------------------'));
         });
       });
     });
@@ -222,7 +221,7 @@ describe('DomainTrackingClient', function () {
           text_footer: 'text_footer_value'
         });
 
-        expect(res).to.eql({
+        expect(res).toMatchObject({
           message: 'Tracking settings have been updated',
           unsubscribe
         });
@@ -240,7 +239,7 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'unsubscribe', { active: true });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nyes\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n----------------------------'));
         });
 
         it('converts boolean FALSE values to string in unsubscribe tracking ', async () => {
@@ -254,7 +253,7 @@ describe('DomainTrackingClient', function () {
               };
             });
           await client.updateTracking('domain.com', 'unsubscribe', { active: false });
-          expect(requestObject).to.have.string('name="active"\r\n\r\nno\r\n----------------------------');
+          expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nno\r\n----------------------------'));
         });
       });
     });
