@@ -17,9 +17,9 @@ type ExtendedWindow = globalThis.Window & {
   packageExport?: object
 };
 
-describe('Send message functionality (AMD)', () => {
+describe('Send message functionality (ESM)', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:3000/pages/esm-dynamic.html');
+    await page.goto('http://localhost:3000/pages/ESM.html');
     await page.waitForFunction(function () { return typeof (window as ExtendedWindow).mailgunClient !== 'undefined'; });
     await page.setRequestInterception(true);
 
@@ -41,7 +41,7 @@ describe('Send message functionality (AMD)', () => {
     await page.setRequestInterception(false);
   });
 
-  test('Sends plain email (AMD)', async () => {
+  test('Sends plain email (ESM)', async () => {
     const result = await page.evaluate(
       (domain, messageData) => (window as ExtendedWindow)?.mailgunClient?.messages.create(
         domain,
@@ -62,7 +62,7 @@ describe('Send message functionality (AMD)', () => {
     });
   });
 
-  test('Sends mime email (AMD)', async () => {
+  test('Sends mime email (ESM)', async () => {
     const result = await page.evaluate(
       (domain, messageData) => (window as ExtendedWindow).mailgunClient?.messages.create(
         domain,
@@ -83,7 +83,7 @@ describe('Send message functionality (AMD)', () => {
     });
   });
 
-  test('Sends an attachment (AMD)', async () => {
+  test('Sends an attachment (ESM)', async () => {
     await page.waitForSelector('input[type=file]', { timeout: 3000 });
     const input = await page.$('input[type=file]');
     expect(input).toBeTruthy();

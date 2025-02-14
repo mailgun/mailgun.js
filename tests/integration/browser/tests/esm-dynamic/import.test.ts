@@ -20,18 +20,19 @@ type Window = globalThis.Window & {
 
 describe('AMD import validation', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:3000/pages/ESM.html');
+    await page.goto('http://localhost:3000/pages/ESM-dynamic.html');
     await page.waitForFunction(function () { return typeof (window as Window).mailgunClient !== 'undefined'; });
     await page.waitForFunction(function () { return typeof (window as Window).packageExport !== 'undefined'; });
     await page.waitForFunction(function () { return typeof (window as Window).definitionsExport !== 'undefined'; });
   });
 
-  test('AMD package exports function', async () => {
-    const isFunction = await page.evaluate(() => (typeof (window as Window).packageExport === 'function'));
-    expect(isFunction).toBe(true);
+  test('ESM-dynamic package exports object', async () => {
+    const exported = await page.evaluate(() => ((window as Window).packageExport));
+    expect(exported).toEqual(expect.any(Object));
+    expect(exported).toHaveProperty('default');
   });
 
-  test('AMD definitions exports object', async () => {
+  test('ESM-dynamic definitions exports object', async () => {
     const definitionsExport = await page.evaluate(() => (window as Window).definitionsExport);
     expect(typeof definitionsExport).toBe('object');
     expect(definitionsExport).toEqual(expect.objectContaining({
@@ -40,7 +41,7 @@ describe('AMD import validation', () => {
     }));
   });
 
-  test('AMD client has expected structure', async () => {
+  test('ESM-dynamic client has expected structure', async () => {
     const client = await page.evaluate(() => (window as Window).mailgunClient);
     const expected = ['request', 'domains', 'webhooks', 'events', 'stats', 'suppressions', 'messages', 'routes', 'ips', 'ip_pools', 'lists', 'validate'];
     expect(client).toBeDefined();

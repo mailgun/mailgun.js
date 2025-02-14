@@ -69,6 +69,8 @@ jobs:
           logTime: "false"
 
       - run: curl -vvvv http://localhost:3000/pages/AMD.html && cat log.txt
+      - run: curl -vvvv http://localhost:3000/pages/ESM.html && cat log.txt
+      - run: curl -vvvv http://localhost:3000/pages/ESM-dynamic.html && cat log.txt
 
       - name: Run Browser integration tests
         run: npm run test:integration:browser

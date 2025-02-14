@@ -26,12 +26,12 @@ describe('AMD import validation', () => {
     await page.waitForFunction(function () { return typeof (window as Window).definitionsExport !== 'undefined'; });
   });
 
-  test('AMD package exports function', async () => {
+  test('ESM package exports function', async () => {
     const isFunction = await page.evaluate(() => (typeof (window as Window).packageExport === 'function'));
     expect(isFunction).toBe(true);
   });
 
-  test('AMD definitions exports object', async () => {
+  test('ESM definitions exports object', async () => {
     const definitionsExport = await page.evaluate(() => (window as Window).definitionsExport);
     expect(typeof definitionsExport).toBe('object');
     expect(definitionsExport).toEqual(expect.objectContaining({
@@ -40,7 +40,7 @@ describe('AMD import validation', () => {
     }));
   });
 
-  test('AMD client has expected structure', async () => {
+  test('ESM client has expected structure', async () => {
     const client = await page.evaluate(() => (window as Window).mailgunClient);
     const expected = ['request', 'domains', 'webhooks', 'events', 'stats', 'suppressions', 'messages', 'routes', 'ips', 'ip_pools', 'lists', 'validate'];
     expect(client).toBeDefined();
