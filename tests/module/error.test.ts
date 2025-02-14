@@ -5,7 +5,8 @@ describe('APIError', function () {
   it('sets status', function () {
     const error = new APIError({ status: 200 } as APIErrorOptions);
     expect(error).toMatchObject({
-      status: 200
+      status: 200,
+      type: 'MailgunAPIError'
     });
   });
 

@@ -23,9 +23,9 @@
     "build:prepublish": "node ./SetupPackage.cjs",
     "build:rollup": " rm -rf dist && rollup -c && npm run build:prepublish && npm run dist:copy",
     "start": "webpack --watch --config ./webpack/webpack.dev.config.js --progress --color",
-    "test": "jest --coverage --config=tests/jest.test.config.cjs",
-    "test:debug": "multi='dot=- mocha --inspect-brk -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts",
-    "test:watch": "mocha -r ts-node/register -w -R dot test/*.test.ts",
+    "test": "jest --config=tests/jest.test.config.cjs",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --config=tests/jest.test.config.cjs",
+    "test:watch": "jest --watch --config=tests/jest.test.config.cjs",
     "test:integration:node": "jest --config=integration_tests/node/jest.config.node.cjs",
     "test:integration:browser": "export JEST_PUPPETEER_CONFIG=integration_tests/browser/jest-puppeteer.config.cjs && jest --config=integration_tests/browser/jest.config.browser.cjs",
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
@@ -34,8 +34,7 @@
     "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
     "dist:copy": "cp -R ./dist/* ./integration_tests/browser/server/dist/",
-    "prepare": "husky install",
-    "test:old": "multi='dot=- xunit=./results.xml' nyc mocha -t 10000 -R mocha-multi -r ts-node/register test/*.test.ts"
+    "prepare": "husky install"
   },
   "exports": {
     ".": {
