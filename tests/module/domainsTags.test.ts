@@ -3,15 +3,9 @@ import formData from 'form-data';
 import nock from 'nock';
 import { IDomainTagsClient } from '../../lib/Interfaces/Domains/DomainTags.js';
 import Request from '../../lib/Classes/common/Request.js';
-import DomainsTagsClient, { DomainTagStatistic } from '../../lib/Classes/Domains/domainsTags.js';
+import DomainsTagsClient from '../../lib/Classes/Domains/domainsTags.js';
 import {
   InputFormData, RequestOptions,
-  DomainTagCountriesAggregation,
-  DomainTagDevicesAggregation,
-  DomainTagProvidersAggregation,
-  DomainTagsItem,
-  DomainTagsList,
-  DomainTagsMessageRes
 } from '../../lib/Types/index.js';
 
 describe('DomainsTagsClient', function () {
@@ -117,7 +111,7 @@ describe('DomainsTagsClient', function () {
       expect(res).toMatchObject({
         message: 'Tag deleted',
         status: 200
-      })
+      });
     });
   });
 

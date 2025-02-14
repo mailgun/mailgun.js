@@ -185,7 +185,7 @@ describe('mailListsMembersClient', function () {
     });
   });
 
-  describe('updateMember',  () => {
+  describe('updateMember', () => {
     it('updates list member in the mailing list ', async () => {
       const mailingListAddress = 'testingMailingListAddress@example.com';
       const mailingListMemberAddress = 'testingMailingListMemberAddress@example.com';

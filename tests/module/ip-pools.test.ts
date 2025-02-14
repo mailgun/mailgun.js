@@ -38,7 +38,7 @@ describe('IpPoolsClient', function () {
           },
         ],
         message: 'success'
-      }
+      };
       api.get('/v1/ip_pools').reply(200, expectedValue);
 
       const result = await client.list();

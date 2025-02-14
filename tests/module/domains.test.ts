@@ -3,18 +3,15 @@ import formData from 'form-data';
 import nock from 'nock';
 import Request from '../../lib/Classes/common/Request.js';
 
-import { InputFormData, APIResponse, RequestOptions } from '../../lib/Types/Common/index.js';
+import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredentials.js';
 import DomainTemplatesClient from '../../lib/Classes/Domains/domainsTemplates.js';
 import DomainTagsClient from '../../lib/Classes/Domains/domainsTags.js';
 import DomainTrackingClient from '../../lib/Classes/Domains/domainsTracking.js';
 
 import {
-  MessageResponse,
   ConnectionSettings,
   UpdatedConnectionSettings,
-  UpdatedDKIMAuthority,
-  UpdatedWebPrefixResponse,
   TDomain,
   UpdatedDKIMSelectorResult,
   DomainTrackingData

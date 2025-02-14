@@ -5,7 +5,7 @@ import Request from '../../lib/Classes/common/Request.js';
 
 import {
   InputFormData, RequestOptions,
-  SubaccountListItem, SubaccountListResponseData, SubaccountResponseData,
+  SubaccountListItem,
 } from '../../lib/Types/index.js';
 
 import SubaccountsClient from '../../lib/Classes/Subaccounts.js';
@@ -39,10 +39,6 @@ describe('SubaccountsClient', function () {
       });
       expect(subacc.subaccounts).toHaveLength(2);
       expect(subacc.subaccounts[0]).toMatchObject({ id: 'XYZ', name: 'test.subaccount1', status: 'open' });
-      // subacc.subaccounts[0].should.eql();
-      // return client.list().then(function (subacc: SubaccountListResponseData) {
-
-      // });
     });
   });
 

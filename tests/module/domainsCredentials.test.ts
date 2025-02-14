@@ -5,8 +5,6 @@ import Request from '../../lib/Classes/common/Request.js';
 
 import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredentials.js';
 import {
-  DomainCredentialsList,
-  DomainCredentialsResult,
   InputFormData,
   RequestOptions
 } from '../../lib/Types/index.js';
