@@ -9,10 +9,10 @@ module.exports = {
       }
     }],
   },
-  globalSetup: './setup/globalSetup.js',
-  globalTeardown: './setup/globalTeardown.js',
+  globalSetup: './setup/globalSetup.cjs',
+  globalTeardown: './setup/globalTeardown.cjs',
   testEnvironment: 'jest-environment-puppeteer',
   testMatch: ['**/tests/**/*.test.ts'],
-  setupFilesAfterEnv: ['./setup/addPageListeners.js'],
+  setupFilesAfterEnv: ['./setup/addPageListeners.cjs'],
   maxWorkers: 4 // limit by 4 to speed up teardown process
 };
