@@ -26,14 +26,14 @@
     "test": "jest --config=tests/jest.test.config.cjs",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --config=tests/jest.test.config.cjs",
     "test:watch": "jest --watch --config=tests/jest.test.config.cjs",
-    "test:integration:node": "jest --config=integration_tests/node/jest.config.node.cjs",
-    "test:integration:browser": "export JEST_PUPPETEER_CONFIG=integration_tests/browser/jest-puppeteer.config.cjs && jest --config=integration_tests/browser/jest.config.browser.cjs",
+    "test:integration:node": "jest --config=tests/integration/node/jest.config.node.cjs",
+    "test:integration:browser": "export JEST_PUPPETEER_CONFIG=tests/integration/browser/jest-puppeteer.config.cjs && jest --config=tests/integration/browser/jest.config.browser.cjs",
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
     "lint": "eslint . --ext .ts",
     "release": "standard-version -a",
     "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
-    "dist:copy": "cp -R ./dist/* ./integration_tests/browser/server/dist/",
+    "dist:copy": "cp -R ./dist/* ./tests/integration/browser/server/dist/",
     "prepare": "husky install"
   },
   "exports": {

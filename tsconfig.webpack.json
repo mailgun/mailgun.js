@@ -4,8 +4,7 @@
     "sourceMap": true
   },
   "exclude": [
-    "**/test/**",
-    "node_modules",
-    "integration_tests/**",
+    "**/tests/**",
+    "node_modules"
   ]
 }

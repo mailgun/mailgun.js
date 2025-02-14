@@ -1,6 +1,6 @@
 import { successResponse } from '../../../tests_data/messageResponses';
-import { IMailgunClient } from '../../../../lib/Interfaces';
-import { MailgunMessageData } from '../../../../lib/Types';
+import { IMailgunClient } from '../../../../../lib/Interfaces';
+import { MailgunMessageData } from '../../../../../lib/Types';
 import 'jest-puppeteer';
 
 const serverUrl = 'http://localhost:3000';

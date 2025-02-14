@@ -1,7 +1,7 @@
 // should be JS file to use require
 
 const formData = require('form-data');
-const Mailgun = require('../../../../../dist/CJS/mailgun.node.cjs');
+const Mailgun = require('../../../../../../dist/CJS/mailgun.node.cjs');
 
 function getMailgunImport() {
   return Mailgun;

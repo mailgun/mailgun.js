@@ -20,6 +20,6 @@
     "out": "docs",
     "entryPointStrategy": "expand",
     "entryPoints": ["./lib/index.ts"],
-    "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**", "integration_tests/**/**"]
+    "exclude": ["tests/**", "dist/**", "build/**", "docs/**", "examples/**"]
   }
 }

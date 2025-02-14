@@ -24,12 +24,12 @@ export default [
         emitDeclarationOnly: true,
         declarationDir: `${distFolder}Types/`,
       },
-      exclude: ['**/test/**', './integration_tests/**/**', "**/dist/*.js"],
+      exclude: ['**/tests/**', "**/dist/*.js"],
     }),
     nodeResolve({
       preferBuiltins: true,
       browser: true,
-      skip: ['./integration_tests/**']
+      skip: ['./tests/**']
     }),
     commonjs() // url-join doesn't have default export
   ]
@@ -53,12 +53,12 @@ export default [
         module: 'ESNext',
         target: 'es5',
       },
-      exclude: ['**/test/**', './integration_tests/**/**', "**/dist/*.js"],
+      exclude: ['**/tests/**', "**/dist/*.js"],
     }),
     nodeResolve({
       preferBuiltins: true,
       browser: true,
-      skip: ['./integration_tests/**']
+      skip: ['./tests/**']
     }),
     commonjs() // url-join doesn't have default export
   ]
@@ -82,7 +82,7 @@ export default [
   typescript({
     tsconfig: './tsconfig.rollup.json',
     incremental: false,
-    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    exclude: ['**/tests/**', "**/dist/**"],
     compilerOptions: {
       outDir: './dist/AMD/',
       module: 'ESNext',
@@ -109,7 +109,7 @@ export default [
     typescript({
       tsconfig: './tsconfig.rollup.json',
       incremental: false,
-      exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+      exclude: ['**/tests/**', "**/dist/**"],
       compilerOptions: {
         outDir: `${distFolder}/CJS/`,
         module: 'ESNext',
@@ -138,7 +138,7 @@ export default [
   typescript({
     tsconfig: './tsconfig.rollup.json',
     incremental: false,
-    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    exclude: ['**/tests/**', "**/dist/**"],
     compilerOptions: {
       outDir: `${distFolder}/CJS/`,
       module: 'ESNext',
@@ -166,7 +166,7 @@ export default [
     typescript({
       tsconfig: './tsconfig.rollup.json',
       incremental: false,
-      exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+      exclude: ['**/tests/**', "**/dist/**"],
       compilerOptions: {
         outDir: './dist/ESM',
         module: "NodeNext",
@@ -190,7 +190,7 @@ export default [
   typescript({
     tsconfig: './tsconfig.rollup.json',
     incremental: false,
-    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    exclude: ['**/tests/**', "**/dist/**"],
     compilerOptions: {
       outDir: './dist/ESM',
       module: "NodeNext",
@@ -217,7 +217,7 @@ export default [
     typescript({
       tsconfig: './tsconfig.rollup.json',
       incremental: false,
-      exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+      exclude: ['**/tests/**', "**/dist/**"],
       compilerOptions: {
         outDir: './dist/ESM',
         module: "ESNext",
@@ -245,7 +245,7 @@ export default [
   typescript({
     tsconfig: './tsconfig.rollup.json',
     incremental: false,
-    exclude: ['**/test/**', '**/integration_tests/**', "**/dist/**"],
+    exclude: ['**/tests/**', "**/dist/**"],
     compilerOptions: {
       outDir: './dist/ESM',
       module: "ESNext",

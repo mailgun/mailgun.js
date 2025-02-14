@@ -7,7 +7,7 @@ import {
   beforeAll
 } from '@jest/globals';
 import 'jest-puppeteer';
-import { IMailgunClient } from '../../../../lib/Interfaces/index.js';
+import { IMailgunClient } from '../../../../../lib/Interfaces/index.js';
 
 type Window = globalThis.Window & {
   mailgunClient?: IMailgunClient
