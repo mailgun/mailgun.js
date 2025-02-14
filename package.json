@@ -26,6 +26,7 @@
     "test": "jest --config=tests/jest.test.config.cjs",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --config=tests/jest.test.config.cjs",
     "test:watch": "jest --watch --config=tests/jest.test.config.cjs",
+    "test:integration": "npm run test:integration:node && npm run test:integration:browser",
     "test:integration:node": "jest --config=tests/integration/node/jest.config.node.cjs",
     "test:integration:browser": "export JEST_PUPPETEER_CONFIG=tests/integration/browser/jest-puppeteer.config.cjs && jest --config=tests/integration/browser/jest.config.browser.cjs",
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
