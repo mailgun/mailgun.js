@@ -4,7 +4,7 @@
 module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.test.ts'],
-  // setupFilesAfterEnv: ['./setup/common-js.setup.js'],
+  preset: 'ts-jest/presets/js-with-ts',
   transform: {
     '^.+.tsx?$': ['ts-jest', {
       tsconfig: false

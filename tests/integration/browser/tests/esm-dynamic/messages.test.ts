@@ -19,7 +19,7 @@ type ExtendedWindow = globalThis.Window & {
 
 describe('Send message functionality (AMD)', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:3000/pages/AMD.html');
+    await page.goto('http://localhost:3000/pages/ESM.html');
     await page.waitForFunction(function () { return typeof (window as ExtendedWindow).mailgunClient !== 'undefined'; });
     await page.setRequestInterception(true);
 

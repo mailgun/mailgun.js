@@ -6,13 +6,12 @@ const path = require('path');
 module.exports = async function globalSetup(globalConfig) {
   const ciEnvValue = process.env.CI;
   if (typeof ciEnvValue !== 'string' || ciEnvValue !== 'true') { // local machine
-    await fs.copyFile(
-      path.join(__dirname, '../../../../dist/AMD/mailgun.amd.js'),
-      path.join(__dirname, '../server/dist/mailgun.amd.js')
-    );
-    await fs.copyFile(
-      path.join(__dirname, '../../../../dist/AMD/definitions.amd.js'),
-      path.join(__dirname, '../server/dist/definitions.amd.js')
+    await fs.cp(
+      path.join(__dirname, '../../../../dist/'),
+      path.join(__dirname, '../server/dist/'),
+      {
+        recursive: true
+      }
     );
     try {
       // set up a web server to server pages

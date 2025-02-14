@@ -8,8 +8,9 @@ module.exports = async function globalTeardown(globalConfig) {
   const ciEnvValue = process.env.CI;
   if (typeof ciEnvValue !== 'string' || ciEnvValue !== 'true') { // local machine
     await teardownDevServer(globalThis.servers);
-    await fs.rm(path.join(__dirname, '../server/dist/mailgun.amd.js'));
-    await fs.rm(path.join(__dirname, '../server/dist/definitions.amd.js'));
+    await fs.rm(path.join(__dirname, '../server/dist/'), { recursive: true });
+    await fs.mkdir(path.join(__dirname, '../server/dist/'));
+    await fs.writeFile(path.join(__dirname, '../server/dist/.gitkeep'), '');
   }
 
   await teardownPuppeteer(globalConfig);

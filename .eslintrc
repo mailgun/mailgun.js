@@ -41,7 +41,8 @@
       "rules": {
         "import/extensions": 0,
         "@typescript-eslint/no-shadow": "error",
-        "import/no-unresolved": "error"
+        "import/no-unresolved": "error",
+        "import/no-extraneous-dependencies" :["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
       },
       "settings": {
         "import/parsers": {
