@@ -2,8 +2,13 @@ import typescript from '@rollup/plugin-typescript';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json' with { type: "json" };import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
 
 const banner = `// mailgun.js v${pkg.version} Copyright (c) ${new Date().getFullYear()} ${pkg.author} and contributors`;
+const isProductionBuild = process.env.NODE_ENV === 'production'
+if(isProductionBuild) {
+  console.log("Production build")
+}
 const distFolder = './dist/'
 export default [
   { // only Type declarations
@@ -42,7 +47,8 @@ export default [
       banner,
       format: 'amd',
       esModule: false,
-      exports: 'default'
+      exports: 'default',
+      sourcemap: (isProductionBuild ? false : 'inline')
     },
     plugins: [
       typescript({
@@ -52,6 +58,7 @@ export default [
           outDir: `${distFolder}AMD/`,
           module: 'ESNext',
           target: 'es5',
+          sourceMap: false,
         },
         exclude: ['**/tests/**', "**/dist/*.js"],
       }),
@@ -60,7 +67,8 @@ export default [
         browser: true,
         skip: ['./tests/**']
       }),
-      commonjs() // url-join doesn't have default export
+      commonjs(), // url-join doesn't have default export,
+      (isProductionBuild && terser())
     ]
   },
   { // AMD definitions entry-point
@@ -87,6 +95,7 @@ export default [
           outDir: './dist/AMD/',
           module: 'ESNext',
           target: 'es5',
+          sourceMap: false,
         }
       }),
     ]
@@ -98,7 +107,8 @@ export default [
       file: `${distFolder}CJS/mailgun.node.cjs`,
       banner,
       format: 'cjs',
-      exports: 'default'
+      exports: 'default',
+      sourcemap: (isProductionBuild ? false : 'inline')
     },
     plugins: [
       nodeResolve({
@@ -114,10 +124,12 @@ export default [
           outDir: `${distFolder}/CJS/`,
           module: 'ESNext',
           target: 'es5',
+          sourceMap: false,
         }
       }),
       commonjs(), // url-join doesn't have default export
       json(), // mime-db.json -> mime-types -> form-data
+      (isProductionBuild && terser())
     ],
   },
   { // CJS the definitions entry-point
@@ -143,6 +155,7 @@ export default [
           outDir: `${distFolder}/CJS/`,
           module: 'ESNext',
           target: 'es5',
+          sourceMap: false,
         }
       }),
     ]
@@ -166,7 +179,8 @@ function getESMConfig({isDefinition, isNode}) {
       banner,
       format: 'es',
       exports: isDefinition ? 'named' : undefined,
-      esModule: true
+      esModule: true,
+      sourcemap: (!isDefinition && isProductionBuild ? false : 'inline')
     },
     plugins: [
       nodeResolve({
@@ -181,10 +195,12 @@ function getESMConfig({isDefinition, isNode}) {
           outDir: './dist/ESM',
           module: isNode ? "NodeNext" : "ESNext",
           target: "ESNext",
+          sourceMap: false,
         }
       }),
       !isDefinition && commonjs(), // url-join doesn't have default export
       !isDefinition && json(), // mime-db.json -> mime-types -> form-data
+      !isDefinition && isProductionBuild && terser()
     ]
   }
 }
