@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Run build
-        run: npm run build:rollup
+        run: npm run build
 
       - name: Run Node.js related integration tests
         run:  npm run test:integration:node
