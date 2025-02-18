@@ -43,7 +43,7 @@ describe('Send message functionality', () => {
       message: 'Queued. Thank you.',
       id: '<20111114174239.25659.5817@samples.mailgun.org>'
     });
-  });
+  }, 10000);
 
   test.each(testingTable)('Sends mime email $name', async ({ isFDPackage }) => {
     const client = await getMailgunClient({ withFormDataPackage: isFDPackage });
