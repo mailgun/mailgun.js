@@ -1,4 +1,4 @@
-// mailgun.js v11.1.0 Copyright (c) 2025 Mailgun and contributors
+// mailgun.js v11.1.1 Copyright (c) 2025 Mailgun and contributors
 var Resolution;
 (function (Resolution) {
     Resolution["HOUR"] = "hour";
