@@ -1,5 +1,5 @@
 {
-  "include": ["lib", "test"],
+  "include": ["lib", "tests/module"],
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,
@@ -14,11 +14,12 @@
     "skipLibCheck": true,
     "strict": true,
     "declarationDir": "./dist",
+    "types": ["jest"]
   },
   "typedocOptions": {
     "out": "docs",
     "entryPointStrategy": "expand",
-    "entryPoints": ["./lib/index.ts"],
-    "exclude": ["test/**", "dist/**", "build/**", "docs/**", "examples/**", "integration_tests/**"]
+    "entryPoints": ["./lib/index.ts", "./lib/definitions.ts"],
+    "exclude": ["tests/**", "dist/**", "build/**", "docs/**", "examples/**"]
   }
 }

@@ -1,13 +1,13 @@
 import urljoin from 'url-join';
-import { APIResponse } from '../../Types/Common/ApiResponse';
-import Request from '../common/Request';
+import { APIResponse } from '../../Types/Common/ApiResponse.js';
+import Request from '../common/Request.js';
 
 import {
   IDomainTagStatisticResult,
   IDomainTagsClient
-} from '../../Interfaces/Domains';
-import NavigationThruPages from '../common/NavigationThruPages';
-import { Resolution } from '../../Enums';
+} from '../../Interfaces/Domains/index.js';
+import NavigationThruPages from '../common/NavigationThruPages.js';
+import { Resolution } from '../../Enums/index.js';
 import {
   DomainTagsItem,
   DomainTagsItemInfo,
@@ -25,7 +25,7 @@ import {
   DomainTagProvidersAPIResponse,
   DomainTagDevicesAggregation,
   DomainTagDevicesAPIResponse
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
 export class DomainTag implements DomainTagsItem {
   tag: string;

@@ -1,7 +1,7 @@
-import { SuppressionModels } from '../../Enums';
-import { IBounce } from '../../Interfaces/Suppressions';
-import { BounceData } from '../../Types/Suppressions';
-import Suppression from './Suppression';
+import { SuppressionModels } from '../../Enums/index.js';
+import { IBounce } from '../../Interfaces/Suppressions/index.js';
+import { BounceData } from '../../Types/Suppressions/index.js';
+import Suppression from './Suppression.js';
 
 export default class Bounce extends Suppression implements IBounce {
     address: string;

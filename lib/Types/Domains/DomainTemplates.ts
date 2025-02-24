@@ -1,6 +1,6 @@
-import { YesNo } from '../../Enums';
-import { IDomainTemplate } from '../../Interfaces/Domains';
-import { PagesList, ParsedPagesList } from '../Common';
+import { YesNo } from '../../Enums/index.js';
+import { IDomainTemplate } from '../../Interfaces/Domains/index.js';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
 
 /* eslint-disable camelcase */
 export type DomainTemplateData = {

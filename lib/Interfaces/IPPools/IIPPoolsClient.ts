@@ -2,7 +2,7 @@ import {
   IpPoolCreateData, IpPoolCreateResult,
   IpPoolDeleteData, IpPoolListResult,
   IpPoolMessageResult, IpPoolUpdateData
-} from '../../Types/IPPools';
+} from '../../Types/IPPools/index.js';
 
 export interface IIPPoolsClient {
   list(): Promise<IpPoolListResult>

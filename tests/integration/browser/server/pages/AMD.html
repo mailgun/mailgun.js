@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMD import</title>
+</head>
+<script src='http://localhost:3000/lib/require.2.3.6.js'></script>
+<script>
+  // RequireJS is a popular AMD loader
+  require(['http://localhost:3000/dist/AMD/mailgun.amd.js', 'http://localhost:3000/dist/AMD/definitions.amd.js'], function(Mailgun, definitions) {
+
+    const mailgun = new Mailgun(FormData);
+    const client = mailgun.client({
+      username: 'js_test_username',
+      key: 'js_test_key',
+      public_key: 'js_test_key',
+      timeout: 10000,
+      url: 'http://localhost:3000/'
+    });
+    window.packageExport = Mailgun;
+    window.mailgunClient = client;
+    window.definitionsExport = definitions;
+     document.getElementById('script_status').innerText = 'Loaded'
+  })
+</script>
+<body>
+<h1>AMD import</h1>
+<h3 id="script_status">Loading ...</h3>
+<input type="file" name="fileUpload" id="fileUpload">
+</body>
+</html>

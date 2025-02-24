@@ -1,7 +1,7 @@
 import * as NodeFormData from 'form-data';
 import { Readable } from 'stream';
-import { FormDataInput, InputFormData } from '../../Types/Common';
-import APIError from './Error';
+import { FormDataInput, InputFormData, AttachmentInfo } from '../../Types/Common/index.js';
+import APIError from './Error.js';
 
 import {
   CustomFile,
@@ -9,9 +9,8 @@ import {
   FormDataInputValue,
   MessageAttachment,
   MimeMessage
-} from '../../Types';
-import AttachmentsHandler from './AttachmentsHandler';
-import { AttachmentInfo } from '../../Types/Common/Attachments';
+} from '../../Types/index.js';
+import AttachmentsHandler from './AttachmentsHandler.js';
 
 class FormDataBuilder {
   private FormDataConstructor: InputFormData;

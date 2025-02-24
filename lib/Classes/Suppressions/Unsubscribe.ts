@@ -1,8 +1,8 @@
-import { SuppressionModels } from '../../Enums';
-import { IUnsubscribe } from '../../Interfaces/Suppressions';
-import { UnsubscribeData } from '../../Types/Suppressions';
+import { SuppressionModels } from '../../Enums/index.js';
+import { IUnsubscribe } from '../../Interfaces/Suppressions/index.js';
+import { UnsubscribeData } from '../../Types/Suppressions/index.js';
 
-import Suppression from './Suppression';
+import Suppression from './Suppression.js';
 
 export default class Unsubscribe extends Suppression implements IUnsubscribe {
     address: string;

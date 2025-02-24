@@ -1,5 +1,5 @@
-import { PagesList, ParsedPagesList } from '../Common';
-import { MailingList } from './MailingLists';
+import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { MailingList } from './MailingLists.js';
 
 export type MailListMember = {
     address: string;

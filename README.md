@@ -38,31 +38,94 @@ npm install mailgun.js
 
 ## Setup Client
 
-Next, require the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
+The next step is to import the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
 
-NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use `form-data` library.
+NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use built-in FormData or `form-data` library.
 
-IMPORTANT: if you are using EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
+**IMPORTANT**: if you are using EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
 
 ### Imports
 Once the package is installed, you can import the library using `import` or `require` approach:
 
 ```js
-  const formData = require('form-data');
+  const formData = require('form-data'); // or built-in FormData
   const Mailgun = require('mailgun.js');
   const mailgun = new Mailgun(formData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
 ```js
-  import FormData from 'form-data';
+  import FormData from 'form-data'; // or built-in FormData
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
 ```
+
+Be aware that there are four bundles available for usage. All of them are conditionally exported by package.json and separated by environment (Browser/Node.js):
+  - Node.js environment:
+    - CommonJS ([CJS](https://nodejs.org/api/modules.html#modules-commonjs-modules)), a bundle to use with the CommonJS module system in Node.js.
+
+      Usage example:
+
+      ``` JS
+      // In this case, the .dist/CJS/mailgun.node.cjs file is expected to be used
+      const Mailgun = require('mailgun.js');
+      const mailgun = new Mailgun(FormData);
+      ```
+
+    - ECMAScript modules ([ESM](https://nodejs.org/download/release/v18.11.0/docs/api/esm.html#modules-ecmascript-modules)) a bundle for the **Node.js** environment
+
+      Usage example:
+      ``` JS
+      // In this case, the .dist/ESM/mailgun.node.js file is expected to be used
+      import Mailgun from 'mailgun.js';
+      const mailgun = new Mailgun(FormData);
+      ...
+      ```
+      or with dynamic imports:
+      ``` JS
+      // In this case, the .dist/ESM/mailgun.node.js file is expected to be used
+      const Mailgun = await import('mailgun.js');
+      const mailgun = new Mailgun.default(FormData);
+      ...
+      ```
+
+  - Browser environment:
+    - Asynchronous Module Definition ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), a bundle to use with the `Require.js` module loader in the browser. This bundle requires the RequireJS module loader to be present in the environment.
+
+      Usage example for the case when the distribution is used directly in the browser:
+      ``` HTML
+      <script src='http://requirejs.org/docs/release/2.3.6/comments/require.js'></script>
+      <script>
+      require(['./dist/AMD/mailgun.amd.js'], function(Mailgun) {
+        const mailgun = new Mailgun(FormData);
+        ...
+      })
+      </script>
+      ```
+
+    - ECMAScript modules ([ESM](https://nodejs.org/download/release/v18.11.0/docs/api/esm.html#modules-ecmascript-modules)) a bundle for **browser** environment.
+
+      Usage example for the case the distribution is used directly in the browser:
+      ``` HTML
+      <script type="module">
+        import Mailgun from './dist/ESM/mailgun.browser.js';
+        const mailgun = new Mailgun(FormData);
+        ...
+      </script>
+      ```
+      or with dynamic imports:
+      ``` HTML
+      <script>
+      import ('./dist/ESM/mailgun.browser.js').then(Mailgun =>{
+        const mailgun = new Mailgun.default(FormData);
+        ...
+      })
+      </script>
+      ```
 ### Using Subaccounts
 Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
 ```js
-  import FormData from 'form-data';
+  import FormData from 'form-data'; // or built-in FormData
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
@@ -75,7 +138,7 @@ Primary accounts can make API calls on behalf of their subaccounts. [API documen
 By leveraging client configuration options, users can effortlessly establish proxy connections that align with their network requirements.
 Ex:
 ```js
-  import FormData from 'form-data';
+  import FormData from 'form-data'; // or built-in FormData
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData);
 
@@ -94,15 +157,15 @@ Ex:
   });
 ```
 ### Types imports
-Starting from version **9.0.0.** Types can be includes as named import:
+Types defined by SDK can be imported from 'definitions' submodule:
 ```TS
- import Mailgun, { MailgunClientOptions, MessagesSendResult } from 'mailgun.js';
+ import { MailgunClientOptions, MessagesSendResult } from 'mailgun.js/definitions';
 ```
 
 ### Interfaces and Enums imports
-Starting from version **9.0.0.** Interfaces and Enums can be imported in the next way:
+Interfaces and Enums defined by SDK can be imported from 'definitions' submodule:
 ```TS
-  import Mailgun, { Interfaces, Enums } from 'mailgun.js';
+  import { Interfaces, Enums } from 'mailgun.js/definitions';
   ...
   const mailgunClient: Interfaces.IMailgunClient = mailgun.client(clientOptions);
   const yes = Enums.YesNo.YES;

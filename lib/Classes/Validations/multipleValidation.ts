@@ -1,8 +1,7 @@
-import NavigationThruPages from '../common/NavigationThruPages';
-import { APIResponse } from '../../Types/Common/ApiResponse';
+import NavigationThruPages from '../common/NavigationThruPages.js';
 
-import Request from '../common/Request';
-import { IMultipleValidationClient } from '../../Interfaces/Validations';
+import Request from '../common/Request.js';
+import { IMultipleValidationClient } from '../../Interfaces/Validations/index.js';
 import {
   MultipleValidationJobResult,
   MultipleValidationJobData,
@@ -12,10 +11,11 @@ import {
   MultipleValidationCreationData,
   CreatedMultipleValidationJob,
   MultipleValidationCreationDataUpdated,
-  CanceledMultipleValidationJob
-} from '../../Types/Validations/MultipleValidation';
-import AttachmentsHandler from '../common/AttachmentsHandler';
-import APIError from '../common/Error';
+  CanceledMultipleValidationJob,
+  APIResponse
+} from '../../Types/index.js';
+import AttachmentsHandler from '../common/AttachmentsHandler.js';
+import APIError from '../common/Error.js';
 
 export class MultipleValidationJob implements MultipleValidationJobResult {
   createdAt: Date;

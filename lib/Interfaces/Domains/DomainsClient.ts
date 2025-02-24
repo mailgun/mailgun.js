@@ -1,5 +1,5 @@
-import { APIResponse } from '../../Types/Common';
-import {
+import { APIResponse } from '../../Types/Common/index.js';
+import type {
   ClickTrackingInfo,
   ConnectionSettings,
   DKIMAuthorityInfo,
@@ -20,12 +20,12 @@ import {
   UpdatedOpenTracking,
   UpdatedWebPrefixResponse,
   WebPrefixInfo
-} from '../../Types/Domains';
+} from '../../Types/Domains/index.js';
 
-import { IDomainCredentials } from './DomainCredentials';
-import { IDomainTagsClient } from './DomainTags';
-import { IDomainTemplatesClient } from './DomainTemplates';
-import { IDomainTrackingClient } from './DomainTracking';
+import { IDomainCredentials } from './DomainCredentials.js';
+import { IDomainTagsClient } from './DomainTags.js';
+import { IDomainTemplatesClient } from './DomainTemplates.js';
+import { IDomainTrackingClient } from './DomainTracking.js';
 
 export interface IDomainsClient {
     domainCredentials: IDomainCredentials;
