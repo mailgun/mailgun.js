@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file. See [standa
 ### [11.1.1](https://github.com/mailgun/mailgun.js/compare/v11.1.0...v11.1.1) (2025-02-24)
 
 
+### Bug Fixes
+
+* **release:** 11.1.1 ([d73f136](https://github.com/mailgun/mailgun.js/commits/d73f13615b5bf47bdbb074cbfd422db0854f20db))
+
+
+### Breaking changes
+
+* Move types, interfaces, enums into submodule ([dba1dd9](https://github.com/mailgun/mailgun.js/commits/dba1dd9a39c213760faa631ca2ce209b34a9eea2))
+
+
+### Other changes
+
+* Add esm bundles ([27008c2](https://github.com/mailgun/mailgun.js/commits/27008c2d0194d766e876fe33b2396b2041848107))
+* Add integration tests ([81079a5](https://github.com/mailgun/mailgun.js/commits/81079a5884dfd6401621669da0131b43f0028860))
+* Add tests for esm imports ([81af7fb](https://github.com/mailgun/mailgun.js/commits/81af7fb238af0e25395e5e1a52124b0c43f61ff3))
+* Add TS to tests ([549bf0a](https://github.com/mailgun/mailgun.js/commits/549bf0ad0c1ace3645bdfd3061325dc4d0b90a64))
+* Add watch script and production setup ([6ae657e](https://github.com/mailgun/mailgun.js/commits/6ae657e7ea06588c9f9aee7fca695076a6e680c2))
+* Fix lint errors ([5bd776e](https://github.com/mailgun/mailgun.js/commits/5bd776edc45550872c11fd82562977a1439f8f9f))
+* Fix tests ([03ee42c](https://github.com/mailgun/mailgun.js/commits/03ee42c2ad4fc99a1e39e181bc933e7e350c9330))
+* Gather tests in one folder ([207d5fd](https://github.com/mailgun/mailgun.js/commits/207d5fd99859aab23c16a30ff4c4a7490ec00e5c))
+* Increase tests timeout ([e658740](https://github.com/mailgun/mailgun.js/commits/e658740ed3f722c87c48b93232d1e84fd59bc1ea))
+* Make function for esm builds configuration ([d76c1e6](https://github.com/mailgun/mailgun.js/commits/d76c1e694a13b1ee3e47d0704532a8424ae18b6b))
+* Regenerate TS documentation ([a70841a](https://github.com/mailgun/mailgun.js/commits/a70841a75e591f5511f16ec36b343890e369d822))
+* Remove webpack deps ([c43cfcc](https://github.com/mailgun/mailgun.js/commits/c43cfcccf7e2b14aca38ac9c18b9df2ab0dd3fe8))
+* Setup coverage report ([60aa11b](https://github.com/mailgun/mailgun.js/commits/60aa11ba619d884cf416190f0c60c64328d26a26))
+* Update CI config ([9b7eba8](https://github.com/mailgun/mailgun.js/commits/9b7eba8f181a09b1a314fd34229aba123eee20aa))
+* Update CI configs ([b9a2254](https://github.com/mailgun/mailgun.js/commits/b9a22546659378892bb6907e42f39e9967d6c244))
+* Update extention for integration browser tests ([c59b110](https://github.com/mailgun/mailgun.js/commits/c59b110bc5ff1ccd4af6108776483e849852c0b4))
+* Update integration tests with sub-module ([128d3bb](https://github.com/mailgun/mailgun.js/commits/128d3bb104e2e8412f8475a6c1980b2c1b976175))
+* Update readme ([8c0b3d1](https://github.com/mailgun/mailgun.js/commits/8c0b3d166e4ffd344974128df5e32fbf89e563e3))
+* Update Readme ([aa3958c](https://github.com/mailgun/mailgun.js/commits/aa3958c3c287b898d855467f9d81a510b2f5a95a))
+* Update test commands ([2faff9e](https://github.com/mailgun/mailgun.js/commits/2faff9e64ae0dfe92e5993de5591af654a067d59))
+* Use jest for module tests ([a1fc8e8](https://github.com/mailgun/mailgun.js/commits/a1fc8e82ad0580f51bfb6abc6ecf8cd260d9cd09))
+
+### [11.1.1](https://github.com/mailgun/mailgun.js/compare/v11.1.0...v11.1.1) (2025-02-24)
+
+
 ### Breaking changes
 
 * Move types, interfaces, enums into submodule ([dba1dd9](https://github.com/mailgun/mailgun.js/commits/dba1dd9a39c213760faa631ca2ce209b34a9eea2))
