@@ -74,7 +74,7 @@ function __generator(thisArg, body) {
             }
             op = body.call(thisArg, _);
         } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : undefined, done: true };
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 }
 
@@ -4093,7 +4093,7 @@ const {
 var APIError = /** @class */ (function (_super) {
     __extends(APIError, _super);
     function APIError(_a) {
-        var status = _a.status, statusText = _a.statusText, message = _a.message, _b = _a.body, body = _b === undefined ? {} : _b;
+        var status = _a.status, statusText = _a.statusText, message = _a.message, _b = _a.body, body = _b === void 0 ? {} : _b;
         var _this = this;
         var bodyMessage = '';
         var error = '';
@@ -4101,8 +4101,8 @@ var APIError = /** @class */ (function (_super) {
             bodyMessage = body;
         }
         else {
-            bodyMessage = (body === null || body === undefined ? undefined : body.message) || '';
-            error = (body === null || body === undefined ? undefined : body.error) || '';
+            bodyMessage = (body === null || body === void 0 ? void 0 : body.message) || '';
+            error = (body === null || body === void 0 ? void 0 : body.error) || '';
         }
         _this = _super.call(this) || this;
         _this.stack = '';
@@ -4409,25 +4409,25 @@ var Request$1 = /** @class */ (function () {
         this.headers = this.makeHeadersFromObject(options.headers);
         this.formDataBuilder = new FormDataBuilder(formData);
         this.maxBodyLength = 52428800; // 50 MB
-        this.proxy = options === null || options === undefined ? undefined : options.proxy;
+        this.proxy = options === null || options === void 0 ? void 0 : options.proxy;
     }
     Request.prototype.request = function (method, url, onCallOptions) {
         var _a, _b, _c;
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var options, requestHeaders, params, body, response, urlValue, err_1, errorResponse, res;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
                         options = __assign({}, onCallOptions);
-                        options === null || options === undefined ? true : delete options.headers;
+                        options === null || options === void 0 ? true : delete options.headers;
                         requestHeaders = this.joinAndTransformHeaders(onCallOptions);
                         params = __assign({}, options);
-                        if ((options === null || options === undefined ? undefined : options.query) && Object.getOwnPropertyNames(options === null || options === undefined ? undefined : options.query).length > 0) {
+                        if ((options === null || options === void 0 ? void 0 : options.query) && Object.getOwnPropertyNames(options === null || options === void 0 ? void 0 : options.query).length > 0) {
                             params.params = new URLSearchParams(options.query);
                             delete params.query;
                         }
-                        if (options === null || options === undefined ? undefined : options.body) {
-                            body = options === null || options === undefined ? undefined : options.body;
+                        if (options === null || options === void 0 ? void 0 : options.body) {
+                            body = options === null || options === void 0 ? void 0 : options.body;
                             params.data = body;
                             delete params.body;
                         }
@@ -4443,9 +4443,9 @@ var Request$1 = /** @class */ (function () {
                         err_1 = _d.sent();
                         errorResponse = err_1;
                         throw new APIError({
-                            status: ((_a = errorResponse === null || errorResponse === undefined ? undefined : errorResponse.response) === null || _a === undefined ? undefined : _a.status) || 400,
-                            statusText: ((_b = errorResponse === null || errorResponse === undefined ? undefined : errorResponse.response) === null || _b === undefined ? undefined : _b.statusText) || errorResponse.code,
-                            body: ((_c = errorResponse === null || errorResponse === undefined ? undefined : errorResponse.response) === null || _c === undefined ? undefined : _c.data) || errorResponse.message
+                            status: ((_a = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _a === void 0 ? void 0 : _a.status) || 400,
+                            statusText: ((_b = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _b === void 0 ? void 0 : _b.statusText) || errorResponse.code,
+                            body: ((_c = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _c === void 0 ? void 0 : _c.data) || errorResponse.message
                         });
                     case 4: return [4 /*yield*/, this.getResponseBody(response)];
                     case 5:
@@ -4456,12 +4456,12 @@ var Request$1 = /** @class */ (function () {
         });
     };
     Request.prototype.getResponseBody = function (response) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
                 res = {
                     body: {},
-                    status: response === null || response === undefined ? undefined : response.status
+                    status: response === null || response === void 0 ? void 0 : response.status
                 };
                 if (typeof response.data === 'string') {
                     if (response.data === 'Mailgun Magnificent API') {
@@ -4493,7 +4493,7 @@ var Request$1 = /** @class */ (function () {
         return requestHeaders;
     };
     Request.prototype.makeHeadersFromObject = function (headersObject) {
-        if (headersObject === undefined) { headersObject = {}; }
+        if (headersObject === void 0) { headersObject = {}; }
         var requestHeaders = new AxiosHeaders();
         requestHeaders = Object.entries(headersObject).reduce(function (headersAccumulator, currentPair) {
             var key = currentPair[0], value = currentPair[1];
@@ -4514,7 +4514,7 @@ var Request$1 = /** @class */ (function () {
         return this.request(method, url, __assign({ query: query }, options));
     };
     Request.prototype.command = function (method, url, data, options, addDefaultHeaders) {
-        if (addDefaultHeaders === undefined) { addDefaultHeaders = true; }
+        if (addDefaultHeaders === void 0) { addDefaultHeaders = true; }
         var headers = {};
         if (addDefaultHeaders) {
             headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
@@ -4593,7 +4593,7 @@ var Domain = /** @class */ (function () {
 
 var DomainsClient = /** @class */ (function () {
     function DomainsClient(request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTracking, logger) {
-        if (logger === undefined) { logger = console; }
+        if (logger === void 0) { logger = console; }
         this.request = request;
         this.domainCredentials = domainCredentialsClient;
         this.domainTemplates = domainTemplatesClient;
@@ -4636,8 +4636,8 @@ var DomainsClient = /** @class */ (function () {
         var _this = this;
         var _a, _b;
         var preparedQuery = query ? {
-            'h:extended': (_a = query === null || query === undefined ? undefined : query.extended) !== null && _a !== undefined ? _a : false,
-            'h:with_dns': (_b = query === null || query === undefined ? undefined : query.with_dns) !== null && _b !== undefined ? _b : true,
+            'h:extended': (_a = query === null || query === void 0 ? void 0 : query.extended) !== null && _a !== void 0 ? _a : false,
+            'h:with_dns': (_b = query === null || query === void 0 ? void 0 : query.with_dns) !== null && _b !== void 0 ? _b : true,
         } : {};
         return this.request.get("/v4/domains/".concat(domain), preparedQuery)
             .then(function (res) { return _this._parseDomain(res); });
@@ -4698,7 +4698,7 @@ var DomainsClient = /** @class */ (function () {
     DomainsClient.prototype.getIps = function (domain) {
         this.logger.warn('"domains.getIps" method is deprecated and will be removed in the future releases.');
         return this.request.get(urljoin('/v3/domains', domain, 'ips'))
-            .then(function (response) { var _a; return (_a = response === null || response === undefined ? undefined : response.body) === null || _a === undefined ? undefined : _a.items; });
+            .then(function (response) { var _a; return (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.items; });
     };
     /**
     * @deprecated "domains.assignIp" method is deprecated, and will be removed in the future releases.
@@ -4747,7 +4747,7 @@ var DomainsClient = /** @class */ (function () {
     };
     DomainsClient.prototype.updateDKIMSelector = function (domain, data) {
         var _a;
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var res;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -4756,7 +4756,7 @@ var DomainsClient = /** @class */ (function () {
                         res = _b.sent();
                         return [2 /*return*/, {
                                 status: res.status,
-                                message: (_a = res === null || res === undefined ? undefined : res.body) === null || _a === undefined ? undefined : _a.message
+                                message: (_a = res === null || res === void 0 ? void 0 : res.body) === null || _a === void 0 ? void 0 : _a.message
                             }];
                 }
             });
@@ -4820,7 +4820,7 @@ var NavigationThruPages = /** @class */ (function () {
         };
     };
     NavigationThruPages.prototype.requestListWithPages = function (clientUrl, query, Model) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var _a, url, updatedQuery, response;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -4859,7 +4859,7 @@ var EventClient = /** @class */ (function (_super) {
         return data;
     };
     EventClient.prototype.get = function (domain, query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages(urljoin('/v3', domain, 'events'), query)];
             });
@@ -4884,7 +4884,7 @@ var StatsContainer = /** @class */ (function () {
 
 var StatsClient = /** @class */ (function () {
     function StatsClient(request, logger) {
-        if (logger === undefined) { logger = console; }
+        if (logger === void 0) { logger = console; }
         this.request = request;
         this.logger = logger;
     }
@@ -5040,7 +5040,7 @@ var SuppressionClient = /** @class */ (function (_super) {
     SuppressionClient.prototype.parseList = function (response, Model) {
         var _a;
         var data = {};
-        data.items = ((_a = response.body.items) === null || _a === undefined ? undefined : _a.map(function (item) { return new Model(item); })) || [];
+        data.items = ((_a = response.body.items) === null || _a === void 0 ? void 0 : _a.map(function (item) { return new Model(item); })) || [];
         data.pages = this.parsePageLinks(response, '?', 'address');
         data.status = response.status;
         return data;
@@ -5066,7 +5066,7 @@ var SuppressionClient = /** @class */ (function (_super) {
                 .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), createOptions)
                 .then(this.prepareResponse);
         }
-        if (data === null || data === undefined ? undefined : data.tags) {
+        if (data === null || data === void 0 ? void 0 : data.tags) {
             throw APIError.getUserDataError('Tags property should not be used for creating one unsubscribe.', 'Tags property can be used if you provides an array of unsubscribes as second argument of create method. Please use tag instead');
         }
         if (Array.isArray(data.tag)) {
@@ -5092,7 +5092,7 @@ var SuppressionClient = /** @class */ (function (_super) {
         };
     };
     SuppressionClient.prototype.list = function (domain, type, query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var model;
             return __generator(this, function (_a) {
                 model = this.getModel(type);
@@ -5160,9 +5160,9 @@ var WebhooksClient = /** @class */ (function () {
     WebhooksClient.prototype._parseWebhookWithID = function (id) {
         return function (response) {
             var _a;
-            var webhookResponse = (_a = response === null || response === undefined ? undefined : response.body) === null || _a === undefined ? undefined : _a.webhook;
-            var url = webhookResponse === null || webhookResponse === undefined ? undefined : webhookResponse.url;
-            var urls = webhookResponse === null || webhookResponse === undefined ? undefined : webhookResponse.urls;
+            var webhookResponse = (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.webhook;
+            var url = webhookResponse === null || webhookResponse === void 0 ? void 0 : webhookResponse.url;
+            var urls = webhookResponse === null || webhookResponse === void 0 ? void 0 : webhookResponse.urls;
             if (!url) {
                 url = urls && urls.length
                     ? urls[0]
@@ -5189,7 +5189,7 @@ var WebhooksClient = /** @class */ (function () {
             .then(this._parseWebhookWithID(id));
     };
     WebhooksClient.prototype.create = function (domain, id, url, test) {
-        if (test === undefined) { test = false; }
+        if (test === void 0) { test = false; }
         if (test) {
             return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id, 'test'), { url: url })
                 .then(this._parseWebhookTest);
@@ -5284,7 +5284,7 @@ var ValidateClient = /** @class */ (function () {
         this.multipleValidation = multipleValidationClient;
     }
     ValidateClient.prototype.get = function (address) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var query, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5306,7 +5306,7 @@ var IpsClient = /** @class */ (function () {
         this.request = request;
     }
     IpsClient.prototype.list = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5319,7 +5319,7 @@ var IpsClient = /** @class */ (function () {
         });
     };
     IpsClient.prototype.get = function (ip) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5347,7 +5347,7 @@ var IpPoolsClient = /** @class */ (function () {
             .then(function (response) { return _this.parseIpPoolsResponse(response); });
     };
     IpPoolsClient.prototype.create = function (data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5360,7 +5360,7 @@ var IpPoolsClient = /** @class */ (function () {
         });
     };
     IpPoolsClient.prototype.update = function (poolId, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5373,7 +5373,7 @@ var IpPoolsClient = /** @class */ (function () {
         });
     };
     IpPoolsClient.prototype.delete = function (poolId, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5415,7 +5415,7 @@ var MailingListsClient = /** @class */ (function (_super) {
         return data;
     };
     MailingListsClient.prototype.list = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages("".concat(this.baseRoute, "/pages"), query)];
             });
@@ -5481,7 +5481,7 @@ var MailListsMembers = /** @class */ (function (_super) {
         return data;
     };
     MailListsMembers.prototype.listMembers = function (mailListAddress, query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages("".concat(this.baseRoute, "/").concat(mailListAddress, "/members/pages"), query)];
             });
@@ -5576,8 +5576,8 @@ var MultipleValidationJob = /** @class */ (function () {
         this.responseStatusCode = responseStatusCode;
         if (data.download_url) {
             this.downloadUrl = {
-                csv: (_a = data.download_url) === null || _a === undefined ? undefined : _a.csv,
-                json: (_b = data.download_url) === null || _b === undefined ? undefined : _b.json
+                csv: (_a = data.download_url) === null || _a === void 0 ? void 0 : _a.csv,
+                json: (_b = data.download_url) === null || _b === void 0 ? void 0 : _b.json
             };
         }
         if (data.summary) {
@@ -5609,7 +5609,7 @@ var MultipleValidationClient = /** @class */ (function (_super) {
         return _this;
     }
     MultipleValidationClient.prototype.handleResponse = function (response) {
-        return __assign({ status: response.status }, response === null || response === undefined ? undefined : response.body);
+        return __assign({ status: response.status }, response === null || response === void 0 ? void 0 : response.body);
     };
     MultipleValidationClient.prototype.parseList = function (response) {
         var data = {};
@@ -5620,14 +5620,14 @@ var MultipleValidationClient = /** @class */ (function (_super) {
         return data;
     };
     MultipleValidationClient.prototype.list = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages('/v4/address/validate/bulk', query)];
             });
         });
     };
     MultipleValidationClient.prototype.get = function (listId) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5656,7 +5656,7 @@ var MultipleValidationClient = /** @class */ (function (_super) {
         return multipleValidationData;
     };
     MultipleValidationClient.prototype.create = function (listId, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var multipleValidationData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5674,7 +5674,7 @@ var MultipleValidationClient = /** @class */ (function (_super) {
         });
     };
     MultipleValidationClient.prototype.destroy = function (listId) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -5771,7 +5771,7 @@ var DomainTemplatesClient = /** @class */ (function (_super) {
         return data;
     };
     DomainTemplatesClient.prototype.list = function (domain, query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages(urljoin(this.baseRoute, domain, '/templates'), query)];
             });
@@ -5873,7 +5873,7 @@ var DomainTagsClient = /** @class */ (function (_super) {
         return new DomainTagStatistic(response);
     };
     DomainTagsClient.prototype.list = function (domain, query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.requestListWithPages(urljoin(this.baseRoute, domain, '/tags'), query)];
             });
@@ -5917,7 +5917,7 @@ var DomainTagsClient = /** @class */ (function (_super) {
 var SeedsListsClient = /** @class */ (function (_super) {
     __extends(SeedsListsClient, _super);
     function SeedsListsClient(request, attributes, filters, logger) {
-        if (logger === undefined) { logger = console; }
+        if (logger === void 0) { logger = console; }
         var _this = _super.call(this, request) || this;
         _this.request = request;
         _this.attributes = attributes;
@@ -5990,13 +5990,13 @@ var SeedsListsClient = /** @class */ (function (_super) {
         var data = {
             items: []
         };
-        data.items = (_a = response.body.items) === null || _a === undefined ? undefined : _a.map(function (item) { return _this.prepareSeedList(item); });
+        data.items = (_a = response.body.items) === null || _a === void 0 ? void 0 : _a.map(function (item) { return _this.prepareSeedList(item); });
         data.pages = this.parsePageLinks(response, '?', 'address');
         data.status = response.status;
         return data;
     };
     SeedsListsClient.prototype.list = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var queryData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6011,7 +6011,7 @@ var SeedsListsClient = /** @class */ (function (_super) {
         });
     };
     SeedsListsClient.prototype.get = function (id) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response, updatedSeedsList;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6025,7 +6025,7 @@ var SeedsListsClient = /** @class */ (function (_super) {
         });
     };
     SeedsListsClient.prototype.create = function (data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6038,7 +6038,7 @@ var SeedsListsClient = /** @class */ (function (_super) {
         });
     };
     SeedsListsClient.prototype.update = function (id, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6051,7 +6051,7 @@ var SeedsListsClient = /** @class */ (function (_super) {
         });
     };
     SeedsListsClient.prototype.destroy = function (id) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.request.delete("/v4/inbox/seedlists/".concat(id))];
             });
@@ -6069,7 +6069,7 @@ var InboxPlacementsClient = /** @class */ (function () {
         this.providers = providers;
     }
     InboxPlacementsClient.prototype.runTest = function (data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6087,7 +6087,7 @@ var InboxPlacementsClient = /** @class */ (function () {
 var InboxPlacementsResultsClient = /** @class */ (function (_super) {
     __extends(InboxPlacementsResultsClient, _super);
     function InboxPlacementsResultsClient(request, attributes, filters, sharing, logger) {
-        if (logger === undefined) { logger = console; }
+        if (logger === void 0) { logger = console; }
         var _this = _super.call(this, request) || this;
         _this.request = request;
         _this.attributes = attributes;
@@ -6145,7 +6145,7 @@ var InboxPlacementsResultsClient = /** @class */ (function (_super) {
         return data;
     };
     InboxPlacementsResultsClient.prototype.list = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var queryData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6160,7 +6160,7 @@ var InboxPlacementsResultsClient = /** @class */ (function (_super) {
         });
     };
     InboxPlacementsResultsClient.prototype.get = function (id) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response, inboxPlacementResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6177,7 +6177,7 @@ var InboxPlacementsResultsClient = /** @class */ (function (_super) {
         });
     };
     InboxPlacementsResultsClient.prototype.destroy = function (id) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6190,7 +6190,7 @@ var InboxPlacementsResultsClient = /** @class */ (function (_super) {
         });
     };
     InboxPlacementsResultsClient.prototype.getResultByShareId = function (shareId) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response, inboxPlacementResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6215,7 +6215,7 @@ var InboxPlacementsAttributesClient = /** @class */ (function () {
         this.request = request;
     }
     InboxPlacementsAttributesClient.prototype.list = function () {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6231,7 +6231,7 @@ var InboxPlacementsAttributesClient = /** @class */ (function () {
         });
     };
     InboxPlacementsAttributesClient.prototype.get = function (attributeName) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6252,7 +6252,7 @@ var InboxPlacementsFiltersClient = /** @class */ (function () {
         this.path = path;
     }
     InboxPlacementsFiltersClient.prototype.list = function () {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6282,7 +6282,7 @@ var IPRSharingClient = /** @class */ (function () {
         return result;
     };
     IPRSharingClient.prototype.get = function (id) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6296,7 +6296,7 @@ var IPRSharingClient = /** @class */ (function () {
         });
     };
     IPRSharingClient.prototype.update = function (id, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6331,7 +6331,7 @@ var InboxPlacementsProvidersClient = /** @class */ (function () {
         return data;
     };
     InboxPlacementsProvidersClient.prototype.list = function () {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6348,7 +6348,7 @@ var InboxPlacementsProvidersClient = /** @class */ (function () {
 
 var MetricsClient = /** @class */ (function () {
     function MetricsClient(request, logger) {
-        if (logger === undefined) { logger = console; }
+        if (logger === void 0) { logger = console; }
         this.request = request;
         this.logger = logger;
     }
@@ -6367,10 +6367,10 @@ var MetricsClient = /** @class */ (function () {
         var startDate;
         var endDate;
         if (query) {
-            var qStart = query === null || query === undefined ? undefined : query.start;
-            var qEnd = query === null || query === undefined ? undefined : query.end;
-            startDate = qStart instanceof Date ? this.convertDateToUTC('start', qStart) : qStart !== null && qStart !== undefined ? qStart : '';
-            endDate = qEnd && qEnd instanceof Date ? this.convertDateToUTC('end', qEnd) : qEnd !== null && qEnd !== undefined ? qEnd : '';
+            var qStart = query === null || query === void 0 ? void 0 : query.start;
+            var qEnd = query === null || query === void 0 ? void 0 : query.end;
+            startDate = qStart instanceof Date ? this.convertDateToUTC('start', qStart) : qStart !== null && qStart !== void 0 ? qStart : '';
+            endDate = qEnd && qEnd instanceof Date ? this.convertDateToUTC('end', qEnd) : qEnd !== null && qEnd !== void 0 ? qEnd : '';
         }
         var result = __assign(__assign({}, query), { start: startDate, end: endDate });
         return result;
@@ -6383,7 +6383,7 @@ var MetricsClient = /** @class */ (function () {
         return result;
     };
     MetricsClient.prototype.getAccount = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var queryData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6398,7 +6398,7 @@ var MetricsClient = /** @class */ (function () {
         });
     };
     MetricsClient.prototype.getAccountUsage = function (query) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var queryData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6429,7 +6429,7 @@ var DomainTrackingClient = /** @class */ (function () {
         return typeof obj === 'object' && 'place_at_the_top' in obj;
     };
     DomainTrackingClient.prototype.get = function (domain) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6442,7 +6442,7 @@ var DomainTrackingClient = /** @class */ (function () {
         });
     };
     DomainTrackingClient.prototype.generate = function (domain) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6455,7 +6455,7 @@ var DomainTrackingClient = /** @class */ (function () {
         });
     };
     DomainTrackingClient.prototype.regenerate = function (domain) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6468,7 +6468,7 @@ var DomainTrackingClient = /** @class */ (function () {
         });
     };
     DomainTrackingClient.prototype.getTracking = function (domain) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -6481,18 +6481,18 @@ var DomainTrackingClient = /** @class */ (function () {
         });
     };
     DomainTrackingClient.prototype.updateTracking = function (domain, type, data) {
-        return __awaiter(this, undefined, undefined, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var preparedData, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         preparedData = __assign({}, data);
-                        if (typeof (data === null || data === undefined ? undefined : data.active) === 'boolean') {
-                            preparedData.active = (data === null || data === undefined ? undefined : data.active) ? 'yes' : 'no';
+                        if (typeof (data === null || data === void 0 ? void 0 : data.active) === 'boolean') {
+                            preparedData.active = (data === null || data === void 0 ? void 0 : data.active) ? 'yes' : 'no';
                         }
                         if (this._isOpenTrackingInfoWitPlace(data)) {
-                            if (typeof (data === null || data === undefined ? undefined : data.place_at_the_top) === 'boolean') {
-                                preparedData.place_at_the_top = (data === null || data === undefined ? undefined : data.place_at_the_top) ? 'yes' : 'no';
+                            if (typeof (data === null || data === void 0 ? void 0 : data.place_at_the_top) === 'boolean') {
+                                preparedData.place_at_the_top = (data === null || data === void 0 ? void 0 : data.place_at_the_top) ? 'yes' : 'no';
                             }
                         }
                         return [4 /*yield*/, this.request.putWithFD(urljoin('/v3/domains', domain, 'tracking', type), preparedData)];
@@ -6551,11 +6551,11 @@ var MailgunClient = /** @class */ (function () {
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;
-        (_a = this.request) === null || _a === undefined ? undefined : _a.setSubaccountHeader(subaccountId);
+        (_a = this.request) === null || _a === void 0 ? void 0 : _a.setSubaccountHeader(subaccountId);
     };
     MailgunClient.prototype.resetSubaccount = function () {
         var _a;
-        (_a = this.request) === null || _a === undefined ? undefined : _a.resetSubaccountHeader();
+        (_a = this.request) === null || _a === void 0 ? void 0 : _a.resetSubaccountHeader();
     };
     return MailgunClient;
 }());

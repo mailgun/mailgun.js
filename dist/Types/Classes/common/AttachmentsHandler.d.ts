@@ -1,7 +1,6 @@
 /// <reference types="node" />
 /// <reference types="node" />
 /// <reference types="node" />
-/// <reference types="node" />
 import { Readable } from 'stream';
 import { CustomFile, CustomFileData } from '../../Types/index.js';
 import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments.js';

@@ -28,4 +28,4 @@
 
 #### Defined in
 
-[Interfaces/Common/Logger.ts:2](https://github.com/mailgun/mailgun.js/blob/aa3958c/lib/Interfaces/Common/Logger.ts#L2)
+[Interfaces/Common/Logger.ts:2](https://github.com/mailgun/mailgun.js/blob/460665c/lib/Interfaces/Common/Logger.ts#L2)
