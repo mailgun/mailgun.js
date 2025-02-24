@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[index.ts:9](https://github.com/mailgun/mailgun.js/blob/aa3958c/lib/index.ts#L9)
+[index.ts:9](https://github.com/mailgun/mailgun.js/blob/460665c/lib/index.ts#L9)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[index.ts:7](https://github.com/mailgun/mailgun.js/blob/aa3958c/lib/index.ts#L7)
+[index.ts:7](https://github.com/mailgun/mailgun.js/blob/460665c/lib/index.ts#L7)
 
 ## Accessors
 
@@ -60,7 +60,7 @@ typeof [`default`](index.default.md)
 
 #### Defined in
 
-[index.ts:6](https://github.com/mailgun/mailgun.js/blob/aa3958c/lib/index.ts#L6)
+[index.ts:6](https://github.com/mailgun/mailgun.js/blob/460665c/lib/index.ts#L6)
 
 ## Methods
 
@@ -80,4 +80,4 @@ typeof [`default`](index.default.md)
 
 #### Defined in
 
-[index.ts:13](https://github.com/mailgun/mailgun.js/blob/aa3958c/lib/index.ts#L13)
+[index.ts:13](https://github.com/mailgun/mailgun.js/blob/460665c/lib/index.ts#L13)

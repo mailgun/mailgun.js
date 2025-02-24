@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "11.1.0",
+  "version": "11.1.1",
   "author": "Mailgun",
   "license": "MIT",
   "type": "module",
@@ -31,7 +31,7 @@
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
     "lint": "eslint . --ext .ts",
     "release": "standard-version -a",
-    "release:test": "standard-version -a --dry-run",
+    "release:test": "standard-version -a --dry-run --release-as major",
     "link": "cd dist && npm link",
     "dist:copy": "cp -R ./dist/* ./tests/integration/browser/server/dist/",
     "prepare": "husky install"
@@ -157,8 +157,7 @@
     "compareUrlFormat": "https://github.com/mailgun/mailgun.js/compare/{{previousTag}}...{{currentTag}}",
     "scripts": {
       "prerelease": "npm test && npm run build:release && npm run docs",
-      "postchangelog": "npm run build:prepublish && git add -A dist && git add -A docs",
-      "posttag": "git push && git push --tags && rm -rf build"
+      "postchangelog": "npm run build:prepublish && git add -A dist && git add -A docs"
     }
   }
 }
