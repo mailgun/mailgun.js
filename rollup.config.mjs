@@ -195,6 +195,7 @@ function getESMConfig({isDefinition, isNode}) {
           outDir: './dist/ESM',
           module: isNode ? "NodeNext" : "ESNext",
           target: "ESNext",
+          moduleResolution: "NodeNext",
           sourceMap: false,
         }
       }),

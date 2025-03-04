@@ -41,28 +41,30 @@
       "node": {
         "import": "./ESM/mailgun.node.js",
         "require": "./CJS/mailgun.node.cjs",
-        "types": "./Types/index.d.ts",
         "default": "./CJS/mailgun.node.js"
       },
       "browser": {
         "import": "./ESM/mailgun.browser.js",
         "require": "./AMD/mailgun.amd.js",
-        "types": "./Types/index.d.ts",
         "default": "./AMD/mailgun.amd.js"
+      },
+      "default": {
+        "types": "./Types/index.d.ts"
       }
     },
     "./definitions": {
       "node": {
         "import": "./ESM/definitions.node.js",
         "require": "./CJS/definitions.cjs",
-        "types": "./Types/definitions.d.ts",
         "default": "./CJS/definitions.js"
       },
       "browser": {
         "import": "./ESM/definitions.browser.js",
         "require": "./AMD/definitions.js",
-        "types": "./Types/definitions.d.ts",
         "default": "./AMD/definitions.js"
+      },
+      "default": {
+        "types": "./Types/definitions.d.ts"
       }
     }
   },
@@ -115,7 +117,7 @@
     "ts-loader": "^9.5.1",
     "typedoc": "^0.24.0",
     "typedoc-plugin-markdown": "^3.15.3",
-    "typescript": "4.9.x"
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

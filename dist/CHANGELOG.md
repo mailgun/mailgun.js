@@ -9,6 +9,35 @@ All notable changes to this project will be documented in this file. See [standa
 
 * Move types, interfaces, enums into submodule ([dba1dd9](https://github.com/mailgun/mailgun.js/commits/dba1dd9a39c213760faa631ca2ce209b34a9eea2))
 
+- Exports of TypeScript types, interfaces, and enums have been moved to the `mailgun.js/definitions` submodule.
+    In case you need them, starting from version 12, please use
+    ```JS
+    import { MailgunClientOptions, MessagesSendResult } from 'mailgun.js/definitions';
+    ```
+    instead of
+    ```JS
+    import { MailgunClientOptions, MessagesSendResult } from 'mailgun.js';
+    ```
+- AMD import no longer requires using the `.default` property.
+  So now this is
+  ``` HTML
+  <script>
+  require('./dist/AMD/mailgun.amd.js', function(Mailgun) {
+   const mailgun = new Mailgun(FormData); // default property is not needed anymore
+  }
+  </script>
+  ```
+  Instead of
+
+
+   ```HTML
+  <script>
+  require('./dist/AMD/mailgun.amd.js', function(Mailgun) {
+    const mailgun = new Mailgun.default(FormData);  // default property was required previously
+  });
+  </script>
+  ```
+
 
 ### Other changes
 
