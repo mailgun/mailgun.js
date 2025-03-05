@@ -1,5 +1,3 @@
-/// <reference types="node" />
-/// <reference types="node" />
 /**
  * Ensures the object has least one key present and not undefined
  *

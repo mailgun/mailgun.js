@@ -1747,14 +1747,14 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### generate
-  Initiates generation of a TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll the status endpoint in location field to check for success
+  Initiates generation of a TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll the status endpoint in location field to check for success. Domain address must be formatted as `webPrefix.domainName` from domains settings
 
   `mg.domains.domainTracking.generate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
 
   Example:
 
   ```JS
-  mg.domains.domainTracking.generate('foobar.example.com')
+  mg.domains.domainTracking.generate('email.foobar.example.com')
     .then(msg => console.log(msg)) // logs response data
     .catch(err => console.error(err)); // logs any error
   ```
@@ -1770,14 +1770,14 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### regenerate
-  Initiates regeneration of an expired TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll status endpoint in location field to check for success. This will not regenerate an existing certificate that is still valid
+  Initiates regeneration of an expired TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll status endpoint in location field to check for success. This will not regenerate an existing certificate that is still valid. Domain address must be formatted as `webPrefix.domainName` from domains settings
 
   `mg.domains.domainTracking.regenerate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
 
   Example:
 
   ```JS
-  mg.domains.domainTracking.regenerate('foobar.example.com')
+  mg.domains.domainTracking.regenerate('email.foobar.example.com')
     .then(msg => console.log(msg)) // logs response data
     .catch(err => console.error(err)); // logs any error
   ```
