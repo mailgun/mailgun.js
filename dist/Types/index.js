@@ -4412,9 +4412,9 @@ var Request$1 = /** @class */ (function () {
         this.proxy = options === null || options === void 0 ? void 0 : options.proxy;
     }
     Request.prototype.request = function (method, url, onCallOptions) {
+        var _a, _b, _c;
         return __awaiter(this, void 0, void 0, function () {
             var options, requestHeaders, params, body, response, urlValue, err_1, errorResponse, res;
-            var _a, _b, _c;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -4746,9 +4746,9 @@ var DomainsClient = /** @class */ (function () {
             .then(function (res) { return res.body; });
     };
     DomainsClient.prototype.updateDKIMSelector = function (domain, data) {
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
             var res;
-            var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4 /*yield*/, this.request.put("/v3/domains/".concat(domain, "/dkim_selector"), {}, { query: "dkim_selector=".concat(data.dkimSelector) })];

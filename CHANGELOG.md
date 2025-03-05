@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.0.1](https://github.com/mailgun/mailgun.js/compare/v12.0.0...v12.0.1) (2025-03-05)
+
+
+### Bug Fixes
+
+* Update package.json conditional exports to support "moduleResolution": "bundler" ([a75329e](https://github.com/mailgun/mailgun.js/commits/a75329e37beada8787092fb84470e69a8309f7ac))
+
+
+### Other changes
+
+* Revert TS version ([855c01a](https://github.com/mailgun/mailgun.js/commits/855c01adf8d64235a0bae6b181b6e2adbd66729a))
+* update x509 TLS certificate generation README ([77b8615](https://github.com/mailgun/mailgun.js/commits/77b86154ed36377a8a3762221b0d6c5f3890d670))
+
 ## [12.0.0](https://github.com/mailgun/mailgun.js/compare/v11.1.0...v12.0.0) (2025-02-24)
 
 
