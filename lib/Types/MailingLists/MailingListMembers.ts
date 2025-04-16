@@ -16,8 +16,15 @@ export type MailListMembersQuery = {
     page?: string;
 }
 
+export type CreateMultipleMailListMembers = Array<{
+    address: string;
+    name?: string;
+    vars?: string;
+    subscribed?: boolean;
+}>
+
 export type MultipleMembersData = {
-    members: Array<MailListMember>;
+    members: CreateMultipleMailListMembers;
     upsert: 'yes' | 'no';
 }
 
