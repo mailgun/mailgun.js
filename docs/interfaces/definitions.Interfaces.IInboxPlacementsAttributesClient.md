@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/AttributesClient.ts:5](https://github.com/mailgun/mailgun.js/blob/f0fcce3/lib/Interfaces/InboxPlacements/AttributesClient.ts#L5)
+[Interfaces/InboxPlacements/AttributesClient.ts:5](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/AttributesClient.ts#L5)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/AttributesClient.ts:4](https://github.com/mailgun/mailgun.js/blob/f0fcce3/lib/Interfaces/InboxPlacements/AttributesClient.ts#L4)
+[Interfaces/InboxPlacements/AttributesClient.ts:4](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/AttributesClient.ts#L4)

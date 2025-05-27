@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.0.2](https://github.com/mailgun/mailgun.js/compare/v12.0.1...v12.0.2) (2025-05-27)
+
+
+### Features
+
+* Add default timeout to prevent unresolved promise ([592fb62](https://github.com/mailgun/mailgun.js/commits/592fb625e8610530361816365a7ded84669bf37a))
+
 ### [12.0.1](https://github.com/mailgun/mailgun.js/compare/v12.0.0...v12.0.1) (2025-03-05)
 
 
