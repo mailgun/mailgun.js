@@ -37,7 +37,7 @@ class Request {
     this.username = options.username;
     this.key = options.key;
     this.url = options.url as string;
-    this.timeout = options.timeout;
+    this.timeout = options.timeout || 60000; // Default timeout is 60 seconds
     this.headers = this.makeHeadersFromObject(options.headers);
     this.formDataBuilder = new FormDataBuilder(formData);
     this.maxBodyLength = 52428800; // 50 MB
