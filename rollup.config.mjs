@@ -180,7 +180,7 @@ function getESMConfig({isDefinition, isNode}) {
       format: 'es',
       exports: isDefinition ? 'named' : undefined,
       esModule: true,
-      sourcemap: (!isDefinition && isProductionBuild ? false : 'inline')
+      sourcemap: (!isDefinition && isProductionBuild ? false : true)
     },
     plugins: [
       nodeResolve({
@@ -196,7 +196,7 @@ function getESMConfig({isDefinition, isNode}) {
           module: isNode ? "NodeNext" : "ESNext",
           target: "ESNext",
           moduleResolution: "NodeNext",
-          sourceMap: false,
+          sourceMap: (!isDefinition && isProductionBuild ? false : true),
         }
       }),
       !isDefinition && commonjs(), // url-join doesn't have default export

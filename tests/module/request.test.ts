@@ -3,6 +3,8 @@ import formData from 'form-data';
 
 import base64 from 'base-64';
 import nock from 'nock';
+import fs from 'fs';
+import path from 'path';
 import Request from '../../lib/Classes/common/Request.js';
 import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
 
@@ -17,6 +19,7 @@ describe('Request', function () {
 
   afterEach(() => {
     jest.resetAllMocks();
+    nock.cleanAll();
   });
 
   describe('request', () => {
@@ -125,6 +128,37 @@ describe('Request', function () {
         expect(error).toMatchObject({
           status: 400,
           details: 'Request body larger than maxBodyLength limit',
+        });
+      }
+    });
+
+    it('default timeout is 60 seconds', async () => {
+      nock(baseURL, { reqheaders: headers })
+        .post('/v2/some/resource')
+        .delay(61000) // 61 seconds
+        .reply(200, { id: 1, message: 'hello' });
+      const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
+      const stream = fs.createReadStream(filepath);
+      const attachments = [
+        {
+          filename: 'test.pdf',
+          data: stream,
+          contentType: 'application/pdf',
+          knownLength: 13264,
+        }
+      ];
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      try {
+        await req.postWithFD(
+          '/v2/some/resource',
+          {
+            attachments
+          }
+        );
+      } catch (error: unknown) {
+        expect(error).toMatchObject({
+          status: 400,
+          details: 'timeout of 60000ms exceeded',
         });
       }
     });
