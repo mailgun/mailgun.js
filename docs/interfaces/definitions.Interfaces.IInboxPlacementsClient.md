@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/InboxPlacementsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L9)
+[Interfaces/InboxPlacements/InboxPlacementsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/20b24c7/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L9)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/InboxPlacementsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L8)
+[Interfaces/InboxPlacements/InboxPlacementsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/20b24c7/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L8)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/InboxPlacementsClient.ts:7](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L7)
+[Interfaces/InboxPlacements/InboxPlacementsClient.ts:7](https://github.com/mailgun/mailgun.js/blob/20b24c7/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L7)
 
 ## Methods
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/InboxPlacementsClient.ts:10](https://github.com/mailgun/mailgun.js/blob/d21489b/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L10)
+[Interfaces/InboxPlacements/InboxPlacementsClient.ts:10](https://github.com/mailgun/mailgun.js/blob/20b24c7/lib/Interfaces/InboxPlacements/InboxPlacementsClient.ts#L10)

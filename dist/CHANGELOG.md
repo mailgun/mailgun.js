@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.0.3](https://github.com/mailgun/mailgun.js/compare/v12.0.2...v12.0.3) (2025-06-20)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.7.9 to 1.9.0 ([4216baa](https://github.com/mailgun/mailgun.js/commits/4216baa0439ec866c357611e20f282c8015a2925))
+* **deps:** bump tar-fs from 3.0.8 to 3.0.9 ([2875739](https://github.com/mailgun/mailgun.js/commits/28757397b4c2daf5f45c6f77875c6d5af92d0937))
+* Update dependencies ([fbb83be](https://github.com/mailgun/mailgun.js/commits/fbb83be7870e1bd092ffb89e0279e29ae78e7ad7))
+
 ### [12.0.2](https://github.com/mailgun/mailgun.js/compare/v12.0.1...v12.0.2) (2025-05-27)
 
 
