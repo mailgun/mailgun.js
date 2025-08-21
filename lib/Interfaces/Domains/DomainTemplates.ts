@@ -13,7 +13,7 @@ import type {
   TemplateQuery,
   TemplateVersion,
   UpdateOrDeleteDomainTemplateResult
-} from '../../Types/Domains/index.js';
+} from '../../Types/Domains/DomainTemplates.js';
 
 export interface IDomainTemplate {
     name: string;
