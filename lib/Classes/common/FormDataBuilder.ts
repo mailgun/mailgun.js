@@ -1,6 +1,8 @@
 import * as NodeFormData from 'form-data';
 import { Readable } from 'stream';
-import { FormDataInput, InputFormData, AttachmentInfo } from '../../Types/Common/index.js';
+import {
+  FormDataInput, InputFormData, AttachmentInfo, FormDataBuilderConfig
+} from '../../Types/Common/index.js';
 import APIError from './Error.js';
 
 import {
@@ -16,17 +18,30 @@ class FormDataBuilder {
   private FormDataConstructor: InputFormData;
   private fileKeys: string[];
   private attachmentsHandler: AttachmentsHandler;
+  private useFetch?: boolean;
 
-  constructor(FormDataConstructor: InputFormData) {
+  constructor(FormDataConstructor: InputFormData, config: FormDataBuilderConfig) {
     this.FormDataConstructor = FormDataConstructor;
     this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
     this.attachmentsHandler = new AttachmentsHandler();
+    this.useFetch = config?.useFetch;
   }
 
   public createFormData(data: FormDataInput): NodeFormData | FormData {
     if (!data) {
       throw new Error('Please provide data object');
     }
+    const formDataInstance = new this.FormDataConstructor();
+    const isFormDataP = this.isFormDataPackage(formDataInstance);
+    if (isFormDataP && this.useFetch) {
+      // in case form-data package is used fetch client thinks form-data is of the string type
+      // also Content-Type is recognized incorrectly
+      throw APIError.getUserDataError(
+        '"form-data" npm package detected, and it can not be used together with "fetch" client',
+        'fetch client does not recognize object created by form-data package as valid FormData instance'
+      );
+    }
+
     const formData: NodeFormData | FormData = Object.keys(data)
       .filter(function (key) { return data[key]; })
       .reduce((formDataAcc: NodeFormData | FormData, key) => {
@@ -56,7 +71,7 @@ class FormDataBuilder {
 
         this.addCommonPropertyToFD(key, data[key], formDataAcc);
         return formDataAcc;
-      }, new this.FormDataConstructor());
+      }, formDataInstance);
     return formData;
   }
 

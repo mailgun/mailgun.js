@@ -129,7 +129,7 @@ Consider using string type for property "${key}" to avoid auto-converting`);
 
   async list(query: InboxPlacementsResultsQuery): Promise<InboxPlacementsResultsList> {
     const queryData = this.prepareQueryData(query);
-    const response = await this.request.get('/v4/inbox/results', queryData) as InboxPlacementsResultsListAPIResponse;
+    const response = await this.request.get('/v4/inbox/results', { ...queryData }) as InboxPlacementsResultsListAPIResponse;
     return this.parseList(response);
   }
 

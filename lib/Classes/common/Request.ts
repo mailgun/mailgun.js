@@ -1,206 +1,129 @@
-import * as base64 from 'base-64';
 import urljoin from 'url-join';
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  AxiosHeaders,
-  RawAxiosRequestHeaders,
-  AxiosProxyConfig,
-  AxiosRequestHeaders,
-} from 'axios';
-import * as NodeFormData from 'form-data';
-import APIError from './Error.js';
 import {
   OnCallRequestOptions,
   RequestOptions,
-  APIErrorOptions,
   InputFormData,
   APIResponse,
   IpPoolDeleteData,
-  FormDataInput
+  FormDataInput,
+  RequestProviderConfig,
+  RequestData,
+  GetQueryTypes,
+  PostDataTypes,
+  PutDataTypes,
+  CommandQuery,
+  PutOptionsType,
+  PutQueryTypes,
+  RequestProviderData,
+  onCallReqConfig
 } from '../../Types/index.js';
 
 import FormDataBuilder from './FormDataBuilder.js';
-import SubaccountsClient from '../Subaccounts.js';
+import FetchProvider from './RequestProviders/FetchProvider.js';
+import { IRequestProvider } from '../../Interfaces/index.js';
+import AxiosProvider from './RequestProviders/AxiosProvider.js';
 
 class Request {
-  private username: string;
-  private key: string;
   private url: string;
-  private timeout: number;
-  private headers: AxiosRequestHeaders;
   private formDataBuilder: FormDataBuilder;
-  private maxBodyLength: number;
-  private proxy: AxiosProxyConfig | undefined;
+  private requestProvider: IRequestProvider
 
   constructor(options: RequestOptions, formData: InputFormData) {
-    this.username = options.username;
-    this.key = options.key;
     this.url = options.url as string;
-    this.timeout = options.timeout || 60000; // Default timeout is 60 seconds
-    this.headers = this.makeHeadersFromObject(options.headers);
-    this.formDataBuilder = new FormDataBuilder(formData);
-    this.maxBodyLength = 52428800; // 50 MB
-    this.proxy = options?.proxy;
+    this.formDataBuilder = new FormDataBuilder(formData, { useFetch: options.useFetch });
+    const providersConfig: RequestProviderConfig = {
+      timeout: options.timeout,
+      maxBodyLength: 52428800,
+      proxy: options.proxy,
+      username: options.username,
+      key: options.key,
+      configHeaders: options.headers,
+    };
+    this.requestProvider = options.useFetch
+      ? new FetchProvider(providersConfig)
+      : new AxiosProvider(providersConfig);
   }
 
   async request(
     method: string,
     url: string,
-    onCallOptions?: Record<string, unknown | Record<string, unknown> >
+    onCallOptions?: {
+      body?: RequestData
+      query?: GetQueryTypes | PutQueryTypes
+    },
+    config?: onCallReqConfig
   ): Promise<APIResponse> {
     const options: OnCallRequestOptions = { ...onCallOptions };
-    delete options?.headers;
-    const requestHeaders = this.joinAndTransformHeaders(onCallOptions);
-    const params = { ...options };
 
+    const params: RequestProviderData = {};
+
+    const urlValue = urljoin(this.url, url);
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
-      params.params = new URLSearchParams(options.query);
-      delete params.query;
+      if (options?.query?.searchParams) {
+        params.params = new URLSearchParams(options.query.searchParams);
+      } else {
+        params.params = new URLSearchParams(options.query);
+      }
     }
 
     if (options?.body) {
-      const body = options?.body;
-      params.data = body;
-      delete params.body;
-    }
-    let response: AxiosResponse;
-    const urlValue = urljoin(this.url, url);
-
-    try {
-      response = await axios.request({
-        method: method.toLocaleUpperCase(),
-        timeout: this.timeout,
-        url: urlValue,
-        headers: requestHeaders,
-        ...params,
-        maxBodyLength: this.maxBodyLength,
-        proxy: this.proxy,
-      });
-    } catch (err: unknown) {
-      const errorResponse = err as AxiosError;
-
-      throw new APIError({
-        status: errorResponse?.response?.status || 400,
-        statusText: errorResponse?.response?.statusText || errorResponse.code,
-        body: errorResponse?.response?.data || errorResponse.message
-      } as APIErrorOptions);
+      params.data = options?.body;
     }
 
-    const res = await this.getResponseBody(response);
-    return res as APIResponse;
+    return this.requestProvider.makeRequest(urlValue, method.toUpperCase(), params, config);
   }
 
-  private async getResponseBody(response: AxiosResponse): Promise<APIResponse> {
-    const res = {
-      body: {},
-      status: response?.status
-    } as APIResponse;
-
-    if (typeof response.data === 'string') {
-      if (response.data === 'Mailgun Magnificent API') {
-        throw new APIError({
-          status: 400,
-          statusText: 'Incorrect url',
-          body: response.data
-        } as APIErrorOptions);
-      }
-      res.body = {
-        message: response.data
-      };
-    } else {
-      res.body = response.data;
-    }
-    return res;
-  }
-
-  private joinAndTransformHeaders(
-    onCallOptions?: OnCallRequestOptions
-  ): AxiosRequestHeaders {
-    const requestHeaders = new AxiosHeaders();
-
-    const basic = base64.encode(`${this.username}:${this.key}`);
-    requestHeaders.setAuthorization(`Basic ${basic}`);
-    requestHeaders.set(this.headers);
-
-    const receivedOnCallHeaders = onCallOptions && onCallOptions.headers;
-    const onCallHeaders = this.makeHeadersFromObject(receivedOnCallHeaders);
-    requestHeaders.set(onCallHeaders);
-    return requestHeaders;
-  }
-
-  private makeHeadersFromObject(
-    headersObject: RawAxiosRequestHeaders = {}
-  ): AxiosRequestHeaders {
-    let requestHeaders = new AxiosHeaders();
-    requestHeaders = Object.entries(headersObject).reduce(
-      (headersAccumulator: AxiosRequestHeaders, currentPair) => {
-        const [key, value] = currentPair;
-        headersAccumulator.set(key, value);
-        return headersAccumulator;
-      }, requestHeaders
-    );
-    return requestHeaders;
-  }
-
-  setSubaccountHeader(subaccountId: string): void {
-    const headers = this.makeHeadersFromObject({
-      ...this.headers,
-      [SubaccountsClient.SUBACCOUNT_HEADER]: subaccountId
-    });
-    this.headers.set(headers);
+  setSubaccountHeader(subAccountId: string): void {
+    this.requestProvider.setSubAccountHeader(subAccountId);
   }
 
   resetSubaccountHeader(): void {
-    this.headers.delete(SubaccountsClient.SUBACCOUNT_HEADER);
+    this.requestProvider.resetSubAccountHeader();
   }
 
   query(
     method: string,
     url: string,
-    query?: Record<string, unknown> | Array<Array<string>>,
-    options?: Record<string, unknown>
+    query?: GetQueryTypes,
   ): Promise<APIResponse> {
-    return this.request(method, url, { query, ...options });
+    return this.request(method, url, { query });
   }
 
   command(
     method: string,
     url: string,
-    data?: Record<string, unknown> | Record<string, unknown>[] | string | NodeFormData | FormData,
-    options?: Record<string, unknown>,
-    addDefaultHeaders = true
+    data?: RequestData,
+    config?: onCallReqConfig,
+    queryObject?: CommandQuery,
   ): Promise<APIResponse> {
-    let headers = {};
-    if (addDefaultHeaders) {
-      headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-    }
     const requestOptions = {
-      ...headers,
       body: data,
-      ...options
+      query: queryObject?.query,
     };
     return this.request(
       method,
       url,
-      requestOptions
+      requestOptions,
+      config
     );
   }
 
   get(
     url: string,
-    query?: Record<string, unknown> | Array<Array<string>>,
-    options?: Record<string, unknown>
+    query?: GetQueryTypes,
   ): Promise<APIResponse> {
-    return this.query('get', url, query, options);
+    return this.query('get', url, query);
   }
 
   post(
     url: string,
-    data?: Record<string, unknown> | string,
-    options?: Record<string, unknown>
+    data?: PostDataTypes,
+    config?: Omit<onCallReqConfig, 'isFormURLEncoded' | 'isMultipartFormData'>,
   ): Promise<APIResponse> {
-    return this.command('post', url, data, options);
+    return this.command('post', url, data, {
+      isFormURLEncoded: false,
+      isApplicationJSON: config?.isApplicationJSON
+    });
   }
 
   postWithFD(
@@ -209,27 +132,30 @@ class Request {
   ): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('post', url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }, false);
+      isFormURLEncoded: false,
+      isMultipartFormData: true
+    });
   }
 
   putWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('put', url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }, false);
+      isFormURLEncoded: false,
+      isMultipartFormData: true
+    });
   }
 
   patchWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
     const formData = this.formDataBuilder.createFormData(data);
     return this.command('patch', url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }, false);
+      isFormURLEncoded: false,
+      isMultipartFormData: true
+    });
   }
 
-  put(url: string, data?: FormDataInput | string, options?: Record<string, unknown>)
-  : Promise<APIResponse> {
-    return this.command('put', url, data, options);
+  put(url: string, data?: PutDataTypes, queryObject?: PutOptionsType)
+    : Promise<APIResponse> {
+    return this.command('put', url, data, {}, queryObject);
   }
 
   delete(url: string, data?: IpPoolDeleteData): Promise<APIResponse> {

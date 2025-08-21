@@ -31,10 +31,6 @@ import {
   SuppressionDestroyResponse
 } from '../../Types/Suppressions/index.js';
 
-const createOptions = {
-  headers: { 'Content-Type': 'application/json' }
-};
-
 export default class SuppressionClient
   extends NavigationThruPages<SuppressionList>
   implements ISuppressionClient {
@@ -105,7 +101,7 @@ export default class SuppressionClient
         );
       }
       return this.request
-        .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), createOptions)
+        .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), { isApplicationJSON: true })
         .then(this.prepareResponse);
     }
 
@@ -191,7 +187,7 @@ export default class SuppressionClient
     }
 
     return this.request
-      .post(urljoin('v3', domain, type), JSON.stringify(postData), createOptions)
+      .post(urljoin('v3', domain, type), JSON.stringify(postData), { isApplicationJSON: true })
       .then(this.prepareResponse);
   }
 

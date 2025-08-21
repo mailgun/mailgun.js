@@ -30,6 +30,7 @@
     "test:integration:browser": "export JEST_PUPPETEER_CONFIG=tests/integration/browser/jest-puppeteer.config.cjs && jest --config=tests/integration/browser/jest.config.browser.cjs",
     "docs": "typedoc --tsconfig ./tsconfig.json --plugin typedoc-plugin-markdown",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint --fix . --ext .ts",
     "release": "standard-version -a",
     "release:test": "standard-version -a --dry-run",
     "link": "cd dist && npm link",
