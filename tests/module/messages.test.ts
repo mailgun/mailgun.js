@@ -1,18 +1,17 @@
-import formData from 'form-data'; // importing this way to not have type error in line 13
-
 import fs from 'fs';
 import nock from 'nock';
 
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import MessagesClient from '../../lib/Classes/Messages.js';
-import { InputFormData, RequestOptions } from '../../lib/Types/index.js';
+import { RequestOptions } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
 describe('MessagesClient', function () {
   let client: MessagesClient;
   let api: nock.Scope;
-  const request = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+  const request = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
   beforeEach(function () {
     // chai.spy.on(request, 'postWithFD');
     client = new MessagesClient(request);

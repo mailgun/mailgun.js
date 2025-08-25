@@ -1,19 +1,18 @@
-import formData from 'form-data';
-
 import nock from 'nock';
 import { IDomainTagsClient } from '../../lib/Interfaces/Domains/DomainTags.js';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import DomainsTagsClient from '../../lib/Classes/Domains/domainsTags.js';
 import {
-  InputFormData, RequestOptions,
+  RequestOptions,
 } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('DomainsTagsClient', function () {
   let client: IDomainTagsClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     client = new DomainsTagsClient(reqObject);
     api = nock('https://api.mailgun.net');
   });

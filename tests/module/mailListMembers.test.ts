@@ -1,9 +1,7 @@
 import nock from 'nock';
-import formData from 'form-data';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import MailListMembers from '../../lib/Classes/MailingLists/mailListMembers.js';
 import {
-  InputFormData,
   RequestOptions,
   CreateUpdateMailListMembers,
   DeletedMember,
@@ -12,6 +10,7 @@ import {
   NewMultipleMembersResponse
 } from '../../lib/Types/index.js';
 import { IMailListsMembers } from '../../lib/Interfaces/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('mailListsMembersClient', function () {
   let mailListsMembersClient: IMailListsMembers;
@@ -19,7 +18,7 @@ describe('mailListsMembersClient', function () {
   let defaultListMember : MailListMember;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     mailListsMembersClient = new MailListMembers(reqObject);
     api = nock('https://api.mailgun.net');
     defaultListMember = {

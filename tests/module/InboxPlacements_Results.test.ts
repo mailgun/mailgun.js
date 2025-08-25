@@ -1,15 +1,14 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
 
 import InboxPlacementsAttributesClient from '../../lib/Classes/InboxPlacements/AttributesClient.js';
 import InboxPlacementsFiltersClient from '../../lib/Classes/InboxPlacements/FiltersClient.js';
 import { IInboxPlacementsResultsClient } from '../../lib/Interfaces/index.js';
 import InboxPlacementsResultsClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
 import IPRSharingClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsSharingClient.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 // TODO: fix types
 describe('Inbox Placements results', () => {
@@ -119,7 +118,7 @@ describe('Inbox Placements results', () => {
   delete (expectedResult.Box as {ID?: string}).ID;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     const seedsListsAttributes = new InboxPlacementsAttributesClient(reqObject, '/v4/inbox/results/a');
     const seedsListsFiltersClient = new InboxPlacementsFiltersClient(reqObject, '/v4/inbox/results/_filters');
     const InboxPlacementsResultsSharingClient = new IPRSharingClient(reqObject);

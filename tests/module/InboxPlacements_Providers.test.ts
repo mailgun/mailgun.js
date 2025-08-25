@@ -1,12 +1,11 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
 
 import InboxPlacementsProvidersClient from '../../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
 import { IInboxPlacementsProvidersClient } from '../../lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 // TODO: fix types
 describe('Inbox Placements Providers', () => {
@@ -14,7 +13,7 @@ describe('Inbox Placements Providers', () => {
   let api: nock.Scope;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     client = new InboxPlacementsProvidersClient(reqObject);
     api = nock('https://api.mailgun.net');
   });

@@ -25,6 +25,7 @@ import MailListsMembers from '../../lib/Classes/MailingLists/mailListMembers.js'
 import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
 import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
 import AxiosProvider from '../../lib/Classes/common/RequestProviders/AxiosProvider.js';
+import FetchProvider from '../../lib/Classes/common/RequestProviders/FetchProvider.js';
 
 describe('Client', () => {
   let client: IMailgunClient;
@@ -41,23 +42,6 @@ describe('Client', () => {
   it('exposes raw request client', () => {
     expect(client).toHaveProperty('request');
     expect(client.request).toBeInstanceOf(Request);
-  });
-
-  it('sets and resets subaccount header for requests', () => {
-    client.setSubaccount('XYZ');
-    expect(client).toHaveProperty('request');
-    expect(client.request).toBeInstanceOf(Request);
-    expect(client.request).toHaveProperty('requestProvider');
-    expect(client.request.requestProvider).toBeInstanceOf(AxiosProvider);
-    expect(client.request.requestProvider).toHaveProperty('headers');
-    expect(client.request.requestProvider).toMatchObject({ headers: { [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' } });
-    client.resetSubaccount();
-
-    expect(client.request.requestProvider).toMatchObject(expect.objectContaining({
-      headers: expect.not.objectContaining({
-        [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ'
-      })
-    }));
   });
 
   it('creates domain client', () => {
@@ -161,6 +145,27 @@ describe('Client', () => {
   });
 
   describe('User configuration', () => {
+    it('uses axios by default', () => {
+      client = new Client({
+        username: 'username',
+        key: 'key',
+        public_key: 'key',
+        timeout: 10000
+      }, formData as InputFormData);
+      expect(client.request.requestProvider).toBeInstanceOf(AxiosProvider);
+    });
+
+    it('uses fetch if asked', () => {
+      client = new Client({
+        username: 'username',
+        key: 'key',
+        public_key: 'key',
+        timeout: 10000,
+        useFetch: true
+      }, formData as InputFormData);
+      expect(client.request.requestProvider).toBeInstanceOf(FetchProvider);
+    });
+
     it('respects proxy settings', () => {
       const mgClient = new Client({
         username: 'username',

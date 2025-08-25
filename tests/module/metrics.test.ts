@@ -1,11 +1,10 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
-import { InputFormData, MetricsResult, RequestOptions } from '../../lib/Types/index.js';
+import Request from './test-utils/TestRequest.js';
+import { MetricsResult, RequestOptions } from '../../lib/Types/index.js';
 import { IMetricsClient } from '../../lib/Interfaces/Metrics/MetricsClient.js';
 import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
 import { Resolution } from '../../lib/Enums/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('MetricsClient', function () {
   let client: IMetricsClient;
@@ -49,7 +48,7 @@ describe('MetricsClient', function () {
 
   beforeEach(function () {
     client = new MetricsClient(
-      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData),
+      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData()),
       {
         warn: () => undefined
       }
