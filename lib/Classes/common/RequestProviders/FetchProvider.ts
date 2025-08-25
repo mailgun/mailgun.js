@@ -5,6 +5,8 @@ import {
   APIResponse,
   ClientProxyConfig,
   FetchSupportedData,
+  HeadersWithKeysMethod,
+  KeysWithToArray,
   onCallReqConfig,
   RequestData,
   RequestHeaders,
@@ -13,11 +15,6 @@ import {
 } from '../../../Types/index.js';
 import SubaccountsClient from '../../Subaccounts.js';
 import APIError from '../Error.js';
-
-type KeysWithToArray = { toArray: () => string[] };
-type HeadersWithKeysMethod = Headers & {
-  keys: () => KeysWithToArray
-};
 
 class FetchProvider implements IRequestProvider {
   private timeout: number | undefined;

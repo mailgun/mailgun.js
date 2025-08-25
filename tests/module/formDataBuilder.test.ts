@@ -3,10 +3,15 @@ import fs, { promises } from 'fs';
 import path from 'path';
 import FormDataBuilder from '../../lib/Classes/common/FormDataBuilder.js';
 import { InputFormData } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
+
+const { env } = process;
 
 describe('FormDataBuilder', function () {
   let builder: FormDataBuilder;
   const filepath = path.resolve('./tests/module/img/mailgun.png');
+  const isENVUseFetch = Boolean(env.USE_FETCH && env.USE_FETCH === 'true');
+
   const readFDStream = (fd: NodeFormData) => {
     const fdDataAwaiter = new Promise((resolve) => {
       let result = '';
@@ -24,7 +29,7 @@ describe('FormDataBuilder', function () {
 
   describe('createFormData (form-data package)', () => {
     beforeAll(function () {
-      builder = new FormDataBuilder(NodeFormData);
+      builder = new FormDataBuilder(getTestFormData({ type: 'package' }), { useFetch: false }); // form-data package can't be used with fetch
     });
 
     it('checks that input object exists', async () => {
@@ -116,12 +121,23 @@ describe('FormDataBuilder', function () {
       expect(data).toEqual(expect.stringContaining('Content-Disposition: form-data; name="t:variables"'));
       expect(data).toEqual(expect.stringContaining('{"testProp":"testValue"}'));
     });
+
+    it('throws if form-data package provided', async () => {
+      try {
+        const incorrectBuilder = new FormDataBuilder(NodeFormData, { useFetch: true });
+        incorrectBuilder.createFormData({});
+      } catch (error: unknown) {
+        expect(error).toHaveProperty('message');
+        const err = error as Error;
+        expect(err.message).toEqual('"form-data" npm package detected, and it can not be used together with "fetch" client');
+      }
+    });
   });
 
   if (global.FormData) {
     describe('createFormData node environment with FormData', () => {
       beforeAll(function () {
-        builder = new FormDataBuilder(global.FormData as InputFormData);
+        builder = new FormDataBuilder(getTestFormData({ type: 'global' }), { useFetch: isENVUseFetch });
       });
 
       it('works with ReadStream value', async () => {
@@ -211,7 +227,10 @@ describe('FormDataBuilder', function () {
     if (globalThis.Blob) {
       describe('createFormData (Browser compliant FormData + Blob)', () => {
         beforeAll(function () {
-          builder = new FormDataBuilder(global.FormData as InputFormData);
+          builder = new FormDataBuilder(
+            global.FormData as InputFormData,
+            { useFetch: isENVUseFetch }
+          );
         });
 
         it('Respects filename for blob', async () => {
@@ -239,7 +258,10 @@ describe('FormDataBuilder', function () {
     }
     if (globalThis.File) {
       beforeAll(function () {
-        builder = new FormDataBuilder(globalThis.FormData as InputFormData);
+        builder = new FormDataBuilder(
+          globalThis.FormData as InputFormData,
+          { useFetch: isENVUseFetch }
+        );
       });
       describe('createFormData (Browser compliant FormData + File)', () => {
         it('Respects filename for File', async () => {

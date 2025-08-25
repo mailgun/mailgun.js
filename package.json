@@ -110,7 +110,7 @@
     "jest-environment-puppeteer": "^11.0.0",
     "jest-puppeteer": "^11.0.0",
     "json-loader": "^0.5.7",
-    "nock": "^13.5.0",
+    "nock": "^14.0.0",
     "puppeteer": "^24.1.1",
     "rollup": "^4.34.5",
     "standard-version": "^9.3.1",

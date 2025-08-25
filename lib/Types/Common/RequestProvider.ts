@@ -25,3 +25,8 @@ export type RequestProviderData = {
 }
 
 export type FetchSupportedData = Blob | BufferSource | FormData | URLSearchParams | string;
+
+export type KeysWithToArray = { toArray: () => string[] };
+export type HeadersWithKeysMethod = Headers & {
+  keys: () => KeysWithToArray
+};
