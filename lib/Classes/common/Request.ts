@@ -26,7 +26,7 @@ import AxiosProvider from './RequestProviders/AxiosProvider.js';
 class Request {
   private url: string;
   private formDataBuilder: FormDataBuilder;
-  private requestProvider: IRequestProvider
+  public requestProvider: IRequestProvider
 
   constructor(options: RequestOptions, formData: InputFormData) {
     this.url = options.url as string;

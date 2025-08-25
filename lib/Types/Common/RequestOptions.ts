@@ -68,7 +68,11 @@ export type GetQueryTypes = IPsListQuery |
   ValidationQuery
 
 export type PostDataTypes = InboxPlacementsData | MetricsQuery | string;
-export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings
+export type PutDataTypes = SeedsListsUpdatingData |
+ object |
+ FormDataInput |
+ ConnectionSettings |
+ string
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
 
 export type ContainsPrefix<T extends string> = `${T}${string}`;

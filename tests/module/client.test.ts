@@ -24,8 +24,9 @@ import MultipleValidationClient from '../../lib/Classes/Validations/multipleVali
 import MailListsMembers from '../../lib/Classes/MailingLists/mailListMembers.js';
 import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
 import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
+import AxiosProvider from '../../lib/Classes/common/RequestProviders/AxiosProvider.js';
 
-describe.only('Client', () => {
+describe('Client', () => {
   let client: IMailgunClient;
 
   beforeEach(() => {
@@ -46,13 +47,16 @@ describe.only('Client', () => {
     client.setSubaccount('XYZ');
     expect(client).toHaveProperty('request');
     expect(client.request).toBeInstanceOf(Request);
-    expect(client.request).toHaveProperty('headers');
-    expect(client.request).toMatchObject(expect.objectContaining({
-      headers: expect.objectContaining({ [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' })
-    }));
+    expect(client.request).toHaveProperty('requestProvider');
+    expect(client.request.requestProvider).toBeInstanceOf(AxiosProvider);
+    expect(client.request.requestProvider).toHaveProperty('headers');
+    expect(client.request.requestProvider).toMatchObject({ headers: { [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' } });
     client.resetSubaccount();
-    expect(client.request).toMatchObject(expect.objectContaining({
-      headers: expect.not.objectContaining({ [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ' })
+
+    expect(client.request.requestProvider).toMatchObject(expect.objectContaining({
+      headers: expect.not.objectContaining({
+        [SubaccountsClient.SUBACCOUNT_HEADER]: 'XYZ'
+      })
     }));
   });
 
@@ -173,8 +177,9 @@ describe.only('Client', () => {
         }
       } as MailgunClientOptions, formData as InputFormData);
       expect(mgClient).toHaveProperty('request');
-      expect(mgClient.request).toHaveProperty('proxy');
-      expect(mgClient.request).toMatchObject(expect.objectContaining({
+      expect(mgClient.request).toHaveProperty('requestProvider');
+      expect(mgClient.request.requestProvider).toHaveProperty('proxy');
+      expect(mgClient.request.requestProvider).toMatchObject(expect.objectContaining({
         proxy: expect.objectContaining({
           protocol: 'https',
           host: '127.0.0.1',
@@ -195,11 +200,14 @@ describe.only('Client', () => {
         timeout: 1000,
         url: 'test_url'
       } as MailgunClientOptions, formData as InputFormData);
-      expect(mgClient).toMatchObject(expect.objectContaining({
-        request: expect.objectContaining({
-          timeout: 1000,
-          url: 'test_url'
-        })
+      expect(mgClient).toHaveProperty('request');
+      expect(mgClient.request).toHaveProperty('requestProvider');
+      expect(mgClient.request).toHaveProperty('url');
+      expect(mgClient.request).toMatchObject(expect.objectContaining({
+        url: 'test_url'
+      }));
+      expect(mgClient.request.requestProvider).toMatchObject(expect.objectContaining({
+        timeout: 1000
       }));
     });
 
