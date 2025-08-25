@@ -1,15 +1,15 @@
 import nock from 'nock';
-import formData from 'form-data';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import IpPoolsClient from '../../lib/Classes/IPPools.js';
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('IpPoolsClient', function () {
   let client: IpPoolsClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     client = new IpPoolsClient(reqObject);
     api = nock('https://api.mailgun.net');
   });

@@ -1,9 +1,7 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
 
 import { IInboxPlacementsClient } from '../../lib/Interfaces/index.js';
 import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
@@ -11,13 +9,14 @@ import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacem
 import SeedsListsClient from '../../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsResultsClient from '../../lib/Classes/InboxPlacements/Results/InboxPlacementsResultsClient.js';
 import InboxPlacementsProvidersClient from '../../lib/Classes/InboxPlacements/providers/InboxPlacementsProviders.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('Inbox Placements Client', () => {
   let client: IInboxPlacementsClient;
   let api: nock.Scope;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     client = new InboxPlacementsClient(
       reqObject,
       {} as SeedsListsClient,

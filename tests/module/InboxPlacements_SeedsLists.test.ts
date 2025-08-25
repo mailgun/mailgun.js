@@ -1,13 +1,12 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
 
 import SeedsListsClient from '../../lib/Classes/InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsAttributesClient from '../../lib/Classes/InboxPlacements/AttributesClient.js';
 import InboxPlacementsFiltersClient from '../../lib/Classes/InboxPlacements/FiltersClient.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 // TODO: fix types
 describe('SeedsListsClient', () => {
@@ -97,7 +96,7 @@ describe('SeedsListsClient', () => {
   delete (expectedSeedsList as {Id?: string}).Id;
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     const seedsListsAttributes = new InboxPlacementsAttributesClient(reqObject, '/v4/inbox/seedlists/a');
     const seedsListsFiltersClient = new InboxPlacementsFiltersClient(reqObject, '/v4/inbox/seedlists/_filters');
     client = new SeedsListsClient(reqObject, seedsListsAttributes, seedsListsFiltersClient);

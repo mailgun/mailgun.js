@@ -2,7 +2,7 @@ import formData from 'form-data';
 
 import base64 from 'base-64';
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import APIError from '../../lib/Classes/common/Error.js';
 import {
   InputFormData,
@@ -10,6 +10,7 @@ import {
   RequestOptions,
   RequestHeaders
 } from '../../lib/Types/Common/index.js';
+import SubaccountsClient from '../../lib/Classes/Subaccounts.js';
 
 describe('Request', function () {
   let headers: { [key: string]: string };
@@ -76,12 +77,14 @@ describe('Request', function () {
       return res;
     });
 
-    it('parses API response with string', async function () {
+    it('parses API response with string (axios)', async function () {
       api = nock(baseURL, { reqheaders: headers })
         .get('/v3/some/resource')
         .reply(200, 'Mailgun Magnificent API');
 
-      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      const req = new Request({
+        username: 'api', key: 'key', url: baseURL, useFetch: false
+      } as RequestOptions, formData as InputFormData);
       try {
         await req.request('get', '/v3/some/resource');
       } catch (error) {
@@ -89,6 +92,25 @@ describe('Request', function () {
           status: 400,
           details: 'Mailgun Magnificent API',
           message: 'Incorrect url'
+        });
+      }
+    });
+
+    it('parses API response with string (fetch)', async function () {
+      api = nock(baseURL, { reqheaders: headers })
+        .get('/v3/some/resource')
+        .reply(200, 'Mailgun Magnificent API');
+
+      const req = new Request({
+        username: 'api', key: 'key', url: baseURL, useFetch: true
+      } as RequestOptions, formData as InputFormData);
+      try {
+        await req.request('get', '/v3/some/resource');
+      } catch (error) {
+        expect(error).toMatchObject({
+          status: 400,
+          details: 'Mailgun Magnificent API',
+          message: '(Fetch) Incorrect url'
         });
       }
     });
@@ -321,6 +343,49 @@ describe('Request', function () {
         await req.request('get', '/v2/some/resource1');
         expect(reqHeaders).not.toHaveProperty('test'); // no test because prop is null
       });
+
+      it('sets sub account header for Axios requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: false,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(expect.objectContaining({ [header]: 'XYZ' }));
+      });
+
+      it('resets sub account header for Axios requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: false,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        req.resetSubaccountHeader();
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(
+          expect.not.objectContaining({
+            [header]: 'XYZ'
+          })
+        );
+      });
     });
 
     describe('Headers with fetch', () => {
@@ -440,6 +505,49 @@ describe('Request', function () {
 
         await req.request('get', '/v2/some/resource1');
         expect(reqHeaders).not.toHaveProperty('test'); // no test because prop is null
+      });
+
+      it('sets sub account header for Fetch requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: true,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(expect.objectContaining({ [header]: 'XYZ' }));
+      });
+
+      it('resets sub account header for Fetch requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: true,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        req.resetSubaccountHeader();
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(
+          expect.not.objectContaining({
+            [header]: 'XYZ'
+          })
+        );
       });
     });
   });

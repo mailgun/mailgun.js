@@ -1,15 +1,13 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import StatsClient from '../../lib/Classes/Stats/StatsClient.js';
 import {
   StatsOptions,
   StatsQuery,
-  InputFormData,
   RequestOptions
 } from '../../lib/Types/index.js';
 import { IStatsClient } from '../../lib/Interfaces/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('StatsClient', () => {
   let client: IStatsClient;
@@ -17,7 +15,7 @@ describe('StatsClient', () => {
 
   beforeEach(function () {
     client = new StatsClient(
-      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData),
+      new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData()),
       {
         warn: () => undefined
       }

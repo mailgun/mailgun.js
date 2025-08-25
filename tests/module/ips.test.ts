@@ -1,15 +1,14 @@
 // const formData = require('form-data');
 
 import nock from 'nock';
-import formData from 'form-data';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import IpsClient from '../../lib/Classes/IPs.js';
 import {
   IpData,
   IpsListResponseBody,
-  InputFormData,
   RequestOptions
 } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 // TODO: fix types
 describe('DomainClient', function () {
@@ -17,7 +16,7 @@ describe('DomainClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new IpsClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData()));
     api = nock('https://api.mailgun.net');
   });
 
