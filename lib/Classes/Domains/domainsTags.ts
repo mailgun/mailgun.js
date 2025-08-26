@@ -103,7 +103,7 @@ export default class DomainTagsClient
   }
 
   update(domain: string, tag: string, description: string): Promise<DomainTagsMessageRes> {
-    return this.request.put(urljoin(this.baseRoute, domain, '/tags', tag), description)
+    return this.request.put(urljoin(this.baseRoute, domain, '/tags', tag), { description })
       .then(
         (res: APIResponse) => res.body as DomainTagsMessageRes
       );

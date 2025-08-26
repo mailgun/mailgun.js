@@ -71,8 +71,7 @@ export type PostDataTypes = InboxPlacementsData | MetricsQuery | string;
 export type PutDataTypes = SeedsListsUpdatingData |
  object |
  FormDataInput |
- ConnectionSettings |
- string
+ ConnectionSettings
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
 
 export type ContainsPrefix<T extends string> = `${T}${string}`;
