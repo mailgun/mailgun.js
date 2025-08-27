@@ -30,13 +30,11 @@ class FetchProvider implements IRequestProvider {
       key,
       timeout,
       maxBodyLength,
-      proxy,
       configHeaders
     }: RequestProviderConfig
   ) {
     this.timeout = timeout;
     this.maxBodyLength = maxBodyLength;
-    this.proxy = proxy;
     this.username = username;
     this.key = key;
     this.headers = this.makeHeadersFromObject(configHeaders);
@@ -139,7 +137,8 @@ class FetchProvider implements IRequestProvider {
       const requestSetup = {
         method,
         headers: requestHeaders,
-        body: this.prepareReqBody(reqData?.data, config)
+        body: this.prepareReqBody(reqData?.data, config),
+        signal: this.timeout ? (new AbortController()).signal : undefined,
       };
       await this.checkSize(urlWithParams, requestSetup);
       const fetchRes: Response = await fetch(urlWithParams, requestSetup);

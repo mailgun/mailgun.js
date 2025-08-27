@@ -80,6 +80,10 @@ export default class MailgunClient implements IMailgunClient {
       throw new Error('Parameter "key" is required');
     }
 
+    if (config.useFetch && config.proxy) {
+      throw new Error('Proxy can not be used with fetch provider');
+    }
+
     /** @internal */
     this.request = new Request(config, formData);
     const mailListsMembers = new MailListsMembers(this.request);
