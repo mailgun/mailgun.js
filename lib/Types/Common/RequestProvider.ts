@@ -17,6 +17,7 @@ export type RequestProviderConfig = {
   maxBodyLength: number;
   proxy?: ClientProxyConfig;
   configHeaders?: RequestHeaders;
+  useFetch?: boolean;
 }
 
 export type RequestProviderData = {

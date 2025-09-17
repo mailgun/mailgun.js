@@ -110,7 +110,7 @@ describe('Request', function () {
         expect(error).toMatchObject({
           status: 400,
           details: 'Mailgun Magnificent API',
-          message: '(Fetch) Incorrect url'
+          message: 'Incorrect url'
         });
       }
     });
@@ -192,7 +192,7 @@ describe('Request', function () {
         expect(error).toHaveProperty('details');
         const err: APIError = error as APIError;
         expect(err.status).toBe(400);
-        expect(err.details).toBe('Request body larger than maxBodyLength limit');
+        expect(err.details).toBe('(Fetch) Request body larger than maxBodyLength limit');
       }
 
       // should not reach the api if size is more than limit
