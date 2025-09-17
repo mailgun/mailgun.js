@@ -1,7 +1,8 @@
 import * as NodeFormData from 'form-data';
 import { Readable } from 'stream';
 import {
-  FormDataInput, InputFormData, AttachmentInfo, FormDataBuilderConfig
+  FormDataInput, InputFormData, AttachmentInfo, FormDataBuilderConfig,
+  CreatedFormData
 } from '../../Types/Common/index.js';
 import APIError from './Error.js';
 
@@ -27,10 +28,11 @@ class FormDataBuilder {
     this.useFetch = config?.useFetch;
   }
 
-  public createFormData(data: FormDataInput): NodeFormData | FormData {
+  public async createFormData(data: FormDataInput): Promise<CreatedFormData> {
     if (!data) {
       throw new Error('Please provide data object');
     }
+
     const formDataInstance = new this.FormDataConstructor();
     const isFormDataP = this.isFormDataPackage(formDataInstance);
     if (isFormDataP && this.useFetch) {
@@ -72,7 +74,28 @@ class FormDataBuilder {
         this.addCommonPropertyToFD(key, data[key], formDataAcc);
         return formDataAcc;
       }, formDataInstance);
-    return formData;
+
+    const result = {
+      formData,
+      dataSize: 0
+    };
+
+    if (this.useFetch && !isFormDataP) {
+      // axios trick to get correct Content-Type with boundary
+      // otherwise boundary is missing and request fails
+      Object.defineProperty(formData, 'getHeaders', {
+        value: () => ({ 'Content-Type': undefined }),
+      });
+
+      // calculating FD size for fetch client.
+      // Axios maxBodyLength does not work with fetch provider
+      if (Response !== undefined) {
+        const resObj = new Response(formData as unknown as BodyInit);
+        const blob = await resObj.blob();
+        result.dataSize = blob.size;
+      }
+    }
+    return result;
   }
 
   private addMimeDataToFD(

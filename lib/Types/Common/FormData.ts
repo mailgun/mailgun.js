@@ -20,3 +20,8 @@ export type FormDataInput = {
 export type FormDataBuilderConfig = {
   useFetch?: boolean
 }
+
+export type CreatedFormData = {
+  dataSize?: number;
+  formData: NodeFormData | FormData;
+}

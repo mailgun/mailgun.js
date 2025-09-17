@@ -19,7 +19,6 @@ import {
 } from '../../Types/index.js';
 
 import FormDataBuilder from './FormDataBuilder.js';
-import FetchProvider from './RequestProviders/FetchProvider.js';
 import { IRequestProvider } from '../../Interfaces/index.js';
 import AxiosProvider from './RequestProviders/AxiosProvider.js';
 
@@ -33,15 +32,14 @@ class Request {
     this.formDataBuilder = new FormDataBuilder(formData, { useFetch: options.useFetch });
     const providersConfig: RequestProviderConfig = {
       timeout: options.timeout,
-      maxBodyLength: 52428800,
+      maxBodyLength: 52428800, // 50 MB
       proxy: options.proxy,
       username: options.username,
       key: options.key,
       configHeaders: options.headers,
+      useFetch: options.useFetch
     };
-    this.requestProvider = options.useFetch
-      ? new FetchProvider(providersConfig)
-      : new AxiosProvider(providersConfig);
+    this.requestProvider = new AxiosProvider(providersConfig);
   }
 
   async request(
@@ -126,30 +124,33 @@ class Request {
     });
   }
 
-  postWithFD(
+  async postWithFD(
     url: string,
     data: FormDataInput
   ): Promise<APIResponse> {
-    const formData = this.formDataBuilder.createFormData(data);
+    const { formData, dataSize } = await this.formDataBuilder.createFormData(data);
     return this.command('post', url, formData, {
       isFormURLEncoded: false,
-      isMultipartFormData: true
+      isMultipartFormData: true,
+      dataSize
     });
   }
 
-  putWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
-    const formData = this.formDataBuilder.createFormData(data);
+  async putWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
+    const { formData, dataSize } = await this.formDataBuilder.createFormData(data);
     return this.command('put', url, formData, {
       isFormURLEncoded: false,
-      isMultipartFormData: true
+      isMultipartFormData: true,
+      dataSize
     });
   }
 
-  patchWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
-    const formData = this.formDataBuilder.createFormData(data);
+  async patchWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
+    const { formData, dataSize } = await this.formDataBuilder.createFormData(data);
     return this.command('patch', url, formData, {
       isFormURLEncoded: false,
-      isMultipartFormData: true
+      isMultipartFormData: true,
+      dataSize
     });
   }
 

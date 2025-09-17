@@ -4,6 +4,7 @@ import axios, {
   AxiosHeaders,
   RawAxiosRequestHeaders,
   AxiosProxyConfig,
+  AxiosRequestConfig,
 } from 'axios';
 import * as base64 from 'base-64';
 import {
@@ -25,6 +26,7 @@ class AxiosProvider implements IRequestProvider {
   private username: string;
   private key: string;
   private headers: AxiosHeaders;
+  private useFetch: boolean | undefined;
 
   constructor({
     username,
@@ -32,7 +34,8 @@ class AxiosProvider implements IRequestProvider {
     timeout,
     maxBodyLength,
     proxy,
-    configHeaders
+    configHeaders,
+    useFetch
   }: RequestProviderConfig) {
     this.timeout = timeout;
     this.maxBodyLength = maxBodyLength;
@@ -40,6 +43,7 @@ class AxiosProvider implements IRequestProvider {
     this.username = username;
     this.key = key;
     this.headers = this.makeHeadersFromObject(configHeaders);
+    this.useFetch = useFetch;
   }
 
   private async getResponseBody(response: AxiosResponse): Promise<APIResponse> {
@@ -130,7 +134,7 @@ class AxiosProvider implements IRequestProvider {
     let response: AxiosResponse;
     const requestHeaders = this.addRequestLevelHeaders(config);
     try {
-      const reqObject = {
+      const reqObject: AxiosRequestConfig = {
         method: method.toLocaleUpperCase(),
         timeout: this.timeout,
         url,
@@ -139,6 +143,20 @@ class AxiosProvider implements IRequestProvider {
         maxBodyLength: this.maxBodyLength,
         proxy: this.proxy,
       };
+
+      if (this.useFetch) {
+        reqObject.adapter = 'fetch';
+        if (config?.dataSize) {
+          if (config.dataSize > 0 && config.dataSize > this.maxBodyLength) {
+            throw new APIError({
+              status: 400,
+              statusText: '(Fetch) Request body larger than maxBodyLength limit',
+              body: `(Fetch) Request body size of ${config.dataSize} bytes exceeds the maximum allowed size of ${this.maxBodyLength} bytes`
+            } as APIErrorOptions);
+          }
+        }
+      }
+
       response = await axios.request(reqObject);
     } catch (err: unknown) {
       const errorResponse = err as AxiosError;

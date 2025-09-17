@@ -25,7 +25,6 @@ import MailListsMembers from '../../lib/Classes/MailingLists/mailListMembers.js'
 import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
 import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
 import AxiosProvider from '../../lib/Classes/common/RequestProviders/AxiosProvider.js';
-import FetchProvider from '../../lib/Classes/common/RequestProviders/FetchProvider.js';
 
 describe('Client', () => {
   let client: IMailgunClient;
@@ -163,7 +162,10 @@ describe('Client', () => {
         timeout: 10000,
         useFetch: true
       }, formData as InputFormData);
-      expect(client.request.requestProvider).toBeInstanceOf(FetchProvider);
+      expect(client.request.requestProvider).toBeInstanceOf(AxiosProvider);
+      expect(client.request.requestProvider).toMatchObject(expect.objectContaining({
+        useFetch: true
+      }));
     });
 
     it('respects proxy settings', () => {

@@ -92,4 +92,5 @@ export type onCallReqConfig = {
   isFormURLEncoded?: boolean
   isMultipartFormData?: boolean
   isApplicationJSON?: boolean;
+  dataSize?: number;
 }
