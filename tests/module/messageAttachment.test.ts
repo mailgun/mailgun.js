@@ -1,11 +1,11 @@
 import fs from 'fs';
 import nock from 'nock';
-import formData from 'form-data';
 
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import MessagesClient from '../../lib/Classes/Messages.js';
 import { IMessagesClient } from '../../lib/Interfaces/index.js';
-import { InputFormData, RequestOptions, MessagesSendResult } from '../../lib/Types/index.js';
+import { RequestOptions, MessagesSendResult } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 const mailgunLogo = fs.createReadStream(`${__dirname}/img/mailgun.png`);
 
@@ -14,7 +14,7 @@ describe('MessagesClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new MessagesClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData()));
     api = nock('https://api.mailgun.net');
   });
 

@@ -1,18 +1,17 @@
-import formData from 'form-data';
-
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import ValidateClient from '../../lib/Classes/Validations/validate.js';
-import { ValidationResult, InputFormData, RequestOptions } from '../../lib/Types/index.js';
+import { ValidationResult, RequestOptions } from '../../lib/Types/index.js';
 import MultipleValidationClient from '../../lib/Classes/Validations/multipleValidation.js';
 import { IValidationClient } from '../../lib/Interfaces/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('ValidateClient', function () {
   let validateClient: IValidationClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     const multipleValidationClient = new MultipleValidationClient(reqObject);
     validateClient = new ValidateClient(reqObject, multipleValidationClient);
     api = nock('https://api.mailgun.net');

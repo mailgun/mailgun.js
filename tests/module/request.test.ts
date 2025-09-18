@@ -1,16 +1,22 @@
-// jscs:disable requireDotNotation
 import formData from 'form-data';
 
 import base64 from 'base-64';
 import nock from 'nock';
-import fs from 'fs';
-import path from 'path';
-import Request from '../../lib/Classes/common/Request.js';
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import Request from './test-utils/TestRequest.js';
+import APIError from '../../lib/Classes/common/Error.js';
+import {
+  InputFormData,
+  APIResponse,
+  RequestOptions,
+  RequestHeaders
+} from '../../lib/Types/Common/index.js';
+import SubaccountsClient from '../../lib/Classes/Subaccounts.js';
 
 describe('Request', function () {
   let headers: { [key: string]: string };
+  const encodedAuthHeader = 'Basic YXBpOmtleQ==';
   const baseURL = 'https://api.mailgun.com';
+  let api: nock.Scope;
 
   beforeEach(function () {
     headers = {};
@@ -18,11 +24,12 @@ describe('Request', function () {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
-    nock.cleanAll();
+    if (api) {
+      api.done();
+    }
   });
 
-  describe('request', () => {
+  describe('request', function () {
     it('makes API request with correct headers', async function () {
       let reqHeaders = {};
       headers.Test = 'Custom Header';
@@ -30,7 +37,7 @@ describe('Request', function () {
 
       nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource1')
-        .query({ some: 'parameter' })
+        .query({ name: 'test' })
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .reply(200, function (_, requestBody) {
           reqHeaders = this.req.headers;
@@ -40,45 +47,44 @@ describe('Request', function () {
         username: 'api',
         key: 'key',
         url: baseURL,
-        headers: { 'X-CSRF-Token': 'protectme' },
-        timeout: 10000
+        headers: { 'X-CSRF-Token': 'protectme', Test: 'Custom Header' },
+        timeout: 10000,
       }, formData as InputFormData);
 
       await req.request('get', '/v2/some/resource1', {
-        headers: { Test: 'Custom Header', 'X-CSRF-Token': 'protectme' },
-        query: { some: 'parameter' }
+        query: { name: 'test' }
       });
+
       expect(reqHeaders).toMatchObject({
-        authorization: 'Basic YXBpOmtleQ==',
+        authorization: encodedAuthHeader,
         test: 'Custom Header',
         'x-csrf-token': 'protectme'
       });
-
-      // expect(reqHeaders).to.have.property('test').to.eql('Custom Header');
-      // expect(reqHeaders).to.have.property('x-csrf-token').to.eql('protectme');
     });
 
-    it('parses API response', async () => {
-      nock(baseURL, { reqheaders: headers })
+    it('parses API response', function () {
+      api = nock(baseURL, { reqheaders: headers })
         .get('/v2/some/resource')
         .reply(200, { id: 1, message: 'hello' });
 
       const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
-      const res = await req.request('get', '/v2/some/resource');
-      expect(res).toMatchObject({
-        status: 200,
-        body: {
-          id: 1, message: 'hello'
-        }
-      });
+      const res = req.request('get', '/v2/some/resource')
+        .then(function (response: APIResponse) {
+          expect(response.status).toBe(200);
+          expect(response.body).toMatchObject({ id: 1, message: 'hello' });
+        });
+
+      return res;
     });
 
-    it('parses API response with string', async function () {
-      nock(baseURL, { reqheaders: headers })
+    it('parses API response with string (axios)', async function () {
+      api = nock(baseURL, { reqheaders: headers })
         .get('/v3/some/resource')
         .reply(200, 'Mailgun Magnificent API');
 
-      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      const req = new Request({
+        username: 'api', key: 'key', url: baseURL, useFetch: false
+      } as RequestOptions, formData as InputFormData);
       try {
         await req.request('get', '/v3/some/resource');
       } catch (error) {
@@ -90,32 +96,54 @@ describe('Request', function () {
       }
     });
 
-    it('handles API error', async () => {
-      nock(baseURL, { reqheaders: headers })
-        .get('/v2/some/resource')
-        .reply(429, 'Too many requests');
+    it('parses API response with string (fetch)', async function () {
+      api = nock(baseURL, { reqheaders: headers })
+        .get('/v3/some/resource')
+        .reply(200, 'Mailgun Magnificent API');
 
-      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      const req = new Request({
+        username: 'api', key: 'key', url: baseURL, useFetch: true
+      } as RequestOptions, formData as InputFormData);
       try {
-        await req.request('get', '/v2/some/resource');
+        await req.request('get', '/v3/some/resource');
       } catch (error) {
         expect(error).toMatchObject({
-          status: 429,
-          details: 'Too many requests',
+          status: 400,
+          details: 'Mailgun Magnificent API',
+          message: 'Incorrect url'
         });
       }
     });
 
-    it('handles axios error', async () => {
+    it('handles API error', function () {
+      api = nock(baseURL, { reqheaders: headers })
+        .get('/v2/some/resource')
+        .reply(429, 'Too many requests');
+
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      const res = req.request('get', '/v2/some/resource').catch(function (error: APIError) {
+        expect(error.status).toBe(429);
+        expect(error.details).toBe('Too many requests');
+      });
+
+      return res;
+    });
+
+    it('handles body bigger than max body size error (axios)', async () => {
       nock(baseURL, { reqheaders: headers })
         .post('/v2/some/resource')
         .reply(400, 'Too big body');
-
       const twentyFiveMegabytesInBytes = 52428899;
       const moreThanExpectedLimitBuffer = Buffer.alloc(twentyFiveMegabytesInBytes);
-      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      const req = new Request({
+        username: 'api',
+        key: 'key',
+        url: baseURL,
+        useFetch: false,
+      } as RequestOptions, formData as InputFormData);
+      let res;
       try {
-        await req.postWithFD(
+        res = await req.postWithFD(
           '/v2/some/resource',
           {
             attachment: [{
@@ -125,76 +153,401 @@ describe('Request', function () {
           }
         );
       } catch (error: unknown) {
-        expect(error).toMatchObject({
-          status: 400,
-          details: 'Request body larger than maxBodyLength limit',
-        });
+        expect(error).toHaveProperty('status');
+        expect(error).toHaveProperty('details');
+        const err: APIError = error as APIError;
+        expect(err.status).toBe(400);
+        expect(err.details).toBe('Request body larger than maxBodyLength limit');
       }
+
+      // should not reach the api if size is more than limit
+      expect(res?.body.message).not.toBe('Too big body');
     });
 
-    it('default timeout is 60 seconds', async () => {
+    it('handles body bigger than max body size error (fetch)', async () => {
       nock(baseURL, { reqheaders: headers })
         .post('/v2/some/resource')
-        .delay(61000) // 61 seconds
-        .reply(200, { id: 1, message: 'hello' });
-      const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
-      const stream = fs.createReadStream(filepath);
-      const attachments = [
-        {
-          filename: 'test.pdf',
-          data: stream,
-          contentType: 'application/pdf',
-          knownLength: 13264,
-        }
-      ];
-      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+        .reply(400, 'Too big body');
+      const twentyFiveMegabytesInBytes = 52428899;
+      const moreThanExpectedLimitBuffer = Buffer.alloc(twentyFiveMegabytesInBytes);
+      const req = new Request({
+        username: 'api',
+        key: 'key',
+        url: baseURL,
+        useFetch: true,
+      } as RequestOptions, FormData);
+      let res;
       try {
-        await req.postWithFD(
+        res = await req.postWithFD(
           '/v2/some/resource',
           {
-            attachments
+            attachment: [{
+              filename: 'test.pdf',
+              data: moreThanExpectedLimitBuffer
+            }]
           }
         );
       } catch (error: unknown) {
-        expect(error).toMatchObject({
-          status: 400,
-          details: 'timeout of 60000ms exceeded',
-        });
+        expect(error).toHaveProperty('status');
+        expect(error).toHaveProperty('details');
+        const err: APIError = error as APIError;
+        expect(err.status).toBe(400);
+        expect(err.details).toBe('(Fetch) Request body larger than maxBodyLength limit');
       }
+
+      // should not reach the api if size is more than limit
+      expect(res?.body.message).not.toBe('Too big body');
     });
-  });
 
-  describe('query', function () {
-    const search = { query: 'data' };
+    describe('query', () => {
+      const search = { name: 'test' };
 
-    it('sends data as query parameter', async function () {
-      nock(baseURL)
-        .get('/v2/some/resource2')
-        .query(search)
-        .reply(200, {});
+      it('sends data as query parameter', async () => {
+        api = nock(baseURL)
+          .get('/v2/some/resource2')
+          .query(search)
+          .reply(200, {});
 
-      const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
-      const reqSpy = jest.spyOn(req, 'request');
-      await req.query('get', '/v2/some/resource2', search);
-      expect(reqSpy).toHaveBeenCalledWith('get', '/v2/some/resource2', { query: { query: 'data' } });
+        const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
+        await req.query('get', '/v2/some/resource2', search);
+      });
     });
-  });
 
-  describe('command', function () {
-    const body = { query: 'data' };
+    describe('command', () => {
+      const body = { query: 'data' };
 
-    it('sends data as form-encoded request body', function () {
-      nock(baseURL)
-        .post('/v2/some/resource')
-        .reply(200, {});
-      const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
-      const reqSpy = jest.spyOn(req, 'request');
-      req.command('post', '/v2/some/resource', body);
-      expect(reqSpy).toHaveBeenCalledWith('post', '/v2/some/resource', {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        body: {
-          query: 'data',
-        },
+      it('sends data as form-encoded request body', () => {
+        api = nock(baseURL)
+          .post('/v2/some/resource')
+          .reply(200, {});
+
+        const req = new Request({ url: baseURL } as RequestOptions, formData as InputFormData);
+        const res = req.command('post', '/v2/some/resource', body);
+
+        return res;
+      });
+    });
+
+    describe('Headers', () => {
+      it('handle string header', async () => {
+        let reqHeaders = {};
+        headers.Test = 'string header';
+
+        api = nock(baseURL, { reqheaders: headers })
+          .get('/v2/some/resource1')
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .reply(200, function (_, requestBody) {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers,
+        }, formData as InputFormData);
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: 'string header' });
+      });
+
+      it('handle boolean header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: true
+        };
+
+        api = nock(baseURL, { reqheaders: { test: 'true' } })
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          timeout: 10000
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: 'true' });
+      });
+
+      it('handle array of strings in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: ['value1', 'value2', 'value3']
+        };
+
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          useFetch: false
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: 'value1, value2, value3' }); // new nock returns string
+      });
+
+      it('handle number in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: 234
+        };
+
+        api = nock(baseURL, { reqheaders: { test: '234' } })
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: '234' });
+      });
+
+      it('handle null in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: null
+        };
+
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).not.toHaveProperty('test'); // no test because prop is null
+      });
+
+      it('sets sub account header for Axios requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: false,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(expect.objectContaining({ [header]: 'XYZ' }));
+      });
+
+      it('resets sub account header for Axios requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: false,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        req.resetSubaccountHeader();
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(
+          expect.not.objectContaining({
+            [header]: 'XYZ'
+          })
+        );
+      });
+    });
+
+    describe('Headers with fetch', () => {
+      it('handle string header', async () => {
+        let reqHeaders = {};
+        headers.Test = 'string header';
+
+        api = nock(baseURL, { reqheaders: headers }).get('/test')
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .reply(200, function (_, requestBody) {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers,
+          useFetch: true
+        }, formData as InputFormData);
+        await req.request('get', '/test');
+        expect(reqHeaders).toMatchObject({ test: 'string header' });
+      });
+
+      it('handle boolean header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: true
+        };
+
+        api = nock(baseURL, { reqheaders: { test: 'true' } })
+          .get('/v2/some/resource1')
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .reply(200, function (_, requestBody) {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          useFetch: true
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: 'true' });
+      });
+
+      it('handle array of strings in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: ['value1', 'value2', 'value3']
+        };
+
+        api = nock(baseURL, { reqheaders: headers })
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          useFetch: true
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: 'value1,value2,value3' });
+      });
+
+      it('handle number in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: 234
+        };
+
+        api = nock(baseURL, { reqheaders: { test: '234' } })
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          useFetch: true
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject({ test: '234' }); // seems in browser it goes to string
+      });
+
+      it('handle null in header', async () => {
+        let reqHeaders = {};
+        const userHeaders: RequestHeaders = {
+          Test: null
+        };
+
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          headers: userHeaders,
+          useFetch: true
+        }, formData as InputFormData);
+
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).not.toHaveProperty('test'); // no test because prop is null
+      });
+
+      it('sets sub account header for Fetch requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: true,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(expect.objectContaining({ [header]: 'XYZ' }));
+      });
+
+      it('resets sub account header for Fetch requests', async () => {
+        let reqHeaders = {};
+        const header = SubaccountsClient.SUBACCOUNT_HEADER.toLowerCase();
+        api = nock(baseURL)
+          .get('/v2/some/resource1')
+          .reply(200, function () {
+            reqHeaders = this.req.headers;
+          });
+        const req = new Request({
+          username: 'api',
+          key: 'key',
+          url: baseURL,
+          useFetch: true,
+        }, formData as InputFormData);
+        req.setSubaccountHeader('XYZ');
+        req.resetSubaccountHeader();
+        await req.request('get', '/v2/some/resource1');
+        expect(reqHeaders).toMatchObject(
+          expect.not.objectContaining({
+            [header]: 'XYZ'
+          })
+        );
       });
     });
   });

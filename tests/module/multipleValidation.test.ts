@@ -3,9 +3,10 @@ import fs from 'fs';
 import path from 'path';
 
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
 import { InputFormData, RequestOptions, MultipleValidationJobsListResult } from '../../lib/Types/index.js';
 import MultipleValidationClient from '../../lib/Classes/Validations/multipleValidation.js';
+import Request from './test-utils/TestRequest.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 const filepath = path.resolve(__dirname, './data/emailsValidation1.csv');
 
@@ -16,7 +17,7 @@ describe('ValidateClient', () => {
   let responseData = {};
 
   beforeEach(() => {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     client = new MultipleValidationClient(reqObject);
     api = nock('https://api.mailgun.net');
     responseData = {
@@ -345,7 +346,8 @@ describe('ValidateClient', () => {
 
     describe('form-data package', () => {
       beforeEach(() => {
-        const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+        // disable fetch since it does not work with form-data package
+        const reqObject = new Request({ url: 'https://api.mailgun.net', useFetch: false } as RequestOptions, formData as InputFormData);
         client = new MultipleValidationClient(reqObject);
       });
 
