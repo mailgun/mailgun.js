@@ -99,178 +99,6 @@ function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-var base64$1 = {exports: {}};
-
-/*! https://mths.be/base64 v1.0.0 by @mathias | MIT license */
-var base64 = base64$1.exports;
-
-var hasRequiredBase64;
-
-function requireBase64 () {
-	if (hasRequiredBase64) return base64$1.exports;
-	hasRequiredBase64 = 1;
-	(function (module, exports) {
-(function(root) {
-
-			// Detect free variables `exports`.
-			var freeExports = exports;
-
-			// Detect free variable `module`.
-			var freeModule = module &&
-				module.exports == freeExports && module;
-
-			// Detect free variable `global`, from Node.js or Browserified code, and use
-			// it as `root`.
-			var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal;
-			if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
-				root = freeGlobal;
-			}
-
-			/*--------------------------------------------------------------------------*/
-
-			var InvalidCharacterError = function(message) {
-				this.message = message;
-			};
-			InvalidCharacterError.prototype = new Error;
-			InvalidCharacterError.prototype.name = 'InvalidCharacterError';
-
-			var error = function(message) {
-				// Note: the error messages used throughout this file match those used by
-				// the native `atob`/`btoa` implementation in Chromium.
-				throw new InvalidCharacterError(message);
-			};
-
-			var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-			// http://whatwg.org/html/common-microsyntaxes.html#space-character
-			var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
-
-			// `decode` is designed to be fully compatible with `atob` as described in the
-			// HTML Standard. http://whatwg.org/html/webappapis.html#dom-windowbase64-atob
-			// The optimized base64-decoding algorithm used is based on @atk’s excellent
-			// implementation. https://gist.github.com/atk/1020396
-			var decode = function(input) {
-				input = String(input)
-					.replace(REGEX_SPACE_CHARACTERS, '');
-				var length = input.length;
-				if (length % 4 == 0) {
-					input = input.replace(/==?$/, '');
-					length = input.length;
-				}
-				if (
-					length % 4 == 1 ||
-					// http://whatwg.org/C#alphanumeric-ascii-characters
-					/[^+a-zA-Z0-9/]/.test(input)
-				) {
-					error(
-						'Invalid character: the string to be decoded is not correctly encoded.'
-					);
-				}
-				var bitCounter = 0;
-				var bitStorage;
-				var buffer;
-				var output = '';
-				var position = -1;
-				while (++position < length) {
-					buffer = TABLE.indexOf(input.charAt(position));
-					bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
-					// Unless this is the first of a group of 4 characters…
-					if (bitCounter++ % 4) {
-						// …convert the first 8 bits to a single ASCII character.
-						output += String.fromCharCode(
-							0xFF & bitStorage >> (-2 * bitCounter & 6)
-						);
-					}
-				}
-				return output;
-			};
-
-			// `encode` is designed to be fully compatible with `btoa` as described in the
-			// HTML Standard: http://whatwg.org/html/webappapis.html#dom-windowbase64-btoa
-			var encode = function(input) {
-				input = String(input);
-				if (/[^\0-\xFF]/.test(input)) {
-					// Note: no need to special-case astral symbols here, as surrogates are
-					// matched, and the input is supposed to only contain ASCII anyway.
-					error(
-						'The string to be encoded contains characters outside of the ' +
-						'Latin1 range.'
-					);
-				}
-				var padding = input.length % 3;
-				var output = '';
-				var position = -1;
-				var a;
-				var b;
-				var c;
-				var buffer;
-				// Make sure any padding is handled outside of the loop.
-				var length = input.length - padding;
-
-				while (++position < length) {
-					// Read three bytes, i.e. 24 bits.
-					a = input.charCodeAt(position) << 16;
-					b = input.charCodeAt(++position) << 8;
-					c = input.charCodeAt(++position);
-					buffer = a + b + c;
-					// Turn the 24 bits into four chunks of 6 bits each, and append the
-					// matching character for each of them to the output.
-					output += (
-						TABLE.charAt(buffer >> 18 & 0x3F) +
-						TABLE.charAt(buffer >> 12 & 0x3F) +
-						TABLE.charAt(buffer >> 6 & 0x3F) +
-						TABLE.charAt(buffer & 0x3F)
-					);
-				}
-
-				if (padding == 2) {
-					a = input.charCodeAt(position) << 8;
-					b = input.charCodeAt(++position);
-					buffer = a + b;
-					output += (
-						TABLE.charAt(buffer >> 10) +
-						TABLE.charAt((buffer >> 4) & 0x3F) +
-						TABLE.charAt((buffer << 2) & 0x3F) +
-						'='
-					);
-				} else if (padding == 1) {
-					buffer = input.charCodeAt(position);
-					output += (
-						TABLE.charAt(buffer >> 2) +
-						TABLE.charAt((buffer << 4) & 0x3F) +
-						'=='
-					);
-				}
-
-				return output;
-			};
-
-			var base64 = {
-				'encode': encode,
-				'decode': decode,
-				'version': '1.0.0'
-			};
-
-			// Some AMD build optimizers, like r.js, check for specific condition patterns
-			// like the following:
-			if (freeExports && !freeExports.nodeType) {
-				if (freeModule) { // in Node.js or RingoJS v0.8.0+
-					freeModule.exports = base64;
-				} else { // in Narwhal or RingoJS v0.7.0-
-					for (var key in base64) {
-						base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
-					}
-				}
-			} else { // in Rhino or a web browser
-				root.base64 = base64;
-			}
-
-		}(base64)); 
-	} (base64$1, base64$1.exports));
-	return base64$1.exports;
-}
-
-var base64Exports = requireBase64();
-
 var urlJoin$1 = {exports: {}};
 
 var urlJoin = urlJoin$1.exports;
@@ -365,6 +193,324 @@ function requireUrlJoin () {
 var urlJoinExports = requireUrlJoin();
 var urljoin = /*@__PURE__*/getDefaultExportFromCjs(urlJoinExports);
 
+var APIError = /** @class */ (function (_super) {
+    __extends(APIError, _super);
+    function APIError(_a) {
+        var status = _a.status, statusText = _a.statusText, message = _a.message, _b = _a.body, body = _b === void 0 ? {} : _b;
+        var _this = this;
+        var bodyMessage = '';
+        var error = '';
+        if (typeof body === 'string') {
+            bodyMessage = body;
+        }
+        else {
+            bodyMessage = (body === null || body === void 0 ? void 0 : body.message) || '';
+            error = (body === null || body === void 0 ? void 0 : body.error) || '';
+        }
+        _this = _super.call(this) || this;
+        _this.stack = '';
+        _this.status = status;
+        _this.message = message || error || statusText || '';
+        _this.details = bodyMessage;
+        _this.type = 'MailgunAPIError';
+        return _this;
+    }
+    APIError.isApiError = function (err) {
+        return typeof err === 'object' && (err === null || err === void 0 ? void 0 : err.type) === 'MailgunAPIError';
+    };
+    APIError.getUserDataError = function (statusText, message) {
+        return new this({
+            status: 400,
+            statusText: statusText,
+            body: {
+                message: message
+            }
+        });
+    };
+    return APIError;
+}(Error));
+
+var BlobFromStream = /** @class */ (function () {
+    function BlobFromStream(stream, size) {
+        this._stream = stream;
+        this.size = size;
+    }
+    BlobFromStream.prototype.stream = function () {
+        return this._stream;
+    };
+    Object.defineProperty(BlobFromStream.prototype, Symbol.toStringTag, {
+        get: function () {
+            return 'Blob';
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return BlobFromStream;
+}());
+var AttachmentsHandler = /** @class */ (function () {
+    function AttachmentsHandler() {
+    }
+    AttachmentsHandler.prototype.getAttachmentOptions = function (item) {
+        var filename = item.filename, contentType = item.contentType, knownLength = item.knownLength;
+        return __assign(__assign(__assign({}, (filename ? { filename: filename } : { filename: 'file' })), (contentType && { contentType: contentType })), (knownLength && { knownLength: knownLength }));
+    };
+    AttachmentsHandler.prototype.getFileInfo = function (file) {
+        var filename = file.name, contentType = file.type, knownLength = file.size;
+        return this.getAttachmentOptions({ filename: filename, contentType: contentType, knownLength: knownLength });
+    };
+    AttachmentsHandler.prototype.getCustomFileInfo = function (file) {
+        var filename = file.filename, contentType = file.contentType, knownLength = file.knownLength;
+        return this.getAttachmentOptions({ filename: filename, contentType: contentType, knownLength: knownLength });
+    };
+    AttachmentsHandler.prototype.getBufferInfo = function (buffer) {
+        var knownLength = buffer.byteLength;
+        return this.getAttachmentOptions({ filename: 'file', contentType: '', knownLength: knownLength });
+    };
+    AttachmentsHandler.prototype.isStream = function (data) {
+        return typeof data === 'object' && typeof data.pipe === 'function';
+    };
+    AttachmentsHandler.prototype.isCustomFile = function (obj) {
+        return typeof obj === 'object'
+            && !!obj.data;
+    };
+    AttachmentsHandler.prototype.isBrowserFile = function (obj) {
+        return typeof obj === 'object' && (!!obj.name || (typeof Blob !== 'undefined' && obj instanceof Blob));
+    };
+    AttachmentsHandler.prototype.isBuffer = function (data) {
+        return typeof Buffer !== 'undefined' && Buffer.isBuffer(data);
+    };
+    AttachmentsHandler.prototype.getAttachmentInfo = function (attachment) {
+        var isBrowserFile = this.isBrowserFile(attachment);
+        var isCustomFile = this.isCustomFile(attachment);
+        var isString = typeof attachment === 'string';
+        if (!isString) {
+            if (isBrowserFile) {
+                return this.getFileInfo(attachment);
+            }
+            if (typeof Buffer !== 'undefined' && Buffer.isBuffer(attachment)) {
+                return this.getBufferInfo(attachment);
+            }
+            if (isCustomFile) {
+                return this.getCustomFileInfo(attachment);
+            }
+        }
+        var options = {
+            filename: 'file',
+            contentType: undefined,
+            knownLength: undefined
+        };
+        return options;
+    };
+    AttachmentsHandler.prototype.convertToFDexpectedShape = function (userProvidedValue) {
+        var isStream = this.isStream(userProvidedValue);
+        var isBrowserFile = this.isBrowserFile(userProvidedValue);
+        var isCustomFile = this.isCustomFile(userProvidedValue);
+        var isString = typeof userProvidedValue === 'string';
+        var result;
+        if (isStream || isString || isBrowserFile || this.isBuffer(userProvidedValue)) {
+            result = userProvidedValue;
+        }
+        else if (isCustomFile) {
+            result = userProvidedValue.data;
+        }
+        else {
+            throw APIError.getUserDataError("Unknown attachment type ".concat(typeof userProvidedValue), "The \"attachment\" property expects either Buffer, Blob, or String.\n          Also, It is possible to provide an object that has the property \"data\" with a value that is equal to one of the types counted before.\n          Additionally, you may use an array to send more than one attachment.");
+        }
+        return result;
+    };
+    AttachmentsHandler.prototype.getBlobFromStream = function (stream, size) {
+        return new BlobFromStream(stream, size);
+    };
+    return AttachmentsHandler;
+}());
+
+var FormDataBuilder = /** @class */ (function () {
+    function FormDataBuilder(FormDataConstructor, config) {
+        this.FormDataConstructor = FormDataConstructor;
+        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
+        this.attachmentsHandler = new AttachmentsHandler();
+        this.useFetch = config === null || config === void 0 ? void 0 : config.useFetch;
+    }
+    FormDataBuilder.prototype.createFormData = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formDataInstance, isFormDataP, formData, result, resObj, blob;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!data) {
+                            throw new Error('Please provide data object');
+                        }
+                        formDataInstance = new this.FormDataConstructor();
+                        isFormDataP = this.isFormDataPackage(formDataInstance);
+                        if (isFormDataP && this.useFetch) {
+                            // in case form-data package is used fetch client thinks form-data is of the string type
+                            // also Content-Type is recognized incorrectly
+                            throw APIError.getUserDataError('"form-data" npm package detected, and it can not be used together with "fetch" client', 'fetch client does not recognize object created by form-data package as valid FormData instance');
+                        }
+                        formData = Object.keys(data)
+                            .filter(function (key) { return data[key]; })
+                            .reduce(function (formDataAcc, key) {
+                            if (_this.fileKeys.includes(key)) {
+                                var attachmentValue = data[key];
+                                if (_this.isMessageAttachment(attachmentValue)) {
+                                    _this.addFilesToFD(key, attachmentValue, formDataAcc);
+                                    return formDataAcc;
+                                }
+                                throw APIError.getUserDataError("Unknown value ".concat(data[key], " with type ").concat(typeof data[key], " for property \"").concat(key, "\""), "The key \"".concat(key, "\" should have type of Buffer, Stream, File, or String "));
+                            }
+                            if (key === 'message') { // mime message
+                                var messageValue = data[key];
+                                if (!messageValue || !_this.isMIME(messageValue)) {
+                                    throw APIError.getUserDataError("Unknown data type for \"".concat(key, "\" property"), 'The mime data should have type of Buffer, String or Blob');
+                                }
+                                _this.addMimeDataToFD(key, messageValue, formDataAcc);
+                                return formDataAcc;
+                            }
+                            _this.addCommonPropertyToFD(key, data[key], formDataAcc);
+                            return formDataAcc;
+                        }, formDataInstance);
+                        result = {
+                            formData: formData,
+                            dataSize: 0
+                        };
+                        if (!(this.useFetch && !isFormDataP)) return [3 /*break*/, 2];
+                        // axios trick to get correct Content-Type with boundary
+                        // otherwise boundary is missing and request fails
+                        Object.defineProperty(formData, 'getHeaders', {
+                            value: function () { return ({ 'Content-Type': undefined }); },
+                        });
+                        if (!(Response !== undefined)) return [3 /*break*/, 2];
+                        resObj = new Response(formData);
+                        return [4 /*yield*/, resObj.blob()];
+                    case 1:
+                        blob = _a.sent();
+                        result.dataSize = blob.size;
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    FormDataBuilder.prototype.addMimeDataToFD = function (key, data, formDataInstance) {
+        if (typeof data === 'string') { // if string only two parameters should be used.
+            formDataInstance.append(key, data);
+            return;
+        }
+        if (this.isFormDataPackage(formDataInstance)) { // form-data package is used
+            var nodeFormData = formDataInstance;
+            nodeFormData.append(key, data, { filename: 'MimeMessage' });
+            return;
+        }
+        if (typeof Blob !== undefined) { // either node > 18 or browser
+            var browserFormData = formDataInstance; // Browser compliant FormData
+            if (data instanceof Blob) {
+                browserFormData.append(key, data, 'MimeMessage');
+                return;
+            }
+            if (this.attachmentsHandler.isBuffer(data)) { // node environment
+                var blobInstance = new Blob([data]);
+                browserFormData.append(key, blobInstance, 'MimeMessage');
+            }
+        }
+    };
+    FormDataBuilder.prototype.isMIME = function (data) {
+        return typeof data === 'string'
+            || (typeof Blob !== 'undefined' && data instanceof Blob)
+            || this.attachmentsHandler.isBuffer(data)
+            || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
+    };
+    FormDataBuilder.prototype.isFormDataPackage = function (obj) {
+        return typeof obj === 'object'
+            && obj !== null
+            && typeof obj.getHeaders === 'function';
+    };
+    FormDataBuilder.prototype.isMessageAttachment = function (value) {
+        var _this = this;
+        return (this.attachmentsHandler.isCustomFile(value)
+            || typeof value === 'string'
+            || (typeof File !== 'undefined' && value instanceof File)
+            || (typeof Blob !== 'undefined' && value instanceof Blob)
+            || this.attachmentsHandler.isBuffer(value)
+            || this.attachmentsHandler.isStream(value)
+            || (Array.isArray(value) && value.every(function (item) { return _this.attachmentsHandler.isCustomFile(item)
+                || (typeof File !== 'undefined' && item instanceof File)
+                || (typeof Blob !== 'undefined' && value instanceof Blob)
+                || _this.attachmentsHandler.isBuffer(item)
+                || _this.attachmentsHandler.isStream(item); })));
+    };
+    FormDataBuilder.prototype.addFilesToFD = function (propertyName, value, formDataInstance) {
+        var _this = this;
+        var appendFileToFD = function (originalKey, attachment, formData) {
+            var key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
+            var objData = _this.attachmentsHandler.convertToFDexpectedShape(attachment);
+            var options = _this.attachmentsHandler.getAttachmentInfo(attachment);
+            if (_this.isFormDataPackage(formData)) {
+                var fd = formData;
+                var data = typeof objData === 'string' ? Buffer.from(objData) : objData;
+                fd.append(key, data, options);
+                return;
+            }
+            if (typeof Blob !== undefined) { // either node > 18 or browser
+                var browserFormData = formDataInstance; // Browser compliant FormData
+                if (typeof objData === 'string' || _this.attachmentsHandler.isBuffer(objData)) {
+                    var blobInstance = new Blob([objData]);
+                    browserFormData.append(key, blobInstance, options.filename);
+                    return;
+                }
+                if (objData instanceof Blob) {
+                    browserFormData.append(key, objData, options.filename);
+                    return;
+                }
+                if (_this.attachmentsHandler.isStream(objData)) {
+                    var blob = _this.attachmentsHandler.getBlobFromStream(objData, options.knownLength);
+                    browserFormData.set(key, blob, options.filename);
+                }
+            }
+        };
+        if (Array.isArray(value)) {
+            value.forEach(function (item) {
+                appendFileToFD(propertyName, item, formDataInstance);
+            });
+        }
+        else {
+            appendFileToFD(propertyName, value, formDataInstance);
+        }
+    };
+    FormDataBuilder.prototype.addCommonPropertyToFD = function (key, value, formDataAcc) {
+        var _this = this;
+        var addValueBasedOnFD = function (fdKey, fdValue) {
+            if (_this.isFormDataPackage(formDataAcc)) {
+                if (typeof fdValue === 'object') {
+                    // eslint-disable-next-line no-console
+                    console.warn('The received value is an object. \n'
+                        + '"JSON.Stringify" will be used to avoid TypeError \n'
+                        + 'To remove this warning: \n'
+                        + 'Consider switching to built-in FormData or converting the value on your own.\n');
+                    return formDataAcc.append(fdKey, JSON.stringify(fdValue));
+                }
+                return formDataAcc.append(fdKey, fdValue);
+            }
+            if (typeof fdValue === 'string') {
+                return formDataAcc.append(fdKey, fdValue);
+            }
+            if (typeof Blob !== undefined && fdValue instanceof Blob) {
+                return formDataAcc.append(fdKey, fdValue);
+            }
+            throw APIError.getUserDataError('Unknown value type for Form Data. String or Blob expected', 'Browser compliant FormData allows only string or Blob values for properties that are not attachments.');
+        };
+        if (Array.isArray(value)) {
+            value.forEach(function (item) {
+                addValueBasedOnFD(key, item);
+            });
+        }
+        else if (value != null) {
+            addValueBasedOnFD(key, value);
+        }
+    };
+    return FormDataBuilder;
+}());
+
 function bind(fn, thisArg) {
   return function wrap() {
     return fn.apply(thisArg, arguments);
@@ -416,7 +562,7 @@ const isUndefined = typeOfTest('undefined');
  */
 function isBuffer(val) {
   return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && isFunction(val.constructor.isBuffer) && val.constructor.isBuffer(val);
+    && isFunction$1(val.constructor.isBuffer) && val.constructor.isBuffer(val);
 }
 
 /**
@@ -461,7 +607,7 @@ const isString = typeOfTest('string');
  * @param {*} val The value to test
  * @returns {boolean} True if value is a Function, otherwise false
  */
-const isFunction = typeOfTest('function');
+const isFunction$1 = typeOfTest('function');
 
 /**
  * Determine if a value is a Number
@@ -503,6 +649,27 @@ const isPlainObject = (val) => {
 
   const prototype = getPrototypeOf(val);
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(toStringTag in val) && !(iterator in val);
+};
+
+/**
+ * Determine if a value is an empty object (safely handles Buffers)
+ *
+ * @param {*} val The value to test
+ *
+ * @returns {boolean} True if value is an empty object, otherwise false
+ */
+const isEmptyObject = (val) => {
+  // Early return for non-objects or Buffers to prevent RangeError
+  if (!isObject(val) || isBuffer(val)) {
+    return false;
+  }
+
+  try {
+    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+  } catch (e) {
+    // Fallback for any other objects that might cause RangeError with Object.keys()
+    return false;
+  }
 };
 
 /**
@@ -548,7 +715,7 @@ const isFileList = kindOfTest('FileList');
  *
  * @returns {boolean} True if value is a Stream, otherwise false
  */
-const isStream = (val) => isObject(val) && isFunction(val.pipe);
+const isStream = (val) => isObject(val) && isFunction$1(val.pipe);
 
 /**
  * Determine if a value is a FormData
@@ -561,10 +728,10 @@ const isFormData = (thing) => {
   let kind;
   return thing && (
     (typeof FormData === 'function' && thing instanceof FormData) || (
-      isFunction(thing.append) && (
+      isFunction$1(thing.append) && (
         (kind = kindOf(thing)) === 'formdata' ||
         // detect form-data instance
-        (kind === 'object' && isFunction(thing.toString) && thing.toString() === '[object FormData]')
+        (kind === 'object' && isFunction$1(thing.toString) && thing.toString() === '[object FormData]')
       )
     )
   )
@@ -627,6 +794,11 @@ function forEach(obj, fn, {allOwnKeys = false} = {}) {
       fn.call(null, obj[i], i, obj);
     }
   } else {
+    // Buffer check
+    if (isBuffer(obj)) {
+      return;
+    }
+
     // Iterate over object keys
     const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
     const len = keys.length;
@@ -640,6 +812,10 @@ function forEach(obj, fn, {allOwnKeys = false} = {}) {
 }
 
 function findKey(obj, key) {
+  if (isBuffer(obj)){
+    return null;
+  }
+
   key = key.toLowerCase();
   const keys = Object.keys(obj);
   let i = keys.length;
@@ -680,7 +856,7 @@ const isContextDefined = (context) => !isUndefined(context) && context !== _glob
  * @returns {Object} Result of all merge properties
  */
 function merge(/* obj1, obj2, obj3, ... */) {
-  const {caseless} = isContextDefined(this) && this || {};
+  const {caseless, skipUndefined} = isContextDefined(this) && this || {};
   const result = {};
   const assignValue = (val, key) => {
     const targetKey = caseless && findKey(result, key) || key;
@@ -691,7 +867,9 @@ function merge(/* obj1, obj2, obj3, ... */) {
     } else if (isArray(val)) {
       result[targetKey] = val.slice();
     } else {
-      result[targetKey] = val;
+      if (!skipUndefined || !isUndefined(val)) {
+        result[targetKey] = val;
+      }
     }
   };
 
@@ -713,7 +891,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
  */
 const extend = (a, b, thisArg, {allOwnKeys}= {}) => {
   forEach(b, (val, key) => {
-    if (thisArg && isFunction(val)) {
+    if (thisArg && isFunction$1(val)) {
       a[key] = bind(val, thisArg);
     } else {
       a[key] = val;
@@ -929,13 +1107,13 @@ const reduceDescriptors = (obj, reducer) => {
 const freezeMethods = (obj) => {
   reduceDescriptors(obj, (descriptor, name) => {
     // skip restricted props in strict mode
-    if (isFunction(obj) && ['arguments', 'caller', 'callee'].indexOf(name) !== -1) {
+    if (isFunction$1(obj) && ['arguments', 'caller', 'callee'].indexOf(name) !== -1) {
       return false;
     }
 
     const value = obj[name];
 
-    if (!isFunction(value)) return;
+    if (!isFunction$1(value)) return;
 
     descriptor.enumerable = false;
 
@@ -972,6 +1150,8 @@ const toFiniteNumber = (value, defaultValue) => {
   return value != null && Number.isFinite(value = +value) ? value : defaultValue;
 };
 
+
+
 /**
  * If the thing is a FormData object, return true, otherwise return false.
  *
@@ -980,7 +1160,7 @@ const toFiniteNumber = (value, defaultValue) => {
  * @returns {boolean}
  */
 function isSpecCompliantForm(thing) {
-  return !!(thing && isFunction(thing.append) && thing[toStringTag] === 'FormData' && thing[iterator]);
+  return !!(thing && isFunction$1(thing.append) && thing[toStringTag] === 'FormData' && thing[iterator]);
 }
 
 const toJSONObject = (obj) => {
@@ -991,6 +1171,11 @@ const toJSONObject = (obj) => {
     if (isObject(source)) {
       if (stack.indexOf(source) >= 0) {
         return;
+      }
+
+      //Buffer check
+      if (isBuffer(source)) {
+        return source;
       }
 
       if(!('toJSON' in source)) {
@@ -1017,7 +1202,7 @@ const toJSONObject = (obj) => {
 const isAsyncFn = kindOfTest('AsyncFunction');
 
 const isThenable = (thing) =>
-  thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
+  thing && (isObject(thing) || isFunction$1(thing)) && isFunction$1(thing.then) && isFunction$1(thing.catch);
 
 // original code
 // https://github.com/DigitalBrainJS/AxiosPromise/blob/16deab13710ec09779922131f3fa5954320f83ab/lib/utils.js#L11-L34
@@ -1041,7 +1226,7 @@ const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
 })(
   typeof setImmediate === 'function',
-  isFunction(_global.postMessage)
+  isFunction$1(_global.postMessage)
 );
 
 const asap = typeof queueMicrotask !== 'undefined' ?
@@ -1050,7 +1235,7 @@ const asap = typeof queueMicrotask !== 'undefined' ?
 // *********************
 
 
-const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
+const isIterable = (thing) => thing != null && isFunction$1(thing[iterator]);
 
 
 var utils$1 = {
@@ -1064,6 +1249,7 @@ var utils$1 = {
   isBoolean,
   isObject,
   isPlainObject,
+  isEmptyObject,
   isReadableStream,
   isRequest,
   isResponse,
@@ -1073,7 +1259,7 @@ var utils$1 = {
   isFile,
   isBlob,
   isRegExp,
-  isFunction,
+  isFunction: isFunction$1,
   isStream,
   isURLSearchParams,
   isTypedArray,
@@ -1199,11 +1385,18 @@ AxiosError$1.from = (error, code, config, request, response, customProps) => {
     return prop !== 'isAxiosError';
   });
 
-  AxiosError$1.call(axiosError, error.message, code, config, request, response);
+  const msg = error && error.message ? error.message : 'Error';
 
-  axiosError.cause = error;
+  // Prefer explicit code; otherwise copy the low-level error's code (e.g. ECONNREFUSED)
+  const errCode = code == null && error ? error.code : code;
+  AxiosError$1.call(axiosError, msg, errCode, config, request, response);
 
-  axiosError.name = error.name;
+  // Chain the original error on the standard field; non-enumerable to avoid JSON noise
+  if (error && axiosError.cause == null) {
+    Object.defineProperty(axiosError, 'cause', { value: error, configurable: true });
+  }
+
+  axiosError.name = (error && error.name) || 'Error';
 
   customProps && Object.assign(axiosError, customProps);
 
@@ -1494,9 +1687,7 @@ function encode(val) {
     replace(/%3A/gi, ':').
     replace(/%24/g, '$').
     replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
+    replace(/%20/g, '+');
 }
 
 /**
@@ -1693,7 +1884,7 @@ var platform = {
 };
 
 function toURLEncodedForm(data, options) {
-  return toFormData$1(data, new platform.classes.URLSearchParams(), Object.assign({
+  return toFormData$1(data, new platform.classes.URLSearchParams(), {
     visitor: function(value, key, path, helpers) {
       if (platform.isNode && utils$1.isBuffer(value)) {
         this.append(key, value.toString('base64'));
@@ -1701,8 +1892,9 @@ function toURLEncodedForm(data, options) {
       }
 
       return helpers.defaultVisitor.apply(this, arguments);
-    }
-  }, options));
+    },
+    ...options
+  });
 }
 
 /**
@@ -1898,7 +2090,7 @@ const defaults = {
       const strictJSONParsing = !silentJSONParsing && JSONRequested;
 
       try {
-        return JSON.parse(data);
+        return JSON.parse(data, this.parseReviver);
       } catch (e) {
         if (strictJSONParsing) {
           if (e.name === 'SyntaxError') {
@@ -2451,7 +2643,7 @@ function throttle(fn, freq) {
       clearTimeout(timer);
       timer = null;
     }
-    fn.apply(null, args);
+    fn(...args);
   };
 
   const throttled = (...args) => {
@@ -2707,7 +2899,7 @@ function mergeConfig$1(config1, config2) {
     headers: (a, b , prop) => mergeDeepProperties(headersToObject(a), headersToObject(b),prop, true)
   };
 
-  utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
+  utils$1.forEach(Object.keys({...config1, ...config2}), function computeConfigValue(prop) {
     const merge = mergeMap[prop] || mergeDeepProperties;
     const configValue = merge(config1[prop], config2[prop], prop);
     (utils$1.isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
@@ -2719,7 +2911,7 @@ function mergeConfig$1(config1, config2) {
 var resolveConfig = (config) => {
   const newConfig = mergeConfig$1({}, config);
 
-  let {data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth} = newConfig;
+  let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
 
   newConfig.headers = headers = AxiosHeaders$1.from(headers);
 
@@ -2732,17 +2924,21 @@ var resolveConfig = (config) => {
     );
   }
 
-  let contentType;
-
   if (utils$1.isFormData(data)) {
     if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
-      headers.setContentType(undefined); // Let the browser set it
-    } else if ((contentType = headers.getContentType()) !== false) {
-      // fix semicolon duplication issue for ReactNative FormData implementation
-      const [type, ...tokens] = contentType ? contentType.split(';').map(token => token.trim()).filter(Boolean) : [];
-      headers.setContentType([type || 'multipart/form-data', ...tokens].join('; '));
+      headers.setContentType(undefined); // browser handles it
+    } else if (utils$1.isFunction(data.getHeaders)) {
+      // Node.js FormData (like form-data package)
+      const formHeaders = data.getHeaders();
+      // Only set safe headers to avoid overwriting security headers
+      const allowedHeaders = ['content-type', 'content-length'];
+      Object.entries(formHeaders).forEach(([key, val]) => {
+        if (allowedHeaders.includes(key.toLowerCase())) {
+          headers.set(key, val);
+        }
+      });
     }
-  }
+  }  
 
   // Add xsrf header
   // This is only done if running in a standard browser environment.
@@ -2859,15 +3055,18 @@ var xhrAdapter = isXHRAdapterSupported && function (config) {
     };
 
     // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(new AxiosError$1('Network Error', AxiosError$1.ERR_NETWORK, config, request));
-
-      // Clean up request
-      request = null;
+  request.onerror = function handleError(event) {
+       // Browsers deliver a ProgressEvent in XHR onerror
+       // (message may be empty; when present, surface it)
+       // See https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/error_event
+       const msg = event && event.message ? event.message : 'Network Error';
+       const err = new AxiosError$1(msg, AxiosError$1.ERR_NETWORK, config, request);
+       // attach the underlying event for consumers who want details
+       err.event = event || null;
+       reject(err);
+       request = null;
     };
-
+    
     // Handle timeout
     request.ontimeout = function handleTimeout() {
       let timeoutErrorMessage = _config.timeout ? 'timeout of ' + _config.timeout + 'ms exceeded' : 'timeout exceeded';
@@ -3081,14 +3280,18 @@ const trackStream = (stream, chunkSize, onProgress, onFinish) => {
   })
 };
 
-const isFetchSupported = typeof fetch === 'function' && typeof Request === 'function' && typeof Response === 'function';
-const isReadableStreamSupported = isFetchSupported && typeof ReadableStream === 'function';
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
 
-// used only inside the fetch adapter
-const encodeText = isFetchSupported && (typeof TextEncoder === 'function' ?
-    ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) :
-    async (str) => new Uint8Array(await new Response(str).arrayBuffer())
-);
+const {isFunction} = utils$1;
+
+const globalFetchAPI = (({fetch, Request, Response}) => ({
+    fetch, Request, Response
+  }))(utils$1.global);
+
+const {
+  ReadableStream: ReadableStream$1, TextEncoder
+} = utils$1.global;
+
 
 const test = (fn, ...args) => {
   try {
@@ -3098,211 +3301,266 @@ const test = (fn, ...args) => {
   }
 };
 
-const supportsRequestStream = isReadableStreamSupported && test(() => {
-  let duplexAccessed = false;
+const factory = (env) => {
+  const {fetch, Request, Response} = Object.assign({}, globalFetchAPI, env);
+  const isFetchSupported = isFunction(fetch);
+  const isRequestSupported = isFunction(Request);
+  const isResponseSupported = isFunction(Response);
 
-  const hasContentType = new Request(platform.origin, {
-    body: new ReadableStream(),
-    method: 'POST',
-    get duplex() {
-      duplexAccessed = true;
-      return 'half';
-    },
-  }).headers.has('Content-Type');
+  if (!isFetchSupported) {
+    return false;
+  }
 
-  return duplexAccessed && !hasContentType;
-});
+  const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream$1);
 
-const DEFAULT_CHUNK_SIZE = 64 * 1024;
+  const encodeText = isFetchSupported && (typeof TextEncoder === 'function' ?
+      ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) :
+      async (str) => new Uint8Array(await new Request(str).arrayBuffer())
+  );
 
-const supportsResponseStream = isReadableStreamSupported &&
-  test(() => utils$1.isReadableStream(new Response('').body));
+  const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
+    let duplexAccessed = false;
 
+    const hasContentType = new Request(platform.origin, {
+      body: new ReadableStream$1(),
+      method: 'POST',
+      get duplex() {
+        duplexAccessed = true;
+        return 'half';
+      },
+    }).headers.has('Content-Type');
 
-const resolvers = {
-  stream: supportsResponseStream && ((res) => res.body)
-};
+    return duplexAccessed && !hasContentType;
+  });
 
-isFetchSupported && (((res) => {
-  ['text', 'arrayBuffer', 'blob', 'formData', 'stream'].forEach(type => {
-    !resolvers[type] && (resolvers[type] = utils$1.isFunction(res[type]) ? (res) => res[type]() :
-      (_, config) => {
+  const supportsResponseStream = isResponseSupported && isReadableStreamSupported &&
+    test(() => utils$1.isReadableStream(new Response('').body));
+
+  const resolvers = {
+    stream: supportsResponseStream && ((res) => res.body)
+  };
+
+  isFetchSupported && ((() => {
+    ['text', 'arrayBuffer', 'blob', 'formData', 'stream'].forEach(type => {
+      !resolvers[type] && (resolvers[type] = (res, config) => {
+        let method = res && res[type];
+
+        if (method) {
+          return method.call(res);
+        }
+
         throw new AxiosError$1(`Response type '${type}' is not supported`, AxiosError$1.ERR_NOT_SUPPORT, config);
       });
-  });
-})(new Response));
-
-const getBodyLength = async (body) => {
-  if (body == null) {
-    return 0;
-  }
-
-  if(utils$1.isBlob(body)) {
-    return body.size;
-  }
-
-  if(utils$1.isSpecCompliantForm(body)) {
-    const _request = new Request(platform.origin, {
-      method: 'POST',
-      body,
     });
-    return (await _request.arrayBuffer()).byteLength;
-  }
+  })());
 
-  if(utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
-    return body.byteLength;
-  }
+  const getBodyLength = async (body) => {
+    if (body == null) {
+      return 0;
+    }
 
-  if(utils$1.isURLSearchParams(body)) {
-    body = body + '';
-  }
+    if (utils$1.isBlob(body)) {
+      return body.size;
+    }
 
-  if(utils$1.isString(body)) {
-    return (await encodeText(body)).byteLength;
-  }
-};
-
-const resolveBodyLength = async (headers, body) => {
-  const length = utils$1.toFiniteNumber(headers.getContentLength());
-
-  return length == null ? getBodyLength(body) : length;
-};
-
-var fetchAdapter = isFetchSupported && (async (config) => {
-  let {
-    url,
-    method,
-    data,
-    signal,
-    cancelToken,
-    timeout,
-    onDownloadProgress,
-    onUploadProgress,
-    responseType,
-    headers,
-    withCredentials = 'same-origin',
-    fetchOptions
-  } = resolveConfig(config);
-
-  responseType = responseType ? (responseType + '').toLowerCase() : 'text';
-
-  let composedSignal = composeSignals([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
-
-  let request;
-
-  const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
-      composedSignal.unsubscribe();
-  });
-
-  let requestContentLength;
-
-  try {
-    if (
-      onUploadProgress && supportsRequestStream && method !== 'get' && method !== 'head' &&
-      (requestContentLength = await resolveBodyLength(headers, data)) !== 0
-    ) {
-      let _request = new Request(url, {
+    if (utils$1.isSpecCompliantForm(body)) {
+      const _request = new Request(platform.origin, {
         method: 'POST',
-        body: data,
-        duplex: "half"
+        body,
       });
-
-      let contentTypeHeader;
-
-      if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get('content-type'))) {
-        headers.setContentType(contentTypeHeader);
-      }
-
-      if (_request.body) {
-        const [onProgress, flush] = progressEventDecorator(
-          requestContentLength,
-          progressEventReducer(asyncDecorator(onUploadProgress))
-        );
-
-        data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
-      }
+      return (await _request.arrayBuffer()).byteLength;
     }
 
-    if (!utils$1.isString(withCredentials)) {
-      withCredentials = withCredentials ? 'include' : 'omit';
+    if (utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
+      return body.byteLength;
     }
 
-    // Cloudflare Workers throws when credentials are defined
-    // see https://github.com/cloudflare/workerd/issues/902
-    const isCredentialsSupported = "credentials" in Request.prototype;
-    request = new Request(url, {
-      ...fetchOptions,
-      signal: composedSignal,
-      method: method.toUpperCase(),
-      headers: headers.normalize().toJSON(),
-      body: data,
-      duplex: "half",
-      credentials: isCredentialsSupported ? withCredentials : undefined
+    if (utils$1.isURLSearchParams(body)) {
+      body = body + '';
+    }
+
+    if (utils$1.isString(body)) {
+      return (await encodeText(body)).byteLength;
+    }
+  };
+
+  const resolveBodyLength = async (headers, body) => {
+    const length = utils$1.toFiniteNumber(headers.getContentLength());
+
+    return length == null ? getBodyLength(body) : length;
+  };
+
+  return async (config) => {
+    let {
+      url,
+      method,
+      data,
+      signal,
+      cancelToken,
+      timeout,
+      onDownloadProgress,
+      onUploadProgress,
+      responseType,
+      headers,
+      withCredentials = 'same-origin',
+      fetchOptions
+    } = resolveConfig(config);
+
+    responseType = responseType ? (responseType + '').toLowerCase() : 'text';
+
+    let composedSignal = composeSignals([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
+
+    let request = null;
+
+    const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+      composedSignal.unsubscribe();
     });
 
-    let response = await fetch(request, fetchOptions);
+    let requestContentLength;
 
-    const isStreamResponse = supportsResponseStream && (responseType === 'stream' || responseType === 'response');
+    try {
+      if (
+        onUploadProgress && supportsRequestStream && method !== 'get' && method !== 'head' &&
+        (requestContentLength = await resolveBodyLength(headers, data)) !== 0
+      ) {
+        let _request = new Request(url, {
+          method: 'POST',
+          body: data,
+          duplex: "half"
+        });
 
-    if (supportsResponseStream && (onDownloadProgress || (isStreamResponse && unsubscribe))) {
-      const options = {};
+        let contentTypeHeader;
 
-      ['status', 'statusText', 'headers'].forEach(prop => {
-        options[prop] = response[prop];
-      });
-
-      const responseContentLength = utils$1.toFiniteNumber(response.headers.get('content-length'));
-
-      const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
-        responseContentLength,
-        progressEventReducer(asyncDecorator(onDownloadProgress), true)
-      ) || [];
-
-      response = new Response(
-        trackStream(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
-          flush && flush();
-          unsubscribe && unsubscribe();
-        }),
-        options
-      );
-    }
-
-    responseType = responseType || 'text';
-
-    let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || 'text'](response, config);
-
-    !isStreamResponse && unsubscribe && unsubscribe();
-
-    return await new Promise((resolve, reject) => {
-      settle(resolve, reject, {
-        data: responseData,
-        headers: AxiosHeaders$1.from(response.headers),
-        status: response.status,
-        statusText: response.statusText,
-        config,
-        request
-      });
-    })
-  } catch (err) {
-    unsubscribe && unsubscribe();
-
-    if (err && err.name === 'TypeError' && /Load failed|fetch/i.test(err.message)) {
-      throw Object.assign(
-        new AxiosError$1('Network Error', AxiosError$1.ERR_NETWORK, config, request),
-        {
-          cause: err.cause || err
+        if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get('content-type'))) {
+          headers.setContentType(contentTypeHeader);
         }
-      )
-    }
 
-    throw AxiosError$1.from(err, err && err.code, config, request);
+        if (_request.body) {
+          const [onProgress, flush] = progressEventDecorator(
+            requestContentLength,
+            progressEventReducer(asyncDecorator(onUploadProgress))
+          );
+
+          data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
+        }
+      }
+
+      if (!utils$1.isString(withCredentials)) {
+        withCredentials = withCredentials ? 'include' : 'omit';
+      }
+
+      // Cloudflare Workers throws when credentials are defined
+      // see https://github.com/cloudflare/workerd/issues/902
+      const isCredentialsSupported = isRequestSupported && "credentials" in Request.prototype;
+
+      const resolvedOptions = {
+        ...fetchOptions,
+        signal: composedSignal,
+        method: method.toUpperCase(),
+        headers: headers.normalize().toJSON(),
+        body: data,
+        duplex: "half",
+        credentials: isCredentialsSupported ? withCredentials : undefined
+      };
+
+      request = isRequestSupported && new Request(url, resolvedOptions);
+
+      let response = await (isRequestSupported ? fetch(request, fetchOptions) : fetch(url, resolvedOptions));
+
+      const isStreamResponse = supportsResponseStream && (responseType === 'stream' || responseType === 'response');
+
+      if (supportsResponseStream && (onDownloadProgress || (isStreamResponse && unsubscribe))) {
+        const options = {};
+
+        ['status', 'statusText', 'headers'].forEach(prop => {
+          options[prop] = response[prop];
+        });
+
+        const responseContentLength = utils$1.toFiniteNumber(response.headers.get('content-length'));
+
+        const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
+          responseContentLength,
+          progressEventReducer(asyncDecorator(onDownloadProgress), true)
+        ) || [];
+
+        response = new Response(
+          trackStream(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
+            flush && flush();
+            unsubscribe && unsubscribe();
+          }),
+          options
+        );
+      }
+
+      responseType = responseType || 'text';
+
+      let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || 'text'](response, config);
+
+      !isStreamResponse && unsubscribe && unsubscribe();
+
+      return await new Promise((resolve, reject) => {
+        settle(resolve, reject, {
+          data: responseData,
+          headers: AxiosHeaders$1.from(response.headers),
+          status: response.status,
+          statusText: response.statusText,
+          config,
+          request
+        });
+      })
+    } catch (err) {
+      unsubscribe && unsubscribe();
+
+      if (err && err.name === 'TypeError' && /Load failed|fetch/i.test(err.message)) {
+        throw Object.assign(
+          new AxiosError$1('Network Error', AxiosError$1.ERR_NETWORK, config, request),
+          {
+            cause: err.cause || err
+          }
+        )
+      }
+
+      throw AxiosError$1.from(err, err && err.code, config, request);
+    }
   }
-});
+};
+
+const seedCache = new Map();
+
+const getFetch = (config) => {
+  let env = utils$1.merge.call({
+    skipUndefined: true
+  }, globalFetchAPI, config ? config.env : null);
+
+  const {fetch, Request, Response} = env;
+
+  const seeds = [
+    Request, Response, fetch
+  ];
+
+  let len = seeds.length, i = len,
+    seed, target, map = seedCache;
+
+  while (i--) {
+    seed = seeds[i];
+    target = map.get(seed);
+
+    target === undefined && map.set(seed, target = (i ? new Map() : factory(env)));
+
+    map = target;
+  }
+
+  return target;
+};
+
+getFetch();
 
 const knownAdapters = {
   http: httpAdapter,
   xhr: xhrAdapter,
-  fetch: fetchAdapter
+  fetch: {
+    get: getFetch,
+  }
 };
 
 utils$1.forEach(knownAdapters, (fn, value) => {
@@ -3321,7 +3579,7 @@ const renderReason = (reason) => `- ${reason}`;
 const isResolvedHandle = (adapter) => utils$1.isFunction(adapter) || adapter === null || adapter === false;
 
 var adapters = {
-  getAdapter: (adapters) => {
+  getAdapter: (adapters, config) => {
     adapters = utils$1.isArray(adapters) ? adapters : [adapters];
 
     const {length} = adapters;
@@ -3344,7 +3602,7 @@ var adapters = {
         }
       }
 
-      if (adapter) {
+      if (adapter && (utils$1.isFunction(adapter) || (adapter = adapter.get(config)))) {
         break;
       }
 
@@ -3412,7 +3670,7 @@ function dispatchRequest(config) {
     config.headers.setContentType('application/x-www-form-urlencoded', false);
   }
 
-  const adapter = adapters.getAdapter(config.adapter || defaults.adapter);
+  const adapter = adapters.getAdapter(config.adapter || defaults.adapter, config);
 
   return adapter(config).then(function onAdapterResolution(response) {
     throwIfCancellationRequested(config);
@@ -3446,7 +3704,7 @@ function dispatchRequest(config) {
   });
 }
 
-const VERSION$1 = "1.10.0";
+const VERSION$1 = "1.12.1";
 
 const validators$1 = {};
 
@@ -3685,8 +3943,8 @@ let Axios$1 = class Axios {
 
     if (!synchronousRequestInterceptors) {
       const chain = [dispatchRequest.bind(this), undefined];
-      chain.unshift.apply(chain, requestInterceptorChain);
-      chain.push.apply(chain, responseInterceptorChain);
+      chain.unshift(...requestInterceptorChain);
+      chain.push(...responseInterceptorChain);
       len = chain.length;
 
       promise = Promise.resolve(config);
@@ -4098,287 +4356,177 @@ const {
   mergeConfig
 } = axios;
 
-var APIError = /** @class */ (function (_super) {
-    __extends(APIError, _super);
-    function APIError(_a) {
-        var status = _a.status, statusText = _a.statusText, message = _a.message, _b = _a.body, body = _b === void 0 ? {} : _b;
-        var _this = this;
-        var bodyMessage = '';
-        var error = '';
-        if (typeof body === 'string') {
-            bodyMessage = body;
-        }
-        else {
-            bodyMessage = (body === null || body === void 0 ? void 0 : body.message) || '';
-            error = (body === null || body === void 0 ? void 0 : body.error) || '';
-        }
-        _this = _super.call(this) || this;
-        _this.stack = '';
-        _this.status = status;
-        _this.message = message || error || statusText || '';
-        _this.details = bodyMessage;
-        _this.type = 'MailgunAPIError';
-        return _this;
-    }
-    APIError.getUserDataError = function (statusText, message) {
-        return new this({
-            status: 400,
-            statusText: statusText,
-            body: {
-                message: message
-            }
-        });
-    };
-    return APIError;
-}(Error));
+var base64$1 = {exports: {}};
 
-var BlobFromStream = /** @class */ (function () {
-    function BlobFromStream(stream, size) {
-        this._stream = stream;
-        this.size = size;
-    }
-    BlobFromStream.prototype.stream = function () {
-        return this._stream;
-    };
-    Object.defineProperty(BlobFromStream.prototype, Symbol.toStringTag, {
-        get: function () {
-            return 'Blob';
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return BlobFromStream;
-}());
-var AttachmentsHandler = /** @class */ (function () {
-    function AttachmentsHandler() {
-    }
-    AttachmentsHandler.prototype.getAttachmentOptions = function (item) {
-        var filename = item.filename, contentType = item.contentType, knownLength = item.knownLength;
-        return __assign(__assign(__assign({}, (filename ? { filename: filename } : { filename: 'file' })), (contentType && { contentType: contentType })), (knownLength && { knownLength: knownLength }));
-    };
-    AttachmentsHandler.prototype.getFileInfo = function (file) {
-        var filename = file.name, contentType = file.type, knownLength = file.size;
-        return this.getAttachmentOptions({ filename: filename, contentType: contentType, knownLength: knownLength });
-    };
-    AttachmentsHandler.prototype.getCustomFileInfo = function (file) {
-        var filename = file.filename, contentType = file.contentType, knownLength = file.knownLength;
-        return this.getAttachmentOptions({ filename: filename, contentType: contentType, knownLength: knownLength });
-    };
-    AttachmentsHandler.prototype.getBufferInfo = function (buffer) {
-        var knownLength = buffer.byteLength;
-        return this.getAttachmentOptions({ filename: 'file', contentType: '', knownLength: knownLength });
-    };
-    AttachmentsHandler.prototype.isStream = function (data) {
-        return typeof data === 'object' && typeof data.pipe === 'function';
-    };
-    AttachmentsHandler.prototype.isCustomFile = function (obj) {
-        return typeof obj === 'object'
-            && !!obj.data;
-    };
-    AttachmentsHandler.prototype.isBrowserFile = function (obj) {
-        return typeof obj === 'object' && (!!obj.name || (typeof Blob !== 'undefined' && obj instanceof Blob));
-    };
-    AttachmentsHandler.prototype.isBuffer = function (data) {
-        return typeof Buffer !== 'undefined' && Buffer.isBuffer(data);
-    };
-    AttachmentsHandler.prototype.getAttachmentInfo = function (attachment) {
-        var isBrowserFile = this.isBrowserFile(attachment);
-        var isCustomFile = this.isCustomFile(attachment);
-        var isString = typeof attachment === 'string';
-        if (!isString) {
-            if (isBrowserFile) {
-                return this.getFileInfo(attachment);
-            }
-            if (typeof Buffer !== 'undefined' && Buffer.isBuffer(attachment)) {
-                return this.getBufferInfo(attachment);
-            }
-            if (isCustomFile) {
-                return this.getCustomFileInfo(attachment);
-            }
-        }
-        var options = {
-            filename: 'file',
-            contentType: undefined,
-            knownLength: undefined
-        };
-        return options;
-    };
-    AttachmentsHandler.prototype.convertToFDexpectedShape = function (userProvidedValue) {
-        var isStream = this.isStream(userProvidedValue);
-        var isBrowserFile = this.isBrowserFile(userProvidedValue);
-        var isCustomFile = this.isCustomFile(userProvidedValue);
-        var isString = typeof userProvidedValue === 'string';
-        var result;
-        if (isStream || isString || isBrowserFile || this.isBuffer(userProvidedValue)) {
-            result = userProvidedValue;
-        }
-        else if (isCustomFile) {
-            result = userProvidedValue.data;
-        }
-        else {
-            throw APIError.getUserDataError("Unknown attachment type ".concat(typeof userProvidedValue), "The \"attachment\" property expects either Buffer, Blob, or String.\n          Also, It is possible to provide an object that has the property \"data\" with a value that is equal to one of the types counted before.\n          Additionally, you may use an array to send more than one attachment.");
-        }
-        return result;
-    };
-    AttachmentsHandler.prototype.getBlobFromStream = function (stream, size) {
-        return new BlobFromStream(stream, size);
-    };
-    return AttachmentsHandler;
-}());
+/*! https://mths.be/base64 v1.0.0 by @mathias | MIT license */
+var base64 = base64$1.exports;
 
-var FormDataBuilder = /** @class */ (function () {
-    function FormDataBuilder(FormDataConstructor) {
-        this.FormDataConstructor = FormDataConstructor;
-        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
-        this.attachmentsHandler = new AttachmentsHandler();
-    }
-    FormDataBuilder.prototype.createFormData = function (data) {
-        var _this = this;
-        if (!data) {
-            throw new Error('Please provide data object');
-        }
-        var formData = Object.keys(data)
-            .filter(function (key) { return data[key]; })
-            .reduce(function (formDataAcc, key) {
-            if (_this.fileKeys.includes(key)) {
-                var attachmentValue = data[key];
-                if (_this.isMessageAttachment(attachmentValue)) {
-                    _this.addFilesToFD(key, attachmentValue, formDataAcc);
-                    return formDataAcc;
-                }
-                throw APIError.getUserDataError("Unknown value ".concat(data[key], " with type ").concat(typeof data[key], " for property \"").concat(key, "\""), "The key \"".concat(key, "\" should have type of Buffer, Stream, File, or String "));
-            }
-            if (key === 'message') { // mime message
-                var messageValue = data[key];
-                if (!messageValue || !_this.isMIME(messageValue)) {
-                    throw APIError.getUserDataError("Unknown data type for \"".concat(key, "\" property"), 'The mime data should have type of Buffer, String or Blob');
-                }
-                _this.addMimeDataToFD(key, messageValue, formDataAcc);
-                return formDataAcc;
-            }
-            _this.addCommonPropertyToFD(key, data[key], formDataAcc);
-            return formDataAcc;
-        }, new this.FormDataConstructor());
-        return formData;
-    };
-    FormDataBuilder.prototype.addMimeDataToFD = function (key, data, formDataInstance) {
-        if (typeof data === 'string') { // if string only two parameters should be used.
-            formDataInstance.append(key, data);
-            return;
-        }
-        if (this.isFormDataPackage(formDataInstance)) { // form-data package is used
-            var nodeFormData = formDataInstance;
-            nodeFormData.append(key, data, { filename: 'MimeMessage' });
-            return;
-        }
-        if (typeof Blob !== undefined) { // either node > 18 or browser
-            var browserFormData = formDataInstance; // Browser compliant FormData
-            if (data instanceof Blob) {
-                browserFormData.append(key, data, 'MimeMessage');
-                return;
-            }
-            if (this.attachmentsHandler.isBuffer(data)) { // node environment
-                var blobInstance = new Blob([data]);
-                browserFormData.append(key, blobInstance, 'MimeMessage');
-            }
-        }
-    };
-    FormDataBuilder.prototype.isMIME = function (data) {
-        return typeof data === 'string'
-            || (typeof Blob !== 'undefined' && data instanceof Blob)
-            || this.attachmentsHandler.isBuffer(data)
-            || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
-    };
-    FormDataBuilder.prototype.isFormDataPackage = function (obj) {
-        return typeof obj === 'object'
-            && obj !== null
-            && typeof obj.getHeaders === 'function';
-    };
-    FormDataBuilder.prototype.isMessageAttachment = function (value) {
-        var _this = this;
-        return (this.attachmentsHandler.isCustomFile(value)
-            || typeof value === 'string'
-            || (typeof File !== 'undefined' && value instanceof File)
-            || (typeof Blob !== 'undefined' && value instanceof Blob)
-            || this.attachmentsHandler.isBuffer(value)
-            || this.attachmentsHandler.isStream(value)
-            || (Array.isArray(value) && value.every(function (item) { return _this.attachmentsHandler.isCustomFile(item)
-                || (typeof File !== 'undefined' && item instanceof File)
-                || (typeof Blob !== 'undefined' && value instanceof Blob)
-                || _this.attachmentsHandler.isBuffer(item)
-                || _this.attachmentsHandler.isStream(item); })));
-    };
-    FormDataBuilder.prototype.addFilesToFD = function (propertyName, value, formDataInstance) {
-        var _this = this;
-        var appendFileToFD = function (originalKey, attachment, formData) {
-            var key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
-            var objData = _this.attachmentsHandler.convertToFDexpectedShape(attachment);
-            var options = _this.attachmentsHandler.getAttachmentInfo(attachment);
-            if (_this.isFormDataPackage(formData)) {
-                var fd = formData;
-                var data = typeof objData === 'string' ? Buffer.from(objData) : objData;
-                fd.append(key, data, options);
-                return;
-            }
-            if (typeof Blob !== undefined) { // either node > 18 or browser
-                var browserFormData = formDataInstance; // Browser compliant FormData
-                if (typeof objData === 'string' || _this.attachmentsHandler.isBuffer(objData)) {
-                    var blobInstance = new Blob([objData]);
-                    browserFormData.append(key, blobInstance, options.filename);
-                    return;
-                }
-                if (objData instanceof Blob) {
-                    browserFormData.append(key, objData, options.filename);
-                    return;
-                }
-                if (_this.attachmentsHandler.isStream(objData)) {
-                    var blob = _this.attachmentsHandler.getBlobFromStream(objData, options.knownLength);
-                    browserFormData.set(key, blob, options.filename);
-                }
-            }
-        };
-        if (Array.isArray(value)) {
-            value.forEach(function (item) {
-                appendFileToFD(propertyName, item, formDataInstance);
-            });
-        }
-        else {
-            appendFileToFD(propertyName, value, formDataInstance);
-        }
-    };
-    FormDataBuilder.prototype.addCommonPropertyToFD = function (key, value, formDataAcc) {
-        var _this = this;
-        var addValueBasedOnFD = function (fdKey, fdValue) {
-            if (_this.isFormDataPackage(formDataAcc)) {
-                if (typeof fdValue === 'object') {
-                    // eslint-disable-next-line no-console
-                    console.warn('The received value is an object. \n'
-                        + '"JSON.Stringify" will be used to avoid TypeError \n'
-                        + 'To remove this warning: \n'
-                        + 'Consider switching to built-in FormData or converting the value on your own.\n');
-                    return formDataAcc.append(fdKey, JSON.stringify(fdValue));
-                }
-                return formDataAcc.append(fdKey, fdValue);
-            }
-            if (typeof fdValue === 'string') {
-                return formDataAcc.append(fdKey, fdValue);
-            }
-            if (typeof Blob !== undefined && fdValue instanceof Blob) {
-                return formDataAcc.append(fdKey, fdValue);
-            }
-            throw APIError.getUserDataError('Unknown value type for Form Data. String or Blob expected', 'Browser compliant FormData allows only string or Blob values for properties that are not attachments.');
-        };
-        if (Array.isArray(value)) {
-            value.forEach(function (item) {
-                addValueBasedOnFD(key, item);
-            });
-        }
-        else if (value != null) {
-            addValueBasedOnFD(key, value);
-        }
-    };
-    return FormDataBuilder;
-}());
+var hasRequiredBase64;
+
+function requireBase64 () {
+	if (hasRequiredBase64) return base64$1.exports;
+	hasRequiredBase64 = 1;
+	(function (module, exports) {
+(function(root) {
+
+			// Detect free variables `exports`.
+			var freeExports = exports;
+
+			// Detect free variable `module`.
+			var freeModule = module &&
+				module.exports == freeExports && module;
+
+			// Detect free variable `global`, from Node.js or Browserified code, and use
+			// it as `root`.
+			var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal;
+			if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
+				root = freeGlobal;
+			}
+
+			/*--------------------------------------------------------------------------*/
+
+			var InvalidCharacterError = function(message) {
+				this.message = message;
+			};
+			InvalidCharacterError.prototype = new Error;
+			InvalidCharacterError.prototype.name = 'InvalidCharacterError';
+
+			var error = function(message) {
+				// Note: the error messages used throughout this file match those used by
+				// the native `atob`/`btoa` implementation in Chromium.
+				throw new InvalidCharacterError(message);
+			};
+
+			var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+			// http://whatwg.org/html/common-microsyntaxes.html#space-character
+			var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
+
+			// `decode` is designed to be fully compatible with `atob` as described in the
+			// HTML Standard. http://whatwg.org/html/webappapis.html#dom-windowbase64-atob
+			// The optimized base64-decoding algorithm used is based on @atk’s excellent
+			// implementation. https://gist.github.com/atk/1020396
+			var decode = function(input) {
+				input = String(input)
+					.replace(REGEX_SPACE_CHARACTERS, '');
+				var length = input.length;
+				if (length % 4 == 0) {
+					input = input.replace(/==?$/, '');
+					length = input.length;
+				}
+				if (
+					length % 4 == 1 ||
+					// http://whatwg.org/C#alphanumeric-ascii-characters
+					/[^+a-zA-Z0-9/]/.test(input)
+				) {
+					error(
+						'Invalid character: the string to be decoded is not correctly encoded.'
+					);
+				}
+				var bitCounter = 0;
+				var bitStorage;
+				var buffer;
+				var output = '';
+				var position = -1;
+				while (++position < length) {
+					buffer = TABLE.indexOf(input.charAt(position));
+					bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
+					// Unless this is the first of a group of 4 characters…
+					if (bitCounter++ % 4) {
+						// …convert the first 8 bits to a single ASCII character.
+						output += String.fromCharCode(
+							0xFF & bitStorage >> (-2 * bitCounter & 6)
+						);
+					}
+				}
+				return output;
+			};
+
+			// `encode` is designed to be fully compatible with `btoa` as described in the
+			// HTML Standard: http://whatwg.org/html/webappapis.html#dom-windowbase64-btoa
+			var encode = function(input) {
+				input = String(input);
+				if (/[^\0-\xFF]/.test(input)) {
+					// Note: no need to special-case astral symbols here, as surrogates are
+					// matched, and the input is supposed to only contain ASCII anyway.
+					error(
+						'The string to be encoded contains characters outside of the ' +
+						'Latin1 range.'
+					);
+				}
+				var padding = input.length % 3;
+				var output = '';
+				var position = -1;
+				var a;
+				var b;
+				var c;
+				var buffer;
+				// Make sure any padding is handled outside of the loop.
+				var length = input.length - padding;
+
+				while (++position < length) {
+					// Read three bytes, i.e. 24 bits.
+					a = input.charCodeAt(position) << 16;
+					b = input.charCodeAt(++position) << 8;
+					c = input.charCodeAt(++position);
+					buffer = a + b + c;
+					// Turn the 24 bits into four chunks of 6 bits each, and append the
+					// matching character for each of them to the output.
+					output += (
+						TABLE.charAt(buffer >> 18 & 0x3F) +
+						TABLE.charAt(buffer >> 12 & 0x3F) +
+						TABLE.charAt(buffer >> 6 & 0x3F) +
+						TABLE.charAt(buffer & 0x3F)
+					);
+				}
+
+				if (padding == 2) {
+					a = input.charCodeAt(position) << 8;
+					b = input.charCodeAt(++position);
+					buffer = a + b;
+					output += (
+						TABLE.charAt(buffer >> 10) +
+						TABLE.charAt((buffer >> 4) & 0x3F) +
+						TABLE.charAt((buffer << 2) & 0x3F) +
+						'='
+					);
+				} else if (padding == 1) {
+					buffer = input.charCodeAt(position);
+					output += (
+						TABLE.charAt(buffer >> 2) +
+						TABLE.charAt((buffer << 4) & 0x3F) +
+						'=='
+					);
+				}
+
+				return output;
+			};
+
+			var base64 = {
+				'encode': encode,
+				'decode': decode,
+				'version': '1.0.0'
+			};
+
+			// Some AMD build optimizers, like r.js, check for specific condition patterns
+			// like the following:
+			if (freeExports && !freeExports.nodeType) {
+				if (freeModule) { // in Node.js or RingoJS v0.8.0+
+					freeModule.exports = base64;
+				} else { // in Narwhal or RingoJS v0.7.0-
+					for (var key in base64) {
+						base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
+					}
+				}
+			} else { // in Rhino or a web browser
+				root.base64 = base64;
+			}
+
+		}(base64)); 
+	} (base64$1, base64$1.exports));
+	return base64$1.exports;
+}
+
+var base64Exports = requireBase64();
 
 var SubaccountsClient = /** @class */ (function () {
     function SubaccountsClient(request) {
@@ -4408,62 +4556,18 @@ var SubaccountsClient = /** @class */ (function () {
     return SubaccountsClient;
 }());
 
-var Request$1 = /** @class */ (function () {
-    function Request(options, formData) {
-        this.username = options.username;
-        this.key = options.key;
-        this.url = options.url;
-        this.timeout = options.timeout || 60000; // Default timeout is 60 seconds
-        this.headers = this.makeHeadersFromObject(options.headers);
-        this.formDataBuilder = new FormDataBuilder(formData);
-        this.maxBodyLength = 52428800; // 50 MB
-        this.proxy = options === null || options === void 0 ? void 0 : options.proxy;
+var AxiosProvider = /** @class */ (function () {
+    function AxiosProvider(_a) {
+        var username = _a.username, key = _a.key, timeout = _a.timeout, maxBodyLength = _a.maxBodyLength, proxy = _a.proxy, configHeaders = _a.configHeaders, useFetch = _a.useFetch;
+        this.timeout = timeout;
+        this.maxBodyLength = maxBodyLength;
+        this.proxy = proxy;
+        this.username = username;
+        this.key = key;
+        this.headers = this.makeHeadersFromObject(configHeaders);
+        this.useFetch = useFetch;
     }
-    Request.prototype.request = function (method, url, onCallOptions) {
-        var _a, _b, _c;
-        return __awaiter(this, void 0, void 0, function () {
-            var options, requestHeaders, params, body, response, urlValue, err_1, errorResponse, res;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        options = __assign({}, onCallOptions);
-                        options === null || options === void 0 ? true : delete options.headers;
-                        requestHeaders = this.joinAndTransformHeaders(onCallOptions);
-                        params = __assign({}, options);
-                        if ((options === null || options === void 0 ? void 0 : options.query) && Object.getOwnPropertyNames(options === null || options === void 0 ? void 0 : options.query).length > 0) {
-                            params.params = new URLSearchParams(options.query);
-                            delete params.query;
-                        }
-                        if (options === null || options === void 0 ? void 0 : options.body) {
-                            body = options === null || options === void 0 ? void 0 : options.body;
-                            params.data = body;
-                            delete params.body;
-                        }
-                        urlValue = urljoin(this.url, url);
-                        _d.label = 1;
-                    case 1:
-                        _d.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios.request(__assign(__assign({ method: method.toLocaleUpperCase(), timeout: this.timeout, url: urlValue, headers: requestHeaders }, params), { maxBodyLength: this.maxBodyLength, proxy: this.proxy }))];
-                    case 2:
-                        response = _d.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _d.sent();
-                        errorResponse = err_1;
-                        throw new APIError({
-                            status: ((_a = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _a === void 0 ? void 0 : _a.status) || 400,
-                            statusText: ((_b = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _b === void 0 ? void 0 : _b.statusText) || errorResponse.code,
-                            body: ((_c = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _c === void 0 ? void 0 : _c.data) || errorResponse.message
-                        });
-                    case 4: return [4 /*yield*/, this.getResponseBody(response)];
-                    case 5:
-                        res = _d.sent();
-                        return [2 /*return*/, res];
-                }
-            });
-        });
-    };
-    Request.prototype.getResponseBody = function (response) {
+    AxiosProvider.prototype.getResponseBody = function (response) {
         return __awaiter(this, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
@@ -4490,17 +4594,34 @@ var Request$1 = /** @class */ (function () {
             });
         });
     };
-    Request.prototype.joinAndTransformHeaders = function (onCallOptions) {
+    AxiosProvider.prototype.getDataRelatedHeaders = function (config) {
+        var _a;
+        var isFormURLEncoded = (_a = config === null || config === void 0 ? void 0 : config.isFormURLEncoded) !== null && _a !== void 0 ? _a : true;
+        var isMultipartFormData = config === null || config === void 0 ? void 0 : config.isMultipartFormData;
+        var isApplicationJSON = config === null || config === void 0 ? void 0 : config.isApplicationJSON;
+        var headers = {};
+        if (isFormURLEncoded) {
+            headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+        if (isMultipartFormData) {
+            headers['Content-Type'] = 'multipart/form-data';
+        }
+        if (isApplicationJSON) {
+            headers['Content-Type'] = 'application/json';
+        }
+        return headers;
+    };
+    AxiosProvider.prototype.addRequestLevelHeaders = function (config) {
         var requestHeaders = new AxiosHeaders();
         var basic = base64Exports.encode("".concat(this.username, ":").concat(this.key));
         requestHeaders.setAuthorization("Basic ".concat(basic));
         requestHeaders.set(this.headers);
-        var receivedOnCallHeaders = onCallOptions && onCallOptions.headers;
-        var onCallHeaders = this.makeHeadersFromObject(receivedOnCallHeaders);
+        var dataRelatedHeaders = this.getDataRelatedHeaders(config);
+        var onCallHeaders = this.makeHeadersFromObject(dataRelatedHeaders);
         requestHeaders.set(onCallHeaders);
         return requestHeaders;
     };
-    Request.prototype.makeHeadersFromObject = function (headersObject) {
+    AxiosProvider.prototype.makeHeadersFromObject = function (headersObject) {
         if (headersObject === void 0) { headersObject = {}; }
         var requestHeaders = new AxiosHeaders();
         requestHeaders = Object.entries(headersObject).reduce(function (headersAccumulator, currentPair) {
@@ -4510,52 +4631,175 @@ var Request$1 = /** @class */ (function () {
         }, requestHeaders);
         return requestHeaders;
     };
-    Request.prototype.setSubaccountHeader = function (subaccountId) {
-        var _a;
-        var headers = this.makeHeadersFromObject(__assign(__assign({}, this.headers), (_a = {}, _a[SubaccountsClient.SUBACCOUNT_HEADER] = subaccountId, _a)));
-        this.headers.set(headers);
+    AxiosProvider.prototype.setSubAccountHeader = function (subAccountId) {
+        this.headers.set(SubaccountsClient.SUBACCOUNT_HEADER, subAccountId);
     };
-    Request.prototype.resetSubaccountHeader = function () {
+    AxiosProvider.prototype.resetSubAccountHeader = function () {
         this.headers.delete(SubaccountsClient.SUBACCOUNT_HEADER);
     };
-    Request.prototype.query = function (method, url, query, options) {
-        return this.request(method, url, __assign({ query: query }, options));
+    AxiosProvider.prototype.makeRequest = function (url, method, data, config) {
+        var _a, _b, _c;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, requestHeaders, reqObject, err_1, errorResponse, res;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        requestHeaders = this.addRequestLevelHeaders(config);
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 3, , 4]);
+                        reqObject = __assign(__assign({ method: method.toLocaleUpperCase(), timeout: this.timeout, url: url, headers: requestHeaders }, data), { maxBodyLength: this.maxBodyLength, proxy: this.proxy });
+                        if (this.useFetch) {
+                            reqObject.adapter = 'fetch';
+                            if (config === null || config === void 0 ? void 0 : config.dataSize) {
+                                if (config.dataSize > 0 && config.dataSize > this.maxBodyLength) {
+                                    throw new APIError({
+                                        status: 400,
+                                        statusText: '(Fetch) Request body larger than maxBodyLength limit',
+                                        body: "(Fetch) Request body size of ".concat(config.dataSize, " bytes exceeds the maximum allowed size of ").concat(this.maxBodyLength, " bytes")
+                                    });
+                                }
+                            }
+                        }
+                        return [4 /*yield*/, axios.request(reqObject)];
+                    case 2:
+                        response = _d.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_1 = _d.sent();
+                        errorResponse = err_1;
+                        throw new APIError({
+                            status: ((_a = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _a === void 0 ? void 0 : _a.status) || 400,
+                            statusText: ((_b = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _b === void 0 ? void 0 : _b.statusText) || errorResponse.code,
+                            body: ((_c = errorResponse === null || errorResponse === void 0 ? void 0 : errorResponse.response) === null || _c === void 0 ? void 0 : _c.data) || errorResponse.message
+                        });
+                    case 4: return [4 /*yield*/, this.getResponseBody(response)];
+                    case 5:
+                        res = _d.sent();
+                        return [2 /*return*/, res];
+                }
+            });
+        });
     };
-    Request.prototype.command = function (method, url, data, options, addDefaultHeaders) {
-        if (addDefaultHeaders === void 0) { addDefaultHeaders = true; }
-        var headers = {};
-        if (addDefaultHeaders) {
-            headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-        }
-        var requestOptions = __assign(__assign(__assign({}, headers), { body: data }), options);
-        return this.request(method, url, requestOptions);
+    return AxiosProvider;
+}());
+
+var Request = /** @class */ (function () {
+    function Request(options, formData) {
+        this.url = options.url;
+        this.formDataBuilder = new FormDataBuilder(formData, { useFetch: options.useFetch });
+        var providersConfig = {
+            timeout: options.timeout,
+            maxBodyLength: 52428800,
+            proxy: options.proxy,
+            username: options.username,
+            key: options.key,
+            configHeaders: options.headers,
+            useFetch: options.useFetch
+        };
+        this.requestProvider = new AxiosProvider(providersConfig);
+    }
+    Request.prototype.request = function (method, url, onCallOptions, config) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var options, params, urlValue;
+            return __generator(this, function (_b) {
+                options = __assign({}, onCallOptions);
+                params = {};
+                urlValue = urljoin(this.url, url);
+                if ((options === null || options === void 0 ? void 0 : options.query) && Object.getOwnPropertyNames(options === null || options === void 0 ? void 0 : options.query).length > 0) {
+                    if ((_a = options === null || options === void 0 ? void 0 : options.query) === null || _a === void 0 ? void 0 : _a.searchParams) {
+                        params.params = new URLSearchParams(options.query.searchParams);
+                    }
+                    else {
+                        params.params = new URLSearchParams(options.query);
+                    }
+                }
+                if (options === null || options === void 0 ? void 0 : options.body) {
+                    params.data = options === null || options === void 0 ? void 0 : options.body;
+                }
+                return [2 /*return*/, this.requestProvider.makeRequest(urlValue, method.toUpperCase(), params, config)];
+            });
+        });
     };
-    Request.prototype.get = function (url, query, options) {
-        return this.query('get', url, query, options);
+    Request.prototype.setSubaccountHeader = function (subAccountId) {
+        this.requestProvider.setSubAccountHeader(subAccountId);
     };
-    Request.prototype.post = function (url, data, options) {
-        return this.command('post', url, data, options);
+    Request.prototype.resetSubaccountHeader = function () {
+        this.requestProvider.resetSubAccountHeader();
+    };
+    Request.prototype.query = function (method, url, query) {
+        return this.request(method, url, { query: query });
+    };
+    Request.prototype.command = function (method, url, data, config, queryObject) {
+        var requestOptions = {
+            body: data,
+            query: queryObject === null || queryObject === void 0 ? void 0 : queryObject.query,
+        };
+        return this.request(method, url, requestOptions, config);
+    };
+    Request.prototype.get = function (url, query) {
+        return this.query('get', url, query);
+    };
+    Request.prototype.post = function (url, data, config) {
+        return this.command('post', url, data, {
+            isFormURLEncoded: false,
+            isApplicationJSON: config === null || config === void 0 ? void 0 : config.isApplicationJSON
+        });
     };
     Request.prototype.postWithFD = function (url, data) {
-        var formData = this.formDataBuilder.createFormData(data);
-        return this.command('post', url, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        }, false);
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, formData, dataSize;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.formDataBuilder.createFormData(data)];
+                    case 1:
+                        _a = _b.sent(), formData = _a.formData, dataSize = _a.dataSize;
+                        return [2 /*return*/, this.command('post', url, formData, {
+                                isFormURLEncoded: false,
+                                isMultipartFormData: true,
+                                dataSize: dataSize
+                            })];
+                }
+            });
+        });
     };
     Request.prototype.putWithFD = function (url, data) {
-        var formData = this.formDataBuilder.createFormData(data);
-        return this.command('put', url, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        }, false);
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, formData, dataSize;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.formDataBuilder.createFormData(data)];
+                    case 1:
+                        _a = _b.sent(), formData = _a.formData, dataSize = _a.dataSize;
+                        return [2 /*return*/, this.command('put', url, formData, {
+                                isFormURLEncoded: false,
+                                isMultipartFormData: true,
+                                dataSize: dataSize
+                            })];
+                }
+            });
+        });
     };
     Request.prototype.patchWithFD = function (url, data) {
-        var formData = this.formDataBuilder.createFormData(data);
-        return this.command('patch', url, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        }, false);
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, formData, dataSize;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.formDataBuilder.createFormData(data)];
+                    case 1:
+                        _a = _b.sent(), formData = _a.formData, dataSize = _a.dataSize;
+                        return [2 /*return*/, this.command('patch', url, formData, {
+                                isFormURLEncoded: false,
+                                isMultipartFormData: true,
+                                dataSize: dataSize
+                            })];
+                }
+            });
+        });
     };
-    Request.prototype.put = function (url, data, options) {
-        return this.command('put', url, data, options);
+    Request.prototype.put = function (url, data, queryObject) {
+        return this.command('put', url, data, {}, queryObject);
     };
     Request.prototype.delete = function (url, data) {
         return this.command('delete', url, data);
@@ -4749,17 +4993,20 @@ var DomainsClient = /** @class */ (function () {
         return this.request.delete(urljoin('/v3/domains', domain, 'ips', 'ip_pool', searchParams));
     };
     DomainsClient.prototype.updateDKIMAuthority = function (domain, data) {
-        return this.request.put("/v3/domains/".concat(domain, "/dkim_authority"), {}, { query: "self=".concat(data.self) })
+        var options = { query: "self=".concat(data.self) };
+        return this.request.put("/v3/domains/".concat(domain, "/dkim_authority"), {}, options)
             .then(function (res) { return res; })
             .then(function (res) { return res.body; });
     };
     DomainsClient.prototype.updateDKIMSelector = function (domain, data) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var res;
+            var options, res;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.request.put("/v3/domains/".concat(domain, "/dkim_selector"), {}, { query: "dkim_selector=".concat(data.dkimSelector) })];
+                    case 0:
+                        options = { query: "dkim_selector=".concat(data.dkimSelector) };
+                        return [4 /*yield*/, this.request.put("/v3/domains/".concat(domain, "/dkim_selector"), {}, options)];
                     case 1:
                         res = _b.sent();
                         return [2 /*return*/, {
@@ -4777,7 +5024,8 @@ var DomainsClient = /** @class */ (function () {
     */
     DomainsClient.prototype.updateWebPrefix = function (domain, data) {
         this.logger.warn('"domains.updateWebPrefix" method is deprecated, please use domains.update to set new "web_prefix". Current method will be removed in the future releases.');
-        return this.request.put("/v3/domains/".concat(domain, "/web_prefix"), {}, { query: "web_prefix=".concat(data.webPrefix) })
+        var options = { query: "web_prefix=".concat(data.webPrefix) };
+        return this.request.put("/v3/domains/".concat(domain, "/web_prefix"), {}, options)
             .then(function (res) { return res; });
     };
     return DomainsClient;
@@ -4934,12 +5182,12 @@ var StatsClient = /** @class */ (function () {
     };
     StatsClient.prototype.getDomain = function (domain, query) {
         var searchParams = this.prepareSearchParams(query);
-        return this.request.get(urljoin('/v3', domain, 'stats/total'), searchParams)
+        return this.request.get(urljoin('/v3', domain, 'stats/total'), { searchParams: searchParams })
             .then(this.parseStats);
     };
     StatsClient.prototype.getAccount = function (query) {
         var searchParams = this.prepareSearchParams(query);
-        return this.request.get('/v3/stats/total', searchParams)
+        return this.request.get('/v3/stats/total', { searchParams: searchParams })
             .then(this.parseStats);
     };
     return StatsClient;
@@ -5029,9 +5277,6 @@ var WhiteList = /** @class */ (function (_super) {
     return WhiteList;
 }(Suppression));
 
-var createOptions = {
-    headers: { 'Content-Type': 'application/json' }
-};
 var SuppressionClient = /** @class */ (function (_super) {
     __extends(SuppressionClient, _super);
     function SuppressionClient(request) {
@@ -5071,7 +5316,7 @@ var SuppressionClient = /** @class */ (function (_super) {
                 throw APIError.getUserDataError('Tag property should not be used for creating multiple unsubscribes.', 'Tag property can be used only if one unsubscribe provided as second argument of create method. Please use tags instead.');
             }
             return this.request
-                .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), createOptions)
+                .post(urljoin('v3', domain, 'unsubscribes'), JSON.stringify(data), { isApplicationJSON: true })
                 .then(this.prepareResponse);
         }
         if (data === null || data === void 0 ? void 0 : data.tags) {
@@ -5133,7 +5378,7 @@ var SuppressionClient = /** @class */ (function (_super) {
             postData = __spreadArray([], data, true);
         }
         return this.request
-            .post(urljoin('v3', domain, type), JSON.stringify(postData), createOptions)
+            .post(urljoin('v3', domain, type), JSON.stringify(postData), { isApplicationJSON: true })
             .then(this.prepareResponse);
     };
     SuppressionClient.prototype.destroy = function (domain, type, address) {
@@ -5892,7 +6137,7 @@ var DomainTagsClient = /** @class */ (function (_super) {
             .then(function (res) { return new DomainTag(res.body); });
     };
     DomainTagsClient.prototype.update = function (domain, tag, description) {
-        return this.request.put(urljoin(this.baseRoute, domain, '/tags', tag), description)
+        return this.request.put(urljoin(this.baseRoute, domain, '/tags', tag), { description: description })
             .then(function (res) { return res.body; });
     };
     DomainTagsClient.prototype.destroy = function (domain, tag) {
@@ -6159,7 +6404,7 @@ var InboxPlacementsResultsClient = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         queryData = this.prepareQueryData(query);
-                        return [4 /*yield*/, this.request.get('/v4/inbox/results', queryData)];
+                        return [4 /*yield*/, this.request.get('/v4/inbox/results', __assign({}, queryData))];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, this.parseList(response)];
@@ -6305,10 +6550,12 @@ var IPRSharingClient = /** @class */ (function () {
     };
     IPRSharingClient.prototype.update = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, result;
+            var options, response, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request.put("/v4/inbox/sharing/".concat(id), {}, { query: "enabled=".concat(data.enabled) })];
+                    case 0:
+                        options = { query: "enabled=".concat(data.enabled) };
+                        return [4 /*yield*/, this.request.put("/v4/inbox/sharing/".concat(id), {}, options)];
                     case 1:
                         response = _a.sent();
                         result = this.prepareInboxPlacementsResultSharing(response.body.sharing);
@@ -6526,8 +6773,11 @@ var MailgunClient = /** @class */ (function () {
         if (!config.key) {
             throw new Error('Parameter "key" is required');
         }
+        if (config.useFetch && config.proxy) {
+            throw new Error('Proxy can not be used with fetch provider');
+        }
         /** @internal */
-        this.request = new Request$1(config, formData);
+        this.request = new Request(config, formData);
         var mailListsMembers = new MailListsMembers(this.request);
         var domainCredentialsClient = new DomainCredentialsClient(this.request);
         var domainTemplatesClient = new DomainTemplatesClient(this.request);

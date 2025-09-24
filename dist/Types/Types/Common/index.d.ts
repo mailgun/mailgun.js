@@ -4,3 +4,4 @@ export * from './Error.js';
 export * from './FormData.js';
 export * from './NavigationThruPages.js';
 export * from './RequestOptions.js';
+export * from './RequestProvider.js';

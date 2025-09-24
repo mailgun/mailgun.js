@@ -11,3 +11,10 @@ export type InputFormData = {
 export type FormDataInput = {
     [key: string]: FormDataInputValue;
 };
+export type FormDataBuilderConfig = {
+    useFetch?: boolean;
+};
+export type CreatedFormData = {
+    dataSize?: number;
+    formData: NodeFormData | FormData;
+};

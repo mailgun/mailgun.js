@@ -175,3 +175,7 @@ export type DomainGetQuery = {
     extended?: boolean;
     with_dns?: boolean;
 };
+export type DomainGetAPIQuery = {
+    'h:extended'?: boolean;
+    'h:with_dns'?: boolean;
+};
