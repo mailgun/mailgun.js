@@ -12,11 +12,14 @@ __Table of Contents__
   - [Install](#install)
   - [Setup Client](#setup-client)
     - [Available Imports](#imports)
-    - [Using Subaccounts](#using-subaccounts)
     - [Types imports](#types-imports)
     - [Interfaces and Enums imports](#interfaces-and-enums-imports)
+    - [Fetch API usage](#fetch-api-usage)
+    - [Proxy configuration](proxy-configuration)
+    - [SubAccounts](#using-subaccounts)
   - [Generated docs](#generated-docs)
   - [Methods](#methods)
+  - [Pagination](#pagination)
   - [Browser Demo](#browser-demo)
   - [Examples](https://github.com/mailgun/mailgun-js/tree/master/examples)
 - [Development](#development)
@@ -50,16 +53,14 @@ NOTE: starting from version 3.0 you need to pass FormData (we need this to keep 
 Once the package is installed, you can import the library using `import` or `require` approach:
 
 ```js
-  const formData = require('form-data'); // or built-in FormData
   const Mailgun = require('mailgun.js');
-  const mailgun = new Mailgun(formData);
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+  const mailgun = new Mailgun(FormData); // or const formData = require('form-data');
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-{yourkeyhere}'});
 ```
 ```js
-  import FormData from 'form-data'; // or built-in FormData
   import Mailgun from 'mailgun.js';
-  const mailgun = new Mailgun(FormData);
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+  const mailgun = new Mailgun(FormData); // or import formData from 'form-data';
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-{yourkeyhere}'});
 ```
 
 Be aware that there are four bundles available for usage. All of them are conditionally exported by package.json and separated by environment (Browser/Node.js):
@@ -124,25 +125,49 @@ Be aware that there are four bundles available for usage. All of them are condit
       })
       </script>
       ```
-### Using Subaccounts
-Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
-```js
-  import FormData from 'form-data'; // or built-in FormData
-  import Mailgun from 'mailgun.js';
-  const mailgun = new Mailgun(FormData);
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
-  mg.setSubaccount('subaccount-id');
-  // then, if you need to reset it back to the primary account:
-  mg.resetSubaccount();
+
+### Types imports
+Types defined by SDK can be imported from 'definitions' submodule:
+```TS
+ import { MailgunClientOptions, MessagesSendResult } from 'mailgun.js/definitions';
+```
+
+### Interfaces and Enums imports
+Interfaces and Enums defined by SDK can be imported from 'definitions' submodule:
+```TS
+  import { Interfaces, Enums } from 'mailgun.js/definitions';
+  ...
+  const mailgunClient: Interfaces.IMailgunClient = mailgun.client(clientOptions);
+  const yes = Enums.YesNo.YES;
+  ...
+```
+### Fetch API usage
+
+Starting from version `12.1.0`, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is available for use in environments that do not support `XMLHttpRequest`.
+
+The new `useFetch` configuration parameter is responsible for this.
+
+***Note that proxy configuration and the `form-data` NPM package are not supported in this case.***
+
+Example:
+
+```TS
+import Mailgun from 'mailgun.js';
+const mailgun = new Mailgun(FormData);
+
+const mg = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
+  useFetch: true,
+});
 ```
 
 ### Proxy configuration
 By leveraging client configuration options, users can effortlessly establish proxy connections that align with their network requirements.
-Ex:
+Example:
 ```js
-  import FormData from 'form-data'; // or built-in FormData
   import Mailgun from 'mailgun.js';
-  const mailgun = new Mailgun(FormData);
+  const mailgun = new Mailgun(FormData);// or import FormData from 'form-data';
 
   const mg = mailgun.client({
     username: 'api',
@@ -158,20 +183,16 @@ Ex:
     },
   });
 ```
-### Types imports
-Types defined by SDK can be imported from 'definitions' submodule:
-```TS
- import { MailgunClientOptions, MessagesSendResult } from 'mailgun.js/definitions';
-```
 
-### Interfaces and Enums imports
-Interfaces and Enums defined by SDK can be imported from 'definitions' submodule:
-```TS
-  import { Interfaces, Enums } from 'mailgun.js/definitions';
-  ...
-  const mailgunClient: Interfaces.IMailgunClient = mailgun.client(clientOptions);
-  const yes = Enums.YesNo.YES;
-  ...
+### SubAccounts Usage
+Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
+```js
+  import Mailgun from 'mailgun.js';
+  const mailgun = new Mailgun(FormData); // or import FormData from 'form-data'
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+  mg.setSubaccount('subaccount-id');
+  // then, if you need to reset it back to the primary account:
+  mg.resetSubaccount();
 ```
 
 ### Generated docs
@@ -4121,21 +4142,21 @@ A client to manage members within a specific mailing list.
     }
   }
 
-## Navigation thru lists
+## Pagination
   Most of the methods that return items in a list support pagination.
   There are two ways to receive part of the list:
-  1. Provide properties 'limit' and 'page' in the query.
+  1. Provide properties `limit` and `page` in the query.
   This way uses more frequently in the SDK and works for the next methods:
-  - mg.domains.domainTags.list()
-  - mg.domains.domainTemplates.list()
-  - mg.domains.domainTemplates.listVersions()
-  - mg.events.get()
-  - mg.lists.list()
-  - mg.lists.members.listMembers()
-  - mg.validate.list()
-  - mg.suppressions.list()
+  - `mg.domains.domainTags.list()`
+  - `mg.domains.domainTemplates.list()`
+  - `mg.domains.domainTemplates.listVersions()`
+  - `mg.events.get()`
+  - `mg.lists.list()`
+  - `mg.lists.members.listMembers()`
+  - `mg.validate.list()`
+  - `mg.suppressions.list()`
 
-    The general idea is that after you made the first call with a limit property in the query you will receive a response with a property called pages in it. This property implements the next interface:
+    The general idea is that after you made the first call with a limit property in the query you will receive a response with `pages` property in it. This property implements the next interface:
 
     ```TS
     {
@@ -4165,7 +4186,7 @@ A client to manage members within a specific mailing list.
         };
     }
     ```
-    To receive the next page you need to add the page property to the query argument. This property should contain a string value from 'page' property in response.pages.(previous/first/last/next).
+    To receive the next page you need to add the `page` property to the query argument. This property should contain a string value from `page` property in response.pages.(previous/first/last/next).
 
     Example:
     ```Js
@@ -4270,12 +4291,13 @@ A client to manage members within a specific mailing list.
     }
     */
     ```
-    2. The second option of navigation is to provide properties 'limit' and 'skip' in the query. This way uses only in a few places for now:
-      - mg.domains.list()
-      - mg.domains.domainCredentials.list()
-      - mg.routes.list()
-      - mg.webhooks.list()
-    The main idea here is quite simple you just need to provide how many records from the start of a list you want to skip and how many to receive. You can do it using the query parameter in each method.
+    2. The second option of navigation is to provide properties `limit` and `skip` in the query. Currently this way is being used only in a few places:
+      - `mg.domains.list()`
+      - `mg.domains.domainCredentials.list()`
+      - `mg.routes.list()`
+      - `mg.webhooks.list()`
+
+    The main idea here is quite simple, you just need to provide how many records from the start of a list you want to skip and how many to receive. You can do it with the query parameter in each method.
     Example:
     ```js
     const listDomainCredentials = await client.domains.domainCredentials.list(

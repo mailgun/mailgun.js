@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.1.0](https://github.com/mailgun/mailgun.js/compare/v12.0.3...v12.1.0) (2025-09-25)
+
+
+### Features
+
+* Add Fetch as alternative client for requests ([3c3cb4a](https://github.com/mailgun/mailgun.js/commits/3c3cb4a5e7230821c90397e52b851217a00814b9))
+* Add timeout handling and error for proxy ([93f903f](https://github.com/mailgun/mailgun.js/commits/93f903f046866a280bb1f87eef814f5f2e79eb89))
+* Use fetch from Axios ([ab1f3e4](https://github.com/mailgun/mailgun.js/commits/ab1f3e429b127e8124de38e8e1f8452cf9dedfd4))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump form-data from 3.0.3 to 3.0.4 ([8c94cc6](https://github.com/mailgun/mailgun.js/commits/8c94cc63fc1aec015b2f4b870a3f306a3b4b80c5))
+* **deps:** bump axios from 1.10.0 to 1.11.0 ([442918a](https://github.com/mailgun/mailgun.js/commits/442918a1b62f16c28badaf9fda8042ff51c77bd9))
+* **deps:** bump axios from 1.11.0 to 1.12.1 ([d349402](https://github.com/mailgun/mailgun.js/commits/d349402c391b81df52229c983ad6c72ebdd7c742))
+* **deps:** bump tar-fs from 3.0.9 to 3.1.1 ([eb7135e](https://github.com/mailgun/mailgun.js/commits/eb7135e5fdfa146591b2b1ca39ac42492aa9dcba))
+* Domain tags update method ([361ecc7](https://github.com/mailgun/mailgun.js/commits/361ecc7bf37e574708dccf83bfae1379f62e7e27))
+
+
+### Other changes
+
+* Add fetch checks to all tests ([74382c0](https://github.com/mailgun/mailgun.js/commits/74382c065140ebbd234bc991b95ec68f507af014))
+* Fix existing tests ([e3e0760](https://github.com/mailgun/mailgun.js/commits/e3e07604c35cba541866ebd0419e52f9705fe546))
+* Update build ([a3867a8](https://github.com/mailgun/mailgun.js/commits/a3867a87e44662f9350add77966fcd1c9b259297))
+* Update readme ([4481b81](https://github.com/mailgun/mailgun.js/commits/4481b81512b5bff830e62940f8b75ae96df41417))
+
 ### [12.0.3](https://github.com/mailgun/mailgun.js/compare/v12.0.2...v12.0.3) (2025-06-20)
 
 

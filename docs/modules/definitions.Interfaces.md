@@ -33,6 +33,7 @@
 - [IMessagesClient](../interfaces/definitions.Interfaces.IMessagesClient.md)
 - [IMetricsClient](../interfaces/definitions.Interfaces.IMetricsClient.md)
 - [IMultipleValidationClient](../interfaces/definitions.Interfaces.IMultipleValidationClient.md)
+- [IRequestProvider](../interfaces/definitions.Interfaces.IRequestProvider.md)
 - [IRoutesClient](../interfaces/definitions.Interfaces.IRoutesClient.md)
 - [ISeedsListsClient](../interfaces/definitions.Interfaces.ISeedsListsClient.md)
 - [IStatsClient](../interfaces/definitions.Interfaces.IStatsClient.md)
