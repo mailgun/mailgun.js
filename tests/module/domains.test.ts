@@ -1,9 +1,9 @@
 import formData from 'form-data';
 
 import nock from 'nock';
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 
-import { InputFormData, RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions } from '../../lib/Types/Common/index.js';
 import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredentials.js';
 import DomainTemplatesClient from '../../lib/Classes/Domains/domainsTemplates.js';
 import DomainTagsClient from '../../lib/Classes/Domains/domainsTags.js';
@@ -17,6 +17,7 @@ import {
   DomainTrackingData
 } from '../../lib/Types/Domains/index.js';
 import DomainsClient from '../../lib/Classes/Domains/domainsClient.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 // TODO: fix types
 describe('DomainsClient', function () {
@@ -24,7 +25,7 @@ describe('DomainsClient', function () {
   let api: nock.Scope;
 
   beforeEach(function () {
-    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData);
+    const reqObject = new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData());
     const domainCredentialsClient = new DomainCredentialsClient(reqObject);
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
     const domainTagsClient = new DomainTagsClient(reqObject);
@@ -232,11 +233,11 @@ describe('DomainsClient', function () {
         force_root_dkim_host: true,
         use_automatic_sender_security: true,
       });
-      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\ntrue\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\ntrue\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\ntrue\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\ntrue\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\ntrue\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\ntrue\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n------'));
     });
 
     it('converts boolean FALSE values to string', async () => {
@@ -261,11 +262,11 @@ describe('DomainsClient', function () {
         force_root_dkim_host: false,
         use_automatic_sender_security: false,
       });
-      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\nfalse\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\nfalse\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\nfalse\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_dkim_authority"\r\n\r\nfalse\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="encrypt_incoming_message"\r\n\r\nfalse\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="force_root_dkim_host"\r\n\r\nfalse\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n------'));
     });
   });
   describe('update', function () {
@@ -327,8 +328,8 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: true,
       });
-      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\ntrue\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\ntrue\r\n------'));
     });
 
     it('converts boolean FALSE values to string', async () => {
@@ -349,8 +350,8 @@ describe('DomainsClient', function () {
         spam_action: 'disabled',
         use_automatic_sender_security: false,
       });
-      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n----------------------------'));
-      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n----------------------------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="wildcard"\r\n\r\nfalse\r\n------'));
+      expect(requestObject).toEqual(expect.stringContaining('name="use_automatic_sender_security"\r\n\r\nfalse\r\n------'));
     });
   });
 

@@ -1,4 +1,5 @@
 import { IIPRSharingClient } from '../../../Interfaces/index.js';
+import { PutOptionsType } from '../../../Types/index.js';
 import {
   IPRSharingAPIResponse,
   IPRSharingApiShape,
@@ -44,7 +45,8 @@ export default class IPRSharingClient implements IIPRSharingClient {
     id: string,
     data: IPRSharingUpdateData
   ): Promise<IPRSharingUpdateResult & { status: number }> {
-    const response = await this.request.put(`/v4/inbox/sharing/${id}`, {}, { query: `enabled=${data.enabled}` }) as IPRSharingUpdateAPIResponse;
+    const options: PutOptionsType = { query: `enabled=${data.enabled}` };
+    const response = await this.request.put(`/v4/inbox/sharing/${id}`, {}, options) as IPRSharingUpdateAPIResponse;
     const result = this.prepareInboxPlacementsResultSharing(response.body.sharing);
     return {
       ...result,

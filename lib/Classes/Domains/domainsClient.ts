@@ -41,9 +41,11 @@ import {
   BoolToString,
   DomainGetQuery,
   UpdatedDKIMSelectorResult,
+  DomainGetAPIQuery,
 } from '../../Types/Domains/index.js';
 import Domain from './domain.js';
 import { ILogger, IDomainTrackingClient } from '../../Interfaces/index.js';
+import { PutOptionsType } from '../../Types/index.js';
 
 export default class DomainsClient implements IDomainsClient {
   request: Request;
@@ -111,7 +113,7 @@ export default class DomainsClient implements IDomainsClient {
   }
 
   get(domain: string, query?: DomainGetQuery) : Promise<TDomain> {
-    const preparedQuery = query ? {
+    const preparedQuery: DomainGetAPIQuery = query ? {
       'h:extended': query?.extended ?? false,
       'h:with_dns': query?.with_dns ?? true,
     } : {};
@@ -234,7 +236,8 @@ export default class DomainsClient implements IDomainsClient {
   }
 
   updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority> {
-    return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, { query: `self=${data.self}` })
+    const options: PutOptionsType = { query: `self=${data.self}` };
+    return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, options)
       .then((res : APIResponse) => res as UpdatedDKIMAuthorityResponse)
       .then((res : UpdatedDKIMAuthorityResponse) => res.body as UpdatedDKIMAuthority);
   }
@@ -243,7 +246,8 @@ export default class DomainsClient implements IDomainsClient {
     domain: string,
     data: DKIMSelectorInfo
   ): Promise<UpdatedDKIMSelectorResult> {
-    const res: UpdatedDKIMSelectorResponse = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, { query: `dkim_selector=${data.dkimSelector}` });
+    const options: PutOptionsType = { query: `dkim_selector=${data.dkimSelector}` };
+    const res: UpdatedDKIMSelectorResponse = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, options);
 
     return {
       status: res.status,
@@ -258,7 +262,8 @@ export default class DomainsClient implements IDomainsClient {
   */
   updateWebPrefix(domain: string, data: WebPrefixInfo): Promise<UpdatedWebPrefixResponse> {
     this.logger.warn('"domains.updateWebPrefix" method is deprecated, please use domains.update to set new "web_prefix". Current method will be removed in the future releases.');
-    return this.request.put(`/v3/domains/${domain}/web_prefix`, {}, { query: `web_prefix=${data.webPrefix}` })
+    const options: PutOptionsType = { query: `web_prefix=${data.webPrefix}` };
+    return this.request.put(`/v3/domains/${domain}/web_prefix`, {}, options)
       .then((res : APIResponse) => res as UpdatedWebPrefixResponse);
   }
 }

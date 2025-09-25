@@ -1,15 +1,13 @@
-import formData from 'form-data';
 import nock from 'nock';
 import APIError from '../../lib/Classes/common/Error.js';
 
-import Request from '../../lib/Classes/common/Request.js';
+import Request from './test-utils/TestRequest.js';
 import Bounce from '../../lib/Classes/Suppressions/Bounce.js';
 import Complaint from '../../lib/Classes/Suppressions/Complaint.js';
 import SuppressionClient from '../../lib/Classes/Suppressions/SuppressionsClient.js';
 import Unsubscribe from '../../lib/Classes/Suppressions/Unsubscribe.js';
 import WhiteList from '../../lib/Classes/Suppressions/WhiteList.js';
 import {
-  InputFormData,
   ParsedPage,
   RequestOptions,
   SuppressionCreationResult,
@@ -17,13 +15,14 @@ import {
   SuppressionList,
   SuppressionListResponse
 } from '../../lib/Types/index.js';
+import getTestFormData from './test-utils/TestFormData.js';
 
 describe('SuppressionsClient', function () {
   let client: SuppressionClient;
   let api: nock.Scope;
 
   beforeEach(function () {
-    client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, formData as InputFormData));
+    client = new SuppressionClient(new Request({ url: 'https://api.mailgun.net' } as RequestOptions, getTestFormData()));
     api = nock('https://api.mailgun.net');
   });
 
