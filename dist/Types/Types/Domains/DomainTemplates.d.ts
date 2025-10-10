@@ -1,6 +1,11 @@
 import { YesNo } from '../../Enums/index.js';
 import { IDomainTemplate } from '../../Interfaces/Domains/index.js';
 import { PagesList, ParsedPagesList } from '../Common/index.js';
+export type DomainTemplateAllowedHeaders = {
+    From?: string;
+    'Reply-To'?: string;
+    Subject?: string;
+};
 export type DomainTemplateData = {
     name: string;
     description: string;
@@ -8,6 +13,8 @@ export type DomainTemplateData = {
     tag?: string;
     engine?: string;
     comment?: string;
+    createdBy?: string;
+    headers?: DomainTemplateAllowedHeaders;
 };
 export type DomainTemplateVersionData = {
     template: string;
@@ -15,6 +22,7 @@ export type DomainTemplateVersionData = {
     engine?: string;
     comment?: string;
     active?: YesNo;
+    headers?: DomainTemplateAllowedHeaders;
 };
 export type DomainTemplateUpdateData = {
     description: string;
@@ -23,6 +31,7 @@ export type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
+    headers?: DomainTemplateAllowedHeaders;
 };
 export type DomainTemplatesQuery = {
     /** 'page' (optionally 'p') params from previous response's 'paging' object.
@@ -46,6 +55,7 @@ export type ShortTemplateVersion = {
 };
 export type TemplateVersion = ShortTemplateVersion & {
     template: string;
+    headers?: DomainTemplateAllowedHeaders;
 };
 export type CreateDomainTemplateAPIResponse = {
     status: number;
