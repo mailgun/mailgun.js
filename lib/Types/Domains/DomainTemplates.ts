@@ -2,6 +2,12 @@ import { YesNo } from '../../Enums/index.js';
 import { IDomainTemplate } from '../../Interfaces/Domains/index.js';
 import { PagesList, ParsedPagesList } from '../Common/index.js';
 
+export type DomainTemplateAllowedHeaders = {
+    From?: string;
+    'Reply-To'?: string;
+    Subject?: string;
+}
+
 /* eslint-disable camelcase */
 export type DomainTemplateData = {
     name: string;
@@ -10,6 +16,8 @@ export type DomainTemplateData = {
     tag?: string;
     engine?: string;
     comment?: string;
+    createdBy?: string;
+    headers?: DomainTemplateAllowedHeaders;
 }
 
 export type DomainTemplateVersionData = {
@@ -18,6 +26,7 @@ export type DomainTemplateVersionData = {
     engine?: string;
     comment?: string;
     active?: YesNo;
+    headers?: DomainTemplateAllowedHeaders;
 }
 
 export type DomainTemplateUpdateData = {
@@ -28,6 +37,7 @@ export type DomainTemplateUpdateVersionData = {
     template?: string;
     comment?: string;
     active?: YesNo;
+    headers?: DomainTemplateAllowedHeaders;
 }
 
 export type DomainTemplatesQuery = {
@@ -55,6 +65,7 @@ export type ShortTemplateVersion = {
 
 export type TemplateVersion = ShortTemplateVersion & {
     template: string;
+    headers?: DomainTemplateAllowedHeaders;
 }
 
 export type CreateDomainTemplateAPIResponse = {
