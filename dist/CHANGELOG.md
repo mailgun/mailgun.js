@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.1](https://github.com/mailgun/mailgun.js/compare/v12.1.0...v12.1.1) (2025-10-10)
+
+
+### Bug Fixes
+
+* Domain template types are missing headers field ([bb84b3f](https://github.com/mailgun/mailgun.js/commits/bb84b3fb49acd60e31c22924d70930e3208e5d62))
+
 ## [12.1.0](https://github.com/mailgun/mailgun.js/compare/v12.0.3...v12.1.0) (2025-09-25)
 
 
