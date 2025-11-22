@@ -4532,17 +4532,128 @@ var SubaccountsClient = /** @class */ (function () {
     function SubaccountsClient(request) {
         this.request = request;
     }
+    SubaccountsClient.prototype.convertToDate = function (data) {
+        var res = __assign(__assign({}, data), { created_at: new Date(data.created_at), updated_at: new Date(data.updated_at) });
+        return res;
+    };
     SubaccountsClient.prototype.list = function (query) {
-        return this.request.get('/v5/accounts/subaccounts', query)
-            .then(function (res) { return res.body; });
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get('/v5/accounts/subaccounts', query)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, {
+                                total: res.body.total,
+                                subaccounts: res.body.subaccounts.map(this.convertToDate)
+                            }];
+                }
+            });
+        });
     };
     SubaccountsClient.prototype.get = function (id) {
-        return this.request.get("/v5/accounts/subaccounts/".concat(id))
-            .then(function (res) { return res.body; });
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v5/accounts/subaccounts/".concat(id))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, {
+                                subaccount: this.convertToDate(res.body.subaccount)
+                            }];
+                }
+            });
+        });
     };
     SubaccountsClient.prototype.create = function (name) {
-        return this.request.postWithFD('/v5/accounts/subaccounts', { name: name })
-            .then(function (res) { return res.body; });
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.postWithFD('/v5/accounts/subaccounts', { name: name })];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, {
+                                subaccount: this.convertToDate(res.body.subaccount)
+                            }];
+                }
+            });
+        });
+    };
+    SubaccountsClient.prototype.destroy = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        this.request.setSubaccountHeader(id);
+                        return [4 /*yield*/, this.request.delete('/v5/accounts/subaccounts')];
+                    case 1:
+                        response = _a.sent();
+                        this.request.resetSubaccountHeader();
+                        return [2 /*return*/, response.body];
+                    case 2:
+                        error_1 = _a.sent();
+                        this.request.resetSubaccountHeader();
+                        throw error_1;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    SubaccountsClient.prototype.getMonthlySendingLimit = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v5/accounts/subaccounts/".concat(id, "/limit/custom/monthly"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    SubaccountsClient.prototype.setMonthlySendingLimit = function (id, limit) {
+        return __awaiter(this, void 0, void 0, function () {
+            var customLimit, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        customLimit = { query: "limit=".concat(limit) };
+                        return [4 /*yield*/, this.request.put("/v5/accounts/subaccounts/".concat(id, "/limit/custom/monthly"), undefined, customLimit)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    SubaccountsClient.prototype.updateSubaccountFeature = function (id, features) {
+        return __awaiter(this, void 0, void 0, function () {
+            var keys, readyFeatures, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        keys = ['email_preview', 'inbox_placement', 'sending', 'validations', 'validations_bulk'];
+                        readyFeatures = keys.reduce(function (acc, currentFeatureName) {
+                            if (currentFeatureName in features && typeof features[currentFeatureName] === 'boolean') {
+                                acc[currentFeatureName] = JSON.stringify({
+                                    enabled: features[currentFeatureName]
+                                });
+                            }
+                            return acc;
+                        }, {});
+                        return [4 /*yield*/, this.request.put("/v5/accounts/subaccounts/".concat(id, "/features"), readyFeatures)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
     };
     SubaccountsClient.prototype.enable = function (id) {
         return this.request.post("/v5/accounts/subaccounts/".concat(id, "/enable"))
