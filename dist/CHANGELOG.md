@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.2.0](https://github.com/mailgun/mailgun.js/compare/v12.1.1...v12.2.0) (2025-11-25)
+
+
+### Features
+
+* Add new subaccounts endpoints and fix existing types ([a4bb781](https://github.com/mailgun/mailgun.js/commits/a4bb781b1a1d158614bff2dceb3bdaca49e15d8c))
+
 ### [12.1.1](https://github.com/mailgun/mailgun.js/compare/v12.1.0...v12.1.1) (2025-10-10)
 
 

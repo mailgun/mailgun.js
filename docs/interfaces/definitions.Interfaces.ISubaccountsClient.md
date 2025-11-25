@@ -9,10 +9,13 @@
 ### Methods
 
 - [create](definitions.Interfaces.ISubaccountsClient.md#create)
+- [destroy](definitions.Interfaces.ISubaccountsClient.md#destroy)
 - [disable](definitions.Interfaces.ISubaccountsClient.md#disable)
 - [enable](definitions.Interfaces.ISubaccountsClient.md#enable)
 - [get](definitions.Interfaces.ISubaccountsClient.md#get)
+- [getMonthlySendingLimit](definitions.Interfaces.ISubaccountsClient.md#getmonthlysendinglimit)
 - [list](definitions.Interfaces.ISubaccountsClient.md#list)
+- [setMonthlySendingLimit](definitions.Interfaces.ISubaccountsClient.md#setmonthlysendinglimit)
 
 ## Methods
 
@@ -32,7 +35,27 @@
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L6)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:13](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L13)
+
+___
+
+### destroy
+
+▸ **destroy**(`id`): `Promise`\<[`SubaccountDestroyResponse`](../modules/definitions.md#subaccountdestroyresponse)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`Promise`\<[`SubaccountDestroyResponse`](../modules/definitions.md#subaccountdestroyresponse)\>
+
+#### Defined in
+
+[Interfaces/Subaccounts/ISubaccountsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L16)
 
 ___
 
@@ -52,7 +75,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:7](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L7)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L14)
 
 ___
 
@@ -72,7 +95,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L8)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:15](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L15)
 
 ___
 
@@ -92,7 +115,27 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L5)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:12](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L12)
+
+___
+
+### getMonthlySendingLimit
+
+▸ **getMonthlySendingLimit**(`id`): `Promise`\<[`SubaccountSendingLimitResponse`](../modules/definitions.md#subaccountsendinglimitresponse)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`Promise`\<[`SubaccountSendingLimitResponse`](../modules/definitions.md#subaccountsendinglimitresponse)\>
+
+#### Defined in
+
+[Interfaces/Subaccounts/ISubaccountsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L17)
 
 ___
 
@@ -112,4 +155,25 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:4](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L4)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:11](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L11)
+
+___
+
+### setMonthlySendingLimit
+
+▸ **setMonthlySendingLimit**(`id`, `limit`): `Promise`\<[`SubaccountSetSendingLimitResponse`](../modules/definitions.md#subaccountsetsendinglimitresponse)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+| `limit` | `number` |
+
+#### Returns
+
+`Promise`\<[`SubaccountSetSendingLimitResponse`](../modules/definitions.md#subaccountsetsendinglimitresponse)\>
+
+#### Defined in
+
+[Interfaces/Subaccounts/ISubaccountsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L18)

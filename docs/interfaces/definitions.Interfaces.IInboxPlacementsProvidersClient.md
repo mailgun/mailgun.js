@@ -22,4 +22,4 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/providers/InboxPlacementsProviders.ts:4](https://github.com/mailgun/mailgun.js/blob/b77a046/lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.ts#L4)
+[Interfaces/InboxPlacements/providers/InboxPlacementsProviders.ts:4](https://github.com/mailgun/mailgun.js/blob/e884775/lib/Interfaces/InboxPlacements/providers/InboxPlacementsProviders.ts#L4)
