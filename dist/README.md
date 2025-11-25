@@ -310,13 +310,17 @@ The following service methods are available to instantiated clients. The example
       - [create](#create-8)
       - [enable](#enable)
       - [disable](#disable)
+      - [destroy](#destroy-7)
+      - [setMonthlySendingLimit](#setmonthlysendinglimit)
+      - [getMonthlySendingLimit](#getmonthlysendinglimit)
+      - [updateSubaccountFeature](#updatesubaccountfeature)
     - [inbox placements](#inbox-placements)
       - [SeedsLists](#seedslists)
         - [list](#list-8)
         - [get](#get-11)
         - [create](#create-9)
         - [update](#update-5)
-        - [destroy](#destroy-7)
+        - [destroy](#destroy-8)
         - [SeedsLists Attributes](#attributes)
           - [list](#list-9)
           - [get](#get-12)
@@ -327,7 +331,7 @@ The following service methods are available to instantiated clients. The example
       - [Results](#results)
         - [list](#list-12)
         - [get](#get-13)
-        - [destroy](#destroy-8)
+        - [destroy](#destroy-9)
         - [getResultByShareId](#getresultbyshareid)
         - [Results Attributes](#attributes-1)
           - [list](#list-13)
@@ -3215,6 +3219,86 @@ A client to manage members within a specific mailing list.
   { id: "123", name: "foobar", status: "disabled" }
   ```
 
+- #### destroy
+
+  `mg.subaccounts.destroy(subaccount_id)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.destroy('123')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Result message
+
+  ```JS
+  { message: 'Subaccount successfully deleted' }
+  ```
+
+- #### setMonthlySendingLimit
+
+   `mg.subaccounts.setMonthlySendingLimit(subaccount_id, limit)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.setMonthlySendingLimit('123', 5000)
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Status message
+
+  ```JS
+  { success: true }
+  ```
+
+- #### getMonthlySendingLimit
+
+  `mg.subaccounts.getMonthlySendingLimit(subaccount_id)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.getMonthlySendingLimit('123')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Details of custom sending limit on the account
+
+  ```JS
+  { current: 0, limit: 5000, period: '1m' }
+  ```
+
+- #### updateSubaccountFeature
+  `mg.subaccounts.updateSubaccountFeature(subaccount_id, featuresValues)`
+
+  Example:
+
+  ```js
+  mg.subaccounts.updateSubaccountFeature('123', {
+    email_preview: false,
+    inbox_placement: false,
+    sending: false,
+    validations: false,
+    validations_bulk: false
+  })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+  Promise returns: Successfully updated subaccount features
+
+  ```JS
+  {
+    features: {
+      email_preview: { enabled: false },
+      inbox_placement: { enabled: false },
+      sending: { enabled: true },
+      validations: { enabled: false },
+      validations_bulk: { enabled: false }
+    }
+  }
+  ```
 
 ### Inbox Placements
   A client to allows you to see the likely deliverability of your email campaigns.

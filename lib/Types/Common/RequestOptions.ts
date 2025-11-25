@@ -80,8 +80,14 @@ type EnableQuery = ContainsPrefix<'enabled='>;
 type DkimSelectorQuery = ContainsPrefix<'dkim_selector='>;
 type SelfQuery = ContainsPrefix<'self='>;
 type WebPrefixQuery = ContainsPrefix<'web_prefix='>;
+type LimitQuery = ContainsPrefix<'limit='>;
 
-export type PutQueryTypes = EnableQuery | DkimSelectorQuery | SelfQuery | WebPrefixQuery;
+export type PutQueryTypes = EnableQuery |
+ DkimSelectorQuery |
+ SelfQuery |
+ WebPrefixQuery |
+ LimitQuery;
+
 export type PutOptionsType = { query?: PutQueryTypes };
 
 export type CommandQuery = {
