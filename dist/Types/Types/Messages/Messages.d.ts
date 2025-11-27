@@ -202,3 +202,61 @@ export type MessagesSendResult = {
     status: number;
     details?: string;
 };
+export type MessageHeader = [string, string];
+export type StoredEmailResponse = {
+    'Content-Type': string;
+    From: string;
+    'Message-Id': string;
+    'Mime-Version': string;
+    Subject: string;
+    To: string;
+    sender: string;
+    recipients: string;
+    from?: string;
+    subject?: string;
+    'body-html': string;
+    'body-plain': string;
+    attachments?: [
+        {
+            name: string;
+            'content-type': string;
+            size: number;
+            url: string;
+        }
+    ];
+    'content-id-map'?: object;
+    'message-headers': MessageHeader[];
+    'stripped-html': string;
+    'stripped-text': string;
+    'stripped-signature': string;
+    'Content-Transfer-Encoding'?: string;
+    'X-Mailgun-Tag'?: string;
+    'X-Mailgun-Template-Name'?: string;
+    'X-Mailgun-Template-Variables'?: string;
+    'X-Mailgun-Deliver-By'?: string;
+};
+type QueueStatusAPI = {
+    'is_disabled': boolean;
+    disabled: {
+        until: string;
+        reason: string;
+    };
+};
+type QueueStatus = Omit<QueueStatusAPI, 'disabled'> & {
+    disabled: {
+        until: Date | '';
+        reason: string;
+    };
+};
+export type MessagesQueueStatusAPIResponse = {
+    regular: QueueStatusAPI;
+    scheduled: QueueStatusAPI;
+};
+export type MessagesQueueStatusResult = {
+    regular: QueueStatus;
+    scheduled: QueueStatus;
+};
+export type ClearMessagesQueueResult = {
+    message: string;
+};
+export {};

@@ -4813,11 +4813,16 @@ var Request = /** @class */ (function () {
     Request.prototype.request = function (method, url, onCallOptions, config) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var options, params, urlValue;
+            var options, params, fullUrl;
             return __generator(this, function (_b) {
                 options = __assign({}, onCallOptions);
                 params = {};
-                urlValue = urljoin(this.url, url);
+                if (config === null || config === void 0 ? void 0 : config.isStorageAPI) {
+                    fullUrl = url;
+                }
+                else {
+                    fullUrl = urljoin(this.url, url);
+                }
                 if ((options === null || options === void 0 ? void 0 : options.query) && Object.getOwnPropertyNames(options === null || options === void 0 ? void 0 : options.query).length > 0) {
                     if ((_a = options === null || options === void 0 ? void 0 : options.query) === null || _a === void 0 ? void 0 : _a.searchParams) {
                         params.params = new URLSearchParams(options.query.searchParams);
@@ -4829,7 +4834,7 @@ var Request = /** @class */ (function () {
                 if (options === null || options === void 0 ? void 0 : options.body) {
                     params.data = options === null || options === void 0 ? void 0 : options.body;
                 }
-                return [2 /*return*/, this.requestProvider.makeRequest(urlValue, method.toUpperCase(), params, config)];
+                return [2 /*return*/, this.requestProvider.makeRequest(fullUrl, method.toUpperCase(), params, config)];
             });
         });
     };
@@ -5587,9 +5592,6 @@ var MessagesClient = /** @class */ (function () {
             'o:require-tls',
             'o:skip-verification'
         ]);
-        if (!data || Object.keys(data).length === 0) {
-            throw APIError.getUserDataError('Message data object can not be empty', 'Message data object can not be empty');
-        }
         return Object.keys(data).reduce(function (acc, key) {
             if (yesNoProperties.has(key) && typeof data[key] === 'boolean') {
                 acc[key] = data[key] ? 'yes' : 'no';
@@ -5604,6 +5606,9 @@ var MessagesClient = /** @class */ (function () {
         return __assign({ status: response.status }, response.body);
     };
     MessagesClient.prototype.create = function (domain, data) {
+        if (!data || Object.keys(data).length === 0) {
+            throw APIError.getUserDataError('Message data object can not be empty', 'Message data object can not be empty');
+        }
         if (data.message) {
             return this.request.postWithFD("/v3/".concat(domain, "/messages.mime"), data)
                 .then(this._parseResponse);
@@ -5611,6 +5616,95 @@ var MessagesClient = /** @class */ (function () {
         var modifiedData = this.prepareBooleanValues(data);
         return this.request.postWithFD("/v3/".concat(domain, "/messages"), modifiedData)
             .then(this._parseResponse);
+    };
+    MessagesClient.prototype.retrieveStoredEmail = function (domain, storageKey) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v3/domains/".concat(domain, "/messages/").concat(storageKey))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
+    };
+    /**
+     * domain: string
+     * Domain name used to send the message
+     *
+     * storageKey: string
+     * Storage key from the email's associated events
+     * (Example: Accepted/Delivered events storage.key field)
+     *
+     * recipients: string
+     * Email address of the recipient(s). You can use commas to separate multiple recipients
+     */
+    MessagesClient.prototype.resendEmail = function (domain, storageKey, recipients) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.postWithFD("/v3/domains/".concat(domain, "/messages/").concat(storageKey), { to: recipients })];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, this._parseResponse(res)];
+                }
+            });
+        });
+    };
+    MessagesClient.prototype.getMessagesQueueStatus = function (domain) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        return __awaiter(this, void 0, void 0, function () {
+            var res, apiResponse, result;
+            return __generator(this, function (_l) {
+                switch (_l.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v3/domains/".concat(domain, "/sending_queues"))];
+                    case 1:
+                        res = _l.sent();
+                        apiResponse = res.body;
+                        result = {
+                            regular: {
+                                is_disabled: (_a = apiResponse.regular) === null || _a === void 0 ? void 0 : _a.is_disabled,
+                                disabled: {
+                                    until: ((_c = (_b = apiResponse.regular) === null || _b === void 0 ? void 0 : _b.disabled) === null || _c === void 0 ? void 0 : _c.until) ? new Date(apiResponse.regular.disabled.until) : '',
+                                    reason: ((_e = (_d = apiResponse.regular) === null || _d === void 0 ? void 0 : _d.disabled) === null || _e === void 0 ? void 0 : _e.reason) || '',
+                                }
+                            },
+                            scheduled: {
+                                is_disabled: (_f = apiResponse.scheduled) === null || _f === void 0 ? void 0 : _f.is_disabled,
+                                disabled: {
+                                    until: ((_h = (_g = apiResponse.scheduled) === null || _g === void 0 ? void 0 : _g.disabled) === null || _h === void 0 ? void 0 : _h.until) ? new Date(apiResponse.scheduled.disabled.until) : '',
+                                    reason: ((_k = (_j = apiResponse.scheduled) === null || _j === void 0 ? void 0 : _j.disabled) === null || _k === void 0 ? void 0 : _k.reason) || '',
+                                }
+                            }
+                        };
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** Deletes all scheduled and undelivered mail from the domain queue.
+     * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/delete-v3--domain-name--envelopes
+    */
+    MessagesClient.prototype.clearMessagesQueue = function (domain, storageUrl) {
+        return __awaiter(this, void 0, void 0, function () {
+            var allowedStorageUrls, res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        allowedStorageUrls = ['storage-us-east4.api.mailgun.net', 'storage-us-west1.api.mailgun.net', 'storage-europe-west1.api.mailgun.net'];
+                        if (!allowedStorageUrls.includes(storageUrl)) {
+                            throw APIError.getUserDataError('Invalid storage URL', 'The provided storage URL is not allowed.');
+                        }
+                        return [4 /*yield*/, this.request.command('delete', "https://".concat(storageUrl, "/v3/").concat(domain, "/envelopes"), undefined, { isStorageAPI: true })];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
     };
     return MessagesClient;
 }());
