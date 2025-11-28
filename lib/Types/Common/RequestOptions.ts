@@ -6,6 +6,7 @@ import type { SubaccountsQuery } from '../Subaccounts/index.js';
 import type { WebhooksQuery } from '../Webhooks/index.js';
 import type {
   ConnectionSettings,
+  DeletedDomainKeysQuery,
   DomainCredentialsQuery,
   DomainGetAPIQuery,
   DomainsQuery,
@@ -67,6 +68,8 @@ export type GetQueryTypes = IPsListQuery |
 { searchParams?: Array<Array<string>> } |
   ValidationQuery
 
+export type DeleteQueryTypes = DeletedDomainKeysQuery;
+
 export type PostDataTypes = InboxPlacementsData | MetricsQuery | string;
 export type PutDataTypes = SeedsListsUpdatingData |
  object |
@@ -91,7 +94,7 @@ export type PutQueryTypes = EnableQuery |
 export type PutOptionsType = { query?: PutQueryTypes };
 
 export type CommandQuery = {
-  query?: PutQueryTypes;
+  query?: PutQueryTypes | DeleteQueryTypes;
 }
 
 export type onCallReqConfig = {

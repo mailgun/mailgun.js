@@ -3,3 +3,4 @@ export * from './DomainTags.js';
 export * from './DomainTemplates.js';
 export * from './DomainsClient.js';
 export * from './DomainTracking.js';
+export * from './DomainKeys.js';

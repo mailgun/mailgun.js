@@ -46,6 +46,7 @@ import IPRSharingClient from './InboxPlacements/Results/InboxPlacementsResultsSh
 import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPlacementsProviders.js';
 import MetricsClient from './Metrics/MetricsClient.js';
 import DomainTrackingClient from './Domains/domainsTracking.js';
+import DomainKeysClient from './Domains/domainsKeys.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -91,6 +92,7 @@ export default class MailgunClient implements IMailgunClient {
     const domainTemplatesClient = new DomainTemplatesClient(this.request);
     const domainTagsClient = new DomainTagsClient(this.request);
     const domainTrackingClient = new DomainTrackingClient(this.request);
+    const domainKeysClient = new DomainKeysClient(this.request);
     const multipleValidationClient = new MultipleValidationClient(this.request);
     const InboxPlacementsResultsSharingClient = new IPRSharingClient(this.request);
 
@@ -122,7 +124,8 @@ export default class MailgunClient implements IMailgunClient {
       domainCredentialsClient,
       domainTemplatesClient,
       domainTagsClient,
-      domainTrackingClient
+      domainTrackingClient,
+      domainKeysClient
     );
     this.webhooks = new WebhooksClient(this.request);
     this.events = new EventClient(this.request);

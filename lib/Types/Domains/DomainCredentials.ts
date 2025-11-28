@@ -15,6 +15,7 @@ export type DomainCredentialsItem = {
     mailbox: string,
     size_bytes: number | null
 }
+
 export type DomainCredentialsResponseData = {
     status: number;
     body: {
@@ -27,6 +28,7 @@ export type DomainCredentialsList = {
     items: DomainCredentialsItem[];
     totalCount: number;
 }
+
 export type DomainCredentialsResult = {
     status: number,
     message: string;
