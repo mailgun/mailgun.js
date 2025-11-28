@@ -15,7 +15,8 @@ import {
   PutOptionsType,
   PutQueryTypes,
   RequestProviderData,
-  onCallReqConfig
+  onCallReqConfig,
+  DeleteQueryTypes
 } from '../../Types/index.js';
 
 import FormDataBuilder from './FormDataBuilder.js';
@@ -47,7 +48,7 @@ class Request {
     url: string,
     onCallOptions?: {
       body?: RequestData
-      query?: GetQueryTypes | PutQueryTypes
+      query?: GetQueryTypes | PutQueryTypes | DeleteQueryTypes
     },
     config?: onCallReqConfig
   ): Promise<APIResponse> {
@@ -165,8 +166,12 @@ class Request {
     return this.command('put', url, data, {}, queryObject);
   }
 
-  delete(url: string, data?: IpPoolDeleteData): Promise<APIResponse> {
-    return this.command('delete', url, data);
+  delete(
+    url: string,
+    data?: IpPoolDeleteData,
+    queryObject?: DeleteQueryTypes
+  ): Promise<APIResponse> {
+    return this.command('delete', url, data, {}, { query: queryObject });
   }
 }
 
