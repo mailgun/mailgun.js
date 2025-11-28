@@ -210,6 +210,10 @@ The following service methods are available to instantiated clients. The example
   - [Methods](#methods)
     - [messages](#messages)
       - [create](#create)
+      - [retrieveStoredEmail](#retrievestoredemail)
+      - [resendEmail](#resendemail)
+      - [getMessagesQueueStatus](#getmessagesqueuestatus)
+      - [clearMessagesQueue](#clearmessagesqueue)
     - [domains](#domains)
       - [list](#list)
       - [get](#get)
@@ -362,7 +366,7 @@ The following service methods are available to instantiated clients. The example
 
 - #### create
 
-  `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/en/latest/api-sending.html)
+  `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3--domain-name--messages)
 
   Options:
 
@@ -501,7 +505,6 @@ The following service methods are available to instantiated clients. The example
         })
         .then(response => console.log(response))
       ```
-
     - Browser example of send file
 
       Before sending the file you need to somehow get the Blob of the file.
@@ -537,6 +540,153 @@ The following service methods are available to instantiated clients. The example
   {
     id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
     message: 'Queued. Thank you.'
+  }
+  ```
+
+- #### retrieveStoredEmail
+    [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
+
+    `mg.messages.retrieveStoredEmail(domain, storageKey)`
+
+    **storageKey** - Storage key from the email's associated events (Example: Accepted/Delivered events storage.key field). Mentioned events can be found on https://app.mailgun.com/ (Send -> logs).
+
+    *Note: Storage keys are available for the duration of your domain's message retention policy.*
+
+    Example:
+
+    ```JS
+    mg.messages.retrieveStoredEmail('sandbox-123.mailgun.org', 'BABEAAeEDgPUyeFqr-tATLaCfYqyqvLpbg')
+      .then(storedEmail => console.log(storedEmail)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Promise returns:
+
+    ```JS
+    {
+        'Content-Type': 'multipart/alternative; boundary="boundary_12345"',
+        From: 'postmaster@sandbox.mailgun.org',
+        'Message-Id': '<123.123@sandbox.mailgun.org>',
+        'Mime-Version': '1.0',
+        Subject: 'Hello',
+        To: 'foo@example.com',
+        'X-Mailgun-Deliver-By': 'Fri, 28 Nov 2025 18:02:00 +0000',
+        sender: 'postmaster@sandbox.mailgun.org',
+        recipients: 'foo@example.com',
+        from: 'postmaster@sandbox.mailgun.org',
+        subject: 'Hello',
+        'body-html': '<a href="https://test.com">Test</a>',
+        'body-plain': 'Testing some Mailgun awesomness!',
+        attachments: [],
+        'content-id-map': {},
+        'message-headers': [
+          ['Mime-Version', '1.0'],
+          [
+            'Content-Type',
+            'multipart/alternative; boundary="boundary_12345'
+          ],
+          ['Subject', 'Hello'],
+          ['From', 'postmaster@sandbox.mailgun.org'],
+          ['To', 'foo@example.com'],
+          ['X-Mailgun-Deliver-By', 'Fri, 28 Nov 2025 18:02:00 +0000'],
+          [
+            'Message-Id',
+            '<123.123@sandbox.mailgun.org>'
+          ]
+        ],
+        'stripped-html': '<a href="https://test.com">Test</a>',
+        'stripped-text': 'Testing some Mailgun awesomness!',
+        'stripped-signature': ''
+      }
+    ```
+
+- ### resendEmail
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3-domains--domain-name--messages--storage-key-)
+
+  `mg.messages.resendEmail(domain, storageKey, recipient)`
+
+  **storageKey** - Storage key from the email's associated events (Example: Accepted/Delivered events storage.key field). Mentioned events can be found on https://app.mailgun.com/ (Send -> logs).
+
+  *Note: Storage keys are available for the duration of your domain's message retention policy.*
+
+  **recipient** - Email address of the recipient(s). Supports friendly name format.
+  Example: "Bob <bob@host.com>". Use commas to separate multiple recipients. Duplicate addresses are automatically ignored.
+
+  Example:
+
+  ```JS
+    mg.messages.resendEmail(
+      'sandbox-123.mailgun.org',
+      'BABEAAeEDgPUyeFqr-tATLaCfYqyqvLpbg',
+      'foo@test.com, bar@test.com'
+    ).then(resendStatus => console.log(resendStatus)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+    {
+      id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
+      message: 'Queued. Thank you.'
+    }
+  ```
+
+- ### getMessagesQueueStatus
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--name--sending-queues)
+
+  `mg.messages.getMessagesQueueStatus(domain)`
+
+  Example:
+
+  ```JS
+    mg.messages.getMessagesQueueStatus('sandbox-123.mailgun.org')
+      .then(queueStatus => console.log(queueStatus)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+    {
+      regular: {
+        is_disabled: false,
+        disabled: {
+          until: null,
+          reason: ''
+        }
+      },
+      scheduled: {
+        is_disabled: true,
+        disabled: {
+          until: new Date('2025-11-28T18:02:00Z'),
+          reason: 'High load'
+        }
+      }
+    }
+  ```
+
+- ### clearMessagesQueue
+  Deletes all scheduled and undelivered mail from the domain queue.
+
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/delete-v3--domain-name--envelopes)
+
+  `mg.messages.getMessagesQueueStatus(domain, storageUrl)`
+
+  **storageUrl** - Mail's generated storage URL. e.g. https://storage-us-east4.api.mailgun.net/v3/example.com/envelopes. Can be found on https://app.mailgun.com/ (Send -> logs -> event). Allowed values: `storage-us-east4.api.mailgun.net`, `storage-us-west1.api.mailgun.net`, and `storage-europe-west1.api.mailgun.net`.
+
+  Example:
+
+  ```JS
+    mg.messages.clearMessagesQueue('sandbox-123.mailgun.org', 'storage-us-east4.api.mailgun.net')
+      .then(result => console.log(result)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    message: "done"
   }
   ```
 

@@ -55,7 +55,13 @@ class Request {
 
     const params: RequestProviderData = {};
 
-    const urlValue = urljoin(this.url, url);
+    let fullUrl: string;
+    if (config?.isStorageAPI) {
+      fullUrl = url;
+    } else {
+      fullUrl = urljoin(this.url, url);
+    }
+
     if (options?.query && Object.getOwnPropertyNames(options?.query).length > 0) {
       if (options?.query?.searchParams) {
         params.params = new URLSearchParams(options.query.searchParams);
@@ -68,7 +74,7 @@ class Request {
       params.data = options?.body;
     }
 
-    return this.requestProvider.makeRequest(urlValue, method.toUpperCase(), params, config);
+    return this.requestProvider.makeRequest(fullUrl, method.toUpperCase(), params, config);
   }
 
   setSubaccountHeader(subAccountId: string): void {

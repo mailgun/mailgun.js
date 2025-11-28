@@ -56,5 +56,6 @@ export type onCallReqConfig = {
     isMultipartFormData?: boolean;
     isApplicationJSON?: boolean;
     dataSize?: number;
+    isStorageAPI?: boolean;
 };
 export {};
