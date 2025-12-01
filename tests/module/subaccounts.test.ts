@@ -171,8 +171,6 @@ describe('SubaccountsClient', function () {
         validations: true,
         validations_bulk: true
       });
-      console.log(response);
-      console.log('testValue', testValue);
       expect(response).toMatchObject(apiData);
     });
   });

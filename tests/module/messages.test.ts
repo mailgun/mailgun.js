@@ -132,5 +132,148 @@ describe('MessagesClient', function () {
         status: 200,
       });
     });
+
+    it('throws error when no data provided', async () => {
+      try {
+        // @ts-expect-error testing invalid data
+        await client.create('sandbox.mailgun.org', {});
+      } catch (error) {
+        expect(error).toMatchObject({
+          message: 'Message data object can not be empty', details: 'Message data object can not be empty'
+        });
+      }
+    });
+  });
+
+  describe('retrieveStoredEmail', function () {
+    it('retrieves stored email', async () => {
+      const apiResponse = {
+        'Content-Type': 'multipart/alternative; boundary="boundary_12345"',
+        From: 'postmaster@sandbox.mailgun.org',
+        'Message-Id': '<123.123@sandbox.mailgun.org>',
+        'Mime-Version': '1.0',
+        Subject: 'Hello',
+        To: 'foo@example.com',
+        'X-Mailgun-Deliver-By': 'Fri, 28 Nov 2025 18:02:00 +0000',
+        sender: 'postmaster@sandbox.mailgun.org',
+        recipients: 'foo@example.com',
+        from: 'postmaster@sandbox.mailgun.org',
+        subject: 'Hello',
+        'body-html': '<a href="https://test.com">Test</a>',
+        'body-plain': 'Testing some Mailgun awesomness!',
+        attachments: [],
+        'content-id-map': {},
+        'message-headers': [
+          ['Mime-Version', '1.0'],
+          [
+            'Content-Type',
+            'multipart/alternative; boundary="boundary_12345'
+          ],
+          ['Subject', 'Hello'],
+          ['From', 'postmaster@sandbox.mailgun.org'],
+          ['To', 'foo@example.com'],
+          ['X-Mailgun-Deliver-By', 'Fri, 28 Nov 2025 18:02:00 +0000'],
+          [
+            'Message-Id',
+            '<123.123@sandbox.mailgun.org>'
+          ]
+        ],
+        'stripped-html': '<a href="https://test.com">Test</a>',
+        'stripped-text': 'Testing some Mailgun awesomness!',
+        'stripped-signature': ''
+      };
+      api.get('/v3/domains/sandbox.mailgun.org/messages/abc123').reply(200, apiResponse);
+
+      const data = await client.retrieveStoredEmail('sandbox.mailgun.org', 'abc123');
+      expect(data).toMatchObject(apiResponse);
+    });
+  });
+
+  describe('resendEmail', function () {
+    it('resends stored email', async () => {
+      api.post('/v3/domains/sandbox.mailgun.org/messages/abc123').reply(200, {
+        message: 'Queued. Thank you.',
+        id: '<20111114174239.25659.5817@samples.mailgun.org>'
+      });
+
+      const data = await client.resendEmail('sandbox.mailgun.org', 'abc123', 'foo@example.com');
+      expect(data).toMatchObject({
+        message: 'Queued. Thank you.',
+        status: 200,
+      });
+    });
+  });
+
+  describe('getMessagesQueueStatus', function () {
+    it('retrieves messages queue status', async () => {
+      const apiResponse = {
+        regular: {
+          is_disabled: false,
+          disabled: {
+            until: null,
+            reason: ''
+          }
+        },
+        scheduled: {
+          is_disabled: true,
+          disabled: {
+            until: '2025-11-28T18:02:00Z',
+            reason: 'High load'
+          }
+        }
+      };
+      api.get('/v3/domains/sandbox.mailgun.org/sending_queues').reply(200, apiResponse);
+
+      const data = await client.getMessagesQueueStatus('sandbox.mailgun.org');
+      expect(data).toMatchObject({
+        regular: {
+          is_disabled: false,
+          disabled: {
+            until: '',
+            reason: ''
+          }
+        },
+        scheduled: {
+          is_disabled: true,
+          disabled: {
+            until: new Date('2025-11-28T18:02:00Z'),
+            reason: 'High load'
+          }
+        }
+      });
+    });
+  });
+
+  describe('clearMessagesQueue', function () {
+    let storageApi: nock.Scope;
+    beforeEach(function () {
+      storageApi = nock('https://storage-us-east4.api.mailgun.net');
+    });
+
+    afterEach(function () {
+      storageApi.done();
+    });
+
+    it('clears messages queue', async () => {
+      storageApi.delete('/v3/sandbox.mailgun.org/envelopes').reply(200, {
+        message: 'done'
+      });
+
+      const data = await client.clearMessagesQueue('sandbox.mailgun.org', 'storage-us-east4.api.mailgun.net');
+      expect(data).toMatchObject({
+        message: 'done'
+      });
+    });
+
+    it('throws error for invalid storage URL', async () => {
+      try {
+        await client.clearMessagesQueue('sandbox.mailgun.org', 'invalid-storage.api.mailgun.net');
+      } catch (error) {
+        expect(error).toMatchObject({
+          message: 'Invalid storage URL',
+          details: 'The provided storage URL is not allowed.'
+        });
+      }
+    });
   });
 });
