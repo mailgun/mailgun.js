@@ -208,6 +208,10 @@ The following service methods are available to instantiated clients. The example
   - [Methods](#methods)
     - [messages](#messages)
       - [create](#create)
+      - [retrieveStoredEmail](#retrievestoredemail)
+      - [resendEmail](#resendemail)
+      - [getMessagesQueueStatus](#getmessagesqueuestatus)
+      - [clearMessagesQueue](#clearmessagesqueue)
     - [domains](#domains)
       - [list](#list)
       - [get](#get)
@@ -241,6 +245,15 @@ The following service methods are available to instantiated clients. The example
       - [get](#get-2)
       - [generate](#generate)
       - [regenerate](#regenerate)
+    - [domain keys](#domain-keys)
+      - [list](#list-2)
+      - [listAll](#listall)
+      - [create](#create-3)
+      - [activate](#activate)
+      - [deactivate](#deactivate)
+      - [destroy](#destroy-2)
+      - [updateDKIMAuthority](#updatedkimauthority-1)
+      - [updateDKIMSelector](#updatedkimselector-1)
     - [events](#events)
       - [get](#get-3)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
@@ -252,7 +265,7 @@ The following service methods are available to instantiated clients. The example
       - [getAccount](#getaccount-1)
       - [getAccountUsage](#getaccountusage)
     - [suppressions](#suppressions)
-      - [list](#list-2)
+      - [list](#list-3)
         - [Bounces Example](#bounces-example)
         - [Unsubscribes Example](#unsubscribes-example)
         - [Complaints Example](#complaints-example)
@@ -260,41 +273,41 @@ The following service methods are available to instantiated clients. The example
         - [Bounces Example](#bounces-example-1)
         - [Unsubscribes Example](#unsubscribes-example-1)
         - [Complaints Example](#complaints-example-1)
-      - [create](#create-3)
+      - [create](#create-4)
         - [Bounces Example](#bounces-example-2)
         - [Unsubscribes Example](#unsubscribes-example-2)
           - [Unsubscribe from one tag](#unsubscribe-from-one-tag)
           - [Unsubscribe from particular tags](#unsubscribe-from-particular-tags)
         - [Complaints Example](#complaints-example-2)
-      - [destroy](#destroy-2)
+      - [destroy](#destroy-3)
         - [Bounces Example](#bounces-example-3)
         - [Unsubscribes Example](#unsubscribes-example-3)
         - [Complaints Example](#complaints-example-3)
     - [webhooks](#webhooks)
-      - [list](#list-3)
-      - [get](#get-5)
-      - [create](#create-4)
-      - [update](#update-2)
-      - [destroy](#destroy-3)
-    - [routes](#routes)
       - [list](#list-4)
-      - [get](#get-6)
+      - [get](#get-5)
       - [create](#create-5)
-      - [update](#update-3)
+      - [update](#update-2)
       - [destroy](#destroy-4)
+    - [routes](#routes)
+      - [list](#list-5)
+      - [get](#get-6)
+      - [create](#create-6)
+      - [update](#update-3)
+      - [destroy](#destroy-5)
     - [validate](#validate)
       - [get](#get-7)
     - [multiple validation](#multiple-validation)
-      - [create](#create-6)
-      - [list](#list-5)
-      - [get](#get-8)
-      - [destroy](#destroy-5)
-    - [mailing lists](#mailing-lists)
-      - [list](#list-6)
-      - [get](#get-9)
       - [create](#create-7)
-      - [update](#update-4)
+      - [list](#list-6)
+      - [get](#get-8)
       - [destroy](#destroy-6)
+    - [mailing lists](#mailing-lists)
+      - [list](#list-7)
+      - [get](#get-9)
+      - [create](#create-8)
+      - [update](#update-4)
+      - [destroy](#destroy-7)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
       - [getMember](#getmember)
@@ -303,39 +316,39 @@ The following service methods are available to instantiated clients. The example
       - [updateMember](#updatemember)
       - [destroyMember](#destroymember)
     - [subaccounts](#subaccounts)
-      - [list](#list-7)
+      - [list](#list-8)
       - [get](#get-10)
-      - [create](#create-8)
+      - [create](#create-9)
       - [enable](#enable)
       - [disable](#disable)
-      - [destroy](#destroy-7)
+      - [destroy](#destroy-8)
       - [setMonthlySendingLimit](#setmonthlysendinglimit)
       - [getMonthlySendingLimit](#getmonthlysendinglimit)
       - [updateSubaccountFeature](#updatesubaccountfeature)
     - [inbox placements](#inbox-placements)
       - [SeedsLists](#seedslists)
-        - [list](#list-8)
+        - [list](#list-9)
         - [get](#get-11)
-        - [create](#create-9)
+        - [create](#create-10)
         - [update](#update-5)
-        - [destroy](#destroy-8)
+        - [destroy](#destroy-9)
         - [SeedsLists Attributes](#attributes)
-          - [list](#list-9)
+          - [list](#list-10)
           - [get](#get-12)
         - [SeedsLists Filters](#filters)
-          - [list](#list-10)
+          - [list](#list-11)
       - [Providers](#providers)
-        - [list](#list-11)
-      - [Results](#results)
         - [list](#list-12)
+      - [Results](#results)
+        - [list](#list-13)
         - [get](#get-13)
-        - [destroy](#destroy-9)
+        - [destroy](#destroy-10)
         - [getResultByShareId](#getresultbyshareid)
         - [Results Attributes](#attributes-1)
-          - [list](#list-13)
+          - [list](#list-14)
           - [get](#get-14)
         - [Results Filters](#filters-1)
-          - [list](#list-14)
+          - [list](#list-15)
         - [Sharing](#sharing)
           - [get](#get-15)
           - [update](#update-6)
@@ -360,7 +373,7 @@ The following service methods are available to instantiated clients. The example
 
 - #### create
 
-  `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/en/latest/api-sending.html)
+  `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3--domain-name--messages)
 
   Options:
 
@@ -498,7 +511,6 @@ The following service methods are available to instantiated clients. The example
         })
         .then(response => console.log(response))
       ```
-
     - Browser example of send file
 
       Before sending the file you need to somehow get the Blob of the file.
@@ -534,6 +546,153 @@ The following service methods are available to instantiated clients. The example
   {
     id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
     message: 'Queued. Thank you.'
+  }
+  ```
+
+- #### retrieveStoredEmail
+    [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
+
+    `mg.messages.retrieveStoredEmail(domain, storageKey)`
+
+    **storageKey** - Storage key from the email's associated events (Example: Accepted/Delivered events storage.key field). Mentioned events can be found on https://app.mailgun.com/ (Send -> logs).
+
+    *Note: Storage keys are available for the duration of your domain's message retention policy.*
+
+    Example:
+
+    ```JS
+    mg.messages.retrieveStoredEmail('sandbox-123.mailgun.org', 'BABEAAeEDgPUyeFqr-tATLaCfYqyqvLpbg')
+      .then(storedEmail => console.log(storedEmail)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Promise returns:
+
+    ```JS
+    {
+        'Content-Type': 'multipart/alternative; boundary="boundary_12345"',
+        From: 'postmaster@sandbox.mailgun.org',
+        'Message-Id': '<123.123@sandbox.mailgun.org>',
+        'Mime-Version': '1.0',
+        Subject: 'Hello',
+        To: 'foo@example.com',
+        'X-Mailgun-Deliver-By': 'Fri, 28 Nov 2025 18:02:00 +0000',
+        sender: 'postmaster@sandbox.mailgun.org',
+        recipients: 'foo@example.com',
+        from: 'postmaster@sandbox.mailgun.org',
+        subject: 'Hello',
+        'body-html': '<a href="https://test.com">Test</a>',
+        'body-plain': 'Testing some Mailgun awesomness!',
+        attachments: [],
+        'content-id-map': {},
+        'message-headers': [
+          ['Mime-Version', '1.0'],
+          [
+            'Content-Type',
+            'multipart/alternative; boundary="boundary_12345'
+          ],
+          ['Subject', 'Hello'],
+          ['From', 'postmaster@sandbox.mailgun.org'],
+          ['To', 'foo@example.com'],
+          ['X-Mailgun-Deliver-By', 'Fri, 28 Nov 2025 18:02:00 +0000'],
+          [
+            'Message-Id',
+            '<123.123@sandbox.mailgun.org>'
+          ]
+        ],
+        'stripped-html': '<a href="https://test.com">Test</a>',
+        'stripped-text': 'Testing some Mailgun awesomness!',
+        'stripped-signature': ''
+      }
+    ```
+
+- ### resendEmail
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3-domains--domain-name--messages--storage-key-)
+
+  `mg.messages.resendEmail(domain, storageKey, recipient)`
+
+  **storageKey** - Storage key from the email's associated events (Example: Accepted/Delivered events storage.key field). Mentioned events can be found on https://app.mailgun.com/ (Send -> logs).
+
+  *Note: Storage keys are available for the duration of your domain's message retention policy.*
+
+  **recipient** - Email address of the recipient(s). Supports friendly name format.
+  Example: "Bob <bob@host.com>". Use commas to separate multiple recipients. Duplicate addresses are automatically ignored.
+
+  Example:
+
+  ```JS
+    mg.messages.resendEmail(
+      'sandbox-123.mailgun.org',
+      'BABEAAeEDgPUyeFqr-tATLaCfYqyqvLpbg',
+      'foo@test.com, bar@test.com'
+    ).then(resendStatus => console.log(resendStatus)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+    {
+      id: '<20151025002517.117282.79817@sandbox-123.mailgun.org>',
+      message: 'Queued. Thank you.'
+    }
+  ```
+
+- ### getMessagesQueueStatus
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--name--sending-queues)
+
+  `mg.messages.getMessagesQueueStatus(domain)`
+
+  Example:
+
+  ```JS
+    mg.messages.getMessagesQueueStatus('sandbox-123.mailgun.org')
+      .then(queueStatus => console.log(queueStatus)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+    {
+      regular: {
+        is_disabled: false,
+        disabled: {
+          until: null,
+          reason: ''
+        }
+      },
+      scheduled: {
+        is_disabled: true,
+        disabled: {
+          until: new Date('2025-11-28T18:02:00Z'),
+          reason: 'High load'
+        }
+      }
+    }
+  ```
+
+- ### clearMessagesQueue
+  Deletes all scheduled and undelivered mail from the domain queue.
+
+  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/delete-v3--domain-name--envelopes)
+
+  `mg.messages.getMessagesQueueStatus(domain, storageUrl)`
+
+  **storageUrl** - Mail's generated storage URL. e.g. https://storage-us-east4.api.mailgun.net/v3/example.com/envelopes. Can be found on https://app.mailgun.com/ (Send -> logs -> event). Allowed values: `storage-us-east4.api.mailgun.net`, `storage-us-west1.api.mailgun.net`, and `storage-europe-west1.api.mailgun.net`.
+
+  Example:
+
+  ```JS
+    mg.messages.clearMessagesQueue('sandbox-123.mailgun.org', 'storage-us-east4.api.mailgun.net')
+      .then(result => console.log(result)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+  ```JS
+  {
+    message: "done"
   }
   ```
 
@@ -1053,75 +1212,10 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### updateDKIMAuthority
-  You can delegate the domain authority to an other domain. Domain's authority is set to itself by default.
-
-  `mg.domains.updateDKIMAuthority(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Keys/#tag/Domain-Keys/operation/PUT-v3-domains--name--dkim-authority)
-
-  Example:
-
-  ```JS
-  mg.domains.updateDKIMAuthority(domainAddress, {
-    self: true
-  })
-    .then(data => console.log(data)) // logs response data
-    .catch(err => console.error(err)); // logs any error
-  ```
-
-  Data object accepts next properties:
-
-  | Property    | Description                                                                                                                                   |
-  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-  | self | Change the DKIM authority for a domain. If set to true, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account If set to false, the domain will have the same DKIM authority as the root domain registered on the same mailgun account |
-
-  Promise returns:
-
-  ```JS
-  {
-  message: 'Domain DKIM authority has been changed',
-  sending_dns_records: [
-    {
-      is_active: true,
-      cached: [],
-      name: 'sending_dns_record_name',
-      record_type: 'TXT',
-      valid: 'unknown',
-      value: 'sending_dns_record_value'
-    },
-    ...
-  ],
-  changed: true
-  }
-  ```
+ `domains.updateDKIMAuthority` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMAuthority` instead.
 
 - #### updateDKIMSelector
-  Selector is the unique identifier of your key. It has to be different from other keys selector.
-
-  `mg.domains.updateDKIMSelector(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Keys/#tag/Domain-Keys/operation/PUT-v3-domains--name--dkim-selector)
-
-  Example:
-
-  ```JS
-  mg.domains.updateDKIMSelector(domainAddress, {
-    dkimSelector: 'dkimSelector_value'
-  })
-    .then(data => console.log(data)) // logs response data
-    .catch(err => console.error(err)); // logs any error
-  ```
-
-  Data object accepts next properties:
-
-  | Property    | Description                                                                                                                                   |
-  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-  | dkimSelector | Selector is the unique identifier of your key. It has to be different from other keys selector. |
-
-  Promise returns:
-
-  ```JS
-  {
-    message: 'DKIM selector changed',
-    status: 200
-  }
-  ```
+ `domains.updateDKIMSelector` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMSelector` instead.
 
 - #### getIps
     **Deprecated, and will be removed in the future releases**
@@ -1811,6 +1905,280 @@ The following service methods are available to instantiated clients. The example
     message: 'Initiated x509 key pair generation',
     location: '/v2/x509/example.com/status',
     status: 202,
+  }
+  ```
+
+### Domain Keys
+
+- #### list
+  List all domain keys for your domain, including active/inactive and valid/invalid ones.
+
+  `mg.domains.domainKeys.list(domainAddress, data)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v4-domains--authority-name--keys)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.list(domainAddress)
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    items: [
+      {
+        signing_domain: 'authority.domain.tld',
+        selector: 's1',
+        dns_record: {
+          is_active: true,
+          cached: [],
+          name: 's1._domainkey.authority.domain.tld',
+          record_type: 'TXT',
+          valid: 'unknown',
+          value: 'expected dns value'
+        }
+      },
+    ],
+    status: 200
+  }
+  ```
+
+- #### listAll
+  List domain keys, and optionally filter by signing domain or selector. The page & limit data is only required when paging through the data.
+
+  `mg.domains.domainKeys.listAll(filterData)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v1-dkim-keys)
+
+   Example:
+
+  ```JS
+    mg.domains.domainKeys.listAll(
+      {
+        signingDomain: 'authority.domain.tld', // optional
+        selector: 's1', // optional
+      }
+    )
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    items: [
+      {
+        signing_domain: 'authority.domain.tld',
+        selector: 's1',
+        dns_record: {
+          is_active: true,
+          cached: [],
+          name: 's1._domainkey.authority.domain.tld',
+          record_type: 'TXT',
+          valid: 'unknown',
+          value: 'expected dns value'
+        }
+      },
+    ],
+    status: 200
+  }
+  ```
+
+- #### create
+  Create a domain key.
+
+  *Note that once private keys are created or imported they are never exported. Alternatively, you can import an existing PEM file containing a RSA private key in PKCS #1, ASn.1 DER format. Note, the pem can be passed as a file attachment or as a form-string parameter.*
+
+  `mg.domains.domainKeys.create(newKeyData)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/post-v1-dkim-keys)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.create(
+      {
+        signingDomain: 'authority.domain.tld',
+        selector: 's1',
+        bits: '2048' // optional
+      }
+    )
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    signing_domain: 'authority.domain.tld',
+    selector: 's1',
+    dns_record: {
+      is_active: true,
+      cached: [],
+      name: 's1._domainkey.authority.domain.tld',
+      record_type: 'TXT',
+      valid: 'unknown',
+      value: 'expected dns value'
+    },
+    status: 200
+  }
+  ```
+
+- #### activate
+  Activate a key to be used to DKIM sign emails with.
+
+  *Note: dns records must be valid for a domain key to be activated*
+
+  `mg.domains.domainKeys.activate(domainAddress, selector)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--activate)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.activate('authority.domain.tld', 's1')
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'domain key activated',
+    authority: 'authority.domain.tld',
+    selector: 's1',
+    active: true,
+    status: 200,
+  }
+  ```
+
+- #### deactivate
+  Deactivating for a specified authority and/or selector means a key won't be used for signing email anymore, even if they are valid.
+
+  `mg.domains.domainKeys.deactivate(domainAddress, selector)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--deactivate)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.deactivate('authority.domain.tld', 's1')
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'domain key deactivated',
+    authority: 'authority.domain.tld',
+    selector: 's1',
+    active: true,
+    status: 200,
+  }
+  ```
+
+- #### destroy
+  Delete a key.
+
+  **Domain keys are not recoverable after deletion so use with care**
+
+  `mg.domains.domainKeys.destroy(domainAddress, selector)`
+
+  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/delete-v1-dkim-keys)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.destroy('authority.domain.tld', 's1')
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'success'
+  }
+  ```
+
+- #### updateDKIMAuthority
+  You can delegate the domain authority to an other domain. Domain's authority is set to itself by default.
+
+  `mg.domains.domainKeys.updateDKIMAuthority(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-authority)
+
+  Example:
+
+  ```JS
+    mg.domains.domainKeys.updateDKIMAuthority(domainAddress, {
+      self: true
+    })
+      .then(data => console.log(data)) // logs response data
+      .catch(err => console.error(err)); // logs any error
+  ```
+
+  Data object accepts next properties:
+
+  | Property    | Description                                                                                                                                   |
+  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+  | self | Change the DKIM authority for a domain. If set to true, the domain will be the DKIM authority for itself even if the root domain is registered on the same mailgun account If set to false, the domain will have the same DKIM authority as the root domain registered on the same mailgun account |
+
+  Promise returns:
+
+  ```JS
+  {
+  message: 'Domain DKIM authority has been changed',
+  sending_dns_records: [
+    {
+      is_active: true,
+      cached: [],
+      name: 'sending_dns_record_name',
+      record_type: 'TXT',
+      valid: 'unknown',
+      value: 'sending_dns_record_value'
+    },
+    ...
+  ],
+  changed: true
+  }
+  ```
+
+- #### updateDKIMSelector
+  Selector is the unique identifier of your key. It has to be different from other keys selector.
+
+  `mg.domains.domainKeys.updateDKIMSelector(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-selector)
+
+  Example:
+
+  ```JS
+  mg.domains.domainKeys.updateDKIMSelector(domainAddress, {
+    dkimSelector: 'dkimSelector_value'
+  })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Data object accepts next properties:
+
+  | Property    | Description                                                                                                                                   |
+  |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+  | dkimSelector | Selector is the unique identifier of your key. It has to be different from other keys selector. |
+
+  Promise returns:
+
+  ```JS
+  {
+    message: 'DKIM selector changed',
+    status: 200
   }
   ```
 

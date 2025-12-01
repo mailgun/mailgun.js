@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.3.0](https://github.com/mailgun/mailgun.js/compare/v12.2.0...v12.3.0) (2025-12-01)
+
+
+### Features
+
+* Add domain keys endpoints ([74d5f02](https://github.com/mailgun/mailgun.js/commits/74d5f02c8835a467b67d0366ff11dd797116e964))
+* Add missed messages endpoints ([8df975a](https://github.com/mailgun/mailgun.js/commits/8df975a79fbb011d86b45bd2fcfbb040ab510f5d))
+
+
+### Other changes
+
+* Add tests for domainKeys and deprecation messages to logs ([3d6e9b2](https://github.com/mailgun/mailgun.js/commits/3d6e9b2378f1cfdc17c3d42dab3821f34711e7de))
+* Refresh build and types ([3dedac7](https://github.com/mailgun/mailgun.js/commits/3dedac7e946d433441722f8868545b2e62408d29))
+* Update Readme ([f117df5](https://github.com/mailgun/mailgun.js/commits/f117df585c8e96d67d7f6ee46cd6efb9e700604f))
+* Update readme by domainKeys methods ([886c4eb](https://github.com/mailgun/mailgun.js/commits/886c4eb2cc8866911a77db54a24ab26c15428740))
+
 ## [12.2.0](https://github.com/mailgun/mailgun.js/compare/v12.1.1...v12.2.0) (2025-11-25)
 
 

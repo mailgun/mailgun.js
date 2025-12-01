@@ -11,6 +11,7 @@
 - [IBounce](../interfaces/definitions.Interfaces.IBounce.md)
 - [IComplaint](../interfaces/definitions.Interfaces.IComplaint.md)
 - [IDomainCredentials](../interfaces/definitions.Interfaces.IDomainCredentials.md)
+- [IDomainKeysClient](../interfaces/definitions.Interfaces.IDomainKeysClient.md)
 - [IDomainTagStatisticResult](../interfaces/definitions.Interfaces.IDomainTagStatisticResult.md)
 - [IDomainTagsClient](../interfaces/definitions.Interfaces.IDomainTagsClient.md)
 - [IDomainTemplate](../interfaces/definitions.Interfaces.IDomainTemplate.md)
