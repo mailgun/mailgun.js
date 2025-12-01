@@ -1,4 +1,4 @@
-import { RequestOptions, InputFormData, APIResponse, IpPoolDeleteData, FormDataInput, RequestData, GetQueryTypes, PostDataTypes, PutDataTypes, CommandQuery, PutOptionsType, PutQueryTypes, onCallReqConfig } from '../../Types/index.js';
+import { RequestOptions, InputFormData, APIResponse, IpPoolDeleteData, FormDataInput, RequestData, GetQueryTypes, PostDataTypes, PutDataTypes, CommandQuery, PutOptionsType, PutQueryTypes, onCallReqConfig, DeleteQueryTypes } from '../../Types/index.js';
 import { IRequestProvider } from '../../Interfaces/index.js';
 declare class Request {
     private url;
@@ -7,7 +7,7 @@ declare class Request {
     constructor(options: RequestOptions, formData: InputFormData);
     request(method: string, url: string, onCallOptions?: {
         body?: RequestData;
-        query?: GetQueryTypes | PutQueryTypes;
+        query?: GetQueryTypes | PutQueryTypes | DeleteQueryTypes;
     }, config?: onCallReqConfig): Promise<APIResponse>;
     setSubaccountHeader(subAccountId: string): void;
     resetSubaccountHeader(): void;
@@ -19,6 +19,6 @@ declare class Request {
     putWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
     patchWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
     put(url: string, data?: PutDataTypes, queryObject?: PutOptionsType): Promise<APIResponse>;
-    delete(url: string, data?: IpPoolDeleteData): Promise<APIResponse>;
+    delete(url: string, data?: IpPoolDeleteData, queryObject?: DeleteQueryTypes): Promise<APIResponse>;
 }
 export default Request;

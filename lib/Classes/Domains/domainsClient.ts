@@ -3,7 +3,8 @@ import {
   IDomainTemplatesClient,
   IDomainTagsClient,
   IDomainCredentials,
-  IDomainsClient
+  IDomainsClient,
+  IDomainKeysClient
 } from '../../Interfaces/Domains/index.js';
 
 import { APIResponse } from '../../Types/Common/ApiResponse.js';
@@ -29,9 +30,7 @@ import {
   ReplacementForPool,
   DKIMAuthorityInfo,
   UpdatedDKIMAuthority,
-  UpdatedDKIMAuthorityResponse,
   DKIMSelectorInfo,
-  UpdatedDKIMSelectorResponse,
   WebPrefixInfo,
   UpdatedWebPrefixResponse,
   TDomain,
@@ -53,6 +52,7 @@ export default class DomainsClient implements IDomainsClient {
   public domainTemplates: IDomainTemplatesClient;
   public domainTags: IDomainTagsClient;
   public domainTracking: IDomainTrackingClient;
+  public domainKeys: IDomainKeysClient;
   private logger: ILogger;
 
   constructor(
@@ -61,6 +61,7 @@ export default class DomainsClient implements IDomainsClient {
     domainTemplatesClient: IDomainTemplatesClient,
     domainTagsClient: IDomainTagsClient,
     domainTracking: IDomainTrackingClient,
+    domainKeysClient: IDomainKeysClient,
     logger: ILogger = console
   ) {
     this.request = request;
@@ -69,6 +70,7 @@ export default class DomainsClient implements IDomainsClient {
     this.domainTags = domainTagsClient;
     this.logger = logger;
     this.domainTracking = domainTracking;
+    this.domainKeys = domainKeysClient;
   }
 
   private _handleBoolValues(
@@ -235,24 +237,27 @@ export default class DomainsClient implements IDomainsClient {
     return this.request.delete(urljoin('/v3/domains', domain, 'ips', 'ip_pool', searchParams));
   }
 
+  /**
+  * @deprecated "domains.updateDKIMAuthority" method is deprecated,
+  * and moved into the "domains.domainKeys.updateDKIMAuthority".
+  * Current method will be removed in the future releases.
+  */
   updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority> {
-    const options: PutOptionsType = { query: `self=${data.self}` };
-    return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, options)
-      .then((res : APIResponse) => res as UpdatedDKIMAuthorityResponse)
-      .then((res : UpdatedDKIMAuthorityResponse) => res.body as UpdatedDKIMAuthority);
+    this.logger.warn('"domains.updateDKIMAuthority" method is deprecated. Please use "domains.domainKeys.updateDKIMAuthority" instead');
+    return this.domainKeys.updateDKIMAuthority(domain, data);
   }
 
+  /**
+  * @deprecated "domains.updateDKIMSelector" method is deprecated,
+  * and moved into the "domains.domainKeys.updateDKIMSelector".
+  * Current method will be removed in the future releases.
+  */
   async updateDKIMSelector(
     domain: string,
     data: DKIMSelectorInfo
   ): Promise<UpdatedDKIMSelectorResult> {
-    const options: PutOptionsType = { query: `dkim_selector=${data.dkimSelector}` };
-    const res: UpdatedDKIMSelectorResponse = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, options);
-
-    return {
-      status: res.status,
-      message: res?.body?.message
-    };
+    this.logger.warn('"domains.updateDKIMSelector" method is deprecated. Please use domains.domainKeys.updateDKIMSelector instead');
+    return this.domainKeys.updateDKIMSelector(domain, data);
   }
 
   /**

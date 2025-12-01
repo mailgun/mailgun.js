@@ -8,6 +8,7 @@ import DomainCredentialsClient from '../../lib/Classes/Domains/domainsCredential
 import DomainTemplatesClient from '../../lib/Classes/Domains/domainsTemplates.js';
 import DomainTagsClient from '../../lib/Classes/Domains/domainsTags.js';
 import DomainTrackingClient from '../../lib/Classes/Domains/domainsTracking.js';
+import DomainKeysClient from '../../lib/Classes/Domains/domainsKeys.js';
 
 import {
   ConnectionSettings,
@@ -30,12 +31,15 @@ describe('DomainsClient', function () {
     const domainTemplatesClient = new DomainTemplatesClient(reqObject);
     const domainTagsClient = new DomainTagsClient(reqObject);
     const domainTrackingClient = new DomainTrackingClient(reqObject);
+    const domainKeysClient = new DomainKeysClient(reqObject);
+
     client = new DomainsClient(
       reqObject,
       domainCredentialsClient,
       domainTemplatesClient,
       domainTagsClient,
       domainTrackingClient,
+      domainKeysClient,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       { warn: () => {} }
     );

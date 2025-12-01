@@ -4715,8 +4715,8 @@ class Request {
     put(url, data, queryObject) {
         return this.command('put', url, data, {}, queryObject);
     }
-    delete(url, data) {
-        return this.command('delete', url, data);
+    delete(url, data, queryObject) {
+        return this.command('delete', url, data, {}, { query: queryObject });
     }
 }
 
@@ -4780,14 +4780,16 @@ class DomainsClient {
     domainTemplates;
     domainTags;
     domainTracking;
+    domainKeys;
     logger;
-    constructor(request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTracking, logger = console) {
+    constructor(request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTracking, domainKeysClient, logger = console) {
         this.request = request;
         this.domainCredentials = domainCredentialsClient;
         this.domainTemplates = domainTemplatesClient;
         this.domainTags = domainTagsClient;
         this.logger = logger;
         this.domainTracking = domainTracking;
+        this.domainKeys = domainKeysClient;
     }
     _handleBoolValues(data) {
         const propsForReplacement = data;
@@ -4925,19 +4927,23 @@ class DomainsClient {
         }
         return this.request.delete(urljoin('/v3/domains', domain, 'ips', 'ip_pool', searchParams));
     }
+    /**
+    * @deprecated "domains.updateDKIMAuthority" method is deprecated,
+    * and moved into the "domains.domainKeys.updateDKIMAuthority".
+    * Current method will be removed in the future releases.
+    */
     updateDKIMAuthority(domain, data) {
-        const options = { query: `self=${data.self}` };
-        return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, options)
-            .then((res) => res)
-            .then((res) => res.body);
+        this.logger.warn('"domains.updateDKIMAuthority" method is deprecated. Please use "domains.domainKeys.updateDKIMAuthority" instead');
+        return this.domainKeys.updateDKIMAuthority(domain, data);
     }
+    /**
+    * @deprecated "domains.updateDKIMSelector" method is deprecated,
+    * and moved into the "domains.domainKeys.updateDKIMSelector".
+    * Current method will be removed in the future releases.
+    */
     async updateDKIMSelector(domain, data) {
-        const options = { query: `dkim_selector=${data.dkimSelector}` };
-        const res = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, options);
-        return {
-            status: res.status,
-            message: res?.body?.message
-        };
+        this.logger.warn('"domains.updateDKIMSelector" method is deprecated. Please use domains.domainKeys.updateDKIMSelector instead');
+        return this.domainKeys.updateDKIMSelector(domain, data);
     }
     /**
     * @deprecated "domains.updateWebPrefix" method is deprecated.
@@ -6511,6 +6517,93 @@ class DomainTrackingClient {
     }
 }
 
+class DomainKeysClient extends NavigationThruPages {
+    baseRoute;
+    request;
+    constructor(request) {
+        super(request);
+        this.request = request;
+        this.baseRoute = '/v3/domains/';
+    }
+    _parseDomainKeysList(response) {
+        return {
+            items: response.items,
+        };
+    }
+    parseList(response) {
+        response.body.items;
+        this.parsePageLinks(response, '?', 'page');
+        response.status;
+        return {
+            items: response.body.items,
+            pages: this.parsePageLinks(response, '?', 'page'),
+            status: response.status || 200,
+        };
+    }
+    async list(domainName) {
+        const res = await this.request.get(urljoin('v4/domains/', domainName, '/keys'));
+        return { ...this._parseDomainKeysList(res.body), status: res.status };
+    }
+    async listAll(query) {
+        // Suggested way of filtering in the docs using the FormData can't be used
+        // since body is not allowed in GET requests.
+        // Omitting the limit and page for now.
+        const preparedQuery = {
+            ...(query?.signingDomain
+                ? { signing_domain: encodeURIComponent(query.signingDomain) }
+                : {}),
+            ...(query?.selector ? { selector: encodeURIComponent(query.selector) } : {}),
+            page: '',
+            limit: ''
+        };
+        const res = await this.requestListWithPages(urljoin('/v1/dkim/keys'), preparedQuery);
+        return res;
+    }
+    async create(data) {
+        const preparedData = {
+            signing_domain: data.signingDomain,
+            selector: data.selector,
+        };
+        if (data.bits) {
+            preparedData.bits = data.bits;
+        }
+        if (data.pem) {
+            preparedData.pem = data.pem;
+        }
+        const res = await this.request.postWithFD(urljoin('v1/dkim/keys'), preparedData);
+        return {
+            status: res.status,
+            ...res.body
+        };
+    }
+    async activate(domainName, selector) {
+        const res = await this.request.put(`/v4/domains/${domainName}/keys/${selector}/activate`);
+        return { ...res.body, status: res.status };
+    }
+    async deactivate(domainName, selector) {
+        const res = await this.request.put(`/v4/domains/${domainName}/keys/${selector}/deactivate`);
+        return { ...res.body, status: res.status };
+    }
+    async destroy(domain, selector) {
+        const res = await this.request.delete(urljoin('v1/dkim/keys'), undefined, { signing_domain: domain, selector });
+        return res.body;
+    }
+    async updateDKIMSelector(domain, data) {
+        const options = { query: `dkim_selector=${data.dkimSelector}` };
+        const res = await this.request.put(`/v3/domains/${domain}/dkim_selector`, {}, options);
+        return {
+            status: res.status,
+            message: res?.body?.message
+        };
+    }
+    async updateDKIMAuthority(domain, data) {
+        const options = { query: `self=${data.self}` };
+        return this.request.put(`/v3/domains/${domain}/dkim_authority`, {}, options)
+            .then((res) => res)
+            .then((res) => res.body);
+    }
+}
+
 /* eslint-disable camelcase */
 class MailgunClient {
     request;
@@ -6549,6 +6642,7 @@ class MailgunClient {
         const domainTemplatesClient = new DomainTemplatesClient(this.request);
         const domainTagsClient = new DomainTagsClient(this.request);
         const domainTrackingClient = new DomainTrackingClient(this.request);
+        const domainKeysClient = new DomainKeysClient(this.request);
         const multipleValidationClient = new MultipleValidationClient(this.request);
         const InboxPlacementsResultsSharingClient = new IPRSharingClient(this.request);
         const seedsListsAttributes = new InboxPlacementsAttributesClient(this.request, '/v4/inbox/seedlists/a');
@@ -6558,7 +6652,7 @@ class MailgunClient {
         const seedsListsClient = new SeedsListsClient(this.request, seedsListsAttributes, seedsListsFiltersClient);
         const inboxPlacementsResultsClient = new InboxPlacementsResultsClient(this.request, resultsAttributesClient, resultsFiltersClient, InboxPlacementsResultsSharingClient);
         const inboxPlacementsProvidersClient = new InboxPlacementsProvidersClient(this.request);
-        this.domains = new DomainsClient(this.request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTrackingClient);
+        this.domains = new DomainsClient(this.request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTrackingClient, domainKeysClient);
         this.webhooks = new WebhooksClient(this.request);
         this.events = new EventClient(this.request);
         this.stats = new StatsClient(this.request);
