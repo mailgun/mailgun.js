@@ -4,7 +4,7 @@ import type { IPsListQuery } from '../IPs/index.js';
 import type { RoutesListQuery } from '../Routes/index.js';
 import type { SubaccountsQuery } from '../Subaccounts/index.js';
 import type { WebhooksQuery } from '../Webhooks/index.js';
-import type { ConnectionSettings, DomainCredentialsQuery, DomainGetAPIQuery, DomainsQuery, DomainTagsStatisticQuery, DomainTemplatesQuery, TemplateQuery } from '../Domains/index.js';
+import type { ConnectionSettings, DeletedDomainKeysQuery, DomainCredentialsQuery, DomainGetAPIQuery, DomainsQuery, DomainTagsStatisticQuery, DomainTemplatesQuery, TemplateQuery } from '../Domains/index.js';
 import type { InboxPlacementsData, InboxPlacementsResultsApiQuery, SeedsListsAPIQuery, SeedsListsUpdatingData } from '../InboxPlacements/index.js';
 import type { ValidationQuery } from '../Validations/index.js';
 import type { IpPoolDeleteData } from '../IPPools/index.js';
@@ -35,6 +35,7 @@ export type OnCallRequestOptions = {
 export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | WebhooksQuery | DomainsQuery | DomainGetAPIQuery | DomainCredentialsQuery | DomainTagsStatisticQuery | TemplateQuery | DomainTemplatesQuery | InboxPlacementsResultsApiQuery | SeedsListsAPIQuery | {
     searchParams?: Array<Array<string>>;
 } | ValidationQuery;
+export type DeleteQueryTypes = DeletedDomainKeysQuery;
 export type PostDataTypes = InboxPlacementsData | MetricsQuery | string;
 export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings;
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
@@ -49,7 +50,7 @@ export type PutOptionsType = {
     query?: PutQueryTypes;
 };
 export type CommandQuery = {
-    query?: PutQueryTypes;
+    query?: PutQueryTypes | DeleteQueryTypes;
 };
 export type onCallReqConfig = {
     isFormURLEncoded?: boolean;

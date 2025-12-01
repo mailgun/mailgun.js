@@ -4917,8 +4917,8 @@ var Request = /** @class */ (function () {
     Request.prototype.put = function (url, data, queryObject) {
         return this.command('put', url, data, {}, queryObject);
     };
-    Request.prototype.delete = function (url, data) {
-        return this.command('delete', url, data);
+    Request.prototype.delete = function (url, data, queryObject) {
+        return this.command('delete', url, data, {}, { query: queryObject });
     };
     return Request;
 }());
@@ -4960,7 +4960,7 @@ var Domain = /** @class */ (function () {
 }());
 
 var DomainsClient = /** @class */ (function () {
-    function DomainsClient(request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTracking, logger) {
+    function DomainsClient(request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTracking, domainKeysClient, logger) {
         if (logger === void 0) { logger = console; }
         this.request = request;
         this.domainCredentials = domainCredentialsClient;
@@ -4968,6 +4968,7 @@ var DomainsClient = /** @class */ (function () {
         this.domainTags = domainTagsClient;
         this.logger = logger;
         this.domainTracking = domainTracking;
+        this.domainKeys = domainKeysClient;
     }
     DomainsClient.prototype._handleBoolValues = function (data) {
         var propsForReplacement = data;
@@ -5108,28 +5109,25 @@ var DomainsClient = /** @class */ (function () {
         }
         return this.request.delete(urljoin('/v3/domains', domain, 'ips', 'ip_pool', searchParams));
     };
+    /**
+    * @deprecated "domains.updateDKIMAuthority" method is deprecated,
+    * and moved into the "domains.domainKeys.updateDKIMAuthority".
+    * Current method will be removed in the future releases.
+    */
     DomainsClient.prototype.updateDKIMAuthority = function (domain, data) {
-        var options = { query: "self=".concat(data.self) };
-        return this.request.put("/v3/domains/".concat(domain, "/dkim_authority"), {}, options)
-            .then(function (res) { return res; })
-            .then(function (res) { return res.body; });
+        this.logger.warn('"domains.updateDKIMAuthority" method is deprecated. Please use "domains.domainKeys.updateDKIMAuthority" instead');
+        return this.domainKeys.updateDKIMAuthority(domain, data);
     };
+    /**
+    * @deprecated "domains.updateDKIMSelector" method is deprecated,
+    * and moved into the "domains.domainKeys.updateDKIMSelector".
+    * Current method will be removed in the future releases.
+    */
     DomainsClient.prototype.updateDKIMSelector = function (domain, data) {
-        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var options, res;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        options = { query: "dkim_selector=".concat(data.dkimSelector) };
-                        return [4 /*yield*/, this.request.put("/v3/domains/".concat(domain, "/dkim_selector"), {}, options)];
-                    case 1:
-                        res = _b.sent();
-                        return [2 /*return*/, {
-                                status: res.status,
-                                message: (_a = res === null || res === void 0 ? void 0 : res.body) === null || _a === void 0 ? void 0 : _a.message
-                            }];
-                }
+            return __generator(this, function (_a) {
+                this.logger.warn('"domains.updateDKIMSelector" method is deprecated. Please use domains.domainKeys.updateDKIMSelector instead');
+                return [2 /*return*/, this.domainKeys.updateDKIMSelector(domain, data)];
             });
         });
     };
@@ -6966,6 +6964,155 @@ var DomainTrackingClient = /** @class */ (function () {
     return DomainTrackingClient;
 }());
 
+var DomainKeysClient = /** @class */ (function (_super) {
+    __extends(DomainKeysClient, _super);
+    function DomainKeysClient(request) {
+        var _this = _super.call(this, request) || this;
+        _this.request = request;
+        _this.baseRoute = '/v3/domains/';
+        return _this;
+    }
+    DomainKeysClient.prototype._parseDomainKeysList = function (response) {
+        return {
+            items: response.items,
+        };
+    };
+    DomainKeysClient.prototype.parseList = function (response) {
+        response.body.items;
+        this.parsePageLinks(response, '?', 'page');
+        response.status;
+        return {
+            items: response.body.items,
+            pages: this.parsePageLinks(response, '?', 'page'),
+            status: response.status || 200,
+        };
+    };
+    DomainKeysClient.prototype.list = function (domainName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get(urljoin('v4/domains/', domainName, '/keys'))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, __assign(__assign({}, this._parseDomainKeysList(res.body)), { status: res.status })];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.listAll = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var preparedQuery, res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        preparedQuery = __assign(__assign(__assign({}, ((query === null || query === void 0 ? void 0 : query.signingDomain)
+                            ? { signing_domain: encodeURIComponent(query.signingDomain) }
+                            : {})), ((query === null || query === void 0 ? void 0 : query.selector) ? { selector: encodeURIComponent(query.selector) } : {})), { page: '', limit: '' });
+                        return [4 /*yield*/, this.requestListWithPages(urljoin('/v1/dkim/keys'), preparedQuery)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.create = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var preparedData, res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        preparedData = {
+                            signing_domain: data.signingDomain,
+                            selector: data.selector,
+                        };
+                        if (data.bits) {
+                            preparedData.bits = data.bits;
+                        }
+                        if (data.pem) {
+                            preparedData.pem = data.pem;
+                        }
+                        return [4 /*yield*/, this.request.postWithFD(urljoin('v1/dkim/keys'), preparedData)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, __assign({ status: res.status }, res.body)];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.activate = function (domainName, selector) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("/v4/domains/".concat(domainName, "/keys/").concat(selector, "/activate"))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, __assign(__assign({}, res.body), { status: res.status })];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.deactivate = function (domainName, selector) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("/v4/domains/".concat(domainName, "/keys/").concat(selector, "/deactivate"))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, __assign(__assign({}, res.body), { status: res.status })];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.destroy = function (domain, selector) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete(urljoin('v1/dkim/keys'), undefined, { signing_domain: domain, selector: selector })];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.updateDKIMSelector = function (domain, data) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var options, res;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        options = { query: "dkim_selector=".concat(data.dkimSelector) };
+                        return [4 /*yield*/, this.request.put("/v3/domains/".concat(domain, "/dkim_selector"), {}, options)];
+                    case 1:
+                        res = _b.sent();
+                        return [2 /*return*/, {
+                                status: res.status,
+                                message: (_a = res === null || res === void 0 ? void 0 : res.body) === null || _a === void 0 ? void 0 : _a.message
+                            }];
+                }
+            });
+        });
+    };
+    DomainKeysClient.prototype.updateDKIMAuthority = function (domain, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var options;
+            return __generator(this, function (_a) {
+                options = { query: "self=".concat(data.self) };
+                return [2 /*return*/, this.request.put("/v3/domains/".concat(domain, "/dkim_authority"), {}, options)
+                        .then(function (res) { return res; })
+                        .then(function (res) { return res.body; })];
+            });
+        });
+    };
+    return DomainKeysClient;
+}(NavigationThruPages));
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -6988,6 +7135,7 @@ var MailgunClient = /** @class */ (function () {
         var domainTemplatesClient = new DomainTemplatesClient(this.request);
         var domainTagsClient = new DomainTagsClient(this.request);
         var domainTrackingClient = new DomainTrackingClient(this.request);
+        var domainKeysClient = new DomainKeysClient(this.request);
         var multipleValidationClient = new MultipleValidationClient(this.request);
         var InboxPlacementsResultsSharingClient = new IPRSharingClient(this.request);
         var seedsListsAttributes = new InboxPlacementsAttributesClient(this.request, '/v4/inbox/seedlists/a');
@@ -6997,7 +7145,7 @@ var MailgunClient = /** @class */ (function () {
         var seedsListsClient = new SeedsListsClient(this.request, seedsListsAttributes, seedsListsFiltersClient);
         var inboxPlacementsResultsClient = new InboxPlacementsResultsClient(this.request, resultsAttributesClient, resultsFiltersClient, InboxPlacementsResultsSharingClient);
         var inboxPlacementsProvidersClient = new InboxPlacementsProvidersClient(this.request);
-        this.domains = new DomainsClient(this.request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTrackingClient);
+        this.domains = new DomainsClient(this.request, domainCredentialsClient, domainTemplatesClient, domainTagsClient, domainTrackingClient, domainKeysClient);
         this.webhooks = new WebhooksClient(this.request);
         this.events = new EventClient(this.request);
         this.stats = new StatsClient(this.request);

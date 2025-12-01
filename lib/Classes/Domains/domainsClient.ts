@@ -243,6 +243,7 @@ export default class DomainsClient implements IDomainsClient {
   * Current method will be removed in the future releases.
   */
   updateDKIMAuthority(domain: string, data: DKIMAuthorityInfo): Promise<UpdatedDKIMAuthority> {
+    this.logger.warn('"domains.updateDKIMAuthority" method is deprecated. Please use "domains.domainKeys.updateDKIMAuthority" instead');
     return this.domainKeys.updateDKIMAuthority(domain, data);
   }
 
@@ -255,6 +256,7 @@ export default class DomainsClient implements IDomainsClient {
     domain: string,
     data: DKIMSelectorInfo
   ): Promise<UpdatedDKIMSelectorResult> {
+    this.logger.warn('"domains.updateDKIMSelector" method is deprecated. Please use domains.domainKeys.updateDKIMSelector instead');
     return this.domainKeys.updateDKIMSelector(domain, data);
   }
 
