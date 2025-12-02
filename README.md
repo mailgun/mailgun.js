@@ -27,7 +27,7 @@ __Table of Contents__
   - [Release Process](#release-process)
 
 # Documentation
-[Mailgun API Documentation](https://documentation.mailgun.com/en/latest/api_reference.html):
+[Mailgun API Documentation](https://documentation.mailgun.com/docs/mailgun/api-reference/api-overview)
 
 ## Install
 
@@ -35,7 +35,7 @@ __Table of Contents__
 
 Install mailgun.js with:
 
-```sh
+```SH
 npm install mailgun.js
 ```
 
@@ -45,7 +45,7 @@ The next step is to import the module and instantiate a mailgun client by callin
 
 NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use built-in FormData or `form-data` library.
 
-**IMPORTANT**: if you are using EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
+**IMPORTANT**: if you use EU infrastructure, you need to also pass `url: 'https://api.eu.mailgun.net'` together with auth credentials as stated in [Mailgun docs](https://documentation.mailgun.com/docs/mailgun/api-reference/api-overview#base-url)
 
 ### Imports
 Once the package is installed, you can import the library using `import` or `require` approach:
@@ -186,7 +186,7 @@ Example:
 
 
 ### SubAccounts Usage
-Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/en/latest/subaccounts.html#subaccounts)
+Primary accounts can make API calls on behalf of their subaccounts. [API documentation](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts)
 ```js
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData); // or import FormData from 'form-data'
@@ -374,8 +374,9 @@ The following service methods are available to instantiated clients. The example
 ### Messages
 
 - #### create
+   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
 
-  `mg.messages.create(domain, data)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3--domain-name--messages)
+  `mg.messages.create(domain, data)`
 
   Options:
 
@@ -553,7 +554,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### retrieveStoredEmail
-    [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
 
     `mg.messages.retrieveStoredEmail(domain, storageKey)`
 
@@ -610,7 +611,7 @@ The following service methods are available to instantiated clients. The example
     ```
 
 - ### resendEmail
-  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3-domains--domain-name--messages--storage-key-)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3-domains--domain-name--messages--storage-key-)
 
   `mg.messages.resendEmail(domain, storageKey, recipient)`
 
@@ -642,7 +643,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - ### getMessagesQueueStatus
-  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--name--sending-queues)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--name--sending-queues)
 
   `mg.messages.getMessagesQueueStatus(domain)`
 
@@ -678,7 +679,7 @@ The following service methods are available to instantiated clients. The example
 - ### clearMessagesQueue
   Deletes all scheduled and undelivered mail from the domain queue.
 
-  [Link to api doc](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/delete-v3--domain-name--envelopes)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/delete-v3--domain-name--envelopes)
 
   `mg.messages.getMessagesQueueStatus(domain, storageUrl)`
 
@@ -703,19 +704,19 @@ The following service methods are available to instantiated clients. The example
 
   Mailgun’s templates uses a fork of the very popular template engine [handlebars](https://handlebarsjs.com/).
 
-  To provide values for a substitution you need to use 'h:X-Mailgun-Variables' property in the message description.
+  To provide values for a substitution you need to use `h:X-Mailgun-Variables` property in the message description.
 
   Make sure that this property is a JSON string like:
-  ```js
-  JSON.stringify({
-    "title": "A title",
-    "body": "The body"
-  })
+  ```JS
+    JSON.stringify({
+      title: "A title",
+      body: "The body"
+    })
   ```
 
   You can find few examples of how to use templates below.
 - Providing values for **title** and **slug** variables to render in template
-  ```js
+  ```JS
     ...
     const {
       title,
@@ -766,7 +767,7 @@ The following service methods are available to instantiated clients. The example
 
 ### Recipient Variables
 
-  [Docs](https://documentation.mailgun.com/en/latest/user_manual.html#batch-sending)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3--domain-name--messages)
 
   Recipient Variables are custom variables that you define, which you can then reference in the message body. They give you the ability to send a custom message to each recipient while still using a single API Call.
 
@@ -799,14 +800,17 @@ The following service methods are available to instantiated clients. The example
 
 - #### list
   Get the list of domains. Can be filtered by state or authority. Sorting is optional. The list is paginated and limited to 1000 items per page.
-  `mg.domains.list(query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/GET-v4-domains)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/get-v4-domains)
+
+  `mg.domains.list(query)`
 
   Example:
 
-  ```js
-  mg.domains.list()
-    .then(domains => console.log(domains)) // logs array of domains
-    .catch(err => console.error(err)); // logs any error
+  ```JS
+    mg.domains.list()
+      .then(domains => console.log(domains)) // logs array of domains
+      .catch(err => console.error(err)); // logs any error
   ```
 
   Promise returns: array of Domain instances
@@ -847,7 +851,9 @@ The following service methods are available to instantiated clients. The example
 - #### get
   Fetches representation of a domain that includes details about the domain's state and settings.
 
-  `mg.domains.get(domain, query)`  - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/GET-v4-domains--name-)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/get-v4-domains--name-)
+
+  `mg.domains.get(domain, query)`
 
   Example:
 
@@ -915,7 +921,9 @@ The following service methods are available to instantiated clients. The example
 - #### create
   Creates a domain for sending emails
 
-  `mg.domains.create(data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/POST-v4-domains)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/post-v4-domains)
+
+  `mg.domains.create(data)`
 
   Example:
 
@@ -1007,7 +1015,9 @@ The following service methods are available to instantiated clients. The example
 - #### verify
   Verify the domains DNS records (includes A, CNAME, SPF, DKIM and MX records) to ensure the domain is ready and able to send
 
-  `mg.domains.verify(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/PUT-v4-domains--name--verify)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/put-v4-domains--name--verify)
+
+  `mg.domains.verify(domainAddress)`
 
   Example:
 
@@ -1065,7 +1075,9 @@ The following service methods are available to instantiated clients. The example
 - #### update
   Update domains configuration like smtp credentials, enable/disable automatic sender security, spam actions, wildcard, or tracking web scheme.
 
-  `mg.domains.update(domain, options)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/PUT-v4-domains--name-)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/put-v4-domains--name-)
+
+  `mg.domains.update(domain, options)`
 
   Example:
 
@@ -1145,7 +1157,10 @@ The following service methods are available to instantiated clients. The example
 
 - #### destroy
   The domain must not be disabled or used as an authority for an other domain. Sandbox domain can't be deleted.
-  `mg.domains.destroy(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domains/#tag/Domains/operation/DELETE-v3-domains--name-)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domains/delete-v3-domains--name-)
+
+  `mg.domains.destroy(domainAddress)`
 
   Example:
 
@@ -1170,9 +1185,13 @@ The following service methods are available to instantiated clients. The example
    `domains.updateTracking` method is deprecated, and will be removed. Please use `domains.domainTracking.updateTracking` instead.
 
 - #### getConnection
+  ***Deprecated, and will be removed in the future releases***
+
   Returns domain's delivery connection settings.
 
-  `mg.domains.getConnection(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Connection/#tag/Domain-Connection/operation/GET-v3-domains--name--connection)
+  [API Reference](https://mailgun-docs.redoc.ly/docs/mailgun/api-reference/domain/operation/httpapi.(*T).GetDomainConnection-fm-14-0/)
+
+  `mg.domains.getConnection(domainAddress)`
 
   Example:
 
@@ -1192,9 +1211,13 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### updateConnection
+  ***Deprecated, and will be removed in the future releases***
+
   Update a domain's TLS connection settings.
 
-  `mg.domains.updateConnection(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Connection/#tag/Domain-Connection/operation/PUT-v3-domains--name--connection)
+  [API Reference](https://mailgun-docs.redoc.ly/docs/mailgun/api-reference/domain/operation/httpapi.(*T).UpdateDomainConnection-fm-15-0/)
+
+  `mg.domains.updateConnection(domainAddress, data)`
 
   Example:
 
@@ -1218,13 +1241,13 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### updateDKIMAuthority
- `domains.updateDKIMAuthority` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMAuthority` instead.
+  `domains.updateDKIMAuthority` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMAuthority` [instead](#updatedkimauthority-1).
 
 - #### updateDKIMSelector
- `domains.updateDKIMSelector` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMSelector` instead.
+  `domains.updateDKIMSelector` method is deprecated, and will be removed. Please use `domains.domainKeys.updateDKIMSelector` [instead](#updatedkimselector-1).
 
 - #### getIps
-    **Deprecated, and will be removed in the future releases**
+    ***Deprecated, and will be removed in the future releases***
 
     `mg.domains.getIps(domain)`
 
@@ -1243,7 +1266,7 @@ The following service methods are available to instantiated clients. The example
     ```
 
 - #### assignIp
-   **Deprecated, and will be removed in the future releases**
+   ***Deprecated, and will be removed in the future releases***
   `mg.domains.assignIp(domain, ip)`
 
   Example:
@@ -1285,7 +1308,9 @@ The following service methods are available to instantiated clients. The example
 - #### list
   Returns a list of templates for the domain.
 
-  `mg.domains.domainTemplates.list('domainId', query)` - [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetPage-fm-9)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/get-v3--domain-name--templates)
+
+  `mg.domains.domainTemplates.list('domainId', query)`
 
   Example:
 
@@ -1324,7 +1349,9 @@ The following service methods are available to instantiated clients. The example
 
   Returns metadata information about the stored template specified in the url. If the active flag is provided, the content of the active version of the template is returned.
 
-  `mg.domains.domainTemplates.get('domainId', 'templateName', query)`  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Get-fm-6)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/get-v3--domain-name--templates--template-name-)
+
+  `mg.domains.domainTemplates.get('domainId', 'templateName', query)`
 
   Example:
 
@@ -1369,7 +1396,9 @@ The following service methods are available to instantiated clients. The example
   Store a new template, including its name, description and (optionally) the template content.
   If the template content is provided, a new version is automatically created and becomes the active version.
 
-  `mg.domains.domainTemplates.create(domainId, templateData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Post-fm-4)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/post-v3--domain-name--templates)
+
+  `mg.domains.domainTemplates.create(domainId, templateData)`
 
   Example:
 
@@ -1428,7 +1457,9 @@ The following service methods are available to instantiated clients. The example
 - #### update
   Update the description of a template.
 
-  `mg.domains.domainTemplates.update('domainId', 'templateName', data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Put-fm-12)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/put-v3--domain-name--templates--template-name-)
+
+  `mg.domains.domainTemplates.update('domainId', 'templateName', data)`
 
   Example:
 
@@ -1457,7 +1488,9 @@ The following service methods are available to instantiated clients. The example
 - #### destroy
   Delete the template specified in the url. NOTE: This method deletes all versions of the specified template.
 
-  `mg.domains.domainTemplates.destroy('domainId', 'templateName')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).Delete-fm-13)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/delete-v3--domain-name--templates--template-name-)
+
+  `mg.domains.domainTemplates.destroy('domainId', 'templateName')`
 
   Example:
 
@@ -1479,7 +1512,9 @@ The following service methods are available to instantiated clients. The example
 - #### destroyAll
   Delete all templates and their versions for the domain.
 
-  `mg.domains.domainTemplates.destroyAll('domainId')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).DeleteAll-fm-15)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/delete-v3--domain-name--templates)
+
+  `mg.domains.domainTemplates.destroyAll('domainId')`
 
   Example:
 
@@ -1500,7 +1535,9 @@ The following service methods are available to instantiated clients. The example
 - #### listVersions
   Returns a paginated list of template versions.
 
-  `mg.domains.domainTemplates.listVersions('domainId', 'template_name', queryData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetVersionsPage-fm-8)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/get-v3--domain-name--templates--template-name--versions)
+
+  `mg.domains.domainTemplates.listVersions('domainId', 'template_name', queryData)`
 
   Example:
 
@@ -1547,7 +1584,9 @@ The following service methods are available to instantiated clients. The example
 
   Retrieve the information and content of the specified version of a template.
 
-  `mg.domains.domainTemplates.getVersion('domainId', 'template_name', 'tag')` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).GetVersion-fm-7)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/get-v3--domain-name--templates--template-name--versions--version-name-)
+
+  `mg.domains.domainTemplates.getVersion('domainId', 'template_name', 'tag')`
 
   Example:
 
@@ -1588,7 +1627,9 @@ The following service methods are available to instantiated clients. The example
 - #### createVersion
   Adds a new template version. If the template doesn’t contain any other versions, the first version becomes active. A template can store up to 40 versions.
 
-  `mg.domains.domainTemplates.createVersion('domainId', 'template_name', versionData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).PostVersion-fm-5)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/post-v3--domain-name--templates--template-name--versions)
+
+  `mg.domains.domainTemplates.createVersion('domainId', 'template_name', versionData)`
 
   Example:
 
@@ -1650,7 +1691,9 @@ The following service methods are available to instantiated clients. The example
   Update information or content of the specific template version.
   Existing fields not included in the request will not be changed
 
-  `mg.domains.domainTemplates.updateVersion('domainId', 'template_name', 'tag' , versionData)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).PutVersion-fm-11)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/put-v3--domain-name--templates--template-name--versions--version-name-)
+
+  `mg.domains.domainTemplates.updateVersion('domainId', 'template_name', 'tag' , versionData)`
 
   Example:
 
@@ -1695,7 +1738,9 @@ The following service methods are available to instantiated clients. The example
 - #### destroyVersion
   Delete a specific template version.
 
-  `mg.domains.domainTemplates.destroyVersion('domainId', 'template_name', 'tag' )` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Templates/#tag/Templates/operation/httpapi.(*TemplateAPIControler).DeleteVersion-fm-14)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/delete-v3--domain-name--templates--template-name--versions--version-name-)
+
+  `mg.domains.domainTemplates.destroyVersion(domainId, templateName, tag)`
 
   Example:
 
@@ -1710,7 +1755,9 @@ The following service methods are available to instantiated clients. The example
       status: 200,
       message: 'version has been deleted',
       templateName: 'template_name',
-      templateVersion: { tag: 'v1' }
+      templateVersion: {
+        tag:'v1'
+      }
     }
     ```
 
@@ -1720,7 +1767,9 @@ The following service methods are available to instantiated clients. The example
 
   Mailgun offers tracking for clicks, unsubscribes, and opens, with optional HTTPS protocol support on tracking URLs. To enable HTTPS, Mailgun uses Let’s Encrypt with HTTP-01 challenges through your existing tracking CNAME record to issue a TLS certificate. This setup also includes support for HTTP Strict Transport Security (HSTS) for enhanced security.
 
-  `mg.domains.domainTracking.getTracking(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/get-v3-domains--name--tracking)
+
+  `mg.domains.domainTracking.getTracking(domainAddress)`
 
   Example:
 
@@ -1756,7 +1805,8 @@ The following service methods are available to instantiated clients. The example
 
   - Open Tracking Example:
 
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-open)
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/put-v3-domains--name--tracking-open)
+
     ```js
     mg.domains.domainTracking.updateTracking('foobar.example.com', 'open', {
       active: true,
@@ -1787,7 +1837,7 @@ The following service methods are available to instantiated clients. The example
 
   - Click Tracking Example:
 
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-click)
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/put-v3-domains--name--tracking-click)
     ```JS
     mg.domains.domainTracking.updateTracking('foobar.example.com', 'click', {active: true})
       .then(msg => console.log(msg)) // logs response data
@@ -1813,7 +1863,7 @@ The following service methods are available to instantiated clients. The example
 
   - Unsubscribe Tracking Example
 
-    [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/PUT-v3-domains--name--tracking-unsubscribe)
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/put-v3-domains--name--tracking-unsubscribe)
     ```js
     mg.domains.domainTracking.updateTracking('foobar.example.com', 'unsubscribe', {
         active: true,
@@ -1848,7 +1898,9 @@ The following service methods are available to instantiated clients. The example
 - #### get
   Get x509 TLS certificate and status
 
-  `mg.domains.domainTracking.get(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).getStatusV2-fm-8)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/get-v2-x509--domain--status)
+
+  `mg.domains.domainTracking.get(domainAddress)`
 
   Example:
 
@@ -1872,7 +1924,9 @@ The following service methods are available to instantiated clients. The example
 - #### generate
   Initiates generation of a TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll the status endpoint in location field to check for success. Domain address must be formatted as `webPrefix.domainName` from domains settings
 
-  `mg.domains.domainTracking.generate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/post-v2-x509--domain-)
+
+  `mg.domains.domainTracking.generate(domainAddress)`
 
   Example:
 
@@ -1895,7 +1949,9 @@ The following service methods are available to instantiated clients. The example
 - #### regenerate
   Initiates regeneration of an expired TLS certificate for the tracking domain in a background task. Once generation is enqueued, you may poll status endpoint in location field to check for success. This will not regenerate an existing certificate that is still valid. Domain address must be formatted as `webPrefix.domainName` from domains settings
 
-  `mg.domains.domainTracking.regenerate(domainAddress)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Domain-Tracking/#tag/Domain-Tracking/operation/httpapi.(*HttpAPI).generateStatusV2-fm-8)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-tracking/put-v2-x509--domain-)
+
+  `mg.domains.domainTracking.regenerate(domainAddress)`
 
   Example:
 
@@ -1922,7 +1978,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.list(domainAddress, data)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v4-domains--authority-name--keys)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v4-domains--authority-name--keys)
 
   Example:
 
@@ -1959,7 +2015,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.listAll(filterData)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v1-dkim-keys)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/get-v1-dkim-keys)
 
    Example:
 
@@ -2003,7 +2059,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.create(newKeyData)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/post-v1-dkim-keys)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/post-v1-dkim-keys)
 
   Example:
 
@@ -2044,7 +2100,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.activate(domainAddress, selector)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--activate)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--activate)
 
   Example:
 
@@ -2071,7 +2127,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.deactivate(domainAddress, selector)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--deactivate)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v4-domains--authority-name--keys--selector--deactivate)
 
   Example:
 
@@ -2100,7 +2156,7 @@ The following service methods are available to instantiated clients. The example
 
   `mg.domains.domainKeys.destroy(domainAddress, selector)`
 
-  [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/delete-v1-dkim-keys)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/delete-v1-dkim-keys)
 
   Example:
 
@@ -2121,7 +2177,9 @@ The following service methods are available to instantiated clients. The example
 - #### updateDKIMAuthority
   You can delegate the domain authority to an other domain. Domain's authority is set to itself by default.
 
-  `mg.domains.domainKeys.updateDKIMAuthority(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-authority)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-authority)
+
+  `mg.domains.domainKeys.updateDKIMAuthority(domainAddress, data)`
 
   Example:
 
@@ -2162,7 +2220,9 @@ The following service methods are available to instantiated clients. The example
 - #### updateDKIMSelector
   Selector is the unique identifier of your key. It has to be different from other keys selector.
 
-  `mg.domains.domainKeys.updateDKIMSelector(domainAddress, data)` [api docs](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-selector)
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/domain-keys/put-v3-domains--name--dkim-selector)
+
+  `mg.domains.domainKeys.updateDKIMSelector(domainAddress, data)`
 
   Example:
 
@@ -2192,6 +2252,9 @@ The following service methods are available to instantiated clients. The example
 ### Events
 
 - #### get
+  ***Deprecated, and will be removed in the future releases***
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/events)
 
   `mg.events.get(domain, data)`
 
@@ -2215,7 +2278,7 @@ The following service methods are available to instantiated clients. The example
   | end       | The end of the search time range. It can be specified as a string (see Date Format) or linux epoch seconds. Refer to Time Range for details.                                                                                                                                    |
   | ascending | Defines the direction of the search time range if the range end time is not specified. Can be either yes or no. Refer to Time Range for details.                                                                                                                                |
   | limit     | Number of entries to return. (300 max)                                                                                                                                                                                                                                          |
-  | **field** | **field** is the name of the *[Filter Field](https://documentation.mailgun.com/en/latest/api-events.html#filter-field)*. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator. |
+  | **field** | **field** is the name of the *[Filter Field](https://mailgun-docs.redoc.ly/docs/mailgun/user-manual/events/#filter-field)*. The value of the parameter should be a valid Filter Expression. Several field filters can be specified in one request. If the same field is mentioned, more then once, then all its filter expressions are combined with AND operator. |
   - #### Example with Date and *Filter field*
     ```js
       const date = new Date(2023, 7, 2, 0, 0, 0, 0); // Wed Aug 02 2023 00:00:00 GMT+0300
@@ -2226,6 +2289,7 @@ The following service methods are available to instantiated clients. The example
           event: 'delivered'
         });
     ```
+
   Promise returns: items (array of event objects), pages (paging keys grouped by id)
 
   ```JS
@@ -2246,8 +2310,11 @@ The following service methods are available to instantiated clients. The example
   ```
 
 ### Stats
-- #### Stats Options
+  ***Deprecated, and will be removed in the future releases***
 
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/stats)
+
+- #### Stats Options
     | Parameter  | Description                                                                                                                |
     |:-----------|:---------------------------------------------------------------------------------------------------------------------------|
     | event      | The type of the event. For a complete list of all events written to the log see the `Event Types` table below. (Required)  |
@@ -2283,6 +2350,8 @@ The following service methods are available to instantiated clients. The example
 
 - #### getDomain
 
+  [API Reference](https://mailgun-docs.redoc.ly/docs/mailgun/api-reference/openapi-final/tag/Stats/#tag/Stats/operation/GET-v3--domain--stats-total)
+
   `mg.stats.getDomain(domain, query)`
 
   Example:
@@ -2308,6 +2377,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### getAccount
+  [API Reference](https://mailgun-docs.redoc.ly/docs/mailgun/api-reference/openapi-final/tag/Stats/#tag/Stats/operation/GET-v3-stats-total)
 
   `mg.stats.getDomain(domain, query)`
 
@@ -2337,10 +2407,12 @@ The following service methods are available to instantiated clients. The example
   ```
 
 ### Metrics
-  Mailgun collects many different events and generates event metrics which are available in your Control Panel. This data is also available via our analytics metrics [API endpoint](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics).
+  Mailgun collects many different events and generates event metrics which are available in your Control Panel. This data is also available via our analytics metrics [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/metrics).
 
 - #### getAccount
   Gets filtered metrics for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/metrics/post-v1-analytics-metrics)
 
   `mg.metrics.getAccount(MetricsQuery);`
 
@@ -2375,7 +2447,7 @@ The following service methods are available to instantiated clients. The example
   | duration   | String | A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.|
   | dimensions | Array of strings | Attributes of the metric data such as 'subaccount'.|
   | metrics    | Array of strings | Name of the metrics to receive the stats for such as 'processed_count'.|
-  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics/operation/api.(*MetricsAPI).PostMetricQuery-fm-3!path=filter&t=request) for an object shape. |
+  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/metrics/post-v1-analytics-metrics#metrics/post-v1-analytics-metrics/t=request&path=filter) for an object shape. |
   | include_subaccounts | Boolean | Include stats from all subaccounts. |
   | include_aggregates  | Boolean | Include top-level aggregate metrics.|
 
@@ -2408,6 +2480,9 @@ The following service methods are available to instantiated clients. The example
 
 - #### getAccountUsage
   Gets filtered **usage metrics** for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/metrics/post-v1-analytics-usage-metrics)
+
   `mg.metrics.getAccountUsage(MetricsQuery);`
 
   Example:
@@ -2441,7 +2516,7 @@ The following service methods are available to instantiated clients. The example
   | duration   | String | A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.|
   | dimensions | Array of strings | Attributes of the metric data such as 'subaccount'.|
   | metrics    | Array of strings | Name of the metrics to receive the stats for such as 'processed_count'.|
-  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/openapi-final/tag/Metrics/#tag/Metrics/operation/api.(*MetricsAPI).PostMetricQuery-fm-3!path=filter&t=request) for an object shape. |
+  | filter    | object | Filters to apply to the query. The 'AND' property is required and should contains array of filters objects. See this [document](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/metrics/post-v1-analytics-metrics#metrics/post-v1-analytics-metrics/t=request&path=filter) for an object shape. |
   | include_subaccounts | Boolean | Include stats from all subaccounts. |
   | include_aggregates  | Boolean | Include top-level aggregate metrics.|
 
@@ -2479,7 +2554,7 @@ The following service methods are available to instantiated clients. The example
   `mg.suppressions.list(domain, suppressionType, query?)`
 
   - #### Bounces Example:
-
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/get-v3--domainid--bounces)
     ```js
     mg.suppressions.list('foobar.example.com', 'bounces')
       .then(msg => console.log(msg)) // logs response data
@@ -2487,7 +2562,7 @@ The following service methods are available to instantiated clients. The example
     ```
 
   - #### Unsubscribes Example:
-
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/get-v3--domainid--unsubscribes)
     ```js
     mg.suppressions.list('foobar.example.com', 'unsubscribes')
       .then(msg => console.log(msg)) // logs response data
@@ -2495,6 +2570,8 @@ The following service methods are available to instantiated clients. The example
     ```
 
   - #### Complaints Example:
+
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/get-v3--domainid--complaints)
 
     ```js
     mg.suppressions.list('foobar.example.com', 'complaints')
@@ -2528,7 +2605,7 @@ The following service methods are available to instantiated clients. The example
   `mg.suppressions.get(domain, suppressionType, address)`
 
   - #### Bounces Example:
-
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/get-v3--domainid--bounces--address-)
     ```js
     mg.suppressions.get('foobar.example.com', 'bounces', 'address@example.com')
       .then(msg => console.log(msg)) // logs response data
@@ -2536,6 +2613,7 @@ The following service methods are available to instantiated clients. The example
     ```
 
   - #### Unsubscribes Example:
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/get-v3--domainid--unsubscribes--address-)
 
     ```js
     mg.suppressions.get('foobar.example.com', 'unsubscribes', 'address@example.com')
@@ -2544,6 +2622,8 @@ The following service methods are available to instantiated clients. The example
     ```
 
   - #### Complaints Example:
+
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/get-v3--domainid--complaints--address-)
 
     ```js
     mg.suppressions.get('foobar.example.com', 'complaints', 'address@example.com')
@@ -2566,6 +2646,8 @@ The following service methods are available to instantiated clients. The example
     `mg.suppressions.create(domain, suppressionType, data || data[])`
 
     - #### Bounces Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/post-v3--domainid--bounces)
+
       ```JS
       mg.suppressions.create('foobar.example.com', 'bounces', [{address: 'bob@example.com'}])
         .then(msg => console.log(msg)) // logs response data
@@ -2590,7 +2672,7 @@ The following service methods are available to instantiated clients. The example
       ```
 
     - #### Unsubscribes Example:
-
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/post-v3--domainid--unsubscribes)
       ```js
       mg.suppressions.create('foobar.example.com', 'unsubscribes', {address: 'bob@example.com'})
         .then(msg => console.log(msg)) // logs response data
@@ -2641,8 +2723,8 @@ The following service methods are available to instantiated clients. The example
           ```
 
     - #### Complaints Example:
-
-      ```js
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/post-v3--domainid--complaints)
+      ```JS
       mg.suppressions.create('foobar.example.com', 'complaints', [{address: 'bob@example.com'}])
         .then(msg => console.log(msg)) // logs response data
         .catch(err => console.error(err)); // logs any error
@@ -2667,7 +2749,7 @@ The following service methods are available to instantiated clients. The example
     `mg.suppressions.destroy(domain, suppressionType, address)`
 
     - #### Bounces Example:
-
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/delete-v3--domainid--bounces--address-)
       ```JS
       mg.suppressions.destroy('foobar.example.com', 'bounces', 'bob@example.com')
         .then(msg => console.log(msg)) // logs response data
@@ -2686,7 +2768,7 @@ The following service methods are available to instantiated clients. The example
       ```
 
     - #### Unsubscribes Example:
-
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/delete-v3--domainid--unsubscribes--address-)
       ```js
       mg.suppressions.destroy('foobar.example.com', 'unsubscribes', 'bob@example.com')
         .then(msg => console.log(msg)) // logs response data
@@ -2705,7 +2787,7 @@ The following service methods are available to instantiated clients. The example
       ```
 
     - #### Complaints Example:
-
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/delete-v3--domainid--complaints--address-)
       ```js
       mg.suppressions.destroy('foobar.example.com', 'complaints', 'bob@example.com')
         .then(msg => console.log(msg)) // logs response data
@@ -2725,6 +2807,7 @@ The following service methods are available to instantiated clients. The example
 ### Webhooks
 
 - #### list
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/mailgun/webhooks/get-v3-domains--domain--webhooks)
 
   `mg.webhooks.list(domain, query)`
 
@@ -2753,6 +2836,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### get
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/mailgun/webhooks/get-v3-domains--domain-name--webhooks--webhook-name-)
 
   `mg.webhooks.get(domain, id)`
 
@@ -2773,6 +2857,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### create
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/mailgun/webhooks/post-v3-domains--domain--webhooks)
 
   `mg.webhooks.create(domain, id, data, test)`
 
@@ -2810,6 +2895,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### update
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/mailgun/webhooks/put-v3-domains--domain-name--webhooks--webhook-name-)
 
   `mg.webhooks.update(domain, id, url, test)`
 
@@ -2844,6 +2930,7 @@ The following service methods are available to instantiated clients. The example
 
 
 - #### destroy
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/mailgun/webhooks/delete-v3-domains--domain-name--webhooks--webhook-name-)
 
   `mg.webhooks.destroy(domain, id)`
 
@@ -2866,6 +2953,7 @@ The following service methods are available to instantiated clients. The example
 ### Routes
 
 - #### list
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/get-v3-routes)
 
   `mg.routes.list(query)`
 
@@ -2893,6 +2981,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### get
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/get-v3-routes-id)
 
   `mg.routes.get(id)`
 
@@ -2918,6 +3007,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### create
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/post-v3-routes)
 
   `mg.routes.create(options)`
 
@@ -2948,6 +3038,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### update
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/put-v3-routes-id)
 
   `mg.routes.update(id, options)`
 
@@ -2979,6 +3070,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### destroy
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/delete-v3-routes-id)
 
   `mg.routes.destroy(id)`
 
@@ -3002,6 +3094,7 @@ The following service methods are available to instantiated clients. The example
 ### Validation
 
 - #### get
+  [API Reference](https://documentation.mailgun.com/docs/validate/single-valid-ir)
 
   `mg.validate.get(address)`
 
@@ -3029,7 +3122,8 @@ The following service methods are available to instantiated clients. The example
   ```
 
 ### Multiple validation
-https://documentation.mailgun.com/en/latest/api-email-validation.html#email-validation
+  [API Reference](https://documentation.mailgun.com/docs/validate/bulk-valid-ir)
+
 - #### create
   `mg.validate.multipleValidation.create('name_of_the_list', { file })`
 
@@ -3168,6 +3262,7 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   A client to manage mailing lists.
 
 - #### list
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
 
   `mg.lists.list()`
 
@@ -3196,6 +3291,7 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   ```
 
 - #### get
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address)
 
   `mg.lists.get(mailListAddress)`
 
@@ -3222,6 +3318,7 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   ```
 
 - #### create
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/post-v3-lists)
 
   `mg.lists.create(data)`
 
@@ -3254,6 +3351,7 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   ```
 
 - #### update
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/put-v3-lists-address)
 
   `mg.lists.update(mailListAddress)`
 
@@ -3286,6 +3384,7 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   ```
 
 - #### destroy
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/delete-v3-lists-address)
 
   `mg.lists.destroy(mailListAddress)`
 
@@ -3307,9 +3406,10 @@ https://documentation.mailgun.com/en/latest/api-email-validation.html#email-vali
   ```
 
 ### Mailing list members
-A client to manage members within a specific mailing list.
+  A client to manage members within a specific mailing list.
 
 - #### listMembers
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-lists-string:list_address-members)
 
   `mg.lists.members.listMembers(mailListAddress)`
 
@@ -3335,6 +3435,8 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### getMember
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-lists-list_address-members-member_address)
+
   `mg.lists.members.getMember(mailListAddress, mailListMemberAddress)`
 
   Example:
@@ -3357,6 +3459,8 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### createMember
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/post-lists-string:list_address-members)
+
   `mg.lists.members.createMember(mailListAddress, data)`
 
   Example:
@@ -3385,6 +3489,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### createMembers
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/post-lists-list_address-members.json)
   `mg.lists.members.createMembers(mailListAddress, data)`
 
   Example:
@@ -3430,6 +3535,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### updateMember
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/put-lists-list_address-members-member_address)
 
   `mg.lists.members.updateMember(mailListAddress, mailListMemberAddress, data)`
 
@@ -3458,6 +3564,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### destroyMember
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/delete-lists-list_address-members-member_address)
 
   `mg.lists.members.destroyMember(mailListAddress, mailListMemberAddress)`
 
@@ -3477,13 +3584,15 @@ A client to manage members within a specific mailing list.
     message: 'Mailing list member has been deleted'
   }
   ```
+
 ### Subaccounts
 
   A client to manage subaccounts.
 
 - #### list
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/get-v5-accounts-subaccounts)
 
-  `mg.subaccounts.list(query)` - [api docs](https://documentation.mailgun.com/en/latest/subaccounts.html)
+  `mg.subaccounts.list(query)`
 
   Example:
 
@@ -3512,6 +3621,7 @@ A client to manage members within a specific mailing list.
   | enabled  | Returns all enabled/disabled subaccounts. (Defaults to all if omitted) |
 
 - #### get
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/get-v5-accounts-subaccounts-subaccount_id)
 
   `mg.subaccounts.get(subaccount_id)`
 
@@ -3530,6 +3640,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### create
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/post-v5-accounts-subaccounts)
 
   `mg.subaccounts.create(name)`
 
@@ -3554,6 +3665,7 @@ A client to manage members within a specific mailing list.
   | name 	     | Name of the subaccount being created (ex. 'mysubaccount') 	 |
 
 - #### enable
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/post-v5-accounts-subaccounts-subaccount_id-enable)
 
   `mg.subaccounts.enable(subaccount_id)`
 
@@ -3571,6 +3683,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### disable
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/post-v5-accounts-subaccounts-subaccount_id-disable)
 
   `mg.subaccounts.disable(subaccount_id)`
 
@@ -3588,6 +3701,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### destroy
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/delete-v5-accounts-subaccounts-subaccount_id)
 
   `mg.subaccounts.destroy(subaccount_id)`
 
@@ -3605,8 +3719,9 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### setMonthlySendingLimit
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/put-v5-accounts-subaccounts-subaccount_id-limit-custom-monthly)
 
-   `mg.subaccounts.setMonthlySendingLimit(subaccount_id, limit)`
+  `mg.subaccounts.setMonthlySendingLimit(subaccount_id, limit)`
 
   Example:
 
@@ -3622,6 +3737,7 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### getMonthlySendingLimit
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/get-v5-accounts-subaccounts-subaccount_id-limit-custom-monthly)
 
   `mg.subaccounts.getMonthlySendingLimit(subaccount_id)`
 
@@ -3639,6 +3755,8 @@ A client to manage members within a specific mailing list.
   ```
 
 - #### updateSubaccountFeature
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/subaccounts/put-v5-accounts-subaccounts-subaccount_id-features)
+
   `mg.subaccounts.updateSubaccountFeature(subaccount_id, featuresValues)`
 
   Example:
@@ -3670,9 +3788,12 @@ A client to manage members within a specific mailing list.
 
 ### Inbox Placements
   A client to allows you to see the likely deliverability of your email campaigns.
+
 - #### SeedsLists
 
   - #### list
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-seedlists)
+
     `mg.inboxPlacements.seedsLists.list()`
 
       Example:
@@ -3766,6 +3887,8 @@ A client to manage members within a specific mailing list.
       ```
 
   - #### get
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-seedlists--address-)
+
     `mg.inboxPlacements.seedsLists.get(seedsListId)`
 
     Example:
@@ -3848,6 +3971,8 @@ A client to manage members within a specific mailing list.
     ```
 
   - #### create
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/post-v4-inbox-seedlists)
+
     ```js
     mg.inboxPlacements.seedsLists.create({
       name: 'seedLists name',
@@ -3909,6 +4034,7 @@ A client to manage members within a specific mailing list.
     ```
 
   - #### update
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/put-v4-inbox-seedlists--address-)
 
     ```JS
     mg.inboxPlacements.seedsLists.update(seedsListId,{
@@ -3970,6 +4096,8 @@ A client to manage members within a specific mailing list.
     ```
 
   - #### destroy
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/delete-v4-inbox-seedlists--address-)
+
     ```js
     mg.inboxPlacements.seedsLists.destroy(seedsListId)
     ```
@@ -3993,6 +4121,9 @@ A client to manage members within a specific mailing list.
   - #### Attributes
 
     - #### list
+
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-seedlists-a)
+
       `mg.inboxPlacements.seedsLists.attributes.list()`
 
       Example:
@@ -4014,7 +4145,9 @@ A client to manage members within a specific mailing list.
       ```
 
     - #### get
-      `mg.inboxPlacements.attributes.get('attribute_name');`
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-seedlists-a--attribute-)
+
+      `mg.inboxPlacements.seedsLists.attributes.get('attribute_name');`
 
       Example:
       ```JS
@@ -4036,6 +4169,8 @@ A client to manage members within a specific mailing list.
   - #### Filters
 
     - #### list
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-seedlists--filters)
+
       `mg.inboxPlacements.seedsLists.filters.list()`
 
       Example:
@@ -4063,6 +4198,8 @@ A client to manage members within a specific mailing list.
 - #### Providers
 
   - #### list
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-providers)
+
     List all available email providers.
 
     `mg.inboxPlacements.providers.list()`
@@ -4093,6 +4230,8 @@ A client to manage members within a specific mailing list.
 - #### Results
 
   - #### list
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-results)
+
       Get the details for all placement test results.
 
       ```js
@@ -4224,6 +4363,9 @@ A client to manage members within a specific mailing list.
 
     Get the details for a single result.
 
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-results--result-)
+
+
     `mg.inboxPlacements.results.get(IBPResultId)`
 
     Example:
@@ -4326,6 +4468,8 @@ A client to manage members within a specific mailing list.
     ```
 
   - #### destroy
+    [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/delete-v4-inbox-results--result-)
+
     Delete the result and all associated information.
 
     `mg.inboxPlacements.results.destroy(IBPResultId)`
@@ -4348,6 +4492,9 @@ A client to manage members within a specific mailing list.
 
   - #### getResultByShareId
       Get a result by the share ID.
+
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-sharing-public--shareid-)
+
       ```js
       mg.inboxPlacements.results.getResultByShareId('result_sharing_id')
       ```
@@ -4454,6 +4601,8 @@ A client to manage members within a specific mailing list.
   - #### Attributes
 
     - #### list
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-results-a)
+
       `mg.inboxPlacements.results.attributes.list()`
 
       Example:
@@ -4475,6 +4624,8 @@ A client to manage members within a specific mailing list.
       ```
 
     - #### get
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-results-a--attribute-)
+
       `mg.inboxPlacements.attributes.get('attribute_name');`
 
       Example:
@@ -4497,6 +4648,8 @@ A client to manage members within a specific mailing list.
   - #### Filters
 
     - #### list
+        [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-results--filters)
+
         `mg.inboxPlacements.results.filters.list()`
 
         Example:
@@ -4525,6 +4678,8 @@ A client to manage members within a specific mailing list.
     - #### get
       The sharing status of a result.
 
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-sharing--result-)
+
       `mg.inboxPlacements.results.sharing.get('result_id');`
       Example:
         ```JS
@@ -4546,6 +4701,8 @@ A client to manage members within a specific mailing list.
         ```
     - #### update
       Change the sharing status of a result or create a new share URL
+
+      [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/put-v4-inbox-sharing--result-)
 
       `mg.inboxPlacements.results.sharing.update('result_id', IPRSharingUpdateData);`
 
@@ -4574,6 +4731,8 @@ A client to manage members within a specific mailing list.
   Either 'html' or 'template_name' field should be provided.
 
   'variables' are Template variables, which could be used in html or template. You can use next recipient variables inside Template variables, which will be filled for every seed automatically: %recipient.first_name%, %recipient.last_name%.
+
+  [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/post-v4-inbox-tests)
 
   `mg.inboxPlacements.runTest(InboxPlacementsData);`
 
