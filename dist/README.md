@@ -374,7 +374,7 @@ The following service methods are available to instantiated clients. The example
 ### Messages
 
 - #### create
-   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/get-v3-domains--domain-name--messages--storage-key-)
+   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages/post-v3--domain-name--messages)
 
   `mg.messages.create(domain, data)`
 
