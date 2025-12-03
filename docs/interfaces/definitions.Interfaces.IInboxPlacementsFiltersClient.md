@@ -22,4 +22,4 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/FiltersClient.ts:4](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/InboxPlacements/FiltersClient.ts#L4)
+[Interfaces/InboxPlacements/FiltersClient.ts:4](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/InboxPlacements/FiltersClient.ts#L4)

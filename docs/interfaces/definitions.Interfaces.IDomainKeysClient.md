@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:24](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L24)
+[Interfaces/Domains/DomainKeys.ts:24](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L24)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:19](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L19)
+[Interfaces/Domains/DomainKeys.ts:19](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L19)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:28](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L28)
+[Interfaces/Domains/DomainKeys.ts:28](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L28)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:20](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L20)
+[Interfaces/Domains/DomainKeys.ts:20](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L20)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:17](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L17)
+[Interfaces/Domains/DomainKeys.ts:17](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L17)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:18](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L18)
+[Interfaces/Domains/DomainKeys.ts:18](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L18)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:29](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L29)
+[Interfaces/Domains/DomainKeys.ts:29](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L29)
 
 ___
 
@@ -180,4 +180,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/dcbfb69/lib/Interfaces/Domains/DomainKeys.ts#L30)
+[Interfaces/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/eaf19a2/lib/Interfaces/Domains/DomainKeys.ts#L30)

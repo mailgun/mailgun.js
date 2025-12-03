@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.3.1](https://github.com/mailgun/mailgun.js/compare/v12.3.0...v12.3.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* **deps:** bump js-yaml ([24ac7ea](https://github.com/mailgun/mailgun.js/commits/24ac7ead7725a13dd14b978701264178d4d3caa1))
+
+
+### Other changes
+
+* Fix links in readme ([1d209a9](https://github.com/mailgun/mailgun.js/commits/1d209a9df893678de342b19abd0b6b291fcbf995))
+* Update incorrect create link in readme ([bf6fd50](https://github.com/mailgun/mailgun.js/commits/bf6fd502f8660a29445a0d94ea99713a3ab60f50))
+
 ## [12.3.0](https://github.com/mailgun/mailgun.js/compare/v12.2.0...v12.3.0) (2025-12-01)
 
 
