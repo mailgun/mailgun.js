@@ -180,7 +180,7 @@ describe('DomainKeysClient', function () {
           is_active: true
         }
       }];
-      console.log('filters by domain and selector');
+
       api
         .get('/v1/dkim/keys')
         .query({

@@ -5216,9 +5216,11 @@ var NavigationThruPages = /** @class */ (function () {
 
 var EventClient = /** @class */ (function (_super) {
     __extends(EventClient, _super);
-    function EventClient(request) {
+    function EventClient(request, logger) {
+        if (logger === void 0) { logger = console; }
         var _this = _super.call(this, request) || this;
         _this.request = request;
+        _this.logger = logger;
         return _this;
     }
     EventClient.prototype.parseList = function (response) {
@@ -5231,6 +5233,7 @@ var EventClient = /** @class */ (function (_super) {
     EventClient.prototype.get = function (domain, query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                this.logger.warn('"events.get" method is deprecated. Please use "logs.list" instead');
                 return [2 /*return*/, this.requestListWithPages(urljoin('/v3', domain, 'events'), query)];
             });
         });
@@ -7113,6 +7116,97 @@ var DomainKeysClient = /** @class */ (function (_super) {
     return DomainKeysClient;
 }(NavigationThruPages));
 
+var LogsClient = /** @class */ (function () {
+    function LogsClient(request) {
+        this.request = request;
+    }
+    LogsClient.prototype.parseListResponse = function (response) {
+        var parsedResponse = {
+            start: new Date(response.body.start),
+            end: new Date(response.body.end),
+            status: response.status,
+            pagination: response.body.pagination,
+            items: response.body.items.map(function (item) {
+                var responseItem = __assign(__assign({}, item), { '@timestamp': new Date(item['@timestamp']) });
+                return responseItem;
+            }),
+            aggregates: response.body.aggregates
+        };
+        return parsedResponse;
+    };
+    LogsClient.prototype.prepareDate = function (date) {
+        // 'Wed, 03 Dec 2025 00:00:00 -0000'
+        var formattedDate = "".concat(date.toUTCString().slice(0, 25), " -0000");
+        return formattedDate;
+    };
+    LogsClient.prototype.parseQuery = function (queryData) {
+        var res = __assign(__assign({}, queryData), { start: '', end: '' });
+        if (queryData.start) {
+            res.start = this.prepareDate(queryData.start);
+        }
+        if (queryData.end) {
+            res.end = this.prepareDate(queryData.end);
+        }
+        return res;
+    };
+    LogsClient.prototype.validateQuery = function (queryData) {
+        if (!queryData) {
+            throw APIError.getUserDataError('Missed parameter "query"', '"logs.list": Query data is required');
+        }
+        if (queryData === null || queryData === void 0 ? void 0 : queryData.start) {
+            if ((!((queryData === null || queryData === void 0 ? void 0 : queryData.start) instanceof Date) || Number.isNaN(queryData.start.getTime()))) {
+                throw APIError.getUserDataError('Incorrect type', '"logs.list": Type of "start" must be valid JS Data object');
+            }
+        }
+        else {
+            throw APIError.getUserDataError('Missed property', '"logs.list": "start" property is required');
+        }
+        if (queryData === null || queryData === void 0 ? void 0 : queryData.end) {
+            if ((!((queryData === null || queryData === void 0 ? void 0 : queryData.end) instanceof Date) || Number.isNaN(queryData.end.getTime()))) {
+                throw APIError.getUserDataError('Incorrect type', '"logs.list": Type of "end" must be valid JS Data object');
+            }
+        }
+        if (queryData.filter) {
+            if (!queryData.filter.AND) {
+                throw APIError.getUserDataError('Incorrect filter', '"logs.list": Logs filter must have AND operator');
+            }
+            if (!Array.isArray(queryData.filter.AND) || queryData.filter.AND.length === 0) {
+                throw APIError.getUserDataError('Incorrect filter', '"logs.list": Logs filter AND operator must be an array');
+            }
+            queryData.filter.AND.forEach(function (condition) {
+                if (!condition.attribute || !condition.comparator || !condition.values) {
+                    throw APIError.getUserDataError('Incorrect filter', '"logs.list": Each condition in Logs filter AND operator must have attribute, comparator and values');
+                }
+                if (!Array.isArray(condition.values) || condition.values.length === 0) {
+                    throw APIError.getUserDataError('Incorrect filter', '"logs.list": Values in each condition of Logs filter AND operator must be an array');
+                }
+                condition.values.forEach(function (value) {
+                    if (!value.label || !value.value) {
+                        throw APIError.getUserDataError('Incorrect filter', '"logs.list": Each value in Logs filter condition must have label and value');
+                    }
+                });
+            });
+        }
+    };
+    LogsClient.prototype.list = function (queryData) {
+        return __awaiter(this, void 0, void 0, function () {
+            var preparedQuery, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.validateQuery(queryData);
+                        preparedQuery = this.parseQuery(queryData);
+                        return [4 /*yield*/, this.request.post(urljoin('/v1/analytics/logs'), preparedQuery)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, this.parseListResponse(response)];
+                }
+            });
+        });
+    };
+    return LogsClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -7159,6 +7253,7 @@ var MailgunClient = /** @class */ (function () {
         this.validate = new ValidateClient(this.request, multipleValidationClient);
         this.subaccounts = new SubaccountsClient(this.request);
         this.inboxPlacements = new InboxPlacementsClient(this.request, seedsListsClient, inboxPlacementsResultsClient, inboxPlacementsProvidersClient);
+        this.logs = new LogsClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

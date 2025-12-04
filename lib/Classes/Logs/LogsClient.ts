@@ -49,7 +49,7 @@ export default class LogsClient implements ILogsClient {
 
   private validateQuery(queryData: LogsQuery): void {
     if (!queryData) {
-      throw APIError.getUserDataError('Missed parameter', '"logs.list": Query data is required');
+      throw APIError.getUserDataError('Missed parameter "query"', '"logs.list": Query data is required');
     }
 
     if (queryData?.start) {
