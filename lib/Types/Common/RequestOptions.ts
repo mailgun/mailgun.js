@@ -24,6 +24,7 @@ import type { ValidationQuery } from '../Validations/index.js';
 import type { IpPoolDeleteData } from '../IPPools/index.js';
 import type { MetricsQuery } from '../Metrics/index.js';
 import type { FormDataInput } from './FormData.js';
+import { LogsQuery } from '../Logs/Logs.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;
@@ -70,7 +71,7 @@ export type GetQueryTypes = IPsListQuery |
 
 export type DeleteQueryTypes = DeletedDomainKeysQuery;
 
-export type PostDataTypes = InboxPlacementsData | MetricsQuery | string;
+export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery |string;
 export type PutDataTypes = SeedsListsUpdatingData |
  object |
  FormDataInput |

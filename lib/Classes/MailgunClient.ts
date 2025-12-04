@@ -47,6 +47,8 @@ import InboxPlacementsProvidersClient from './InboxPlacements/providers/InboxPla
 import MetricsClient from './Metrics/MetricsClient.js';
 import DomainTrackingClient from './Domains/domainsTracking.js';
 import DomainKeysClient from './Domains/domainsKeys.js';
+import LogsClient from './Logs/LogsClient.js';
+import { ILogsClient } from '../Interfaces/Logs/ILogsClient.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -65,6 +67,7 @@ export default class MailgunClient implements IMailgunClient {
   public lists: IMailingListsClient;
   public subaccounts: ISubaccountsClient;
   public inboxPlacements: IInboxPlacementsClient;
+  public logs: ILogsClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -145,6 +148,7 @@ export default class MailgunClient implements IMailgunClient {
       inboxPlacementsResultsClient,
       inboxPlacementsProvidersClient,
     );
+    this.logs = new LogsClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {

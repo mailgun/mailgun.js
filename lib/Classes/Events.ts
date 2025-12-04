@@ -7,16 +7,18 @@ import {
 } from '../Types/Events/index.js';
 
 import Request from './common/Request.js';
-import { IEventClient } from '../Interfaces/index.js';
+import { IEventClient, ILogger } from '../Interfaces/index.js';
 
 export default class EventClient
   extends NavigationThruPages<EventsList>
   implements IEventClient {
   request: Request;
+  private logger: ILogger;
 
-  constructor(request: Request) {
+  constructor(request: Request, logger: ILogger = console) {
     super(request);
     this.request = request;
+    this.logger = logger;
   }
 
   protected parseList(
@@ -31,6 +33,7 @@ export default class EventClient
   }
 
   async get(domain: string, query?: EventsQuery) : Promise<EventsList> {
+    this.logger.warn('"events.get" method is deprecated. Please use "logs.list" instead');
     return this.requestListWithPages(urljoin('/v3', domain, 'events'), query);
   }
 }

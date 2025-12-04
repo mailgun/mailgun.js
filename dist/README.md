@@ -259,6 +259,8 @@ The following service methods are available to instantiated clients. The example
     - [events](#events)
       - [get](#get-3)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
+    - [logs](#logs)
+      - [get](#get-4)
     - [stats](#stats)
       - [Stats Options](#stats-options)
       - [getDomain](#getdomain)
@@ -271,7 +273,7 @@ The following service methods are available to instantiated clients. The example
         - [Bounces Example](#bounces-example)
         - [Unsubscribes Example](#unsubscribes-example)
         - [Complaints Example](#complaints-example)
-      - [get](#get-4)
+      - [get](#get-5)
         - [Bounces Example](#bounces-example-1)
         - [Unsubscribes Example](#unsubscribes-example-1)
         - [Complaints Example](#complaints-example-1)
@@ -287,26 +289,26 @@ The following service methods are available to instantiated clients. The example
         - [Complaints Example](#complaints-example-3)
     - [webhooks](#webhooks)
       - [list](#list-4)
-      - [get](#get-5)
+      - [get](#get-6)
       - [create](#create-5)
       - [update](#update-2)
       - [destroy](#destroy-4)
     - [routes](#routes)
       - [list](#list-5)
-      - [get](#get-6)
+      - [get](#get-7)
       - [create](#create-6)
       - [update](#update-3)
       - [destroy](#destroy-5)
     - [validate](#validate)
-      - [get](#get-7)
+      - [get](#get-8)
     - [multiple validation](#multiple-validation)
       - [create](#create-7)
       - [list](#list-6)
-      - [get](#get-8)
+      - [get](#get-9)
       - [destroy](#destroy-6)
     - [mailing lists](#mailing-lists)
       - [list](#list-7)
-      - [get](#get-9)
+      - [get](#get-10)
       - [create](#create-8)
       - [update](#update-4)
       - [destroy](#destroy-7)
@@ -319,7 +321,7 @@ The following service methods are available to instantiated clients. The example
       - [destroyMember](#destroymember)
     - [subaccounts](#subaccounts)
       - [list](#list-8)
-      - [get](#get-10)
+      - [get](#get-11)
       - [create](#create-9)
       - [enable](#enable)
       - [disable](#disable)
@@ -330,29 +332,29 @@ The following service methods are available to instantiated clients. The example
     - [inbox placements](#inbox-placements)
       - [SeedsLists](#seedslists)
         - [list](#list-9)
-        - [get](#get-11)
+        - [get](#get-12)
         - [create](#create-10)
         - [update](#update-5)
         - [destroy](#destroy-9)
         - [SeedsLists Attributes](#attributes)
           - [list](#list-10)
-          - [get](#get-12)
+          - [get](#get-13)
         - [SeedsLists Filters](#filters)
           - [list](#list-11)
       - [Providers](#providers)
         - [list](#list-12)
       - [Results](#results)
         - [list](#list-13)
-        - [get](#get-13)
+        - [get](#get-14)
         - [destroy](#destroy-10)
         - [getResultByShareId](#getresultbyshareid)
         - [Results Attributes](#attributes-1)
           - [list](#list-14)
-          - [get](#get-14)
+          - [get](#get-15)
         - [Results Filters](#filters-1)
           - [list](#list-15)
         - [Sharing](#sharing)
-          - [get](#get-15)
+          - [get](#get-16)
           - [update](#update-6)
       - [Run Test](#run-test)
   - [Navigation thru lists](#navigation-thru-lists)
@@ -2252,7 +2254,7 @@ The following service methods are available to instantiated clients. The example
 ### Events
 
 - #### get
-  ***Deprecated, and will be removed in the future releases***
+  ***Deprecated, and will be removed in the future releases. Use [Logs](#logs) instead**
 
   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/events)
 
@@ -2308,6 +2310,93 @@ The following service methods are available to instantiated clients. The example
     }
   }
   ```
+
+### Logs
+  Mailgun keeps track of every inbound and outbound message event and stores this log data. This data can be queried and filtered to provide insights into the health of your email infrastructure.
+
+  - #### get
+    Gets customer event logs for an account
+
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/stats)
+
+    ```mg.logs.get(query)```
+
+    Example:
+
+    ```JS
+    mg.events.get({
+      start: new Date('2025-11-17T13:00:00Z'), // required
+      end: new Date('2025-11-30T13:05:00Z'), // required
+      include_totals: true,
+      events: ['accepted'], // opened, delivered, etc.
+      include_subaccounts: false,
+      pagination: {
+        token: 'page token from response',
+        limit: 5,
+        sort: 'timestamp:asc'
+      },
+      filter: {
+        AND: [
+          {
+            attribute: 'domain',
+            comparator: '=',
+            values: [
+              {
+                label: 'example.com',
+                value: 'example.com'
+              }
+            ]
+          }
+        ]
+      }
+    }).then(data => console.log(data)) // logs response
+      .catch(err => console.error(err)); // logs any error
+    ```
+
+    Promise returns:
+    ```JS
+    {
+      start: new Date('2025-11-17T13:00:00.000Z'),
+      end: new Date('2025-11-30T13:05:00.000Z'),
+      status: 200,
+      pagination: {
+        next: 'page token for next page',
+        last: 'page token for last page'
+      },
+      items: [
+        {
+          id: 'JDhSWf9mT5OFxCkZfpDU5d',
+          event: 'accepted',
+          '@timestamp': new Date('2024-07-08T16:30:18.530Z'),
+          account: {
+            id: '12345'
+          },
+          delivery-status: {
+            message: 'Turret client: server connection failed',
+            'attempt-no': 5,
+            code: 680,
+            'session-seconds': 15.026,
+            'retry-seconds': 145
+          },
+          domain: {
+            name: 'example.com'
+          },
+          recipient: 'example@gmail.com',
+          'recipient-domain': 'gmail.com',
+          'recipient-provider': 'Gmail',
+          envelope: {
+            sender: 'bob@example.com',
+            transport: 'smtp',
+            'sending-ip': '198.52.100.1',
+            targets: 'bob@example.com'
+          }
+        },
+        ...
+      ],
+      aggregates: {}
+    }
+    ```
+
 
 ### Stats
   ***Deprecated, and will be removed in the future releases***
@@ -4675,6 +4764,7 @@ The following service methods are available to instantiated clients. The example
         ```
 
   - #### Sharing
+
     - #### get
       The sharing status of a result.
 
