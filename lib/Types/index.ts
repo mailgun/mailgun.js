@@ -3,6 +3,7 @@ export * from './Domains/index.js';
 export * from './Events/index.js';
 export * from './IPPools/index.js';
 export * from './IPs/index.js';
+export * from './Logs/index.js';
 export * from './MailgunClient/index.js';
 export * from './MailingLists/index.js';
 export * from './Messages/index.js';
