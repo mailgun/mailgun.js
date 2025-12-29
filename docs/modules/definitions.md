@@ -151,6 +151,14 @@
 - [ListDomainTemplatesAPIResponse](definitions.md#listdomaintemplatesapiresponse)
 - [ListDomainTemplatesResult](definitions.md#listdomaintemplatesresult)
 - [ListsQuery](definitions.md#listsquery)
+- [LogsDeliveryStatus](definitions.md#logsdeliverystatus)
+- [LogsEvent](definitions.md#logsevent)
+- [LogsEventItem](definitions.md#logseventitem)
+- [LogsFilter](definitions.md#logsfilter)
+- [LogsFilterValue](definitions.md#logsfiltervalue)
+- [LogsList](definitions.md#logslist)
+- [LogsParsedQuery](definitions.md#logsparsedquery)
+- [LogsQuery](definitions.md#logsquery)
 - [MailListMember](definitions.md#maillistmember)
 - [MailListMembersQuery](definitions.md#maillistmembersquery)
 - [MailListMembersResponse](definitions.md#maillistmembersresponse)
@@ -307,7 +315,7 @@
 
 #### Defined in
 
-[Types/Common/Error.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Error.ts#L1)
+[Types/Common/Error.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Error.ts#L1)
 
 ___
 
@@ -326,7 +334,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Error.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Error.ts#L13)
+[Types/Common/Error.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Error.ts#L13)
 
 ___
 
@@ -343,7 +351,7 @@ ___
 
 #### Defined in
 
-[Types/Common/ApiResponse.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/ApiResponse.ts#L1)
+[Types/Common/ApiResponse.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/ApiResponse.ts#L1)
 
 ___
 
@@ -360,7 +368,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L1)
+[Types/Webhooks/Webhooks.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L1)
 
 ___
 
@@ -380,7 +388,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:66](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L66)
+[Types/Domains/DomainKeys.ts:66](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L66)
 
 ___
 
@@ -403,7 +411,7 @@ Ensures the object has least one key present and not undefined
 
 #### Defined in
 
-[Types/Messages/Messages.ts:7](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L7)
+[Types/Messages/Messages.ts:7](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L7)
 
 ___
 
@@ -421,7 +429,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Attachments.ts#L8)
+[Types/Common/Attachments.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Attachments.ts#L8)
 
 ___
 
@@ -441,7 +449,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:43](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L43)
+[Types/Domains/Domains.ts:43](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L43)
 
 ___
 
@@ -460,7 +468,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Bounce.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Bounce.ts#L2)
+[Types/Suppressions/Bounce.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Bounce.ts#L2)
 
 ___
 
@@ -484,7 +492,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Attachments.ts#L2)
+[Types/Common/Attachments.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Attachments.ts#L2)
 
 ___
 
@@ -501,7 +509,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:91](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L91)
+[Types/Validations/MultipleValidation.ts:91](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L91)
 
 ___
 
@@ -517,7 +525,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:318](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L318)
+[Types/Messages/Messages.ts:318](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L318)
 
 ___
 
@@ -533,7 +541,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:40](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L40)
+[Types/Domains/DomainTracking.ts:40](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L40)
 
 ___
 
@@ -554,7 +562,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L3)
+[Types/Common/RequestProvider.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L3)
 
 ___
 
@@ -570,7 +578,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:97](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L97)
+[Types/Common/RequestOptions.ts:97](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L97)
 
 ___
 
@@ -587,7 +595,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Complaint.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Complaint.ts#L2)
+[Types/Suppressions/Complaint.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Complaint.ts#L2)
 
 ___
 
@@ -604,7 +612,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:112](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L112)
+[Types/Domains/Domains.ts:112](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L112)
 
 ___
 
@@ -621,7 +629,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:116](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L116)
+[Types/Domains/Domains.ts:116](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L116)
 
 ___
 
@@ -637,7 +645,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:81](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L81)
+[Types/Common/RequestOptions.ts:81](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L81)
 
 ___
 
@@ -656,7 +664,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:71](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L71)
+[Types/Domains/DomainTemplates.ts:71](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L71)
 
 ___
 
@@ -675,7 +683,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:133](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L133)
+[Types/Domains/DomainTemplates.ts:133](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L133)
 
 ___
 
@@ -693,7 +701,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:141](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L141)
+[Types/Domains/DomainTemplates.ts:141](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L141)
 
 ___
 
@@ -713,7 +721,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:10](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L10)
+[Types/MailingLists/MailingLists.ts:10](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L10)
 
 ___
 
@@ -733,7 +741,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:29](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L29)
+[Types/MailingLists/MailingListMembers.ts:29](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L29)
 
 ___
 
@@ -753,7 +761,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:37](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L37)
+[Types/MailingLists/MailingListMembers.ts:37](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L37)
 
 ___
 
@@ -772,7 +780,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:20](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Routes/Routes.ts#L20)
+[Types/Routes/Routes.ts:20](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Routes/Routes.ts#L20)
 
 ___
 
@@ -789,7 +797,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:24](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/FormData.ts#L24)
+[Types/Common/FormData.ts:24](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/FormData.ts#L24)
 
 ___
 
@@ -806,7 +814,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:60](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L60)
+[Types/Validations/MultipleValidation.ts:60](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L60)
 
 ___
 
@@ -824,7 +832,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:38](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L38)
+[Types/Domains/DomainCredentials.ts:38](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L38)
 
 ___
 
@@ -847,7 +855,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:19](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L19)
+[Types/Messages/Messages.ts:19](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L19)
 
 ___
 
@@ -857,7 +865,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:17](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L17)
+[Types/Messages/Messages.ts:17](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L17)
 
 ___
 
@@ -873,7 +881,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:132](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L132)
+[Types/Domains/Domains.ts:132](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L132)
 
 ___
 
@@ -889,7 +897,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:147](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L147)
+[Types/Domains/Domains.ts:147](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L147)
 
 ___
 
@@ -909,7 +917,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:74](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L74)
+[Types/Domains/DomainKeys.ts:74](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L74)
 
 ___
 
@@ -919,7 +927,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:72](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L72)
+[Types/Common/RequestOptions.ts:72](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L72)
 
 ___
 
@@ -938,7 +946,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:45](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L45)
+[Types/Domains/DomainCredentials.ts:45](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L45)
 
 ___
 
@@ -955,7 +963,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:57](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L57)
+[Types/Domains/DomainKeys.ts:57](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L57)
 
 ___
 
@@ -971,7 +979,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:62](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L62)
+[Types/Domains/DomainKeys.ts:62](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L62)
 
 ___
 
@@ -989,7 +997,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:45](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L45)
+[Types/MailingLists/MailingListMembers.ts:45](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L45)
 
 ___
 
@@ -1006,7 +1014,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:15](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Routes/Routes.ts#L15)
+[Types/Routes/Routes.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Routes/Routes.ts#L15)
 
 ___
 
@@ -1023,7 +1031,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:107](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L107)
+[Types/Domains/Domains.ts:107](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L107)
 
 ___
 
@@ -1040,7 +1048,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:18](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L18)
+[Types/MailingLists/MailingLists.ts:18](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L18)
 
 ___
 
@@ -1061,7 +1069,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:176](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L176)
+[Types/Domains/DomainTags.ts:176](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L176)
 
 ___
 
@@ -1080,7 +1088,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:185](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L185)
+[Types/Domains/DomainTags.ts:185](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L185)
 
 ___
 
@@ -1097,7 +1105,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:7](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L7)
+[Types/Domains/DomainCredentials.ts:7](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L7)
 
 ___
 
@@ -1116,7 +1124,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L12)
+[Types/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L12)
 
 ___
 
@@ -1133,7 +1141,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:27](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L27)
+[Types/Domains/DomainCredentials.ts:27](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L27)
 
 ___
 
@@ -1150,7 +1158,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L2)
+[Types/Domains/DomainCredentials.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L2)
 
 ___
 
@@ -1169,7 +1177,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L19)
+[Types/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L19)
 
 ___
 
@@ -1187,7 +1195,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L32)
+[Types/Domains/DomainCredentials.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L32)
 
 ___
 
@@ -1219,7 +1227,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:51](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L51)
+[Types/Domains/Domains.ts:51](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L51)
 
 ___
 
@@ -1229,7 +1237,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:200](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L200)
+[Types/Domains/Domains.ts:200](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L200)
 
 ___
 
@@ -1287,7 +1295,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:38](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L38)
+[Types/Events/Events.ts:38](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L38)
 
 ___
 
@@ -1304,7 +1312,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:207](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L207)
+[Types/Domains/Domains.ts:207](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L207)
 
 ___
 
@@ -1321,7 +1329,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:202](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L202)
+[Types/Domains/Domains.ts:202](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L202)
 
 ___
 
@@ -1331,7 +1339,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:27](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L27)
+[Types/Domains/Domains.ts:27](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L27)
 
 ___
 
@@ -1341,7 +1349,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:39](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L39)
+[Types/Domains/Domains.ts:39](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L39)
 
 ___
 
@@ -1360,7 +1368,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:15](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L15)
+[Types/Domains/DomainKeys.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L15)
 
 ___
 
@@ -1370,7 +1378,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:22](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L22)
+[Types/Domains/DomainKeys.ts:22](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L22)
 
 ___
 
@@ -1380,7 +1388,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:10](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L10)
+[Types/Domains/DomainKeys.ts:10](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L10)
 
 ___
 
@@ -1398,7 +1406,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L4)
+[Types/Domains/DomainKeys.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L4)
 
 ___
 
@@ -1414,7 +1422,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:26](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L26)
+[Types/Domains/DomainKeys.ts:26](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L26)
 
 ___
 
@@ -1433,7 +1441,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:49](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L49)
+[Types/Domains/DomainKeys.ts:49](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L49)
 
 ___
 
@@ -1452,7 +1460,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:35](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L35)
+[Types/Domains/DomainKeys.ts:35](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L35)
 
 ___
 
@@ -1470,7 +1478,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:43](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L43)
+[Types/Domains/DomainKeys.ts:43](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L43)
 
 ___
 
@@ -1487,7 +1495,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainKeys.ts#L30)
+[Types/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainKeys.ts#L30)
 
 ___
 
@@ -1506,7 +1514,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:95](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L95)
+[Types/Domains/Domains.ts:95](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L95)
 
 ___
 
@@ -1527,7 +1535,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:85](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L85)
+[Types/Domains/Domains.ts:85](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L85)
 
 ___
 
@@ -1575,7 +1583,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:51](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L51)
+[Types/Domains/DomainTags.ts:51](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L51)
 
 ___
 
@@ -1593,7 +1601,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:111](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L111)
+[Types/Domains/DomainTags.ts:111](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L111)
 
 ___
 
@@ -1610,7 +1618,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:127](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L127)
+[Types/Domains/DomainTags.ts:127](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L127)
 
 ___
 
@@ -1629,7 +1637,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:192](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L192)
+[Types/Domains/DomainTags.ts:192](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L192)
 
 ___
 
@@ -1646,7 +1654,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:200](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L200)
+[Types/Domains/DomainTags.ts:200](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L200)
 
 ___
 
@@ -1665,7 +1673,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:141](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L141)
+[Types/Domains/DomainTags.ts:141](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L141)
 
 ___
 
@@ -1682,7 +1690,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:160](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L160)
+[Types/Domains/DomainTags.ts:160](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L160)
 
 ___
 
@@ -1704,7 +1712,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:97](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L97)
+[Types/Domains/DomainTags.ts:97](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L97)
 
 ___
 
@@ -1714,7 +1722,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:107](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L107)
+[Types/Domains/DomainTags.ts:107](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L107)
 
 ___
 
@@ -1733,7 +1741,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:25](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L25)
+[Types/Domains/DomainTags.ts:25](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L25)
 
 ___
 
@@ -1752,7 +1760,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L18)
+[Types/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L18)
 
 ___
 
@@ -1770,7 +1778,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:40](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L40)
+[Types/Domains/DomainTags.ts:40](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L40)
 
 ___
 
@@ -1787,7 +1795,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:46](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L46)
+[Types/Domains/DomainTags.ts:46](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L46)
 
 ___
 
@@ -1804,7 +1812,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:5](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L5)
+[Types/Domains/DomainTags.ts:5](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L5)
 
 ___
 
@@ -1823,7 +1831,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L32)
+[Types/Domains/DomainTags.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L32)
 
 ___
 
@@ -1843,7 +1851,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:10](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTags.ts#L10)
+[Types/Domains/DomainTags.ts:10](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTags.ts#L10)
 
 ___
 
@@ -1861,7 +1869,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:5](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L5)
+[Types/Domains/DomainTemplates.ts:5](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L5)
 
 ___
 
@@ -1884,7 +1892,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:12](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L12)
+[Types/Domains/DomainTemplates.ts:12](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L12)
 
 ___
 
@@ -1900,7 +1908,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L32)
+[Types/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L32)
 
 ___
 
@@ -1919,7 +1927,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:36](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L36)
+[Types/Domains/DomainTemplates.ts:36](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L36)
 
 ___
 
@@ -1940,7 +1948,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:23](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L23)
+[Types/Domains/DomainTemplates.ts:23](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L23)
 
 ___
 
@@ -1957,7 +1965,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:43](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L43)
+[Types/Domains/DomainTemplates.ts:43](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L43)
 
 ___
 
@@ -1980,7 +1988,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L3)
+[Types/Domains/DomainTracking.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L3)
 
 ___
 
@@ -1998,7 +2006,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L13)
+[Types/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L13)
 
 ___
 
@@ -2021,7 +2029,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:11](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L11)
+[Types/Domains/Domains.ts:11](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L11)
 
 ___
 
@@ -2031,7 +2039,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:22](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L22)
+[Types/Domains/Domains.ts:22](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L22)
 
 ___
 
@@ -2052,7 +2060,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L2)
+[Types/Domains/Domains.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L2)
 
 ___
 
@@ -2070,7 +2078,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:92](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L92)
+[Types/Events/Events.ts:92](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L92)
 
 ___
 
@@ -2088,7 +2096,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L3)
+[Types/Events/Events.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L3)
 
 ___
 
@@ -2098,7 +2106,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:24](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L24)
+[Types/Events/Events.ts:24](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L24)
 
 ___
 
@@ -2117,7 +2125,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:31](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L31)
+[Types/Events/Events.ts:31](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L31)
 
 ___
 
@@ -2127,7 +2135,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:28](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L28)
+[Types/Common/RequestProvider.ts:28](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L28)
 
 ___
 
@@ -2154,7 +2162,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:9](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Events/Events.ts#L9)
+[Types/Events/Events.ts:9](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Events/Events.ts#L9)
 
 ___
 
@@ -2170,7 +2178,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:20](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/FormData.ts#L20)
+[Types/Common/FormData.ts:20](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/FormData.ts#L20)
 
 ___
 
@@ -2184,7 +2192,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:16](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/FormData.ts#L16)
+[Types/Common/FormData.ts:16](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/FormData.ts#L16)
 
 ___
 
@@ -2194,7 +2202,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:36](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L36)
+[Types/Messages/Messages.ts:36](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L36)
 
 ___
 
@@ -2208,7 +2216,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/FormData.ts#L4)
+[Types/Common/FormData.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/FormData.ts#L4)
 
 ___
 
@@ -2226,7 +2234,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:57](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L57)
+[Types/Domains/DomainTracking.ts:57](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L57)
 
 ___
 
@@ -2244,7 +2252,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:98](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L98)
+[Types/Domains/DomainTemplates.ts:98](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L98)
 
 ___
 
@@ -2263,7 +2271,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:50](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L50)
+[Types/Domains/DomainTracking.ts:50](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L50)
 
 ___
 
@@ -2273,7 +2281,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:57](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L57)
+[Types/Common/RequestOptions.ts:57](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L57)
 
 ___
 
@@ -2283,7 +2291,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:31](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L31)
+[Types/Common/RequestProvider.ts:31](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L31)
 
 ___
 
@@ -2299,7 +2307,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:14](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPs/IPs.ts#L14)
+[Types/IPs/IPs.ts:14](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPs/IPs.ts#L14)
 
 ___
 
@@ -2309,7 +2317,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/FormData.ts#L8)
+[Types/Common/FormData.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/FormData.ts#L8)
 
 ___
 
@@ -2327,7 +2335,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPs/IPs.ts#L8)
+[Types/IPs/IPs.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPs/IPs.ts#L8)
 
 ___
 
@@ -2347,7 +2355,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L2)
+[Types/IPPools/IpPools.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L2)
 
 ___
 
@@ -2365,7 +2373,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:47](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L47)
+[Types/IPPools/IpPools.ts:47](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L47)
 
 ___
 
@@ -2384,7 +2392,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:53](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L53)
+[Types/IPPools/IpPools.ts:53](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L53)
 
 ___
 
@@ -2402,7 +2410,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:61](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L61)
+[Types/IPPools/IpPools.ts:61](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L61)
 
 ___
 
@@ -2419,7 +2427,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:42](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L42)
+[Types/IPPools/IpPools.ts:42](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L42)
 
 ___
 
@@ -2438,7 +2446,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:10](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L10)
+[Types/IPPools/IpPools.ts:10](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L10)
 
 ___
 
@@ -2456,7 +2464,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:18](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L18)
+[Types/IPPools/IpPools.ts:18](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L18)
 
 ___
 
@@ -2474,7 +2482,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:30](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L30)
+[Types/IPPools/IpPools.ts:30](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L30)
 
 ___
 
@@ -2491,7 +2499,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:37](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L37)
+[Types/IPPools/IpPools.ts:37](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L37)
 
 ___
 
@@ -2509,7 +2517,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:24](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPPools/IpPools.ts#L24)
+[Types/IPPools/IpPools.ts:24](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPPools/IpPools.ts#L24)
 
 ___
 
@@ -2527,7 +2535,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/IPs/IPs.ts#L2)
+[Types/IPs/IPs.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/IPs/IPs.ts#L2)
 
 ___
 
@@ -2537,7 +2545,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:51](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L51)
+[Types/Messages/Messages.ts:51](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L51)
 
 ___
 
@@ -2547,7 +2555,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:48](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L48)
+[Types/Messages/Messages.ts:48](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L48)
 
 ___
 
@@ -2557,7 +2565,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:50](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L50)
+[Types/Messages/Messages.ts:50](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L50)
 
 ___
 
@@ -2571,7 +2579,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:49](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L49)
+[Types/Messages/Messages.ts:49](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L49)
 
 ___
 
@@ -2581,7 +2589,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:47](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L47)
+[Types/Messages/Messages.ts:47](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L47)
 
 ___
 
@@ -2597,7 +2605,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:30](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L30)
+[Types/Common/RequestProvider.ts:30](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L30)
 
 ___
 
@@ -2622,7 +2630,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:169](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L169)
+[Types/Domains/DomainTemplates.ts:169](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L169)
 
 ___
 
@@ -2639,7 +2647,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:184](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L184)
+[Types/Domains/DomainTemplates.ts:184](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L184)
 
 ___
 
@@ -2662,7 +2670,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:79](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L79)
+[Types/Domains/DomainTemplates.ts:79](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L79)
 
 ___
 
@@ -2680,7 +2688,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:92](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L92)
+[Types/Domains/DomainTemplates.ts:92](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L92)
 
 ___
 
@@ -2698,7 +2706,243 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L4)
+[Types/MailingLists/MailingLists.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L4)
+
+___
+
+### LogsDeliveryStatus
+
+Ƭ **LogsDeliveryStatus**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `attempt-no?` | `number` |
+| `bounce-type?` | `string` |
+| `certificate-verified?` | `boolean` |
+| `code?` | `number` |
+| `description?` | `string` |
+| `enhanced-code?` | `string` |
+| `first-delivery-attempt-seconds?` | `number` |
+| `last-code?` | `number` |
+| `last-message?` | `string` |
+| `message?` | `string` |
+| `mx-host?` | `string` |
+| `retry-seconds?` | `number` |
+| `session-seconds?` | `number` |
+| `tls?` | `boolean` |
+| `utf8?` | `boolean` |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:34](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L34)
+
+___
+
+### LogsEvent
+
+Ƭ **LogsEvent**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `@timestamp` | `string` |
+| `account?` | \{ `id`: `string` ; `parent-id`: `string`  } |
+| `account.id` | `string` |
+| `account.parent-id` | `string` |
+| `api-key-id?` | `string` |
+| `campaigns?` | \{ `id`: `string` ; `name`: `string`  }[] |
+| `client-info?` | \{ `bot?`: `string` ; `client-name?`: `string` ; `client-os?`: `string` ; `client-type?`: `string` ; `device-type?`: `string` ; `ip?`: `string` ; `user-agent?`: `string`  } |
+| `client-info.bot?` | `string` |
+| `client-info.client-name?` | `string` |
+| `client-info.client-os?` | `string` |
+| `client-info.client-type?` | `string` |
+| `client-info.device-type?` | `string` |
+| `client-info.ip?` | `string` |
+| `client-info.user-agent?` | `string` |
+| `delivery-status?` | [`LogsDeliveryStatus`](definitions.md#logsdeliverystatus) |
+| `domain` | \{ `name`: `string`  } |
+| `domain.name` | `string` |
+| `envelope?` | \{ `i-ip-pool-id?`: `string` ; `sender?`: `string` ; `sending-ip?`: `string` ; `targets?`: `string` ; `transport?`: `string`  } |
+| `envelope.i-ip-pool-id?` | `string` |
+| `envelope.sender?` | `string` |
+| `envelope.sending-ip?` | `string` |
+| `envelope.targets?` | `string` |
+| `envelope.transport?` | `string` |
+| `event` | `string` |
+| `flags?` | \{ `is-amp?`: `boolean` ; `is-authenticated`: `boolean` ; `is-callback`: `boolean` ; `is-delayed-bounce`: `boolean` ; `is-encrypted`: `boolean` ; `is-routed`: `boolean` ; `is-system-test`: `boolean` ; `is-test-mode`: `boolean`  } |
+| `flags.is-amp?` | `boolean` |
+| `flags.is-authenticated` | `boolean` |
+| `flags.is-callback` | `boolean` |
+| `flags.is-delayed-bounce` | `boolean` |
+| `flags.is-encrypted` | `boolean` |
+| `flags.is-routed` | `boolean` |
+| `flags.is-system-test` | `boolean` |
+| `flags.is-test-mode` | `boolean` |
+| `geolocation?` | \{ `city?`: `string` ; `country?`: `string` ; `region?`: `string` ; `timezone?`: `string`  } |
+| `geolocation.city?` | `string` |
+| `geolocation.country?` | `string` |
+| `geolocation.region?` | `string` |
+| `geolocation.timezone?` | `string` |
+| `i-delivery-optimizer?` | `string` |
+| `id` | `string` |
+| `ip?` | `string` |
+| `log-level?` | `string` |
+| `mailing-list?` | \{ `address?`: `string` ; `list-id?`: `string` ; `sid?`: `string`  } |
+| `mailing-list.address?` | `string` |
+| `mailing-list.list-id?` | `string` |
+| `mailing-list.sid?` | `string` |
+| `message?` | \{ `attachments?`: \{ `content-type?`: `string` ; `filename?`: `string` ; `size?`: `number`  }[] ; `headers?`: \{ `from`: `string` ; `message-id`: `string` ; `subject`: `string` ; `to`: `string`  } ; `recipients?`: `string`[] ; `scheduled-for?`: `number` ; `size?`: `number`  } |
+| `message.attachments?` | \{ `content-type?`: `string` ; `filename?`: `string` ; `size?`: `number`  }[] |
+| `message.headers?` | \{ `from`: `string` ; `message-id`: `string` ; `subject`: `string` ; `to`: `string`  } |
+| `message.headers.from` | `string` |
+| `message.headers.message-id` | `string` |
+| `message.headers.subject` | `string` |
+| `message.headers.to` | `string` |
+| `message.recipients?` | `string`[] |
+| `message.scheduled-for?` | `number` |
+| `message.size?` | `number` |
+| `method?` | `string` |
+| `originating-ip?` | `string` |
+| `primary-dkim?` | `string` |
+| `reason?` | `string` |
+| `recipient?` | `string` |
+| `recipient-domain?` | `string` |
+| `recipient-provider?` | `string` |
+| `routes?` | \{ `actions?`: `string` ; `description?`: `string` ; `expression?`: `string` ; `id?`: `string` ; `match?`: \{ `recipient?`: `string`  } ; `priority?`: `number`  } |
+| `routes.actions?` | `string` |
+| `routes.description?` | `string` |
+| `routes.expression?` | `string` |
+| `routes.id?` | `string` |
+| `routes.match?` | \{ `recipient?`: `string`  } |
+| `routes.match.recipient?` | `string` |
+| `routes.priority?` | `number` |
+| `severity?` | `string` |
+| `storage?` | \{ `env?`: `string` ; `key?`: `string` ; `region?`: `string` ; `url?`: `string`[]  } |
+| `storage.env?` | `string` |
+| `storage.key?` | `string` |
+| `storage.region?` | `string` |
+| `storage.url?` | `string`[] |
+| `tags?` | `string`[] |
+| `template?` | \{ `is-text?`: `boolean` ; `name?`: `string` ; `version?`: `string`  } |
+| `template.is-text?` | `boolean` |
+| `template.name?` | `string` |
+| `template.version?` | `string` |
+| `url?` | `string` |
+| `user-variables?` | `string` |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:52](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L52)
+
+___
+
+### LogsEventItem
+
+Ƭ **LogsEventItem**: `Omit`\<[`LogsEvent`](definitions.md#logsevent), ``"@timestamp"``\> & \{ `@timestamp`: `Date`  }
+
+#### Defined in
+
+[Types/Logs/Logs.ts:159](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L159)
+
+___
+
+### LogsFilter
+
+Ƭ **LogsFilter**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `AND` | \{ `attribute`: `string` ; `comparator`: `string` ; `values`: [`LogsFilterValue`](definitions.md#logsfiltervalue)[]  }[] |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:6](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L6)
+
+___
+
+### LogsFilterValue
+
+Ƭ **LogsFilterValue**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `label` | `string` |
+| `value` | `string` |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L1)
+
+___
+
+### LogsList
+
+Ƭ **LogsList**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `aggregates` | \{ `all`: `number` ; `metrics`: `object`  } |
+| `aggregates.all` | `number` |
+| `aggregates.metrics` | `object` |
+| `end` | `Date` |
+| `items` | [`LogsEventItem`](definitions.md#logseventitem)[] |
+| `pagination` | \{ `first?`: `string` ; `last?`: `string` ; `next?`: `string` ; `previous?`: `string` ; `total?`: `number`  } |
+| `pagination.first?` | `string` |
+| `pagination.last?` | `string` |
+| `pagination.next?` | `string` |
+| `pagination.previous?` | `string` |
+| `pagination.total?` | `number` |
+| `start` | `Date` |
+| `status` | `number` |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:163](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L163)
+
+___
+
+### LogsParsedQuery
+
+Ƭ **LogsParsedQuery**: `Omit`\<[`LogsQuery`](definitions.md#logsquery), ``"start"`` \| ``"end"``\> & \{ `end?`: `string` ; `start?`: `string`  }
+
+#### Defined in
+
+[Types/Logs/Logs.ts:29](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L29)
+
+___
+
+### LogsQuery
+
+Ƭ **LogsQuery**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `end?` | `Date` |
+| `events?` | `string`[] |
+| `filter?` | [`LogsFilter`](definitions.md#logsfilter) |
+| `include_subaccounts?` | `boolean` |
+| `include_totals?` | `boolean` |
+| `metric_events?` | `string`[] |
+| `pagination?` | \{ `limit?`: `number` ; `sort?`: `string` ; `token?`: `string`  } |
+| `pagination.limit?` | `number` |
+| `pagination.sort?` | `string` |
+| `pagination.token?` | `string` |
+| `start?` | `Date` |
+
+#### Defined in
+
+[Types/Logs/Logs.ts:14](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Logs/Logs.ts#L14)
 
 ___
 
@@ -2717,7 +2961,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L4)
+[Types/MailingLists/MailingListMembers.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L4)
 
 ___
 
@@ -2735,7 +2979,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L13)
+[Types/MailingLists/MailingListMembers.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L13)
 
 ___
 
@@ -2754,7 +2998,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:58](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L58)
+[Types/MailingLists/MailingListMembers.ts:58](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L58)
 
 ___
 
@@ -2772,7 +3016,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:66](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L66)
+[Types/MailingLists/MailingListMembers.ts:66](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L66)
 
 ___
 
@@ -2794,7 +3038,7 @@ ___
 
 #### Defined in
 
-[Types/MailgunClient/MailgunClientOptions.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailgunClient/MailgunClientOptions.ts#L3)
+[Types/MailgunClient/MailgunClientOptions.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailgunClient/MailgunClientOptions.ts#L3)
 
 ___
 
@@ -2804,7 +3048,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:53](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L53)
+[Types/Messages/Messages.ts:53](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L53)
 
 ___
 
@@ -2814,7 +3058,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:73](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L73)
+[Types/Messages/Messages.ts:73](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L73)
 
 ___
 
@@ -2836,7 +3080,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:69](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L69)
+[Types/MailingLists/MailingLists.ts:69](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L69)
 
 ___
 
@@ -2855,7 +3099,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:85](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L85)
+[Types/MailingLists/MailingLists.ts:85](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L85)
 
 ___
 
@@ -2872,7 +3116,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:65](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L65)
+[Types/MailingLists/MailingLists.ts:65](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L65)
 
 ___
 
@@ -2890,7 +3134,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:79](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L79)
+[Types/MailingLists/MailingLists.ts:79](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L79)
 
 ___
 
@@ -2900,7 +3144,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:54](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L54)
+[Types/MailingLists/MailingLists.ts:54](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L54)
 
 ___
 
@@ -2934,7 +3178,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:29](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L29)
+[Types/MailingLists/MailingLists.ts:29](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L29)
 
 ___
 
@@ -2951,7 +3195,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:60](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L60)
+[Types/MailingLists/MailingLists.ts:60](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L60)
 
 ___
 
@@ -2961,7 +3205,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:57](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L57)
+[Types/MailingLists/MailingLists.ts:57](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L57)
 
 ___
 
@@ -2971,7 +3215,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:27](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L27)
+[Types/Messages/Messages.ts:27](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L27)
 
 ___
 
@@ -2981,7 +3225,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:259](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L259)
+[Types/Messages/Messages.ts:259](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L259)
 
 ___
 
@@ -2997,7 +3241,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:103](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L103)
+[Types/Domains/Domains.ts:103](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L103)
 
 ___
 
@@ -3014,7 +3258,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:308](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L308)
+[Types/Messages/Messages.ts:308](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L308)
 
 ___
 
@@ -3031,7 +3275,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:313](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L313)
+[Types/Messages/Messages.ts:313](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L313)
 
 ___
 
@@ -3050,7 +3294,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:244](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L244)
+[Types/Messages/Messages.ts:244](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L244)
 
 ___
 
@@ -3069,7 +3313,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:252](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L252)
+[Types/Messages/Messages.ts:252](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L252)
 
 ___
 
@@ -3131,7 +3375,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:28](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L28)
+[Types/Metrics/Metrics.ts:28](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L28)
 
 ___
 
@@ -3141,7 +3385,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/MetricsAPI.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/MetricsAPI.ts#L8)
+[Types/Metrics/MetricsAPI.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/MetricsAPI.ts#L8)
 
 ___
 
@@ -3167,7 +3411,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/MetricsAPI.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/MetricsAPI.ts#L13)
+[Types/Metrics/MetricsAPI.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/MetricsAPI.ts#L13)
 
 ___
 
@@ -3185,7 +3429,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:85](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L85)
+[Types/Metrics/Metrics.ts:85](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L85)
 
 ___
 
@@ -3203,7 +3447,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L8)
+[Types/Metrics/Metrics.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L8)
 
 ___
 
@@ -3220,7 +3464,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L4)
+[Types/Metrics/Metrics.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L4)
 
 ___
 
@@ -3239,7 +3483,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:78](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L78)
+[Types/Metrics/Metrics.ts:78](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L78)
 
 ___
 
@@ -3264,7 +3508,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:14](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L14)
+[Types/Metrics/Metrics.ts:14](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L14)
 
 ___
 
@@ -3281,7 +3525,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:91](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L91)
+[Types/Metrics/Metrics.ts:91](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L91)
 
 ___
 
@@ -3306,7 +3550,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:96](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Metrics/Metrics.ts#L96)
+[Types/Metrics/Metrics.ts:96](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Metrics/Metrics.ts#L96)
 
 ___
 
@@ -3316,7 +3560,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:16](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L16)
+[Types/Messages/Messages.ts:16](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L16)
 
 ___
 
@@ -3333,7 +3577,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:19](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L19)
+[Types/MailingLists/MailingListMembers.ts:19](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L19)
 
 ___
 
@@ -3350,7 +3594,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L24)
+[Types/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L24)
 
 ___
 
@@ -3366,7 +3610,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:64](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L64)
+[Types/Validations/MultipleValidation.ts:64](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L64)
 
 ___
 
@@ -3382,7 +3626,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:67](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L67)
+[Types/Validations/MultipleValidation.ts:67](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L67)
 
 ___
 
@@ -3417,7 +3661,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:5](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L5)
+[Types/Validations/MultipleValidation.ts:5](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L5)
 
 ___
 
@@ -3453,7 +3697,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L32)
+[Types/Validations/MultipleValidation.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L32)
 
 ___
 
@@ -3470,7 +3714,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:78](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L78)
+[Types/Validations/MultipleValidation.ts:78](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L78)
 
 ___
 
@@ -3490,7 +3734,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:83](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L83)
+[Types/Validations/MultipleValidation.ts:83](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L83)
 
 ___
 
@@ -3509,7 +3753,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:71](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/MultipleValidation.ts#L71)
+[Types/Validations/MultipleValidation.ts:71](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/MultipleValidation.ts#L71)
 
 ___
 
@@ -3531,7 +3775,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:147](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L147)
+[Types/Domains/DomainTemplates.ts:147](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L147)
 
 ___
 
@@ -3551,7 +3795,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:160](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L160)
+[Types/Domains/DomainTemplates.ts:160](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L160)
 
 ___
 
@@ -3569,7 +3813,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:52](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingListMembers.ts#L52)
+[Types/MailingLists/MailingListMembers.ts:52](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingListMembers.ts#L52)
 
 ___
 
@@ -3595,7 +3839,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Attachments.ts#L1)
+[Types/Common/Attachments.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Attachments.ts#L1)
 
 ___
 
@@ -3613,7 +3857,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:121](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L121)
+[Types/Domains/DomainTemplates.ts:121](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L121)
 
 ___
 
@@ -3630,7 +3874,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:128](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L128)
+[Types/Domains/DomainTemplates.ts:128](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L128)
 
 ___
 
@@ -3644,7 +3888,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:29](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L29)
+[Types/Common/RequestOptions.ts:29](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L29)
 
 ___
 
@@ -3665,7 +3909,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:51](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L51)
+[Types/Common/RequestOptions.ts:51](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L51)
 
 ___
 
@@ -3682,7 +3926,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:36](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L36)
+[Types/Domains/DomainTracking.ts:36](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L36)
 
 ___
 
@@ -3701,7 +3945,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L1)
+[Types/Common/NavigationThruPages.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L1)
 
 ___
 
@@ -3715,7 +3959,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:22](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L22)
+[Types/Common/NavigationThruPages.ts:22](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L22)
 
 ___
 
@@ -3734,7 +3978,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:8](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L8)
+[Types/Common/NavigationThruPages.ts:8](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L8)
 
 ___
 
@@ -3753,17 +3997,17 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:15](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L15)
+[Types/Common/NavigationThruPages.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L15)
 
 ___
 
 ### PostDataTypes
 
-Ƭ **PostDataTypes**: `InboxPlacementsData` \| [`MetricsQuery`](definitions.md#metricsquery) \| `LogsQuery` \| `string`
+Ƭ **PostDataTypes**: `InboxPlacementsData` \| [`MetricsQuery`](definitions.md#metricsquery) \| [`LogsQuery`](definitions.md#logsquery) \| `string`
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:74](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L74)
+[Types/Common/RequestOptions.ts:74](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L74)
 
 ___
 
@@ -3773,7 +4017,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:75](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L75)
+[Types/Common/RequestOptions.ts:75](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L75)
 
 ___
 
@@ -3789,7 +4033,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:95](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L95)
+[Types/Common/RequestOptions.ts:95](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L95)
 
 ___
 
@@ -3799,7 +4043,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:89](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L89)
+[Types/Common/RequestOptions.ts:89](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L89)
 
 ___
 
@@ -3815,7 +4059,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L32)
+[Types/Common/NavigationThruPages.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L32)
 
 ___
 
@@ -3833,7 +4077,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:63](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L63)
+[Types/Domains/DomainTracking.ts:63](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L63)
 
 ___
 
@@ -3850,7 +4094,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:172](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L172)
+[Types/Domains/Domains.ts:172](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L172)
 
 ___
 
@@ -3860,7 +4104,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:79](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L79)
+[Types/Common/RequestOptions.ts:79](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L79)
 
 ___
 
@@ -3870,7 +4114,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:37](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L37)
+[Types/Common/RequestOptions.ts:37](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L37)
 
 ___
 
@@ -3880,7 +4124,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:46](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L46)
+[Types/Common/RequestOptions.ts:46](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L46)
 
 ___
 
@@ -3902,7 +4146,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L13)
+[Types/Common/RequestProvider.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L13)
 
 ___
 
@@ -3919,7 +4163,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:23](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestProvider.ts#L23)
+[Types/Common/RequestProvider.ts:23](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestProvider.ts#L23)
 
 ___
 
@@ -3936,7 +4180,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:26](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L26)
+[Types/Common/NavigationThruPages.ts:26](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L26)
 
 ___
 
@@ -3957,7 +4201,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Routes/Routes.ts#L2)
+[Types/Routes/Routes.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Routes/Routes.ts#L2)
 
 ___
 
@@ -3974,7 +4218,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:27](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Routes/Routes.ts#L27)
+[Types/Routes/Routes.ts:27](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Routes/Routes.ts#L27)
 
 ___
 
@@ -3996,7 +4240,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:56](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L56)
+[Types/Domains/DomainTemplates.ts:56](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L56)
 
 ___
 
@@ -4014,7 +4258,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:23](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/MailingLists/MailingLists.ts#L23)
+[Types/MailingLists/MailingLists.ts:23](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/MailingLists/MailingLists.ts#L23)
 
 ___
 
@@ -4034,7 +4278,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Stats/Stats.ts#L1)
+[Types/Stats/Stats.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Stats/Stats.ts#L1)
 
 ___
 
@@ -4044,7 +4288,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:17](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Stats/Stats.ts#L17)
+[Types/Stats/Stats.ts:17](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Stats/Stats.ts#L17)
 
 ___
 
@@ -4063,7 +4307,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:10](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Stats/Stats.ts#L10)
+[Types/Stats/Stats.ts:10](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Stats/Stats.ts#L10)
 
 ___
 
@@ -4083,7 +4327,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:19](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Stats/Stats.ts#L19)
+[Types/Stats/Stats.ts:19](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Stats/Stats.ts#L19)
 
 ___
 
@@ -4121,7 +4365,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:261](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Messages/Messages.ts#L261)
+[Types/Messages/Messages.ts:261](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Messages/Messages.ts#L261)
 
 ___
 
@@ -4137,7 +4381,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/Attachments.ts#L4)
+[Types/Common/Attachments.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/Attachments.ts#L4)
 
 ___
 
@@ -4154,7 +4398,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:60](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L60)
+[Types/Subaccounts/Subaccounts.ts:60](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L60)
 
 ___
 
@@ -4175,7 +4419,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:33](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L33)
+[Types/Subaccounts/Subaccounts.ts:33](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L33)
 
 ___
 
@@ -4191,7 +4435,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:80](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L80)
+[Types/Subaccounts/Subaccounts.ts:80](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L80)
 
 ___
 
@@ -4207,7 +4451,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:9](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L9)
+[Types/Subaccounts/Subaccounts.ts:9](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L9)
 
 ___
 
@@ -4227,7 +4471,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:13](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L13)
+[Types/Subaccounts/Subaccounts.ts:13](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L13)
 
 ___
 
@@ -4247,7 +4491,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:25](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L25)
+[Types/Subaccounts/Subaccounts.ts:25](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L25)
 
 ___
 
@@ -4263,7 +4507,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:21](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L21)
+[Types/Subaccounts/Subaccounts.ts:21](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L21)
 
 ___
 
@@ -4273,7 +4517,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:42](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L42)
+[Types/Subaccounts/Subaccounts.ts:42](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L42)
 
 ___
 
@@ -4291,7 +4535,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:48](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L48)
+[Types/Subaccounts/Subaccounts.ts:48](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L48)
 
 ___
 
@@ -4308,7 +4552,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:55](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L55)
+[Types/Subaccounts/Subaccounts.ts:55](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L55)
 
 ___
 
@@ -4324,7 +4568,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:66](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L66)
+[Types/Subaccounts/Subaccounts.ts:66](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L66)
 
 ___
 
@@ -4342,7 +4586,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:70](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L70)
+[Types/Subaccounts/Subaccounts.ts:70](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L70)
 
 ___
 
@@ -4358,7 +4602,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:76](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L76)
+[Types/Subaccounts/Subaccounts.ts:76](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L76)
 
 ___
 
@@ -4377,7 +4621,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Subaccounts/Subaccounts.ts#L2)
+[Types/Subaccounts/Subaccounts.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Subaccounts/Subaccounts.ts#L2)
 
 ___
 
@@ -4399,7 +4643,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:57](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L57)
+[Types/Suppressions/Suppressions.ts:57](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L57)
 
 ___
 
@@ -4419,7 +4663,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:67](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L67)
+[Types/Suppressions/Suppressions.ts:67](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L67)
 
 ___
 
@@ -4438,7 +4682,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:76](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L76)
+[Types/Suppressions/Suppressions.ts:76](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L76)
 
 ___
 
@@ -4448,7 +4692,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:26](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L26)
+[Types/Suppressions/Suppressions.ts:26](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L26)
 
 ___
 
@@ -4468,7 +4712,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:41](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L41)
+[Types/Suppressions/Suppressions.ts:41](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L41)
 
 ___
 
@@ -4487,7 +4731,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:50](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L50)
+[Types/Suppressions/Suppressions.ts:50](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L50)
 
 ___
 
@@ -4505,7 +4749,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:15](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L15)
+[Types/Suppressions/Suppressions.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L15)
 
 ___
 
@@ -4522,7 +4766,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:21](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L21)
+[Types/Suppressions/Suppressions.ts:21](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L21)
 
 ___
 
@@ -4541,7 +4785,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:28](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L28)
+[Types/Suppressions/Suppressions.ts:28](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L28)
 
 ___
 
@@ -4558,7 +4802,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:36](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Suppressions.ts#L36)
+[Types/Suppressions/Suppressions.ts:36](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Suppressions.ts#L36)
 
 ___
 
@@ -4593,7 +4837,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:177](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L177)
+[Types/Domains/Domains.ts:177](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L177)
 
 ___
 
@@ -4609,7 +4853,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:52](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L52)
+[Types/Domains/DomainTemplates.ts:52](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L52)
 
 ___
 
@@ -4619,7 +4863,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:66](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L66)
+[Types/Domains/DomainTemplates.ts:66](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L66)
 
 ___
 
@@ -4637,7 +4881,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Unsubscribe.ts:2](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/Unsubscribe.ts#L2)
+[Types/Suppressions/Unsubscribe.ts:2](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/Unsubscribe.ts#L2)
 
 ___
 
@@ -4655,7 +4899,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:44](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L44)
+[Types/Domains/DomainTracking.ts:44](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L44)
 
 ___
 
@@ -4671,7 +4915,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:53](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainCredentials.ts#L53)
+[Types/Domains/DomainCredentials.ts:53](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainCredentials.ts#L53)
 
 ___
 
@@ -4688,7 +4932,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:31](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L31)
+[Types/Domains/DomainTracking.ts:31](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L31)
 
 ___
 
@@ -4708,7 +4952,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:105](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L105)
+[Types/Domains/DomainTemplates.ts:105](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L105)
 
 ___
 
@@ -4726,7 +4970,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:115](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTemplates.ts#L115)
+[Types/Domains/DomainTemplates.ts:115](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTemplates.ts#L115)
 
 ___
 
@@ -4736,7 +4980,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:11](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Routes/Routes.ts#L11)
+[Types/Routes/Routes.ts:11](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Routes/Routes.ts#L11)
 
 ___
 
@@ -4754,7 +4998,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:121](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L121)
+[Types/Domains/Domains.ts:121](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L121)
 
 ___
 
@@ -4771,7 +5015,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:127](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L127)
+[Types/Domains/Domains.ts:127](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L127)
 
 ___
 
@@ -4789,7 +5033,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:136](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L136)
+[Types/Domains/Domains.ts:136](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L136)
 
 ___
 
@@ -4806,7 +5050,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:142](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L142)
+[Types/Domains/Domains.ts:142](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L142)
 
 ___
 
@@ -4823,7 +5067,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:151](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L151)
+[Types/Domains/Domains.ts:151](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L151)
 
 ___
 
@@ -4833,7 +5077,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:156](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L156)
+[Types/Domains/Domains.ts:156](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L156)
 
 ___
 
@@ -4857,7 +5101,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:20](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/DomainTracking.ts#L20)
+[Types/Domains/DomainTracking.ts:20](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/DomainTracking.ts#L20)
 
 ___
 
@@ -4874,7 +5118,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:36](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/NavigationThruPages.ts#L36)
+[Types/Common/NavigationThruPages.ts:36](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/NavigationThruPages.ts#L36)
 
 ___
 
@@ -4890,7 +5134,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:164](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L164)
+[Types/Domains/Domains.ts:164](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L164)
 
 ___
 
@@ -4907,7 +5151,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:167](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L167)
+[Types/Domains/Domains.ts:167](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L167)
 
 ___
 
@@ -4923,7 +5167,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/Validation.ts#L3)
+[Types/Validations/Validation.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/Validation.ts#L3)
 
 ___
 
@@ -4940,7 +5184,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:15](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/Validation.ts#L15)
+[Types/Validations/Validation.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/Validation.ts#L15)
 
 ___
 
@@ -4961,7 +5205,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Validations/Validation.ts#L6)
+[Types/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Validations/Validation.ts#L6)
 
 ___
 
@@ -4977,7 +5221,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:160](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Domains/Domains.ts#L160)
+[Types/Domains/Domains.ts:160](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Domains/Domains.ts#L160)
 
 ___
 
@@ -4991,7 +5235,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:16](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L16)
+[Types/Webhooks/Webhooks.ts:16](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L16)
 
 ___
 
@@ -5008,7 +5252,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:11](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L11)
+[Types/Webhooks/Webhooks.ts:11](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L11)
 
 ___
 
@@ -5025,7 +5269,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:6](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L6)
+[Types/Webhooks/Webhooks.ts:6](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L6)
 
 ___
 
@@ -5043,7 +5287,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:32](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L32)
+[Types/Webhooks/Webhooks.ts:32](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L32)
 
 ___
 
@@ -5060,7 +5304,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:27](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L27)
+[Types/Webhooks/Webhooks.ts:27](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L27)
 
 ___
 
@@ -5077,7 +5321,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:22](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Webhooks/Webhooks.ts#L22)
+[Types/Webhooks/Webhooks.ts:22](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Webhooks/Webhooks.ts#L22)
 
 ___
 
@@ -5096,7 +5340,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/WhiteList.ts:1](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Suppressions/WhiteList.ts#L1)
+[Types/Suppressions/WhiteList.ts:1](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Suppressions/WhiteList.ts#L1)
 
 ___
 
@@ -5116,4 +5360,4 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:101](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Types/Common/RequestOptions.ts#L101)
+[Types/Common/RequestOptions.ts:101](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Types/Common/RequestOptions.ts#L101)

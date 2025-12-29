@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.4.1](https://github.com/mailgun/mailgun.js/compare/v12.4.0...v12.4.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* Export types for logs ([e2179d2](https://github.com/mailgun/mailgun.js/commits/e2179d25ab152be23595962b48af22ac01e05f66))
+
+
+### Other changes
+
+* Fix readme with correct method in logs client ([9b1f5ff](https://github.com/mailgun/mailgun.js/commits/9b1f5ff6f80017e521af5759f4444a9b1221027e))
+
 ## [12.4.0](https://github.com/mailgun/mailgun.js/compare/v12.3.0...v12.4.0) (2025-12-04)
 
 

@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/Complaint.ts:3](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Interfaces/Suppressions/Complaint.ts#L3)
+[Interfaces/Suppressions/Complaint.ts:3](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Suppressions/Complaint.ts#L3)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Complaint.ts:4](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Interfaces/Suppressions/Complaint.ts#L4)
+[Interfaces/Suppressions/Complaint.ts:4](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Suppressions/Complaint.ts#L4)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Complaint.ts:5](https://github.com/mailgun/mailgun.js/blob/13b7f4f/lib/Interfaces/Suppressions/Complaint.ts#L5)
+[Interfaces/Suppressions/Complaint.ts:5](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Suppressions/Complaint.ts#L5)
