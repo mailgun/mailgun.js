@@ -13,3 +13,4 @@ export * from './Subaccounts/index.js';
 export * from './Suppressions/index.js';
 export * from './Validations/index.js';
 export * from './Webhooks/index.js';
+export * from './Logs/index.js';
