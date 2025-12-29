@@ -153,6 +153,16 @@ describe('FormDataBuilder', function () {
         }
       });
 
+      it('works with multiple ReadStream values', async () => {
+        // When FD.set called the property will be overridden, so need to use append.
+        const file = { filename: 'readStream.pdf', data: fs.createReadStream(filepath) };
+        const file1 = { filename: 'readStream1.pdf', data: fs.createReadStream(filepath) };
+        const { formData } = await builder.createFormData({ attachment: [file, file1] });
+        const fdFiles = (formData as FormData).getAll('attachment');
+        expect(fdFiles).toHaveProperty('length');
+        expect(fdFiles.length).toEqual(2);
+      });
+
       it('works with String value', async () => {
         const { formData } = await builder.createFormData({ attachment: 'check,this,stuff,out' });
         const fdFile = (formData as FormData).get('attachment') as File;
