@@ -357,6 +357,8 @@ The following service methods are available to instantiated clients. The example
           - [get](#get-15)
           - [update](#update-6)
       - [Run Test](#run-test)
+    - [DKIM Management](#dkim-management)
+      - [update](#update-7)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -4771,6 +4773,7 @@ The following service methods are available to instantiated clients. The example
       [API Reference](https://documentation.mailgun.com/docs/inboxready/api-reference/optimize/inboxready/inbox-placement/get-v4-inbox-sharing--result-)
 
       `mg.inboxPlacements.results.sharing.get('result_id');`
+
       Example:
         ```JS
         mg.inboxPlacements.results.sharing.get('result_id');
@@ -4856,6 +4859,71 @@ The following service methods are available to instantiated clients. The example
       results: 'link to result page',
     }
   }
+
+### DKIM Management
+- #### update
+  Updates DKIM key rotation configuration for a domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/dkim-security/put-v1-dkim-management-domains--name--rotation)
+
+  `mg.dkimManagement.update(domain_name, configurationData)`
+
+  Example:
+  ```JS
+    mg.dkimManagement.update('foobar.example.com', {
+      rotation_enabled: true,
+      rotation_interval: '120h0m0s'
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: DKIMUpdateRotationResult
+  ```JS
+  {
+    domain: {
+      id: 'domain_id',
+      account_id: 'account_id',
+      sid: 'sid',
+      name: 'foobar.example.com',
+      state: 'active',
+      active_selector: 'active_selector',
+      rotation_enabled: 'true',
+      rotation_interval: '120h0m0s',
+      records: [
+        {
+          name: 'record name',
+          type: 'CNAME',
+          identifier: 'DKIM',
+          value: 'record value',
+          comment: 'Customer DKIM CNAME Record'
+        },
+        ....
+      ]
+    }
+  }
+  ```
+
+- #### rotateImmediately
+  Immediately rotate your DKIM key. This will trigger a rotation even if auto-rotation is disabled on the domain.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/dkim-security/post-v1-dkim-management-domains--name--rotate)
+
+  `mg.dkimManagement.rotateImmediately(domain_name)`
+
+  Example:
+  ```JS
+    mg.dkimManagement.rotateImmediately('foobar.example.com')
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: DKIMRotateImmediatelyResult
+  ```JS
+  {
+    message: "ok";
+  }
+  ```
 
 ## Pagination
   Most of the methods that return items in a list support pagination.
