@@ -201,7 +201,8 @@ class FormDataBuilder {
             objData as unknown as Readable,
             options.knownLength as number
           );
-          browserFormData.set(key, blob as unknown as File, options.filename);
+          // Needs to be append for multiple files, otherwise only last file is attached.
+          browserFormData.append(key, blob as unknown as File, options.filename);
         }
       }
     };

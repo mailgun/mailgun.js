@@ -464,7 +464,8 @@ var FormDataBuilder = /** @class */ (function () {
                 }
                 if (_this.attachmentsHandler.isStream(objData)) {
                     var blob = _this.attachmentsHandler.getBlobFromStream(objData, options.knownLength);
-                    browserFormData.set(key, blob, options.filename);
+                    // Needs to be append for multiple files, otherwise only last file is attached.
+                    browserFormData.append(key, blob, options.filename);
                 }
             }
         };
