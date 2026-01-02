@@ -13,12 +13,13 @@ export enum SuppressionModels {
 
 export enum WebhooksIds {
     CLICKED = 'clicked',
-    COMPLAINED = 'complained',
-    DELIVERED = 'delivered',
     OPENED = 'opened',
+    UNSUBSCRIBED = 'unsubscribe',
+    DELIVERED = 'delivered',
     PERMANENT_FAIL = 'permanent_fail',
     TEMPORARY_FAIL = 'temporary_fail',
-    UNSUBSCRIBED = 'unsubscribe',
+    COMPLAINED = 'complained',
+    ACCEPTED = 'accepted',
 }
 
 export enum YesNo {

@@ -36,6 +36,8 @@ import {
   ISubaccountsClient,
   IInboxPlacementsClient,
   IMetricsClient,
+  IDKIMManagementClient,
+  ILogsClient
 } from '../Interfaces/index.js';
 import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
@@ -48,7 +50,7 @@ import MetricsClient from './Metrics/MetricsClient.js';
 import DomainTrackingClient from './Domains/domainsTracking.js';
 import DomainKeysClient from './Domains/domainsKeys.js';
 import LogsClient from './Logs/LogsClient.js';
-import { ILogsClient } from '../Interfaces/Logs/ILogsClient.js';
+import DKIMManagementClient from './DKIM/DKIMManagment.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -68,6 +70,7 @@ export default class MailgunClient implements IMailgunClient {
   public subaccounts: ISubaccountsClient;
   public inboxPlacements: IInboxPlacementsClient;
   public logs: ILogsClient;
+  public dkimManagement: IDKIMManagementClient
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -149,6 +152,7 @@ export default class MailgunClient implements IMailgunClient {
       inboxPlacementsProvidersClient,
     );
     this.logs = new LogsClient(this.request);
+    this.dkimManagement = new DKIMManagementClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {

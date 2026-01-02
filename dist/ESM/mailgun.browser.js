@@ -1,4 +1,4 @@
-// mailgun.js v12.4.1 Copyright (c) 2025 Mailgun and contributors
+// mailgun.js v12.4.1 Copyright (c) 2026 Mailgun and contributors
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -5127,12 +5127,13 @@ var SuppressionModels;
 var WebhooksIds;
 (function (WebhooksIds) {
     WebhooksIds["CLICKED"] = "clicked";
-    WebhooksIds["COMPLAINED"] = "complained";
-    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["OPENED"] = "opened";
+    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["PERMANENT_FAIL"] = "permanent_fail";
     WebhooksIds["TEMPORARY_FAIL"] = "temporary_fail";
-    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["COMPLAINED"] = "complained";
+    WebhooksIds["ACCEPTED"] = "accepted";
 })(WebhooksIds || (WebhooksIds = {}));
 var YesNo;
 (function (YesNo) {
@@ -6689,6 +6690,29 @@ class LogsClient {
     }
 }
 
+class DKIMManagementClient {
+    request;
+    constructor(request) {
+        this.request = request;
+    }
+    prepareBooleanValues(data) {
+        const res = { ...data, rotation_enabled: '' };
+        if (Object.keys(data).includes('rotation_enabled')) {
+            res.rotation_enabled = `${data.rotation_enabled}`;
+        }
+        return res;
+    }
+    async update(domainName, data) {
+        const preparedData = this.prepareBooleanValues(data);
+        const response = await this.request.putWithFD(urljoin('v1/dkim_management/domains/', domainName, 'rotation'), preparedData);
+        return response.body;
+    }
+    async rotateImmediately(domainName) {
+        const response = await this.request.post(urljoin('v1/dkim_management/domains/', domainName, 'rotate'), {});
+        return response.body;
+    }
+}
+
 /* eslint-disable camelcase */
 class MailgunClient {
     request;
@@ -6707,6 +6731,7 @@ class MailgunClient {
     subaccounts;
     inboxPlacements;
     logs;
+    dkimManagement;
     constructor(options, formData) {
         const config = { ...options };
         if (!config.url) {
@@ -6753,6 +6778,7 @@ class MailgunClient {
         this.subaccounts = new SubaccountsClient(this.request);
         this.inboxPlacements = new InboxPlacementsClient(this.request, seedsListsClient, inboxPlacementsResultsClient, inboxPlacementsProvidersClient);
         this.logs = new LogsClient(this.request);
+        this.dkimManagement = new DKIMManagementClient(this.request);
     }
     setSubaccount(subaccountId) {
         this.request?.setSubaccountHeader(subaccountId);

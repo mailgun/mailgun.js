@@ -1,4 +1,4 @@
-// mailgun.js v12.4.1 Copyright (c) 2025 Mailgun and contributors
+// mailgun.js v12.4.1 Copyright (c) 2026 Mailgun and contributors
 var Resolution;
 (function (Resolution) {
     Resolution["HOUR"] = "hour";
@@ -15,12 +15,13 @@ var SuppressionModels;
 var WebhooksIds;
 (function (WebhooksIds) {
     WebhooksIds["CLICKED"] = "clicked";
-    WebhooksIds["COMPLAINED"] = "complained";
-    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["OPENED"] = "opened";
+    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["PERMANENT_FAIL"] = "permanent_fail";
     WebhooksIds["TEMPORARY_FAIL"] = "temporary_fail";
-    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["COMPLAINED"] = "complained";
+    WebhooksIds["ACCEPTED"] = "accepted";
 })(WebhooksIds = WebhooksIds || (WebhooksIds = {}));
 var YesNo;
 (function (YesNo) {

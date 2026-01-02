@@ -5327,12 +5327,13 @@ var SuppressionModels;
 var WebhooksIds;
 (function (WebhooksIds) {
     WebhooksIds["CLICKED"] = "clicked";
-    WebhooksIds["COMPLAINED"] = "complained";
-    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["OPENED"] = "opened";
+    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["DELIVERED"] = "delivered";
     WebhooksIds["PERMANENT_FAIL"] = "permanent_fail";
     WebhooksIds["TEMPORARY_FAIL"] = "temporary_fail";
-    WebhooksIds["UNSUBSCRIBED"] = "unsubscribe";
+    WebhooksIds["COMPLAINED"] = "complained";
+    WebhooksIds["ACCEPTED"] = "accepted";
 })(WebhooksIds || (WebhooksIds = {}));
 var YesNo;
 (function (YesNo) {
@@ -7208,6 +7209,48 @@ var LogsClient = /** @class */ (function () {
     return LogsClient;
 }());
 
+var DKIMManagementClient = /** @class */ (function () {
+    function DKIMManagementClient(request) {
+        this.request = request;
+    }
+    DKIMManagementClient.prototype.prepareBooleanValues = function (data) {
+        var res = __assign(__assign({}, data), { rotation_enabled: '' });
+        if (Object.keys(data).includes('rotation_enabled')) {
+            res.rotation_enabled = "".concat(data.rotation_enabled);
+        }
+        return res;
+    };
+    DKIMManagementClient.prototype.update = function (domainName, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var preparedData, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        preparedData = this.prepareBooleanValues(data);
+                        return [4 /*yield*/, this.request.putWithFD(urljoin('v1/dkim_management/domains/', domainName, 'rotation'), preparedData)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    DKIMManagementClient.prototype.rotateImmediately = function (domainName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post(urljoin('v1/dkim_management/domains/', domainName, 'rotate'), {})];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    return DKIMManagementClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -7255,6 +7298,7 @@ var MailgunClient = /** @class */ (function () {
         this.subaccounts = new SubaccountsClient(this.request);
         this.inboxPlacements = new InboxPlacementsClient(this.request, seedsListsClient, inboxPlacementsResultsClient, inboxPlacementsProvidersClient);
         this.logs = new LogsClient(this.request);
+        this.dkimManagement = new DKIMManagementClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

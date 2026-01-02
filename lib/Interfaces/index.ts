@@ -14,3 +14,5 @@ export * from './IPPools/index.js';
 export * from './Subaccounts/index.js';
 export * from './InboxPlacements/index.js';
 export * from './Metrics/MetricsClient.js';
+export * from './Logs/ILogsClient.js';
+export * from './DKIM/IDKIMManagementClient.js';
