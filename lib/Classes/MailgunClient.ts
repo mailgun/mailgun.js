@@ -37,7 +37,8 @@ import {
   IInboxPlacementsClient,
   IMetricsClient,
   IDKIMManagementClient,
-  ILogsClient
+  ILogsClient,
+  IBounceClassificationClient
 } from '../Interfaces/index.js';
 import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
@@ -51,6 +52,7 @@ import DomainTrackingClient from './Domains/domainsTracking.js';
 import DomainKeysClient from './Domains/domainsKeys.js';
 import LogsClient from './Logs/LogsClient.js';
 import DKIMManagementClient from './DKIM/DKIMManagment.js';
+import BounceClassificationClient from './BounceClassification/BounceClassificationClient.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -71,6 +73,7 @@ export default class MailgunClient implements IMailgunClient {
   public inboxPlacements: IInboxPlacementsClient;
   public logs: ILogsClient;
   public dkimManagement: IDKIMManagementClient
+  public bounceClassification: IBounceClassificationClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -153,6 +156,7 @@ export default class MailgunClient implements IMailgunClient {
     );
     this.logs = new LogsClient(this.request);
     this.dkimManagement = new DKIMManagementClient(this.request);
+    this.bounceClassification = new BounceClassificationClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {

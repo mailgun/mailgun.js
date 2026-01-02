@@ -25,8 +25,11 @@ import MailListsMembers from '../../lib/Classes/MailingLists/mailListMembers.js'
 import InboxPlacementsClient from '../../lib/Classes/InboxPlacements/inboxPlacements.js';
 import MetricsClient from '../../lib/Classes/Metrics/MetricsClient.js';
 import AxiosProvider from '../../lib/Classes/common/RequestProviders/AxiosProvider.js';
+import LogsClient from '../../lib/Classes/Logs/LogsClient.js';
+import DKIMManagementClient from '../../lib/Classes/DKIM/DKIMManagment.js';
+import BounceClassificationClient from '../../lib/Classes/BounceClassification/BounceClassificationClient.js';
 
-describe('Client', () => {
+describe('MailgunClient', () => {
   let client: IMailgunClient;
 
   beforeEach(() => {
@@ -143,6 +146,21 @@ describe('Client', () => {
     expect(client.inboxPlacements).toBeInstanceOf(InboxPlacementsClient);
   });
 
+  it('creates logs client', () => {
+    expect(client).toHaveProperty('logs');
+    expect(client.logs).toBeInstanceOf(LogsClient);
+  });
+
+  it('creates dkimManagement client', () => {
+    expect(client).toHaveProperty('dkimManagement');
+    expect(client.dkimManagement).toBeInstanceOf(DKIMManagementClient);
+  });
+
+  it('creates bounceClassification client', () => {
+    expect(client).toHaveProperty('bounceClassification');
+    expect(client.bounceClassification).toBeInstanceOf(BounceClassificationClient);
+  });
+
   describe('User configuration', () => {
     it('uses axios by default', () => {
       client = new Client({
@@ -199,6 +217,25 @@ describe('Client', () => {
       }));
     });
 
+    it('rejects proxy settings when useFetch', () => {
+      expect(() => new Client({
+        username: 'username',
+        key: 'key',
+        public_key: 'key',
+        useFetch: true,
+        proxy: {
+          protocol: 'https',
+          host: '127.0.0.1',
+          port: 9000,
+          auth: {
+            username: 'test',
+            password: 'test-pass'
+          }
+        }
+      } as MailgunClientOptions, formData as InputFormData))
+        .toThrow('Proxy can not be used with fetch provider');
+    });
+
     it('respects timeout and url settings', () => {
       const mgClient = new Client({
         username: 'username',
@@ -234,6 +271,48 @@ describe('Client', () => {
           formData as InputFormData
         )
       ).toThrow('Parameter "key" is required');
+    });
+  });
+
+  describe('Subaccount management', () => {
+    it('sets subaccount header', () => {
+      const subaccountId = 'test-subaccount-id';
+      const setSubAccountHeaderSpy = jest.spyOn(client.request.requestProvider, 'setSubAccountHeader');
+
+      client.setSubaccount(subaccountId);
+
+      expect(setSubAccountHeaderSpy).toHaveBeenCalledWith(subaccountId);
+      expect(setSubAccountHeaderSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('resets subaccount header', () => {
+      const subaccountId = 'test-subaccount-id';
+      const resetSubAccountHeaderSpy = jest.spyOn(client.request.requestProvider, 'resetSubAccountHeader');
+
+      client.setSubaccount(subaccountId);
+      client.resetSubaccount();
+
+      expect(resetSubAccountHeaderSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('allows setting different subaccount IDs', () => {
+      const firstSubaccountId = 'subaccount-1';
+      const secondSubaccountId = 'subaccount-2';
+      const setSubAccountHeaderSpy = jest.spyOn(client.request.requestProvider, 'setSubAccountHeader');
+
+      client.setSubaccount(firstSubaccountId);
+      client.setSubaccount(secondSubaccountId);
+
+      expect(setSubAccountHeaderSpy).toHaveBeenCalledWith(firstSubaccountId);
+      expect(setSubAccountHeaderSpy).toHaveBeenCalledWith(secondSubaccountId);
+      expect(setSubAccountHeaderSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('handles reset when no subaccount is set', () => {
+      const resetSubAccountHeaderSpy = jest.spyOn(client.request.requestProvider, 'resetSubAccountHeader');
+
+      expect(() => client.resetSubaccount()).not.toThrow();
+      expect(resetSubAccountHeaderSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -15,6 +15,8 @@ import { IInboxPlacementsClient } from '../InboxPlacements/index.js';
 import { IMetricsClient } from '../Metrics/MetricsClient.js';
 import type Request from '../../Classes/common/Request.js';
 import { ILogsClient } from '../Logs/ILogsClient.js';
+import { IDKIMManagementClient } from '../DKIM/IDKIMManagementClient.js';
+import { IBounceClassificationClient } from '../BounceClassification/IBounceClassificationClient.js';
 
 export interface IMailgunClient {
     request: Request;
@@ -35,4 +37,6 @@ export interface IMailgunClient {
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;
     logs: ILogsClient
+    dkimManagement: IDKIMManagementClient
+    bounceClassification: IBounceClassificationClient
 }
