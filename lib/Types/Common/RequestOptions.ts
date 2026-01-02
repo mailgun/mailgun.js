@@ -25,6 +25,7 @@ import type { IpPoolDeleteData } from '../IPPools/index.js';
 import type { MetricsQuery } from '../Metrics/index.js';
 import type { FormDataInput } from './FormData.js';
 import { LogsQuery } from '../Logs/Logs.js';
+import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClassification.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;
@@ -71,11 +72,15 @@ export type GetQueryTypes = IPsListQuery |
 
 export type DeleteQueryTypes = DeletedDomainKeysQuery;
 
-export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery |string;
+export type PostDataTypes = InboxPlacementsData |
+  MetricsQuery |
+  LogsQuery |
+  BounceClassificationAPIQuery |
+  string;
 export type PutDataTypes = SeedsListsUpdatingData |
- object |
- FormDataInput |
- ConnectionSettings
+  object |
+  FormDataInput |
+  ConnectionSettings
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
 
 export type ContainsPrefix<T extends string> = `${T}${string}`;
@@ -87,10 +92,10 @@ type WebPrefixQuery = ContainsPrefix<'web_prefix='>;
 type LimitQuery = ContainsPrefix<'limit='>;
 
 export type PutQueryTypes = EnableQuery |
- DkimSelectorQuery |
- SelfQuery |
- WebPrefixQuery |
- LimitQuery;
+  DkimSelectorQuery |
+  SelfQuery |
+  WebPrefixQuery |
+  LimitQuery;
 
 export type PutOptionsType = { query?: PutQueryTypes };
 

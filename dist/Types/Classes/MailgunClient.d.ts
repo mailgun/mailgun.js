@@ -1,6 +1,6 @@
 import Request from './common/Request.js';
 import { MailgunClientOptions, InputFormData } from '../Types/index.js';
-import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient, IDKIMManagementClient, ILogsClient } from '../Interfaces/index.js';
+import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient, IDKIMManagementClient, ILogsClient, IBounceClassificationClient } from '../Interfaces/index.js';
 export default class MailgunClient implements IMailgunClient {
     request: Request;
     domains: IDomainsClient;
@@ -19,6 +19,7 @@ export default class MailgunClient implements IMailgunClient {
     inboxPlacements: IInboxPlacementsClient;
     logs: ILogsClient;
     dkimManagement: IDKIMManagementClient;
+    bounceClassification: IBounceClassificationClient;
     constructor(options: MailgunClientOptions, formData: InputFormData);
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;

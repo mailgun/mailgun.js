@@ -23207,6 +23207,45 @@ class DKIMManagementClient {
     }
 }
 
+class BounceClassificationClient {
+    request;
+    constructor(request) {
+        this.request = request;
+    }
+    prepareDate(date) {
+        const formattedDate = `${date.toUTCString().slice(0, 25)} -0000`; // expected format 'Wed, 03 Dec 2025 00:00:00 -0000'
+        return formattedDate;
+    }
+    parseQuery(queryData) {
+        const res = {
+            ...queryData,
+            start: undefined,
+            end: undefined,
+            include_subaccounts: undefined
+        };
+        if (queryData.start) {
+            res.start = this.prepareDate(queryData.start);
+        }
+        if (queryData.end) {
+            res.end = this.prepareDate(queryData.end);
+        }
+        return res;
+    }
+    parseResponse(body) {
+        const res = {
+            ...body,
+            start: new Date(body.start),
+            end: new Date(body.end)
+        };
+        return res;
+    }
+    async list(queryData) {
+        const preparedQueryData = this.parseQuery(queryData);
+        const response = await this.request.post('/v2/bounce-classification/metrics', preparedQueryData);
+        return this.parseResponse(response.body);
+    }
+}
+
 /* eslint-disable camelcase */
 class MailgunClient {
     request;
@@ -23226,6 +23265,7 @@ class MailgunClient {
     inboxPlacements;
     logs;
     dkimManagement;
+    bounceClassification;
     constructor(options, formData) {
         const config = { ...options };
         if (!config.url) {
@@ -23273,6 +23313,7 @@ class MailgunClient {
         this.inboxPlacements = new InboxPlacementsClient(this.request, seedsListsClient, inboxPlacementsResultsClient, inboxPlacementsProvidersClient);
         this.logs = new LogsClient(this.request);
         this.dkimManagement = new DKIMManagementClient(this.request);
+        this.bounceClassification = new BounceClassificationClient(this.request);
     }
     setSubaccount(subaccountId) {
         this.request?.setSubaccountHeader(subaccountId);

@@ -359,6 +359,8 @@ The following service methods are available to instantiated clients. The example
       - [Run Test](#run-test)
     - [DKIM Management](#dkim-management)
       - [update](#update-7)
+    - [Bounce Classification](#bounce-classification)
+      - [list](#list-16)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -4922,6 +4924,96 @@ The following service methods are available to instantiated clients. The example
   ```JS
   {
     message: "ok";
+  }
+  ```
+
+### Bounce Classification
+- #### list
+  Returns bounce classification entities
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounce-classification/post-v2-bounce-classification-metrics)
+
+  `mg.bounceClassification.list(query)`
+
+  Example:
+  ```JS
+    mg.bounceClassification.bounceClassification({
+      start: new Date('2025-12-01T13:00:00Z'),
+      end: new Date('2025-12-31T13:05:00Z'),
+      include_subaccounts: true,
+      resolution: 'day',
+      duration: '48h',
+      dimensions: [
+        'entity-name',
+        'domain.name'
+      ],
+      metrics: [
+        'critical_bounce_count',
+        'non_critical_bounce_count',
+        'critical_delay_count',
+        'non_critical_delay_count',
+        'delivered_smtp_count',
+        'classified_failures_count',
+        'critical_bounce_rate',
+        'non_critical_bounce_rate',
+        'critical_delay_rate',
+        'non_critical_delay_rate'
+      ],
+      filter: {
+        AND: [
+          {
+            attribute: 'domain.name',
+            comparator: '=',
+            values: [
+              {
+                value: 'example.com'
+              }
+            ]
+          }
+        ]
+      },
+      pagination: {
+        limit: 25,
+        skip: 0,
+        sort: 'entity-name:asc'
+      }
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: BounceClassificationResult
+  ```JS
+  {
+    start: new Date('2025-12-01T13:00:00.000Z'),
+    end: new Date('2025-12-31T13:05:00.000Z'),
+    resolution: 'day',
+    duration: '720h5m0s',
+    dimensions: [ 'entity-name', 'domain.name' ],
+    pagination: { sort: 'entity-name:asc', skip: 0, limit: 25, total: 1 },
+    items: [
+      {
+        'account.name': 'subaccount name',
+        'entity-name': 'Gmail',
+        'domain.name': 'example.com',
+        'envelope.i-ip-pool-name': 'default',
+        'envelope.sending-ip': '1.2.3.4',
+        timestamp: 'Tue, 02 Dec 2025 22:04:05 +0000',
+        tags: 'daily, campaign1',
+        metrics: {
+            'critical_bounce_count': 10,
+            'non_critical_bounce_count': 20,
+            'critical_delay_count': 30,
+            'non_critical_delay_count': 40,
+            'classified_failures_count': 100,
+            'delivered_smtp_count': 1000,
+            'critical_bounce_rate': 1,
+            'non_critical_bounce_rate': 2,
+            'critical_delay_rate': 3,
+            'non_critical_delay_rate': 4
+        }
+      }
+    ]
   }
   ```
 

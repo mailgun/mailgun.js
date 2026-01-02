@@ -7251,6 +7251,46 @@ var DKIMManagementClient = /** @class */ (function () {
     return DKIMManagementClient;
 }());
 
+var BounceClassificationClient = /** @class */ (function () {
+    function BounceClassificationClient(request) {
+        this.request = request;
+    }
+    BounceClassificationClient.prototype.prepareDate = function (date) {
+        var formattedDate = "".concat(date.toUTCString().slice(0, 25), " -0000"); // expected format 'Wed, 03 Dec 2025 00:00:00 -0000'
+        return formattedDate;
+    };
+    BounceClassificationClient.prototype.parseQuery = function (queryData) {
+        var res = __assign(__assign({}, queryData), { start: undefined, end: undefined, include_subaccounts: undefined });
+        if (queryData.start) {
+            res.start = this.prepareDate(queryData.start);
+        }
+        if (queryData.end) {
+            res.end = this.prepareDate(queryData.end);
+        }
+        return res;
+    };
+    BounceClassificationClient.prototype.parseResponse = function (body) {
+        var res = __assign(__assign({}, body), { start: new Date(body.start), end: new Date(body.end) });
+        return res;
+    };
+    BounceClassificationClient.prototype.list = function (queryData) {
+        return __awaiter(this, void 0, void 0, function () {
+            var preparedQueryData, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        preparedQueryData = this.parseQuery(queryData);
+                        return [4 /*yield*/, this.request.post('/v2/bounce-classification/metrics', preparedQueryData)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, this.parseResponse(response.body)];
+                }
+            });
+        });
+    };
+    return BounceClassificationClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -7299,6 +7339,7 @@ var MailgunClient = /** @class */ (function () {
         this.inboxPlacements = new InboxPlacementsClient(this.request, seedsListsClient, inboxPlacementsResultsClient, inboxPlacementsProvidersClient);
         this.logs = new LogsClient(this.request);
         this.dkimManagement = new DKIMManagementClient(this.request);
+        this.bounceClassification = new BounceClassificationClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

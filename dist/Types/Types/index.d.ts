@@ -15,3 +15,4 @@ export * from './Validations/index.js';
 export * from './Webhooks/index.js';
 export * from './Logs/index.js';
 export * from './DKIM/index.js';
+export * from './BounceClassification/index.js';

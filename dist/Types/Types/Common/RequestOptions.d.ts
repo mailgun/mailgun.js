@@ -11,6 +11,7 @@ import type { IpPoolDeleteData } from '../IPPools/index.js';
 import type { MetricsQuery } from '../Metrics/index.js';
 import type { FormDataInput } from './FormData.js';
 import { LogsQuery } from '../Logs/Logs.js';
+import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClassification.js';
 export type OnCallEmptyHeaders = {
     [key: string]: undefined;
 };
@@ -37,7 +38,7 @@ export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | 
     searchParams?: Array<Array<string>>;
 } | ValidationQuery;
 export type DeleteQueryTypes = DeletedDomainKeysQuery;
-export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery | string;
+export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery | BounceClassificationAPIQuery | string;
 export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings;
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
 export type ContainsPrefix<T extends string> = `${T}${string}`;
