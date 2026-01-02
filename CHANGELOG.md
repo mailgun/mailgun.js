@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.5.0](https://github.com/mailgun/mailgun.js/compare/v12.4.1...v12.5.0) (2026-01-02)
+
+
+### Features
+
+* Add BounceClassification client ([9c0e440](https://github.com/mailgun/mailgun.js/commits/9c0e44093fe50a234d6849e7a7953d4ec8968156))
+* Add DKIM Management client ([9c33bcc](https://github.com/mailgun/mailgun.js/commits/9c33bccba94f6c22ae0887534c7ff14eccf2d5f0))
+
+
+### Bug Fixes
+
+* Add accepted webhooks id ([fd8e59b](https://github.com/mailgun/mailgun.js/commits/fd8e59bdffd8ffb85ef0985dafcf6df3e8986fe9))
+* **deps-dev:** bump qs from 6.14.0 to 6.14.1 ([5a63360](https://github.com/mailgun/mailgun.js/commits/5a63360df34379b43888b318c9d9b831b7e9e07a))
+* Multiple attachments only include the first one ([d62db69](https://github.com/mailgun/mailgun.js/commits/d62db695389bbbeaf8e4be32669ed93a42bc6b7a))
+
+
+### Other changes
+
+* Refresh dist ([3d7763a](https://github.com/mailgun/mailgun.js/commits/3d7763acf8fe517c92c25448fef24b368eccb2ff))
+* Update readme ([35ddb9d](https://github.com/mailgun/mailgun.js/commits/35ddb9d34bdd7fddb540d39fe7672f74b2263390))
+
 ### [12.4.1](https://github.com/mailgun/mailgun.js/compare/v12.4.0...v12.4.1) (2025-12-29)
 
 

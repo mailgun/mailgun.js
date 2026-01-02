@@ -9,7 +9,9 @@
 ### Interfaces
 
 - [IBounce](../interfaces/definitions.Interfaces.IBounce.md)
+- [IBounceClassificationClient](../interfaces/definitions.Interfaces.IBounceClassificationClient.md)
 - [IComplaint](../interfaces/definitions.Interfaces.IComplaint.md)
+- [IDKIMManagementClient](../interfaces/definitions.Interfaces.IDKIMManagementClient.md)
 - [IDomainCredentials](../interfaces/definitions.Interfaces.IDomainCredentials.md)
 - [IDomainKeysClient](../interfaces/definitions.Interfaces.IDomainKeysClient.md)
 - [IDomainTagStatisticResult](../interfaces/definitions.Interfaces.IDomainTagStatisticResult.md)
@@ -28,6 +30,7 @@
 - [IInboxPlacementsProvidersClient](../interfaces/definitions.Interfaces.IInboxPlacementsProvidersClient.md)
 - [IInboxPlacementsResultsClient](../interfaces/definitions.Interfaces.IInboxPlacementsResultsClient.md)
 - [ILogger](../interfaces/definitions.Interfaces.ILogger.md)
+- [ILogsClient](../interfaces/definitions.Interfaces.ILogsClient.md)
 - [IMailListsMembers](../interfaces/definitions.Interfaces.IMailListsMembers.md)
 - [IMailgunClient](../interfaces/definitions.Interfaces.IMailgunClient.md)
 - [IMailingListsClient](../interfaces/definitions.Interfaces.IMailingListsClient.md)

@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:16](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L16)
+[Interfaces/Domains/DomainTags.ts:16](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L16)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L18)
+[Interfaces/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L18)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:19](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L19)
+[Interfaces/Domains/DomainTags.ts:19](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L19)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:17](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L17)
+[Interfaces/Domains/DomainTags.ts:17](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L17)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:20](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L20)
+[Interfaces/Domains/DomainTags.ts:20](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L20)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTags.ts:15](https://github.com/mailgun/mailgun.js/blob/0b962eb/lib/Interfaces/Domains/DomainTags.ts#L15)
+[Interfaces/Domains/DomainTags.ts:15](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTags.ts#L15)
