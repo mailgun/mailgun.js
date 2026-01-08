@@ -1,4 +1,4 @@
-import { APIResponse } from '../../Types/Common/index.js';
+import { APIResponse, MessageResponse } from '../../Types/Common/index.js';
 import type {
   ClickTrackingInfo,
   ConnectionSettings,
@@ -9,7 +9,6 @@ import type {
   DomainsQuery,
   DomainTrackingData,
   DomainUpdateInfo,
-  MessageResponse,
   OpenTrackingInfo,
   ReplacementForPool,
   TDomain,

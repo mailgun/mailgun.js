@@ -7,13 +7,12 @@ import {
   IDomainKeysClient
 } from '../../Interfaces/Domains/index.js';
 
-import { APIResponse } from '../../Types/Common/ApiResponse.js';
+import { APIResponse, MessageResponse } from '../../Types/Common/ApiResponse.js';
 import APIError from '../common/Error.js';
 import Request from '../common/Request.js';
 
 import {
   DestroyedDomainResponse,
-  MessageResponse,
   DomainListResponseData,
   DomainResponseData,
   DomainTrackingData,
@@ -84,11 +83,11 @@ export default class DomainsClient implements IDomainsClient {
         acc[prop] = (value.toString() === 'true') ? 'true' : 'false';
       }
       return acc;
-    }, {} as Record<keyof BoolToString, 'true'| 'false'>);
+    }, {} as Record<keyof BoolToString, 'true' | 'false'>);
     return { ...data, ...replacedProps } as DomainUpdateInfoReq | DomainInfoReq;
   }
 
-  private _parseMessage(response: DestroyedDomainResponse) : MessageResponse {
+  private _parseMessage(response: DestroyedDomainResponse): MessageResponse {
     return response.body;
   }
 
@@ -111,50 +110,50 @@ export default class DomainsClient implements IDomainsClient {
 
   list(query?: DomainsQuery): Promise<TDomain[]> {
     return this.request.get('/v4/domains', query)
-      .then((res : APIResponse) => this.parseDomainList(res as DomainListResponseData));
+      .then((res: APIResponse) => this.parseDomainList(res as DomainListResponseData));
   }
 
-  get(domain: string, query?: DomainGetQuery) : Promise<TDomain> {
+  get(domain: string, query?: DomainGetQuery): Promise<TDomain> {
     const preparedQuery: DomainGetAPIQuery = query ? {
       'h:extended': query?.extended ?? false,
       'h:with_dns': query?.with_dns ?? true,
     } : {};
     return this.request.get(`/v4/domains/${domain}`, preparedQuery)
-      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+      .then((res: APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  create(data: DomainInfo) : Promise<TDomain> {
+  create(data: DomainInfo): Promise<TDomain> {
     const postObj = this._handleBoolValues(data);
     return this.request.postWithFD('/v4/domains', postObj)
-      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+      .then((res: APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
-  update(domain: string, data: DomainUpdateInfo) : Promise<TDomain> {
+  update(domain: string, data: DomainUpdateInfo): Promise<TDomain> {
     const putData = this._handleBoolValues(data);
     return this.request.putWithFD(`/v4/domains/${domain}`, putData)
-      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+      .then((res: APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
   verify(domain: string): Promise<TDomain> {
     return this.request.put(`/v4/domains/${domain}/verify`)
-      .then((res : APIResponse) => this._parseDomain(res as DomainResponseData));
+      .then((res: APIResponse) => this._parseDomain(res as DomainResponseData));
   }
 
   destroy(domain: string): Promise<MessageResponse> {
     return this.request.delete(`/v3/domains/${domain}`)
-      .then((res : APIResponse) => this._parseMessage(res as DestroyedDomainResponse));
+      .then((res: APIResponse) => this._parseMessage(res as DestroyedDomainResponse));
   }
 
   getConnection(domain: string): Promise<ConnectionSettings> {
     return this.request.get(`/v3/domains/${domain}/connection`)
-      .then((res : APIResponse) => res as ConnectionSettingsResponse)
-      .then((res:ConnectionSettingsResponse) => res.body as ConnectionSettings);
+      .then((res: APIResponse) => res as ConnectionSettingsResponse)
+      .then((res: ConnectionSettingsResponse) => res.body as ConnectionSettings);
   }
 
   updateConnection(domain: string, data: ConnectionSettings): Promise<UpdatedConnectionSettings> {
     return this.request.put(`/v3/domains/${domain}/connection`, data)
-      .then((res : APIResponse) => res as UpdatedConnectionSettingsRes)
-      .then((res:UpdatedConnectionSettingsRes) => res.body as UpdatedConnectionSettings);
+      .then((res: APIResponse) => res as UpdatedConnectionSettingsRes)
+      .then((res: UpdatedConnectionSettingsRes) => res.body as UpdatedConnectionSettings);
   }
 
   // Tracking
@@ -163,7 +162,7 @@ export default class DomainsClient implements IDomainsClient {
   * Please use 'domains.domainTracking.getTracking' instead.
   */
 
-  getTracking(domain: string) : Promise<DomainTrackingData> {
+  getTracking(domain: string): Promise<DomainTrackingData> {
     this.logger.warn(`
       'domains.getTracking' method is deprecated, and will be removed. Please use 'domains.domainTracking.getTracking' instead.
     `);
@@ -269,6 +268,6 @@ export default class DomainsClient implements IDomainsClient {
     this.logger.warn('"domains.updateWebPrefix" method is deprecated, please use domains.update to set new "web_prefix". Current method will be removed in the future releases.');
     const options: PutOptionsType = { query: `web_prefix=${data.webPrefix}` };
     return this.request.put(`/v3/domains/${domain}/web_prefix`, {}, options)
-      .then((res : APIResponse) => res as UpdatedWebPrefixResponse);
+      .then((res: APIResponse) => res as UpdatedWebPrefixResponse);
   }
 }

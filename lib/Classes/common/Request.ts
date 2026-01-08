@@ -4,7 +4,6 @@ import {
   RequestOptions,
   InputFormData,
   APIResponse,
-  IpPoolDeleteData,
   FormDataInput,
   RequestProviderConfig,
   RequestData,
@@ -16,7 +15,8 @@ import {
   PutQueryTypes,
   RequestProviderData,
   onCallReqConfig,
-  DeleteQueryTypes
+  DeleteQueryTypes,
+  DeleteDataTypes
 } from '../../Types/index.js';
 
 import FormDataBuilder from './FormDataBuilder.js';
@@ -163,15 +163,18 @@ class Request {
 
   put(url: string, data?: PutDataTypes, queryObject?: PutOptionsType)
     : Promise<APIResponse> {
-    return this.command('put', url, data, {}, queryObject);
+    const isTagsUpdateData = data && 'tag' in data;
+    return this.command('put', url, data, { isApplicationJSON: isTagsUpdateData }, queryObject);
   }
 
   delete(
     url: string,
-    data?: IpPoolDeleteData,
-    queryObject?: DeleteQueryTypes
+    data?: DeleteDataTypes,
+    queryObject?: DeleteQueryTypes,
   ): Promise<APIResponse> {
-    return this.command('delete', url, data, {}, { query: queryObject });
+    const isTagsDeleteData = data && 'tag' in data;
+    const dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
+    return this.command('delete', url, dataObject, {}, { query: queryObject });
   }
 }
 

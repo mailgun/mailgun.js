@@ -17,3 +17,4 @@ export * from './Metrics/MetricsClient.js';
 export * from './Logs/ILogsClient.js';
 export * from './DKIM/IDKIMManagementClient.js';
 export * from './BounceClassification/IBounceClassificationClient.js';
+export * from './Tags/index.js';
