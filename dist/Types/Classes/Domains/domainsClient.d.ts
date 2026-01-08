@@ -1,7 +1,7 @@
 import { IDomainTemplatesClient, IDomainTagsClient, IDomainCredentials, IDomainsClient, IDomainKeysClient } from '../../Interfaces/Domains/index.js';
-import { APIResponse } from '../../Types/Common/ApiResponse.js';
+import { APIResponse, MessageResponse } from '../../Types/Common/ApiResponse.js';
 import Request from '../common/Request.js';
-import { MessageResponse, DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain, DomainUpdateInfo, DomainGetQuery, UpdatedDKIMSelectorResult } from '../../Types/Domains/index.js';
+import { DomainTrackingData, UpdatedOpenTracking, DomainsQuery, DomainInfo, ConnectionSettings, UpdatedConnectionSettings, OpenTrackingInfo, ClickTrackingInfo, UnsubscribeTrackingInfo, ReplacementForPool, DKIMAuthorityInfo, UpdatedDKIMAuthority, DKIMSelectorInfo, WebPrefixInfo, UpdatedWebPrefixResponse, TDomain, DomainUpdateInfo, DomainGetQuery, UpdatedDKIMSelectorResult } from '../../Types/Domains/index.js';
 import { ILogger, IDomainTrackingClient } from '../../Interfaces/index.js';
 export default class DomainsClient implements IDomainsClient {
     request: Request;
