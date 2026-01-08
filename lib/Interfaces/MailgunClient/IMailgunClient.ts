@@ -17,6 +17,7 @@ import type Request from '../../Classes/common/Request.js';
 import { ILogsClient } from '../Logs/ILogsClient.js';
 import { IDKIMManagementClient } from '../DKIM/IDKIMManagementClient.js';
 import { IBounceClassificationClient } from '../BounceClassification/IBounceClassificationClient.js';
+import { ITagsClient } from '../Tags/ITagsClient.js';
 
 export interface IMailgunClient {
     request: Request;
@@ -36,7 +37,8 @@ export interface IMailgunClient {
     inboxPlacements: IInboxPlacementsClient;
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;
-    logs: ILogsClient
-    dkimManagement: IDKIMManagementClient
-    bounceClassification: IBounceClassificationClient
+    logs: ILogsClient;
+    dkimManagement: IDKIMManagementClient;
+    bounceClassification: IBounceClassificationClient;
+    tags: ITagsClient;
 }

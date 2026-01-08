@@ -1,3 +1,5 @@
+import { MessageResponse } from '../Common/index.js';
+
 /* eslint-disable camelcase */
 export type DomainsQuery = {
     limit?: number;
@@ -98,10 +100,6 @@ export type DomainListResponseData = {
         items: DomainsListItem[] | null;
         total_count: number;
     }
-}
-
-export type MessageResponse = {
-    message : string
 }
 
 export type DestroyedDomainResponse = {

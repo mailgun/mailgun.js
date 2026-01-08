@@ -12,6 +12,7 @@ import type { MetricsQuery } from '../Metrics/index.js';
 import type { FormDataInput } from './FormData.js';
 import { LogsQuery } from '../Logs/Logs.js';
 import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClassification.js';
+import { TagDeleteData, TagsUpdateData } from '../Tags/Tags.js';
 export type OnCallEmptyHeaders = {
     [key: string]: undefined;
 };
@@ -39,7 +40,8 @@ export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | 
 } | ValidationQuery;
 export type DeleteQueryTypes = DeletedDomainKeysQuery;
 export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery | BounceClassificationAPIQuery | string;
-export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings;
+export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings | TagsUpdateData;
+export type DeleteDataTypes = IpPoolDeleteData | TagDeleteData;
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;
 export type ContainsPrefix<T extends string> = `${T}${string}`;
 type EnableQuery = ContainsPrefix<'enabled='>;

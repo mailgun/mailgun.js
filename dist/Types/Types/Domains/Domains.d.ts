@@ -1,3 +1,4 @@
+import { MessageResponse } from '../Common/index.js';
 export type DomainsQuery = {
     limit?: number;
     skip?: number;
@@ -87,9 +88,6 @@ export type DomainListResponseData = {
         items: DomainsListItem[] | null;
         total_count: number;
     };
-};
-export type MessageResponse = {
-    message: string;
 };
 export type DestroyedDomainResponse = {
     status: number;

@@ -4916,10 +4916,13 @@ var Request = /** @class */ (function () {
         });
     };
     Request.prototype.put = function (url, data, queryObject) {
-        return this.command('put', url, data, {}, queryObject);
+        var isTagsUpdateData = data && 'tag' in data;
+        return this.command('put', url, data, { isApplicationJSON: isTagsUpdateData }, queryObject);
     };
     Request.prototype.delete = function (url, data, queryObject) {
-        return this.command('delete', url, data, {}, { query: queryObject });
+        var isTagsDeleteData = data && 'tag' in data;
+        var dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
+        return this.command('delete', url, dataObject, {}, { query: queryObject });
     };
     return Request;
 }());
@@ -6317,10 +6320,12 @@ var DomainTagStatistic = /** @class */ (function () {
 }());
 var DomainTagsClient = /** @class */ (function (_super) {
     __extends(DomainTagsClient, _super);
-    function DomainTagsClient(request) {
+    function DomainTagsClient(request, logger) {
+        if (logger === void 0) { logger = console; }
         var _this = _super.call(this, request) || this;
         _this.request = request;
         _this.baseRoute = '/v3/';
+        _this.logger = logger;
         return _this;
     }
     DomainTagsClient.prototype.parseList = function (response) {
@@ -6333,42 +6338,82 @@ var DomainTagsClient = /** @class */ (function (_super) {
     DomainTagsClient.prototype._parseTagStatistic = function (response) {
         return new DomainTagStatistic(response);
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.list = function (domain, query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                this.logger.warn("\n      'domains.domainTags.list' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
                 return [2 /*return*/, this.requestListWithPages(urljoin(this.baseRoute, domain, '/tags'), query)];
             });
         });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.get = function (domain, tag) {
+        this.logger.warn("\n      'domains.domainTags.get' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.get(urljoin(this.baseRoute, domain, '/tags', tag))
             .then(function (res) { return new DomainTag(res.body); });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.update = function (domain, tag, description) {
+        this.logger.warn("\n      'domains.domainTags.update' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.put(urljoin(this.baseRoute, domain, '/tags', tag), { description: description })
             .then(function (res) { return res.body; });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.destroy = function (domain, tag) {
+        this.logger.warn("\n      'domains.domainTags.destroy' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.delete("".concat(this.baseRoute).concat(domain, "/tags/").concat(tag))
             .then(function (res) { return ({
             message: res.body.message,
             status: res.status
         }); });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.statistic = function (domain, tag, query) {
         var _this = this;
+        this.logger.warn("\n      'domains.domainTags.statistic' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.get(urljoin(this.baseRoute, domain, '/tags', tag, 'stats'), query)
             .then(function (res) { return _this._parseTagStatistic(res); });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.countries = function (domain, tag) {
+        this.logger.warn("\n      'domains.domainTags.countries' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.get(urljoin(this.baseRoute, domain, '/tags', tag, 'stats/aggregates/countries'))
             .then(function (res) { return res.body; });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.providers = function (domain, tag) {
+        this.logger.warn("\n      'domains.domainTags.providers' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.get(urljoin(this.baseRoute, domain, '/tags', tag, 'stats/aggregates/providers'))
             .then(function (res) { return res.body; });
     };
+    /**
+    * @deprecated This method is deprecated in favor of new Tags Client.
+    * https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new
+    * */
     DomainTagsClient.prototype.devices = function (domain, tag) {
+        this.logger.warn("\n      'domains.domainTags.devices' method is deprecated, and will be removed. Please use 'tags' client instead.\n    ");
         return this.request.get(urljoin(this.baseRoute, domain, '/tags', tag, 'stats/aggregates/devices'))
             .then(function (res) { return res.body; });
     };
@@ -7291,6 +7336,72 @@ var BounceClassificationClient = /** @class */ (function () {
     return BounceClassificationClient;
 }());
 
+var TagsClient = /** @class */ (function () {
+    function TagsClient(request) {
+        this.request = request;
+        this.baseRoute = '/v1';
+    }
+    TagsClient.prototype.parseListResponse = function (responseBody) {
+        var items = responseBody.items.map(function (tagInfo) { return (__assign(__assign({}, tagInfo), { first_seen: new Date(tagInfo.first_seen), last_seen: new Date(tagInfo.last_seen) })); });
+        return __assign(__assign({}, responseBody), { items: items });
+    };
+    TagsClient.prototype.list = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("/".concat(this.baseRoute, "/analytics/tags"), data)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, this.parseListResponse(res.body)];
+                }
+            });
+        });
+    };
+    TagsClient.prototype.limits = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/".concat(this.baseRoute, "/analytics/tags/limits"))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
+    };
+    TagsClient.prototype.update = function (tag, description) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data, res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        data = { tag: tag, description: description };
+                        return [4 /*yield*/, this.request.put("/".concat(this.baseRoute, "/analytics/tags"), data)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
+    };
+    TagsClient.prototype.destroy = function (tag) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete("/".concat(this.baseRoute, "/analytics/tags"), { tag: tag })];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res.body];
+                }
+            });
+        });
+    };
+    return TagsClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -7340,6 +7451,7 @@ var MailgunClient = /** @class */ (function () {
         this.logs = new LogsClient(this.request);
         this.dkimManagement = new DKIMManagementClient(this.request);
         this.bounceClassification = new BounceClassificationClient(this.request);
+        this.tags = new TagsClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;
