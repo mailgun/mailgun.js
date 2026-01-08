@@ -44,6 +44,7 @@
 - [IStatsContainer](../interfaces/definitions.Interfaces.IStatsContainer.md)
 - [ISubaccountsClient](../interfaces/definitions.Interfaces.ISubaccountsClient.md)
 - [ISuppressionClient](../interfaces/definitions.Interfaces.ISuppressionClient.md)
+- [ITagsClient](../interfaces/definitions.Interfaces.ITagsClient.md)
 - [IUnsubscribe](../interfaces/definitions.Interfaces.IUnsubscribe.md)
 - [IValidationClient](../interfaces/definitions.Interfaces.IValidationClient.md)
 - [IWebHooksClient](../interfaces/definitions.Interfaces.IWebHooksClient.md)

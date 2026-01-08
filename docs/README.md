@@ -358,7 +358,12 @@ The following service methods are available to instantiated clients. The example
     - [DKIM Management](#dkim-management)
       - [update](#update-7)
     - [Bounce Classification](#bounce-classification)
-      - [list](#list-16)
+      - [list](#list-17)
+    - [Tags](#tags)
+      - [list](#list-18)
+      - [limits](#limits)
+      - [update](#update-8)
+      - [destroy](#destroy-11)
   - [Navigation thru lists](#navigation-thru-lists)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -4999,6 +5004,120 @@ The following service methods are available to instantiated clients. The example
         }
       }
     ]
+  }
+  ```
+
+### Tags
+  Mailgun allows you to tag your email with unique identifiers. Tags are visible via our analytics tags API endpoint.
+- #### list
+  Gets the list of all tags, or filtered by tag prefix, for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new/post-v1-analytics-tags)
+
+  `mg.tags.list(query)`
+
+  Example:
+  ```JS
+    mg.tags.list({
+      // tag: '<tag_name>'
+      include_subaccounts: true,
+      include_metrics: true,
+      pagination: {
+        include_total: true
+        sort: 'lastseen:asc',
+        // skip: 1
+        // limit: 10
+      }
+    })
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: TagsListResult
+  ```JS
+  {
+    items: [
+      {
+        account_id: "12345",
+        parent_account_id: "12345",
+        tag: "tag1",
+        description: "tag used to identify campaign 1",
+        first_seen: new Date('2026-01-08T13:00:00Z'),
+        last_seen: new Date('2026-01-08T13:00:00Z'),
+        metrics: {},
+        account_name: "account1"
+      },
+      ...
+    ],
+    pagination: {
+      "sort": "lastseen:asc",
+      "total": 10,
+    }
+  }
+  ```
+
+- #### limits
+  Gets the tag limit and current number of unique tags for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new/get-v1-analytics-tags-limits)
+
+  `mg.tags.limits()`
+
+  Example:
+  ```JS
+    mg.tags.limits()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: TagLimitsResult
+  ```JS
+  {
+    limit: 0,
+    count: 0,
+    limit_reached: true
+  }
+  ```
+
+- #### update
+  Updates the tag description for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new/put-v1-analytics-tags)
+
+  `mg.tags.update(tagName, description)`
+
+  Example:
+  ```JS
+    mg.tags.update('<tag_name>', 'description text')()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: MessageResponse
+  ```JS
+  {
+    message: 'Tag updated'
+  }
+  ```
+
+- #### destroy
+  Deletes the tag for an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/tags-new/delete-v1-analytics-tags)
+
+  `mg.tags.destroy(tagName)`
+
+  Example:
+  ```JS
+    mg.tags.destroy('<tag_name>')()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: MessageResponse
+  ```JS
+  {
+    message: 'Tag updated'
   }
   ```
 

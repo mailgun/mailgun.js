@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainTracking.ts:14](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTracking.ts#L14)
+[Interfaces/Domains/DomainTracking.ts:14](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Domains/DomainTracking.ts#L14)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTracking.ts#L13)
+[Interfaces/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Domains/DomainTracking.ts#L13)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTracking.ts:16](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTracking.ts#L16)
+[Interfaces/Domains/DomainTracking.ts:16](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Domains/DomainTracking.ts#L16)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTracking.ts:15](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTracking.ts#L15)
+[Interfaces/Domains/DomainTracking.ts:15](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Domains/DomainTracking.ts#L15)
 
 ___
 
@@ -114,4 +114,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainTracking.ts:17](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/Domains/DomainTracking.ts#L17)
+[Interfaces/Domains/DomainTracking.ts:17](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Domains/DomainTracking.ts#L17)

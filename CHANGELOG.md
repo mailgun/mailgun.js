@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.6.0](https://github.com/mailgun/mailgun.js/compare/v12.5.0...v12.6.0) (2026-01-08)
+
+
+### Features
+
+* Add new tags client ([725868a](https://github.com/mailgun/mailgun.js/commits/725868a2f927d67a554beaa3a89d56ef0141975a))
+
+
+### Other changes
+
+* Update readme and build ([e4f1870](https://github.com/mailgun/mailgun.js/commits/e4f187088302987465c209b02ffb8dce65b10e91))
+
 ## [12.5.0](https://github.com/mailgun/mailgun.js/compare/v12.4.1...v12.5.0) (2026-01-02)
 
 

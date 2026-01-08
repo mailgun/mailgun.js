@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:13](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L13)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:13](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L13)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:14](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L14)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:14](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L14)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:12](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L12)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:12](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L12)
 
 ## Methods
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:17](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L17)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:17](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L17)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:16](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L16)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:16](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L16)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:18](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L18)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:18](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L18)
 
 ___
 
@@ -127,4 +127,4 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:15](https://github.com/mailgun/mailgun.js/blob/de57db7/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L15)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts:15](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResults.ts#L15)
