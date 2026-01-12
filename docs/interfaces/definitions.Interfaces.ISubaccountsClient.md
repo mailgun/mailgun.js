@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:13](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L13)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:13](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L13)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L16)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L16)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L14)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L14)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:15](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L15)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:15](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L15)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:12](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L12)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:12](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L12)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L17)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L17)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:11](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L11)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:11](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L11)
 
 ___
 
@@ -176,4 +176,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Subaccounts/ISubaccountsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L18)
+[Interfaces/Subaccounts/ISubaccountsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Subaccounts/ISubaccountsClient.ts#L18)

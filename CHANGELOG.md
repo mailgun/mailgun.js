@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.6.1](https://github.com/mailgun/mailgun.js/compare/v12.6.0...v12.6.1) (2026-01-12)
+
+
+### Other changes
+
+* Remove "key-" prefix from examples ([d0b2e90](https://github.com/mailgun/mailgun.js/commits/d0b2e90691c6c480814dd34cc70a90d060fdadae))
+
 ## [12.6.0](https://github.com/mailgun/mailgun.js/compare/v12.5.0...v12.6.0) (2026-01-08)
 
 

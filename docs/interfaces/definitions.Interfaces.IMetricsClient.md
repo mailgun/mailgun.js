@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/Metrics/MetricsClient.ts:4](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Metrics/MetricsClient.ts#L4)
+[Interfaces/Metrics/MetricsClient.ts:4](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Metrics/MetricsClient.ts#L4)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Metrics/MetricsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Metrics/MetricsClient.ts#L5)
+[Interfaces/Metrics/MetricsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Metrics/MetricsClient.ts#L5)

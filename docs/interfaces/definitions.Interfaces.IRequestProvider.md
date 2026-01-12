@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Common/RequestProviders/RequestProvider.ts:4](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L4)
+[Interfaces/Common/RequestProviders/RequestProvider.ts:4](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L4)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Common/RequestProviders/RequestProvider.ts:11](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L11)
+[Interfaces/Common/RequestProviders/RequestProvider.ts:11](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L11)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Common/RequestProviders/RequestProvider.ts:10](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L10)
+[Interfaces/Common/RequestProviders/RequestProvider.ts:10](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Common/RequestProviders/RequestProvider.ts#L10)

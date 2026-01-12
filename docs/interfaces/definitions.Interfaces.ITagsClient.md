@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[Interfaces/Tags/ITagsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Tags/ITagsClient.ts#L9)
+[Interfaces/Tags/ITagsClient.ts:9](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Tags/ITagsClient.ts#L9)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Tags/ITagsClient.ts:7](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Tags/ITagsClient.ts#L7)
+[Interfaces/Tags/ITagsClient.ts:7](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Tags/ITagsClient.ts#L7)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Tags/ITagsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Tags/ITagsClient.ts#L6)
+[Interfaces/Tags/ITagsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Tags/ITagsClient.ts#L6)
 
 ___
 
@@ -86,4 +86,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Tags/ITagsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/bb42d24/lib/Interfaces/Tags/ITagsClient.ts#L8)
+[Interfaces/Tags/ITagsClient.ts:8](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Tags/ITagsClient.ts#L8)
