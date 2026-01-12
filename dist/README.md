@@ -41,7 +41,7 @@ npm install mailgun.js
 
 ## Setup Client
 
-The next step is to import the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'key-yourkeyhere')`.
+The next step is to import the module and instantiate a mailgun client by calling `new Mailgun(formData)` and then using `mailgun.client` setup the client with basic auth credentials `(username: 'api', key: 'MAILGUN_API_KEY')`.
 
 NOTE: starting from version 3.0 you need to pass FormData (we need this to keep library universal). For node.js you can use built-in FormData or `form-data` library.
 
@@ -53,12 +53,12 @@ Once the package is installed, you can import the library using `import` or `req
 ```js
   const Mailgun = require('mailgun.js');
   const mailgun = new Mailgun(FormData); // or const formData = require('form-data');
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-{yourkeyhere}'});
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'MAILGUN_API_KEY'});
 ```
 ```js
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData); // or import formData from 'form-data';
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-{yourkeyhere}'});
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'MAILGUN_API_KEY'});
 ```
 
 Be aware that there are four bundles available for usage. All of them are conditionally exported by package.json and separated by environment (Browser/Node.js):
@@ -155,7 +155,7 @@ const mailgun = new Mailgun(FormData);
 
 const mg = mailgun.client({
   username: 'api',
-  key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
+  key: process.env.MAILGUN_API_KEY || 'MAILGUN_API_KEY',
   useFetch: true,
 });
 ```
@@ -170,7 +170,7 @@ Example:
 
   const mg = mailgun.client({
     username: 'api',
-    key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
+    key: process.env.MAILGUN_API_KEY || 'MAILGUN_API_KEY',
     proxy: {
       protocol: 'https' // 'http' ,
       host: '127.0.0.1', // use your proxy host here
@@ -190,7 +190,7 @@ Primary accounts can make API calls on behalf of their subaccounts. [API documen
 ```js
   import Mailgun from 'mailgun.js';
   const mailgun = new Mailgun(FormData); // or import FormData from 'form-data'
-  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
+  const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'MAILGUN_API_KEY'});
   mg.setSubaccount('subaccount-id');
   // then, if you need to reset it back to the primary account:
   mg.resetSubaccount();
