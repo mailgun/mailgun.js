@@ -2,7 +2,8 @@ import Request from '../common/Request.js';
 import NavigationThruPages from '../common/NavigationThruPages.js';
 import Suppression from './Suppression.js';
 import { IBounce, IComplaint, ISuppressionClient, IUnsubscribe, IWhiteList } from '../../Interfaces/Suppressions/index.js';
-import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions/index.js';
+import { SuppressionList, SuppressionListResponse, SuppressionDataType, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult, SuppressionUploadData, SuppressionModelNames } from '../../Types/Suppressions/index.js';
+import { MessageResponse } from '../../Types/Common/ApiResponse.js';
 export default class SuppressionClient extends NavigationThruPages<SuppressionList> implements ISuppressionClient {
     request: Request;
     models: object;
@@ -21,4 +22,5 @@ export default class SuppressionClient extends NavigationThruPages<SuppressionLi
     get(domain: string, type: string, address: string): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList>;
     create(domain: string, type: string, data: SuppressionCreationData | SuppressionCreationData[]): Promise<SuppressionCreationResult>;
     destroy(domain: string, type: string, address: string): Promise<SuppressionDestroyResult>;
+    upload(domain: string, type: SuppressionModelNames, file: SuppressionUploadData): Promise<MessageResponse>;
 }

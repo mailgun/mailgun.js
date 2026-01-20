@@ -1,4 +1,4 @@
-import { SuppressionList, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult } from '../../Types/Suppressions/index.js';
+import { SuppressionList, SuppressionCreationData, SuppressionCreationResult, SuppressionListQuery, SuppressionDestroyResult, SuppressionUploadData, MessageResponse, SuppressionModelNames } from '../../Types/index.js';
 import { IBounce } from './Bounce.js';
 import { IComplaint } from './Complaint.js';
 import { IUnsubscribe } from './Unsubscribe.js';
@@ -8,4 +8,5 @@ export interface ISuppressionClient {
     get(domain: string, type: string, address: string): Promise<IBounce | IComplaint | IUnsubscribe | IWhiteList>;
     create(domain: string, type: string, data: SuppressionCreationData | SuppressionCreationData[]): Promise<SuppressionCreationResult>;
     destroy(domain: string, type: string, address: string): Promise<SuppressionDestroyResult>;
+    upload(domain: string, type: SuppressionModelNames, file: SuppressionUploadData): Promise<MessageResponse>;
 }
