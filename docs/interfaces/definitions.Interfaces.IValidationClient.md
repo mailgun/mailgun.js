@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[Interfaces/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Validations/Validation.ts#L6)
+[Interfaces/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Validations/Validation.ts#L6)
 
 ## Methods
 
@@ -42,4 +42,4 @@
 
 #### Defined in
 
-[Interfaces/Validations/Validation.ts:7](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Validations/Validation.ts#L7)
+[Interfaces/Validations/Validation.ts:7](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Validations/Validation.ts#L7)

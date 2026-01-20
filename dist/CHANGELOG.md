@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.7.0](https://github.com/mailgun/mailgun.js/compare/v12.6.1...v12.7.0) (2026-01-20)
+
+
+### Features
+
+* Add list upload for unsubscribes, complaints, bounces, and whitelists ([c2647e1](https://github.com/mailgun/mailgun.js/commits/c2647e175f049b1ee501cceb6927113deb0227fc))
+
+
+### Other changes
+
+* Update readme and build ([3e65549](https://github.com/mailgun/mailgun.js/commits/3e6554973e9087abb85147c3da9177107b3422a9))
+* Update tests ([cca2227](https://github.com/mailgun/mailgun.js/commits/cca222731798e96a52eafc48ed8fa78137143ba0))
+
 ### [12.6.1](https://github.com/mailgun/mailgun.js/compare/v12.6.0...v12.6.1) (2026-01-12)
 
 

@@ -12,6 +12,7 @@
 - [destroy](definitions.Interfaces.ISuppressionClient.md#destroy)
 - [get](definitions.Interfaces.ISuppressionClient.md#get)
 - [list](definitions.Interfaces.ISuppressionClient.md#list)
+- [upload](definitions.Interfaces.ISuppressionClient.md#upload)
 
 ## Methods
 
@@ -33,7 +34,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:22](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L22)
+[Interfaces/Suppressions/ISuppressionsClient.ts:25](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L25)
 
 ___
 
@@ -55,7 +56,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:28](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L28)
+[Interfaces/Suppressions/ISuppressionsClient.ts:31](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L31)
 
 ___
 
@@ -77,7 +78,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:16](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L16)
+[Interfaces/Suppressions/ISuppressionsClient.ts:19](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L19)
 
 ___
 
@@ -99,4 +100,26 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:14](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L14)
+[Interfaces/Suppressions/ISuppressionsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L17)
+
+___
+
+### upload
+
+▸ **upload**(`domain`, `type`, `file`): `Promise`\<[`MessageResponse`](../modules/definitions.md#messageresponse)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `domain` | `string` |
+| `type` | [`SuppressionModelNames`](../modules/definitions.md#suppressionmodelnames) |
+| `file` | [`SuppressionUploadData`](../modules/definitions.md#suppressionuploaddata) |
+
+#### Returns
+
+`Promise`\<[`MessageResponse`](../modules/definitions.md#messageresponse)\>
+
+#### Defined in
+
+[Interfaces/Suppressions/ISuppressionsClient.ts:37](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L37)

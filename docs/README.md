@@ -285,6 +285,11 @@ The following service methods are available to instantiated clients. The example
         - [Bounces Example](#bounces-example-3)
         - [Unsubscribes Example](#unsubscribes-example-3)
         - [Complaints Example](#complaints-example-3)
+      - [upload](#upload)
+        - [Bounces list upload example](#bounces-file-upload-example)
+        - [Unsubscribes list upload example](#unsubscribes-file-upload-example)
+        - [Complaints list upload example](#complaints-file-upload-example)
+        - [Whitelists list upload example](#whitelists-file-upload-example)
     - [webhooks](#webhooks)
       - [list](#list-5)
       - [get](#get-5)
@@ -2891,6 +2896,152 @@ The following service methods are available to instantiated clients. The example
         status: 200
       ```
 
+-   #### upload
+    `mg.suppressions.upload(domain, suppressionType, file)`
+
+    - #### Bounces file upload example:
+
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/post-v3--domainid--bounces-import)
+      ```JS
+      const fsPromises = require('fs').promises;
+      const path = require('path');
+      const filepath = path.resolve(__dirname, '../bounces-list.csv');
+
+      (async () =>{
+          try {
+              const file = {
+                  filename: 'bounces-list.csv',
+                  data: await fsPromises.readFile(filepath)
+              }
+
+              const result = mg.suppressions.upload('foobar.example.com', 'bounces', file)
+              console.log(result);
+              } catch (error) {
+                  console.error(error);
+              }
+      })()
+      ```
+
+      Example of `bounces-list.csv` file structure :
+      ```CSV
+        address, code, error, created_at
+        bob@example.com,error code,error description,"Tue, 20 Jan 2026 14:00:00 +0000"
+        anotherBob@example.com,,,
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: "file uploaded successfully for processing. standby..."
+      }
+      ```
+    - #### Unsubscribes file upload example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/post-v3--domainid--unsubscribes-import)
+      ```JS
+      const fsPromises = require('fs').promises;
+      const path = require('path');
+      const filepath = path.resolve(__dirname, '../unsubscribes-list.csv');
+
+      (async () =>{
+          try {
+              const file = {
+                  filename: 'unsubscribes-list.csv',
+                  data: await fsPromises.readFile(filepath)
+              }
+
+              const result = mg.suppressions.upload('foobar.example.com', 'unsubscribes', file)
+              console.log(result);
+              } catch (error) {
+                  console.error(error);
+              }
+      })()
+      ```
+
+      Example of `unsubscribes-list.csv` file structure :
+      ```CSV
+        address, tags, created_at
+        bob@example.com,tag to unsubscribe from,"Tue, 20 Jan 2026 14:00:00 +0000"
+        anotherBob@example.com,,
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: "file uploaded successfully for processing. standby..."
+      }
+    - #### Complaints file upload example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/post-v3--domainid--complaints-import)
+      ```JS
+      const fsPromises = require('fs').promises;
+      const path = require('path');
+      const filepath = path.resolve(__dirname, '../complaints-list.csv');
+
+      (async () =>{
+          try {
+              const file = {
+                  filename: 'complaints-list.csv',
+                  data: await fsPromises.readFile(filepath)
+              }
+
+              const result = mg.suppressions.upload('foobar.example.com', 'complaints', file)
+              console.log(result);
+              } catch (error) {
+                  console.error(error);
+              }
+      })()
+      ```
+
+      Example of `complaints-list.csv` file structure :
+      ```CSV
+        address, created_at
+        bob@example.com,"Tue, 20 Jan 2026 14:00:00 +0000"
+        anotherBob@example.com,,
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: "file uploaded successfully for processing. standby..."
+      }
+
+    - #### WhiteLists file upload example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/allowlist)
+      ```JS
+      const fsPromises = require('fs').promises;
+      const path = require('path');
+      const filepath = path.resolve(__dirname, '../whitelists-list.csv');
+
+      (async () =>{
+          try {
+              const file = {
+                  filename: 'whitelists-list.csv',
+                  data: await fsPromises.readFile(filepath)
+              }
+
+              const result = mg.suppressions.upload('foobar.example.com', 'whitelists', file)
+              console.log(result);
+              } catch (error) {
+                  console.error(error);
+              }
+      })()
+      ```
+
+      Example of `whitelists-list.csv` file structure :
+      ```CSV
+        address, created_at
+        bob@example.com,"Tue, 20 Jan 2026 14:00:00 +0000"
+        anotherBob@example.com,,
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: "file uploaded successfully for processing. standby..."
+      }
 ### Webhooks
 
 - #### list

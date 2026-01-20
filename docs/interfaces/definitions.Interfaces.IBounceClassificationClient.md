@@ -28,4 +28,4 @@
 
 #### Defined in
 
-[Interfaces/BounceClassification/IBounceClassificationClient.ts:4](https://github.com/mailgun/mailgun.js/blob/b379559/lib/Interfaces/BounceClassification/IBounceClassificationClient.ts#L4)
+[Interfaces/BounceClassification/IBounceClassificationClient.ts:4](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/BounceClassification/IBounceClassificationClient.ts#L4)
