@@ -28,8 +28,13 @@ import {
   SuppressionListQuery,
   SuppressionResponse,
   SuppressionDestroyResult,
-  SuppressionDestroyResponse
+  SuppressionDestroyResponse,
+  SuppressionUploadData,
+  SuppressionModelNames,
+  SuppressionUploadDataUpdated
 } from '../../Types/Suppressions/index.js';
+
+import { MessageResponse } from '../../Types/Common/ApiResponse.js';
 
 export default class SuppressionClient
   extends NavigationThruPages<SuppressionList>
@@ -205,5 +210,24 @@ export default class SuppressionClient
         address: response.body.address || '',
         status: response.status
       }));
+  }
+
+  async upload(
+    domain: string,
+    type: SuppressionModelNames,
+    file: SuppressionUploadData,
+  ): Promise<MessageResponse> {
+    this.getModel(type);
+    const data: SuppressionUploadDataUpdated = {
+      suppressionUploadFile: file
+    };
+
+    if (typeof file === 'string') {
+      data.suppressionUploadFile = { data: file };
+    }
+
+    const url = urljoin('v3', domain, type, 'import');
+    const response = await this.request.postWithFD(url, data);
+    return response.body;
   }
 }

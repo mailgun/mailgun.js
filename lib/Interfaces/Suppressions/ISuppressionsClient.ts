@@ -3,8 +3,11 @@ import {
   SuppressionCreationData,
   SuppressionCreationResult,
   SuppressionListQuery,
-  SuppressionDestroyResult
-} from '../../Types/Suppressions/index.js';
+  SuppressionDestroyResult,
+  SuppressionUploadData,
+  MessageResponse,
+  SuppressionModelNames
+} from '../../Types/index.js';
 import { IBounce } from './Bounce.js';
 import { IComplaint } from './Complaint.js';
 import { IUnsubscribe } from './Unsubscribe.js';
@@ -30,4 +33,10 @@ export interface ISuppressionClient {
     type: string,
     address: string
   ): Promise<SuppressionDestroyResult>
+
+  upload(
+    domain: string,
+    type: SuppressionModelNames,
+    file: SuppressionUploadData
+  ): Promise<MessageResponse>;
 }

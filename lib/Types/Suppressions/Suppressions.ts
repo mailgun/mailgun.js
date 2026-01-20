@@ -9,6 +9,7 @@ import type {
 } from '../../Interfaces/index.js';
 
 import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { CustomFile, CustomFileData } from '../Messages/Messages.js';
 
 /* eslint-disable camelcase */
 
@@ -79,3 +80,10 @@ export type SuppressionCreationResult = {
   value: string;
   status: number;
 }
+
+export type SuppressionUploadData = CustomFileData | CustomFile;
+export type SuppressionUploadDataUpdated = {
+  suppressionUploadFile: SuppressionUploadData
+};
+
+export type SuppressionModelNames = 'bounces' |'complaints' | 'unsubscribes' | 'whitelists';
