@@ -1,6 +1,7 @@
 import type { BounceData, ComplaintData, UnsubscribeData, WhiteListData } from './index.js';
 import type { IBounce, IComplaint, IUnsubscribe, IWhiteList } from '../../Interfaces/index.js';
 import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { CustomFile, CustomFileData } from '../Messages/Messages.js';
 export type SuppressionList = {
     items: (IBounce | IComplaint | IUnsubscribe | IWhiteList)[];
     pages: ParsedPagesList;
@@ -59,3 +60,8 @@ export type SuppressionCreationResult = {
     value: string;
     status: number;
 };
+export type SuppressionUploadData = CustomFileData | CustomFile;
+export type SuppressionUploadDataUpdated = {
+    suppressionUploadFile: SuppressionUploadData;
+};
+export type SuppressionModelNames = 'bounces' | 'complaints' | 'unsubscribes' | 'whitelists';

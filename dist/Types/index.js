@@ -327,7 +327,7 @@ var AttachmentsHandler = /** @class */ (function () {
 var FormDataBuilder = /** @class */ (function () {
     function FormDataBuilder(FormDataConstructor, config) {
         this.FormDataConstructor = FormDataConstructor;
-        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
+        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile'];
         this.attachmentsHandler = new AttachmentsHandler();
         this.useFetch = config === null || config === void 0 ? void 0 : config.useFetch;
     }
@@ -442,7 +442,7 @@ var FormDataBuilder = /** @class */ (function () {
     FormDataBuilder.prototype.addFilesToFD = function (propertyName, value, formDataInstance) {
         var _this = this;
         var appendFileToFD = function (originalKey, attachment, formData) {
-            var key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
+            var key = originalKey === 'multipleValidationFile' || originalKey === 'suppressionUploadFile' ? 'file' : originalKey;
             var objData = _this.attachmentsHandler.convertToFDexpectedShape(attachment);
             var options = _this.attachmentsHandler.getAttachmentInfo(attachment);
             if (_this.isFormDataPackage(formData)) {
@@ -5513,6 +5513,28 @@ var SuppressionClient = /** @class */ (function (_super) {
             address: response.body.address || '',
             status: response.status
         }); });
+    };
+    SuppressionClient.prototype.upload = function (domain, type, file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data, url, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.getModel(type);
+                        data = {
+                            suppressionUploadFile: file
+                        };
+                        if (typeof file === 'string') {
+                            data.suppressionUploadFile = { data: file };
+                        }
+                        url = urljoin('v3', domain, type, 'import');
+                        return [4 /*yield*/, this.request.postWithFD(url, data)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
     };
     return SuppressionClient;
 }(NavigationThruPages));

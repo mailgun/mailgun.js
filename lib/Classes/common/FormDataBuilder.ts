@@ -23,7 +23,7 @@ class FormDataBuilder {
 
   constructor(FormDataConstructor: InputFormData, config: FormDataBuilderConfig) {
     this.FormDataConstructor = FormDataConstructor;
-    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile'];
+    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile'];
     this.attachmentsHandler = new AttachmentsHandler();
     this.useFetch = config?.useFetch;
   }
@@ -171,7 +171,7 @@ class FormDataBuilder {
       attachment: CustomFile | File | string| CustomFileData,
       formData: NodeFormData | FormData
     ): void => {
-      const key = originalKey === 'multipleValidationFile' ? 'file' : originalKey;
+      const key = originalKey === 'multipleValidationFile' || originalKey === 'suppressionUploadFile' ? 'file' : originalKey;
       const objData = this.attachmentsHandler.convertToFDexpectedShape(attachment);
       const options: AttachmentInfo = this.attachmentsHandler.getAttachmentInfo(attachment);
 

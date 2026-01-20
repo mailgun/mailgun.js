@@ -501,4 +501,131 @@ describe('SuppressionsClient', function () {
       expect(res.address).toEqual('my?@address.com');
     });
   });
+
+  describe('upload', function () {
+    describe('bounces', () => {
+      it('uploads bounces from string data', async () => {
+        const csvData = 'address, code, error, created_at\ntest1@example.com,550,No such mailbox,\ntest2@example.com,552,Mailbox full,';
+
+        api.post('/v3/domain.com/bounces/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'bounces', csvData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+
+      it('uploads bounces from CustomFile object', async () => {
+        const csvData = 'address, code, error, created_at\ntest1@example.com,550,No such mailbox,';
+        const fileData = {
+          data: csvData,
+          filename: 'bounces.csv'
+        };
+
+        api.post('/v3/domain.com/bounces/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'bounces', fileData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+    });
+
+    describe('unsubscribes', () => {
+      it('uploads unsubscribes from string data', async () => {
+        const csvData = 'address, tags, created_at\ntest1@example.com,newsletter,\ntest2@example.com,promo,';
+
+        api.post('/v3/domain.com/unsubscribes/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'unsubscribes', csvData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+
+      it('uploads unsubscribes from CustomFile object with filename', async () => {
+        const csvData = 'address, tags, created_at\ntest1@example.com,newsletter,';
+        const fileData = {
+          data: csvData,
+          filename: 'unsubscribes.csv',
+          contentType: 'text/csv'
+        };
+
+        api.post('/v3/domain.com/unsubscribes/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'unsubscribes', fileData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+    });
+
+    describe('complaints', () => {
+      it('uploads complaints from string data', async () => {
+        const csvData = 'address, created_at\ntest1@example.com,\ntest2@example.com,';
+
+        api.post('/v3/domain.com/complaints/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'complaints', csvData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+    });
+
+    describe('whitelists', () => {
+      it('uploads whitelists from string data', async () => {
+        const csvData = 'address, domain\ntest1@example.com,example.com\ntest2@example.com,example.com';
+
+        api.post('/v3/domain.com/whitelists/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'whitelists', csvData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+
+      it('uploads whitelists from CustomFile object', async () => {
+        const csvData = 'address, domain\ntest1@example.com,example.com';
+        const fileData = {
+          data: csvData,
+          filename: 'whitelists.csv'
+        };
+
+        api.post('/v3/domain.com/whitelists/import').reply(200, {
+          message: 'file uploaded successfully for processing. standby...'
+        });
+
+        const result = await client.upload('domain.com', 'whitelists', fileData);
+        expect(result).toEqual({
+          message: 'file uploaded successfully for processing. standby...'
+        });
+      });
+    });
+
+    it('throws error for unknown suppression type', async () => {
+      try {
+        // @ts-expect-error: Testing invalid type
+        await client.upload('domain.com', 'invalid-type', 'data');
+      } catch (error: unknown) {
+        expect(error).toMatchObject({
+          message: 'Unknown type value',
+          details: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]',
+          status: 400
+        });
+      }
+    });
+  });
 });
