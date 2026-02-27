@@ -114,7 +114,7 @@
     "json-loader": "^0.5.7",
     "nock": "^14.0.0",
     "puppeteer": "^24.1.1",
-    "rollup": "^4.34.5",
+    "rollup": "^4.59.0",
     "standard-version": "^9.3.1",
     "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.1",
