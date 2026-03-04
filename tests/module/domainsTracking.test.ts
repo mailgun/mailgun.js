@@ -117,7 +117,8 @@ describe('DomainTrackingClient', function () {
       describe('converts boolean values to string in open tracking', () => {
         it('converts boolean TRUE values to string in open tracking', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/open').reply(200,
+          api.put('/v3/domains/domain.com/tracking/open').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
@@ -127,7 +128,8 @@ describe('DomainTrackingClient', function () {
                   place_at_the_top: true,
                 }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'open', { active: true, place_at_the_top: true });
           expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n------'));
           expect(requestObject).toEqual(expect.stringContaining('name="place_at_the_top"\r\n\r\nyes\r\n------'));
@@ -135,7 +137,8 @@ describe('DomainTrackingClient', function () {
 
         it('converts boolean FALSE values to string in open tracking', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/open').reply(200,
+          api.put('/v3/domains/domain.com/tracking/open').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
@@ -145,7 +148,8 @@ describe('DomainTrackingClient', function () {
                   place_at_the_top: false,
                 }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'open', {
             active: false,
             place_at_the_top: false,
@@ -175,28 +179,32 @@ describe('DomainTrackingClient', function () {
       describe('converts boolean values to string in click tracking ', () => {
         it('converts boolean TRUE values to string in click tracking', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/click').reply(200,
+          api.put('/v3/domains/domain.com/tracking/click').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
                 message: 'message_value',
                 click: { active: true }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'click', { active: true });
           expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n------'));
         });
 
         it('converts boolean FALSE values to string in click tracking ', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/click').reply(200,
+          api.put('/v3/domains/domain.com/tracking/click').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
                 message: 'message_value',
                 click: { active: false }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'click', { active: false });
           expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nno\r\n------'));
         });
@@ -230,28 +238,32 @@ describe('DomainTrackingClient', function () {
       describe('converts boolean values to string in unsubscribe tracking ', () => {
         it('converts boolean TRUE values to string in unsubscribe tracking', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
+          api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
                 message: 'message_value',
                 unsubscribe: { active: true }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'unsubscribe', { active: true });
           expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nyes\r\n------'));
         });
 
         it('converts boolean FALSE values to string in unsubscribe tracking ', async () => {
           let requestObject;
-          api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(200,
+          api.put('/v3/domains/domain.com/tracking/unsubscribe').reply(
+            200,
             function (_uri, requestBody) {
               requestObject = requestBody as formData;
               return {
                 message: 'message_value',
                 unsubscribe: { active: false }
               };
-            });
+            }
+          );
           await client.updateTracking('domain.com', 'unsubscribe', { active: false });
           expect(requestObject).toEqual(expect.stringContaining('name="active"\r\n\r\nno\r\n------'));
         });

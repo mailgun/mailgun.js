@@ -107,13 +107,12 @@ class AxiosProvider implements IRequestProvider {
     headersObject: RawAxiosRequestHeaders = {}
   ): AxiosHeaders {
     let requestHeaders = new AxiosHeaders();
-    requestHeaders = Object.entries(headersObject).reduce(
-      (headersAccumulator: AxiosHeaders, currentPair) => {
+    requestHeaders = Object.entries(headersObject)
+      .reduce((headersAccumulator: AxiosHeaders, currentPair) => {
         const [key, value] = currentPair;
         headersAccumulator.set(key, value);
         return headersAccumulator;
-      }, requestHeaders
-    );
+      }, requestHeaders);
     return requestHeaders;
   }
 

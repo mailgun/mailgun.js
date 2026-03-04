@@ -20,7 +20,7 @@ import APIError from '../common/Error.js';
 export class MultipleValidationJob implements MultipleValidationJobResult {
   createdAt: Date;
   id: string;
-  quantity: number
+  quantity: number;
   recordsProcessed: number | null;
   status: string;
   downloadUrl?: {
@@ -43,7 +43,7 @@ export class MultipleValidationJob implements MultipleValidationJobResult {
           medium: number;
           unknown: number;
       }
-  }
+  };
 
   constructor(data: MultipleValidationJobData, responseStatusCode: number) {
     this.createdAt = new Date(data.created_at);

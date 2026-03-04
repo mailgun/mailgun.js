@@ -25,6 +25,7 @@
     "no-shadow": "off",
     "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "import/no-extraneous-dependencies" :["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}],
+    "no-console": 2
   },
   "overrides": [
     {
@@ -41,6 +42,8 @@
       "rules": {
         "import/extensions": 0,
         "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "error",
         "import/no-unresolved": "error",
         "import/no-extraneous-dependencies" :["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
       },
@@ -61,7 +64,7 @@
     {
       "files": ["test/*"],
       "rules": {
-          "no-unused-expressions": "off"
+          "no-unused-expressions": "off",
       }
     }
   ]

@@ -69,10 +69,12 @@ export default class WebhooksClient implements IWebHooksClient {
       .then(this._parseWebhookWithID(id));
   }
 
-  create(domain: string,
+  create(
+    domain: string,
     id: string,
     url: string,
-    test = false): Promise<WebhookResult | WebhookValidationResponse> {
+    test = false
+  ): Promise<WebhookResult | WebhookValidationResponse> {
     if (test) {
       return this.request.putWithFD(urljoin('/v3/domains', domain, 'webhooks', id, 'test'), { url })
         .then(this._parseWebhookTest);

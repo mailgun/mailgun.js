@@ -59,12 +59,13 @@ export default abstract class NavigationThruPages <T> {
     iteratorName?: string
   ): ParsedPagesList {
     const pages = Object.entries(response.body.paging);
-    return pages.reduce(
-      (acc: PagesListAccumulator, [id, pageUrl]: [ id: string, pageUrl: string]) => {
-        acc[id] = this.parsePage(id, pageUrl, urlSeparator, iteratorName);
-        return acc;
-      }, {}
-    ) as unknown as ParsedPagesList;
+    return pages.reduce((
+      acc: PagesListAccumulator,
+      [id, pageUrl]: [ id: string, pageUrl: string]
+    ) => {
+      acc[id] = this.parsePage(id, pageUrl, urlSeparator, iteratorName);
+      return acc;
+    }, {}) as unknown as ParsedPagesList;
   }
 
   private updateUrlAndQuery(clientUrl: string, query?: QueryWithPage): UpdatedUrlAndQuery {

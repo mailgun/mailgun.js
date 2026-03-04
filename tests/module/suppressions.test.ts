@@ -331,8 +331,11 @@ describe('SuppressionsClient', function () {
     describe('whitelists', function () {
       it('throws in case type is unknown', async () => {
         try {
-          await client.create('domain.com', 'wrong type',
-            { address: 'myaddress' });
+          await client.create(
+            'domain.com',
+            'wrong type',
+            { address: 'myaddress' }
+          );
         } catch (error: unknown) {
           expect(error).toMatchObject({
             message: 'Unknown type value',
@@ -357,8 +360,11 @@ describe('SuppressionsClient', function () {
 
       it('throws in case multiple whitelists provided', async () => {
         try {
-          await client.create('domain.com', 'whitelists',
-            [{ address: 'myaddress' }, { address: 'myaddress1' }]);
+          await client.create(
+            'domain.com',
+            'whitelists',
+            [{ address: 'myaddress' }, { address: 'myaddress1' }]
+          );
         } catch (error: unknown) {
           const err: APIError = error as APIError;
           expect(err).toMatchObject({

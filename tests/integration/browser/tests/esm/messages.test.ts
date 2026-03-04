@@ -47,7 +47,8 @@ describe('Send message functionality (ESM)', () => {
         domain,
         messageData
       ),
-      'test.domain.com', {
+      'test.domain.com',
+      {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',
@@ -68,7 +69,8 @@ describe('Send message functionality (ESM)', () => {
         domain,
         messageData
       ),
-      'test.domain.com', {
+      'test.domain.com',
+      {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',
@@ -101,7 +103,8 @@ describe('Send message functionality (ESM)', () => {
         }
         return (window as ExtendedWindow).mailgunClient?.messages.create(domain, messageDataCopy);
       },
-      'test.domain.com', {
+      'test.domain.com',
+      {
         to: 'foo@example.com',
         from: 'bar@example.com',
         subject: 'howdy!',

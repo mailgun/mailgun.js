@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 export type UnsubscribeData = {
     address: string;
-    tags: any;
+    tags: string[];
     created_at: string | Date;
 }

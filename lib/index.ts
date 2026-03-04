@@ -4,7 +4,7 @@ import { InputFormData, MailgunClientOptions } from './Types/index.js';
 
 export default class Mailgun {
   static get default(): typeof Mailgun { return this; }
-  private formData: InputFormData
+  private formData: InputFormData;
 
   constructor(FormData: InputFormData) {
     this.formData = FormData;

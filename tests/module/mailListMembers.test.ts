@@ -157,7 +157,8 @@ describe('mailListsMembersClient', function () {
       api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, response);
 
       const result: NewMultipleMembersResponse = await mailListsMembersClient.createMembers(
-        mailingListAddress, {
+        mailingListAddress,
+        {
           members: newMembersList,
           upsert: 'yes'
         }

@@ -1,4 +1,4 @@
-// mailgun.js v12.6.1 Copyright (c) 2026 Mailgun and contributors
+// mailgun.js v12.7.0 Copyright (c) 2026 Mailgun and contributors
 define(['exports'], (function (exports) { 'use strict';
 
     var Resolution;
