@@ -84,16 +84,14 @@ export default class SubaccountsClient implements ISubaccountsClient {
   async updateSubaccountFeature(id: string, features: SubaccountFeaturesData)
     : Promise<SubaccountFeaturesResult> {
     const keys = ['email_preview', 'inbox_placement', 'sending', 'validations', 'validations_bulk'] as (keyof SubaccountFeaturesData)[];
-    const readyFeatures = keys.reduce(
-      (acc, currentFeatureName) => {
-        if (currentFeatureName in features && typeof features[currentFeatureName] === 'boolean') {
-          acc[currentFeatureName] = JSON.stringify({
-            enabled: features[currentFeatureName]
-          });
-        }
-        return acc;
-      }, {} as Record<keyof SubaccountFeaturesData, string>
-    );
+    const readyFeatures = keys.reduce((acc, currentFeatureName) => {
+      if (currentFeatureName in features && typeof features[currentFeatureName] === 'boolean') {
+        acc[currentFeatureName] = JSON.stringify({
+          enabled: features[currentFeatureName]
+        });
+      }
+      return acc;
+    }, {} as Record<keyof SubaccountFeaturesData, string>);
     const response = await this.request.put(`/v5/accounts/subaccounts/${id}/features`, readyFeatures);
     return response.body;
   }

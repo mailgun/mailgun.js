@@ -141,7 +141,8 @@ describe('Inbox Placements results', () => {
       let requestQuery;
       api.get(/v4\/inbox\/results/)
         .query((query) => { requestQuery = query; return true; })
-        .reply(200,
+        .reply(
+          200,
           {
             items: [
               {
@@ -157,7 +158,8 @@ describe('Inbox Placements results', () => {
               next: 'http://nextpage.net',
               previous: 'http://previouspage.net',
             }
-          });
+          }
+        );
 
       await client.list({
         sender: 'test_sender',

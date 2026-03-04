@@ -112,7 +112,8 @@ describe('SeedsListsClient', () => {
       let requestQuery;
       api.get(/v4\/inbox\/seedlists/)
         .query((query) => { requestQuery = query; return true; })
-        .reply(200,
+        .reply(
+          200,
           {
             items: [
               {
@@ -128,7 +129,8 @@ describe('SeedsListsClient', () => {
               next: 'http://nextpage.net',
               previous: 'http://previouspage.net',
             }
-          });
+          }
+        );
 
       const timeAfter = new Date();
       const timeBefore = new Date();

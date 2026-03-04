@@ -1060,7 +1060,7 @@ The following service methods are available to instantiated clients. The example
     receiving_dns_records: [
       {
         is_active: true,
-        cached: [Array],
+        cached: [],
         priority: '10',
         record_type: 'MX',
         valid: 'valid',

@@ -4,8 +4,8 @@ import APIError from './Error.js';
 import { AttachmentInfo, StreamValue } from '../../Types/Common/Attachments.js';
 
 class BlobFromStream {
-  private _stream: Readable
-  size: number
+  private _stream: Readable;
+  size: number;
 
   constructor(stream: Readable, size: number) {
     this._stream = stream;

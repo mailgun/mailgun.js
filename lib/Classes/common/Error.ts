@@ -1,7 +1,7 @@
 import { APIErrorOptions, APIErrorType } from '../../Types/Common/index.js';
 
 export default class APIError extends Error implements APIErrorType {
-  public status: number ;
+  public status: number;
   public stack: string;
   public details: string;
   public type: string;

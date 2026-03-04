@@ -115,6 +115,7 @@ export type MailgunMessageData = MailgunMessageContent & {
      *
      * You can post multiple `inline` values.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     inline?: any;
 
     /**

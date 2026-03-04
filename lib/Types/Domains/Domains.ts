@@ -76,7 +76,7 @@ export interface DomainsListItem extends DomainData{
 }
 
 export interface DNSRecord {
-    cached: any[];
+    cached: string[];
     name: string;
     record_type: string;
     valid: string;

@@ -52,6 +52,7 @@ export type RequestOptions = MailgunClientOptions & {
 
 export type OnCallRequestOptions = {
   timeout?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   query?: any;
   [key: string]: unknown | undefined;
 }

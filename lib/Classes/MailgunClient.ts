@@ -74,7 +74,7 @@ export default class MailgunClient implements IMailgunClient {
   public subaccounts: ISubaccountsClient;
   public inboxPlacements: IInboxPlacementsClient;
   public logs: ILogsClient;
-  public dkimManagement: IDKIMManagementClient
+  public dkimManagement: IDKIMManagementClient;
   public bounceClassification: IBounceClassificationClient;
   public tags: ITagsClient;
 

@@ -4,7 +4,6 @@ import Request from './test-utils/TestRequest.js';
 import {
   RequestOptions,
   SubaccountApiItem,
-  SubaccountItem,
 } from '../../lib/Types/index.js';
 
 import SubaccountsClient from '../../lib/Classes/Subaccounts.js';

@@ -142,15 +142,11 @@ describe('FormDataBuilder', function () {
 
       it('works with ReadStream value', async () => {
         const file = fs.createReadStream(filepath);
-        try {
-          const { formData } = await builder.createFormData({ attachment: [file] });
+        const { formData } = await builder.createFormData({ attachment: [file] });
 
-          const fdFile = (formData as FormData).get('attachment') as File;
-          expect(fdFile).toHaveProperty('name');
-          expect(fdFile.name).toEqual('file');
-        } catch (error) {
-          console.log('Error during the test execution', error);
-        }
+        const fdFile = (formData as FormData).get('attachment') as File;
+        expect(fdFile).toHaveProperty('name');
+        expect(fdFile.name).toEqual('file');
       });
 
       it('works with multiple ReadStream values', async () => {

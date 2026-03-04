@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 export interface IUnsubscribe {
     address: string;
-    tags: any;
+    tags: string[];
     created_at: Date;
     type: string;
 }

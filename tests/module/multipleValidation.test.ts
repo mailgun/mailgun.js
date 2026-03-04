@@ -336,11 +336,13 @@ describe('ValidateClient', () => {
     let requestBody: nock.Body | undefined;
 
     beforeEach(() => {
-      api.post('/v4/address/validate/bulk/testValidationList',
+      api.post(
+        '/v4/address/validate/bulk/testValidationList',
         (body) => {
           requestBody = body;
           return true;
-        })
+        }
+      )
         .reply(200, data);
     });
 
