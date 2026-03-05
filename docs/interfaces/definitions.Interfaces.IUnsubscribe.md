@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/Unsubscribe.ts:3](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/Unsubscribe.ts#L3)
+[Interfaces/Suppressions/Unsubscribe.ts:3](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/Unsubscribe.ts#L3)
 
 ___
 
@@ -31,17 +31,17 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Unsubscribe.ts:5](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/Unsubscribe.ts#L5)
+[Interfaces/Suppressions/Unsubscribe.ts:5](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/Unsubscribe.ts#L5)
 
 ___
 
 ### tags
 
-• **tags**: `any`
+• **tags**: `string`[]
 
 #### Defined in
 
-[Interfaces/Suppressions/Unsubscribe.ts:4](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/Unsubscribe.ts#L4)
+[Interfaces/Suppressions/Unsubscribe.ts:4](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/Unsubscribe.ts#L4)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/Unsubscribe.ts:6](https://github.com/mailgun/mailgun.js/blob/bc9c3a5/lib/Interfaces/Suppressions/Unsubscribe.ts#L6)
+[Interfaces/Suppressions/Unsubscribe.ts:6](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/Unsubscribe.ts#L6)

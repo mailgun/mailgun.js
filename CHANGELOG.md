@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.7.1](https://github.com/mailgun/mailgun.js/compare/v12.7.0...v12.7.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* Fix vulnerabilities ([11f18a6](https://github.com/mailgun/mailgun.js/commits/11f18a6285e1ad6ca808ee9b7890754f5f70c4a4))
+
+
+### Other changes
+
+* Fix lint issues ([ce4a728](https://github.com/mailgun/mailgun.js/commits/ce4a728ee7529f181c27216049514d91597f16d9))
+* Update dist ([801cfa0](https://github.com/mailgun/mailgun.js/commits/801cfa0355aece876397ad1a6ab1791d8c1e5018))
+* Update eslint version ([44229de](https://github.com/mailgun/mailgun.js/commits/44229de5db7e60f452770956e73eb6d025351530))
+* Update node version in pipelines ([0f26598](https://github.com/mailgun/mailgun.js/commits/0f265985369156f39b5672bdc5cec7730db5a2a9))
+
 ## [12.7.0](https://github.com/mailgun/mailgun.js/compare/v12.6.1...v12.7.0) (2026-01-20)
 
 
