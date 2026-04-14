@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.8.0](https://github.com/mailgun/mailgun.js/compare/v12.7.1...v12.8.0) (2026-04-14)
+
+
+### Features
+
+* Add 'destroyAll' method to SuppressionClient ([93c20b6](https://github.com/mailgun/mailgun.js/commits/93c20b61c2029ec56eb96ca8a48bcce99005cdec))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump flatted from 3.3.4 to 3.4.2 ([a25eba4](https://github.com/mailgun/mailgun.js/commits/a25eba4607026e26522b2aaddf1388ac602d2f1f))
+* **deps-dev:** bump picomatch from 2.3.1 to 2.3.2 ([29640fb](https://github.com/mailgun/mailgun.js/commits/29640fb4146a1c4579f0f4568ea6b8573793b3ed))
+* **deps-dev:** bump serialize-javascript from 7.0.4 to 7.0.5 ([a5e5af7](https://github.com/mailgun/mailgun.js/commits/a5e5af785a5d62b597688a7245c8866bad4cf9db))
+* **deps:** bump axios from 1.13.6 to 1.15.0 ([e6fc34b](https://github.com/mailgun/mailgun.js/commits/e6fc34bfbc111ddd43b5631522e211983057ffb9))
+* **deps:** bump basic-ftp from 5.2.0 to 5.2.1 ([bb0d094](https://github.com/mailgun/mailgun.js/commits/bb0d094029cd24801d75a1e89cf5fe4267aef40b))
+* **deps:** bump basic-ftp from 5.2.1 to 5.2.2 ([8eeb3cc](https://github.com/mailgun/mailgun.js/commits/8eeb3cccbc3b5d95a3e914835e1c8e64c46c19ca))
+* **deps:** bump handlebars from 4.7.8 to 4.7.9 ([8ffbd24](https://github.com/mailgun/mailgun.js/commits/8ffbd2494978578353017b4b01c2353b1f85df8c))
+* **deps:** bump lodash from 4.17.23 to 4.18.1 ([f651a6b](https://github.com/mailgun/mailgun.js/commits/f651a6bfae0e2bda29a95ce449f09a60e87a6691))
+
 ### [12.7.1](https://github.com/mailgun/mailgun.js/compare/v12.7.0...v12.7.1) (2026-03-05)
 
 

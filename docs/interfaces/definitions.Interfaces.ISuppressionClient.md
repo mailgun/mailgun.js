@@ -10,6 +10,7 @@
 
 - [create](definitions.Interfaces.ISuppressionClient.md#create)
 - [destroy](definitions.Interfaces.ISuppressionClient.md#destroy)
+- [destroyAll](definitions.Interfaces.ISuppressionClient.md#destroyall)
 - [get](definitions.Interfaces.ISuppressionClient.md#get)
 - [list](definitions.Interfaces.ISuppressionClient.md#list)
 - [upload](definitions.Interfaces.ISuppressionClient.md#upload)
@@ -34,7 +35,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:25](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L25)
+[Interfaces/Suppressions/ISuppressionsClient.ts:26](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L26)
 
 ___
 
@@ -56,7 +57,28 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:31](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L31)
+[Interfaces/Suppressions/ISuppressionsClient.ts:32](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L32)
+
+___
+
+### destroyAll
+
+▸ **destroyAll**(`domain`, `type`): `Promise`\<[`MessageResponseWithStatus`](../modules/definitions.md#messageresponsewithstatus)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `domain` | `string` |
+| `type` | [`SuppressionModelNames`](../modules/definitions.md#suppressionmodelnames) |
+
+#### Returns
+
+`Promise`\<[`MessageResponseWithStatus`](../modules/definitions.md#messageresponsewithstatus)\>
+
+#### Defined in
+
+[Interfaces/Suppressions/ISuppressionsClient.ts:44](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L44)
 
 ___
 
@@ -78,7 +100,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:19](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L19)
+[Interfaces/Suppressions/ISuppressionsClient.ts:20](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L20)
 
 ___
 
@@ -100,7 +122,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:17](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L17)
+[Interfaces/Suppressions/ISuppressionsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L18)
 
 ___
 
@@ -122,4 +144,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:37](https://github.com/mailgun/mailgun.js/blob/c57ed22/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L37)
+[Interfaces/Suppressions/ISuppressionsClient.ts:38](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L38)
