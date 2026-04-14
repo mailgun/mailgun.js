@@ -55,6 +55,13 @@ export type SuppressionDestroyResult = {
   status: number;
 }
 
+export type SuppressionDestroyAllResponse = {
+  body: {
+    message: string;
+  }
+  status: number;
+}
+
 export type SuppressionCreationData = {
   address: string;
   code?: number;

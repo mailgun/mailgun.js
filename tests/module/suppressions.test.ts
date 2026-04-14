@@ -13,7 +13,8 @@ import {
   SuppressionCreationResult,
   SuppressionDestroyResult,
   SuppressionList,
-  SuppressionListResponse
+  SuppressionListResponse,
+  MessageResponseWithStatus
 } from '../../lib/Types/index.js';
 import getTestFormData from './test-utils/TestFormData.js';
 
@@ -505,6 +506,68 @@ describe('SuppressionsClient', function () {
 
       const res: SuppressionDestroyResult = await client.destroy('domain.com', 'bounces', 'my?@address.com');
       expect(res.address).toEqual('my?@address.com');
+    });
+  });
+
+  describe('destroyAll', function () {
+    it('deletes all bounces', async () => {
+      api.delete('/v3/domain.com/bounces').reply(200, {
+        message: 'All bounces have been removed'
+      });
+
+      const res: MessageResponseWithStatus = await client.destroyAll('domain.com', 'bounces');
+      expect(res).toEqual({
+        message: 'All bounces have been removed',
+        status: 200
+      });
+    });
+
+    it('deletes all complaints', async () => {
+      api.delete('/v3/domain.com/complaints').reply(200, {
+        message: 'All complaints have been removed'
+      });
+
+      const res: MessageResponseWithStatus = await client.destroyAll('domain.com', 'complaints');
+      expect(res).toEqual({
+        message: 'All complaints have been removed',
+        status: 200
+      });
+    });
+
+    it('deletes all unsubscribes', async () => {
+      api.delete('/v3/domain.com/unsubscribes').reply(200, {
+        message: 'All unsubscribes have been removed'
+      });
+
+      const res: MessageResponseWithStatus = await client.destroyAll('domain.com', 'unsubscribes');
+      expect(res).toEqual({
+        message: 'All unsubscribes have been removed',
+        status: 200
+      });
+    });
+
+    it('deletes all whitelists', async () => {
+      api.delete('/v3/domain.com/whitelists').reply(200, {
+        message: 'All whitelists have been removed'
+      });
+
+      const res: MessageResponseWithStatus = await client.destroyAll('domain.com', 'whitelists');
+      expect(res).toEqual({
+        message: 'All whitelists have been removed',
+        status: 200
+      });
+    });
+
+    it('throws error for unknown suppression type', async () => {
+      try {
+        await client.destroyAll('domain.com', 'invalid-type');
+      } catch (error: unknown) {
+        expect(error).toMatchObject({
+          message: 'Unknown type value',
+          details: 'Type may be only one of [bounces, complaints, unsubscribes, whitelists]',
+          status: 400
+        });
+      }
     });
   });
 

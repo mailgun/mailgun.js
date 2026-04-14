@@ -6,7 +6,8 @@ import {
   SuppressionDestroyResult,
   SuppressionUploadData,
   MessageResponse,
-  SuppressionModelNames
+  SuppressionModelNames,
+  MessageResponseWithStatus
 } from '../../Types/index.js';
 import { IBounce } from './Bounce.js';
 import { IComplaint } from './Complaint.js';
@@ -39,4 +40,9 @@ export interface ISuppressionClient {
     type: SuppressionModelNames,
     file: SuppressionUploadData
   ): Promise<MessageResponse>;
+
+  destroyAll(
+    domain: string,
+    type: SuppressionModelNames,
+  ): Promise<MessageResponseWithStatus>;
 }

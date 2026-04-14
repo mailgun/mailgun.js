@@ -283,15 +283,20 @@ The following service methods are available to instantiated clients. The example
           - [Unsubscribe from one tag](#unsubscribe-from-one-tag)
           - [Unsubscribe from particular tags](#unsubscribe-from-particular-tags)
         - [Complaints Example](#complaints-example-2)
-      - [destroy](#destroy-3)
-        - [Bounces Example](#bounces-example-3)
-        - [Unsubscribes Example](#unsubscribes-example-3)
-        - [Complaints Example](#complaints-example-3)
       - [upload](#upload)
         - [Bounces list upload example](#bounces-file-upload-example)
         - [Unsubscribes list upload example](#unsubscribes-file-upload-example)
         - [Complaints list upload example](#complaints-file-upload-example)
         - [Whitelists list upload example](#whitelists-file-upload-example)
+      - [destroy](#destroy-3)
+        - [Bounces Example](#bounces-example-3)
+        - [Unsubscribes Example](#unsubscribes-example-3)
+        - [Complaints Example](#complaints-example-3)
+      - [destroyAll](#destroyall-1)
+        - [Bounces Example](#bounces-example-4)
+        - [Unsubscribes Example](#unsubscribes-example-4)
+        - [Complaints Example](#complaints-example-4)
+        - [Whitelists Example](#whitelists-example)
     - [webhooks](#webhooks)
       - [list](#list-5)
       - [get](#get-5)
@@ -2848,64 +2853,6 @@ The following service methods are available to instantiated clients. The example
       }
       ```
 
--   #### destroy
-    `mg.suppressions.destroy(domain, suppressionType, address)`
-
-    - #### Bounces Example:
-      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/delete-v3--domainid--bounces--address-)
-      ```JS
-      mg.suppressions.destroy('foobar.example.com', 'bounces', 'bob@example.com')
-        .then(msg => console.log(msg)) // logs response data
-        .catch(err => console.error(err)); // logs any error
-      ```
-
-      Promise returns:
-
-      ```JS
-      {
-        message: "Bounced address has been removed",
-        value: "",
-        address: "bob@example.com",
-        status: 200
-      }
-      ```
-
-    - #### Unsubscribes Example:
-      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/delete-v3--domainid--unsubscribes--address-)
-      ```js
-      mg.suppressions.destroy('foobar.example.com', 'unsubscribes', 'bob@example.com')
-        .then(msg => console.log(msg)) // logs response data
-        .catch(err => console.error(err)); // logs any error
-      ```
-
-      Promise returns:
-
-      ```JS
-      {
-        message: 'Unsubscribe event has been removed',
-        value: '',
-        address: 'bob@example.com',
-        status: 200
-      }
-      ```
-
-    - #### Complaints Example:
-      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/delete-v3--domainid--complaints--address-)
-      ```js
-      mg.suppressions.destroy('foobar.example.com', 'complaints', 'bob@example.com')
-        .then(msg => console.log(msg)) // logs response data
-        .catch(err => console.error(err)); // logs any error
-      ```
-
-      Promise returns:
-
-      ```JS
-        message: 'Spam complaint has been removed',
-        value: '',
-        address: 'bob@example.com',
-        status: 200
-      ```
-
 -   #### upload
     `mg.suppressions.upload(domain, suppressionType, file)`
 
@@ -2969,6 +2916,7 @@ The following service methods are available to instantiated clients. The example
       ```
 
       Example of `unsubscribes-list.csv` file structure :
+
       ```CSV
         address, tags, created_at
         bob@example.com,tag to unsubscribe from,"Tue, 20 Jan 2026 14:00:00 +0000"
@@ -3052,6 +3000,136 @@ The following service methods are available to instantiated clients. The example
       {
         message: "file uploaded successfully for processing. standby..."
       }
+
+-   #### destroy
+    `mg.suppressions.destroy(domain, suppressionType, address)`
+
+    - #### Bounces Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/delete-v3--domainid--bounces--address-)
+      ```JS
+      mg.suppressions.destroy('foobar.example.com', 'bounces', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: "Bounced address has been removed",
+        value: "",
+        address: "bob@example.com",
+        status: 200
+      }
+      ```
+
+    - #### Unsubscribes Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/delete-v3--domainid--unsubscribes--address-)
+      ```js
+      mg.suppressions.destroy('foobar.example.com', 'unsubscribes', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: 'Unsubscribe event has been removed',
+        value: '',
+        address: 'bob@example.com',
+        status: 200
+      }
+      ```
+
+    - #### Complaints Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/delete-v3--domainid--complaints--address-)
+      ```js
+      mg.suppressions.destroy('foobar.example.com', 'complaints', 'bob@example.com')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+        message: 'Spam complaint has been removed',
+        value: '',
+        address: 'bob@example.com',
+        status: 200
+      ```
+
+-   #### destroyAll
+    `mg.suppressions.destroyAll(domain, suppressionType)`
+
+    - #### Bounces Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/bounces/delete-v3--domainid--bounces)
+      ```js
+      mg.suppressions.destroyAll('foobar.example.com', 'bounces')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: 'Bounced addresses for this domain have been removed',
+        status: 200
+      }
+      ```
+
+    - #### Unsubscribes Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/unsubscribe/delete-v3--domainid--unsubscribes)
+      ```js
+      mg.suppressions.destroyAll('foobar.example.com', 'unsubscribes')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: 'Unsubscribe addresses for this domain have been removed',
+        status: 200
+      }
+      ```
+
+    - #### Complaints Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/complaints/delete-v3--domainid--complaints)
+      ```js
+      mg.suppressions.destroyAll('foobar.example.com', 'complaints')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: 'Complaint addresses for this domain have been removed',
+        status: 200
+      }
+      ```
+
+    - #### Whitelists Example:
+      [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/allowlist/delete-v3--domainid--whitelists)
+      ```js
+      mg.suppressions.destroyAll('foobar.example.com', 'whitelists')
+        .then(msg => console.log(msg)) // logs response data
+        .catch(err => console.error(err)); // logs any error
+      ```
+
+      Promise returns:
+
+      ```JS
+      {
+        message: 'Allowlist addresses/domains for this domain have been removed',
+        status: 200
+      }
+      ```
+
 ### Webhooks
 
 - #### list
