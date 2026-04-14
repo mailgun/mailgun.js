@@ -7,3 +7,8 @@ export type APIResponse = {
 export type MessageResponse = {
     message : string
 };
+
+export type MessageResponseWithStatus = {
+    message : string;
+    status: number;
+};

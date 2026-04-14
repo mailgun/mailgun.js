@@ -5908,6 +5908,27 @@ var SuppressionClient = /** @class */ (function (_super) {
             status: response.status
         }); });
     };
+    /* Deletes an entire suppression type for a domain */
+    SuppressionClient.prototype.destroyAll = function (domain, type) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.getModel(type);
+                        return [4 /*yield*/, this.request
+                                .delete(urljoin('v3', domain, type))];
+                    case 1:
+                        response = _b.sent();
+                        return [2 /*return*/, {
+                                message: (_a = response.body) === null || _a === void 0 ? void 0 : _a.message,
+                                status: Number(response === null || response === void 0 ? void 0 : response.status)
+                            }];
+                }
+            });
+        });
+    };
     SuppressionClient.prototype.upload = function (domain, type, file) {
         return __awaiter(this, void 0, void 0, function () {
             var data, url, response;

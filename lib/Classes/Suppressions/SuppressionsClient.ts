@@ -31,10 +31,11 @@ import {
   SuppressionDestroyResponse,
   SuppressionUploadData,
   SuppressionModelNames,
-  SuppressionUploadDataUpdated
+  SuppressionUploadDataUpdated,
+  SuppressionDestroyAllResponse
 } from '../../Types/Suppressions/index.js';
 
-import { MessageResponse } from '../../Types/Common/ApiResponse.js';
+import { MessageResponse, MessageResponseWithStatus } from '../../Types/Common/ApiResponse.js';
 
 export default class SuppressionClient
   extends NavigationThruPages<SuppressionList>
@@ -210,6 +211,21 @@ export default class SuppressionClient
         address: response.body.address || '',
         status: response.status
       }));
+  }
+
+  /* Deletes an entire suppression type for a domain */
+  async destroyAll(
+    domain: string,
+    type: string,
+  ): Promise<MessageResponseWithStatus> {
+    this.getModel(type);
+    const response: SuppressionDestroyAllResponse = await this.request
+      .delete(urljoin('v3', domain, type));
+
+    return {
+      message: response.body?.message,
+      status: Number(response?.status)
+    };
   }
 
   async upload(
