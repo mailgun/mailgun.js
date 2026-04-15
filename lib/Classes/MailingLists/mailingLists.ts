@@ -11,6 +11,8 @@ import {
   MailingListCancelValidationResult,
   MailingListResult,
   MailingListApiResponse,
+  ListsByAddressQuery,
+  MailingListByAddressResult
 } from '../../Types/MailingLists/index.js';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers.js';
 import NavigationThruPages from '../common/NavigationThruPages.js';
@@ -77,6 +79,17 @@ export default class MailingListsClient
   async list(query?: ListsQuery): Promise<MailingListResult> {
     this.validateQuery(query);
     return this.requestListWithPages(`${this.baseRoute}/pages`, query);
+  }
+
+  // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists#mailing-lists/get-v3-lists/request
+  // list's email provided as query parameter
+  async listByAddress(query?: ListsByAddressQuery): Promise<MailingListByAddressResult> {
+    const res = await this.request.get(`${this.baseRoute}`, query);
+    return {
+      items: res.body.items,
+      total_count: res.body.total_count,
+      status: res.status
+    };
   }
 
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address

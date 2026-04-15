@@ -1,8 +1,12 @@
 import { PagesList, ParsedPagesList } from '../Common/index.js';
 export type ListsQuery = {
-    address?: string;
     limit?: number;
     page?: string;
+};
+export type ListsByAddressQuery = {
+    limit?: number;
+    skip?: number;
+    address?: string;
 };
 export type CreateUpdateList = {
     address: string;
@@ -72,6 +76,11 @@ export type MailingListResult = {
     items: MailingList[];
     status: number;
     pages: ParsedPagesList;
+};
+export type MailingListByAddressResult = {
+    items: MailingList[];
+    status: number;
+    total_count: number;
 };
 export type MailingListApiResponse = {
     body: {

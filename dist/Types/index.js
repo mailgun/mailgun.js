@@ -6405,6 +6405,25 @@ var MailingListsClient = /** @class */ (function (_super) {
             });
         });
     };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists#mailing-lists/get-v3-lists/request
+    // list's email provided as query parameter
+    MailingListsClient.prototype.listByAddress = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.baseRoute), query)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, {
+                                items: res.body.items,
+                                total_count: res.body.total_count,
+                                status: res.status
+                            }];
+                }
+            });
+        });
+    };
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address
     // list's email provided as part of url
     MailingListsClient.prototype.get = function (mailListAddress) {

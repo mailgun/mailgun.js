@@ -10,6 +10,7 @@ import {
   MailingListValidationResult,
   CreateUpdateList,
   DestroyedList,
+  ListsByAddressQuery,
   RequestOptions
 } from '../../lib/Types/index.js';
 import { IMailingListsClient } from '../../lib/Interfaces/index.js';
@@ -99,6 +100,48 @@ describe('ListsClient', function () {
       ).rejects.toMatchObject({
         message: 'Unknown query key',
         details: '"lists.list": Unknown query key(s) invalid. Allowed keys are [limit, page]'
+      });
+    });
+  });
+
+  describe('listByAddress', () => {
+    it('fetches lists by address query', async () => {
+      const lists = [defaultList];
+      const query: ListsByAddressQuery = { address: 'test@example.com' };
+
+      api.get('/v3/lists').query({ address: 'test@example.com' }).reply(200, {
+        items: lists,
+        total_count: lists.length,
+      });
+
+      const result = await mailingListsClient.listByAddress(query);
+      expect(result).toMatchObject({
+        items: lists,
+        total_count: lists.length,
+        status: 200
+      });
+    });
+
+    it('fetches lists by address with skip and limit', async () => {
+      const lists = [defaultList];
+      const query: ListsByAddressQuery = {
+        address: 'test@example.com',
+        skip: 2,
+        limit: 5
+      };
+
+      api.get('/v3/lists')
+        .query({ address: 'test@example.com', skip: '2', limit: '5' })
+        .reply(200, {
+          items: lists,
+          total_count: lists.length
+        });
+
+      const result = await mailingListsClient.listByAddress(query);
+      expect(result).toMatchObject({
+        items: lists,
+        total_count: lists.length,
+        status: 200
       });
     });
   });

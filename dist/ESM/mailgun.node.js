@@ -22954,6 +22954,16 @@ class MailingListsClient extends NavigationThruPages {
         this.validateQuery(query);
         return this.requestListWithPages(`${this.baseRoute}/pages`, query);
     }
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists#mailing-lists/get-v3-lists/request
+    // list's email provided as query parameter
+    async listByAddress(query) {
+        const res = await this.request.get(`${this.baseRoute}`, query);
+        return {
+            items: res.body.items,
+            total_count: res.body.total_count,
+            status: res.status
+        };
+    }
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address
     // list's email provided as part of url
     get(mailListAddress) {

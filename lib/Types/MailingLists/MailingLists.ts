@@ -6,6 +6,12 @@ export type ListsQuery = {
     page?: string;
 }
 
+export type ListsByAddressQuery = {
+    limit?: number;
+    skip?: number;
+    address?: string;
+}
+
 export type CreateUpdateList = {
     address: string;
     name?: string;
@@ -79,6 +85,12 @@ export type MailingListResult = {
     items: MailingList[];
     status: number;
     pages: ParsedPagesList
+}
+
+export type MailingListByAddressResult = {
+    items: MailingList[];
+    status: number;
+    total_count: number;
 }
 
 export type MailingListApiResponse = {
