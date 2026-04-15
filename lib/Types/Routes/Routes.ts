@@ -28,3 +28,7 @@ export type RoutesListQuery = {
     limit?: number;
     skip?: number;
 }
+
+export type RoutesMatchQuery = {
+    address?: string;
+}

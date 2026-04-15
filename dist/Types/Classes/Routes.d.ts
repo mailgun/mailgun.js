@@ -9,4 +9,5 @@ export default class RoutesClient implements IRoutesClient {
     create(data: CreateUpdateRouteData): Promise<Route>;
     update(id: string, data: CreateUpdateRouteData): Promise<UpdateRouteResponse>;
     destroy(id: string): Promise<DestroyRouteResponse>;
+    matchAddress(address: string): Promise<Route>;
 }

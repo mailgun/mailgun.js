@@ -124,4 +124,37 @@ describe('RoutesClient', function () {
       expect(response).toMatchObject({ data });
     });
   });
+
+  describe('matchAddress', () => {
+    it('matches address to route', async () => {
+      const data = {
+        actions: ['forward("http://myhost.com/messages/")', 'stop()'],
+        created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+        description: 'sample',
+        expression: 'match_recipient(".*@example.com")',
+        id: '562da483125730608a7d1719',
+        priority: 0
+      };
+
+      api.get('/v3/routes/match').query({ address: 'test@example.com' }).reply(200, { route: data });
+
+      const response: Route = await client.matchAddress('test@example.com');
+      expect(response).toMatchObject(data);
+    });
+
+    it('throws error when address is not provided', async () => {
+      await expect(client.matchAddress('')).rejects.toThrow('Address is required for matching a route');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await expect(client.matchAddress(null as any)).rejects.toThrow('Address is required for matching a route');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await expect(client.matchAddress(undefined as any)).rejects.toThrow('Address is required for matching a route');
+    });
+
+    it('returns undefined when response body does not contain route', async () => {
+      api.get('/v3/routes/match').query({ address: 'test@example.com' }).reply(200, { someOtherField: 'value' });
+
+      const response: Route = await client.matchAddress('test@example.com');
+      expect(response).toBeUndefined();
+    });
+  });
 });
