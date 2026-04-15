@@ -88,6 +88,19 @@ describe('ListsClient', function () {
       expect(result.items).toHaveLength(1);
       expect(result.items[0]).toMatchObject(defaultList);
     });
+
+    it('throws when query contains invalid keys', async () => {
+      await expect(
+        mailingListsClient.list({
+          page: '?page=first',
+          limit: 10,
+          invalid: 'value'
+        } as never)
+      ).rejects.toMatchObject({
+        message: 'Unknown query key',
+        details: '"lists.list": Unknown query key(s) invalid. Allowed keys are [limit, page]'
+      });
+    });
   });
 
   describe('get', () => {
@@ -216,6 +229,7 @@ describe('ListsClient', function () {
       });
     });
   });
+
   describe('cancelValidation', () => {
     it('cancels validation process', async () => {
       api.delete('/v3/lists/test@example.com/validate').reply(200, {

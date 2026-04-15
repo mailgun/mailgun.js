@@ -3617,7 +3617,7 @@ The following service methods are available to instantiated clients. The example
 - #### list
   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
 
-  `mg.lists.list()`
+  `mg.lists.list(query?)`
 
   Example:
 
@@ -3626,6 +3626,19 @@ The following service methods are available to instantiated clients. The example
     .then(data => console.log(data)) // logs response body
     .catch(err => console.error(err)); // logs any error
   ```
+
+  Example with query:
+
+  ```js
+  mg.lists.list({ page: '?page=first', limit: 10 })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  ```
+
+  Allowed query properties:
+
+  - `limit`
+  - `page`
 
   Promise returns: response body
 

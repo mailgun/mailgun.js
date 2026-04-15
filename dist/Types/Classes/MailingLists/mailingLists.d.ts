@@ -10,6 +10,7 @@ export default class MailingListsClient extends NavigationThruPages<MailingListR
     constructor(request: Request, members: IMailListsMembers);
     private parseValidationResult;
     protected parseList(response: MailingListApiResponse): MailingListResult;
+    private validateQuery;
     list(query?: ListsQuery): Promise<MailingListResult>;
     get(mailListAddress: string): Promise<MailingList>;
     create(data: CreateUpdateList): Promise<MailingList>;

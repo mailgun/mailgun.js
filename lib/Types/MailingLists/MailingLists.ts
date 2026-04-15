@@ -2,7 +2,6 @@ import { PagesList, ParsedPagesList } from '../Common/index.js';
 
 /* eslint-disable camelcase */
 export type ListsQuery = {
-    address?: string;
     limit?: number;
     page?: string;
 }

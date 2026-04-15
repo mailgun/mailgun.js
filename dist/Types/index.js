@@ -6385,13 +6385,28 @@ var MailingListsClient = /** @class */ (function (_super) {
         data.status = response.status;
         return data;
     };
+    MailingListsClient.prototype.validateQuery = function (query) {
+        if (!query) {
+            return;
+        }
+        var allowedQueryKeys = ['limit', 'page'];
+        var invalidKeys = Object.keys(query).filter(function (key) { return !allowedQueryKeys.includes(key); });
+        if (invalidKeys.length) {
+            throw APIError.getUserDataError('Unknown query key', "\"lists.list\": Unknown query key(s) ".concat(invalidKeys.join(', '), ". Allowed keys are [").concat(allowedQueryKeys.join(', '), "]"));
+        }
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-pages
+    // pagination with page parameter in query
     MailingListsClient.prototype.list = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                this.validateQuery(query);
                 return [2 /*return*/, this.requestListWithPages("".concat(this.baseRoute, "/pages"), query)];
             });
         });
     };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address
+    // list's email provided as part of url
     MailingListsClient.prototype.get = function (mailListAddress) {
         return this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress))
             .then(function (response) { return response.body.list; });
