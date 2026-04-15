@@ -327,7 +327,7 @@ var AttachmentsHandler = /** @class */ (function () {
 var FormDataBuilder = /** @class */ (function () {
     function FormDataBuilder(FormDataConstructor, config) {
         this.FormDataConstructor = FormDataConstructor;
-        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile'];
+        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'members'];
         this.attachmentsHandler = new AttachmentsHandler();
         this.useFetch = config === null || config === void 0 ? void 0 : config.useFetch;
     }
@@ -6483,6 +6483,31 @@ var MailListsMembers = /** @class */ (function (_super) {
     MailListsMembers.prototype.destroyMember = function (mailListAddress, mailListMemberAddress) {
         return this.request.delete("".concat(this.baseRoute, "/").concat(mailListAddress, "/members/").concat(mailListMemberAddress))
             .then(function (response) { return response.body; });
+    };
+    MailListsMembers.prototype.upload = function (mailingListAddress, file, subscribed, upsert) {
+        if (subscribed === void 0) { subscribed = true; }
+        if (upsert === void 0) { upsert = true; }
+        return __awaiter(this, void 0, void 0, function () {
+            var data, url, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        data = {
+                            members: file,
+                            subscribed: subscribed ? 'yes' : 'no',
+                            upsert: upsert ? 'yes' : 'no'
+                        };
+                        if (typeof file === 'string') {
+                            data.members = { data: file };
+                        }
+                        url = urljoin('v3/lists', mailingListAddress, 'members.csv');
+                        return [4 /*yield*/, this.request.postWithFD(url, data)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
     };
     return MailListsMembers;
 }(NavigationThruPages));

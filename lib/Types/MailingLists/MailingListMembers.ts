@@ -1,4 +1,5 @@
 import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { CustomFile, CustomFileData } from '../Messages/Messages.js';
 import { MailingList } from './MailingLists.js';
 
 export type MailListMember = {
@@ -67,4 +68,17 @@ export type MailListMembersResult = {
     items: MailListMember[]
     pages: ParsedPagesList
     status: number
+}
+
+export type MailListMembersUploadData = CustomFileData | CustomFile;
+export type MailListMembersUploadDataUpdated = {
+  members: MailListMembersUploadData,
+  subscribed: string,
+  upsert: string
+};
+
+export type MailListMembersUploadResponse = {
+  list: MailingList;
+  message: string;
+  'task-id': string;
 }

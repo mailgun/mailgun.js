@@ -1,4 +1,4 @@
-import { MailListMembersQuery, MailListMembersResult, MailListMember, CreateUpdateMailListMembers, MultipleMembersData, NewMultipleMembersResponse, DeletedMember } from '../../Types/MailingLists/index.js';
+import { MailListMembersQuery, MailListMembersResult, MailListMember, CreateUpdateMailListMembers, MultipleMembersData, NewMultipleMembersResponse, DeletedMember, MailListMembersUploadData, MailListMembersUploadResponse } from '../../Types/MailingLists/index.js';
 export interface IMailListsMembers {
     listMembers(mailListAddress: string, query?: MailListMembersQuery): Promise<MailListMembersResult>;
     getMember(address: string, memberAddress: string): Promise<MailListMember>;
@@ -6,4 +6,5 @@ export interface IMailListsMembers {
     createMembers(mailListAddress: string, data: MultipleMembersData): Promise<NewMultipleMembersResponse>;
     updateMember(address: string, memberAddress: string, data: CreateUpdateMailListMembers): Promise<MailListMember>;
     destroyMember(address: string, memberAddress: string): Promise<DeletedMember>;
+    upload(mailingListAddress: string, file: MailListMembersUploadData, subscribed?: boolean, upsert?: boolean): Promise<MailListMembersUploadResponse>;
 }

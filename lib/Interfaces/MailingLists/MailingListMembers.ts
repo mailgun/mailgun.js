@@ -5,7 +5,9 @@ import {
   CreateUpdateMailListMembers,
   MultipleMembersData,
   NewMultipleMembersResponse,
-  DeletedMember
+  DeletedMember,
+  MailListMembersUploadData,
+  MailListMembersUploadResponse
 } from '../../Types/MailingLists/index.js';
 
 export interface IMailListsMembers {
@@ -26,4 +28,10 @@ export interface IMailListsMembers {
     memberAddress: string,
     data: CreateUpdateMailListMembers): Promise<MailListMember>,
   destroyMember(address: string, memberAddress: string): Promise<DeletedMember>
+  upload(
+    mailingListAddress: string,
+    file: MailListMembersUploadData,
+    subscribed?: boolean,
+    upsert?: boolean
+  ): Promise<MailListMembersUploadResponse>
 }
