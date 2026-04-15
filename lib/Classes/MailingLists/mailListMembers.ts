@@ -13,7 +13,9 @@ import {
   MailListMembersResponse,
   MailListMembersUploadData,
   MailListMembersUploadDataUpdated,
-  MailListMembersUploadResponse
+  MailListMembersUploadResponse,
+  MailListMembersByAddressQuery,
+  MailListMembersByAddressResult
 } from '../../Types/MailingLists/index.js';
 import NavigationThruPages from '../common/NavigationThruPages.js';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/index.js';
@@ -59,6 +61,18 @@ export default class MailListsMembers
     query?: MailListMembersQuery
   ): Promise<MailListMembersResult> {
     return this.requestListWithPages(`${this.baseRoute}/${mailListAddress}/members/pages`, query);
+  }
+
+  async listMembersByAddress(
+    mailListAddress: string,
+    query?: MailListMembersByAddressQuery
+  ): Promise<MailListMembersByAddressResult> {
+    const res = await this.request.get(`${this.baseRoute}/${mailListAddress}/members`, query);
+    return {
+      items: res.body?.items || [],
+      total_count: res.body?.total_count || 0,
+      status: res.status
+    };
   }
 
   getMember(mailListAddress: string, mailListMemberAddress: string): Promise<MailListMember> {

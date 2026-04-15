@@ -7,7 +7,9 @@ import {
   NewMultipleMembersResponse,
   DeletedMember,
   MailListMembersUploadData,
-  MailListMembersUploadResponse
+  MailListMembersUploadResponse,
+  MailListMembersByAddressQuery,
+  MailListMembersByAddressResult
 } from '../../Types/MailingLists/index.js';
 
 export interface IMailListsMembers {
@@ -15,7 +17,10 @@ export interface IMailListsMembers {
     mailListAddress: string,
     query?: MailListMembersQuery
   ): Promise<MailListMembersResult>;
-
+  listMembersByAddress(
+    mailListAddress: string,
+    query?: MailListMembersByAddressQuery
+  ): Promise<MailListMembersByAddressResult>;
   getMember(address: string, memberAddress: string): Promise<MailListMember>,
   createMember(
     mailListAddress: string,

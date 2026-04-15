@@ -326,6 +326,7 @@ The following service methods are available to instantiated clients. The example
       - [destroy](#destroy-7)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
+      - [listMembersByAddress](#listmembersbyaddress)
       - [getMember](#getmember)
       - [createMember](#createmember)
       - [createMembers](#createmembers)
@@ -3841,6 +3842,40 @@ The following service methods are available to instantiated clients. The example
       vars: { age: 50 }
     }
   ]
+  ```
+
+- #### listMembersByAddress
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
+
+  `mg.lists.members.listMembersByAddress(mailListAddress, query)`
+
+  Example:
+
+  ```js
+  mg.lists.members.listMembersByAddress('reply@sample.com', {
+    address: 'foo@bar.com',
+    skip: 0,
+    limit: 10
+  })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    items: [
+      {
+        address: 'foo@bar.com',
+        name: 'Jane Doe',
+        subscribed: true,
+        vars: { age: 50 }
+      }
+    ],
+    total_count: 1,
+    status: 200
+  }
   ```
 
 - #### getMember

@@ -17,6 +17,13 @@ export type MailListMembersQuery = {
     page?: string;
 }
 
+export type MailListMembersByAddressQuery = {
+    subscribed?: boolean;
+    address?: string;
+    limit?: number;
+    skip?: number;
+}
+
 export type MultipleMembersData = {
     members: Array<MailListMember>;
     upsert: 'yes' | 'no';
@@ -67,6 +74,12 @@ export type MailListMembersResponse = {
 export type MailListMembersResult = {
     items: MailListMember[]
     pages: ParsedPagesList
+    status: number
+}
+
+export type MailListMembersByAddressResult = {
+    items: MailListMember[]
+    total_count: number;
     status: number
 }
 

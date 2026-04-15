@@ -6492,6 +6492,24 @@ var MailListsMembers = /** @class */ (function (_super) {
             });
         });
     };
+    MailListsMembers.prototype.listMembersByAddress = function (mailListAddress, query) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress, "/members"), query)];
+                    case 1:
+                        res = _c.sent();
+                        return [2 /*return*/, {
+                                items: ((_a = res.body) === null || _a === void 0 ? void 0 : _a.items) || [],
+                                total_count: ((_b = res.body) === null || _b === void 0 ? void 0 : _b.total_count) || 0,
+                                status: res.status
+                            }];
+                }
+            });
+        });
+    };
     MailListsMembers.prototype.getMember = function (mailListAddress, mailListMemberAddress) {
         return this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress, "/members/").concat(mailListMemberAddress))
             .then(function (response) { return response.body.member; });

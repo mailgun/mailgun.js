@@ -6,6 +6,9 @@ import {
   CreateUpdateMailListMembers,
   DeletedMember,
   MailListMember,
+  MailListMembersByAddressQuery,
+  MailListMembersUploadData,
+  MailListMembersUploadResponse,
   MultipleMembersData,
   NewMultipleMembersResponse
 } from '../../lib/Types/index.js';
@@ -57,6 +60,31 @@ describe('mailListsMembersClient', function () {
       });
       expect(result.items).toHaveLength(1);
       expect(result.items[0]).toMatchObject(defaultListMember);
+    });
+  });
+
+  describe('listMembersByAddress', () => {
+    it('fetches members by address on list', async () => {
+      const members = [defaultListMember];
+      const query: MailListMembersByAddressQuery = {
+        address: 'test@example.com',
+        skip: 2,
+        limit: 5
+      };
+
+      api.get('/v3/lists/list-name/members')
+        .query({ address: 'test@example.com', skip: '2', limit: '5' })
+        .reply(200, {
+          items: members,
+          total_count: 1
+        });
+
+      const result = await mailListsMembersClient.listMembersByAddress('list-name', query);
+      expect(result).toMatchObject({
+        items: members,
+        total_count: 1,
+        status: 200
+      });
     });
   });
 
@@ -182,6 +210,67 @@ describe('mailListsMembersClient', function () {
           upsert: 'yes'
         } as MultipleMembersData);
       expect(result).toMatchObject(response);
+    });
+  });
+
+  describe('upload', () => {
+    it('uploads mailing list members from string data', async () => {
+      const csvData = 'address,name,subscribed\ntest1@example.com,Test User,yes\n';
+      const resultData: MailListMembersUploadResponse = {
+        list: {
+          access_level: 'everyone',
+          address: 'testingMailingListAddress@example.com',
+          created_at: 'Wed, 26 May 2021 10:40:06 -0000',
+          description: 'test description',
+          members_count: 1,
+          name: 'test name',
+          reply_preference: 'list'
+        },
+        message: 'Mailing list has been updated',
+        'task-id': '00000000000000000000000000000000'
+      };
+
+      api.post('/v3/lists/testingMailingListAddress@example.com/members.csv').reply(200, resultData);
+
+      const result = await mailListsMembersClient.upload(
+        'testingMailingListAddress@example.com',
+        csvData
+      );
+
+      expect(result).toMatchObject(resultData);
+    });
+
+    it('uploads mailing list members from CustomFile object with explicit false flags', async () => {
+      const csvData = 'address,name,subscribed\ntest1@example.com,Test User,no\n';
+      const fileData: MailListMembersUploadData = {
+        data: csvData,
+        filename: 'members.csv',
+        contentType: 'text/csv'
+      };
+      const resultData: MailListMembersUploadResponse = {
+        list: {
+          access_level: 'everyone',
+          address: 'testingMailingListAddress@example.com',
+          created_at: 'Wed, 26 May 2021 10:40:06 -0000',
+          description: 'test description',
+          members_count: 1,
+          name: 'test name',
+          reply_preference: 'list'
+        },
+        message: 'Mailing list has been updated',
+        'task-id': '00000000000000000000000000000000'
+      };
+
+      api.post('/v3/lists/testingMailingListAddress@example.com/members.csv').reply(200, resultData);
+
+      const result = await mailListsMembersClient.upload(
+        'testingMailingListAddress@example.com',
+        fileData,
+        false,
+        false
+      );
+
+      expect(result).toMatchObject(resultData);
     });
   });
 

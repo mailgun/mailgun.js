@@ -23029,6 +23029,14 @@ class MailListsMembers extends NavigationThruPages {
     async listMembers(mailListAddress, query) {
         return this.requestListWithPages(`${this.baseRoute}/${mailListAddress}/members/pages`, query);
     }
+    async listMembersByAddress(mailListAddress, query) {
+        const res = await this.request.get(`${this.baseRoute}/${mailListAddress}/members`, query);
+        return {
+            items: res.body?.items || [],
+            total_count: res.body?.total_count || 0,
+            status: res.status
+        };
+    }
     getMember(mailListAddress, mailListMemberAddress) {
         return this.request.get(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`)
             .then((response) => response.body.member);
