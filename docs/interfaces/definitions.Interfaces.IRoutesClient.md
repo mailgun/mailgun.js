@@ -12,6 +12,7 @@
 - [destroy](definitions.Interfaces.IRoutesClient.md#destroy)
 - [get](definitions.Interfaces.IRoutesClient.md#get)
 - [list](definitions.Interfaces.IRoutesClient.md#list)
+- [matchAddress](definitions.Interfaces.IRoutesClient.md#matchaddress)
 - [update](definitions.Interfaces.IRoutesClient.md#update)
 
 ## Methods
@@ -32,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:8](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Routes/IRoutesClient.ts#L8)
+[Interfaces/Routes/IRoutesClient.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L8)
 
 ___
 
@@ -52,7 +53,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:10](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Routes/IRoutesClient.ts#L10)
+[Interfaces/Routes/IRoutesClient.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L10)
 
 ___
 
@@ -72,7 +73,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:7](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Routes/IRoutesClient.ts#L7)
+[Interfaces/Routes/IRoutesClient.ts:7](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L7)
 
 ___
 
@@ -92,7 +93,27 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:6](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Routes/IRoutesClient.ts#L6)
+[Interfaces/Routes/IRoutesClient.ts:6](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L6)
+
+___
+
+### matchAddress
+
+▸ **matchAddress**(`address`): `Promise`\<[`Route`](../modules/definitions.md#route)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `address` | `string` |
+
+#### Returns
+
+`Promise`\<[`Route`](../modules/definitions.md#route)\>
+
+#### Defined in
+
+[Interfaces/Routes/IRoutesClient.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L11)
 
 ___
 
@@ -113,4 +134,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:9](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/Routes/IRoutesClient.ts#L9)
+[Interfaces/Routes/IRoutesClient.ts:9](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L9)

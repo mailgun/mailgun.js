@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts:8](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts#L8)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts#L8)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-[Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts:9](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts#L9)
+[Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts:9](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/InboxPlacements/Results/InboxPlacementsResultsSharing.ts#L9)

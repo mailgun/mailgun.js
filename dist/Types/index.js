@@ -1820,8 +1820,8 @@ prototype.toString = function toString(encoder) {
 };
 
 /**
- * It replaces all instances of the characters `:`, `$`, `,`, `+`, `[`, and `]` with their
- * URI encoded counterparts
+ * It replaces URL-encoded forms of `:`, `$`, `,`, and spaces with
+ * their plain counterparts (`:`, `$`, `,`, `+`).
  *
  * @param {string} val The value to be encoded.
  *
@@ -2363,8 +2363,41 @@ var parseHeaders = (rawHeaders) => {
 
 const $internals = Symbol('internals');
 
+const isValidHeaderValue = (value) => !/[\r\n]/.test(value);
+
+function assertValidHeaderValue(value, header) {
+  if (value === false || value == null) {
+    return;
+  }
+
+  if (utils$1.isArray(value)) {
+    value.forEach((v) => assertValidHeaderValue(v, header));
+    return;
+  }
+
+  if (!isValidHeaderValue(String(value))) {
+    throw new Error(`Invalid character in header content ["${header}"]`);
+  }
+}
+
 function normalizeHeader(header) {
   return header && String(header).trim().toLowerCase();
+}
+
+function stripTrailingCRLF(str) {
+  let end = str.length;
+
+  while (end > 0) {
+    const charCode = str.charCodeAt(end - 1);
+
+    if (charCode !== 10 && charCode !== 13) {
+      break;
+    }
+
+    end -= 1;
+  }
+
+  return end === str.length ? str : str.slice(0, end);
 }
 
 function normalizeValue(value) {
@@ -2372,7 +2405,7 @@ function normalizeValue(value) {
     return value;
   }
 
-  return utils$1.isArray(value) ? value.map(normalizeValue) : String(value);
+  return utils$1.isArray(value) ? value.map(normalizeValue) : stripTrailingCRLF(String(value));
 }
 
 function parseTokens(str) {
@@ -2454,6 +2487,7 @@ let AxiosHeaders$1 = class AxiosHeaders {
         _rewrite === true ||
         (_rewrite === undefined && self[key] !== false)
       ) {
+        assertValidHeaderValue(_value, _header);
         self[key || _header] = normalizeValue(_value);
       }
     }
@@ -3602,14 +3636,18 @@ const factory = (env) => {
     test(() => {
       let duplexAccessed = false;
 
+      const body = new ReadableStream$1();
+
       const hasContentType = new Request(platform.origin, {
-        body: new ReadableStream$1(),
+        body,
         method: 'POST',
         get duplex() {
           duplexAccessed = true;
           return 'half';
         },
       }).headers.has('Content-Type');
+
+      body.cancel();
 
       return duplexAccessed && !hasContentType;
     });
@@ -4061,7 +4099,7 @@ function dispatchRequest(config) {
   );
 }
 
-const VERSION$1 = "1.13.6";
+const VERSION$1 = "1.15.0";
 
 const validators$1 = {};
 
@@ -4205,13 +4243,29 @@ let Axios$1 = class Axios {
         Error.captureStackTrace ? Error.captureStackTrace(dummy) : (dummy = new Error());
 
         // slice off the Error: ... line
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, '') : '';
+        const stack = (() => {
+          if (!dummy.stack) {
+            return '';
+          }
+
+          const firstNewlineIndex = dummy.stack.indexOf('\n');
+
+          return firstNewlineIndex === -1 ? '' : dummy.stack.slice(firstNewlineIndex + 1);
+        })();
         try {
           if (!err.stack) {
             err.stack = stack;
             // match without the 2 top stack lines
-          } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))) {
-            err.stack += '\n' + stack;
+          } else if (stack) {
+            const firstNewlineIndex = stack.indexOf('\n');
+            const secondNewlineIndex =
+              firstNewlineIndex === -1 ? -1 : stack.indexOf('\n', firstNewlineIndex + 1);
+            const stackWithoutTwoTopLines =
+              secondNewlineIndex === -1 ? '' : stack.slice(secondNewlineIndex + 1);
+
+            if (!String(err.stack).endsWith(stackWithoutTwoTopLines)) {
+              err.stack += '\n' + stack;
+            }
           }
         } catch (e) {
           // ignore the case where "stack" is an un-writable property
@@ -4393,8 +4447,6 @@ utils$1.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoDa
 });
 
 utils$1.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  /*eslint func-names:0*/
-
   function generateHTTPMethod(isForm) {
     return function httpMethod(url, data, config) {
       return this.request(

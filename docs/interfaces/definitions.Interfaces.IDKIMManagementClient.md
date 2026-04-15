@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/DKIM/IDKIMManagementClient.ts:5](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/DKIM/IDKIMManagementClient.ts#L5)
+[Interfaces/DKIM/IDKIMManagementClient.ts:5](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/DKIM/IDKIMManagementClient.ts#L5)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-[Interfaces/DKIM/IDKIMManagementClient.ts:4](https://github.com/mailgun/mailgun.js/blob/c6ea0df/lib/Interfaces/DKIM/IDKIMManagementClient.ts#L4)
+[Interfaces/DKIM/IDKIMManagementClient.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/DKIM/IDKIMManagementClient.ts#L4)

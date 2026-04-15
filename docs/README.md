@@ -307,6 +307,7 @@ The following service methods are available to instantiated clients. The example
       - [create](#create-6)
       - [update](#update-3)
       - [destroy](#destroy-5)
+      - [matchAddress](#matchaddress)
     - [validate](#validate)
       - [get](#get-7)
     - [multiple validation](#multiple-validation)
@@ -3403,6 +3404,32 @@ The following service methods are available to instantiated clients. The example
   {
     id: '562da483125730608a7d1719',
     message: 'Route has been deleted'
+  }
+  ```
+
+- #### matchAddress
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/routes/get-v3-routes-match)
+
+  `mg.routes.matchAddress(address)`
+
+  Example:
+
+  ```js
+  mg.routes.matchAddress('test@example.com')
+    .then(data => console.log(data)) // logs response body
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: response body
+
+  ```JS
+  {
+    actions: [ 'forward("http://myhost.com/messages/")', 'stop()' ],
+    created_at: 'Mon, 26 Oct 2015 03:56:51 GMT',
+    description: 'sample',
+    expression: 'match_recipient(".*@example.com")',
+    id: '562da483125730608a7d1719',
+    priority: 0
   }
   ```
 

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.9.0](https://github.com/mailgun/mailgun.js/compare/v12.8.0...v12.9.0) (2026-04-15)
+
+
+### Features
+
+* Add 'matchAddress' method to RoutesClient ([d70185a](https://github.com/mailgun/mailgun.js/commits/d70185a843a479855e63f9a6d610ddda31735e5b))
+
+
+### Bug Fixes
+
+* Update vulnerable packages ([349aa82](https://github.com/mailgun/mailgun.js/commits/349aa82a9aa41a543c8f1b2ba85b842ac3cc17eb))
+
 ## [12.8.0](https://github.com/mailgun/mailgun.js/compare/v12.7.1...v12.8.0) (2026-04-14)
 
 
