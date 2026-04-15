@@ -1,7 +1,7 @@
 import * as NodeFormData from 'form-data';
 import type { MailgunClientOptions } from '../MailgunClient/index.js';
 import type { IPsListQuery } from '../IPs/index.js';
-import type { RoutesListQuery } from '../Routes/index.js';
+import type { RoutesListQuery, RoutesMatchQuery } from '../Routes/index.js';
 import type { SubaccountsQuery } from '../Subaccounts/index.js';
 import type { WebhooksQuery } from '../Webhooks/index.js';
 import type { ConnectionSettings, DeletedDomainKeysQuery, DomainCredentialsQuery, DomainGetAPIQuery, DomainsQuery, DomainTagsStatisticQuery, DomainTemplatesQuery, TemplateQuery } from '../Domains/index.js';
@@ -35,7 +35,7 @@ export type OnCallRequestOptions = {
     query?: any;
     [key: string]: unknown | undefined;
 };
-export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | WebhooksQuery | DomainsQuery | DomainGetAPIQuery | DomainCredentialsQuery | DomainTagsStatisticQuery | TemplateQuery | DomainTemplatesQuery | InboxPlacementsResultsApiQuery | SeedsListsAPIQuery | {
+export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | WebhooksQuery | DomainsQuery | DomainGetAPIQuery | DomainCredentialsQuery | DomainTagsStatisticQuery | TemplateQuery | DomainTemplatesQuery | InboxPlacementsResultsApiQuery | SeedsListsAPIQuery | RoutesMatchQuery | {
     searchParams?: Array<Array<string>>;
 } | ValidationQuery;
 export type DeleteQueryTypes = DeletedDomainKeysQuery;

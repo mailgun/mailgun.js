@@ -1,7 +1,7 @@
 import * as NodeFormData from 'form-data';
 import type { MailgunClientOptions } from '../MailgunClient/index.js';
 import type { IPsListQuery } from '../IPs/index.js';
-import type { RoutesListQuery } from '../Routes/index.js';
+import type { RoutesListQuery, RoutesMatchQuery } from '../Routes/index.js';
 import type { SubaccountsQuery } from '../Subaccounts/index.js';
 import type { WebhooksQuery } from '../Webhooks/index.js';
 import type {
@@ -69,6 +69,7 @@ export type GetQueryTypes = IPsListQuery |
   DomainTemplatesQuery |
   InboxPlacementsResultsApiQuery |
   SeedsListsAPIQuery |
+  RoutesMatchQuery |
 { searchParams?: Array<Array<string>> } |
   ValidationQuery
 

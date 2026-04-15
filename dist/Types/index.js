@@ -6176,6 +6176,24 @@ var RoutesClient = /** @class */ (function () {
         return this.request.delete("/v3/routes/".concat(id))
             .then(function (response) { return response.body; });
     };
+    RoutesClient.prototype.matchAddress = function (address) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!address) {
+                            throw new Error('Address is required for matching a route');
+                        }
+                        return [4 /*yield*/, this.request.get('/v3/routes/match', { address: address })];
+                    case 1:
+                        res = _b.sent();
+                        return [2 /*return*/, (_a = res.body) === null || _a === void 0 ? void 0 : _a.route];
+                }
+            });
+        });
+    };
     return RoutesClient;
 }());
 

@@ -35,4 +35,12 @@ export default class RoutesClient implements IRoutesClient {
     return this.request.delete(`/v3/routes/${id}`)
       .then((response) => response.body);
   }
+
+  async matchAddress(address: string): Promise<Route> {
+    if (!address) {
+      throw new Error('Address is required for matching a route');
+    }
+    const res = await this.request.get('/v3/routes/match', { address });
+    return res.body?.route;
+  }
 }
