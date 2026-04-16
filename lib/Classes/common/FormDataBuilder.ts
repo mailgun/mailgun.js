@@ -23,7 +23,7 @@ class FormDataBuilder {
 
   constructor(FormDataConstructor: InputFormData, config: FormDataBuilderConfig) {
     this.FormDataConstructor = FormDataConstructor;
-    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile'];
+    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'members'];
     this.attachmentsHandler = new AttachmentsHandler();
     this.useFetch = config?.useFetch;
   }

@@ -1,4 +1,5 @@
 import { PagesList, ParsedPagesList } from '../Common/index.js';
+import { CustomFile, CustomFileData } from '../Messages/Messages.js';
 import { MailingList } from './MailingLists.js';
 
 export type MailListMember = {
@@ -14,6 +15,13 @@ export type MailListMembersQuery = {
     subscribed?: 'yes' | 'no';
     limit?: number;
     page?: string;
+}
+
+export type MailListMembersByAddressQuery = {
+    subscribed?: boolean;
+    address?: string;
+    limit?: number;
+    skip?: number;
 }
 
 export type MultipleMembersData = {
@@ -67,4 +75,23 @@ export type MailListMembersResult = {
     items: MailListMember[]
     pages: ParsedPagesList
     status: number
+}
+
+export type MailListMembersByAddressResult = {
+    items: MailListMember[]
+    total_count: number;
+    status: number
+}
+
+export type MailListMembersUploadData = CustomFileData | CustomFile;
+export type MailListMembersUploadDataUpdated = {
+  members: MailListMembersUploadData,
+  subscribed: string,
+  upsert: string
+};
+
+export type MailListMembersUploadResponse = {
+  list: MailingList;
+  message: string;
+  'task-id': string;
 }

@@ -327,7 +327,7 @@ var AttachmentsHandler = /** @class */ (function () {
 var FormDataBuilder = /** @class */ (function () {
     function FormDataBuilder(FormDataConstructor, config) {
         this.FormDataConstructor = FormDataConstructor;
-        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile'];
+        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'members'];
         this.attachmentsHandler = new AttachmentsHandler();
         this.useFetch = config === null || config === void 0 ? void 0 : config.useFetch;
     }
@@ -6385,13 +6385,47 @@ var MailingListsClient = /** @class */ (function (_super) {
         data.status = response.status;
         return data;
     };
+    MailingListsClient.prototype.validateQuery = function (query) {
+        if (!query) {
+            return;
+        }
+        var allowedQueryKeys = ['limit', 'page'];
+        var invalidKeys = Object.keys(query).filter(function (key) { return !allowedQueryKeys.includes(key); });
+        if (invalidKeys.length) {
+            throw APIError.getUserDataError('Unknown query key', "\"lists.list\": Unknown query key(s) ".concat(invalidKeys.join(', '), ". Allowed keys are [").concat(allowedQueryKeys.join(', '), "]"));
+        }
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-pages
+    // pagination with page parameter in query
     MailingListsClient.prototype.list = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                this.validateQuery(query);
                 return [2 /*return*/, this.requestListWithPages("".concat(this.baseRoute, "/pages"), query)];
             });
         });
     };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists#mailing-lists/get-v3-lists/request
+    // list's email provided as query parameter
+    MailingListsClient.prototype.listByAddress = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.baseRoute), query)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, {
+                                items: res.body.items,
+                                total_count: res.body.total_count,
+                                status: res.status
+                            }];
+                }
+            });
+        });
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address
+    // list's email provided as part of url
     MailingListsClient.prototype.get = function (mailListAddress) {
         return this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress))
             .then(function (response) { return response.body.list; });
@@ -6458,6 +6492,24 @@ var MailListsMembers = /** @class */ (function (_super) {
             });
         });
     };
+    MailListsMembers.prototype.listMembersByAddress = function (mailListAddress, query) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress, "/members"), query)];
+                    case 1:
+                        res = _c.sent();
+                        return [2 /*return*/, {
+                                items: ((_a = res.body) === null || _a === void 0 ? void 0 : _a.items) || [],
+                                total_count: ((_b = res.body) === null || _b === void 0 ? void 0 : _b.total_count) || 0,
+                                status: res.status
+                            }];
+                }
+            });
+        });
+    };
     MailListsMembers.prototype.getMember = function (mailListAddress, mailListMemberAddress) {
         return this.request.get("".concat(this.baseRoute, "/").concat(mailListAddress, "/members/").concat(mailListMemberAddress))
             .then(function (response) { return response.body.member; });
@@ -6483,6 +6535,31 @@ var MailListsMembers = /** @class */ (function (_super) {
     MailListsMembers.prototype.destroyMember = function (mailListAddress, mailListMemberAddress) {
         return this.request.delete("".concat(this.baseRoute, "/").concat(mailListAddress, "/members/").concat(mailListMemberAddress))
             .then(function (response) { return response.body; });
+    };
+    MailListsMembers.prototype.upload = function (mailingListAddress, file, subscribed, upsert) {
+        if (subscribed === void 0) { subscribed = true; }
+        if (upsert === void 0) { upsert = true; }
+        return __awaiter(this, void 0, void 0, function () {
+            var data, url, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        data = {
+                            members: file,
+                            subscribed: subscribed ? 'yes' : 'no',
+                            upsert: upsert ? 'yes' : 'no'
+                        };
+                        if (typeof file === 'string') {
+                            data.members = { data: file };
+                        }
+                        url = urljoin('v3/lists', mailingListAddress, 'members.csv');
+                        return [4 /*yield*/, this.request.postWithFD(url, data)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
     };
     return MailListsMembers;
 }(NavigationThruPages));

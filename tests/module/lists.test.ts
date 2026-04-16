@@ -10,6 +10,7 @@ import {
   MailingListValidationResult,
   CreateUpdateList,
   DestroyedList,
+  ListsByAddressQuery,
   RequestOptions
 } from '../../lib/Types/index.js';
 import { IMailingListsClient } from '../../lib/Interfaces/index.js';
@@ -87,6 +88,61 @@ describe('ListsClient', function () {
       });
       expect(result.items).toHaveLength(1);
       expect(result.items[0]).toMatchObject(defaultList);
+    });
+
+    it('throws when query contains invalid keys', async () => {
+      await expect(
+        mailingListsClient.list({
+          page: '?page=first',
+          limit: 10,
+          invalid: 'value'
+        } as never)
+      ).rejects.toMatchObject({
+        message: 'Unknown query key',
+        details: '"lists.list": Unknown query key(s) invalid. Allowed keys are [limit, page]'
+      });
+    });
+  });
+
+  describe('listByAddress', () => {
+    it('fetches lists by address query', async () => {
+      const lists = [defaultList];
+      const query: ListsByAddressQuery = { address: 'test@example.com' };
+
+      api.get('/v3/lists').query({ address: 'test@example.com' }).reply(200, {
+        items: lists,
+        total_count: lists.length,
+      });
+
+      const result = await mailingListsClient.listByAddress(query);
+      expect(result).toMatchObject({
+        items: lists,
+        total_count: lists.length,
+        status: 200
+      });
+    });
+
+    it('fetches lists by address with skip and limit', async () => {
+      const lists = [defaultList];
+      const query: ListsByAddressQuery = {
+        address: 'test@example.com',
+        skip: 2,
+        limit: 5
+      };
+
+      api.get('/v3/lists')
+        .query({ address: 'test@example.com', skip: '2', limit: '5' })
+        .reply(200, {
+          items: lists,
+          total_count: lists.length
+        });
+
+      const result = await mailingListsClient.listByAddress(query);
+      expect(result).toMatchObject({
+        items: lists,
+        total_count: lists.length,
+        status: 200
+      });
     });
   });
 
@@ -216,6 +272,7 @@ describe('ListsClient', function () {
       });
     });
   });
+
   describe('cancelValidation', () => {
     it('cancels validation process', async () => {
       api.delete('/v3/lists/test@example.com/validate').reply(200, {

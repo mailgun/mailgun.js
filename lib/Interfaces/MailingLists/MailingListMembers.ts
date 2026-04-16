@@ -5,7 +5,11 @@ import {
   CreateUpdateMailListMembers,
   MultipleMembersData,
   NewMultipleMembersResponse,
-  DeletedMember
+  DeletedMember,
+  MailListMembersUploadData,
+  MailListMembersUploadResponse,
+  MailListMembersByAddressQuery,
+  MailListMembersByAddressResult
 } from '../../Types/MailingLists/index.js';
 
 export interface IMailListsMembers {
@@ -13,7 +17,10 @@ export interface IMailListsMembers {
     mailListAddress: string,
     query?: MailListMembersQuery
   ): Promise<MailListMembersResult>;
-
+  listMembersByAddress(
+    mailListAddress: string,
+    query?: MailListMembersByAddressQuery
+  ): Promise<MailListMembersByAddressResult>;
   getMember(address: string, memberAddress: string): Promise<MailListMember>,
   createMember(
     mailListAddress: string,
@@ -26,4 +33,10 @@ export interface IMailListsMembers {
     memberAddress: string,
     data: CreateUpdateMailListMembers): Promise<MailListMember>,
   destroyMember(address: string, memberAddress: string): Promise<DeletedMember>
+  upload(
+    mailingListAddress: string,
+    file: MailListMembersUploadData,
+    subscribed?: boolean,
+    upsert?: boolean
+  ): Promise<MailListMembersUploadResponse>
 }

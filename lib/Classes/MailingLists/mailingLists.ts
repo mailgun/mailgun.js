@@ -1,4 +1,5 @@
 import Request from '../common/Request.js';
+import APIError from '../common/Error.js';
 import {
   ListsQuery,
   CreateUpdateList,
@@ -9,7 +10,9 @@ import {
   MailingListValidationResult,
   MailingListCancelValidationResult,
   MailingListResult,
-  MailingListApiResponse
+  MailingListApiResponse,
+  ListsByAddressQuery,
+  MailingListByAddressResult
 } from '../../Types/MailingLists/index.js';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/MailingListMembers.js';
 import NavigationThruPages from '../common/NavigationThruPages.js';
@@ -53,10 +56,44 @@ export default class MailingListsClient
     return data;
   }
 
+  private validateQuery(query?: ListsQuery): void {
+    if (!query) {
+      return;
+    }
+
+    const allowedQueryKeys: Array<keyof ListsQuery> = ['limit', 'page'];
+    const invalidKeys = Object.keys(query).filter(
+      (key) => !allowedQueryKeys.includes(key as keyof ListsQuery)
+    );
+
+    if (invalidKeys.length) {
+      throw APIError.getUserDataError(
+        'Unknown query key',
+        `"lists.list": Unknown query key(s) ${invalidKeys.join(', ')}. Allowed keys are [${allowedQueryKeys.join(', ')}]`
+      );
+    }
+  }
+
+  // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-pages
+  // pagination with page parameter in query
   async list(query?: ListsQuery): Promise<MailingListResult> {
+    this.validateQuery(query);
     return this.requestListWithPages(`${this.baseRoute}/pages`, query);
   }
 
+  // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists#mailing-lists/get-v3-lists/request
+  // list's email provided as query parameter
+  async listByAddress(query?: ListsByAddressQuery): Promise<MailingListByAddressResult> {
+    const res = await this.request.get(`${this.baseRoute}`, query);
+    return {
+      items: res.body.items,
+      total_count: res.body.total_count,
+      status: res.status
+    };
+  }
+
+  // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists-address
+  // list's email provided as part of url
   get(mailListAddress: string): Promise<MailingList> {
     return this.request.get(`${this.baseRoute}/${mailListAddress}`)
       .then((response) => response.body.list as MailingList);

@@ -1,3 +1,4 @@
+import urljoin from 'url-join';
 import Request from '../common/Request.js';
 import {
   MailListMembersQuery,
@@ -9,7 +10,12 @@ import {
   CreateUpdateMailListMembersReq,
   NewMultipleMembersResponse,
   MailListMembersResult,
-  MailListMembersResponse
+  MailListMembersResponse,
+  MailListMembersUploadData,
+  MailListMembersUploadDataUpdated,
+  MailListMembersUploadResponse,
+  MailListMembersByAddressQuery,
+  MailListMembersByAddressResult
 } from '../../Types/MailingLists/index.js';
 import NavigationThruPages from '../common/NavigationThruPages.js';
 import { IMailListsMembers } from '../../Interfaces/MailingLists/index.js';
@@ -57,6 +63,18 @@ export default class MailListsMembers
     return this.requestListWithPages(`${this.baseRoute}/${mailListAddress}/members/pages`, query);
   }
 
+  async listMembersByAddress(
+    mailListAddress: string,
+    query?: MailListMembersByAddressQuery
+  ): Promise<MailListMembersByAddressResult> {
+    const res = await this.request.get(`${this.baseRoute}/${mailListAddress}/members`, query);
+    return {
+      items: res.body?.items || [],
+      total_count: res.body?.total_count || 0,
+      status: res.status
+    };
+  }
+
   getMember(mailListAddress: string, mailListMemberAddress: string): Promise<MailListMember> {
     return this.request.get(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`)
       .then((response) => response.body.member as MailListMember);
@@ -97,5 +115,26 @@ export default class MailListsMembers
   destroyMember(mailListAddress: string, mailListMemberAddress: string) : Promise<DeletedMember> {
     return this.request.delete(`${this.baseRoute}/${mailListAddress}/members/${mailListMemberAddress}`)
       .then((response) => response.body as DeletedMember);
+  }
+
+  async upload(
+    mailingListAddress: string,
+    file: MailListMembersUploadData,
+    subscribed = true,
+    upsert = true
+  ): Promise<MailListMembersUploadResponse> {
+    const data: MailListMembersUploadDataUpdated = {
+      members: file,
+      subscribed: subscribed ? 'yes' : 'no',
+      upsert: upsert ? 'yes' : 'no'
+    };
+
+    if (typeof file === 'string') {
+      data.members = { data: file };
+    }
+
+    const url = urljoin('v3/lists', mailingListAddress, 'members.csv');
+    const response = await this.request.postWithFD(url, data);
+    return response.body;
   }
 }
