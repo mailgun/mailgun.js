@@ -317,12 +317,14 @@ The following service methods are available to instantiated clients. The example
       - [destroy](#destroy-6)
     - [mailing lists](#mailing-lists)
       - [list](#list-8)
+      - [listByAddress](#listbyaddress)
       - [get](#get-9)
       - [create](#create-8)
       - [update](#update-4)
       - [destroy](#destroy-7)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
+      - [listMembersByAddress](#listmembersbyaddress)
       - [getMember](#getmember)
       - [createMember](#createmember)
       - [createMembers](#createmembers)
@@ -3606,7 +3608,7 @@ The following service methods are available to instantiated clients. The example
 - #### list
   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
 
-  `mg.lists.list()`
+  `mg.lists.list(query?)`
 
   Example:
 
@@ -3615,6 +3617,19 @@ The following service methods are available to instantiated clients. The example
     .then(data => console.log(data)) // logs response body
     .catch(err => console.error(err)); // logs any error
   ```
+
+  Example with query:
+
+  ```js
+  mg.lists.list({ page: '?page=first', limit: 10 })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  ```
+
+  Allowed query properties:
+
+  - `limit`
+  - `page`
 
   Promise returns: response body
 
@@ -3630,6 +3645,48 @@ The following service methods are available to instantiated clients. The example
       reply_preference: 'list'
     }
   ]
+  ```
+
+- #### listByAddress
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
+
+  `mg.lists.listByAddress(query)`
+
+  Example:
+
+  ```js
+  mg.lists.listByAddress({
+    address: 'test@example.com',
+    skip: 2,
+    limit: 10
+  })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  ```
+
+  Allowed query properties:
+
+  - `address`
+  - `skip`
+  - `limit`
+
+  Promise returns: response body
+
+  ```JS
+  {
+    items: [
+      {
+        access_level: 'readonly',
+        address: 'noreply@sample.com',
+        created_at: 'Wed, 27 Oct 2021 21:59:21 -0000',
+        description: '',
+        members_count: 0,
+        name: '',
+        reply_preference: 'list'
+      }
+    ],
+    status: 200
+  }
   ```
 
 - #### get
@@ -3774,6 +3831,40 @@ The following service methods are available to instantiated clients. The example
       vars: { age: 50 }
     }
   ]
+  ```
+
+- #### listMembersByAddress
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/mailing-lists/get-v3-lists)
+
+  `mg.lists.members.listMembersByAddress(mailListAddress, query)`
+
+  Example:
+
+  ```js
+  mg.lists.members.listMembersByAddress('reply@sample.com', {
+    address: 'foo@bar.com',
+    skip: 0,
+    limit: 10
+  })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    items: [
+      {
+        address: 'foo@bar.com',
+        name: 'Jane Doe',
+        subscribed: true,
+        vars: { age: 50 }
+      }
+    ],
+    total_count: 1,
+    status: 200
+  }
   ```
 
 - #### getMember

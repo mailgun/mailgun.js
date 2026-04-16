@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L8)
+[Interfaces/Routes/IRoutesClient.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L8)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L10)
+[Interfaces/Routes/IRoutesClient.ts:10](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L10)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:7](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L7)
+[Interfaces/Routes/IRoutesClient.ts:7](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L7)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:6](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L6)
+[Interfaces/Routes/IRoutesClient.ts:6](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L6)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L11)
+[Interfaces/Routes/IRoutesClient.ts:11](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L11)
 
 ___
 
@@ -134,4 +134,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Routes/IRoutesClient.ts:9](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/Routes/IRoutesClient.ts#L9)
+[Interfaces/Routes/IRoutesClient.ts:9](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Routes/IRoutesClient.ts#L9)

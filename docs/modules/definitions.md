@@ -163,6 +163,7 @@
 - [ListDomainTemplateVersionsResult](definitions.md#listdomaintemplateversionsresult)
 - [ListDomainTemplatesAPIResponse](definitions.md#listdomaintemplatesapiresponse)
 - [ListDomainTemplatesResult](definitions.md#listdomaintemplatesresult)
+- [ListsByAddressQuery](definitions.md#listsbyaddressquery)
 - [ListsQuery](definitions.md#listsquery)
 - [LogsDeliveryStatus](definitions.md#logsdeliverystatus)
 - [LogsEvent](definitions.md#logsevent)
@@ -173,14 +174,20 @@
 - [LogsParsedQuery](definitions.md#logsparsedquery)
 - [LogsQuery](definitions.md#logsquery)
 - [MailListMember](definitions.md#maillistmember)
+- [MailListMembersByAddressQuery](definitions.md#maillistmembersbyaddressquery)
+- [MailListMembersByAddressResult](definitions.md#maillistmembersbyaddressresult)
 - [MailListMembersQuery](definitions.md#maillistmembersquery)
 - [MailListMembersResponse](definitions.md#maillistmembersresponse)
 - [MailListMembersResult](definitions.md#maillistmembersresult)
+- [MailListMembersUploadData](definitions.md#maillistmembersuploaddata)
+- [MailListMembersUploadDataUpdated](definitions.md#maillistmembersuploaddataupdated)
+- [MailListMembersUploadResponse](definitions.md#maillistmembersuploadresponse)
 - [MailgunClientOptions](definitions.md#mailgunclientoptions)
 - [MailgunMessageContent](definitions.md#mailgunmessagecontent)
 - [MailgunMessageData](definitions.md#mailgunmessagedata)
 - [MailingList](definitions.md#mailinglist)
 - [MailingListApiResponse](definitions.md#mailinglistapiresponse)
+- [MailingListByAddressResult](definitions.md#mailinglistbyaddressresult)
 - [MailingListCancelValidationResult](definitions.md#mailinglistcancelvalidationresult)
 - [MailingListResult](definitions.md#mailinglistresult)
 - [MailingListValidationApiResponse](definitions.md#mailinglistvalidationapiresponse)
@@ -345,7 +352,7 @@
 
 #### Defined in
 
-[Types/Common/Error.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Error.ts#L1)
+[Types/Common/Error.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Error.ts#L1)
 
 ___
 
@@ -364,7 +371,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Error.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Error.ts#L13)
+[Types/Common/Error.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Error.ts#L13)
 
 ___
 
@@ -381,7 +388,7 @@ ___
 
 #### Defined in
 
-[Types/Common/ApiResponse.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/ApiResponse.ts#L1)
+[Types/Common/ApiResponse.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/ApiResponse.ts#L1)
 
 ___
 
@@ -398,7 +405,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L1)
+[Types/Webhooks/Webhooks.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L1)
 
 ___
 
@@ -418,7 +425,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:66](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L66)
+[Types/Domains/DomainKeys.ts:66](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L66)
 
 ___
 
@@ -441,7 +448,7 @@ Ensures the object has least one key present and not undefined
 
 #### Defined in
 
-[Types/Messages/Messages.ts:7](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L7)
+[Types/Messages/Messages.ts:7](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L7)
 
 ___
 
@@ -459,7 +466,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Attachments.ts#L8)
+[Types/Common/Attachments.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Attachments.ts#L8)
 
 ___
 
@@ -479,7 +486,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:45](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L45)
+[Types/Domains/Domains.ts:45](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L45)
 
 ___
 
@@ -489,7 +496,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:68](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L68)
+[Types/BounceClassification/BounceClassification.ts:68](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L68)
 
 ___
 
@@ -499,7 +506,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:112](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L112)
+[Types/BounceClassification/BounceClassification.ts:112](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L112)
 
 ___
 
@@ -526,7 +533,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:51](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L51)
+[Types/BounceClassification/BounceClassification.ts:51](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L51)
 
 ___
 
@@ -536,7 +543,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L1)
+[Types/BounceClassification/BounceClassification.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L1)
 
 ___
 
@@ -552,7 +559,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:40](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L40)
+[Types/BounceClassification/BounceClassification.ts:40](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L40)
 
 ___
 
@@ -562,7 +569,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L27)
+[Types/BounceClassification/BounceClassification.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L27)
 
 ___
 
@@ -572,7 +579,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:15](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L15)
+[Types/BounceClassification/BounceClassification.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L15)
 
 ___
 
@@ -598,7 +605,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:97](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L97)
+[Types/BounceClassification/BounceClassification.ts:97](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L97)
 
 ___
 
@@ -632,7 +639,7 @@ ___
 
 #### Defined in
 
-[Types/BounceClassification/BounceClassification.ts:73](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/BounceClassification/BounceClassification.ts#L73)
+[Types/BounceClassification/BounceClassification.ts:73](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/BounceClassification/BounceClassification.ts#L73)
 
 ___
 
@@ -651,7 +658,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Bounce.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Bounce.ts#L2)
+[Types/Suppressions/Bounce.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Bounce.ts#L2)
 
 ___
 
@@ -675,7 +682,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Attachments.ts#L2)
+[Types/Common/Attachments.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Attachments.ts#L2)
 
 ___
 
@@ -692,7 +699,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:91](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L91)
+[Types/Validations/MultipleValidation.ts:91](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L91)
 
 ___
 
@@ -708,7 +715,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:319](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L319)
+[Types/Messages/Messages.ts:319](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L319)
 
 ___
 
@@ -724,7 +731,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:40](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L40)
+[Types/Domains/DomainTracking.ts:40](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L40)
 
 ___
 
@@ -745,7 +752,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L3)
+[Types/Common/RequestProvider.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L3)
 
 ___
 
@@ -761,7 +768,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:110](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L110)
+[Types/Common/RequestOptions.ts:110](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L110)
 
 ___
 
@@ -778,7 +785,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Complaint.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Complaint.ts#L2)
+[Types/Suppressions/Complaint.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Complaint.ts#L2)
 
 ___
 
@@ -795,7 +802,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:110](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L110)
+[Types/Domains/Domains.ts:110](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L110)
 
 ___
 
@@ -812,7 +819,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:114](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L114)
+[Types/Domains/Domains.ts:114](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L114)
 
 ___
 
@@ -828,7 +835,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:94](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L94)
+[Types/Common/RequestOptions.ts:94](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L94)
 
 ___
 
@@ -847,7 +854,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:71](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L71)
+[Types/Domains/DomainTemplates.ts:71](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L71)
 
 ___
 
@@ -866,7 +873,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:133](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L133)
+[Types/Domains/DomainTemplates.ts:133](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L133)
 
 ___
 
@@ -884,7 +891,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:141](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L141)
+[Types/Domains/DomainTemplates.ts:141](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L141)
 
 ___
 
@@ -904,7 +911,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L10)
+[Types/MailingLists/MailingLists.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L15)
 
 ___
 
@@ -924,7 +931,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:29](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L29)
+[Types/MailingLists/MailingListMembers.ts:37](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L37)
 
 ___
 
@@ -944,7 +951,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:37](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L37)
+[Types/MailingLists/MailingListMembers.ts:45](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L45)
 
 ___
 
@@ -963,7 +970,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:20](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L20)
+[Types/Routes/Routes.ts:20](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L20)
 
 ___
 
@@ -980,7 +987,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/FormData.ts#L24)
+[Types/Common/FormData.ts:24](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/FormData.ts#L24)
 
 ___
 
@@ -997,7 +1004,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:60](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L60)
+[Types/Validations/MultipleValidation.ts:60](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L60)
 
 ___
 
@@ -1015,7 +1022,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:38](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L38)
+[Types/Domains/DomainCredentials.ts:38](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L38)
 
 ___
 
@@ -1038,7 +1045,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:19](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L19)
+[Types/Messages/Messages.ts:19](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L19)
 
 ___
 
@@ -1048,7 +1055,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:17](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L17)
+[Types/Messages/Messages.ts:17](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L17)
 
 ___
 
@@ -1064,7 +1071,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:130](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L130)
+[Types/Domains/Domains.ts:130](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L130)
 
 ___
 
@@ -1080,7 +1087,7 @@ ___
 
 #### Defined in
 
-[Types/DKIM/DKIM.ts:30](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/DKIM/DKIM.ts#L30)
+[Types/DKIM/DKIM.ts:30](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/DKIM/DKIM.ts#L30)
 
 ___
 
@@ -1097,7 +1104,7 @@ ___
 
 #### Defined in
 
-[Types/DKIM/DKIM.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/DKIM/DKIM.ts#L1)
+[Types/DKIM/DKIM.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/DKIM/DKIM.ts#L1)
 
 ___
 
@@ -1113,7 +1120,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:145](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L145)
+[Types/Domains/Domains.ts:145](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L145)
 
 ___
 
@@ -1129,7 +1136,7 @@ ___
 
 #### Defined in
 
-[Types/DKIM/DKIM.ts:26](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/DKIM/DKIM.ts#L26)
+[Types/DKIM/DKIM.ts:26](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/DKIM/DKIM.ts#L26)
 
 ___
 
@@ -1149,7 +1156,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:74](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L74)
+[Types/Domains/DomainKeys.ts:74](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L74)
 
 ___
 
@@ -1159,7 +1166,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:90](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L90)
+[Types/Common/RequestOptions.ts:90](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L90)
 
 ___
 
@@ -1169,7 +1176,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:76](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L76)
+[Types/Common/RequestOptions.ts:76](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L76)
 
 ___
 
@@ -1188,7 +1195,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:45](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L45)
+[Types/Domains/DomainCredentials.ts:45](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L45)
 
 ___
 
@@ -1205,7 +1212,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:57](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L57)
+[Types/Domains/DomainKeys.ts:57](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L57)
 
 ___
 
@@ -1221,7 +1228,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:62](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L62)
+[Types/Domains/DomainKeys.ts:62](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L62)
 
 ___
 
@@ -1239,7 +1246,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:45](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L45)
+[Types/MailingLists/MailingListMembers.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L53)
 
 ___
 
@@ -1256,7 +1263,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:15](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L15)
+[Types/Routes/Routes.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L15)
 
 ___
 
@@ -1273,7 +1280,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:105](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L105)
+[Types/Domains/Domains.ts:105](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L105)
 
 ___
 
@@ -1290,7 +1297,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:18](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L18)
+[Types/MailingLists/MailingLists.ts:23](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L23)
 
 ___
 
@@ -1311,7 +1318,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:176](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L176)
+[Types/Domains/DomainTags.ts:176](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L176)
 
 ___
 
@@ -1330,7 +1337,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:185](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L185)
+[Types/Domains/DomainTags.ts:185](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L185)
 
 ___
 
@@ -1347,7 +1354,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:7](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L7)
+[Types/Domains/DomainCredentials.ts:7](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L7)
 
 ___
 
@@ -1366,7 +1373,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L12)
+[Types/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L12)
 
 ___
 
@@ -1383,7 +1390,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L27)
+[Types/Domains/DomainCredentials.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L27)
 
 ___
 
@@ -1400,7 +1407,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L2)
+[Types/Domains/DomainCredentials.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L2)
 
 ___
 
@@ -1419,7 +1426,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L19)
+[Types/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L19)
 
 ___
 
@@ -1437,7 +1444,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L32)
+[Types/Domains/DomainCredentials.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L32)
 
 ___
 
@@ -1469,7 +1476,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L53)
+[Types/Domains/Domains.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L53)
 
 ___
 
@@ -1479,7 +1486,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:198](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L198)
+[Types/Domains/Domains.ts:198](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L198)
 
 ___
 
@@ -1537,7 +1544,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:38](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L38)
+[Types/Events/Events.ts:38](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L38)
 
 ___
 
@@ -1554,7 +1561,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:205](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L205)
+[Types/Domains/Domains.ts:205](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L205)
 
 ___
 
@@ -1571,7 +1578,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:200](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L200)
+[Types/Domains/Domains.ts:200](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L200)
 
 ___
 
@@ -1581,7 +1588,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:29](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L29)
+[Types/Domains/Domains.ts:29](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L29)
 
 ___
 
@@ -1591,7 +1598,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:41](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L41)
+[Types/Domains/Domains.ts:41](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L41)
 
 ___
 
@@ -1610,7 +1617,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:15](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L15)
+[Types/Domains/DomainKeys.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L15)
 
 ___
 
@@ -1620,7 +1627,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:22](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L22)
+[Types/Domains/DomainKeys.ts:22](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L22)
 
 ___
 
@@ -1630,7 +1637,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L10)
+[Types/Domains/DomainKeys.ts:10](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L10)
 
 ___
 
@@ -1648,7 +1655,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L4)
+[Types/Domains/DomainKeys.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L4)
 
 ___
 
@@ -1664,7 +1671,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:26](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L26)
+[Types/Domains/DomainKeys.ts:26](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L26)
 
 ___
 
@@ -1683,7 +1690,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:49](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L49)
+[Types/Domains/DomainKeys.ts:49](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L49)
 
 ___
 
@@ -1702,7 +1709,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:35](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L35)
+[Types/Domains/DomainKeys.ts:35](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L35)
 
 ___
 
@@ -1720,7 +1727,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:43](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L43)
+[Types/Domains/DomainKeys.ts:43](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L43)
 
 ___
 
@@ -1737,7 +1744,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainKeys.ts#L30)
+[Types/Domains/DomainKeys.ts:30](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainKeys.ts#L30)
 
 ___
 
@@ -1756,7 +1763,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:97](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L97)
+[Types/Domains/Domains.ts:97](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L97)
 
 ___
 
@@ -1777,7 +1784,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:87](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L87)
+[Types/Domains/Domains.ts:87](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L87)
 
 ___
 
@@ -1825,7 +1832,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:51](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L51)
+[Types/Domains/DomainTags.ts:51](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L51)
 
 ___
 
@@ -1843,7 +1850,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:111](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L111)
+[Types/Domains/DomainTags.ts:111](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L111)
 
 ___
 
@@ -1860,7 +1867,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:127](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L127)
+[Types/Domains/DomainTags.ts:127](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L127)
 
 ___
 
@@ -1879,7 +1886,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:192](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L192)
+[Types/Domains/DomainTags.ts:192](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L192)
 
 ___
 
@@ -1896,7 +1903,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:200](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L200)
+[Types/Domains/DomainTags.ts:200](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L200)
 
 ___
 
@@ -1915,7 +1922,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:141](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L141)
+[Types/Domains/DomainTags.ts:141](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L141)
 
 ___
 
@@ -1932,7 +1939,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:160](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L160)
+[Types/Domains/DomainTags.ts:160](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L160)
 
 ___
 
@@ -1954,7 +1961,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:97](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L97)
+[Types/Domains/DomainTags.ts:97](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L97)
 
 ___
 
@@ -1964,7 +1971,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:107](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L107)
+[Types/Domains/DomainTags.ts:107](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L107)
 
 ___
 
@@ -1983,7 +1990,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:25](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L25)
+[Types/Domains/DomainTags.ts:25](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L25)
 
 ___
 
@@ -2002,7 +2009,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L18)
+[Types/Domains/DomainTags.ts:18](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L18)
 
 ___
 
@@ -2020,7 +2027,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:40](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L40)
+[Types/Domains/DomainTags.ts:40](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L40)
 
 ___
 
@@ -2037,7 +2044,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:46](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L46)
+[Types/Domains/DomainTags.ts:46](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L46)
 
 ___
 
@@ -2054,7 +2061,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:5](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L5)
+[Types/Domains/DomainTags.ts:5](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L5)
 
 ___
 
@@ -2073,7 +2080,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L32)
+[Types/Domains/DomainTags.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L32)
 
 ___
 
@@ -2093,7 +2100,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTags.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTags.ts#L10)
+[Types/Domains/DomainTags.ts:10](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTags.ts#L10)
 
 ___
 
@@ -2111,7 +2118,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:5](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L5)
+[Types/Domains/DomainTemplates.ts:5](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L5)
 
 ___
 
@@ -2134,7 +2141,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:12](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L12)
+[Types/Domains/DomainTemplates.ts:12](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L12)
 
 ___
 
@@ -2150,7 +2157,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L32)
+[Types/Domains/DomainTemplates.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L32)
 
 ___
 
@@ -2169,7 +2176,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:36](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L36)
+[Types/Domains/DomainTemplates.ts:36](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L36)
 
 ___
 
@@ -2190,7 +2197,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:23](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L23)
+[Types/Domains/DomainTemplates.ts:23](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L23)
 
 ___
 
@@ -2207,7 +2214,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:43](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L43)
+[Types/Domains/DomainTemplates.ts:43](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L43)
 
 ___
 
@@ -2230,7 +2237,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L3)
+[Types/Domains/DomainTracking.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L3)
 
 ___
 
@@ -2248,7 +2255,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L13)
+[Types/Domains/DomainTracking.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L13)
 
 ___
 
@@ -2271,7 +2278,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L13)
+[Types/Domains/Domains.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L13)
 
 ___
 
@@ -2281,7 +2288,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L24)
+[Types/Domains/Domains.ts:24](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L24)
 
 ___
 
@@ -2302,7 +2309,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L4)
+[Types/Domains/Domains.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L4)
 
 ___
 
@@ -2320,7 +2327,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:92](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L92)
+[Types/Events/Events.ts:92](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L92)
 
 ___
 
@@ -2338,7 +2345,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L3)
+[Types/Events/Events.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L3)
 
 ___
 
@@ -2348,7 +2355,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L24)
+[Types/Events/Events.ts:24](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L24)
 
 ___
 
@@ -2367,7 +2374,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:31](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L31)
+[Types/Events/Events.ts:31](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L31)
 
 ___
 
@@ -2377,7 +2384,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:28](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L28)
+[Types/Common/RequestProvider.ts:28](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L28)
 
 ___
 
@@ -2404,7 +2411,7 @@ ___
 
 #### Defined in
 
-[Types/Events/Events.ts:9](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Events/Events.ts#L9)
+[Types/Events/Events.ts:9](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Events/Events.ts#L9)
 
 ___
 
@@ -2420,7 +2427,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:20](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/FormData.ts#L20)
+[Types/Common/FormData.ts:20](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/FormData.ts#L20)
 
 ___
 
@@ -2434,7 +2441,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:16](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/FormData.ts#L16)
+[Types/Common/FormData.ts:16](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/FormData.ts#L16)
 
 ___
 
@@ -2444,7 +2451,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:36](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L36)
+[Types/Messages/Messages.ts:36](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L36)
 
 ___
 
@@ -2458,7 +2465,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/FormData.ts#L4)
+[Types/Common/FormData.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/FormData.ts#L4)
 
 ___
 
@@ -2476,7 +2483,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:57](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L57)
+[Types/Domains/DomainTracking.ts:57](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L57)
 
 ___
 
@@ -2494,7 +2501,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:98](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L98)
+[Types/Domains/DomainTemplates.ts:98](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L98)
 
 ___
 
@@ -2513,7 +2520,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:50](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L50)
+[Types/Domains/DomainTracking.ts:50](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L50)
 
 ___
 
@@ -2523,7 +2530,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:60](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L60)
+[Types/Common/RequestOptions.ts:60](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L60)
 
 ___
 
@@ -2533,7 +2540,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:31](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L31)
+[Types/Common/RequestProvider.ts:31](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L31)
 
 ___
 
@@ -2549,7 +2556,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:14](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPs/IPs.ts#L14)
+[Types/IPs/IPs.ts:14](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPs/IPs.ts#L14)
 
 ___
 
@@ -2559,7 +2566,7 @@ ___
 
 #### Defined in
 
-[Types/Common/FormData.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/FormData.ts#L8)
+[Types/Common/FormData.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/FormData.ts#L8)
 
 ___
 
@@ -2577,7 +2584,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPs/IPs.ts#L8)
+[Types/IPs/IPs.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPs/IPs.ts#L8)
 
 ___
 
@@ -2597,7 +2604,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L2)
+[Types/IPPools/IpPools.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L2)
 
 ___
 
@@ -2615,7 +2622,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:47](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L47)
+[Types/IPPools/IpPools.ts:47](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L47)
 
 ___
 
@@ -2634,7 +2641,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L53)
+[Types/IPPools/IpPools.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L53)
 
 ___
 
@@ -2652,7 +2659,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:61](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L61)
+[Types/IPPools/IpPools.ts:61](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L61)
 
 ___
 
@@ -2669,7 +2676,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:42](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L42)
+[Types/IPPools/IpPools.ts:42](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L42)
 
 ___
 
@@ -2688,7 +2695,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L10)
+[Types/IPPools/IpPools.ts:10](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L10)
 
 ___
 
@@ -2706,7 +2713,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:18](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L18)
+[Types/IPPools/IpPools.ts:18](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L18)
 
 ___
 
@@ -2724,7 +2731,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:30](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L30)
+[Types/IPPools/IpPools.ts:30](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L30)
 
 ___
 
@@ -2741,7 +2748,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:37](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L37)
+[Types/IPPools/IpPools.ts:37](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L37)
 
 ___
 
@@ -2759,7 +2766,7 @@ ___
 
 #### Defined in
 
-[Types/IPPools/IpPools.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPPools/IpPools.ts#L24)
+[Types/IPPools/IpPools.ts:24](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPPools/IpPools.ts#L24)
 
 ___
 
@@ -2777,7 +2784,7 @@ ___
 
 #### Defined in
 
-[Types/IPs/IPs.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/IPs/IPs.ts#L2)
+[Types/IPs/IPs.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/IPs/IPs.ts#L2)
 
 ___
 
@@ -2787,7 +2794,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:51](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L51)
+[Types/Messages/Messages.ts:51](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L51)
 
 ___
 
@@ -2797,7 +2804,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:48](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L48)
+[Types/Messages/Messages.ts:48](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L48)
 
 ___
 
@@ -2807,7 +2814,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:50](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L50)
+[Types/Messages/Messages.ts:50](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L50)
 
 ___
 
@@ -2821,7 +2828,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:49](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L49)
+[Types/Messages/Messages.ts:49](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L49)
 
 ___
 
@@ -2831,7 +2838,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:47](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L47)
+[Types/Messages/Messages.ts:47](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L47)
 
 ___
 
@@ -2847,7 +2854,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:30](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L30)
+[Types/Common/RequestProvider.ts:30](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L30)
 
 ___
 
@@ -2872,7 +2879,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:169](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L169)
+[Types/Domains/DomainTemplates.ts:169](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L169)
 
 ___
 
@@ -2889,7 +2896,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:184](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L184)
+[Types/Domains/DomainTemplates.ts:184](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L184)
 
 ___
 
@@ -2912,7 +2919,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:79](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L79)
+[Types/Domains/DomainTemplates.ts:79](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L79)
 
 ___
 
@@ -2930,7 +2937,25 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:92](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L92)
+[Types/Domains/DomainTemplates.ts:92](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L92)
+
+___
+
+### ListsByAddressQuery
+
+Ƭ **ListsByAddressQuery**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `address?` | `string` |
+| `limit?` | `number` |
+| `skip?` | `number` |
+
+#### Defined in
+
+[Types/MailingLists/MailingLists.ts:9](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L9)
 
 ___
 
@@ -2942,13 +2967,12 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `address?` | `string` |
 | `limit?` | `number` |
 | `page?` | `string` |
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L4)
+[Types/MailingLists/MailingLists.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L4)
 
 ___
 
@@ -2978,7 +3002,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:34](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L34)
+[Types/Logs/Logs.ts:34](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L34)
 
 ___
 
@@ -3077,7 +3101,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:52](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L52)
+[Types/Logs/Logs.ts:52](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L52)
 
 ___
 
@@ -3087,7 +3111,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:159](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L159)
+[Types/Logs/Logs.ts:159](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L159)
 
 ___
 
@@ -3103,7 +3127,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:6](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L6)
+[Types/Logs/Logs.ts:6](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L6)
 
 ___
 
@@ -3120,7 +3144,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L1)
+[Types/Logs/Logs.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L1)
 
 ___
 
@@ -3148,7 +3172,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:163](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L163)
+[Types/Logs/Logs.ts:163](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L163)
 
 ___
 
@@ -3158,7 +3182,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:29](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L29)
+[Types/Logs/Logs.ts:29](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L29)
 
 ___
 
@@ -3184,7 +3208,7 @@ ___
 
 #### Defined in
 
-[Types/Logs/Logs.ts:14](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Logs/Logs.ts#L14)
+[Types/Logs/Logs.ts:14](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Logs/Logs.ts#L14)
 
 ___
 
@@ -3203,7 +3227,44 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L4)
+[Types/MailingLists/MailingListMembers.ts:5](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L5)
+
+___
+
+### MailListMembersByAddressQuery
+
+Ƭ **MailListMembersByAddressQuery**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `address?` | `string` |
+| `limit?` | `number` |
+| `skip?` | `number` |
+| `subscribed?` | `boolean` |
+
+#### Defined in
+
+[Types/MailingLists/MailingListMembers.ts:20](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L20)
+
+___
+
+### MailListMembersByAddressResult
+
+Ƭ **MailListMembersByAddressResult**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `items` | [`MailListMember`](definitions.md#maillistmember)[] |
+| `status` | `number` |
+| `total_count` | `number` |
+
+#### Defined in
+
+[Types/MailingLists/MailingListMembers.ts:80](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L80)
 
 ___
 
@@ -3221,7 +3282,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L13)
+[Types/MailingLists/MailingListMembers.ts:14](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L14)
 
 ___
 
@@ -3240,7 +3301,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:58](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L58)
+[Types/MailingLists/MailingListMembers.ts:66](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L66)
 
 ___
 
@@ -3258,7 +3319,53 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:66](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L66)
+[Types/MailingLists/MailingListMembers.ts:74](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L74)
+
+___
+
+### MailListMembersUploadData
+
+Ƭ **MailListMembersUploadData**: [`CustomFileData`](definitions.md#customfiledata) \| [`CustomFile`](definitions.md#customfile)
+
+#### Defined in
+
+[Types/MailingLists/MailingListMembers.ts:86](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L86)
+
+___
+
+### MailListMembersUploadDataUpdated
+
+Ƭ **MailListMembersUploadDataUpdated**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `members` | [`MailListMembersUploadData`](definitions.md#maillistmembersuploaddata) |
+| `subscribed` | `string` |
+| `upsert` | `string` |
+
+#### Defined in
+
+[Types/MailingLists/MailingListMembers.ts:87](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L87)
+
+___
+
+### MailListMembersUploadResponse
+
+Ƭ **MailListMembersUploadResponse**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `list` | [`MailingList`](definitions.md#mailinglist) |
+| `message` | `string` |
+| `task-id` | `string` |
+
+#### Defined in
+
+[Types/MailingLists/MailingListMembers.ts:93](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L93)
 
 ___
 
@@ -3280,7 +3387,7 @@ ___
 
 #### Defined in
 
-[Types/MailgunClient/MailgunClientOptions.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailgunClient/MailgunClientOptions.ts#L3)
+[Types/MailgunClient/MailgunClientOptions.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailgunClient/MailgunClientOptions.ts#L3)
 
 ___
 
@@ -3290,7 +3397,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L53)
+[Types/Messages/Messages.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L53)
 
 ___
 
@@ -3300,7 +3407,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:73](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L73)
+[Types/Messages/Messages.ts:73](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L73)
 
 ___
 
@@ -3322,7 +3429,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:69](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L69)
+[Types/MailingLists/MailingLists.ts:74](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L74)
 
 ___
 
@@ -3341,7 +3448,25 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:85](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L85)
+[Types/MailingLists/MailingLists.ts:96](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L96)
+
+___
+
+### MailingListByAddressResult
+
+Ƭ **MailingListByAddressResult**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `items` | [`MailingList`](definitions.md#mailinglist)[] |
+| `status` | `number` |
+| `total_count` | `number` |
+
+#### Defined in
+
+[Types/MailingLists/MailingLists.ts:90](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L90)
 
 ___
 
@@ -3358,7 +3483,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:65](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L65)
+[Types/MailingLists/MailingLists.ts:70](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L70)
 
 ___
 
@@ -3376,7 +3501,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:79](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L79)
+[Types/MailingLists/MailingLists.ts:84](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L84)
 
 ___
 
@@ -3386,7 +3511,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:54](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L54)
+[Types/MailingLists/MailingLists.ts:59](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L59)
 
 ___
 
@@ -3420,7 +3545,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:29](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L29)
+[Types/MailingLists/MailingLists.ts:34](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L34)
 
 ___
 
@@ -3437,7 +3562,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:60](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L60)
+[Types/MailingLists/MailingLists.ts:65](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L65)
 
 ___
 
@@ -3447,7 +3572,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:57](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L57)
+[Types/MailingLists/MailingLists.ts:62](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L62)
 
 ___
 
@@ -3457,7 +3582,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L27)
+[Types/Messages/Messages.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L27)
 
 ___
 
@@ -3467,7 +3592,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:260](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L260)
+[Types/Messages/Messages.ts:260](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L260)
 
 ___
 
@@ -3483,7 +3608,7 @@ ___
 
 #### Defined in
 
-[Types/Common/ApiResponse.ts:7](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/ApiResponse.ts#L7)
+[Types/Common/ApiResponse.ts:7](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/ApiResponse.ts#L7)
 
 ___
 
@@ -3500,7 +3625,7 @@ ___
 
 #### Defined in
 
-[Types/Common/ApiResponse.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/ApiResponse.ts#L11)
+[Types/Common/ApiResponse.ts:11](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/ApiResponse.ts#L11)
 
 ___
 
@@ -3517,7 +3642,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:309](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L309)
+[Types/Messages/Messages.ts:309](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L309)
 
 ___
 
@@ -3534,7 +3659,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:314](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L314)
+[Types/Messages/Messages.ts:314](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L314)
 
 ___
 
@@ -3553,7 +3678,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:245](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L245)
+[Types/Messages/Messages.ts:245](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L245)
 
 ___
 
@@ -3572,7 +3697,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:253](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L253)
+[Types/Messages/Messages.ts:253](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L253)
 
 ___
 
@@ -3634,7 +3759,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:28](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L28)
+[Types/Metrics/Metrics.ts:28](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L28)
 
 ___
 
@@ -3644,7 +3769,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/MetricsAPI.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/MetricsAPI.ts#L8)
+[Types/Metrics/MetricsAPI.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/MetricsAPI.ts#L8)
 
 ___
 
@@ -3670,7 +3795,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/MetricsAPI.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/MetricsAPI.ts#L13)
+[Types/Metrics/MetricsAPI.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/MetricsAPI.ts#L13)
 
 ___
 
@@ -3688,7 +3813,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:85](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L85)
+[Types/Metrics/Metrics.ts:85](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L85)
 
 ___
 
@@ -3706,7 +3831,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L8)
+[Types/Metrics/Metrics.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L8)
 
 ___
 
@@ -3723,7 +3848,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L4)
+[Types/Metrics/Metrics.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L4)
 
 ___
 
@@ -3742,7 +3867,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:78](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L78)
+[Types/Metrics/Metrics.ts:78](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L78)
 
 ___
 
@@ -3767,7 +3892,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:14](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L14)
+[Types/Metrics/Metrics.ts:14](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L14)
 
 ___
 
@@ -3784,7 +3909,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:91](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L91)
+[Types/Metrics/Metrics.ts:91](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L91)
 
 ___
 
@@ -3809,7 +3934,7 @@ ___
 
 #### Defined in
 
-[Types/Metrics/Metrics.ts:96](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Metrics/Metrics.ts#L96)
+[Types/Metrics/Metrics.ts:96](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Metrics/Metrics.ts#L96)
 
 ___
 
@@ -3819,7 +3944,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:16](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L16)
+[Types/Messages/Messages.ts:16](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L16)
 
 ___
 
@@ -3836,7 +3961,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:19](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L19)
+[Types/MailingLists/MailingListMembers.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L27)
 
 ___
 
@@ -3853,7 +3978,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L24)
+[Types/MailingLists/MailingListMembers.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L32)
 
 ___
 
@@ -3869,7 +3994,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:64](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L64)
+[Types/Validations/MultipleValidation.ts:64](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L64)
 
 ___
 
@@ -3885,7 +4010,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:67](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L67)
+[Types/Validations/MultipleValidation.ts:67](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L67)
 
 ___
 
@@ -3920,7 +4045,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:5](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L5)
+[Types/Validations/MultipleValidation.ts:5](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L5)
 
 ___
 
@@ -3956,7 +4081,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L32)
+[Types/Validations/MultipleValidation.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L32)
 
 ___
 
@@ -3973,7 +4098,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:78](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L78)
+[Types/Validations/MultipleValidation.ts:78](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L78)
 
 ___
 
@@ -3993,7 +4118,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:83](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L83)
+[Types/Validations/MultipleValidation.ts:83](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L83)
 
 ___
 
@@ -4012,7 +4137,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/MultipleValidation.ts:71](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/MultipleValidation.ts#L71)
+[Types/Validations/MultipleValidation.ts:71](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/MultipleValidation.ts#L71)
 
 ___
 
@@ -4034,7 +4159,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:147](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L147)
+[Types/Domains/DomainTemplates.ts:147](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L147)
 
 ___
 
@@ -4054,7 +4179,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:160](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L160)
+[Types/Domains/DomainTemplates.ts:160](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L160)
 
 ___
 
@@ -4072,7 +4197,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingListMembers.ts:52](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingListMembers.ts#L52)
+[Types/MailingLists/MailingListMembers.ts:60](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingListMembers.ts#L60)
 
 ___
 
@@ -4098,7 +4223,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Attachments.ts#L1)
+[Types/Common/Attachments.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Attachments.ts#L1)
 
 ___
 
@@ -4116,7 +4241,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:121](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L121)
+[Types/Domains/DomainTemplates.ts:121](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L121)
 
 ___
 
@@ -4133,7 +4258,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:128](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L128)
+[Types/Domains/DomainTemplates.ts:128](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L128)
 
 ___
 
@@ -4147,7 +4272,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:31](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L31)
+[Types/Common/RequestOptions.ts:31](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L31)
 
 ___
 
@@ -4168,7 +4293,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L53)
+[Types/Common/RequestOptions.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L53)
 
 ___
 
@@ -4185,7 +4310,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:36](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L36)
+[Types/Domains/DomainTracking.ts:36](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L36)
 
 ___
 
@@ -4204,7 +4329,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L1)
+[Types/Common/NavigationThruPages.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L1)
 
 ___
 
@@ -4218,7 +4343,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:22](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L22)
+[Types/Common/NavigationThruPages.ts:22](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L22)
 
 ___
 
@@ -4228,7 +4353,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:58](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L58)
+[Types/Tags/Tags.ts:58](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L58)
 
 ___
 
@@ -4247,7 +4372,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:8](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L8)
+[Types/Common/NavigationThruPages.ts:8](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L8)
 
 ___
 
@@ -4266,7 +4391,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:15](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L15)
+[Types/Common/NavigationThruPages.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L15)
 
 ___
 
@@ -4276,7 +4401,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:78](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L78)
+[Types/Common/RequestOptions.ts:78](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L78)
 
 ___
 
@@ -4286,7 +4411,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:84](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L84)
+[Types/Common/RequestOptions.ts:84](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L84)
 
 ___
 
@@ -4302,7 +4427,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:108](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L108)
+[Types/Common/RequestOptions.ts:108](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L108)
 
 ___
 
@@ -4312,7 +4437,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:102](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L102)
+[Types/Common/RequestOptions.ts:102](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L102)
 
 ___
 
@@ -4328,7 +4453,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L32)
+[Types/Common/NavigationThruPages.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L32)
 
 ___
 
@@ -4346,7 +4471,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:63](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L63)
+[Types/Domains/DomainTracking.ts:63](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L63)
 
 ___
 
@@ -4363,7 +4488,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:170](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L170)
+[Types/Domains/Domains.ts:170](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L170)
 
 ___
 
@@ -4373,7 +4498,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:92](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L92)
+[Types/Common/RequestOptions.ts:92](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L92)
 
 ___
 
@@ -4383,7 +4508,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:39](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L39)
+[Types/Common/RequestOptions.ts:39](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L39)
 
 ___
 
@@ -4393,7 +4518,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:48](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L48)
+[Types/Common/RequestOptions.ts:48](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L48)
 
 ___
 
@@ -4415,7 +4540,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L13)
+[Types/Common/RequestProvider.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L13)
 
 ___
 
@@ -4432,7 +4557,7 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestProvider.ts:23](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestProvider.ts#L23)
+[Types/Common/RequestProvider.ts:23](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestProvider.ts#L23)
 
 ___
 
@@ -4449,7 +4574,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:26](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L26)
+[Types/Common/NavigationThruPages.ts:26](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L26)
 
 ___
 
@@ -4470,7 +4595,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L2)
+[Types/Routes/Routes.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L2)
 
 ___
 
@@ -4487,7 +4612,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L27)
+[Types/Routes/Routes.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L27)
 
 ___
 
@@ -4503,7 +4628,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L32)
+[Types/Routes/Routes.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L32)
 
 ___
 
@@ -4525,7 +4650,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:56](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L56)
+[Types/Domains/DomainTemplates.ts:56](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L56)
 
 ___
 
@@ -4543,7 +4668,7 @@ ___
 
 #### Defined in
 
-[Types/MailingLists/MailingLists.ts:23](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/MailingLists/MailingLists.ts#L23)
+[Types/MailingLists/MailingLists.ts:28](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/MailingLists/MailingLists.ts#L28)
 
 ___
 
@@ -4563,7 +4688,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Stats/Stats.ts#L1)
+[Types/Stats/Stats.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Stats/Stats.ts#L1)
 
 ___
 
@@ -4573,7 +4698,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:17](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Stats/Stats.ts#L17)
+[Types/Stats/Stats.ts:17](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Stats/Stats.ts#L17)
 
 ___
 
@@ -4592,7 +4717,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:10](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Stats/Stats.ts#L10)
+[Types/Stats/Stats.ts:10](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Stats/Stats.ts#L10)
 
 ___
 
@@ -4612,7 +4737,7 @@ ___
 
 #### Defined in
 
-[Types/Stats/Stats.ts:19](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Stats/Stats.ts#L19)
+[Types/Stats/Stats.ts:19](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Stats/Stats.ts#L19)
 
 ___
 
@@ -4650,7 +4775,7 @@ ___
 
 #### Defined in
 
-[Types/Messages/Messages.ts:262](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Messages/Messages.ts#L262)
+[Types/Messages/Messages.ts:262](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Messages/Messages.ts#L262)
 
 ___
 
@@ -4666,7 +4791,7 @@ ___
 
 #### Defined in
 
-[Types/Common/Attachments.ts:4](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/Attachments.ts#L4)
+[Types/Common/Attachments.ts:4](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/Attachments.ts#L4)
 
 ___
 
@@ -4683,7 +4808,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:60](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L60)
+[Types/Subaccounts/Subaccounts.ts:60](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L60)
 
 ___
 
@@ -4704,7 +4829,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:33](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L33)
+[Types/Subaccounts/Subaccounts.ts:33](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L33)
 
 ___
 
@@ -4720,7 +4845,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:80](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L80)
+[Types/Subaccounts/Subaccounts.ts:80](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L80)
 
 ___
 
@@ -4736,7 +4861,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:9](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L9)
+[Types/Subaccounts/Subaccounts.ts:9](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L9)
 
 ___
 
@@ -4756,7 +4881,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:13](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L13)
+[Types/Subaccounts/Subaccounts.ts:13](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L13)
 
 ___
 
@@ -4776,7 +4901,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:25](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L25)
+[Types/Subaccounts/Subaccounts.ts:25](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L25)
 
 ___
 
@@ -4792,7 +4917,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:21](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L21)
+[Types/Subaccounts/Subaccounts.ts:21](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L21)
 
 ___
 
@@ -4802,7 +4927,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:42](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L42)
+[Types/Subaccounts/Subaccounts.ts:42](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L42)
 
 ___
 
@@ -4820,7 +4945,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:48](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L48)
+[Types/Subaccounts/Subaccounts.ts:48](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L48)
 
 ___
 
@@ -4837,7 +4962,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:55](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L55)
+[Types/Subaccounts/Subaccounts.ts:55](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L55)
 
 ___
 
@@ -4853,7 +4978,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:66](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L66)
+[Types/Subaccounts/Subaccounts.ts:66](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L66)
 
 ___
 
@@ -4871,7 +4996,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:70](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L70)
+[Types/Subaccounts/Subaccounts.ts:70](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L70)
 
 ___
 
@@ -4887,7 +5012,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:76](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L76)
+[Types/Subaccounts/Subaccounts.ts:76](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L76)
 
 ___
 
@@ -4906,7 +5031,7 @@ ___
 
 #### Defined in
 
-[Types/Subaccounts/Subaccounts.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Subaccounts/Subaccounts.ts#L2)
+[Types/Subaccounts/Subaccounts.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Subaccounts/Subaccounts.ts#L2)
 
 ___
 
@@ -4928,7 +5053,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:65](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L65)
+[Types/Suppressions/Suppressions.ts:65](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L65)
 
 ___
 
@@ -4948,7 +5073,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:75](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L75)
+[Types/Suppressions/Suppressions.ts:75](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L75)
 
 ___
 
@@ -4967,7 +5092,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:84](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L84)
+[Types/Suppressions/Suppressions.ts:84](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L84)
 
 ___
 
@@ -4977,7 +5102,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L27)
+[Types/Suppressions/Suppressions.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L27)
 
 ___
 
@@ -4995,7 +5120,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:58](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L58)
+[Types/Suppressions/Suppressions.ts:58](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L58)
 
 ___
 
@@ -5015,7 +5140,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:42](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L42)
+[Types/Suppressions/Suppressions.ts:42](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L42)
 
 ___
 
@@ -5034,7 +5159,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:51](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L51)
+[Types/Suppressions/Suppressions.ts:51](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L51)
 
 ___
 
@@ -5052,7 +5177,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:16](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L16)
+[Types/Suppressions/Suppressions.ts:16](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L16)
 
 ___
 
@@ -5069,7 +5194,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:22](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L22)
+[Types/Suppressions/Suppressions.ts:22](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L22)
 
 ___
 
@@ -5088,7 +5213,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:29](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L29)
+[Types/Suppressions/Suppressions.ts:29](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L29)
 
 ___
 
@@ -5098,7 +5223,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:96](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L96)
+[Types/Suppressions/Suppressions.ts:96](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L96)
 
 ___
 
@@ -5115,7 +5240,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:37](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L37)
+[Types/Suppressions/Suppressions.ts:37](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L37)
 
 ___
 
@@ -5125,7 +5250,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:91](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L91)
+[Types/Suppressions/Suppressions.ts:91](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L91)
 
 ___
 
@@ -5141,7 +5266,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Suppressions.ts:92](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Suppressions.ts#L92)
+[Types/Suppressions/Suppressions.ts:92](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Suppressions.ts#L92)
 
 ___
 
@@ -5176,7 +5301,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:175](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L175)
+[Types/Domains/Domains.ts:175](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L175)
 
 ___
 
@@ -5186,7 +5311,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:83](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L83)
+[Types/Tags/Tags.ts:83](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L83)
 
 ___
 
@@ -5209,7 +5334,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:42](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L42)
+[Types/Tags/Tags.ts:42](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L42)
 
 ___
 
@@ -5219,7 +5344,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L53)
+[Types/Tags/Tags.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L53)
 
 ___
 
@@ -5237,7 +5362,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:72](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L72)
+[Types/Tags/Tags.ts:72](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L72)
 
 ___
 
@@ -5247,7 +5372,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:18](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L18)
+[Types/Tags/Tags.ts:18](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L18)
 
 ___
 
@@ -5267,7 +5392,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L3)
+[Types/Tags/Tags.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L3)
 
 ___
 
@@ -5286,7 +5411,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L11)
+[Types/Tags/Tags.ts:11](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L11)
 
 ___
 
@@ -5303,7 +5428,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:67](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L67)
+[Types/Tags/Tags.ts:67](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L67)
 
 ___
 
@@ -5320,7 +5445,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:62](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L62)
+[Types/Tags/Tags.ts:62](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L62)
 
 ___
 
@@ -5337,7 +5462,7 @@ ___
 
 #### Defined in
 
-[Types/Tags/Tags.ts:78](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Tags/Tags.ts#L78)
+[Types/Tags/Tags.ts:78](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Tags/Tags.ts#L78)
 
 ___
 
@@ -5353,7 +5478,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:52](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L52)
+[Types/Domains/DomainTemplates.ts:52](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L52)
 
 ___
 
@@ -5363,7 +5488,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:66](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L66)
+[Types/Domains/DomainTemplates.ts:66](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L66)
 
 ___
 
@@ -5381,7 +5506,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/Unsubscribe.ts:2](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/Unsubscribe.ts#L2)
+[Types/Suppressions/Unsubscribe.ts:2](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/Unsubscribe.ts#L2)
 
 ___
 
@@ -5399,7 +5524,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:44](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L44)
+[Types/Domains/DomainTracking.ts:44](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L44)
 
 ___
 
@@ -5415,7 +5540,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainCredentials.ts:53](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainCredentials.ts#L53)
+[Types/Domains/DomainCredentials.ts:53](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainCredentials.ts#L53)
 
 ___
 
@@ -5432,7 +5557,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:31](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L31)
+[Types/Domains/DomainTracking.ts:31](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L31)
 
 ___
 
@@ -5452,7 +5577,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:105](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L105)
+[Types/Domains/DomainTemplates.ts:105](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L105)
 
 ___
 
@@ -5470,7 +5595,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTemplates.ts:115](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTemplates.ts#L115)
+[Types/Domains/DomainTemplates.ts:115](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTemplates.ts#L115)
 
 ___
 
@@ -5480,7 +5605,7 @@ ___
 
 #### Defined in
 
-[Types/Routes/Routes.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Routes/Routes.ts#L11)
+[Types/Routes/Routes.ts:11](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Routes/Routes.ts#L11)
 
 ___
 
@@ -5498,7 +5623,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:119](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L119)
+[Types/Domains/Domains.ts:119](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L119)
 
 ___
 
@@ -5515,7 +5640,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:125](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L125)
+[Types/Domains/Domains.ts:125](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L125)
 
 ___
 
@@ -5533,7 +5658,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:134](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L134)
+[Types/Domains/Domains.ts:134](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L134)
 
 ___
 
@@ -5550,7 +5675,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:140](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L140)
+[Types/Domains/Domains.ts:140](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L140)
 
 ___
 
@@ -5567,7 +5692,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:149](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L149)
+[Types/Domains/Domains.ts:149](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L149)
 
 ___
 
@@ -5577,7 +5702,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:154](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L154)
+[Types/Domains/Domains.ts:154](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L154)
 
 ___
 
@@ -5601,7 +5726,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/DomainTracking.ts:20](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/DomainTracking.ts#L20)
+[Types/Domains/DomainTracking.ts:20](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/DomainTracking.ts#L20)
 
 ___
 
@@ -5618,7 +5743,7 @@ ___
 
 #### Defined in
 
-[Types/Common/NavigationThruPages.ts:36](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/NavigationThruPages.ts#L36)
+[Types/Common/NavigationThruPages.ts:36](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/NavigationThruPages.ts#L36)
 
 ___
 
@@ -5634,7 +5759,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:162](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L162)
+[Types/Domains/Domains.ts:162](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L162)
 
 ___
 
@@ -5651,7 +5776,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:165](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L165)
+[Types/Domains/Domains.ts:165](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L165)
 
 ___
 
@@ -5667,7 +5792,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:3](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/Validation.ts#L3)
+[Types/Validations/Validation.ts:3](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/Validation.ts#L3)
 
 ___
 
@@ -5684,7 +5809,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:15](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/Validation.ts#L15)
+[Types/Validations/Validation.ts:15](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/Validation.ts#L15)
 
 ___
 
@@ -5705,7 +5830,7 @@ ___
 
 #### Defined in
 
-[Types/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Validations/Validation.ts#L6)
+[Types/Validations/Validation.ts:6](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Validations/Validation.ts#L6)
 
 ___
 
@@ -5721,7 +5846,7 @@ ___
 
 #### Defined in
 
-[Types/Domains/Domains.ts:158](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Domains/Domains.ts#L158)
+[Types/Domains/Domains.ts:158](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Domains/Domains.ts#L158)
 
 ___
 
@@ -5735,7 +5860,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:16](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L16)
+[Types/Webhooks/Webhooks.ts:16](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L16)
 
 ___
 
@@ -5752,7 +5877,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:11](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L11)
+[Types/Webhooks/Webhooks.ts:11](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L11)
 
 ___
 
@@ -5769,7 +5894,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:6](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L6)
+[Types/Webhooks/Webhooks.ts:6](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L6)
 
 ___
 
@@ -5787,7 +5912,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:32](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L32)
+[Types/Webhooks/Webhooks.ts:32](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L32)
 
 ___
 
@@ -5804,7 +5929,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:27](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L27)
+[Types/Webhooks/Webhooks.ts:27](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L27)
 
 ___
 
@@ -5821,7 +5946,7 @@ ___
 
 #### Defined in
 
-[Types/Webhooks/Webhooks.ts:22](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Webhooks/Webhooks.ts#L22)
+[Types/Webhooks/Webhooks.ts:22](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Webhooks/Webhooks.ts#L22)
 
 ___
 
@@ -5840,7 +5965,7 @@ ___
 
 #### Defined in
 
-[Types/Suppressions/WhiteList.ts:1](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Suppressions/WhiteList.ts#L1)
+[Types/Suppressions/WhiteList.ts:1](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Suppressions/WhiteList.ts#L1)
 
 ___
 
@@ -5860,4 +5985,4 @@ ___
 
 #### Defined in
 
-[Types/Common/RequestOptions.ts:114](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Types/Common/RequestOptions.ts#L114)
+[Types/Common/RequestOptions.ts:114](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Types/Common/RequestOptions.ts#L114)

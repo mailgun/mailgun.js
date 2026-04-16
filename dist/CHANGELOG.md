@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.0.0](https://github.com/mailgun/mailgun.js/compare/v12.9.0...v13.0.0) (2026-04-16)
+
+
+### Features
+
+* Add `listByAddress` method to `MailingListsClient` ([c1591e3](https://github.com/mailgun/mailgun.js/commits/c1591e3a37acf11a2e9df5861ca370d3a098cea1))
+* Add `listMembersByAddress` method to `MailListsMembers` client ([7cd6299](https://github.com/mailgun/mailgun.js/commits/7cd62991f0079deb252045758e664079c43df07b))
+* Add CSV bulk upload for members of mailing list ([c65069b](https://github.com/mailgun/mailgun.js/commits/c65069b4b5ef51c64ba394a86b0beea024d852e9))
+
+
+### Breaking changes
+
+* Remove optional `address` property of query parameter for `MailingLists.list` method ([a7d0935](https://github.com/mailgun/mailgun.js/commits/a7d093573bc0015d2d38618e703439f25884a62e))
+
 ## [12.9.0](https://github.com/mailgun/mailgun.js/compare/v12.8.0...v12.9.0) (2026-04-15)
 
 

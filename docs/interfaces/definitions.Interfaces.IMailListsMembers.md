@@ -13,7 +13,9 @@
 - [destroyMember](definitions.Interfaces.IMailListsMembers.md#destroymember)
 - [getMember](definitions.Interfaces.IMailListsMembers.md#getmember)
 - [listMembers](definitions.Interfaces.IMailListsMembers.md#listmembers)
+- [listMembersByAddress](definitions.Interfaces.IMailListsMembers.md#listmembersbyaddress)
 - [updateMember](definitions.Interfaces.IMailListsMembers.md#updatemember)
+- [upload](definitions.Interfaces.IMailListsMembers.md#upload)
 
 ## Methods
 
@@ -34,7 +36,7 @@
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:18](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L18)
+[Interfaces/MailingLists/MailingListMembers.ts:25](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L25)
 
 ___
 
@@ -55,7 +57,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:21](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L21)
+[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
 
 ___
 
@@ -76,7 +78,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
+[Interfaces/MailingLists/MailingListMembers.ts:35](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L35)
 
 ___
 
@@ -97,7 +99,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:17](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L17)
+[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
 
 ___
 
@@ -118,7 +120,28 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:12](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L12)
+[Interfaces/MailingLists/MailingListMembers.ts:16](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L16)
+
+___
+
+### listMembersByAddress
+
+▸ **listMembersByAddress**(`mailListAddress`, `query?`): `Promise`\<[`MailListMembersByAddressResult`](../modules/definitions.md#maillistmembersbyaddressresult)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `mailListAddress` | `string` |
+| `query?` | [`MailListMembersByAddressQuery`](../modules/definitions.md#maillistmembersbyaddressquery) |
+
+#### Returns
+
+`Promise`\<[`MailListMembersByAddressResult`](../modules/definitions.md#maillistmembersbyaddressresult)\>
+
+#### Defined in
+
+[Interfaces/MailingLists/MailingListMembers.ts:20](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L20)
 
 ___
 
@@ -140,4 +163,27 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/cad4830/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
+[Interfaces/MailingLists/MailingListMembers.ts:31](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L31)
+
+___
+
+### upload
+
+▸ **upload**(`mailingListAddress`, `file`, `subscribed?`, `upsert?`): `Promise`\<[`MailListMembersUploadResponse`](../modules/definitions.md#maillistmembersuploadresponse)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `mailingListAddress` | `string` |
+| `file` | [`MailListMembersUploadData`](../modules/definitions.md#maillistmembersuploaddata) |
+| `subscribed?` | `boolean` |
+| `upsert?` | `boolean` |
+
+#### Returns
+
+`Promise`\<[`MailListMembersUploadResponse`](../modules/definitions.md#maillistmembersuploadresponse)\>
+
+#### Defined in
+
+[Interfaces/MailingLists/MailingListMembers.ts:36](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/MailingLists/MailingListMembers.ts#L36)
