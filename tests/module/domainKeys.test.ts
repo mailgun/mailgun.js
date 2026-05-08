@@ -80,7 +80,7 @@ describe('DomainKeysClient', function () {
         }
       }];
 
-      api.get('/v1/dkim/keys').query({ page: '', limit: '' }).reply(200, {
+      api.get('/v1/dkim/keys').query({ limit: '' }).reply(200, {
         items: domainKeys,
         paging: {
           first: 'https://api.mailgun.net/v1/dkim/keys?page=first',
@@ -117,7 +117,7 @@ describe('DomainKeysClient', function () {
       api
         .get('/v1/dkim/keys')
         .query({
-          signing_domain: 'test.com', page: '', limit: ''
+          signing_domain: 'test.com', limit: ''
         })
         .reply(200, {
           items: domainKeys,
@@ -150,7 +150,7 @@ describe('DomainKeysClient', function () {
       api
         .get('/v1/dkim/keys')
         .query({
-          selector: 'custom-selector', page: '', limit: ''
+          selector: 'custom-selector', limit: ''
         })
         .reply(200, {
           items: domainKeys,
@@ -186,7 +186,6 @@ describe('DomainKeysClient', function () {
         .query({
           signing_domain: 'test.com',
           selector: 'custom-selector',
-          page: '',
           limit: ''
         })
         .reply(200, {
