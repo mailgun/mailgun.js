@@ -211,6 +211,33 @@ describe('mailListsMembersClient', function () {
         } as MultipleMembersData);
       expect(result).toMatchObject(response);
     });
+
+    it('Should not have file content in FD', async () => {
+      let requestObject;
+      const newMembersListPlaceholder = new Array(5).fill(0);
+      const newMembersList = newMembersListPlaceholder.map((_, index) => ({
+        address: `test${index}@example.com`,
+        name: `test name ${index}`,
+        vars: { gender: 'female', age: index },
+        subscribed: true,
+        upsert: 'yes'
+      }));
+
+      api.post(`/v3/lists/${mailingListAddress}/members.json`).reply(200, function (_uri, requestBody) {
+        requestObject = requestBody;
+        return response;
+      });
+
+      const result: NewMultipleMembersResponse = await mailListsMembersClient
+        .createMembers(mailingListAddress, {
+          members: newMembersList,
+          upsert: 'yes'
+        } as MultipleMembersData);
+      expect(result).toMatchObject(response);
+      expect(requestObject).toEqual(expect.stringContaining('Content-Disposition: form-data; name="members"'));
+      // The field should not have filename as it is not a file upload
+      expect(requestObject).not.toEqual(expect.stringContaining('Content-Disposition: form-data; name="members"; filename="file"'));
+    });
   });
 
   describe('upload', () => {
@@ -238,6 +265,39 @@ describe('mailListsMembersClient', function () {
       );
 
       expect(result).toMatchObject(resultData);
+    });
+
+    it('uploads mailing list members as file', async () => {
+      let requestObject;
+      const csvData = 'address,name,subscribed\ntest1@example.com,Test User,yes\n';
+      const resultData: MailListMembersUploadResponse = {
+        list: {
+          access_level: 'everyone',
+          address: 'testingMailingListAddress@example.com',
+          created_at: 'Wed, 26 May 2021 10:40:06 -0000',
+          description: 'test description',
+          members_count: 1,
+          name: 'test name',
+          reply_preference: 'list'
+        },
+        message: 'Mailing list has been updated',
+        'task-id': '00000000000000000000000000000000'
+      };
+
+      api.post('/v3/lists/testingMailingListAddress@example.com/members.csv')
+        .reply(200, function (_uri, requestBody) {
+          requestObject = requestBody;
+          return resultData;
+        });
+
+      const result = await mailListsMembersClient.upload(
+        'testingMailingListAddress@example.com',
+        csvData
+      );
+
+      expect(result).toMatchObject(resultData);
+      // The field should have filename equal to "file" as it is a file upload
+      expect(requestObject).toEqual(expect.stringContaining('Content-Disposition: form-data; name="members"; filename="file"'));
     });
 
     it('uploads mailing list members from CustomFile object with explicit false flags', async () => {

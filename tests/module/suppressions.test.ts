@@ -254,6 +254,20 @@ describe('SuppressionsClient', function () {
       // expect(bounces.pages.previous.page).to.be.eql('?page=previous&address=next@mailgun.com');
       expect(bounces.items).toHaveLength(0);
     });
+
+    it('should not fail when `query.page` contains null or undefined', async () => {
+      api.get('/v3/domain.com/bounces').reply(200, {
+        items: [],
+      });
+      const bounces = await client.list('domain.com', 'bounces', {
+        page: undefined,
+      });
+      expect(bounces).toMatchObject({
+        items: expect.any(Array)
+      });
+      // expect(bounces.pages.previous.page).to.be.eql('?page=previous&address=next@mailgun.com');
+      expect(bounces.items).toHaveLength(0);
+    });
   });
 
   describe('get', function () {

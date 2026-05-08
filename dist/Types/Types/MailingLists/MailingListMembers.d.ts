@@ -72,7 +72,7 @@ export type MailListMembersByAddressResult = {
 };
 export type MailListMembersUploadData = CustomFileData | CustomFile;
 export type MailListMembersUploadDataUpdated = {
-    members: MailListMembersUploadData;
+    listMembersUploadFile: MailListMembersUploadData;
     subscribed: string;
     upsert: string;
 };

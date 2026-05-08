@@ -124,13 +124,13 @@ export default class MailListsMembers
     upsert = true
   ): Promise<MailListMembersUploadResponse> {
     const data: MailListMembersUploadDataUpdated = {
-      members: file,
+      listMembersUploadFile: file,
       subscribed: subscribed ? 'yes' : 'no',
       upsert: upsert ? 'yes' : 'no'
     };
 
     if (typeof file === 'string') {
-      data.members = { data: file };
+      data.listMembersUploadFile = { data: file };
     }
 
     const url = urljoin('v3/lists', mailingListAddress, 'members.csv');

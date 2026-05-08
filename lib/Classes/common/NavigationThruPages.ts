@@ -58,7 +58,7 @@ export default abstract class NavigationThruPages <T> {
     urlSeparator: string,
     iteratorName?: string
   ): ParsedPagesList {
-    const pages = Object.entries(response.body.paging);
+    const pages = response.body?.paging ? Object.entries(response.body?.paging) : [];
     return pages.reduce((
       acc: PagesListAccumulator,
       [id, pageUrl]: [ id: string, pageUrl: string]
@@ -73,8 +73,11 @@ export default abstract class NavigationThruPages <T> {
     const queryCopy = { ...query };
     if (queryCopy.page) {
       url = urljoin(clientUrl, queryCopy.page);
-      delete queryCopy.page;
     }
+
+    // remove page from query if it exists since it's already added to the url
+    if ('page' in queryCopy) delete queryCopy.page;
+
     return {
       url,
       updatedQuery: queryCopy

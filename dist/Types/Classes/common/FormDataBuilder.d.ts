@@ -5,6 +5,7 @@ declare class FormDataBuilder {
     private fileKeys;
     private attachmentsHandler;
     private useFetch?;
+    private keyReplacementMap;
     constructor(FormDataConstructor: InputFormData, config: FormDataBuilderConfig);
     createFormData(data: FormDataInput): Promise<CreatedFormData>;
     private addMimeDataToFD;
