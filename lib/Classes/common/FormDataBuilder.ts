@@ -20,10 +20,16 @@ class FormDataBuilder {
   private fileKeys: string[];
   private attachmentsHandler: AttachmentsHandler;
   private useFetch?: boolean;
+  private keyReplacementMap: Map<string, string>;
 
   constructor(FormDataConstructor: InputFormData, config: FormDataBuilderConfig) {
     this.FormDataConstructor = FormDataConstructor;
-    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'members'];
+    this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'listMembersUploadFile'];
+    this.keyReplacementMap = new Map([
+      ['multipleValidationFile', 'file'],
+      ['suppressionUploadFile', 'file'],
+      ['listMembersUploadFile', 'members']
+    ]);
     this.attachmentsHandler = new AttachmentsHandler();
     this.useFetch = config?.useFetch;
   }
@@ -171,7 +177,8 @@ class FormDataBuilder {
       attachment: CustomFile | File | string| CustomFileData,
       formData: NodeFormData | FormData
     ): void => {
-      const key = originalKey === 'multipleValidationFile' || originalKey === 'suppressionUploadFile' ? 'file' : originalKey;
+      const key = this.keyReplacementMap.get(originalKey) || originalKey;
+
       const objData = this.attachmentsHandler.convertToFDexpectedShape(attachment);
       const options: AttachmentInfo = this.attachmentsHandler.getAttachmentInfo(attachment);
 

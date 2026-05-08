@@ -327,7 +327,12 @@ var AttachmentsHandler = /** @class */ (function () {
 var FormDataBuilder = /** @class */ (function () {
     function FormDataBuilder(FormDataConstructor, config) {
         this.FormDataConstructor = FormDataConstructor;
-        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'members'];
+        this.fileKeys = ['attachment', 'inline', 'multipleValidationFile', 'suppressionUploadFile', 'listMembersUploadFile'];
+        this.keyReplacementMap = new Map([
+            ['multipleValidationFile', 'file'],
+            ['suppressionUploadFile', 'file'],
+            ['listMembersUploadFile', 'members']
+        ]);
         this.attachmentsHandler = new AttachmentsHandler();
         this.useFetch = config === null || config === void 0 ? void 0 : config.useFetch;
     }
@@ -442,7 +447,7 @@ var FormDataBuilder = /** @class */ (function () {
     FormDataBuilder.prototype.addFilesToFD = function (propertyName, value, formDataInstance) {
         var _this = this;
         var appendFileToFD = function (originalKey, attachment, formData) {
-            var key = originalKey === 'multipleValidationFile' || originalKey === 'suppressionUploadFile' ? 'file' : originalKey;
+            var key = _this.keyReplacementMap.get(originalKey) || originalKey;
             var objData = _this.attachmentsHandler.convertToFDexpectedShape(attachment);
             var options = _this.attachmentsHandler.getAttachmentInfo(attachment);
             if (_this.isFormDataPackage(formData)) {
@@ -6545,12 +6550,12 @@ var MailListsMembers = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         data = {
-                            members: file,
+                            listMembersUploadFile: file,
                             subscribed: subscribed ? 'yes' : 'no',
                             upsert: upsert ? 'yes' : 'no'
                         };
                         if (typeof file === 'string') {
-                            data.members = { data: file };
+                            data.listMembersUploadFile = { data: file };
                         }
                         url = urljoin('v3/lists', mailingListAddress, 'members.csv');
                         return [4 /*yield*/, this.request.postWithFD(url, data)];
