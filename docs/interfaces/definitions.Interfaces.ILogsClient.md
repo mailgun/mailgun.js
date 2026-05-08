@@ -28,4 +28,4 @@
 
 #### Defined in
 
-[Interfaces/Logs/ILogsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/5c6776a/lib/Interfaces/Logs/ILogsClient.ts#L6)
+[Interfaces/Logs/ILogsClient.ts:6](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Logs/ILogsClient.ts#L6)

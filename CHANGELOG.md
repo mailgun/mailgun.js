@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [13.0.1](https://github.com/mailgun/mailgun.js/compare/v13.0.0...v13.0.1) (2026-05-08)
+
+
+### Bug Fixes
+
+* Fix createMembers method in MailListsMembers ([3fc64b3](https://github.com/mailgun/mailgun.js/commits/3fc64b3b1fab2c15e4ca0592a6f15fe7fd65fd5a))
+* SDK Throws 500 When Page is Undefined ([5f5ae84](https://github.com/mailgun/mailgun.js/commits/5f5ae8424c11bdbfb0eed741e95113ed9c5e1286))
+* Update deps ([bd068fa](https://github.com/mailgun/mailgun.js/commits/bd068fa28e032ffb4e28e9067f8fbb4b1f527022))
+
 ## [13.0.0](https://github.com/mailgun/mailgun.js/compare/v12.9.0...v13.0.0) (2026-04-16)
 
 
