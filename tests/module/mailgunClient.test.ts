@@ -28,6 +28,7 @@ import AxiosProvider from '../../lib/Classes/common/RequestProviders/AxiosProvid
 import LogsClient from '../../lib/Classes/Logs/LogsClient.js';
 import DKIMManagementClient from '../../lib/Classes/DKIM/DKIMManagment.js';
 import BounceClassificationClient from '../../lib/Classes/BounceClassification/BounceClassificationClient.js';
+import CustomMessageLimitClient from '../../lib/Classes/CustomMessageLimit/CustomMessageLimit.js';
 
 describe('MailgunClient', () => {
   let client: IMailgunClient;
@@ -159,6 +160,11 @@ describe('MailgunClient', () => {
   it('creates bounceClassification client', () => {
     expect(client).toHaveProperty('bounceClassification');
     expect(client.bounceClassification).toBeInstanceOf(BounceClassificationClient);
+  });
+
+  it('creates customMessageLimit client', () => {
+    expect(client).toHaveProperty('customMessageLimit');
+    expect(client.customMessageLimit).toBeInstanceOf(CustomMessageLimitClient);
   });
 
   describe('User configuration', () => {

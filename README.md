@@ -379,7 +379,11 @@ The following service methods are available to instantiated clients. The example
       - [limits](#limits)
       - [update](#update-8)
       - [destroy](#destroy-11)
-  - [Navigation thru lists](#navigation-thru-lists)
+    - [Custom Message Limit](#custom-message-limit)
+      - [get](#get-16)
+      - [set](#set)
+      - [destroy](#destroy-12)
+      - [enable](#enable-1)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -5479,6 +5483,95 @@ The following service methods are available to instantiated clients. The example
   ```JS
   {
     message: 'Tag updated'
+  }
+  ```
+
+### Custom Message Limit
+  The custom message limit imposes a hard limit on how many messages your account can send during a calendar month.
+
+- #### get
+  Fetch the details of custom sending limit on the account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/custom-message-limit/get-v5-accounts-limit-custom-monthly)
+
+  `mg.customMessageLimit.get()`
+
+  Example:
+  ```JS
+    mg.customMessageLimit.get()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: SendingLimitResult
+  ```JS
+  {
+    current: 0,
+    limit: 2000,
+    period: '1m'
+  }
+  ```
+
+- #### set
+  Set a custom sending limit
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/custom-message-limit/put-v5-accounts-limit-custom-monthly)
+
+  `mg.customMessageLimit.set(limit:number)`
+
+  Example:
+  ```JS
+    mg.customMessageLimit.set(2001)
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: SuccessResult
+  ```JS
+  {
+    success: true
+  }
+  ```
+
+- #### destroy
+  Delete a custom sending limit
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/custom-message-limit/delete-v5-accounts-limit-custom-monthly)
+
+  `mg.customMessageLimit.destroy()`
+
+  Example:
+  ```JS
+    mg.customMessageLimit.destroy()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: SuccessResult
+  ```JS
+  {
+    success: true
+  }
+  ```
+
+- #### enable
+  Re-enable an account that was disabled for reaching the custom sending limit
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/custom-message-limit/put-v5-accounts-limit-custom-enable)
+
+  `mg.customMessageLimit.enable()`
+
+  Example:
+  ```JS
+    mg.customMessageLimit.enable()
+    .then(data => console.log(data)) // logs response data
+    .catch(err => console.error(err)); //logs any error
+  ```
+
+  Promise returns: SuccessResult
+  ```JS
+  {
+    success: true
   }
   ```
 
