@@ -11,6 +11,7 @@
 - [IBounce](../interfaces/definitions.Interfaces.IBounce.md)
 - [IBounceClassificationClient](../interfaces/definitions.Interfaces.IBounceClassificationClient.md)
 - [IComplaint](../interfaces/definitions.Interfaces.IComplaint.md)
+- [ICustomMessageLimitClient](../interfaces/definitions.Interfaces.ICustomMessageLimitClient.md)
 - [IDKIMManagementClient](../interfaces/definitions.Interfaces.IDKIMManagementClient.md)
 - [IDomainCredentials](../interfaces/definitions.Interfaces.IDomainCredentials.md)
 - [IDomainKeysClient](../interfaces/definitions.Interfaces.IDomainKeysClient.md)

@@ -1,6 +1,6 @@
 {
   "name": "mailgun.js",
-  "version": "13.0.1",
+  "version": "13.1.0",
   "author": "Mailgun",
   "license": "MIT",
   "type": "module",

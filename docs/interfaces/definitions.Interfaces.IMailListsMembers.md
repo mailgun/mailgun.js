@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:25](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L25)
+[Interfaces/MailingLists/MailingListMembers.ts:25](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L25)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
+[Interfaces/MailingLists/MailingListMembers.ts:28](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L28)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:35](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L35)
+[Interfaces/MailingLists/MailingListMembers.ts:35](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L35)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
+[Interfaces/MailingLists/MailingListMembers.ts:24](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L24)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:16](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L16)
+[Interfaces/MailingLists/MailingListMembers.ts:16](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L16)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:20](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L20)
+[Interfaces/MailingLists/MailingListMembers.ts:20](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L20)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:31](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L31)
+[Interfaces/MailingLists/MailingListMembers.ts:31](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L31)
 
 ___
 
@@ -186,4 +186,4 @@ ___
 
 #### Defined in
 
-[Interfaces/MailingLists/MailingListMembers.ts:36](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/MailingLists/MailingListMembers.ts#L36)
+[Interfaces/MailingLists/MailingListMembers.ts:36](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/MailingLists/MailingListMembers.ts#L36)

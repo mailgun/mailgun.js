@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.1.0](https://github.com/mailgun/mailgun.js/compare/v13.0.1...v13.1.0) (2026-05-21)
+
+
+### Features
+
+* Add custom message limit functionality ([ff1150b](https://github.com/mailgun/mailgun.js/commits/ff1150b079e1fca97594522cf86299b4d9a31be8))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @babel/plugin-transform-modules-systemjs ([38039b9](https://github.com/mailgun/mailgun.js/commits/38039b99ed1e99bb7d3d7d06cf348c9fdd700d63))
+* **deps-dev:** bump fast-uri from 3.0.6 to 3.1.2 ([3df46e7](https://github.com/mailgun/mailgun.js/commits/3df46e7df8550c130e2b3950c1daae9c4b1a49ce))
+
 ### [13.0.1](https://github.com/mailgun/mailgun.js/compare/v13.0.0...v13.0.1) (2026-05-08)
 
 

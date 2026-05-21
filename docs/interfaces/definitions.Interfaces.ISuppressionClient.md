@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:26](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L26)
+[Interfaces/Suppressions/ISuppressionsClient.ts:26](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L26)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:32](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L32)
+[Interfaces/Suppressions/ISuppressionsClient.ts:32](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L32)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:44](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L44)
+[Interfaces/Suppressions/ISuppressionsClient.ts:44](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L44)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:20](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L20)
+[Interfaces/Suppressions/ISuppressionsClient.ts:20](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L20)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L18)
+[Interfaces/Suppressions/ISuppressionsClient.ts:18](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L18)
 
 ___
 
@@ -144,4 +144,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Suppressions/ISuppressionsClient.ts:38](https://github.com/mailgun/mailgun.js/blob/aa8c929/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L38)
+[Interfaces/Suppressions/ISuppressionsClient.ts:38](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/Suppressions/ISuppressionsClient.ts#L38)
