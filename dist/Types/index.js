@@ -8423,6 +8423,66 @@ var TagsClient = /** @class */ (function () {
     return TagsClient;
 }());
 
+var CustomMessageLimitClient = /** @class */ (function () {
+    function CustomMessageLimitClient(request) {
+        this.request = request;
+        this.path = '/v5/accounts/limit/custom';
+    }
+    CustomMessageLimitClient.prototype.get = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.path, "/monthly"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    CustomMessageLimitClient.prototype.set = function (limit) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("".concat(this.path, "/monthly"), {}, { query: "limit=".concat(limit) })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    CustomMessageLimitClient.prototype.destroy = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete("".concat(this.path, "/monthly"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    CustomMessageLimitClient.prototype.enable = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("".concat(this.path, "/enable"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    return CustomMessageLimitClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -8473,6 +8533,7 @@ var MailgunClient = /** @class */ (function () {
         this.dkimManagement = new DKIMManagementClient(this.request);
         this.bounceClassification = new BounceClassificationClient(this.request);
         this.tags = new TagsClient(this.request);
+        this.customMessageLimit = new CustomMessageLimitClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

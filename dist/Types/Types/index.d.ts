@@ -17,3 +17,4 @@ export * from './Logs/index.js';
 export * from './DKIM/index.js';
 export * from './BounceClassification/index.js';
 export * from './Tags/index.js';
+export * from './CustomMessageLimit/CustomMessageLimitClient.js';

@@ -17,6 +17,7 @@ import { ILogsClient } from '../Logs/ILogsClient.js';
 import { IDKIMManagementClient } from '../DKIM/IDKIMManagementClient.js';
 import { IBounceClassificationClient } from '../BounceClassification/IBounceClassificationClient.js';
 import { ITagsClient } from '../Tags/ITagsClient.js';
+import { ICustomMessageLimitClient } from '../CustomMessageLimit/ICustomMessageLimitClient.js';
 export interface IMailgunClient {
     request: Request;
     domains: IDomainsClient;
@@ -39,4 +40,5 @@ export interface IMailgunClient {
     dkimManagement: IDKIMManagementClient;
     bounceClassification: IBounceClassificationClient;
     tags: ITagsClient;
+    customMessageLimit: ICustomMessageLimitClient;
 }
