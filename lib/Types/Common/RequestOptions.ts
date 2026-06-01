@@ -27,6 +27,7 @@ import type { FormDataInput } from './FormData.js';
 import { LogsQuery } from '../Logs/Logs.js';
 import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClassification.js';
 import { TagDeleteData, TagsUpdateData } from '../Tags/Tags.js';
+import { EmailQuery } from '../AccountManagement/AccountManagement.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;
@@ -57,7 +58,8 @@ export type OnCallRequestOptions = {
   [key: string]: unknown | undefined;
 }
 
-export type GetQueryTypes = IPsListQuery |
+export type GetQueryTypes =
+  IPsListQuery |
   RoutesListQuery |
   SubaccountsQuery |
   WebhooksQuery |
@@ -70,6 +72,7 @@ export type GetQueryTypes = IPsListQuery |
   InboxPlacementsResultsApiQuery |
   SeedsListsAPIQuery |
   RoutesMatchQuery |
+  EmailQuery|
 { searchParams?: Array<Array<string>> } |
   ValidationQuery
 

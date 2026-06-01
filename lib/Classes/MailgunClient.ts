@@ -40,7 +40,8 @@ import {
   ILogsClient,
   IBounceClassificationClient,
   ITagsClient,
-  ICustomMessageLimitClient
+  ICustomMessageLimitClient,
+  IAccountManagementClient
 } from '../Interfaces/index.js';
 import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
@@ -57,6 +58,7 @@ import DKIMManagementClient from './DKIM/DKIMManagment.js';
 import BounceClassificationClient from './BounceClassification/BounceClassificationClient.js';
 import TagsClient from './Tags/TagsClient.js';
 import CustomMessageLimitClient from './CustomMessageLimit/CustomMessageLimit.js';
+import AccountManagementClient from './AccountManagement/AccountManagement.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -80,6 +82,7 @@ export default class MailgunClient implements IMailgunClient {
   public bounceClassification: IBounceClassificationClient;
   public tags: ITagsClient;
   public customMessageLimit: ICustomMessageLimitClient;
+  public accountManagement: IAccountManagementClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -165,6 +168,7 @@ export default class MailgunClient implements IMailgunClient {
     this.bounceClassification = new BounceClassificationClient(this.request);
     this.tags = new TagsClient(this.request);
     this.customMessageLimit = new CustomMessageLimitClient(this.request);
+    this.accountManagement = new AccountManagementClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {

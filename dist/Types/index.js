@@ -8483,6 +8483,146 @@ var CustomMessageLimitClient = /** @class */ (function () {
     return CustomMessageLimitClient;
 }());
 
+var AccountManagementClient = /** @class */ (function () {
+    function AccountManagementClient(request) {
+        this.request = request;
+        this.path = '/v5/accounts';
+        this.allowedKeysAF = new Set(['webhooks_redact_pii', 'ai_insights']);
+    }
+    // Update variable account settings
+    AccountManagementClient.prototype.updateAccountSettings = function (settingsObj) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("".concat(this.path), settingsObj)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Get webhook signing key saved on the account
+    AccountManagementClient.prototype.getWebhookSigningKey = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("".concat(this.path, "/http_signing_key"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Create or regenerate webhook signing key on an account
+    AccountManagementClient.prototype.createWebhookSigningKey = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("".concat(this.path, "/http_signing_key"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Get webhook signing key saved on the account
+    AccountManagementClient.prototype.getSandboxAuthorizedRecipients = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get('/v5/sandbox/auth_recipients')];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Add authorized email recipient for a sandbox domain
+    AccountManagementClient.prototype.addSandboxAuthorizedRecipient = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("/v5/sandbox/auth_recipients?email=".concat(email), {})];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Remove an authorized sandbox domain email recipient
+    AccountManagementClient.prototype.removeSandboxAuthorizedRecipient = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete("/v5/sandbox/auth_recipients/".concat(email))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Resend account activation email to the account owner
+    AccountManagementClient.prototype.resendActivationEmail = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("".concat(this.path, "/resend_activation_email"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    // Update account feature
+    AccountManagementClient.prototype.updateAccountFeature = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var reqData, response;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        reqData = Object.entries(data).reduce(function (acc, currentValue) {
+                            var key = currentValue[0], value = currentValue[1];
+                            try {
+                                if (!_this.allowedKeysAF.has(key)) {
+                                    throw new Error("Forbidden property \"".concat(key, "\". Allowed properties are ").concat(_this.allowedKeysAF.values()));
+                                }
+                                if (!value || typeof value !== 'object' || Object.keys(value).length !== 1 || !('enabled' in value)) {
+                                    throw new Error("Incorrect value ".concat(value));
+                                }
+                                var strVal = JSON.stringify(value);
+                                acc[key] = strVal;
+                                return acc;
+                            }
+                            catch (error) {
+                                throw APIError.getUserDataError(error.message, "The \"".concat(key, "\" property expects JS object value with \"enable\" property in it. See AccountFeatureInput type."));
+                            }
+                        }, {});
+                        return [4 /*yield*/, this.request.put("".concat(this.path, "/features"), reqData)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.body];
+                }
+            });
+        });
+    };
+    return AccountManagementClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -8534,6 +8674,7 @@ var MailgunClient = /** @class */ (function () {
         this.bounceClassification = new BounceClassificationClient(this.request);
         this.tags = new TagsClient(this.request);
         this.customMessageLimit = new CustomMessageLimitClient(this.request);
+        this.accountManagement = new AccountManagementClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;
