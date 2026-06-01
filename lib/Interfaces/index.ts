@@ -19,3 +19,4 @@ export * from './DKIM/IDKIMManagementClient.js';
 export * from './BounceClassification/IBounceClassificationClient.js';
 export * from './Tags/index.js';
 export * from './CustomMessageLimit/ICustomMessageLimitClient.js';
+export * from './AccountManagement/IAccountManagementClient.js';
