@@ -382,6 +382,15 @@ The following service methods are available to instantiated clients. The example
       - [set](#set)
       - [destroy](#destroy-12)
       - [enable](#enable-1)
+    - [Account Management](#account-management)
+      - [updateAccountSettings](#updateaccountsettings)
+      - [getWebhookSigningKey](#getwebhooksigningkey)
+      - [createWebhookSigningKey](#createwebhooksigningkey)
+      - [getSandboxAuthorizedRecipients](#getsandboxauthorizedrecipients)
+      - [addSandboxAuthorizedRecipient](#addsandboxauthorizedrecipient)
+      - [removeSandboxAuthorizedRecipient](#removesandboxauthorizedrecipient)
+      - [resendActivationEmail](#resendactivationemail)
+      - [updateAccountFeature](#updateaccountfeature)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -5555,6 +5564,219 @@ The following service methods are available to instantiated clients. The example
   ```
 
   Promise returns: SuccessResult
+  ```JS
+  {
+    success: true
+  }
+  ```
+
+### Account Management
+  Perform account-level CRUD operations.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management)
+
+- #### updateAccountSettings
+  Updates variable account settings
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/put-v5-accounts)
+
+  `mg.accountManagement.updateAccountSettings(settingsObj)`
+
+  Example:
+
+  ```js
+  mg.accountManagement.updateAccountSettings({
+    name: 'meta test account',
+    inactive_session_timeout: 64800,
+    absolute_session_timeout: 64800,
+    logout_redirect_url: 'http://example.com/logout'
+  })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'Account: 123456 info has been updated.'
+  }
+  ```
+
+- #### getWebhookSigningKey
+  Get webhook signing key saved on the account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/get-v5-accounts-http_signing_key)
+
+  `mg.accountManagement.getWebhookSigningKey()`
+
+  Example:
+
+  ```js
+  mg.accountManagement.getWebhookSigningKey()
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    http_signing_key: '12345'
+  }
+  ```
+
+- #### createWebhookSigningKey
+  Create or regenerate webhook signing key on an account
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/post-v5-accounts-http_signing_key)
+
+  `mg.accountManagement.createWebhookSigningKey()`
+
+  Example:
+
+  ```js
+  mg.accountManagement.createWebhookSigningKey()
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    http_signing_key: '123654',
+    message: 'regenerated HTTP signing key for account: 1234'
+  }
+  ```
+
+- #### getSandboxAuthorizedRecipients
+  Get authorized email recipients for a sandbox domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/get-v5-sandbox-auth_recipients)
+
+  `mg.accountManagement.getSandboxAuthorizedRecipients()`
+
+  Example:
+
+  ```js
+  mg.accountManagement.getSandboxAuthorizedRecipients()
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    limit: 5,
+    recipients: [
+      {
+        email: 'authorized@example.com',
+        activated: true,
+      }
+    ]
+  }
+  ```
+
+- #### addSandboxAuthorizedRecipient
+  Add authorized email recipient for a sandbox domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/post-v5-sandbox-auth_recipients)
+
+  `mg.accountManagement.addSandboxAuthorizedRecipient(email)`
+
+  Example:
+
+  ```js
+  mg.accountManagement.addSandboxAuthorizedRecipient('newuser@example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    recipient: {
+      email: 'newuser@example.com',
+      activated: false,
+    }
+  }
+  ```
+
+- #### removeSandboxAuthorizedRecipient
+  Remove an authorized sandbox domain email recipient
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/delete-v5-sandbox-auth_recipients-email)
+
+  `mg.accountManagement.removeSandboxAuthorizedRecipient(email)`
+
+  Example:
+
+  ```js
+  mg.accountManagement.removeSandboxAuthorizedRecipient('olduser@example.com')
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'Sandbox recipient olduser@example.com deleted.'
+  }
+  ```
+
+- #### resendActivationEmail
+  Resend account activation email to the account owner
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/post-v5-accounts-resend_activation_email)
+
+  `mg.accountManagement.resendActivationEmail()`
+
+  Example:
+
+  ```js
+  mg.accountManagement.resendActivationEmail()
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    success: true
+  }
+  ```
+
+- #### updateAccountFeature
+  Update account feature
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/account-management/put-v5-accounts-features)
+
+  `mg.accountManagement.updateAccountFeature(featureData)`
+
+  Example:
+
+  ```js
+  mg.accountManagement.updateAccountFeature({
+    ai_insights: { enabled: true },
+    webhooks_redact_pii: { enabled: false }
+  })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns:
+
   ```JS
   {
     success: true

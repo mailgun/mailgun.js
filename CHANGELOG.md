@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.2.0](https://github.com/mailgun/mailgun.js/compare/v13.1.0...v13.2.0) (2026-06-01)
+
+
+### Features
+
+* Add account management client ([23156aa](https://github.com/mailgun/mailgun.js/commits/23156aace98d6ea5743b2de38be2e4cdf6cb530c))
+* Add tests for an account management client ([cc5e4f8](https://github.com/mailgun/mailgun.js/commits/cc5e4f8d298ccc3fae50b08729c9f0f2881478a7))
+* Update readme and build ([7987b2f](https://github.com/mailgun/mailgun.js/commits/7987b2ff5395c3b07a70d9d758aa9cda98c60679))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump qs from 6.15.0 to 6.15.2 ([496f939](https://github.com/mailgun/mailgun.js/commits/496f9392a438d63511cdb35aeb53629c26d2b026))
+* Update vulnarable deps ([39ab3eb](https://github.com/mailgun/mailgun.js/commits/39ab3eb44f959c58d176ac64e0e91bb9d6a6c64f))
+
 ## [13.1.0](https://github.com/mailgun/mailgun.js/compare/v13.0.1...v13.1.0) (2026-05-21)
 
 

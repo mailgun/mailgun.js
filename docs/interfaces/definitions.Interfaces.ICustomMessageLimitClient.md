@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:6](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L6)
+[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:6](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L6)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:7](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L7)
+[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:7](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L7)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:4](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L4)
+[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:4](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L4)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:5](https://github.com/mailgun/mailgun.js/blob/428d668/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L5)
+[Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts:5](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/CustomMessageLimit/ICustomMessageLimitClient.ts#L5)

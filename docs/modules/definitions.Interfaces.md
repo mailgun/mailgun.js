@@ -8,6 +8,7 @@
 
 ### Interfaces
 
+- [IAccountManagementClient](../interfaces/definitions.Interfaces.IAccountManagementClient.md)
 - [IBounce](../interfaces/definitions.Interfaces.IBounce.md)
 - [IBounceClassificationClient](../interfaces/definitions.Interfaces.IBounceClassificationClient.md)
 - [IComplaint](../interfaces/definitions.Interfaces.IComplaint.md)
