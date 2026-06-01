@@ -33,7 +33,7 @@ export default class AccountManagementClient implements IAccountManagementClient
   }
 
   // Get webhook signing key saved on the account
-  async getWebhookSigningKey(): Promise<ResponseWithSigninKey> {
+  async getWebhookSigningKey(): Promise<Omit<ResponseWithSigninKey, 'message'>> {
     const response = await this.request.get(`${this.path}/http_signing_key`);
     return {
       status: response.status,

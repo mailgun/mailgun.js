@@ -10,7 +10,7 @@ import {
 
 export interface IAccountManagementClient {
   updateAccountSettings(settingsObj: AccountSettings): Promise<MessageResponseWithStatus>
-  getWebhookSigningKey(): Promise<ResponseWithSigninKey>
+  getWebhookSigningKey(): Promise<Omit<ResponseWithSigninKey, 'message'>>
   createWebhookSigningKey(): Promise<MessageResponseWithStatus>
   getSandboxAuthorizedRecipients(): Promise<AuthorizedRecipientsResult>
   addSandboxAuthorizedRecipient(email: string): Promise<AuthorizedRecipientResult>
