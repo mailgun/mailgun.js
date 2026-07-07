@@ -35,7 +35,7 @@ export type APIKeyData = {
     domain_name?: string;
     kind?: 'domain' | 'user' | 'web';
     description?: string;
-    expiration?: number;
+    expiration?: string;
     role: string;
     user_id?: string;
     user_name?: string;
