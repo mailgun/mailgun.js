@@ -41,7 +41,8 @@ import {
   IBounceClassificationClient,
   ITagsClient,
   ICustomMessageLimitClient,
-  IAccountManagementClient
+  IAccountManagementClient,
+  IAPIKeysClient
 } from '../Interfaces/index.js';
 import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
@@ -59,6 +60,7 @@ import BounceClassificationClient from './BounceClassification/BounceClassificat
 import TagsClient from './Tags/TagsClient.js';
 import CustomMessageLimitClient from './CustomMessageLimit/CustomMessageLimit.js';
 import AccountManagementClient from './AccountManagement/AccountManagement.js';
+import APIKeysClient from './APIKeys/APIKeysClient.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -83,6 +85,7 @@ export default class MailgunClient implements IMailgunClient {
   public tags: ITagsClient;
   public customMessageLimit: ICustomMessageLimitClient;
   public accountManagement: IAccountManagementClient;
+  public apiKeys: IAPIKeysClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -169,6 +172,7 @@ export default class MailgunClient implements IMailgunClient {
     this.tags = new TagsClient(this.request);
     this.customMessageLimit = new CustomMessageLimitClient(this.request);
     this.accountManagement = new AccountManagementClient(this.request);
+    this.apiKeys = new APIKeysClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {
