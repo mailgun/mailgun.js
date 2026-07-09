@@ -1345,6 +1345,14 @@ The following service methods are available to instantiated clients. The example
   }
   ```
 
+### Domain credentials
+  The Credentials API lets you view and manage SMTP credentials.[API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials)
+- #### list
+- #### create
+- #### update
+- #### destroy
+- #### destroyAll
+
 ### Domain templates
 
 - #### list
