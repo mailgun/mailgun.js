@@ -28,6 +28,7 @@ import { LogsQuery } from '../Logs/Logs.js';
 import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClassification.js';
 import { TagDeleteData, TagsUpdateData } from '../Tags/Tags.js';
 import { EmailQuery } from '../AccountManagement/AccountManagement.js';
+import { APIKeysQuery } from '../APIKeys/index.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;
@@ -73,6 +74,7 @@ export type GetQueryTypes =
   SeedsListsAPIQuery |
   RoutesMatchQuery |
   EmailQuery|
+  APIKeysQuery |
 { searchParams?: Array<Array<string>> } |
   ValidationQuery
 

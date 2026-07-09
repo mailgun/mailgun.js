@@ -8623,6 +8623,94 @@ var AccountManagementClient = /** @class */ (function () {
     return AccountManagementClient;
 }());
 
+var APIKeysClient = /** @class */ (function () {
+    function APIKeysClient(request) {
+        this.request = request;
+        this.path = '/v1/keys';
+    }
+    APIKeysClient.prototype.parseItem = function (item) {
+        return __assign(__assign({}, item), { created_at: new Date(item.created_at), updated_at: new Date(item.updated_at), expires_at: item.expires_at ? new Date(item.expires_at) : undefined });
+    };
+    APIKeysClient.prototype.prepareList = function (data) {
+        var _this = this;
+        var items = data.items.map(function (item) { return _this.parseItem(item); });
+        return {
+            totalCount: data.total_count,
+            items: items
+        };
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/get-v1-keys
+    APIKeysClient.prototype.list = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = data || {};
+                        return [4 /*yield*/, this.request.get("".concat(this.path), query)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, this.prepareList(response.body))];
+                }
+            });
+        });
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys
+    APIKeysClient.prototype.create = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.postWithFD("".concat(this.path), data)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, this.parseItem(response.body)];
+                }
+            });
+        });
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/delete-v1-keys--key-id-
+    APIKeysClient.prototype.destroy = function (keyId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!keyId) {
+                            throw APIError.getUserDataError('Missing keyId', 'The keyId parameter is required to delete an API key.');
+                        }
+                        return [4 /*yield*/, this.request.delete("".concat(this.path, "/").concat(keyId))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                status: response.status,
+                                message: response.body.message
+                            }];
+                }
+            });
+        });
+    };
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys-public
+    APIKeysClient.prototype.regeneratePublicKey = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("".concat(this.path, "/public"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                status: response.status,
+                                message: response.body.message,
+                                key: response.body.key
+                            }];
+                }
+            });
+        });
+    };
+    return APIKeysClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -8675,6 +8763,7 @@ var MailgunClient = /** @class */ (function () {
         this.tags = new TagsClient(this.request);
         this.customMessageLimit = new CustomMessageLimitClient(this.request);
         this.accountManagement = new AccountManagementClient(this.request);
+        this.apiKeys = new APIKeysClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

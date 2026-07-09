@@ -20,3 +20,4 @@ export * from './BounceClassification/IBounceClassificationClient.js';
 export * from './Tags/index.js';
 export * from './CustomMessageLimit/ICustomMessageLimitClient.js';
 export * from './AccountManagement/IAccountManagementClient.js';
+export * from './APIKeys/index.js';

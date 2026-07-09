@@ -19,3 +19,4 @@ export * from './BounceClassification/index.js';
 export * from './Tags/index.js';
 export * from './CustomMessageLimit/CustomMessageLimitClient.js';
 export * from './AccountManagement/AccountManagement.js';
+export * from './APIKeys/index.js';
