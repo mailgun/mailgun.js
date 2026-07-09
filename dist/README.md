@@ -393,6 +393,11 @@ The following service methods are available to instantiated clients. The example
       - [removeSandboxAuthorizedRecipient](#removesandboxauthorizedrecipient)
       - [resendActivationEmail](#resendactivationemail)
       - [updateAccountFeature](#updateaccountfeature)
+    - [API keys](#api-keys)
+      - [list](#list-19)
+      - [create](#create-11)
+      - [destroy](#destroy-13)
+      - [regeneratePublicKey](#regeneratepublickey)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -5963,6 +5968,156 @@ The following service methods are available to instantiated clients. The example
     }
     );
     ```
+
+### API keys
+  The Keys API lets you view and manage API keys. [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys)
+
+- #### list
+  Fetch API keys with optional domain and kind filters.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/get-v1-keys)
+
+  `mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })`
+
+  Options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  domain_name   | Filter returned API keys by domain name.
+  kind          | Filter by API key kind. Valid values: `domain`, `user`, `web`.
+
+  Example:
+
+  ```js
+  mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    totalCount: 1,
+    items: [
+      {
+        id: 'key-1',
+        description: 'Primary domain key',
+        kind: 'domain',
+        role: 'admin',
+        created_at: Date,
+        updated_at: Date,
+        expires_at: Date,
+        domain_name: 'example.com',
+        user_name: null,
+        requestor: null
+      }
+    ]
+  }
+  ```
+
+- #### create
+  Create a new Mailgun API key.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys)
+
+  `mg.apiKeys.create({ role: 'sending', kind: 'domain', description: 'Example key' })`
+
+  Options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  domain_name   | Optional domain name for a domain API key.
+  kind          | Key kind. Valid values: `domain`, `user`, `web`.
+  description   | Optional key description.
+  expiration    | Optional expiration time as a string.
+  role          | (**Required**) Key role. Example values: `admin`, `basic`, `sending`, `developer`.
+  user_id       | Optional user identifier for user keys.
+  user_name     | Optional user name for user keys.
+  email         | Optional email for user keys.
+
+  Example:
+
+  ```js
+  mg.apiKeys.create({
+    role: 'sending',
+    kind: 'domain',
+    description: 'SMTP sending key',
+    domain_name: 'example.com'
+  })
+    .then(key => console.log(key))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    id: 'key-3',
+    description: 'SMTP sending key',
+    kind: 'domain',
+    role: 'sending',
+    created_at: Date,
+    updated_at: Date,
+    expires_at: Date, // optional
+    disabled_reason: 'reason', // optional
+    is_disabled: false,
+    domain_name: 'example.com',
+    requestor: null,
+    user_name: null,
+    secret: 'secret',
+  }
+  ```
+
+- #### destroy
+  Delete an API key by its ID.
+
+  `mg.apiKeys.destroy('key-123')`
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/delete-v1-keys--key-id-)
+
+  Example:
+
+  ```JS
+  mg.apiKeys.destroy('key-123')
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'key deleted'
+  }
+  ```
+
+- #### regeneratePublicKey
+  Regenerate the public API key for the authenticated account.
+
+  `mg.apiKeys.regeneratePublicKey()`
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys-public)
+
+  Example:
+
+  ```js
+  mg.apiKeys.regeneratePublicKey()
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'The public API key has been successfully regenerated',
+    key: 'pub-key-123'
+  }
+  ```
 
 ## Browser Demo
 

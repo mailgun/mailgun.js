@@ -1,4 +1,4 @@
-import { MessageResponseWithStatus } from '../Common/index.js';
+import { MessageResponseWithStatus } from '../Common/ApiResponse.js';
 export type APIKeysQuery = {
     domain_name?: string;
     kind?: 'domain' | 'user' | 'web';
