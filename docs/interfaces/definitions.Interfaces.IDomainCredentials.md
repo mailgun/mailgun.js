@@ -10,6 +10,7 @@
 
 - [create](definitions.Interfaces.IDomainCredentials.md#create)
 - [destroy](definitions.Interfaces.IDomainCredentials.md#destroy)
+- [destroyAll](definitions.Interfaces.IDomainCredentials.md#destroyall)
 - [list](definitions.Interfaces.IDomainCredentials.md#list)
 - [update](definitions.Interfaces.IDomainCredentials.md#update)
 
@@ -32,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:11](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/Domains/DomainCredentials.ts#L11)
+[Interfaces/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L12)
 
 ___
 
@@ -53,7 +54,27 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:18](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/Domains/DomainCredentials.ts#L18)
+[Interfaces/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L19)
+
+___
+
+### destroyAll
+
+▸ **destroyAll**(`domain`): `Promise`\<[`DeletedAllDomainCredentialsResult`](../modules/definitions.md#deletedalldomaincredentialsresult)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `domain` | `string` |
+
+#### Returns
+
+`Promise`\<[`DeletedAllDomainCredentialsResult`](../modules/definitions.md#deletedalldomaincredentialsresult)\>
+
+#### Defined in
+
+[Interfaces/Domains/DomainCredentials.ts:23](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L23)
 
 ___
 
@@ -74,7 +95,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:10](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/Domains/DomainCredentials.ts#L10)
+[Interfaces/Domains/DomainCredentials.ts:11](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L11)
 
 ___
 
@@ -96,4 +117,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:13](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/Domains/DomainCredentials.ts#L13)
+[Interfaces/Domains/DomainCredentials.ts:14](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L14)

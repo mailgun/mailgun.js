@@ -8,6 +8,7 @@
 
 ### Interfaces
 
+- [IAPIKeysClient](../interfaces/definitions.Interfaces.IAPIKeysClient.md)
 - [IAccountManagementClient](../interfaces/definitions.Interfaces.IAccountManagementClient.md)
 - [IBounce](../interfaces/definitions.Interfaces.IBounce.md)
 - [IBounceClassificationClient](../interfaces/definitions.Interfaces.IBounceClassificationClient.md)

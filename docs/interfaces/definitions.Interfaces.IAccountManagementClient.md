@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:16](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L16)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:16](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L16)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:14](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L14)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:14](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L14)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:15](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L15)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:15](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L15)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:13](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L13)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:13](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L13)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:17](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L17)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:17](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L17)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:18](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L18)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:18](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L18)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:19](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L19)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:19](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L19)
 
 ___
 
@@ -151,4 +151,4 @@ ___
 
 #### Defined in
 
-[Interfaces/AccountManagement/IAccountManagementClient.ts:12](https://github.com/mailgun/mailgun.js/blob/e14cb60/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L12)
+[Interfaces/AccountManagement/IAccountManagementClient.ts:12](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/AccountManagement/IAccountManagementClient.ts#L12)

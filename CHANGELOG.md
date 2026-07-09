@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.3.0](https://github.com/mailgun/mailgun.js/compare/v13.2.0...v13.3.0) (2026-07-09)
+
+
+### Features
+
+* Add 'deleteAll' method to domain credentials client ([b831baa](https://github.com/mailgun/mailgun.js/commits/b831baa9e7dc61b13634a3bbd67d44bc1921c2c1))
+* Add API keys client ([54a09ab](https://github.com/mailgun/mailgun.js/commits/54a09ab7a6b45785124aaaacf48d0158b3dbbf36))
+* Add tests for new API keys client ([7214787](https://github.com/mailgun/mailgun.js/commits/72147874d228b648be58e2fd5ecf2d046df18352))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @babel/core from 7.26.9 to 7.29.6 ([c19880c](https://github.com/mailgun/mailgun.js/commits/c19880c1731380af6a78a5afe56852f0825fa294))
+* **deps:** bump form-data ([49f34cd](https://github.com/mailgun/mailgun.js/commits/49f34cde29c5106ec03fc995e385817bee2868e2))
+
+
+### Other changes
+
+* Update build ([64a02aa](https://github.com/mailgun/mailgun.js/commits/64a02aa115a4f264d803448a97b5d64a380e5f6b))
+* Update readme and build ([71ca789](https://github.com/mailgun/mailgun.js/commits/71ca7890da43c0aa2bed2dd60861e83c8c9e7a60))
+* Update Readme and fix linter ([428ae41](https://github.com/mailgun/mailgun.js/commits/428ae41cd7793559eac7f2656336ced593af3ab8))
+
 ## [13.2.0](https://github.com/mailgun/mailgun.js/compare/v13.1.0...v13.2.0) (2026-06-01)
 
 
