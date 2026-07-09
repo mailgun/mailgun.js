@@ -86,4 +86,19 @@ describe('DomainsCredentialsClient', function () {
       });
     });
   });
+
+  describe('destroy all', function () {
+    it('deletes all domain credentials', async () => {
+      api.delete('/v3/domains/testDomain/credentials').reply(200, {
+        message: 'All domain credentials have been deleted',
+        count: 5
+      });
+      const res = await client.destroyAll('testDomain');
+      expect(res).toMatchObject({
+        message: 'All domain credentials have been deleted',
+        count: 5,
+        status: 200
+      });
+    });
+  });
 });

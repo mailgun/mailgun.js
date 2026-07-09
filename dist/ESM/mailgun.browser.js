@@ -6694,6 +6694,13 @@ class DomainCredentialsClient {
         return this.request.delete(`${this.baseRoute}${domain}/credentials/${credentialsLogin}`)
             .then((res) => this._parseDeletedResponse(res));
     }
+    async destroyAll(domain) {
+        const response = await this.request.delete(`${this.baseRoute}${domain}/credentials`);
+        return {
+            ...response.body,
+            status: response.status,
+        };
+    }
 }
 
 class MultipleValidationJob {

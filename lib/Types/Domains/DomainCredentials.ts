@@ -6,6 +6,8 @@ export type DomainCredentialsQuery = {
 
 export type DomainCredentials = {
     login: string;
+    mailbox?: string;
+    system?: boolean;
     password: string;
 }
 
@@ -33,6 +35,12 @@ export type DomainCredentialsResult = {
     status: number,
     message: string;
     spec?: string;
+}
+
+export type DeletedAllDomainCredentialsResult = {
+    status: number,
+    message: string;
+    count: number;
 }
 
 export type CreatedUpdatedDomainCredentialsResponse = {

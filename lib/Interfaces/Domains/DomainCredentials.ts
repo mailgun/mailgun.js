@@ -1,4 +1,5 @@
 import type {
+  DeletedAllDomainCredentialsResult,
   DomainCredentials,
   DomainCredentialsList,
   DomainCredentialsQuery,
@@ -19,4 +20,5 @@ export interface IDomainCredentials {
         domain: string,
         credentialsLogin: string
     ): Promise<DomainCredentialsResult>
+    destroyAll(domain: string): Promise<DeletedAllDomainCredentialsResult>
 }
