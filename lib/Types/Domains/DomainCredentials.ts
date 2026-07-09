@@ -35,6 +35,12 @@ export type DomainCredentialsResult = {
     spec?: string;
 }
 
+export type DeletedAllDomainCredentialsResult = {
+    status: number,
+    message: string;
+    count: number;
+}
+
 export type CreatedUpdatedDomainCredentialsResponse = {
     status: number,
     body: {

@@ -9,7 +9,8 @@ import {
   DeletedDomainCredentialsResponse,
   DomainCredentialsQuery,
   DomainCredentials,
-  UpdateDomainCredentialsData
+  UpdateDomainCredentialsData,
+  DeletedAllDomainCredentialsResult
 } from '../../Types/Domains/index.js';
 import Request from '../common/Request.js';
 
@@ -83,5 +84,13 @@ export default class DomainCredentialsClient implements IDomainCredentials {
   ): Promise<DomainCredentialsResult> {
     return this.request.delete(`${this.baseRoute}${domain}/credentials/${credentialsLogin}`)
       .then((res: APIResponse) => this._parseDeletedResponse(res));
+  }
+
+  async destroyAll(domain: string): Promise<DeletedAllDomainCredentialsResult> {
+    const response = await this.request.delete(`${this.baseRoute}${domain}/credentials`);
+    return {
+      ...response.body,
+      status: response.status,
+    };
   }
 }
