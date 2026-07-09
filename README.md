@@ -229,13 +229,19 @@ The following service methods are available to instantiated clients. The example
       - [updateDKIMSelector](#updatedkimselector)
       - [getIps](#getips)
       - [assignIp](#assignip)
-    - [domain templates](#domain-templates)
+    - [domain credentials](#domain-credentials)
       - [list](#list-1)
-      - [get](#get-1)
       - [create](#create-2)
       - [update](#update-1)
       - [destroy](#destroy-1)
       - [destroyAll](#destroyall)
+    - [domain templates](#domain-templates)
+      - [list](#list-2)
+      - [get](#get-1)
+      - [create](#create-3)
+      - [update](#update-2)
+      - [destroy](#destroy-2)
+      - [destroyAll](#destroyall-1)
       - [listVersions](#listversions)
       - [getVersion](#getversion)
       - [createVersion](#createversion)
@@ -248,19 +254,19 @@ The following service methods are available to instantiated clients. The example
       - [generate](#generate)
       - [regenerate](#regenerate)
     - [domain keys](#domain-keys)
-      - [list](#list-2)
+      - [list](#list-3)
       - [listAll](#listall)
-      - [create](#create-3)
+      - [create](#create-4)
       - [activate](#activate)
       - [deactivate](#deactivate)
-      - [destroy](#destroy-2)
+      - [destroy](#destroy-3)
       - [updateDKIMAuthority](#updatedkimauthority-1)
       - [updateDKIMSelector](#updatedkimselector-1)
     - [events](#events)
       - [get](#get-3)
         - [Example with Date and *Filter field*](#example-with-date-and-filter-field)
     - [logs](#logs)
-      - [list](#list-3)
+      - [list](#list-4)
     - [stats](#stats)
       - [Stats Options](#stats-options)
       - [getDomain](#getdomain)
@@ -269,7 +275,7 @@ The following service methods are available to instantiated clients. The example
       - [getAccount](#getaccount-1)
       - [getAccountUsage](#getaccountusage)
     - [suppressions](#suppressions)
-      - [list](#list-4)
+      - [list](#list-5)
         - [Bounces Example](#bounces-example)
         - [Unsubscribes Example](#unsubscribes-example)
         - [Complaints Example](#complaints-example)
@@ -277,7 +283,7 @@ The following service methods are available to instantiated clients. The example
         - [Bounces Example](#bounces-example-1)
         - [Unsubscribes Example](#unsubscribes-example-1)
         - [Complaints Example](#complaints-example-1)
-      - [create](#create-4)
+      - [create](#create-5)
         - [Bounces Example](#bounces-example-2)
         - [Unsubscribes Example](#unsubscribes-example-2)
           - [Unsubscribe from one tag](#unsubscribe-from-one-tag)
@@ -288,42 +294,42 @@ The following service methods are available to instantiated clients. The example
         - [Unsubscribes list upload example](#unsubscribes-file-upload-example)
         - [Complaints list upload example](#complaints-file-upload-example)
         - [Whitelists list upload example](#whitelists-file-upload-example)
-      - [destroy](#destroy-3)
+      - [destroy](#destroy-4)
         - [Bounces Example](#bounces-example-3)
         - [Unsubscribes Example](#unsubscribes-example-3)
         - [Complaints Example](#complaints-example-3)
-      - [destroyAll](#destroyall-1)
+      - [destroyAll](#destroyall-2)
         - [Bounces Example](#bounces-example-4)
         - [Unsubscribes Example](#unsubscribes-example-4)
         - [Complaints Example](#complaints-example-4)
         - [Whitelists Example](#whitelists-example)
     - [webhooks](#webhooks)
-      - [list](#list-5)
-      - [get](#get-5)
-      - [create](#create-5)
-      - [update](#update-2)
-      - [destroy](#destroy-4)
-    - [routes](#routes)
       - [list](#list-6)
-      - [get](#get-6)
+      - [get](#get-5)
       - [create](#create-6)
       - [update](#update-3)
       - [destroy](#destroy-5)
+    - [routes](#routes)
+      - [list](#list-7)
+      - [get](#get-6)
+      - [create](#create-7)
+      - [update](#update-4)
+      - [destroy](#destroy-6)
       - [matchAddress](#matchaddress)
     - [validate](#validate)
       - [get](#get-7)
     - [multiple validation](#multiple-validation)
-      - [create](#create-7)
-      - [list](#list-7)
-      - [get](#get-8)
-      - [destroy](#destroy-6)
-    - [mailing lists](#mailing-lists)
+      - [create](#create-8)
       - [list](#list-8)
+      - [get](#get-8)
+      - [destroy](#destroy-7)
+    - [mailing lists](#mailing-lists)
+      - [list](#list-9)
       - [listByAddress](#listbyaddress)
       - [get](#get-9)
-      - [create](#create-8)
-      - [update](#update-4)
-      - [destroy](#destroy-7)
+      - [create](#create-9)
+      - [update](#update-5)
+      - [destroy](#destroy-8)
     - [mailing list members](#mailing-list-members)
       - [listMembers](#listmember)
       - [listMembersByAddress](#listmembersbyaddress)
@@ -333,56 +339,56 @@ The following service methods are available to instantiated clients. The example
       - [updateMember](#updatemember)
       - [destroyMember](#destroymember)
     - [subaccounts](#subaccounts)
-      - [list](#list-9)
+      - [list](#list-10)
       - [get](#get-10)
-      - [create](#create-9)
+      - [create](#create-10)
       - [enable](#enable)
       - [disable](#disable)
-      - [destroy](#destroy-8)
+      - [destroy](#destroy-9)
       - [setMonthlySendingLimit](#setmonthlysendinglimit)
       - [getMonthlySendingLimit](#getmonthlysendinglimit)
       - [updateSubaccountFeature](#updatesubaccountfeature)
     - [inbox placements](#inbox-placements)
       - [SeedsLists](#seedslists)
-        - [list](#list-10)
+        - [list](#list-11)
         - [get](#get-11)
-        - [create](#create-10)
-        - [update](#update-5)
-        - [destroy](#destroy-9)
+        - [create](#create-11)
+        - [update](#update-6)
+        - [destroy](#destroy-10)
         - [SeedsLists Attributes](#attributes)
-          - [list](#list-11)
+          - [list](#list-12)
           - [get](#get-12)
         - [SeedsLists Filters](#filters)
-          - [list](#list-12)
+          - [list](#list-13)
       - [Providers](#providers)
-        - [list](#list-13)
-      - [Results](#results)
         - [list](#list-14)
+      - [Results](#results)
+        - [list](#list-15)
         - [get](#get-13)
-        - [destroy](#destroy-10)
+        - [destroy](#destroy-11)
         - [getResultByShareId](#getresultbyshareid)
         - [Results Attributes](#attributes-1)
-          - [list](#list-15)
+          - [list](#list-16)
           - [get](#get-14)
         - [Results Filters](#filters-1)
-          - [list](#list-16)
+          - [list](#list-17)
         - [Sharing](#sharing)
           - [get](#get-15)
-          - [update](#update-6)
+          - [update](#update-7)
       - [Run Test](#run-test)
     - [DKIM Management](#dkim-management)
-      - [update](#update-7)
-    - [Bounce Classification](#bounce-classification)
-      - [list](#list-17)
-    - [Tags](#tags)
-      - [list](#list-18)
-      - [limits](#limits)
       - [update](#update-8)
-      - [destroy](#destroy-11)
+    - [Bounce Classification](#bounce-classification)
+      - [list](#list-18)
+    - [Tags](#tags)
+      - [list](#list-19)
+      - [limits](#limits)
+      - [update](#update-9)
+      - [destroy](#destroy-12)
     - [Custom Message Limit](#custom-message-limit)
       - [get](#get-16)
       - [set](#set)
-      - [destroy](#destroy-12)
+      - [destroy](#destroy-13)
       - [enable](#enable-1)
     - [Account Management](#account-management)
       - [updateAccountSettings](#updateaccountsettings)
@@ -394,9 +400,9 @@ The following service methods are available to instantiated clients. The example
       - [resendActivationEmail](#resendactivationemail)
       - [updateAccountFeature](#updateaccountfeature)
     - [API keys](#api-keys)
-      - [list](#list-19)
-      - [create](#create-11)
-      - [destroy](#destroy-13)
+      - [list](#list-20)
+      - [create](#create-12)
+      - [destroy](#destroy-14)
       - [regeneratePublicKey](#regeneratepublickey)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
@@ -1348,10 +1354,164 @@ The following service methods are available to instantiated clients. The example
 ### Domain credentials
   The Credentials API lets you view and manage SMTP credentials.[API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials)
 - #### list
+  List Mailgun SMTP credential metadata for a given domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials/get-v3-domains--domain-name--credentials)
+
+  `mg.domains.domainCredentials.list('domainId', query)`
+
+  Query data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | limit     | Limit results to this many |
+  | skip      | Number of results to skip, to help with pagination|
+
+  Example:
+
+  ```js
+  mg.domains.domainCredentials.list('domainId',{
+    limit: 10,
+    skip: 2,
+  })
+    .then(domainCredentials => console.log(domainCredentials)) // logs array of domain SMTP credentials metadata
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: object with domain's SMTP credentials
+  ```JS
+  {
+    items: [
+      {
+        mailbox: "someone@example.com",
+        login: "someone@example.com",
+        created_at: "Wed, 08 Mar 2023 23:34:57 +0000",
+        size_bytes: null
+      },
+      ...
+    ],
+    total_count: 1
+  }
+  ```
+
 - #### create
+  Create Mailgun SMTP credentials for a given domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials/post-v3-domains--domain-name--credentials)
+
+  `mg.domains.domainCredentials.create('domainId', data)`
+
+  Data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | login     | (**Required**) Email address of SMTP credential user;|
+  | mailbox   | Email address of SMTP credential user, may be used in place of 'login'|
+  | system    | Identify if these are system account credentials, defaults to false |
+  | password  | Supply desired password(s) for the new credentials if preferred over generated ones|
+
+  Example:
+
+  ```js
+  mg.domains.domainCredentials.create('domainId', {
+    login: "someone@example.com", // required
+    mailbox: "someone@example.com",
+    system: 'false',
+    password: 'password',
+  })
+    .then(result => console.log(result)) // logs result of creation
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+
+  Promise returns: object with message
+  ```JS
+  {
+    status: 200
+    message: "Created 1 credentials pair(s)"
+  }
+  ```
+
 - #### update
+  Update Mailgun SMTP credentials for a given domain and SMTP user
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials/put-v3-domains--domain-name--credentials--spec-)
+
+  `mg.domains.domainCredentials.update('domainId', 'loginForUpdate', data)`
+
+  Data object may have next properties:
+
+  | Property | Description                                           |
+  |:----------|:------------------------------------------------------|
+  | password     | (**Required**) Supply desired password for the credentials to update if preferred over a generated one|
+
+  Example:
+
+  ```js
+  mg.domains.domainCredentials.update('domainId', 'someone@example.com' ,{
+    password: 'new password',
+  })
+    .then(result => console.log(result)) // logs result of update
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+   Promise returns: object with message
+    ```JS
+    {
+      status: 200
+      message: "Created 1 credentials pair(s)"
+    }
+    ```
+
+
 - #### destroy
+  Delete Mailgun SMTP credentials for a given domain and SMTP user
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials/delete-v3-domains--domain-name--credentials--spec-)
+
+  `mg.domains.domainCredentials.destroy('domainId', 'loginToDelete')`
+
+  Example:
+
+  ```js
+  mg.domains.domainCredentials.destroy('domainId', 'someone@example.com')
+    .then(result => console.log(result)) // logs result of delete
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: object with message
+  ```JS
+  {
+    status: 200
+    message: "Credentials have been deleted",
+    spec: "someone@example.com"
+  }
+  ```
+
 - #### destroyAll
+
+  Delete Mailgun SMTP credentials for a given domain
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/credentials/delete-v3-domains--domain-name--credentials)
+
+  `mg.domains.domainCredentials.destroyAll('domainId')`
+
+  Example:
+
+  ```js
+  mg.domains.domainCredentials.destroyAll('domainId')
+    .then(result => console.log(result)) // logs result of delete
+    .catch(err => console.error(err)); // logs any error
+  ```
+
+  Promise returns: object with message and count
+  ```JS
+  {
+    status: 200
+    message: "All domain credentials have been deleted",
+    count: 2
+  }
+  ```
 
 ### Domain templates
 
@@ -1505,6 +1665,7 @@ The following service methods are available to instantiated clients. The example
   ```
 
 - #### update
+
   Update the description of a template.
 
   [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/templates/put-v3--domain-name--templates--template-name-)

@@ -6,6 +6,8 @@ export type DomainCredentialsQuery = {
 
 export type DomainCredentials = {
     login: string;
+    mailbox?: string;
+    system?: boolean;
     password: string;
 }
 
