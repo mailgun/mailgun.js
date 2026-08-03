@@ -7,7 +7,7 @@ import type { WebhooksQuery } from '../Webhooks/index.js';
 import type { ConnectionSettings, DeletedDomainKeysQuery, DomainCredentialsQuery, DomainGetAPIQuery, DomainsQuery, DomainTagsStatisticQuery, DomainTemplatesQuery, TemplateQuery } from '../Domains/index.js';
 import type { InboxPlacementsData, InboxPlacementsResultsApiQuery, SeedsListsAPIQuery, SeedsListsUpdatingData } from '../InboxPlacements/index.js';
 import type { ValidationQuery } from '../Validations/index.js';
-import type { IpPoolDeleteData } from '../IPPools/index.js';
+import type { IpPoolDeleteData, MultipleIps } from '../IPPools/index.js';
 import type { MetricsQuery } from '../Metrics/index.js';
 import type { FormDataInput } from './FormData.js';
 import { LogsQuery } from '../Logs/Logs.js';
@@ -15,6 +15,7 @@ import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClas
 import { TagDeleteData, TagsUpdateData } from '../Tags/Tags.js';
 import { EmailQuery } from '../AccountManagement/AccountManagement.js';
 import { APIKeysQuery } from '../APIKeys/index.js';
+import { IPAddressQuery } from '../index.js';
 export type OnCallEmptyHeaders = {
     [key: string]: undefined;
 };
@@ -40,8 +41,8 @@ export type OnCallRequestOptions = {
 export type GetQueryTypes = IPsListQuery | RoutesListQuery | SubaccountsQuery | WebhooksQuery | DomainsQuery | DomainGetAPIQuery | DomainCredentialsQuery | DomainTagsStatisticQuery | TemplateQuery | DomainTemplatesQuery | InboxPlacementsResultsApiQuery | SeedsListsAPIQuery | RoutesMatchQuery | EmailQuery | APIKeysQuery | {
     searchParams?: Array<Array<string>>;
 } | ValidationQuery;
-export type DeleteQueryTypes = DeletedDomainKeysQuery;
-export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery | BounceClassificationAPIQuery | string;
+export type DeleteQueryTypes = DeletedDomainKeysQuery | IPAddressQuery;
+export type PostDataTypes = InboxPlacementsData | MetricsQuery | LogsQuery | BounceClassificationAPIQuery | MultipleIps | string;
 export type PutDataTypes = SeedsListsUpdatingData | object | FormDataInput | ConnectionSettings | TagsUpdateData;
 export type DeleteDataTypes = IpPoolDeleteData | TagDeleteData;
 export type RequestData = IpPoolDeleteData | PostDataTypes | PutDataTypes | NodeFormData | FormData;

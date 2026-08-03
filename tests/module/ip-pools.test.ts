@@ -1,6 +1,6 @@
 import nock from 'nock';
 import Request from './test-utils/TestRequest.js';
-import IpPoolsClient from '../../lib/Classes/IPPools.js';
+import IpPoolsClient, { type IPv4Address, type IPv6Address } from '../../lib/Classes/IPPools.js';
 import { RequestOptions } from '../../lib/Types/Common/index.js';
 import getTestFormData from './test-utils/TestFormData.js';
 
@@ -95,6 +95,44 @@ describe('IpPoolsClient', function () {
         status: 200,
         message: 'started',
       });
+    });
+  });
+
+  describe('removeIpFromDomainPool', () => {
+    it('allows valid ipv4 address', async () => {
+      const requestMock = {
+        delete: jest.fn().mockResolvedValue({ status: 200, body: { message: 'success' } }),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '127.0.0.1' as IPv4Address)).resolves.toMatchObject({
+        status: 200,
+        message: 'success',
+      });
+      expect(requestMock.delete).toHaveBeenCalledWith('/v3/domains/example.com/pool/127.0.0.1?ip=127.0.0.1');
+    });
+
+    it('allows valid ipv6 address', async () => {
+      const requestMock = {
+        delete: jest.fn().mockResolvedValue({ status: 200, body: { message: 'success' } }),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '2001:db8::1' as IPv6Address)).resolves.toMatchObject({
+        status: 200,
+        message: 'success',
+      });
+      expect(requestMock.delete).toHaveBeenCalledWith('/v3/domains/example.com/pool/2001%3Adb8%3A%3A1?ip=2001%3Adb8%3A%3A1');
+    });
+
+    it('throws for invalid ip address', async () => {
+      const requestMock = {
+        delete: jest.fn(),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', 'invalid-ip' as IPv4Address)).rejects.toThrow('Invalid IP address to remove from domain pool');
+      expect(requestMock.delete).not.toHaveBeenCalled();
     });
   });
 });

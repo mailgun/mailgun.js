@@ -15,10 +15,11 @@ declare class Request {
     command(method: string, url: string, data?: RequestData, config?: onCallReqConfig, queryObject?: CommandQuery): Promise<APIResponse>;
     get(url: string, query?: GetQueryTypes): Promise<APIResponse>;
     post(url: string, data?: PostDataTypes, config?: Omit<onCallReqConfig, 'isFormURLEncoded' | 'isMultipartFormData'>): Promise<APIResponse>;
+    delete(url: string, data?: DeleteDataTypes, queryObject?: DeleteQueryTypes): Promise<APIResponse>;
     postWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
     putWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
     patchWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
+    deleteWithFD(url: string, data: FormDataInput): Promise<APIResponse>;
     put(url: string, data?: PutDataTypes, queryObject?: PutOptionsType): Promise<APIResponse>;
-    delete(url: string, data?: DeleteDataTypes, queryObject?: DeleteQueryTypes): Promise<APIResponse>;
 }
 export default Request;

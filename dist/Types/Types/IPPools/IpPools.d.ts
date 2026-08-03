@@ -1,9 +1,17 @@
+import { MessageResponseWithStatus } from '../Common/ApiResponse.js';
 export type IpPool = {
     description: string;
     ips: string[];
     is_linked: boolean;
     name: string;
     pool_id: string;
+};
+export type IpPoolDetails = {
+    details: IpPool & {
+        linked_domains: string[];
+    };
+    message: string;
+    status: number;
 };
 export type IpPoolListResponse = {
     body: {
@@ -28,10 +36,7 @@ export type IpPoolMessageResponse = {
     };
     status: number;
 };
-export type IpPoolMessageResult = {
-    message: string;
-    status: number;
-};
+export type IpPoolMessageResult = MessageResponseWithStatus;
 export type IpPoolDeleteData = {
     ip?: string;
     pool_id?: string;
@@ -52,4 +57,22 @@ export type IpPoolCreateResult = {
     status: number;
     message: string;
     pool_id: string;
+};
+export type IpPoolLinkedDomainsQuery = {
+    limit?: number;
+    page?: string;
+};
+export type IpPoolLinkedDomains = {
+    domains: {
+        id: string;
+        name: string;
+    }[];
+    paging: {
+        first: string;
+        next: string;
+    };
+    status: number;
+};
+export type MultipleIps = {
+    ips: string[];
 };
