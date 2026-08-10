@@ -29,7 +29,7 @@ import { BounceClassificationAPIQuery } from '../BounceClassification/BounceClas
 import { TagDeleteData, TagsUpdateData } from '../Tags/Tags.js';
 import { EmailQuery } from '../AccountManagement/AccountManagement.js';
 import { APIKeysQuery } from '../APIKeys/index.js';
-import { IPAddressQuery, IpPoolQuery } from '../index.js';
+import { IPAddressQuery, IpPoolQuery } from './IP.js';
 
 export type OnCallEmptyHeaders = {
   [key: string]: undefined;

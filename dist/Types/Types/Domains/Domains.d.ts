@@ -1,4 +1,4 @@
-import { MessageResponse } from '../Common/index.js';
+import { MessageResponse } from '../Common/ApiResponse.js';
 export type DomainsQuery = {
     limit?: number;
     skip?: number;

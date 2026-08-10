@@ -15,6 +15,8 @@ import {
   IpPoolMessageResponse,
   IpPoolMessageResult,
   IpPoolUpdateData,
+  IpPoolUpdateResponse,
+  IpPoolUpdateResult,
 } from '../Types/index.js';
 import { IIPPoolsClient } from '../Interfaces/index.js';
 import APIError from './common/Error.js';
@@ -87,8 +89,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Edit dedicated IP pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/patch-v3-ip-pools--pool-id-
-  async update(poolId: string, data: IpPoolUpdateData): Promise<IpPoolMessageResult> {
-    const response: IpPoolMessageResponse = await this.request.patchWithFD(`/v3/ip_pools/${poolId}`, data);
+  async update(poolId: string, data: IpPoolUpdateData): Promise<IpPoolUpdateResult> {
+    const response: IpPoolUpdateResponse = await this.request.patchWithFD(`/v3/ip_pools/${poolId}`, data);
     return {
       status: response.status,
       ...response.body
@@ -97,8 +99,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Delete the dedicated IP pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id-
-  async delete(poolId: string, data: IpPoolDeleteData): Promise<IpPoolMessageResult> {
-    const response:IpPoolMessageResponse = await this.request.delete(`/v3/ip_pools/${poolId}`, data);
+  async destroy(poolId: string, data: IpPoolDeleteData): Promise<IpPoolUpdateResult> {
+    const response:IpPoolUpdateResponse = await this.request.delete(`/v3/ip_pools/${poolId}`, data);
     return {
       status: response.status,
       ...response.body
@@ -120,8 +122,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Add an IP to a dedicated IP pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/put-v3-ip-pools--pool-id--ips--ip-
-  async addIp(poolId: string, ip: string): Promise<IpPoolMessageResult> {
-    const response: IpPoolMessageResponse = await this.request.put(`/v3/ip_pools/${poolId}/ips/${ip}`);
+  async addIp(poolId: string, ip: string): Promise<IpPoolUpdateResult> {
+    const response: IpPoolUpdateResponse = await this.request.put(`/v3/ip_pools/${poolId}/ips/${ip}`);
     return {
       status: response.status,
       ...response.body
@@ -130,8 +132,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Remove an IP from a dedicated IP pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--ips--ip-
-  async removeIp(poolId: string, ip: string): Promise<IpPoolMessageResult> {
-    const response: IpPoolMessageResponse = await this.request.delete(`/v3/ip_pools/${poolId}/ips/${ip}`);
+  async removeIp(poolId: string, ip: string): Promise<IpPoolUpdateResult> {
+    const response: IpPoolUpdateResponse = await this.request.delete(`/v3/ip_pools/${poolId}/ips/${ip}`);
     return {
       status: response.status,
       ...response.body
@@ -150,8 +152,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Revoke dedicated IP pool from SubAccount
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--delegate
-  async revokeDelegation(poolId: string, subAccountId: string): Promise<IpPoolMessageResult> {
-    const response: IpPoolMessageResponse = await this.request.deleteWithFD(`/v3/ip_pools/${poolId}/delegate/`, { subaccount_id: subAccountId });
+  async revokeDelegation(poolId: string, subAccountId: string): Promise<IpPoolUpdateResult> {
+    const response: IpPoolUpdateResponse = await this.request.deleteWithFD(`/v3/ip_pools/${poolId}/delegate`, { subaccount_id: subAccountId });
     return {
       status: response.status,
       ...response.body
@@ -160,8 +162,8 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Add multiple IPs to the dedicated IP pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/post-v3-ip-pools--pool-id--ips-json
-  async addIps(poolId: string, ips: string[]): Promise<IpPoolMessageResult> {
-    const response: IpPoolMessageResponse = await this.request.post(`/v3/ip_pools/${poolId}/ips.json`, { ips });
+  async addIps(poolId: string, ips: string[]): Promise<IpPoolUpdateResult> {
+    const response: IpPoolUpdateResponse = await this.request.post(`/v3/ip_pools/${poolId}/ips.json`, { ips });
     return {
       status: response.status,
       ...response.body
@@ -170,7 +172,7 @@ export default class IpPoolsClient implements IIPPoolsClient {
 
   // Remove an IP from the domain pool, unlink a DIPP or remove the domain pool
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
-  // Valid IP address 'all' -> this IP address will be removed from the domain pool.
+  // Valid IP address -> this IP address will be removed from the domain pool.
   async removeIpFromDomainPool(
     domain: string,
     ip: IPAddress,
@@ -217,13 +219,12 @@ export default class IpPoolsClient implements IIPPoolsClient {
   // 'ip_pool' -> the DIPP which is currently linked to the domain will be unlinked
   async unlinkDomainPool(
     domain: string,
-    ipPool: string,
-    replacementPoolId?: string
+    replacementPoolId: string,
   ): Promise<IpPoolMessageResult> {
     const query = replacementPoolId ? {
       pool_id: encodeURIComponent(replacementPoolId)
     } : undefined;
-    const response: IpPoolMessageResponse = await this.request.delete(`/v3/domains/${encodeURIComponent(domain)}/pool/${encodeURIComponent(ipPool)}`, undefined, query);
+    const response: IpPoolMessageResponse = await this.request.delete(`/v3/domains/${encodeURIComponent(domain)}/pool/ip_pool`, undefined, query);
     return {
       status: response.status,
       ...response.body

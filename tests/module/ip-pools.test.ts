@@ -1,8 +1,7 @@
 import nock from 'nock';
 import Request from './test-utils/TestRequest.js';
 import IpPoolsClient from '../../lib/Classes/IPPools.js';
-import type { IPv4Address, IPv6Address } from '../../lib/Types/index.js';
-import { RequestOptions } from '../../lib/Types/Common/index.js';
+import { RequestOptions, type IPv4Address, type IPv6Address } from '../../lib/Types/Common/index.js';
 import getTestFormData from './test-utils/TestFormData.js';
 
 describe('IpPoolsClient', function () {
@@ -87,11 +86,11 @@ describe('IpPoolsClient', function () {
     });
   });
 
-  describe('delete', () => {
+  describe('destroy', () => {
     it('deletes ip pool with ip replacement', async () => {
       api.delete('/v3/ip_pools/test_pool_id').reply(200, { message: 'started' });
 
-      const result = await client.delete('test_pool_id', { ip: '127.0.0.1' });
+      const result = await client.destroy('test_pool_id', { ip: '127.0.0.1' });
       expect(result).toMatchObject({
         status: 200,
         message: 'started',
@@ -172,7 +171,7 @@ describe('IpPoolsClient', function () {
 
   describe('revokeDelegation', () => {
     it('revokes ip pool delegation from a subaccount', async () => {
-      api.delete('/v3/ip_pools/test_pool_id/delegate/').reply(200, { message: 'success' });
+      api.delete('/v3/ip_pools/test_pool_id/delegate').reply(200, { message: 'success' });
 
       const result = await client.revokeDelegation('test_pool_id', 'subaccount_id');
       expect(result).toMatchObject({ status: 200, message: 'success' });
@@ -199,9 +198,9 @@ describe('IpPoolsClient', function () {
 
   describe('unlinkDomainPool', () => {
     it('unlinks a dedicated ip pool from a domain', async () => {
-      api.delete('/v3/domains/example.com/pool/test_pool').query({ pool_id: 'replacement_pool_id' }).reply(200, { message: 'success' });
+      api.delete('/v3/domains/example.com/pool/ip_pool').query({ pool_id: 'replacement_pool_id' }).reply(200, { message: 'success' });
 
-      const result = await client.unlinkDomainPool('example.com', 'test_pool', 'replacement_pool_id');
+      const result = await client.unlinkDomainPool('example.com', 'replacement_pool_id');
       expect(result).toMatchObject({ status: 200, message: 'success' });
     });
   });
@@ -241,6 +240,49 @@ describe('IpPoolsClient', function () {
 
       await expect(ipPoolsClient.removeIpFromDomainPool('example.com', 'invalid-ip' as IPv4Address)).rejects.toThrow('Invalid IP address to remove from domain pool');
       expect(requestMock.delete).not.toHaveBeenCalled();
+    });
+
+    it('throws for empty ip addresses', async () => {
+      const requestMock = {
+        delete: jest.fn(),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '' as IPv4Address)).rejects.toThrow('Invalid IP address to remove from domain pool');
+      expect(requestMock.delete).not.toHaveBeenCalled();
+    });
+
+    it('throws for ipv4 addresses with empty octets', async () => {
+      const requestMock = {
+        delete: jest.fn(),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '1.2..4' as IPv4Address)).rejects.toThrow('Invalid IP address to remove from domain pool');
+      expect(requestMock.delete).not.toHaveBeenCalled();
+    });
+
+    it('throws for invalid replacement ip address', async () => {
+      const requestMock = {
+        delete: jest.fn(),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '127.0.0.1' as IPv4Address, 'invalid-ip' as IPv4Address)).rejects.toThrow('Invalid replacement IP address');
+      expect(requestMock.delete).not.toHaveBeenCalled();
+    });
+
+    it('adds a replacement ip query when provided', async () => {
+      const requestMock = {
+        delete: jest.fn().mockResolvedValue({ status: 200, body: { message: 'success' } }),
+      } as unknown as Request;
+      const ipPoolsClient = new IpPoolsClient(requestMock);
+
+      await expect(ipPoolsClient.removeIpFromDomainPool('example.com', '127.0.0.1' as IPv4Address, '127.0.0.2' as IPv4Address)).resolves.toMatchObject({
+        status: 200,
+        message: 'success',
+      });
+      expect(requestMock.delete).toHaveBeenCalledWith('/v3/domains/example.com/pool/127.0.0.1', undefined, { ip: '127.0.0.2' });
     });
   });
 });

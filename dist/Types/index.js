@@ -6846,7 +6846,7 @@ var IpPoolsClient = /** @class */ (function () {
     };
     // Delete the dedicated IP pool
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id-
-    IpPoolsClient.prototype.delete = function (poolId, data) {
+    IpPoolsClient.prototype.destroy = function (poolId, data) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
@@ -6921,12 +6921,12 @@ var IpPoolsClient = /** @class */ (function () {
     };
     // Revoke dedicated IP pool from SubAccount
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--delegate
-    IpPoolsClient.prototype.revokeDelegate = function (poolId, subAccountId) {
+    IpPoolsClient.prototype.revokeDelegation = function (poolId, subAccountId) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request.deleteWithFD("/v3/ip_pools/".concat(poolId, "/delegate/"), { subaccount_id: subAccountId })];
+                    case 0: return [4 /*yield*/, this.request.deleteWithFD("/v3/ip_pools/".concat(poolId, "/delegate"), { subaccount_id: subAccountId })];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, __assign({ status: response.status }, response.body)];
@@ -6951,7 +6951,7 @@ var IpPoolsClient = /** @class */ (function () {
     };
     // Remove an IP from the domain pool, unlink a DIPP or remove the domain pool
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
-    // Valid IP address 'all' -> this IP address will be removed from the domain pool.
+    // Valid IP address -> this IP address will be removed from the domain pool.
     IpPoolsClient.prototype.removeIpFromDomainPool = function (domain, ip, replacementIp) {
         return __awaiter(this, void 0, void 0, function () {
             var encodedIp, encodedReplacementIp, query, response;
@@ -6995,16 +6995,16 @@ var IpPoolsClient = /** @class */ (function () {
     // Unlink a dedicated IP pool from a domain
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
     // 'ip_pool' -> the DIPP which is currently linked to the domain will be unlinked
-    IpPoolsClient.prototype.unlinkDomainPool = function (domain, ipPool, replacementIpPoolId) {
+    IpPoolsClient.prototype.unlinkDomainPool = function (domain, replacementPoolId) {
         return __awaiter(this, void 0, void 0, function () {
             var query, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = replacementIpPoolId ? {
-                            pool_id: encodeURIComponent(replacementIpPoolId)
+                        query = replacementPoolId ? {
+                            pool_id: encodeURIComponent(replacementPoolId)
                         } : undefined;
-                        return [4 /*yield*/, this.request.delete("/v3/domains/".concat(encodeURIComponent(domain), "/pool/").concat(encodeURIComponent(ipPool)), undefined, query)];
+                        return [4 /*yield*/, this.request.delete("/v3/domains/".concat(encodeURIComponent(domain), "/pool/ip_pool"), undefined, query)];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, __assign({ status: response.status }, response.body)];

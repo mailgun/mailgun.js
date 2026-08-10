@@ -6520,7 +6520,7 @@ class IpPoolsClient {
     }
     // Delete the dedicated IP pool
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id-
-    async delete(poolId, data) {
+    async destroy(poolId, data) {
         const response = await this.request.delete(`/v3/ip_pools/${poolId}`, data);
         return {
             status: response.status,
@@ -6565,8 +6565,8 @@ class IpPoolsClient {
     }
     // Revoke dedicated IP pool from SubAccount
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--delegate
-    async revokeDelegate(poolId, subAccountId) {
-        const response = await this.request.deleteWithFD(`/v3/ip_pools/${poolId}/delegate/`, { subaccount_id: subAccountId });
+    async revokeDelegation(poolId, subAccountId) {
+        const response = await this.request.deleteWithFD(`/v3/ip_pools/${poolId}/delegate`, { subaccount_id: subAccountId });
         return {
             status: response.status,
             ...response.body
@@ -6583,7 +6583,7 @@ class IpPoolsClient {
     }
     // Remove an IP from the domain pool, unlink a DIPP or remove the domain pool
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
-    // Valid IP address 'all' -> this IP address will be removed from the domain pool.
+    // Valid IP address -> this IP address will be removed from the domain pool.
     async removeIpFromDomainPool(domain, ip, replacementIp) {
         if (!this.isValidIp(ip)) {
             throw APIError.getUserDataError('Invalid IP address to remove from domain pool', `The provided IP address "${ip}" is not a valid IPv4 or IPv6 address.`);
@@ -6614,11 +6614,11 @@ class IpPoolsClient {
     // Unlink a dedicated IP pool from a domain
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
     // 'ip_pool' -> the DIPP which is currently linked to the domain will be unlinked
-    async unlinkDomainPool(domain, ipPool, replacementIpPoolId) {
-        const query = replacementIpPoolId ? {
-            pool_id: encodeURIComponent(replacementIpPoolId)
+    async unlinkDomainPool(domain, replacementPoolId) {
+        const query = replacementPoolId ? {
+            pool_id: encodeURIComponent(replacementPoolId)
         } : undefined;
-        const response = await this.request.delete(`/v3/domains/${encodeURIComponent(domain)}/pool/${encodeURIComponent(ipPool)}`, undefined, query);
+        const response = await this.request.delete(`/v3/domains/${encodeURIComponent(domain)}/pool/ip_pool`, undefined, query);
         return {
             status: response.status,
             ...response.body

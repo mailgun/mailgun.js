@@ -5,14 +5,19 @@ export type IpPool = {
   description: string;
   ips: string[];
   is_linked: boolean;
+  is_inherited: boolean;
+  metadata: {
+    assignments: Record<string, {linked_at: string}>;
+  },
   name: string;
   pool_id: string;
 }
 
 export type IpPoolDetails = {
-  details: IpPool & {
+  details: Omit<IpPool, 'is_inherited' | 'metadata' | 'ips'> & {
     linked_domains: string[];
   },
+  ips: string[] | null;
   message: string;
   status: number;
 }
@@ -32,9 +37,12 @@ export type IpPoolListResult = {
 }
 
 export type IpPoolUpdateData = {
-  name: string,
-  description: string,
-  ips: string[]
+  name?: string,
+  description?: string,
+  add_ip?: string,
+  link_domain?: string,
+  remove_ip?: string,
+  unlink_domain?: string
 }
 
 export type IpPoolMessageResponse = {
@@ -45,6 +53,18 @@ export type IpPoolMessageResponse = {
 }
 
 export type IpPoolMessageResult = MessageResponseWithStatus
+
+export type IpPoolUpdateResult = MessageResponseWithStatus & {
+  reference_id: string;
+}
+
+export type IpPoolUpdateResponse = {
+  body: {
+    reference_id: string;
+    message: string;
+  }
+  status: number;
+}
 
 export type IpPoolDeleteData = {
   ip?: string,

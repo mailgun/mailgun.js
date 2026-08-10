@@ -1,4 +1,4 @@
-import { MessageResponse } from '../Common/index.js';
+import { MessageResponse } from '../Common/ApiResponse.js';
 
 /* eslint-disable camelcase */
 export type DomainsQuery = {

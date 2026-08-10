@@ -8,3 +8,6 @@ export type IPAddress = IPv4Address | IPv6Address;
 export type IPAddressQuery = {
     ip: string;
 };
+export type IpPoolQuery = {
+    pool_id: string;
+};
