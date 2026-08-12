@@ -1,9 +1,24 @@
+import { MessageResponseWithStatus } from '../Common/ApiResponse.js';
 export type IpPool = {
     description: string;
     ips: string[];
     is_linked: boolean;
+    is_inherited: boolean;
+    metadata: {
+        assignments: Record<string, {
+            linked_at: string;
+        }>;
+    };
     name: string;
     pool_id: string;
+};
+export type IpPoolDetails = {
+    details: Omit<IpPool, 'is_inherited' | 'metadata' | 'ips'> & {
+        linked_domains: string[];
+    };
+    ips: string[] | null;
+    message: string;
+    status: number;
 };
 export type IpPoolListResponse = {
     body: {
@@ -18,9 +33,12 @@ export type IpPoolListResult = {
     status: number;
 };
 export type IpPoolUpdateData = {
-    name: string;
-    description: string;
-    ips: string[];
+    name?: string;
+    description?: string;
+    add_ip?: string;
+    link_domain?: string;
+    remove_ip?: string;
+    unlink_domain?: string;
 };
 export type IpPoolMessageResponse = {
     body: {
@@ -28,8 +46,15 @@ export type IpPoolMessageResponse = {
     };
     status: number;
 };
-export type IpPoolMessageResult = {
-    message: string;
+export type IpPoolMessageResult = MessageResponseWithStatus;
+export type IpPoolUpdateResult = MessageResponseWithStatus & {
+    reference_id: string;
+};
+export type IpPoolUpdateResponse = {
+    body: {
+        reference_id: string;
+        message: string;
+    };
     status: number;
 };
 export type IpPoolDeleteData = {
@@ -52,4 +77,22 @@ export type IpPoolCreateResult = {
     status: number;
     message: string;
     pool_id: string;
+};
+export type IpPoolLinkedDomainsQuery = {
+    limit?: number;
+    page?: string;
+};
+export type IpPoolLinkedDomains = {
+    domains: {
+        id: string;
+        name: string;
+    }[];
+    paging: {
+        first: string;
+        next: string;
+    };
+    status: number;
+};
+export type MultipleIps = {
+    ips: string[];
 };

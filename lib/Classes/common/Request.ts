@@ -131,6 +131,16 @@ class Request {
     });
   }
 
+  delete(
+    url: string,
+    data?: DeleteDataTypes,
+    queryObject?: DeleteQueryTypes,
+  ): Promise<APIResponse> {
+    const isTagsDeleteData = data && 'tag' in data;
+    const dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
+    return this.command('delete', url, dataObject, {}, { query: queryObject });
+  }
+
   async postWithFD(
     url: string,
     data: FormDataInput
@@ -161,20 +171,17 @@ class Request {
     });
   }
 
+  async deleteWithFD(url: string, data: FormDataInput): Promise<APIResponse> {
+    return this.command('delete', url, data, {
+      isFormURLEncoded: false,
+      isMultipartFormData: true
+    });
+  }
+
   put(url: string, data?: PutDataTypes, queryObject?: PutOptionsType)
     : Promise<APIResponse> {
     const isTagsUpdateData = data && 'tag' in data;
     return this.command('put', url, data, { isApplicationJSON: isTagsUpdateData }, queryObject);
-  }
-
-  delete(
-    url: string,
-    data?: DeleteDataTypes,
-    queryObject?: DeleteQueryTypes,
-  ): Promise<APIResponse> {
-    const isTagsDeleteData = data && 'tag' in data;
-    const dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
-    return this.command('delete', url, dataObject, {}, { query: queryObject });
   }
 }
 

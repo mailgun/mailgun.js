@@ -5,3 +5,4 @@ export * from './FormData.js';
 export * from './NavigationThruPages.js';
 export * from './RequestOptions.js';
 export * from './RequestProvider.js';
+export * from './IP.js';

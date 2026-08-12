@@ -5744,6 +5744,11 @@ var Request = /** @class */ (function () {
             isApplicationJSON: config === null || config === void 0 ? void 0 : config.isApplicationJSON
         });
     };
+    Request.prototype.delete = function (url, data, queryObject) {
+        var isTagsDeleteData = data && 'tag' in data;
+        var dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
+        return this.command('delete', url, dataObject, {}, { query: queryObject });
+    };
     Request.prototype.postWithFD = function (url, data) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, formData, dataSize;
@@ -5795,14 +5800,19 @@ var Request = /** @class */ (function () {
             });
         });
     };
+    Request.prototype.deleteWithFD = function (url, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.command('delete', url, data, {
+                        isFormURLEncoded: false,
+                        isMultipartFormData: true
+                    })];
+            });
+        });
+    };
     Request.prototype.put = function (url, data, queryObject) {
         var isTagsUpdateData = data && 'tag' in data;
         return this.command('put', url, data, { isApplicationJSON: isTagsUpdateData }, queryObject);
-    };
-    Request.prototype.delete = function (url, data, queryObject) {
-        var isTagsDeleteData = data && 'tag' in data;
-        var dataObject = isTagsDeleteData ? JSON.stringify(data) : data;
-        return this.command('delete', url, dataObject, {}, { query: queryObject });
     };
     return Request;
 }());
@@ -6749,17 +6759,69 @@ var IpPoolsClient = /** @class */ (function () {
     function IpPoolsClient(request) {
         this.request = request;
     }
-    IpPoolsClient.prototype.list = function () {
-        var _this = this;
-        return this.request.get('/v1/ip_pools')
-            .then(function (response) { return _this.parseIpPoolsResponse(response); });
+    IpPoolsClient.prototype.isValidIp = function (ip) {
+        if (typeof ip !== 'string' || ip.length === 0) {
+            return false;
+        }
+        if (ip.includes(':')) { // IPv6 address
+            try {
+                var parsedUrl = new URL("http://[".concat(ip, "]"));
+                return parsedUrl.hostname === "[".concat(ip, "]");
+            }
+            catch (_a) {
+                return false;
+            }
+        }
+        var parts = ip.split('.');
+        if (parts.length !== 4) {
+            return false;
+        }
+        return parts.every(function (part) {
+            if (part.length === 0) {
+                return false;
+            }
+            var value = Number(part);
+            return Number.isInteger(value) && value >= 0 && value <= 255 && part === String(value);
+        });
     };
+    // List dedicated IP pools of the account
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools
+    IpPoolsClient.prototype.list = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get('/v3/ip_pools')];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Get dedicated IP pool details
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools--pool-id-
+    IpPoolsClient.prototype.get = function (poolId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v3/ip_pools/".concat(poolId))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Add a new dedicated IP pool to the account
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/post-v3-ip-pools
     IpPoolsClient.prototype.create = function (data) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request.postWithFD('/v1/ip_pools', data)];
+                    case 0: return [4 /*yield*/, this.request.postWithFD('/v3/ip_pools', data)];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, __assign({ status: response.status }, response.body)];
@@ -6767,12 +6829,14 @@ var IpPoolsClient = /** @class */ (function () {
             });
         });
     };
+    // Edit dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/patch-v3-ip-pools--pool-id-
     IpPoolsClient.prototype.update = function (poolId, data) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request.patchWithFD("/v1/ip_pools/".concat(poolId), data)];
+                    case 0: return [4 /*yield*/, this.request.patchWithFD("/v3/ip_pools/".concat(poolId), data)];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, __assign({ status: response.status }, response.body)];
@@ -6780,12 +6844,14 @@ var IpPoolsClient = /** @class */ (function () {
             });
         });
     };
-    IpPoolsClient.prototype.delete = function (poolId, data) {
+    // Delete the dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id-
+    IpPoolsClient.prototype.destroy = function (poolId, data) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request.delete("/v1/ip_pools/".concat(poolId), data)];
+                    case 0: return [4 /*yield*/, this.request.delete("/v3/ip_pools/".concat(poolId), data)];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, __assign({ status: response.status }, response.body)];
@@ -6793,8 +6859,158 @@ var IpPoolsClient = /** @class */ (function () {
             });
         });
     };
-    IpPoolsClient.prototype.parseIpPoolsResponse = function (response) {
-        return __assign({ status: response.status }, response.body);
+    // Get domains linked to dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools--pool-id--domains
+    IpPoolsClient.prototype.linkedDomains = function (poolId, query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/v3/ip_pools/".concat(poolId, "/domains"), query)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Add an IP to a dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/put-v3-ip-pools--pool-id--ips--ip-
+    IpPoolsClient.prototype.addIp = function (poolId, ip) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.put("/v3/ip_pools/".concat(poolId, "/ips/").concat(ip))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Remove an IP from a dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--ips--ip-
+    IpPoolsClient.prototype.removeIp = function (poolId, ip) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete("/v3/ip_pools/".concat(poolId, "/ips/").concat(ip))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Delegate dedicated IP pool to SubAccount
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/put-v3-ip-pools--pool-id--delegate
+    IpPoolsClient.prototype.delegate = function (poolId, subAccountId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.putWithFD("/v3/ip_pools/".concat(poolId, "/delegate"), { subaccount_id: subAccountId })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Revoke dedicated IP pool from SubAccount
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--delegate
+    IpPoolsClient.prototype.revokeDelegation = function (poolId, subAccountId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.deleteWithFD("/v3/ip_pools/".concat(poolId, "/delegate"), { subaccount_id: subAccountId })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Add multiple IPs to the dedicated IP pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/post-v3-ip-pools--pool-id--ips-json
+    IpPoolsClient.prototype.addIps = function (poolId, ips) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.post("/v3/ip_pools/".concat(poolId, "/ips.json"), { ips: ips })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Remove an IP from the domain pool, unlink a DIPP or remove the domain pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
+    // Valid IP address -> this IP address will be removed from the domain pool.
+    IpPoolsClient.prototype.removeIpFromDomainPool = function (domain, ip, replacementIp) {
+        return __awaiter(this, void 0, void 0, function () {
+            var encodedIp, encodedReplacementIp, query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.isValidIp(ip)) {
+                            throw APIError.getUserDataError('Invalid IP address to remove from domain pool', "The provided IP address \"".concat(ip, "\" is not a valid IPv4 or IPv6 address."));
+                        }
+                        if (replacementIp && (!this.isValidIp(replacementIp) || replacementIp === 'shared')) {
+                            throw APIError.getUserDataError('Invalid replacement IP address', "The provided replacement IP address \"".concat(replacementIp, "\" is not a valid IPv4 or IPv6 address."));
+                        }
+                        encodedIp = encodeURIComponent(ip);
+                        encodedReplacementIp = replacementIp ? encodeURIComponent(replacementIp) : undefined;
+                        query = encodedReplacementIp ? { ip: encodedReplacementIp } : undefined;
+                        return [4 /*yield*/, this.request.delete("/v3/domains/".concat(encodeURIComponent(domain), "/pool/").concat(encodedIp), undefined, query)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Remove the entire domain pool
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
+    // 'all' -> the entire domain pool will be removed.
+    // As far as the system is concerned, such domain will no longer exist.
+    IpPoolsClient.prototype.removeDomainPool = function (domain) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.delete("/v3/domains/".concat(encodeURIComponent(domain), "/pool/all"))];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
+    };
+    // Unlink a dedicated IP pool from a domain
+    // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-
+    // 'ip_pool' -> the DIPP which is currently linked to the domain will be unlinked
+    IpPoolsClient.prototype.unlinkDomainPool = function (domain, replacementPoolId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = replacementPoolId ? {
+                            pool_id: encodeURIComponent(replacementPoolId)
+                        } : undefined;
+                        return [4 /*yield*/, this.request.delete("/v3/domains/".concat(encodeURIComponent(domain), "/pool/ip_pool"), undefined, query)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({ status: response.status }, response.body)];
+                }
+            });
+        });
     };
     return IpPoolsClient;
 }());
