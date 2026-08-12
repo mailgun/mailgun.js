@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L12)
+[Interfaces/Domains/DomainCredentials.ts:12](https://github.com/mailgun/mailgun.js/blob/5493117/lib/Interfaces/Domains/DomainCredentials.ts#L12)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L19)
+[Interfaces/Domains/DomainCredentials.ts:19](https://github.com/mailgun/mailgun.js/blob/5493117/lib/Interfaces/Domains/DomainCredentials.ts#L19)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:23](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L23)
+[Interfaces/Domains/DomainCredentials.ts:23](https://github.com/mailgun/mailgun.js/blob/5493117/lib/Interfaces/Domains/DomainCredentials.ts#L23)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:11](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L11)
+[Interfaces/Domains/DomainCredentials.ts:11](https://github.com/mailgun/mailgun.js/blob/5493117/lib/Interfaces/Domains/DomainCredentials.ts#L11)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Domains/DomainCredentials.ts:14](https://github.com/mailgun/mailgun.js/blob/88aa902/lib/Interfaces/Domains/DomainCredentials.ts#L14)
+[Interfaces/Domains/DomainCredentials.ts:14](https://github.com/mailgun/mailgun.js/blob/5493117/lib/Interfaces/Domains/DomainCredentials.ts#L14)

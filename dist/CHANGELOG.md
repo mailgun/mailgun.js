@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.0.0](https://github.com/mailgun/mailgun.js/compare/v13.3.0...v14.0.0) (2026-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* update IP Pools client to Mailgun v3 API
+
+### Bug Fixes
+
+* Update dependencies ([3f774b8](https://github.com/mailgun/mailgun.js/commits/3f774b84267e6d18747c32dd3e982f72d46e0709))
+
+
+### Breaking changes
+
+* Update 'IpPoolsClient' to v3 API and add new methods ([00c4f0a](https://github.com/mailgun/mailgun.js/commits/00c4f0ab8257d10e43e63b8af275503bc6852c60))
+
+
+### Other changes
+
+* Fix old tests and cover new functionality ([53736fa](https://github.com/mailgun/mailgun.js/commits/53736fadb21b29bc245e84a1c1289d7976206e1f))
+* Update readme and increase test coverage for new code ([cc808cd](https://github.com/mailgun/mailgun.js/commits/cc808cd4577f2a7efcb948105e0208ee07b7ef8c))
+
+
+* Merge pull request #523 from mailgun/update-ip-pools-client ([2c93f0a](https://github.com/mailgun/mailgun.js/commits/2c93f0a137217117315074f6626cb97aac4f6325)), closes [#523](https://github.com/mailgun/mailgun.js/issues/523)
+
 ## [13.3.0](https://github.com/mailgun/mailgun.js/compare/v13.2.0...v13.3.0) (2026-07-09)
 
 

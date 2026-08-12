@@ -402,6 +402,21 @@ The following service methods are available to instantiated clients. The example
       - [create](#create-12)
       - [destroy](#destroy-14)
       - [regeneratePublicKey](#regeneratepublickey)
+    - [IP pools](#ip-pools)
+      - [list](#list-21)
+      - [get](#get-17)
+      - [create](#create-13)
+      - [update](#update-10)
+      - [destroy](#destroy-15)
+      - [linkedDomains](#linkeddomains)
+      - [addIp](#addip)
+      - [removeIp](#removeip)
+      - [delegate](#delegate)
+      - [revokeDelegation](#revokedelegation)
+      - [addIps](#addips)
+      - [removeIpFromDomainPool](#removeipfromdomainpool)
+      - [removeDomainPool](#removedomainpool)
+      - [unlinkDomainPool](#unlinkdomainpool)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -5955,6 +5970,605 @@ The following service methods are available to instantiated clients. The example
   }
   ```
 
+### API keys
+  The Keys API lets you view and manage API keys. [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys)
+
+- #### list
+  Fetch API keys with optional domain and kind filters.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/get-v1-keys)
+
+  `mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })`
+
+  Options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  domain_name   | Filter returned API keys by domain name.
+  kind          | Filter by API key kind. Valid values: `domain`, `user`, `web`.
+
+  Example:
+
+  ```js
+  mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    totalCount: 1,
+    items: [
+      {
+        id: 'key-1',
+        description: 'Primary domain key',
+        kind: 'domain',
+        role: 'admin',
+        created_at: Date,
+        updated_at: Date,
+        expires_at: Date,
+        domain_name: 'example.com',
+        user_name: null,
+        requestor: null
+      }
+    ]
+  }
+  ```
+
+- #### create
+  Create a new Mailgun API key.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys)
+
+  `mg.apiKeys.create({ role: 'sending', kind: 'domain', description: 'Example key' })`
+
+  Options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  domain_name   | Optional domain name for a domain API key.
+  kind          | Key kind. Valid values: `domain`, `user`, `web`.
+  description   | Optional key description.
+  expiration    | Optional expiration time as a string.
+  role          | (**Required**) Key role. Example values: `admin`, `basic`, `sending`, `developer`.
+  user_id       | Optional user identifier for user keys.
+  user_name     | Optional user name for user keys.
+  email         | Optional email for user keys.
+
+  Example:
+
+  ```js
+  mg.apiKeys.create({
+    role: 'sending',
+    kind: 'domain',
+    description: 'SMTP sending key',
+    domain_name: 'example.com'
+  })
+    .then(key => console.log(key))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    id: 'key-3',
+    description: 'SMTP sending key',
+    kind: 'domain',
+    role: 'sending',
+    created_at: Date,
+    updated_at: Date,
+    expires_at: Date, // optional
+    disabled_reason: 'reason', // optional
+    is_disabled: false,
+    domain_name: 'example.com',
+    requestor: null,
+    user_name: null,
+    secret: 'secret',
+  }
+  ```
+
+- #### destroy
+  Delete an API key by its ID.
+
+  `mg.apiKeys.destroy('key-123')`
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/delete-v1-keys--key-id-)
+
+  Example:
+
+  ```JS
+  mg.apiKeys.destroy('key-123')
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'key deleted'
+  }
+  ```
+
+- #### regeneratePublicKey
+  Regenerate the public API key for the authenticated account.
+
+  `mg.apiKeys.regeneratePublicKey()`
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys-public)
+
+  Example:
+
+  ```js
+  mg.apiKeys.regeneratePublicKey()
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'The public API key has been successfully regenerated',
+    key: 'pub-key-123'
+  }
+  ```
+
+### IP Pools
+  IP Pools allow you to group your dedicated IPs into customized "pools" to help manage your sending reputation for different mail sending streams.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools)
+
+- #### list
+  Lists all dedicated IP pools of the account. For each pool returns its basic properties (name, description, the list of IPs) and indicates whether the pool is linked to any domains and whether it's an inherited one.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools)
+
+  `mg.ip_pools.list()`
+
+  Example:
+
+  ```js
+  mg.ip_pools.list()
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    ip_pools: [
+      {
+        description: 'good reputation senders here',
+        ips: [ '127.0.0.0' ],
+        metadata: {
+          assignments: {
+            '127.0.0.1': {
+              linked_at: '2026-08-05T14:11:41Z'
+            }
+          }
+        },
+        is_inherited: false,
+        is_linked: false,
+        name: 'Good Reputation Senders Pool',
+        pool_id: 'id'
+      },
+      ...
+    ],
+    message: 'success'
+  }
+  ```
+
+- #### get
+  Get dedicated ip pool details
+
+  `is_linked` in the response indicates whether the DIPP is currently linked to any domains. If it's true, linked_domain lists those domains.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools--pool-id-)
+
+  `mg.ip_pools.get(poolId)`
+
+  Example:
+
+  ```js
+  mg.ip_pools.get('poolId')
+    .then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    details: {
+      description: 'good reputation senders here',
+      ips: [ '127.0.0.0' ],
+      is_linked: true,
+      linked_domains: [ 'domain' ],
+      name: 'Good Reputation Senders Pool',
+      pool_id: 'poolId'
+    },
+    message: 'success'
+  }
+  ```
+
+- #### create
+  Add a new dedicated IP pool (DIPP) to the account
+
+  The account must have 'DIPPs' feature enabled.
+
+  Returns the id of the newly created DIPP.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/post-v3-ip-pools)
+
+  `mg.ip_pools.create(data)`
+
+  Data options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  name          | (**Required**) Short name of the DIPP
+  description   | (**Required**) Description of the DIPP
+  ip            | IP address to add to the DIPP
+
+  Example:
+
+  ```js
+  mg.ip_pools.create({
+    name: 'dipp name',
+    description: 'dipp description',
+    ip: '127.0.0.1'
+  }).then(result => console.log(result))
+    .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'success',
+    pool_id: 'id'
+  }
+  ```
+
+- #### update
+  Edit dedicated IP pool (DIPP)
+
+  The account must have 'DIPPs' feature enabled.
+
+  It's not allowed to edit a DIPP inherited from the parent account.
+
+  IPs being added to the DIPP must be dedicated ones and belong to the account.
+
+  If IPs of the DIPP end up modified, and the DIPP is linked to domains, the domains will be updated asynchronously (after this endpoint returns response).
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/patch-v3-ip-pools--pool-id-)
+
+  `mg.ip_pools.update(poolId, data)`
+
+  Data options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  name          | Short name of the DIPP
+  description   | Description of the DIPP
+  add_ip        | The IP to add to the DIPP
+  link_domain   | The ID of the domain link to the DIPP
+  remove_ip     | The IP to remove from the DIPP
+  unlink_domain | The ID of the domain to unlink from the DIPP
+
+  Example:
+
+  ```js
+    mg.ip_pools.update('poolId', {
+      name: 'dipp name',
+      description: 'dipp description',
+      add_ip: '127.0.0.1',
+      link_domain: 'domain_name',
+      remove_ip: '127.0.0.2',
+      unlink_domain: 'another_domain_name'
+    }).then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+  ```
+
+- #### destroy
+  Delete the dedicated IP pool (DIPP)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id-)
+
+  ```js
+    mg.ip_pools.destroy(poolId, {
+        ip?: string,
+        pool_id?: string
+    })
+  ```
+
+  Data options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  ip          | Replacement IP or a special value shared
+  pool_id     | Id of the replacement DIPP
+
+  Example:
+  ```js
+    mg.ip_pools.destroy('poolId',  {
+      ip: 'ip',
+      pool_id: 'poolId'
+    }).then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+  ```
+
+- #### linkedDomains
+
+  Get paginated list of domains that are linked to the specified dedicated IP pool.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/get-v3-ip-pools--pool-id--domains)
+
+  ```js
+    mg.ip_pools.linkedDomains(poolId, {
+        limit?: string,
+        page?: string
+    })
+  ```
+
+  Query options:
+
+  Property      | Description
+  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+  limit           | The maximum number of records to return
+  page            | Encoded page identifier retrieved from previous call
+
+  Example:
+  ```js
+    mg.ip_pools.linkedDomains('poolId',  {
+      limit: 10,
+      page: 'page_identifier'
+    }).then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    domains: [
+      {
+        id: 'domain_id',
+        name: 'domain_name'
+      },
+      ...
+    ],
+    paging: {
+      first: 'link_to_the_first_page',
+      next: 'link_to_the_next_page'
+    }
+  }
+  ```
+
+- #### addIp
+  Add an IP to a dedicated IP pool (DIPP)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/put-v3-ip-pools--pool-id--ips--ip-)
+
+  `mg.ip_pools.addIp(poolId, ip)`
+
+  Example:
+  ```js
+    mg.ip_pools.addIp('poolId', '127.0.0.1')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+  ```
+
+- #### removeIp
+  Remove an IP from a dedicated IP pool (DIPP)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--ips--ip-)
+
+  `mg.ip_pools.removeIp(poolId, ip)`
+
+  Example:
+  ```js
+    mg.ip_pools.removeIp('poolId', '127.0.0.1')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+  ```
+
+- #### delegate
+  Delegates a dedicated IP pool (DIPP) from the **parent** account to a specified **subaccount**
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/put-v3-ip-pools--pool-id--delegate)
+
+  `mg.ip_pools.delegate(poolId, subAccountId)`
+
+  Example:
+  ```js
+    mg.ip_pools.delegate('poolId', '8asdf81234')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'success'
+  }
+  ```
+
+- #### revokeDelegation
+
+  Revokes delegation of a dedicated IP pool (DIPP) from a specified subaccount.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-ip-pools--pool-id--delegate)
+
+  `mg.ip_pools.revokeDelegation(poolId, subAccountId)`
+
+  Example:
+  ```js
+    mg.ip_pools.revokeDelegation('poolId', '8asdf81234')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+  ```
+
+- #### addIps
+  Add multiple IPs to the dedicated IP pool (DIPP)
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/post-v3-ip-pools--pool-id--ips-json)
+
+  `mg.ip_pools.addIps(poolId, ips)`
+
+  Example:
+  ```js
+    mg.ip_pools.addIps('poolId', ['127.0.0.1', '127.0.0.2', '127.0.0.3'])
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'started',
+    reference_id: 'id'
+  }
+
+- #### removeIpFromDomainPool
+  Remove IP address from the domain pool (this IP address will be removed from the domain pool).
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-)
+
+  `mg.ip_pools.removeIpFromDomainPool(domain, ip, replacementIp?)`
+
+  `replacementIp` is optional and must be a valid IP (not `shared`).
+
+  Example:
+  ```js
+    mg.ip_pools.removeIpFromDomainPool('domain.example.com','127.0.0.1', '127.0.0.2')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  ```JS
+  {
+    status: 200,
+    message: 'success'
+  }
+
+- #### removeDomainPool
+  Remove entire domain pool. As far as the system is concerned, such domain will no longer exist.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-)
+
+  `mg.ip_pools.removeDomainPool(domain)`
+
+  Example:
+
+  ```js
+    mg.ip_pools.removeDomainPool('domain.example.com')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'success'
+  }
+  ```
+
+- #### unlinkDomainPool
+
+  The dedicated IP pool (DIPP) which is currently linked to the domain will be unlinked.
+
+  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/ip-pools/delete-v3-domains--name--pool--ip-)
+
+  `mg.ip_pools.unlinkDomainPool(domain, replacementPoolId?)`
+
+  Provide `replacementPoolId` to replace the pool.
+
+  Example:
+
+  ```js
+    mg.ip_pools.removeDomainPool('domain.example.com', 'replacement_pool_id')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+  ```
+
+  Promise returns:
+
+  ```JS
+  {
+    status: 200,
+    message: 'success'
+  }
+  ```
+
 ## Pagination
   Most of the methods that return items in a list support pagination.
   There are two ways to receive part of the list:
@@ -6121,157 +6735,6 @@ The following service methods are available to instantiated clients. The example
     }
     );
     ```
-
-### API keys
-  The Keys API lets you view and manage API keys. [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys)
-
-- #### list
-  Fetch API keys with optional domain and kind filters.
-
-  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/get-v1-keys)
-
-  `mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })`
-
-  Options:
-
-  Property      | Description
-  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
-  domain_name   | Filter returned API keys by domain name.
-  kind          | Filter by API key kind. Valid values: `domain`, `user`, `web`.
-
-  Example:
-
-  ```js
-  mg.apiKeys.list({ domain_name: 'example.com', kind: 'domain' })
-    .then(result => console.log(result))
-    .catch(err => console.error(err));
-  ```
-
-  Promise returns:
-
-  ```JS
-  {
-    status: 200,
-    totalCount: 1,
-    items: [
-      {
-        id: 'key-1',
-        description: 'Primary domain key',
-        kind: 'domain',
-        role: 'admin',
-        created_at: Date,
-        updated_at: Date,
-        expires_at: Date,
-        domain_name: 'example.com',
-        user_name: null,
-        requestor: null
-      }
-    ]
-  }
-  ```
-
-- #### create
-  Create a new Mailgun API key.
-
-  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys)
-
-  `mg.apiKeys.create({ role: 'sending', kind: 'domain', description: 'Example key' })`
-
-  Options:
-
-  Property      | Description
-  :------------ | :---------------------------------------------------------------------------------------------------------------------------------
-  domain_name   | Optional domain name for a domain API key.
-  kind          | Key kind. Valid values: `domain`, `user`, `web`.
-  description   | Optional key description.
-  expiration    | Optional expiration time as a string.
-  role          | (**Required**) Key role. Example values: `admin`, `basic`, `sending`, `developer`.
-  user_id       | Optional user identifier for user keys.
-  user_name     | Optional user name for user keys.
-  email         | Optional email for user keys.
-
-  Example:
-
-  ```js
-  mg.apiKeys.create({
-    role: 'sending',
-    kind: 'domain',
-    description: 'SMTP sending key',
-    domain_name: 'example.com'
-  })
-    .then(key => console.log(key))
-    .catch(err => console.error(err));
-  ```
-
-  Promise returns:
-
-  ```JS
-  {
-    id: 'key-3',
-    description: 'SMTP sending key',
-    kind: 'domain',
-    role: 'sending',
-    created_at: Date,
-    updated_at: Date,
-    expires_at: Date, // optional
-    disabled_reason: 'reason', // optional
-    is_disabled: false,
-    domain_name: 'example.com',
-    requestor: null,
-    user_name: null,
-    secret: 'secret',
-  }
-  ```
-
-- #### destroy
-  Delete an API key by its ID.
-
-  `mg.apiKeys.destroy('key-123')`
-
-  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/delete-v1-keys--key-id-)
-
-  Example:
-
-  ```JS
-  mg.apiKeys.destroy('key-123')
-    .then(result => console.log(result))
-    .catch(err => console.error(err));
-  ```
-
-  Promise returns:
-
-  ```JS
-  {
-    status: 200,
-    message: 'key deleted'
-  }
-  ```
-
-- #### regeneratePublicKey
-  Regenerate the public API key for the authenticated account.
-
-  `mg.apiKeys.regeneratePublicKey()`
-
-  [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys-public)
-
-  Example:
-
-  ```js
-  mg.apiKeys.regeneratePublicKey()
-    .then(result => console.log(result))
-    .catch(err => console.error(err));
-  ```
-
-  Promise returns:
-
-  ```JS
-  {
-    status: 200,
-    message: 'The public API key has been successfully regenerated',
-    key: 'pub-key-123'
-  }
-  ```
-
 ## Browser Demo
 
 ![image](https://cloud.githubusercontent.com/assets/399776/10718632/e8fe56e4-7b34-11e5-84c8-cfcfde978711.png)
