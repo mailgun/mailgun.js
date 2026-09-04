@@ -22,7 +22,7 @@ module.exports = async function globalSetup(globalConfig) {
         usedPortAction: 'error'
       });
     } catch (error) {
-      throw new Error('Can not setup test server');
+      throw new Error(`Can not setup test server: ${error.message}`, { cause: error });
     }
   }
 
