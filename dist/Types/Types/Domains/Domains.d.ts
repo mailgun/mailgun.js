@@ -29,8 +29,8 @@ export type DomainInfo = DomainUpdateInfo & {
     encrypt_incoming_message?: boolean | 'true' | 'false';
     force_dkim_authority?: boolean | 'true' | 'false';
     force_root_dkim_host?: boolean | 'true' | 'false';
-    pool_id?: '';
-    ips?: '';
+    pool_id?: string;
+    ips?: string;
 };
 export type DomainInfoReq = DomainInfo & {
     force_dkim_authority?: 'true' | 'false';
