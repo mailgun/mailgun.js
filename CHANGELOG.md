@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [14.0.1](https://github.com/mailgun/mailgun.js/compare/v14.0.0...v14.0.1) (2026-09-04)
+
+
+### Bug Fixes
+
+* Incorrect DomainInfo type ([3eac23b](https://github.com/mailgun/mailgun.js/commits/3eac23b7a263ed9f1a7cb302f4fe72fbd84d23c9))
+
+
+### Other changes
+
+* Update minor deps ([72a4db1](https://github.com/mailgun/mailgun.js/commits/72a4db13c351f4805714fb21e6d40ae028535555))
+* Update puppeteer version ([498ffae](https://github.com/mailgun/mailgun.js/commits/498ffae7f8e34f89f7f0cead31990e7231e93a1f))
+
 ## [14.0.0](https://github.com/mailgun/mailgun.js/compare/v13.3.0...v14.0.0) (2026-08-12)
 
 
