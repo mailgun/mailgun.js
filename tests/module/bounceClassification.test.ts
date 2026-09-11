@@ -324,12 +324,36 @@ describe('BounceClassificationClient', () => {
       await client.list(query);
 
       expect(requestBody).toMatchObject({
+        include_subaccounts: true,
         dimensions: ['account.name'],
         pagination: {
           skip: 0,
           limit: 100
         }
       });
+    });
+
+    it('omits include_subaccounts from the request body when not provided', async () => {
+      let requestBody: nock.Body | undefined;
+
+      const query: BounceClassificationQueryData = {
+        dimensions: ['account.name'],
+        pagination: {
+          skip: 0,
+          limit: 100
+        }
+      };
+
+      api.post('/v2/bounce-classification/metrics', (body: nock.Body) => {
+        requestBody = body;
+        return true;
+      })
+        .reply(200, bounceClassificationResponse);
+
+      await client.list(query);
+
+      expect(requestBody).toBeDefined();
+      expect(requestBody).not.toHaveProperty('include_subaccounts');
     });
 
     it('handles multiple dimensions', async () => {
