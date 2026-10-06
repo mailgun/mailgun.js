@@ -1,20 +1,20 @@
-import nock from 'nock';
-import fs from 'fs/promises';
-import path from 'path';
-import {
+const nock = require('nock');
+const fs = require('fs/promises');
+const path = require('path');
+const {
   afterEach,
   beforeEach,
   describe,
   expect,
   test,
-} from '@jest/globals';
-import { getMailgunClient } from './helpers/clientInit.mjs';
-import { successResponse } from '../../../tests_data/messageResponses';
+} = require('@jest/globals');
+const { getMailgunClient } = require('./helpers/clientInit.cjs');
+const { successResponse } = require('./helpers/messageResponses');
 
 describe('Send message functionality', () => {
   const clientWithPackageFD = getMailgunClient({ withFormDataPackage: false });
   const clientWithNativeFD = getMailgunClient({ withFormDataPackage: true });
-  let api: nock.Scope;
+  let api;
 
   const testingTable = [
     { client: clientWithNativeFD, name: '(with native FormData)' },

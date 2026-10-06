@@ -1,9 +1,9 @@
-import {
+const {
   describe,
   expect,
   test,
-} from '@jest/globals';
-import { getMailgunImport, getMailgunClient } from './helpers/clientInit.cjs';
+} = require('@jest/globals');
+const { getMailgunImport, getMailgunClient } = require('./helpers/clientInit.cjs');
 
 describe('Import validation', () => {
   test('package exports function', async () => {

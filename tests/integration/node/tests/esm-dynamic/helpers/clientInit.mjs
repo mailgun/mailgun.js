@@ -1,5 +1,4 @@
 // should be JS file to use require
-
 import formData from 'form-data';
 
 export async function getMailgunImport() {

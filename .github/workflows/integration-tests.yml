@@ -35,7 +35,7 @@ jobs:
         run: npm run build
 
       - name: Run Node.js related integration tests
-        run:  npm run test:integration:node
+        run: npm run test:integration:node -- --no-cache
 
   integration_browser:
     name: browser
