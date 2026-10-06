@@ -1,5 +1,6 @@
 import { IAPIKeysClient } from '../../Interfaces/index.js';
 import {
+  APIKeyCreateResult,
   APIKeyData,
   APIKeyResponseData,
   APIKeyResultData,
@@ -22,11 +23,12 @@ export default class APIKeysClient implements IAPIKeysClient {
   }
 
   private parseItem(item: APIKeyResponseData): APIKeyResultData {
+    const data = item || {};
     return {
-      ...item,
-      created_at: new Date(item.created_at),
-      updated_at: new Date(item.updated_at),
-      expires_at: item.expires_at ? new Date(item.expires_at) : undefined
+      ...data,
+      created_at: data.created_at ? new Date(data.created_at) : null,
+      updated_at: data.updated_at ? new Date(data.updated_at) : null,
+      expires_at: data.expires_at ? new Date(data.expires_at) : null
     };
   }
 
@@ -49,9 +51,13 @@ export default class APIKeysClient implements IAPIKeysClient {
   }
 
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys
-  async create(data: APIKeyData): Promise<APIKeyResultData> {
+  async create(data: APIKeyData): Promise<APIKeyCreateResult> {
     const response = await this.request.postWithFD(`${this.path}`, data);
-    return this.parseItem(response.body);
+    return {
+      status: response.status,
+      message: response.body?.message,
+      key: this.parseItem(response.body?.key)
+    };
   }
 
   // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/delete-v1-keys--key-id-

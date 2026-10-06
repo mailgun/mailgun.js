@@ -67,7 +67,7 @@ describe('APIKeysClient', function () {
       });
       expect(response.items[0].created_at).toBeInstanceOf(Date);
       expect(response.items[0].expires_at).toBeInstanceOf(Date);
-      expect(response.items[1].expires_at).toBeUndefined();
+      expect(response.items[1].expires_at).toBeNull();
     });
 
     it('handles an empty query object', async () => {
@@ -98,23 +98,25 @@ describe('APIKeysClient', function () {
       };
 
       api.post('/v1/keys').reply(200, {
-        id: 'key-3',
-        description: 'Domain key',
-        kind: 'domain',
-        role: 'admin',
-        created_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
-        updated_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
-        expires_at: 'Mon, 12 Oct 2021 17:30:06 -0000',
-        disabled_reason: null,
-        is_disabled: false,
-        domain_name: 'example.com',
-        requestor: null,
-        user_name: 'jane'
+        key: {
+          id: 'key-3',
+          description: 'Domain key',
+          kind: 'domain',
+          role: 'admin',
+          created_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
+          updated_at: 'Mon, 11 Oct 2021 17:30:06 -0000',
+          expires_at: 'Mon, 12 Oct 2021 17:30:06 -0000',
+          disabled_reason: null,
+          is_disabled: false,
+          domain_name: 'example.com',
+          requestor: null,
+          user_name: 'jane'
+        },
+        message: 'API key created'
       });
 
       const response = await client.create(payload);
-
-      expect(response).toMatchObject({
+      expect(response.key).toMatchObject({
         id: 'key-3',
         description: 'Domain key',
         kind: 'domain',
@@ -122,9 +124,9 @@ describe('APIKeysClient', function () {
         domain_name: 'example.com',
         user_name: 'jane'
       });
-      expect(response.created_at).toBeInstanceOf(Date);
-      expect(response.updated_at).toBeInstanceOf(Date);
-      expect(response.expires_at).toBeInstanceOf(Date);
+      expect(response.key.created_at).toBeInstanceOf(Date);
+      expect(response.key.updated_at).toBeInstanceOf(Date);
+      expect(response.key.expires_at).toBeInstanceOf(Date);
     });
 
     it('creates an API key with a minimal payload', async () => {
@@ -133,22 +135,25 @@ describe('APIKeysClient', function () {
       };
 
       api.post('/v1/keys').reply(200, {
-        id: 'key-4',
-        description: 'Sending key',
-        kind: 'user',
-        role: 'sending',
-        created_at: 'Wed, 13 Oct 2021 17:30:06 -0000',
-        updated_at: 'Wed, 13 Oct 2021 17:30:06 -0000',
-        disabled_reason: null,
-        is_disabled: false,
-        domain_name: null,
-        requestor: 'admin@example.com',
-        user_name: 'admin'
+        key: {
+          id: 'key-4',
+          description: 'Sending key',
+          kind: 'user',
+          role: 'sending',
+          created_at: 'Wed, 13 Oct 2021 17:30:06 -0000',
+          updated_at: 'Wed, 13 Oct 2021 17:30:06 -0000',
+          disabled_reason: null,
+          is_disabled: false,
+          domain_name: null,
+          requestor: 'admin@example.com',
+          user_name: 'admin'
+        },
+        message: 'API key created'
       });
 
       const response = await client.create(payload);
 
-      expect(response).toMatchObject({
+      expect(response.key).toMatchObject({
         id: 'key-4',
         description: 'Sending key',
         kind: 'user',
@@ -156,9 +161,9 @@ describe('APIKeysClient', function () {
         domain_name: null,
         user_name: 'admin'
       });
-      expect(response.created_at).toBeInstanceOf(Date);
-      expect(response.updated_at).toBeInstanceOf(Date);
-      expect(response.expires_at).toBeUndefined();
+      expect(response.key.created_at).toBeInstanceOf(Date);
+      expect(response.key.updated_at).toBeInstanceOf(Date);
+      expect(response.key.expires_at).toBeNull();
     });
   });
 

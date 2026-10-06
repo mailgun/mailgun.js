@@ -9627,7 +9627,8 @@ var APIKeysClient = /** @class */ (function () {
         this.path = '/v1/keys';
     }
     APIKeysClient.prototype.parseItem = function (item) {
-        return __assign(__assign({}, item), { created_at: new Date(item.created_at), updated_at: new Date(item.updated_at), expires_at: item.expires_at ? new Date(item.expires_at) : undefined });
+        var data = item || {};
+        return __assign(__assign({}, data), { created_at: data.created_at ? new Date(data.created_at) : null, updated_at: data.updated_at ? new Date(data.updated_at) : null, expires_at: data.expires_at ? new Date(data.expires_at) : null });
     };
     APIKeysClient.prototype.prepareList = function (data) {
         var _this = this;
@@ -9655,14 +9656,19 @@ var APIKeysClient = /** @class */ (function () {
     };
     // https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/keys/post-v1-keys
     APIKeysClient.prototype.create = function (data) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.request.postWithFD("".concat(this.path), data)];
                     case 1:
-                        response = _a.sent();
-                        return [2 /*return*/, this.parseItem(response.body)];
+                        response = _c.sent();
+                        return [2 /*return*/, {
+                                status: response.status,
+                                message: (_a = response.body) === null || _a === void 0 ? void 0 : _a.message,
+                                key: this.parseItem((_b = response.body) === null || _b === void 0 ? void 0 : _b.key)
+                            }];
                 }
             });
         });

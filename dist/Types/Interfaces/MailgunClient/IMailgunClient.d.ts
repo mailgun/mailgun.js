@@ -19,6 +19,7 @@ import { IBounceClassificationClient } from '../BounceClassification/IBounceClas
 import { ITagsClient } from '../Tags/ITagsClient.js';
 import { ICustomMessageLimitClient } from '../CustomMessageLimit/ICustomMessageLimitClient.js';
 import { IAccountManagementClient } from '../AccountManagement/IAccountManagementClient.js';
+import { IAPIKeysClient } from '../APIKeys/IAPIKeysClient.js';
 export interface IMailgunClient {
     request: Request;
     domains: IDomainsClient;
@@ -43,4 +44,5 @@ export interface IMailgunClient {
     tags: ITagsClient;
     customMessageLimit: ICustomMessageLimitClient;
     accountManagement: IAccountManagementClient;
+    apiKeys: IAPIKeysClient;
 }

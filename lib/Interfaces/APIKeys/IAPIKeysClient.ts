@@ -1,6 +1,6 @@
 import {
+  APIKeyCreateResult,
   APIKeyData,
-  APIKeyResultData,
   APIKeysQuery,
   APIKeysResult,
   MessageResponseWithStatus,
@@ -9,7 +9,7 @@ import {
 
 export interface IAPIKeysClient {
   list(data: APIKeysQuery): Promise<APIKeysResult>
-  create(data: APIKeyData): Promise<APIKeyResultData>
+  create(data: APIKeyData): Promise<APIKeyCreateResult>
   destroy(keyId: string): Promise<MessageResponseWithStatus>
   regeneratePublicKey(): Promise<RegeneratePublicKeyResult>
 }
