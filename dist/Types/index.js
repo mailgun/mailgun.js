@@ -407,7 +407,7 @@ var FormDataBuilder = /** @class */ (function () {
             nodeFormData.append(key, data, { filename: 'MimeMessage' });
             return;
         }
-        if (typeof Blob !== undefined) { // either node > 18 or browser
+        if (typeof Blob === 'function') { // either node > 18 or browser
             var browserFormData = formDataInstance; // Browser compliant FormData
             if (data instanceof Blob) {
                 browserFormData.append(key, data, 'MimeMessage');
@@ -421,7 +421,7 @@ var FormDataBuilder = /** @class */ (function () {
     };
     FormDataBuilder.prototype.isMIME = function (data) {
         return typeof data === 'string'
-            || (typeof Blob !== 'undefined' && data instanceof Blob)
+            || (typeof Blob === 'function' && data instanceof Blob)
             || this.attachmentsHandler.isBuffer(data)
             || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
     };
@@ -456,7 +456,7 @@ var FormDataBuilder = /** @class */ (function () {
                 fd.append(key, data, options);
                 return;
             }
-            if (typeof Blob !== undefined) { // either node > 18 or browser
+            if (typeof Blob === 'function') { // either node > 18 or browser
                 var browserFormData = formDataInstance; // Browser compliant FormData
                 if (typeof objData === 'string' || _this.attachmentsHandler.isBuffer(objData)) {
                     var blobInstance = new Blob([objData]);
@@ -500,7 +500,7 @@ var FormDataBuilder = /** @class */ (function () {
             if (typeof fdValue === 'string') {
                 return formDataAcc.append(fdKey, fdValue);
             }
-            if (typeof Blob !== undefined && fdValue instanceof Blob) {
+            if (typeof Blob === 'function' && fdValue instanceof Blob) {
                 return formDataAcc.append(fdKey, fdValue);
             }
             throw APIError.getUserDataError('Unknown value type for Form Data. String or Blob expected', 'Browser compliant FormData allows only string or Blob values for properties that are not attachments.');

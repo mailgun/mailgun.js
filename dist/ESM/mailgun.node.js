@@ -326,7 +326,7 @@ class FormDataBuilder {
             nodeFormData.append(key, data, { filename: 'MimeMessage' });
             return;
         }
-        if (typeof Blob !== undefined) { // either node > 18 or browser
+        if (typeof Blob === 'function') { // either node > 18 or browser
             const browserFormData = formDataInstance; // Browser compliant FormData
             if (data instanceof Blob) {
                 browserFormData.append(key, data, 'MimeMessage');
@@ -340,7 +340,7 @@ class FormDataBuilder {
     }
     isMIME(data) {
         return typeof data === 'string'
-            || (typeof Blob !== 'undefined' && data instanceof Blob)
+            || (typeof Blob === 'function' && data instanceof Blob)
             || this.attachmentsHandler.isBuffer(data)
             || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
     }
@@ -373,7 +373,7 @@ class FormDataBuilder {
                 fd.append(key, data, options);
                 return;
             }
-            if (typeof Blob !== undefined) { // either node > 18 or browser
+            if (typeof Blob === 'function') { // either node > 18 or browser
                 const browserFormData = formDataInstance; // Browser compliant FormData
                 if (typeof objData === 'string' || this.attachmentsHandler.isBuffer(objData)) {
                     const blobInstance = new Blob([objData]);
@@ -416,7 +416,7 @@ class FormDataBuilder {
             if (typeof fdValue === 'string') {
                 return formDataAcc.append(fdKey, fdValue);
             }
-            if (typeof Blob !== undefined && fdValue instanceof Blob) {
+            if (typeof Blob === 'function' && fdValue instanceof Blob) {
                 return formDataAcc.append(fdKey, fdValue);
             }
             throw APIError.getUserDataError('Unknown value type for Form Data. String or Blob expected', 'Browser compliant FormData allows only string or Blob values for properties that are not attachments.');
