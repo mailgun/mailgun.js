@@ -17,7 +17,7 @@
 
 ### create
 
-▸ **create**(`data`): `Promise`\<[`APIKeyResultData`](../modules/definitions.md#apikeyresultdata)\>
+▸ **create**(`data`): `Promise`\<[`APIKeyCreateResult`](../modules/definitions.md#apikeycreateresult)\>
 
 #### Parameters
 
@@ -27,11 +27,11 @@
 
 #### Returns
 
-`Promise`\<[`APIKeyResultData`](../modules/definitions.md#apikeyresultdata)\>
+`Promise`\<[`APIKeyCreateResult`](../modules/definitions.md#apikeycreateresult)\>
 
 #### Defined in
 
-[Interfaces/APIKeys/IAPIKeysClient.ts:12](https://github.com/mailgun/mailgun.js/blob/b537895/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L12)
+[Interfaces/APIKeys/IAPIKeysClient.ts:12](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L12)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[Interfaces/APIKeys/IAPIKeysClient.ts:13](https://github.com/mailgun/mailgun.js/blob/b537895/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L13)
+[Interfaces/APIKeys/IAPIKeysClient.ts:13](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L13)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[Interfaces/APIKeys/IAPIKeysClient.ts:11](https://github.com/mailgun/mailgun.js/blob/b537895/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L11)
+[Interfaces/APIKeys/IAPIKeysClient.ts:11](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L11)
 
 ___
 
@@ -85,4 +85,4 @@ ___
 
 #### Defined in
 
-[Interfaces/APIKeys/IAPIKeysClient.ts:14](https://github.com/mailgun/mailgun.js/blob/b537895/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L14)
+[Interfaces/APIKeys/IAPIKeysClient.ts:14](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/APIKeys/IAPIKeysClient.ts#L14)

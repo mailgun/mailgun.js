@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [14.0.2](https://github.com/mailgun/mailgun.js/compare/v14.0.1...v14.0.2) (2026-10-07)
+
+
+### Bug Fixes
+
+* APIKeysClient types ([e16b6c4](https://github.com/mailgun/mailgun.js/commits/e16b6c4615c5c8d8857aa420305d9eca4af36361))
+* Fix rest vulnarable dev dependencies ([a6fb933](https://github.com/mailgun/mailgun.js/commits/a6fb933f6b237213f91de93b15199bf96cd84c40))
+* Linter issues ([c83c768](https://github.com/mailgun/mailgun.js/commits/c83c768d4ca3ea986f241ccaa3935e60f50a0141))
+* Update deps ([72fe096](https://github.com/mailgun/mailgun.js/commits/72fe0967f4b7bedc59db84c24730a23e502766ce))
+
+
+### Other changes
+
+* Fix integration tests ([4226c02](https://github.com/mailgun/mailgun.js/commits/4226c02ea7bac33e19393079e1c257cab1a303d4))
+* Fix integration tests for node 24 ([588e848](https://github.com/mailgun/mailgun.js/commits/588e84864df3207863d650a0eab92f2955d1f1c5))
+* Get rid of jest-puppeteer ([7259091](https://github.com/mailgun/mailgun.js/commits/725909165cf4c62279b16bd979e19eb9ddba6bf7))
+
 ### [14.0.1](https://github.com/mailgun/mailgun.js/compare/v14.0.0...v14.0.1) (2026-09-04)
 
 
