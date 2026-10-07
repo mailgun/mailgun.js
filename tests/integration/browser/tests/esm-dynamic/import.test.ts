@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable tsdoc/syntax */
 import {
   describe,
@@ -6,7 +6,7 @@ import {
   test,
   beforeAll
 } from '@jest/globals';
-import 'jest-puppeteer';
+import '../globals';
 import { IMailgunClient } from '../../../../../lib/Interfaces/index.js';
 
 type Window = globalThis.Window & {

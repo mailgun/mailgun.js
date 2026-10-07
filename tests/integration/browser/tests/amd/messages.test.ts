@@ -8,7 +8,7 @@ import {
 import { successResponse } from '../../../tests_data/messageResponses';
 import { IMailgunClient } from '../../../../../lib/Interfaces';
 import { MailgunMessageData } from '../../../../../lib/Types';
-import 'jest-puppeteer';
+import '../globals';
 
 const serverUrl = 'http://localhost:3000';
 

@@ -120,7 +120,7 @@ class FormDataBuilder {
       return;
     }
 
-    if (typeof Blob !== undefined) { // either node > 18 or browser
+    if (typeof Blob === 'function') { // either node > 18 or browser
       const browserFormData = formDataInstance as FormData; // Browser compliant FormData
       if (data instanceof Blob) {
         browserFormData.append(key, data, 'MimeMessage');
@@ -135,7 +135,7 @@ class FormDataBuilder {
 
   public isMIME(data: unknown) : data is MimeMessage {
     return typeof data === 'string'
-      || (typeof Blob !== 'undefined' && data instanceof Blob)
+      || (typeof Blob === 'function' && data instanceof Blob)
       || this.attachmentsHandler.isBuffer(data)
       || (typeof ReadableStream !== 'undefined' && data instanceof ReadableStream);
   }
@@ -189,7 +189,7 @@ class FormDataBuilder {
         return;
       }
 
-      if (typeof Blob !== undefined) { // either node > 18 or browser
+      if (typeof Blob === 'function') { // either node > 18 or browser
         const browserFormData = formDataInstance as FormData; // Browser compliant FormData
 
         if (typeof objData === 'string' || this.attachmentsHandler.isBuffer(objData)) {
@@ -243,7 +243,7 @@ class FormDataBuilder {
       if (typeof fdValue === 'string') {
         return formDataAcc.append(fdKey, fdValue);
       }
-      if (typeof Blob !== undefined && fdValue instanceof Blob) {
+      if (typeof Blob === 'function' && fdValue instanceof Blob) {
         return formDataAcc.append(fdKey, fdValue);
       }
       throw APIError.getUserDataError(

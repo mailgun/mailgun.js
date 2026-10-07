@@ -22,9 +22,9 @@ export type APIKeysResponse = {
     items: APIKeyResponseData[];
 };
 export type APIKeyResultData = Omit<APIKeyResponseData, 'created_at' | 'updated_at' | 'expires_at'> & {
-    created_at: Date;
-    updated_at: Date;
-    expires_at?: Date;
+    created_at: Date | null;
+    updated_at: Date | null;
+    expires_at?: Date | null;
 };
 export type APIKeysResult = {
     status: number;
@@ -43,4 +43,7 @@ export type APIKeyData = {
 };
 export type RegeneratePublicKeyResult = MessageResponseWithStatus & {
     key: string;
+};
+export type APIKeyCreateResult = MessageResponseWithStatus & {
+    key: APIKeyResultData;
 };

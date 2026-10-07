@@ -4,9 +4,7 @@ import formData from 'form-data';
 // eslint-disable-next-line import/extensions, import/no-named-as-default
 import Mailgun from '../../../../../../dist/ESM/mailgun.node.js';
 
-export function getMailgunImport() {
-  return Mailgun;
-}
+export const getMailgunImport = () => Mailgun;
 
 export function getMailgunClient({ withFormDataPackage = false } = {}) {
   let mg = null;

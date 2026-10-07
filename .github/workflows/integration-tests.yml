@@ -15,7 +15,7 @@ jobs:
     name: node.js
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [20.x, 22.x, 24.x]
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
         run: npm run build
 
       - name: Run Node.js related integration tests
-        run:  npm run test:integration:node
+        run: npm run test:integration:node -- --no-cache
 
   integration_browser:
     name: browser

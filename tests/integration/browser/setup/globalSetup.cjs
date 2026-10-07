@@ -1,9 +1,8 @@
 const { setup: setupDevServer } = require('jest-dev-server');
-const setup = require('jest-environment-puppeteer/setup');
 const fs = require('fs/promises');
 const path = require('path');
 
-module.exports = async function globalSetup(globalConfig) {
+module.exports = async function globalSetup() {
   const ciEnvValue = process.env.CI;
   if (typeof ciEnvValue !== 'string' || ciEnvValue !== 'true') { // local machine
     await fs.cp(
@@ -26,5 +25,4 @@ module.exports = async function globalSetup(globalConfig) {
     }
   }
 
-  await setup(globalConfig);
 };
