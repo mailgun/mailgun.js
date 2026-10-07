@@ -9,7 +9,7 @@ const {
   test,
 } = require('@jest/globals');
 const { getMailgunClient } = require('./helpers/clientInit.cjs');
-const { successResponse } = require('./helpers/messageResponses');
+const { successResponse } = require('./helpers/messageResponses.cjs');
 
 describe('Send message functionality', () => {
   const clientWithPackageFD = getMailgunClient({ withFormDataPackage: false });
