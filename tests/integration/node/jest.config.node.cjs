@@ -3,11 +3,14 @@
 
 module.exports = {
   testEnvironment: 'node',
-  testMatch: ['**/tests/**/*.test.ts'],
-  preset: 'ts-jest/presets/js-with-ts',
+  testMatch: ['**/tests/**/*.test.*'],
   transform: {
-    '^.+.tsx?$': ['ts-jest', {
-      tsconfig: false
+    '^.+\\.mts$': ['ts-jest', {
+      tsconfig: {
+        module: 'ESNext'
+      },
+      useESM: true
     }],
   },
+  extensionsToTreatAsEsm: ['.mts']
 };

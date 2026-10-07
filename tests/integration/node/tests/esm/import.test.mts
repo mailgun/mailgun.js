@@ -3,7 +3,7 @@ import {
   expect,
   test,
 } from '@jest/globals';
-import { getMailgunImport, getMailgunClient } from './helpers/clientInit.mjs';
+import {  getMailgunClient, getMailgunImport } from './helpers/clientInit.mjs';
 
 describe('Import validation', () => {
   test('package exports function', async () => {

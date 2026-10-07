@@ -1,14 +1,13 @@
 // should be JS file to use require
-
 import formData from 'form-data';
 
-export async function getMailgunImport() {
+export const getMailgunImport = async () => {
   // eslint-disable-next-line import/extensions, import/no-named-as-default
   const Mailgun = await import('../../../../../../dist/ESM/mailgun.node.js');
   return Mailgun.default;
-}
+};
 
-export async function getMailgunClient({ withFormDataPackage = false } = {}) {
+export const getMailgunClient = async ({ withFormDataPackage = false } = {}) => {
   // eslint-disable-next-line import/extensions, import/no-named-as-default
   const Mailgun = await import('../../../../../../dist/ESM/mailgun.node.js');
   let mg = null;
@@ -28,4 +27,4 @@ export async function getMailgunClient({ withFormDataPackage = false } = {}) {
     timeout: 10000,
   });
   return client;
-}
+};

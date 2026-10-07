@@ -5,7 +5,7 @@ import {
   expect,
   test
 } from '@jest/globals';
-import { successResponse } from '../../../tests_data/messageResponses';
+import { successResponse } from '../test-data/messageResponses.js';
 import { IMailgunClient } from '../../../../../lib/Interfaces';
 import { MailgunMessageData } from '../../../../../lib/Types';
 import 'jest-puppeteer';

@@ -1,21 +1,24 @@
-import nock from 'nock';
-import fs from 'fs/promises';
-import path from 'path';
-import {
+const nock = require('nock');
+const fs = require('fs/promises');
+const path = require('path');
+const {
   afterEach,
   beforeEach,
   describe,
   expect,
   test,
-} from '@jest/globals';
-import { getMailgunClient } from './helpers/clientInit.mjs';
-import { successResponse } from '../../../tests_data/messageResponses';
+} = require('@jest/globals');
+const { getMailgunClient } = require('./helpers/clientInit.cjs');
+const { successResponse } = require('./helpers/messageResponses');
 
 describe('Send message functionality', () => {
-  let api: nock.Scope;
+  const clientWithPackageFD = getMailgunClient({ withFormDataPackage: false });
+  const clientWithNativeFD = getMailgunClient({ withFormDataPackage: true });
+  let api;
+
   const testingTable = [
-    { isFDPackage: true, name: '(with package FormData)' },
-    { isFDPackage: false, name: '(with native FormData)' }
+    { client: clientWithNativeFD, name: '(with native FormData)' },
+    { client: clientWithPackageFD, name: '(with package FormData)' }
   ];
 
   beforeEach(async () => {
@@ -26,9 +29,7 @@ describe('Send message functionality', () => {
     api.done();
   });
 
-  test.each(testingTable)('Sends plain email $name', async ({ isFDPackage }) => {
-    const client = await getMailgunClient({ withFormDataPackage: isFDPackage });
-
+  test.each(testingTable)('Sends plain email $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
 
     const result = await client.messages.create('test.domain.com', {
@@ -43,10 +44,9 @@ describe('Send message functionality', () => {
       message: 'Queued. Thank you.',
       id: '<20111114174239.25659.5817@samples.mailgun.org>'
     });
-  }, 10000);
+  });
 
-  test.each(testingTable)('Sends mime email $name', async ({ isFDPackage }) => {
-    const client = await getMailgunClient({ withFormDataPackage: isFDPackage });
+  test.each(testingTable)('Sends mime email $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages.mime').reply(200, successResponse.body);
     const result = await client.messages.create('test.domain.com', {
       to: 'foo@example.com',
@@ -63,10 +63,9 @@ describe('Send message functionality', () => {
     });
   });
 
-  test.each(testingTable)('Sends an attachment  $name', async ({ isFDPackage }) => {
+  test.each(testingTable)('Sends an attachment  $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
-    const client = await getMailgunClient({ withFormDataPackage: isFDPackage });
-    const img = await fs.readFile(path.resolve(__dirname, '../../../tests_data/img/mailgun.png'));
+    const img = await fs.readFile(path.resolve(__dirname, '../../../tests-data/img/mailgun.png'));
     const result = await client.messages.create('test.domain.com', {
       to: 'foo@example.com',
       from: 'bar@example.com',

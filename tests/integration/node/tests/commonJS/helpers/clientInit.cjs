@@ -24,6 +24,7 @@ function getMailgunClient({ withFormDataPackage = false } = {}) {
   });
   return client;
 }
+
 module.exports = {
   getMailgunClient,
   getMailgunImport

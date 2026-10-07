@@ -1,6 +1,5 @@
 import nock from 'nock';
 import fs from 'fs/promises';
-import path from 'path';
 import {
   afterEach,
   beforeEach,
@@ -8,8 +7,10 @@ import {
   expect,
   test,
 } from '@jest/globals';
-import { getMailgunClient } from './helpers/clientInit.cjs';
-import { successResponse } from '../../../tests_data/messageResponses';
+import { getMailgunClient } from './helpers/clientInit.mjs';
+import messageResponses from './helpers/messageResponses.mjs';
+
+const { successResponse } = messageResponses;
 
 describe('Send message functionality', () => {
   const clientWithPackageFD = getMailgunClient({ withFormDataPackage: false });
@@ -65,7 +66,7 @@ describe('Send message functionality', () => {
 
   test.each(testingTable)('Sends an attachment  $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
-    const img = await fs.readFile(path.resolve(__dirname, '../../../tests_data/img/mailgun.png'));
+    const img = await fs.readFile(new URL('../../../tests-data/img/mailgun.png', import.meta.url));
     const result = await client.messages.create('test.domain.com', {
       to: 'foo@example.com',
       from: 'bar@example.com',
