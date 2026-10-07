@@ -1,6 +1,6 @@
 import Request from './common/Request.js';
 import { MailgunClientOptions, InputFormData } from '../Types/index.js';
-import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient, IDKIMManagementClient, ILogsClient, IBounceClassificationClient, ITagsClient, ICustomMessageLimitClient, IAccountManagementClient, IAPIKeysClient } from '../Interfaces/index.js';
+import { IDomainsClient, IWebHooksClient, IMailgunClient, IMailingListsClient, IEventClient, IStatsClient, ISuppressionClient, IMessagesClient, IRoutesClient, IValidationClient, IIPsClient, IIPPoolsClient, ISubaccountsClient, IInboxPlacementsClient, IMetricsClient, IDKIMManagementClient, ILogsClient, IBounceClassificationClient, ITagsClient, ICustomMessageLimitClient, IAccountManagementClient, IAPIKeysClient, IUsersClient } from '../Interfaces/index.js';
 export default class MailgunClient implements IMailgunClient {
     request: Request;
     domains: IDomainsClient;
@@ -24,6 +24,7 @@ export default class MailgunClient implements IMailgunClient {
     customMessageLimit: ICustomMessageLimitClient;
     accountManagement: IAccountManagementClient;
     apiKeys: IAPIKeysClient;
+    users: IUsersClient;
     constructor(options: MailgunClientOptions, formData: InputFormData);
     setSubaccount(subaccountId: string): void;
     resetSubaccount(): void;

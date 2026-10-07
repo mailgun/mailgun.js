@@ -1,4 +1,4 @@
-// mailgun.js v14.0.1 Copyright (c) 2026 Mailgun and contributors
+// mailgun.js v14.0.2 Copyright (c) 2026 Mailgun and contributors
 var Resolution;
 (function (Resolution) {
     Resolution["HOUR"] = "hour";
@@ -28,11 +28,20 @@ var YesNo;
     YesNo["YES"] = "yes";
     YesNo["NO"] = "no";
 })(YesNo = YesNo || (YesNo = {}));
+var UserRoles;
+(function (UserRoles) {
+    UserRoles["BASIC"] = "basic";
+    UserRoles["BILLING"] = "billing";
+    UserRoles["SUPPORT"] = "support";
+    UserRoles["DEVELOPER"] = "developer";
+    UserRoles["ADMIN"] = "admin"; // Admin user role
+})(UserRoles = UserRoles || (UserRoles = {}));
 
 var index$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     get Resolution () { return Resolution; },
     get SuppressionModels () { return SuppressionModels; },
+    get UserRoles () { return UserRoles; },
     get WebhooksIds () { return WebhooksIds; },
     get YesNo () { return YesNo; }
 });
