@@ -65,7 +65,7 @@ describe('Send message functionality', () => {
 
   test.each(testingTable)('Sends an attachment  $name', async ({ client }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
-    const img = await fs.readFile(path.resolve(__dirname, '../../../tests-data/img/mailgun.png'));
+    const img = await fs.readFile(path.resolve(__dirname, '../../../tests_data/img/mailgun.png'));
     const result = await client.messages.create('test.domain.com', {
       to: 'foo@example.com',
       from: 'bar@example.com',

@@ -3,6 +3,9 @@
 
 module.exports = {
   testEnvironment: 'node',
+  testEnvironmentOptions: {
+    globalsCleanup: 'off',
+  },
   testMatch: ['**/tests/**/*.test.*'],
   transform: {
     '^.+\\.mts$': ['ts-jest', {

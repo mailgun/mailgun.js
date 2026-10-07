@@ -34,14 +34,8 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Check built ESM with Node
-        run: node --input-type=module -e "import('./dist/ESM/mailgun.node.js').then(m => console.log('ESM default export:', typeof m.default))"
-
-      - name: Trace ts-jest
-        run: TS_JEST_LOG=stderr:debug npm run test:integration:node -- --no-cache --runInBand
-
-      # - name: Run Node.js related integration tests
-      #   run:  npm run test:integration:node -- --no-cache
+      - name: Run Node.js related integration tests
+        run: npm run test:integration:node
 
   integration_browser:
     name: browser

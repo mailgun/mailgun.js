@@ -9,7 +9,9 @@ import {
   test,
 } from '@jest/globals';
 import { getMailgunClient } from './helpers/clientInit.mjs';
-import successResponse from './helpers/messageResponses.mjs';
+import messageResponses from '../esm/helpers/messageResponses.mjs';
+
+const { successResponse } = messageResponses;
 
 describe('Send message functionality', () => {
   let api: nock.Scope;
@@ -66,7 +68,7 @@ describe('Send message functionality', () => {
   test.each(testingTable)('Sends an attachment  $name', async ({ isFDPackage }) => {
     api.post('/v3/test.domain.com/messages').reply(200, successResponse.body);
     const client = await getMailgunClient({ withFormDataPackage: isFDPackage });
-    const img = await fs.readFile(new URL('../../../tests-data/img/mailgun.png', import.meta.url));
+    const img = await fs.readFile(new URL('../../../tests_data/img/mailgun.png', import.meta.url));
     const result = await client.messages.create('test.domain.com', {
       to: 'foo@example.com',
       from: 'bar@example.com',
