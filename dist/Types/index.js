@@ -7365,6 +7365,14 @@ var YesNo;
     YesNo["YES"] = "yes";
     YesNo["NO"] = "no";
 })(YesNo || (YesNo = {}));
+var UserRoles;
+(function (UserRoles) {
+    UserRoles["BASIC"] = "basic";
+    UserRoles["BILLING"] = "billing";
+    UserRoles["SUPPORT"] = "support";
+    UserRoles["DEVELOPER"] = "developer";
+    UserRoles["ADMIN"] = "admin"; // Admin user role
+})(UserRoles || (UserRoles = {}));
 
 var Suppression = /** @class */ (function () {
     function Suppression(type) {
@@ -10075,6 +10083,62 @@ var APIKeysClient = /** @class */ (function () {
     return APIKeysClient;
 }());
 
+var UsersClient = /** @class */ (function () {
+    function UsersClient(request) {
+        this.request = request;
+        this.baseRoute = '/v5';
+    }
+    UsersClient.prototype.formatResponse = function (user) {
+        return __assign(__assign({}, user), { tfa_created_at: user.tfa_created_at ? new Date(user.tfa_created_at) : null, password_updated_at: user.password_updated_at ? new Date(user.password_updated_at) : null });
+    };
+    UsersClient.prototype.list = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res, users;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/".concat(this.baseRoute, "/users"), data)];
+                    case 1:
+                        res = _a.sent();
+                        users = res.body.users.map(function (user) { return _this.formatResponse(user); });
+                        return [2 /*return*/, {
+                                status: res.status,
+                                users: users,
+                                total: res.body.total
+                            }];
+                }
+            });
+        });
+    };
+    UsersClient.prototype.get = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/".concat(this.baseRoute, "/users/").concat(id))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, this.formatResponse(res.body)];
+                }
+            });
+        });
+    };
+    UsersClient.prototype.me = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request.get("/".concat(this.baseRoute, "/users/me"))];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, this.formatResponse(res.body)];
+                }
+            });
+        });
+    };
+    return UsersClient;
+}());
+
 var MailgunClient = /** @class */ (function () {
     function MailgunClient(options, formData) {
         var config = __assign({}, options);
@@ -10128,6 +10192,7 @@ var MailgunClient = /** @class */ (function () {
         this.customMessageLimit = new CustomMessageLimitClient(this.request);
         this.accountManagement = new AccountManagementClient(this.request);
         this.apiKeys = new APIKeysClient(this.request);
+        this.users = new UsersClient(this.request);
     }
     MailgunClient.prototype.setSubaccount = function (subaccountId) {
         var _a;

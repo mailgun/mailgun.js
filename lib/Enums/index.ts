@@ -26,3 +26,11 @@ export enum YesNo {
     YES = 'yes',
     NO = 'no'
 }
+
+export enum UserRoles {
+    BASIC = 'basic', // Basic/Analyst user role
+    BILLING = 'billing', // Billing user role
+    SUPPORT = 'support', // Support user role
+    DEVELOPER = 'developer', // Developer user role
+    ADMIN = 'admin' // Admin user role
+}

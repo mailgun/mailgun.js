@@ -42,7 +42,8 @@ import {
   ITagsClient,
   ICustomMessageLimitClient,
   IAccountManagementClient,
-  IAPIKeysClient
+  IAPIKeysClient,
+  IUsersClient
 } from '../Interfaces/index.js';
 import SeedsListsClient from './InboxPlacements/SeedsLists/SeedsListsClient.js';
 import InboxPlacementsClient from './InboxPlacements/inboxPlacements.js';
@@ -61,6 +62,7 @@ import TagsClient from './Tags/TagsClient.js';
 import CustomMessageLimitClient from './CustomMessageLimit/CustomMessageLimit.js';
 import AccountManagementClient from './AccountManagement/AccountManagement.js';
 import APIKeysClient from './APIKeys/APIKeysClient.js';
+import UsersClient from './Users/UsersClient.js';
 
 export default class MailgunClient implements IMailgunClient {
   public request;
@@ -86,6 +88,7 @@ export default class MailgunClient implements IMailgunClient {
   public customMessageLimit: ICustomMessageLimitClient;
   public accountManagement: IAccountManagementClient;
   public apiKeys: IAPIKeysClient;
+  public users: IUsersClient;
 
   constructor(options: MailgunClientOptions, formData: InputFormData) {
     const config: RequestOptions = { ...options } as RequestOptions;
@@ -173,6 +176,7 @@ export default class MailgunClient implements IMailgunClient {
     this.customMessageLimit = new CustomMessageLimitClient(this.request);
     this.accountManagement = new AccountManagementClient(this.request);
     this.apiKeys = new APIKeysClient(this.request);
+    this.users = new UsersClient(this.request);
   }
 
   setSubaccount(subaccountId: string): void {

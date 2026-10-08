@@ -21,6 +21,7 @@ import { ITagsClient } from '../Tags/ITagsClient.js';
 import { ICustomMessageLimitClient } from '../CustomMessageLimit/ICustomMessageLimitClient.js';
 import { IAccountManagementClient } from '../AccountManagement/IAccountManagementClient.js';
 import { IAPIKeysClient } from '../APIKeys/IAPIKeysClient.js';
+import { IUsersClient } from '../Users/IUsersClient.js';
 
 export interface IMailgunClient {
     request: Request;
@@ -47,4 +48,5 @@ export interface IMailgunClient {
     customMessageLimit: ICustomMessageLimitClient;
     accountManagement: IAccountManagementClient;
     apiKeys: IAPIKeysClient;
+    users: IUsersClient;
 }

@@ -23,3 +23,10 @@ export declare enum YesNo {
     YES = "yes",
     NO = "no"
 }
+export declare enum UserRoles {
+    BASIC = "basic",
+    BILLING = "billing",
+    SUPPORT = "support",
+    DEVELOPER = "developer",
+    ADMIN = "admin"
+}
