@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.1.0](https://github.com/mailgun/mailgun.js/compare/v14.0.2...v14.1.0) (2026-10-08)
+
+
+### Features
+
+* Add users endpoints to the SDK (UsersClient) ([bcb3eec](https://github.com/mailgun/mailgun.js/commits/bcb3eecff6f61e0964bbab8945a7a415b2d1a2d0))
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.19.0 to 1.20.0 ([f52a63a](https://github.com/mailgun/mailgun.js/commits/f52a63ad73334c4cbcca8e44811d7b658690913e))
+
+
+### Other changes
+
+* Add new UsersClient methods to the README ([8f50aae](https://github.com/mailgun/mailgun.js/commits/8f50aaef89713be7f29a8088f37721a4ae9b16ce))
+* Add tests for new UsersClient ([5059f47](https://github.com/mailgun/mailgun.js/commits/5059f472c321858057da4bff41341efd48b46075))
+
 ### [14.0.2](https://github.com/mailgun/mailgun.js/compare/v14.0.1...v14.0.2) (2026-10-07)
 
 

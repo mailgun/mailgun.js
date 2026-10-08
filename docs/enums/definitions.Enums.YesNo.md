@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[Enums/index.ts:27](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Enums/index.ts#L27)
+[Enums/index.ts:27](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Enums/index.ts#L27)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[Enums/index.ts:26](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Enums/index.ts#L26)
+[Enums/index.ts:26](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Enums/index.ts#L26)

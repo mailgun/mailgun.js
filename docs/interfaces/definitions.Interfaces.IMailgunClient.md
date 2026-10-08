@@ -28,6 +28,7 @@
 - [subaccounts](definitions.Interfaces.IMailgunClient.md#subaccounts)
 - [suppressions](definitions.Interfaces.IMailgunClient.md#suppressions)
 - [tags](definitions.Interfaces.IMailgunClient.md#tags)
+- [users](definitions.Interfaces.IMailgunClient.md#users)
 - [validate](definitions.Interfaces.IMailgunClient.md#validate)
 - [webhooks](definitions.Interfaces.IMailgunClient.md#webhooks)
 
@@ -44,7 +45,7 @@
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:48](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L48)
+[Interfaces/MailgunClient/IMailgunClient.ts:49](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L49)
 
 ___
 
@@ -54,7 +55,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:49](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L49)
+[Interfaces/MailgunClient/IMailgunClient.ts:50](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L50)
 
 ___
 
@@ -64,7 +65,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:45](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L45)
+[Interfaces/MailgunClient/IMailgunClient.ts:46](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L46)
 
 ___
 
@@ -74,7 +75,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:47](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L47)
+[Interfaces/MailgunClient/IMailgunClient.ts:48](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L48)
 
 ___
 
@@ -84,7 +85,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:44](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L44)
+[Interfaces/MailgunClient/IMailgunClient.ts:45](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L45)
 
 ___
 
@@ -94,7 +95,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:27](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L27)
+[Interfaces/MailgunClient/IMailgunClient.ts:28](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L28)
 
 ___
 
@@ -104,7 +105,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:29](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L29)
+[Interfaces/MailgunClient/IMailgunClient.ts:30](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L30)
 
 ___
 
@@ -114,7 +115,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:40](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L40)
+[Interfaces/MailgunClient/IMailgunClient.ts:41](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L41)
 
 ___
 
@@ -124,7 +125,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:37](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L37)
+[Interfaces/MailgunClient/IMailgunClient.ts:38](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L38)
 
 ___
 
@@ -134,7 +135,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:36](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L36)
+[Interfaces/MailgunClient/IMailgunClient.ts:37](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L37)
 
 ___
 
@@ -144,7 +145,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:38](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L38)
+[Interfaces/MailgunClient/IMailgunClient.ts:39](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L39)
 
 ___
 
@@ -154,7 +155,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:43](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L43)
+[Interfaces/MailgunClient/IMailgunClient.ts:44](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L44)
 
 ___
 
@@ -164,7 +165,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:33](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L33)
+[Interfaces/MailgunClient/IMailgunClient.ts:34](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L34)
 
 ___
 
@@ -174,7 +175,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:31](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L31)
+[Interfaces/MailgunClient/IMailgunClient.ts:32](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L32)
 
 ___
 
@@ -184,7 +185,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:26](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L26)
+[Interfaces/MailgunClient/IMailgunClient.ts:27](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L27)
 
 ___
 
@@ -194,7 +195,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:34](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L34)
+[Interfaces/MailgunClient/IMailgunClient.ts:35](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L35)
 
 ___
 
@@ -204,7 +205,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:30](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L30)
+[Interfaces/MailgunClient/IMailgunClient.ts:31](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L31)
 
 ___
 
@@ -214,7 +215,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:39](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L39)
+[Interfaces/MailgunClient/IMailgunClient.ts:40](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L40)
 
 ___
 
@@ -224,7 +225,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:32](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L32)
+[Interfaces/MailgunClient/IMailgunClient.ts:33](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L33)
 
 ___
 
@@ -234,7 +235,17 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:46](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L46)
+[Interfaces/MailgunClient/IMailgunClient.ts:47](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L47)
+
+___
+
+### users
+
+• **users**: [`IUsersClient`](definitions.Interfaces.IUsersClient.md)
+
+#### Defined in
+
+[Interfaces/MailgunClient/IMailgunClient.ts:51](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L51)
 
 ___
 
@@ -244,7 +255,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:35](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L35)
+[Interfaces/MailgunClient/IMailgunClient.ts:36](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L36)
 
 ___
 
@@ -254,7 +265,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:28](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L28)
+[Interfaces/MailgunClient/IMailgunClient.ts:29](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L29)
 
 ## Methods
 
@@ -268,7 +279,7 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:42](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L42)
+[Interfaces/MailgunClient/IMailgunClient.ts:43](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L43)
 
 ___
 
@@ -288,4 +299,4 @@ ___
 
 #### Defined in
 
-[Interfaces/MailgunClient/IMailgunClient.ts:41](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/MailgunClient/IMailgunClient.ts#L41)
+[Interfaces/MailgunClient/IMailgunClient.ts:42](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/MailgunClient/IMailgunClient.ts#L42)

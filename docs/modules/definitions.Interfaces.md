@@ -49,6 +49,7 @@
 - [ISuppressionClient](../interfaces/definitions.Interfaces.ISuppressionClient.md)
 - [ITagsClient](../interfaces/definitions.Interfaces.ITagsClient.md)
 - [IUnsubscribe](../interfaces/definitions.Interfaces.IUnsubscribe.md)
+- [IUsersClient](../interfaces/definitions.Interfaces.IUsersClient.md)
 - [IValidationClient](../interfaces/definitions.Interfaces.IValidationClient.md)
 - [IWebHooksClient](../interfaces/definitions.Interfaces.IWebHooksClient.md)
 - [IWhiteList](../interfaces/definitions.Interfaces.IWhiteList.md)

@@ -417,6 +417,10 @@ The following service methods are available to instantiated clients. The example
       - [removeIpFromDomainPool](#removeipfromdomainpool)
       - [removeDomainPool](#removedomainpool)
       - [unlinkDomainPool](#unlinkdomainpool)
+    - [Users](#users)
+      - [list](#list-22)
+      - [get](#get-18)
+      - [me](#me)
   - [Browser Demo](#browser-demo)
 - [Development](#development)
   - [Requirements](#requirements)
@@ -6568,6 +6572,247 @@ The following service methods are available to instantiated clients. The example
     message: 'success'
   }
   ```
+
+- ### Users
+  Allows viewing user entities.
+
+  [[API Reference]](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/users)
+
+  - #### list
+
+    List users on an account
+
+    [API Reference](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/users/get-v5-users)
+
+    ```js
+    mg.users.list({
+        role?: UserRoles, // ENUMS -> UserRoles
+        limit?: string,
+        skip?: string,
+    })
+    ```
+
+    Query options:
+
+    Property      | Description
+    :------------ | :---------------------------------------------------------------------------------------------------------------------------------
+    role            | The user role by which to filter results (basic,billing,support,developer,admin)
+    limit           | The number of users to return
+    skip            | The number of users to skip
+
+    Example:
+
+    ```js
+    import { Enums } from "mailgun.js/definitions";
+
+    mg.users.list({
+      limit: 10
+      skip: 1
+      role: Enums.UserRoles.ADMIN
+    })
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+    ```
+
+    Promise returns:
+
+    ```JS
+    {
+      status: 200,
+      users: [
+        {
+          account_id: 'account_id',
+          activated: true,
+          auth: {
+            method: 'sinch-new',
+            prior_details: {},
+            prior_method: 'default'
+          },
+          email: 'email@example.com',
+          email_details: {
+            address: 'email@example.com',
+            did_you_mean: null,
+            is_disposable_address: false,
+            is_role_address: false,
+            is_valid: true,
+            mailbox_verification: 'true',
+            parts: {
+                display_name: null,
+                domain: 'example.com',
+                local_part: 'local_part'
+            },
+            reason: null
+          },
+          github_user_id: null,
+          id: 'id',
+          is_disabled: false,
+          is_master: false,
+          metadata: {},
+          migration_status: 'done',
+          name: 'John',
+          opened_ip: null,
+          password_updated_at: null,
+          preferences: {
+            profile_roles: [],
+            programming_language: 'curl',
+            region: 'us',
+            time_format: '%Y-%m-%d %H:%M',
+            time_zone: 'US/Eastern'
+          },
+          region_data: {},
+          role: 'admin',
+          salesforce_user_id: null,
+          tfa_active: false,
+          tfa_created_at: new Date('2019-11-20T08:42:54.961Z'),
+          tfa_enabled: true
+        },
+        ...
+      ],
+      total: 15
+    }
+    ```
+  - ### get
+    Get details for a user on the account
+
+    [[API Reference]](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/users/get-v5-users-user_id)
+
+    ```js
+    mg.users.get('user_id')
+    ```
+
+    Example:
+
+    ```js
+    mg.users.get('123123123')
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+    ```
+
+    Promise returns:
+
+    ```JS
+    {
+      account_id: '123123123',
+      activated: true,
+      auth: {
+        method: 'sinch',
+        prior_details: {},
+        prior_method: 'default'
+      },
+      email: 'email@example.com',
+      email_details: {
+        address: 'email@example.com',
+        did_you_mean: null,
+        is_disposable_address: false,
+        is_role_address: false,
+        is_valid: true,
+        mailbox_verification: 'true',
+        parts: {
+            display_name: null,
+            domain: 'example.com',
+            local_part: 'local_part'
+        },
+        reason: null
+      },
+      github_user_id: null,
+      id: 'id',
+      is_disabled: false,
+      is_master: false,
+      metadata: {},
+      migration_status: 'done',
+      name: 'John',
+      opened_ip: null,
+      password_updated_at: null,
+      preferences: {
+        profile_roles: [],
+        programming_language: 'curl',
+        region: 'us',
+        time_format: '%Y-%m-%d %H:%M',
+        time_zone: 'US/Eastern'
+      },
+      region_data: {},
+      role: 'admin',
+      salesforce_user_id: null,
+      tfa_active: false,
+      tfa_created_at: new Date('2019-11-20T08:42:54.961Z'),
+      tfa_enabled: true
+    }
+    ```
+
+  - ### me
+    Get one's own user details.
+    > Requires use of an API key with a user_id saved on it, typically of `web` kind
+
+    [[API Reference]](https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/users/get-v5-users-me)
+
+    ```js
+    const clientOptions = {
+      key: '<key-with-a-user_id-saved-on-it> ',
+      ...
+    };
+    const mg = mailgun.client(clientOptions);
+
+    mg.users.me('')
+    ```
+
+    Example:
+
+    ```js
+    mg.users.me()
+      .then(result => console.log(result))
+      .catch(err => console.error(err));
+    ```
+
+    Promise returns:
+
+    ```JS
+    {
+      account_id: 'account_id',
+      activated: true,
+      auth: {
+        method: 'sinch-new',
+        prior_details: {},
+        prior_method: 'default'
+      },
+      email: 'email@example.com',
+      email_details: {
+        address: 'email@example.com',
+        did_you_mean: null,
+        is_disposable_address: false,
+        is_role_address: false,
+        is_valid: true,
+        mailbox_verification: 'true',
+        parts: {
+            display_name: null,
+            domain: 'example.com',
+            local_part: 'local_part'
+        },
+        reason: null
+      },
+      github_user_id: null,
+      id: 'id',
+      is_disabled: false,
+      is_master: false,
+      metadata: {},
+      migration_status: 'done',
+      name: 'John',
+      opened_ip: null,
+      password_updated_at: null,
+      preferences: {
+        profile_roles: [],
+        programming_language: 'curl',
+        region: 'us',
+        time_format: '%Y-%m-%d %H:%M',
+        time_zone: 'US/Eastern'
+      },
+      region_data: {},
+      role: 'admin',
+      salesforce_user_id: null,
+      tfa_active: false,
+      tfa_created_at: new Date('2019-11-20T08:42:54.961Z'),
+      tfa_enabled: true
+    }
+    ```
 
 ## Pagination
   Most of the methods that return items in a list support pagination.

@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[Interfaces/IPs/IIPsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/IPs/IIPsClient.ts#L5)
+[Interfaces/IPs/IIPsClient.ts:5](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/IPs/IIPsClient.ts#L5)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[Interfaces/IPs/IIPsClient.ts:4](https://github.com/mailgun/mailgun.js/blob/cbe68d5/lib/Interfaces/IPs/IIPsClient.ts#L4)
+[Interfaces/IPs/IIPsClient.ts:4](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/IPs/IIPsClient.ts#L4)

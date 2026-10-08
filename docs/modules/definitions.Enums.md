@@ -10,5 +10,6 @@
 
 - [Resolution](../enums/definitions.Enums.Resolution.md)
 - [SuppressionModels](../enums/definitions.Enums.SuppressionModels.md)
+- [UserRoles](../enums/definitions.Enums.UserRoles.md)
 - [WebhooksIds](../enums/definitions.Enums.WebhooksIds.md)
 - [YesNo](../enums/definitions.Enums.YesNo.md)
