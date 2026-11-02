@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [14.1.1](https://github.com/mailgun/mailgun.js/compare/v14.1.0...v14.1.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* Update deps ([e1c02ca](https://github.com/mailgun/mailgun.js/commits/e1c02caa91e1a1c1b6f1e5575c97d01ff9577e41))
+
 ## [14.1.0](https://github.com/mailgun/mailgun.js/compare/v14.0.2...v14.1.0) (2026-10-08)
 
 

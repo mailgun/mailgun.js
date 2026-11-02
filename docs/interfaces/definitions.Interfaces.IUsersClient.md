@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[Interfaces/Users/IUsersClient.ts:9](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/Users/IUsersClient.ts#L9)
+[Interfaces/Users/IUsersClient.ts:9](https://github.com/mailgun/mailgun.js/blob/0ad116f/lib/Interfaces/Users/IUsersClient.ts#L9)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[Interfaces/Users/IUsersClient.ts:8](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/Users/IUsersClient.ts#L8)
+[Interfaces/Users/IUsersClient.ts:8](https://github.com/mailgun/mailgun.js/blob/0ad116f/lib/Interfaces/Users/IUsersClient.ts#L8)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[Interfaces/Users/IUsersClient.ts:10](https://github.com/mailgun/mailgun.js/blob/866a81a/lib/Interfaces/Users/IUsersClient.ts#L10)
+[Interfaces/Users/IUsersClient.ts:10](https://github.com/mailgun/mailgun.js/blob/0ad116f/lib/Interfaces/Users/IUsersClient.ts#L10)
