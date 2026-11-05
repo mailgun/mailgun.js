@@ -190,6 +190,19 @@ describe('AccountManagementClient', function () {
       const response = await client.addSandboxAuthorizedRecipient(email);
       expect(response.recipient.email).toBe(email);
     });
+
+    it('URL-encodes an email containing special characters', async () => {
+      const email = 'user+tag@example.com';
+      const recipient = { email, activated: false };
+
+      api.post('/v5/sandbox/auth_recipients').query({ email }).reply(200, {
+        limit: 100,
+        recipient,
+      });
+
+      const response = await client.addSandboxAuthorizedRecipient(email);
+      expect(response.recipient.email).toBe(email);
+    });
   });
 
   describe('removeSandboxAuthorizedRecipient', function () {

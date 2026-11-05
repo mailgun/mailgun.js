@@ -61,7 +61,7 @@ export default class AccountManagementClient implements IAccountManagementClient
 
   // Add authorized email recipient for a sandbox domain
   async addSandboxAuthorizedRecipient(email: string): Promise<AuthorizedRecipientResult> {
-    const response = await this.request.post(`/v5/sandbox/auth_recipients?email=${email}`, {});
+    const response = await this.request.post(`/v5/sandbox/auth_recipients?email=${encodeURIComponent(email)}`, {});
     return {
       status: response.status,
       ...response.body
