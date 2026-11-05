@@ -23,8 +23,7 @@ export default class BounceClassificationClient implements IBounceClassification
     const res: BounceClassificationAPIQuery = {
       ...queryData,
       start: undefined,
-      end: undefined,
-      include_subaccounts: undefined
+      end: undefined
     };
     if (queryData.start) {
       res.start = this.prepareDate(queryData.start);
