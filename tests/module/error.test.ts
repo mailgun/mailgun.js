@@ -45,6 +45,26 @@ describe('APIError', function () {
     });
   });
 
+  describe('headers property', () => {
+    it('sets headers from the response', () => {
+      const error = new APIError({
+        status: 429,
+        statusText: 'Too Many Requests',
+        body: { message: 'rate limited' },
+        headers: { 'retry-after': '30' }
+      } as APIErrorOptions);
+      expect(error).toMatchObject({
+        status: 429,
+        headers: { 'retry-after': '30' }
+      });
+    });
+
+    it('leaves headers undefined when none are given', () => {
+      const error = new APIError({ status: 400 } as APIErrorOptions);
+      expect(error.headers).toBeUndefined();
+    });
+  });
+
   it('Creates instance if no data', () => {
     const error = new APIError({} as APIErrorOptions);
     expect(error).toMatchObject({

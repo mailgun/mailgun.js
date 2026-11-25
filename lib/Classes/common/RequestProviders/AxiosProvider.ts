@@ -162,7 +162,8 @@ class AxiosProvider implements IRequestProvider {
       throw new APIError({
         status: errorResponse?.response?.status || 400,
         statusText: errorResponse?.response?.statusText || errorResponse.code,
-        body: errorResponse?.response?.data || errorResponse.message
+        body: errorResponse?.response?.data || errorResponse.message,
+        headers: errorResponse?.response?.headers
       } as APIErrorOptions);
     }
 

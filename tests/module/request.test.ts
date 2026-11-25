@@ -129,6 +129,18 @@ describe('Request', function () {
       return res;
     });
 
+    it('keeps the response headers on an API error', async function () {
+      api = nock(baseURL, { reqheaders: headers })
+        .get('/v2/some/resource')
+        .reply(429, 'Too many requests', { 'Retry-After': '30' });
+
+      const req = new Request({ username: 'api', key: 'key', url: baseURL } as RequestOptions, formData as InputFormData);
+      await expect(req.request('get', '/v2/some/resource')).rejects.toMatchObject({
+        status: 429,
+        headers: expect.objectContaining({ 'retry-after': '30' })
+      });
+    });
+
     it('handles body bigger than max body size error (axios)', async () => {
       nock(baseURL, { reqheaders: headers })
         .post('/v2/some/resource')
