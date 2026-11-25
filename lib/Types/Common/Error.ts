@@ -15,4 +15,5 @@ export type APIErrorType = {
   status: number;
   message: string;
   details: string;
+  headers?: { [key: string]: unknown };
 }

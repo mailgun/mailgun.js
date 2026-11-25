@@ -5,6 +5,7 @@ export default class APIError extends Error implements APIErrorType {
   public stack: string;
   public details: string;
   public type: string;
+  public headers?: { [key: string]: unknown };
 
   public static isApiError(err: unknown): err is APIError {
     return typeof err === 'object' && (err as APIError)?.type === 'MailgunAPIError';
@@ -24,7 +25,8 @@ export default class APIError extends Error implements APIErrorType {
     status,
     statusText,
     message,
-    body = {}
+    body = {},
+    headers
   }: APIErrorOptions) {
     let bodyMessage = '';
     let error = '';
@@ -41,5 +43,6 @@ export default class APIError extends Error implements APIErrorType {
     this.message = message || error || statusText || '';
     this.details = bodyMessage;
     this.type = 'MailgunAPIError';
+    this.headers = headers;
   }
 }
